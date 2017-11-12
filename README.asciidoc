@@ -1,0 +1,25 @@
+= ci.erlang.mk
+
+An https://erlang.mk/[Erlang.mk] plugin that maintains a list
+of Erlang/OTP versions in their most recent patch version. It
+allows configuring a project as supporting `OTP-19+`, for example,
+and automatically fills in the `CI_OTP` or other relevant variables
+with the most up to date list of versions. It also provides a target
+for automatically deleting older patch releases.
+
+[source,make]
+----
+BUILD_DEPS = ci.erlang.mk
+dep_ci.erlang.mk = git https://github.com/ninenines/ci.erlang.mk master
+DEP_EARLY_PLUGINS = ci.erlang.mk
+
+AUTO_CI_OTP ?= OTP-19+
+AUTO_CI_HIPE ?= OTP-LATEST
+# AUTO_CI_ERLLVM ?= OTP-LATEST
+
+include erlang.mk
+----
+
+Please consult 'early-plugins.mk' for a detailed list of
+the allowed values. You may also define your own values
+by creating the corresponding variable.
