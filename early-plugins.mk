@@ -96,7 +96,7 @@ WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
 define ci_windows_target
 ci-windows-$1:
 	$(verbose) $(MAKE) --no-print-directory clean
-	$(ci_verbose) \
+	$$(ci_verbose) \
 		PATH="$(WINDOWS-OTP-$1-INSTALL-DIR):$(PATH)" \
 		CI_OTP_RELEASE="$1" \
 		CT_OPTS="-label $1" \
