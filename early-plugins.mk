@@ -47,13 +47,13 @@ CI_AUTO_CLEANUP_TARGETS := $(foreach t,$(OTP-DROPPED),ci-auto-cleanup-$t)
 .PHONY: ci-auto-cleanup $(CI_AUTO_CLEANUP_TARGETS)
 
 define ci_auto_cleanup_target
-ci-auto-cleanup-$1: $$(KERL)
-	$$(verbose) $$(KERL) list builds | grep -q "^git,$1$$$$" && $$(KERL) delete build $1 || true
-	$$(verbose) $$(KERL) list installations | grep -q "^$1 " && $$(KERL) delete installation $1 || true
-	$$(verbose) $$(KERL) list builds | grep -q "^git,$1-native$$$$" && $$(KERL) delete build $1-native || true
-	$$(verbose) $$(KERL) list installations | grep -q "^$1-native " && $$(KERL) delete installation $1-native || true
-	$$(verbose) $$(KERL) list builds | grep -q "^git,$1-erllvm$$$$" && $$(KERL) delete build $1-erllvm || true
-	$$(verbose) $$(KERL) list installations | grep -q "^$1-erllvm " && $$(KERL) delete installation $1-erllvm || true
+ci-auto-cleanup-$1: $(KERL)
+	$(verbose) $(KERL) list builds | grep -q "^git,$1$$$$" && $(KERL) delete build $1 || true
+	$(verbose) $(KERL) list installations | grep -q "^$1 " && $(KERL) delete installation $1 || true
+	$(verbose) $(KERL) list builds | grep -q "^git,$1-native$$$$" && $(KERL) delete build $1-native || true
+	$(verbose) $(KERL) list installations | grep -q "^$1-native " && $(KERL) delete installation $1-native || true
+	$(verbose) $(KERL) list builds | grep -q "^git,$1-erllvm$$$$" && $(KERL) delete build $1-erllvm || true
+	$(verbose) $(KERL) list installations | grep -q "^$1-erllvm " && $(KERL) delete installation $1-erllvm || true
 endef
 
 $(foreach t,$(OTP-DROPPED),$(eval $(call ci_auto_cleanup_target,$t)))
