@@ -59,3 +59,54 @@ endef
 $(foreach t,$(OTP-DROPPED),$(eval $(call ci_auto_cleanup_target,$t)))
 
 ci-auto-cleanup: $(CI_AUTO_CLEANUP_TARGETS)
+
+# Erlang/OTP comes with Windows installers. They are more practical
+# than compiling from source at the moment. We have a special target
+# to perform CI using them.
+#
+# Right now we assume that the versions are already installed on
+# the test machines. In the future we may want to also automate
+# the installation.
+
+ifeq ($(PLATFORM),msys2)
+
+WINDOWS-OTP-18 := 18.0 18.1 18.2.1 18.3
+WINDOWS-OTP-19 := 19.0 19.1 19.2 19.3
+WINDOWS-OTP-20 := 20.0 20.1
+
+WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20)
+WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20)
+WINDOWS-OTP-20+ := $(WINDOWS-OTP-20)
+
+WINDOWS-OTP-18.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.0/bin)
+WINDOWS-OTP-18.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.1/bin)
+WINDOWS-OTP-18.2.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.2.1/bin)
+WINDOWS-OTP-18.3-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.3/bin)
+
+WINDOWS-OTP-19.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.0/bin)
+WINDOWS-OTP-19.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.1/bin)
+WINDOWS-OTP-19.2-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.2/bin)
+WINDOWS-OTP-19.3-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.3/bin)
+
+WINDOWS-OTP-20.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl9.0/bin)
+WINDOWS-OTP-20.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl9.1/bin)
+
+define ci_windows_target
+ci-windows-$1: $(WINDOWS-OTP-$1-INSTALL-DIR)
+	$(verbose) $(MAKE) --no-print-directory clean
+	$(ci_verbose) \
+		PATH="$(WINDOWS-OTP-$1-INSTALL-DIR):$(PATH)" \
+		CI_OTP_RELEASE="$1" \
+		CT_OPTS="-label $1" \
+		CI_VM="otp" \
+		$(MAKE) ci-setup tests
+	$(verbose) $(MAKE) --no-print-directory ci-extra
+endef
+
+CI_WINDOWS := $(foreach otp,$(AUTO_CI_WINDOWS),$(WINDOWS-$(otp)))
+
+$(foreach otp,$(CI_WINDOWS),$(eval $(call ci_windows_target,$(otp))))
+
+ci-windows:: $(addprefix ci-windows-,$(CI_WINDOWS))
+
+endif
