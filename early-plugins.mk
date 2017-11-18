@@ -78,18 +78,20 @@ WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20)
 WINDOWS-OTP-20+ := $(WINDOWS-OTP-20)
 
-WINDOWS-OTP-18.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.0/bin)
-WINDOWS-OTP-18.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.1/bin)
-WINDOWS-OTP-18.2.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.2.1/bin)
-WINDOWS-OTP-18.3-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl7.3/bin)
+msys2_path = $(shell cygpath -u $1)
 
-WINDOWS-OTP-19.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.0/bin)
-WINDOWS-OTP-19.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.1/bin)
-WINDOWS-OTP-19.2-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.2/bin)
-WINDOWS-OTP-19.3-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl8.3/bin)
+WINDOWS-OTP-18.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl7.0/bin)
+WINDOWS-OTP-18.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl7.1/bin)
+WINDOWS-OTP-18.2.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl7.2.1/bin)
+WINDOWS-OTP-18.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl7.3/bin)
 
-WINDOWS-OTP-20.0-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl9.0/bin)
-WINDOWS-OTP-20.1-INSTALL-DIR := $(call core_native_path,$(PROGRAMFILES)/erl9.1/bin)
+WINDOWS-OTP-19.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.0/bin)
+WINDOWS-OTP-19.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.1/bin)
+WINDOWS-OTP-19.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.2/bin)
+WINDOWS-OTP-19.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.3/bin)
+
+WINDOWS-OTP-20.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.0/bin)
+WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
 
 define ci_windows_target
 ci-windows-$1: $(WINDOWS-OTP-$1-INSTALL-DIR)
