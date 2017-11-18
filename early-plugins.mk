@@ -93,10 +93,15 @@ WINDOWS-OTP-19.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.3/bin)
 WINDOWS-OTP-20.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.0/bin)
 WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
 
+# We have to duplicate this for it to work as
+# it is not yet defined when we define this.
+ci_windows_verbose_0 = @echo " CI    " $(1);
+ci_windows_verbose = $(ci_verbose_$(V))
+
 define ci_windows_target
 ci-windows-$1:
 	$(verbose) $(MAKE) --no-print-directory clean
-	$$(ci_verbose) \
+	$(ci_windows_verbose) \
 		PATH="$(WINDOWS-OTP-$1-INSTALL-DIR):$(PATH)" \
 		CI_OTP_RELEASE="$1" \
 		CT_OPTS="-label $1" \
