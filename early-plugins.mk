@@ -96,7 +96,7 @@ WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
 ci_windows_verbose_0 = @echo " CI    " $(1);
-ci_windows_verbose = $(ci_verbose_$(V))
+ci_windows_verbose = $(ci_windows_verbose_$(V))
 
 define ci_windows_target
 ci-windows-$1:
