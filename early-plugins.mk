@@ -98,6 +98,7 @@ WINDOWS-OTP-19.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl8.3/bin)
 
 WINDOWS-OTP-20.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.0/bin)
 WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
+WINDOWS-OTP-20.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.2/bin)
 
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
