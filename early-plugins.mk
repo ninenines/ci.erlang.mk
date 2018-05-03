@@ -21,12 +21,17 @@
 OTP-18 := OTP-18.0.3 OTP-18.1.5 OTP-18.2.4 OTP-18.3.4.9
 OTP-19 := OTP-19.0.7 OTP-19.1.6 OTP-19.2.3 OTP-19.3.6.8
 OTP-20 := OTP-20.0.5 OTP-20.1.7 OTP-20.2.4 OTP-20.3.5
+OTP-21 := OTP-21.0-rc1
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20)
-OTP-19+ := $(OTP-19) $(OTP-20)
-OTP-20+ := $(OTP-20)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21)
+OTP-20+ := $(OTP-20) $(OTP-21)
+OTP-21+ := $(OTP-21)
 
-OTP-LATEST := $(lastword $(OTP-18+))
+# We exclude release candidates here because they are not
+# the latest release, they are the *next* one.
+
+OTP-LATEST := $(lastword $(foreach rel,$(OTP-18+),$(if $(findstring -rc,$(rel)),,$(rel))))
 
 # Older OTP versions that this plugin previously supported
 # are listed here. This list is used to cleanup builds and
@@ -35,8 +40,9 @@ OTP-LATEST := $(lastword $(OTP-18+))
 OTP-18-DROPPED := OTP-18.3.4 OTP-18.3.4.6 OTP-18.3.4.7 OTP-18.3.4.8
 OTP-19-DROPPED := OTP-19.3.6 OTP-19.3.6.3 OTP-19.3.6.4 OTP-19.3.6.5 OTP-19.3.6.6 OTP-19.3.6.7
 OTP-20-DROPPED := OTP-20.1.5 OTP-20.1.6 OTP-20.2 OTP-20.2.1 OTP-20.2.2 OTP-20.2.3 OTP-20.3 OTP-20.3.2 OTP-20.3.3 OTP-20.3.4
+OTP-21-DROPPED :=
 
-OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED)
+OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) $(OTP-21-DROPPED)
 
 # Configure Erlang.mk's CI plugin.
 
