@@ -17,6 +17,11 @@
 # and do not come with an easy to read changelog. They
 # are also unlikely to be used by anyone other than
 # OTP customers.
+#
+# Patch releases are announced on erlang-questions,
+# and add a third component to the version number.
+# A fourth component is also added once the next
+# major release is out.
 
 OTP-18 := OTP-18.0.3 OTP-18.1.5 OTP-18.2.4 OTP-18.3.4.9
 OTP-19 := OTP-19.0.7 OTP-19.1.6 OTP-19.2.3 OTP-19.3.6.9
