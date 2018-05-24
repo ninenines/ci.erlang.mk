@@ -26,7 +26,12 @@
 OTP-18 := OTP-18.0.3 OTP-18.1.5 OTP-18.2.4 OTP-18.3.4.9
 OTP-19 := OTP-19.0.7 OTP-19.1.6 OTP-19.2.3 OTP-19.3.6.9
 OTP-20 := OTP-20.0.5 OTP-20.1.7 OTP-20.2.4 OTP-20.3.6
+# OTP-21.0-rc1 does not compile on FreeBSD.
+ifeq ($(PLATFORM),freebsd)
+OTP-21 :=
+else
 OTP-21 := OTP-21.0-rc1
+endif
 
 OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21)
 OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21)
