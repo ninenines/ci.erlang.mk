@@ -1,0 +1,130 @@
+Patch Package:           OTP 18.3.1
+Git Tag:                 OTP-18.3.1
+Date:                    2016-04-04
+Trouble Report Id:       OTP-13417, OTP-13418, OTP-13419, OTP-13420,
+                         OTP-13423, OTP-13424, OTP-13446, OTP-13452
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             erts-7.3.1, inets-6.2.1, mnesia-4.13.4
+Predecessor:             OTP 18.3
+
+ Check out the git tag OTP-18.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13418    Application(s): erts
+
+               process_info(Pid, last_calls) did not work for Pid /=
+               self().
+
+
+  OTP-13419    Application(s): erts
+
+               Make sure to create a crash dump when running out of
+               memory. This was accidentally removed in the erts-7.3
+               release.
+
+
+  OTP-13420    Application(s): erts
+
+               Schedulers could be woken by a premature timeout on
+               Linux. This premature wakeup was however harmless.
+
+
+  OTP-13424    Application(s): erts
+               Related Id(s): OTP-10336
+
+               A process communicating with a port via one of the
+               erlang:port_* BIFs could potentially end up in an
+               inconsistent state if the port terminated during the
+               communication. When this occurred the process could
+               later block in a receive even though it had messages
+               matching in its message queue.
+
+               This bug was introduced in erts version 5.10 (OTP
+               R16A).
+
+
+  OTP-13446    Application(s): erts
+
+               The reference count of a process structure could under
+               rare circumstances be erroneously managed. When this
+               happened invalid memory accesses occurred.
+
+
+  OTP-13452    Application(s): erts
+
+               Fix race between process_flag(trap_exit,true) and a
+               received exit signal.
+
+               A process could terminate due to exit signal even
+               though process_flag(trap_exit,true) had returned. A
+               very specific timing between call to process_flag/2 and
+               exit signal from another scheduler was required for
+               this to happen.
+
+
+ Full runtime dependencies of erts-7.3.1: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.2.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13417    Application(s): inets
+
+               Mend ipv6_host_with_brackets option in httpc
+
+
+ Full runtime dependencies of inets-6.2.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.13.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.13.4 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13423    Application(s): mnesia
+
+               Mnesia transactions could hang while waiting on a
+               response from a node who had stopped.
+
+
+ Full runtime dependencies of mnesia-4.13.4: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Andrey Mayorov
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

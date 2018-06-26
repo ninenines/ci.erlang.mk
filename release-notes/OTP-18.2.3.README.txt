@@ -1,0 +1,39 @@
+Patch Package:           OTP 18.2.3
+Git Tag:                 OTP-18.2.3
+Date:                    2016-01-29
+Trouble Report Id:       OTP-13248
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             inets-6.1.1
+Predecessor:             OTP 18.2.2
+
+ Check out the git tag OTP-18.2.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.1.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13248    Application(s): inets
+
+               mod_alias now traverses all aliases picking the longest
+               match and not the first match.
+
+
+ Full runtime dependencies of inets-6.1.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,40 @@
+Patch Package:           OTP 18.0.1
+Git Tag:                 OTP-18.0.1
+Date:                    2015-06-30
+Trouble Report Id:       OTP-12859
+Seq num:                 seq12882
+System:                  OTP
+Release:                 18
+Application:             erts-7.0.1
+Predecessor:             OTP 18.0
+
+ Check out the git tag OTP-18.0.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.0.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-12859    Application(s): erts
+               Related Id(s): seq12882
+
+               Fix a rare hanging of the VM seen to happen just after
+               emulator start. Bug exists since R14.
+
+
+ Full runtime dependencies of erts-7.0.1: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

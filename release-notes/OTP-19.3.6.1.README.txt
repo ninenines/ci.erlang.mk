@@ -1,0 +1,64 @@
+Patch Package:           OTP 19.3.6.1
+Git Tag:                 OTP-19.3.6.1
+Date:                    2017-06-27
+Trouble Report Id:       OTP-13939, OTP-14481, OTP-14484
+Seq num:                 ERL-193
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5.1
+Predecessor:             OTP 19.3.6
+
+ Check out the git tag OTP-19.3.6.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13939    Application(s): erts, kernel
+               Related Id(s): ERL-193
+
+               Fixed a bug in gen_tcp:send where it never returned
+               when repeatedly called on a remotely closed TCP socket.
+
+
+  OTP-14481    Application(s): erts
+
+               Fixed segfault that could happen during cleanup of
+               aborted erlang:port_command/3 calls. A port_command is
+               aborted if the port is closed at the same time as the
+               port_command was issued. This bug was introduced in
+               erts-8.0.
+
+
+  OTP-14484    Application(s): erts
+
+               Fixed implementation of statistics(wall_clock) and
+               statistics(runtime) so that values do not unnecessarily
+               wrap due to the emulator. Note that the values returned
+               by statistics(runtime) may still wrap due to
+               limitations in the underlying functionality provided by
+               the operating system.
+
+
+ Full runtime dependencies of erts-8.3.5.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

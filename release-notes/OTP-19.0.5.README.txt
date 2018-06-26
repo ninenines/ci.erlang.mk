@@ -1,0 +1,41 @@
+Patch Package:           OTP 19.0.5
+Git Tag:                 OTP-19.0.5
+Date:                    2016-08-17
+Trouble Report Id:       OTP-13813
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             kernel-5.0.2
+Predecessor:             OTP 19.0.4
+
+ Check out the git tag OTP-19.0.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- kernel-5.0.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-5.0.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13813    Application(s): kernel
+
+               When calling os:cmd from a process that has set
+               trap_exit to true an 'EXIT' message would be left in
+               the message queue. This bug was introduced in kernel
+               vsn 5.0.1.
+
+
+ Full runtime dependencies of kernel-5.0.2: erts-8.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

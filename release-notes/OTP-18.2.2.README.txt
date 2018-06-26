@@ -1,0 +1,41 @@
+Patch Package:           OTP 18.2.2
+Git Tag:                 OTP-18.2.2
+Date:                    2016-01-11
+Trouble Report Id:       OTP-13225
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             ssh-4.2.1
+Predecessor:             OTP 18.2.1
+
+ Check out the git tag OTP-18.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.2.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13225    Application(s): ssh
+
+               The authentication method 'keyboard-interactive' failed
+               in the Erlang client when the server after successful
+               authentication continued by asking for zero more
+               passwords.
+
+
+ Full runtime dependencies of ssh-4.2.1: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

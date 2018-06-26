@@ -1,0 +1,90 @@
+Patch Package:           OTP 18.3.4.2
+Git Tag:                 OTP-18.3.4.2
+Date:                    2016-07-25
+Trouble Report Id:       OTP-13730, OTP-13731, OTP-13753
+Seq num:                 seq13135, seq13150
+System:                  OTP
+Release:                 18
+Application:             common_test-1.12.1.1, erts-7.3.1.1,
+                         ssl-7.3.3.1
+Predecessor:             OTP 18.3.4.1
+
+ Check out the git tag OTP-18.3.4.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.12.1.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.12.1.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13730    Application(s): common_test
+               Related Id(s): seq13135
+
+               If the telnet server would pause during transmission of
+               a line of text before terminating the line, the
+               ct_telnet:expect/3 function would print the line twice
+               in the test case HTML log. This problem has been fixed.
+
+
+ Full runtime dependencies of common_test-1.12.1.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-2.5, test_server-3.9, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13731    Application(s): erts
+               Related Id(s): ERL-188
+
+               Fix scheduler deadlock bug in ets:update_counter/4 when
+               key is not found and inserting the default object
+               causes the table to grow.
+
+
+ Full runtime dependencies of erts-7.3.1.1: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-7.3.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-7.3.3.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13753    Application(s): ssl
+               Related Id(s): seq13150
+
+               The TLS/SSL protocol version selection for the SSL
+               server has been corrected to follow RFC 5246 Appendix
+               E.1 especially in case where the list of supported
+               versions has gaps. Now the server selects the highest
+               protocol version it supports that is not higher than
+               what the client supports.
+
+
+ Full runtime dependencies of ssl-7.3.3.1: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

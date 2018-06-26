@@ -1,0 +1,1384 @@
+Patch Package:           OTP 20.2
+Git Tag:                 OTP-20.2
+Date:                    2017-12-13
+Trouble Report Id:       OTP-13832, OTP-13906, OTP-14281, OTP-14446,
+                         OTP-14448, OTP-14475, OTP-14563, OTP-14567,
+                         OTP-14570, OTP-14602, OTP-14620, OTP-14639,
+                         OTP-14642, OTP-14643, OTP-14657, OTP-14663,
+                         OTP-14664, OTP-14670, OTP-14673, OTP-14674,
+                         OTP-14676, OTP-14677, OTP-14678, OTP-14679,
+                         OTP-14685, OTP-14686, OTP-14688, OTP-14689,
+                         OTP-14691, OTP-14693, OTP-14697, OTP-14720,
+                         OTP-14727, OTP-14735, OTP-14740, OTP-14742,
+                         OTP-14743, OTP-14752, OTP-14755, OTP-14757,
+                         OTP-14767, OTP-14773, OTP-14776, OTP-14777,
+                         OTP-14779, OTP-14783, OTP-14784, OTP-14786,
+                         OTP-14787, OTP-14791, OTP-14794, OTP-14796,
+                         OTP-14798, OTP-14801, OTP-14802, OTP-14803,
+                         OTP-14804, OTP-14805
+Seq num:                 ERIERL-103, ERIERL-52, ERL-261, ERL-409,
+                         ERL-489, ERL-495, ERL-498, ERL-518
+System:                  OTP
+Release:                 20
+Application:             asn1-5.0.4, common_test-1.15.3,
+                         compiler-7.1.4, cosEvent-2.2.2,
+                         cosEventDomain-1.2.2, cosFileTransfer-1.2.2,
+                         cosNotification-1.2.3, cosProperty-1.2.3,
+                         cosTime-1.2.3, cosTransactions-1.3.3,
+                         crypto-4.2, debugger-4.2.4, dialyzer-3.2.3,
+                         diameter-2.1.3, edoc-0.9.2, eldap-1.2.3,
+                         erl_docgen-0.7.2, erl_interface-3.10.1,
+                         erts-9.2, eunit-2.3.5, hipe-3.17, ic-4.4.3,
+                         inets-6.4.5, jinterface-1.8.1, kernel-5.4.1,
+                         megaco-3.18.3, mnesia-4.15.2, observer-2.6,
+                         odbc-2.12.1, orber-3.8.4, os_mon-2.4.4,
+                         otp_mibs-1.1.2, parsetools-2.1.6,
+                         public_key-1.5.2, runtime_tools-1.12.3,
+                         sasl-3.1.1, snmp-5.2.9, ssh-4.6.3, ssl-8.2.3,
+                         stdlib-3.4.3, syntax_tools-2.1.4,
+                         tools-2.11.1, wx-1.8.3, xmerl-1.3.16
+Predecessor:             OTP 20.1.7
+
+ Check out the git tag OTP-20.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-14448    Application(s): crypto, ssl
+
+               The crypto API is extended to use private/public keys
+               stored in an Engine for sign/verify or encrypt/decrypt
+               operations.
+
+               The ssl application provides an API to use this new
+               engine concept in TLS.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14786    Application(s): asn1
+               Related Id(s): ERL-518
+
+               There was a issue with BER encoding and the undec_rest
+               option in generated decoders. An exception could be
+               thrown instead of returning an error tuple.
+
+
+  OTP-14787    Application(s): asn1
+               Related Id(s): ERL-518
+
+               The asn1ct:test functions crashed on decoders generated
+               with options no_ok_wrapper, undec_rest.
+
+
+ Full runtime dependencies of asn1-5.0.4: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.15.3 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.15.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13832    Application(s): common_test
+
+               A new function, ct:remaining_test_procs/0, returns the
+               identity of test- and group leader processes that are
+               still running at the time of the call.
+
+
+  OTP-14281    Application(s): common_test
+
+               A "latest test result" link is now displayed in the
+               footer of each test index page, which performs a jump
+               to the most recently generated test index. This is
+               useful for making quick comparisons of results between
+               test runs without having to traverse the log file tree.
+
+
+ Full runtime dependencies of common_test-1.15.3: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.4, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.1.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.1.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14773    Application(s): compiler
+               Related Id(s): ERL-498
+
+               The 'deterministic' option was not recognized when
+               given in a -compile() attribute in the source code.
+
+
+ Full runtime dependencies of compiler-7.1.4: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- cosEvent-2.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosEvent-2.2.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosEvent-2.2.2: erts-7.0, kernel-3.0,
+ orber-3.6.27, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- cosEventDomain-1.2.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosEventDomain-1.2.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosEventDomain-1.2.2:
+ cosNotification-1.1.21, erts-7.0, kernel-3.0, orber-3.6.27,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- cosFileTransfer-1.2.2 -------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosFileTransfer-1.2.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosFileTransfer-1.2.2:
+ cosProperty-1.1.17, erts-7.0, inets-5.10, kernel-3.0, orber-3.6.27,
+ ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- cosNotification-1.2.3 -------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosNotification-1.2.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosNotification-1.2.3: cosEvent-2.1.15,
+ cosTime-1.1.14, erts-7.0, kernel-3.0, orber-3.6.27, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- cosProperty-1.2.3 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosProperty-1.2.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosProperty-1.2.3: erts-7.0, kernel-3.0,
+ mnesia-4.12, orber-3.6.27, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- cosTime-1.2.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosTime-1.2.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosTime-1.2.3: cosEvent-2.1.15,
+ erts-7.0, kernel-3.0, orber-3.6.27, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- cosTransactions-1.3.3 -------------------------------------------
+ ---------------------------------------------------------------------
+
+ The cosTransactions-1.3.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of cosTransactions-1.3.3: erts-7.0,
+ kernel-3.0, orber-3.6.27, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14720    Application(s): crypto
+
+               The compatibility function void HMAC_CTX_free in
+               crypto.c erroneously tried to return a value.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14446    Application(s): crypto
+
+               Rewrite public and private key encode/decode with EVP
+               api. New RSA padding options added. This is a modified
+               half of PR-838.
+
+
+  OTP-14448    Application(s): crypto, ssl
+
+               *** HIGHLIGHT ***
+
+               The crypto API is extended to use private/public keys
+               stored in an Engine for sign/verify or encrypt/decrypt
+               operations.
+
+               The ssl application provides an API to use this new
+               engine concept in TLS.
+
+
+  OTP-14567    Application(s): crypto
+
+               Add support to plug in alternative implementations for
+               some or all of the cryptographic operations supported
+               by the OpenSSL Engine API. When configured
+               appropriately, OpenSSL calls the engine's
+               implementation of these operations instead of its own.
+
+
+  OTP-14639    Application(s): crypto
+
+               Replaced a call of the OpenSSL deprecated function
+               DH_generate_parameters in crypto.c.
+
+
+  OTP-14735    Application(s): crypto
+               Related Id(s): OTP-14448
+
+               Documentation added about how to use keys stored in an
+               Engine.
+
+
+  OTP-14801    Application(s): crypto
+
+               Add engine_ ctrl_cmd_string/3,4 the OpenSSL Engine
+               support in crypto.
+
+
+ Full runtime dependencies of crypto-4.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- debugger-4.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-4.2.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14802    Application(s): debugger
+
+               Do not quote variables and button names in Debugger
+               windows. The bug was introduced in Erlang/OTP 20.1.
+
+
+ Full runtime dependencies of debugger-4.2.4: compiler-5.0, erts-9.0,
+ kernel-5.3, stdlib-3.4, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The dialyzer-3.2.3 application can *not* be applied
+       independently of other applications on an arbitrary OTP 20
+       installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- hipe-3.16.1 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14742    Application(s): dialyzer
+
+               The error message returned from Dialyzer when, for
+               example, a modified record field type is not a subtype
+               of the declared type, no longer includes a call stack.
+               The bug was introduced in Erlang/OTP 19.3.
+
+
+  OTP-14743    Application(s): dialyzer
+
+               A bug relating to maps and never returning functions
+               has been fixed.
+
+
+ Full runtime dependencies of dialyzer-3.2.3: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.1.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.1.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14805    Application(s): diameter
+
+               Fix documentation typo: peer_down/3 was written where
+               peer_down/3 was intended.
+
+
+ Full runtime dependencies of diameter-2.1.3: erts-6.4, kernel-3.2,
+ ssl-6.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ --- edoc-0.9.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The edoc-0.9.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14777    Application(s): edoc
+
+               The map type is correctly denoted as map() in function
+               specifications and types.
+
+
+ Full runtime dependencies of edoc-0.9.2: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of eldap-1.2.3: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.7.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.7.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14674    Application(s): erl_docgen
+
+               The style for code, warning and note tags in the pdf
+               have been changed so they look like the html version.
+               The spacing around code blocks have been changed for
+               both html and pdf so it's the same regardless if the
+               user have a newline after the start tag (or before the
+               end tag) or not.
+
+
+ Full runtime dependencies of erl_docgen-0.7.2: edoc-0.7.13, erts-9.0,
+ stdlib-3.4, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.10.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.10.1 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14677    Application(s): erts
+
+               Fix a bug in tracing where the {caller} match spec
+               function would be set to undefined incorrectly when
+               used in conjunction with return_to or return_trace on
+               some functions.
+
+               The functions effected are: erlang:put/2,
+               erlang:erase/1, erlang:process_info/1,2,
+               erlang:nif_load/2, erts_internal:garbage_collection/1
+               and erts_internal:check_process_code/1.
+
+               Because of this bug, the analysis done by fprof could
+               become incorrect when the functions above are the
+               tail-call in a function.
+
+
+  OTP-14678    Application(s): erts
+               Related Id(s): ERL-495
+
+               Fix emulator deadlock that would happen if trap_exit
+               was set to true and a process sends an exit signal to
+               itself using exit(self(), Reason) while receive tracing
+               was enabled for that process.
+
+
+  OTP-14685    Application(s): erts, observer
+               Related Id(s): OTP-14595, OTP-14603, OTP-14611
+
+               Writing of crash dumps is significantly faster.
+
+               Maps are now included in crash dumps.
+
+               Constants terms would only be shown in one process,
+               while other processes referencing the same constant
+               term would show a marker for incomplete heap.
+
+
+  OTP-14691    Application(s): erts
+
+               The fallback home directory for windows has been
+               changed to be the PROFILE directory instead of the
+               WINDOWS directory. The fallback is used when the
+               environment variables HOMEDRIVE and HOMEPATH have not
+               been set.
+
+
+  OTP-14740    Application(s): erts, hipe
+
+               Fix bug for hipe compiled code using <<X/utf32>> binary
+               construction that could cause faulty result or even VM
+               crash.
+
+               On architectures other than x86_64, code need to be
+               recompiled to benefit from this fix.
+
+
+  OTP-14752    Application(s): erts
+
+               Fixed bug in erlang:garbage_collect/2 and
+               erlang:check_process_code/3, when called with option
+               {async,ReqestId}. Could cause VM crash or heap
+               corruption if RequestId was an immediate term (like a
+               pid, atom or small integer). Bug exists since OTP-17.0.
+
+
+  OTP-14779    Application(s): erts
+
+               ERL_NIF_MINOR_VERSION wasn't bumped with the addition
+               of enif_ioq_*.
+
+
+  OTP-14791    Application(s): erts
+
+               Purging of loaded code that contained "fake literals"
+               (for example the magic reference obtained from
+               'ets:new/2') would crash the runtime system. Corrected.
+
+
+  OTP-14796    Application(s): erts
+
+               Setting the size of the atom table to a number near
+               2147483647 (using the '+t' option) would cause the
+               emulator to exit with a failure to allocate a huge
+               amount of memory. This has been corrected. Also the
+               usage message for the '+t' option has been corrected to
+               show the correct upper limit 2147483647 instead of 0.
+
+
+  OTP-14803    Application(s): erts
+
+               Fixed a bug that prevented registered process names
+               from being resolved in lcnt results.
+
+
+  OTP-14804    Application(s): erts
+
+               Formatting bugs were fixed in several HiPE debug BIFs.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14686    Application(s): erts, observer
+
+               Binaries and some other data in crash dumps are now
+               encoded in base64 (instead of in hex), which will
+               reduce the size of crash dumps.
+
+               A few bugs in the handling of sub binaries in
+               crashdump_viewer have been fixed.
+
+
+  OTP-14689    Application(s): erts
+
+               Micro optimization for send operations of messages to
+               other nodes. The local ack-message, which is otherwise
+               sent back from TPC/IP port driver to sending client
+               process, is now ignored earlier for distributed send
+               operations.
+
+
+ Full runtime dependencies of erts-9.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.3.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.3.5 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of eunit-2.3.5: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.17 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The hipe-3.17 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-9.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14740    Application(s): erts, hipe
+
+               Fix bug for hipe compiled code using <<X/utf32>> binary
+               construction that could cause faulty result or even VM
+               crash.
+
+               On architectures other than x86_64, code need to be
+               recompiled to benefit from this fix.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14767    Application(s): hipe
+
+               Added documentation about limitations of hipe compared
+               to beam compiled code.
+
+
+ Full runtime dependencies of hipe-3.17: compiler-5.0, erts-9.2,
+ kernel-5.3, stdlib-3.4, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- ic-4.4.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ic-4.4.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of ic-4.4.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.4.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.4.5 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14679    Application(s): inets
+
+               CGI environment variable CONTENT_LENGTH shall be a
+               string
+
+
+  OTP-14727    Application(s): inets
+
+               In relaxed mode disregard Content-Length header if
+               there is also a Transfer-Encoding header.
+
+
+  OTP-14783    Application(s): inets
+
+               Eliminated race condition, that could cause http
+               request to sporadically fail to complete successfully,
+               when keep-alive connections are used.
+
+
+ Full runtime dependencies of inets-6.4.5: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.8.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.8.1 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.4.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-5.4.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-9.1 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14784    Application(s): kernel
+
+               Refactored an internal API.
+
+
+ Full runtime dependencies of kernel-5.4.1: erts-9.1, sasl-3.0,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.18.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.18.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of megaco-3.18.3: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.15.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.15.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14776    Application(s): mnesia
+               Related Id(s): ERIERL-103
+
+               Fix backup error handling, the real failure reason was
+               not returned.
+
+
+ Full runtime dependencies of mnesia-4.15.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.6 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14642    Application(s): observer
+
+               A bug introduced in OTP-20 would make Crashdump Viewer
+               crash when trying to expand an empty binary. This is
+               now corrected.
+
+
+  OTP-14643    Application(s): observer
+               Related Id(s): ERL-489
+
+               If a match spec in the config file contained more than
+               one clause, observer would earlier crash when trying to
+               display it in the GUI. This is now corrected.
+
+
+  OTP-14685    Application(s): erts, observer
+               Related Id(s): OTP-14595, OTP-14603, OTP-14611
+
+               Writing of crash dumps is significantly faster.
+
+               Maps are now included in crash dumps.
+
+               Constants terms would only be shown in one process,
+               while other processes referencing the same constant
+               term would show a marker for incomplete heap.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14686    Application(s): erts, observer
+
+               Binaries and some other data in crash dumps are now
+               encoded in base64 (instead of in hex), which will
+               reduce the size of crash dumps.
+
+               A few bugs in the handling of sub binaries in
+               crashdump_viewer have been fixed.
+
+
+  OTP-14755    Application(s): observer
+
+               In order to allow future improvements, Crashdump Viewer
+               now checks the version tag of the crashdump to see that
+               it is a known format. If the crashdump version is newer
+               than Crashdump Viewer is prepared to read, then an
+               information dialog is displayed before Crashdump Viewer
+               terminates.
+
+               If an incomplete process heap is discovered in a
+               crashdump, Crashdump Viewer will now display a warning
+               for this, similar to the warning displayed when a
+               crashdump is truncated. Incomplete heaps can occur if
+               for instance the literals are not included, which is
+               the case for all dumps prior to OTP-20.2.
+
+
+ Full runtime dependencies of observer-2.6: erts-7.0, et-1.5,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-3.4, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.12.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The odbc-2.12.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of odbc-2.12.1: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- orber-3.8.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The orber-3.8.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+  OTP-14673    Application(s): orber
+
+               Removed the man warnings by using the code tag instead
+               of c tag.
+
+
+ Full runtime dependencies of orber-3.8.4: erts-7.0, inets-5.10,
+ kernel-3.0, mnesia-4.12, ssl-5.3.4, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.4.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.4.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of os_mon-2.4.4: erts-6.0, kernel-3.0,
+ mnesia-4.12, otp_mibs-1.0.9, sasl-2.4, snmp-4.25.1, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- otp_mibs-1.1.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The otp_mibs-1.1.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of otp_mibs-1.1.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, snmp-4.25.1, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.1.6 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The parsetools-2.1.6 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14697    Application(s): parsetools
+
+               Warnings about unused functions in leexinc.hrl are
+               suppressed.
+
+
+ Full runtime dependencies of parsetools-2.1.6: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.5.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.5.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14570    Application(s): public_key
+               Related Id(s): ERIERL-52, OTP-14676
+
+               Fixed a bug in public_key:ssh_encode/2 that made it
+               possible to erroneously encode e.g. an RSA key with
+               another type e.g. ECDSA in the resulting binary.
+
+
+  OTP-14620    Application(s): public_key
+
+               Corrected handling of parameterized EC keys in
+               public_key:generate_key/1 so that it will work as
+               expected instead of causing a runtime error in crypto.
+
+
+ Full runtime dependencies of public_key-1.5.2: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.12.3 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.12.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of runtime_tools-1.12.3: erts-8.0,
+ kernel-5.0, mnesia-4.12, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- sasl-3.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The sasl-3.1.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13906    Application(s): sasl
+               Related Id(s): ERL-261
+
+               The Report Browser, rb, could earlier not handle
+               reports that were not lists, for example generated by
+               error_logger:info_report({some, tuple}). This term is
+               allowed as input to error_logger, but rb would state
+               that "A report on bad form was encountered". This is
+               now corrected.
+
+
+ Full runtime dependencies of sasl-3.1.1: erts-9.0, kernel-5.3,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.2.9 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.2.9 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of snmp-5.2.9: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.3 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14602    Application(s): ssh
+
+               Passphrase option for ecdsa public keys was missing.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14676    Application(s): ssh
+               Related Id(s): ERIERL-52, OTP-14570
+
+               The host and user public key handling is hardened so
+               that a faulty plugin can't deliver a key of wrong type.
+
+               Better checks in the server of the available hostkey's
+               types at start and at each accept.
+
+               Better checks in the client of the available user
+               public key types at connect.
+
+
+  OTP-14757    Application(s): ssh
+
+               SSH can now fetch the host key from the private keys
+               stored in an Engine. See the crypto application for
+               details about Engines.
+
+
+ Full runtime dependencies of ssh-4.6.3: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.2.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.2.3 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14664    Application(s): ssl
+
+               Packet options cannot be supported for unreliable
+               transports, that is, packet option for DTLS over udp
+               will not be supported.
+
+
+  OTP-14794    Application(s): ssl
+
+               Ensure data delivery before close if possible. This fix
+               is related to fix in PR-1479.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14448    Application(s): crypto, ssl
+
+               *** HIGHLIGHT ***
+
+               The crypto API is extended to use private/public keys
+               stored in an Engine for sign/verify or encrypt/decrypt
+               operations.
+
+               The ssl application provides an API to use this new
+               engine concept in TLS.
+
+
+  OTP-14563    Application(s): ssl
+
+               Implemented renegotiation for DTLS
+
+
+  OTP-14657    Application(s): ssl
+
+               A new command line option -ssl_dist_optfile has been
+               added to facilitate specifying the many options needed
+               when using SSL as the distribution protocol.
+
+
+ Full runtime dependencies of ssl-8.2.3: crypto-4.2, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.5, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.4.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.4.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14663    Application(s): stdlib
+
+               Make ets:i/1 exit cleaner when ^D is input while
+               browsing a table. Only the old Erlang shell is affected
+               (erl(1) flag -oldshell).
+
+
+  OTP-14693    Application(s): stdlib
+
+               Fixed handling of windows UNC paths in module filename.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14670    Application(s): stdlib
+
+               Improve performance of the new string functionality
+               when handling ASCII characters.
+
+
+  OTP-14798    Application(s): stdlib
+
+               Added a clarification to the documentation of
+               unicode:characters_to_list/2.
+
+
+ Full runtime dependencies of stdlib-3.4.3: compiler-5.0, crypto-3.3,
+ erts-9.0, kernel-5.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.1.4 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-2.1.4 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of syntax_tools-2.1.4: compiler-7.0,
+ erts-9.0, kernel-5.0, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.11.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The tools-2.11.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-9.1 (first satisfied in OTP 20.1)
+       -- kernel-5.4 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of tools-2.11.1: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.8.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.8.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14688    Application(s): wx
+
+               wx crashes in otp 20.1 if empty binaries was sent down
+               as arguments.
+
+
+ Full runtime dependencies of wx-1.8.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.16 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.16 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14475    Application(s): cosEvent, cosEventDomain,
+               cosFileTransfer, cosNotification, cosProperty, cosTime,
+               cosTransactions, eldap, erl_interface, eunit, ic,
+               jinterface, megaco, odbc, orber, os_mon, otp_mibs,
+               runtime_tools, snmp, syntax_tools, tools, xmerl
+               Related Id(s): ERL-409, PR-1493
+
+               Removed all old unused files in the documentation.
+
+
+ Full runtime dependencies of xmerl-1.3.16: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

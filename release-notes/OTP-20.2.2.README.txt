@@ -1,0 +1,50 @@
+Patch Package:           OTP 20.2.2
+Git Tag:                 OTP-20.2.2
+Date:                    2017-12-19
+Trouble Report Id:       OTP-14829, OTP-14841
+Seq num:                 ERIERL-113, ERIERL-84
+System:                  OTP
+Release:                 20
+Application:             mnesia-4.15.3
+Predecessor:             OTP 20.2.1
+
+ Check out the git tag OTP-20.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.15.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.15.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14829    Application(s): mnesia
+               Related Id(s): ERIERL-84
+
+               Removed a quadratic behavior in startup. This change
+               implies that backend plugins (if used) must be set when
+               the schema is created or via configuration parameters
+               before mnesia is started.
+
+
+  OTP-14841    Application(s): mnesia
+               Related Id(s): ERIERL-113
+
+               Bad timing could crash mnesia after a checkpoint was
+               deactivated and reactivated with the same checkpoint
+               name on different tables.
+
+
+ Full runtime dependencies of mnesia-4.15.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

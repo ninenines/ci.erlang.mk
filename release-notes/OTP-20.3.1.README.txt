@@ -1,0 +1,45 @@
+Patch Package:           OTP 20.3.1
+Git Tag:                 OTP-20.3.1
+Date:                    2018-03-16
+Trouble Report Id:       OTP-14981
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             ssl-8.2.5
+Predecessor:             OTP 20.3
+
+ Check out the git tag OTP-20.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-8.2.5 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.2.5 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14981    Application(s): ssl
+
+               Fix filter function to not incorrectly exclude AEAD
+               cipher suites
+
+
+ Full runtime dependencies of ssl-8.2.5: crypto-4.2, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.5, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

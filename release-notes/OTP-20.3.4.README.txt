@@ -1,0 +1,112 @@
+Patch Package:           OTP 20.3.4
+Git Tag:                 OTP-20.3.4
+Date:                    2018-04-20
+Trouble Report Id:       OTP-15004, OTP-15007, OTP-15018, OTP-15022,
+                         OTP-15023
+Seq num:                 ERIERL-150, ERIERL-163
+System:                  OTP
+Release:                 20
+Application:             erl_interface-3.10.2, ic-4.4.4, inets-6.5.1,
+                         ssh-4.6.8
+Predecessor:             OTP 20.3.3
+
+ Check out the git tag OTP-20.3.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.10.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.10.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15022    Application(s): erl_interface
+               Related Id(s): ERIERL-163
+
+               Fix bug in ei_connect functions that may cause failure
+               due to insufficient buffer space for gethostbyname_r.
+
+
+  OTP-15023    Application(s): erl_interface, ic
+               Related Id(s): ERIERL-150
+
+               Optimize encoding/decoding for pure 7-bit ascii atoms.
+
+
+ ---------------------------------------------------------------------
+ --- ic-4.4.4 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ic-4.4.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15023    Application(s): erl_interface, ic
+               Related Id(s): ERIERL-150
+
+               Optimize encoding/decoding for pure 7-bit ascii atoms.
+
+
+ Full runtime dependencies of ic-4.4.4: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.5.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.5.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15007    Application(s): inets
+
+               Fix broken options handling in httpc (ERL-441).
+
+
+ Full runtime dependencies of inets-6.5.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.8 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.8 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15004    Application(s): ssh
+
+               An ssh_sftp server (running version 6) could fail if it
+               is told to remove a file which in fact is a directory.
+
+
+  OTP-15018    Application(s): ssh
+
+               Fix rare spurios shutdowns of ssh servers when
+               receiveing {'EXIT',_,normal} messages.
+
+
+ Full runtime dependencies of ssh-4.6.8: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

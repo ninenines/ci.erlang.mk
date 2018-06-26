@@ -1,0 +1,76 @@
+Patch Package:           OTP 20.0.5
+Git Tag:                 OTP-20.0.5
+Date:                    2017-09-14
+Trouble Report Id:       OTP-14450, OTP-14573, OTP-14590
+Seq num:                 ERL-474
+System:                  OTP
+Release:                 20
+Application:             erts-9.0.5, inets-6.4.1
+Predecessor:             OTP 20.0.4
+
+ Check out the git tag OTP-20.0.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-9.0.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.0.5 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14590    Application(s): erts
+               Related Id(s): ERL-474
+
+               Fixed bug in binary_to_term and binary_to_atom that
+               could cause VM crash. Typically happens when the last
+               character of an UTF8 string is in the range 128 to 255,
+               but truncated to only one byte. Bug exists in
+               binary_to_term since ERTS version 5.10.2 (OTP_R16B01)
+               and binary_to_atom since ERTS version 9.0 (OTP-20.0).
+
+
+ Full runtime dependencies of erts-9.0.5: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.4.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.4.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14573    Application(s): inets
+
+               http_uri aligned to follow RFC 3986 and not convert "+"
+               to space when decoding URIs.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14450    Application(s): inets
+
+               Added new option max_client_body_chunk to httpd server
+               to allow chunked delivery of PUT and POST data to
+               mod_esi callback. Note, new mod_esi callback
+               implementation is required.
+
+               Also correct value provided by server_name environment
+               variable
+
+
+ Full runtime dependencies of inets-6.4.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

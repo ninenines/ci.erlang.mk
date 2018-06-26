@@ -1,0 +1,49 @@
+Patch Package:           OTP 19.2.1
+Git Tag:                 OTP-19.2.1
+Date:                    2017-01-16
+Trouble Report Id:       OTP-14144
+Seq num:                 seq13242
+System:                  OTP
+Release:                 19
+Application:             erts-8.2.1
+Predecessor:             OTP 19.2
+
+ Check out the git tag OTP-19.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.2.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14144    Application(s): erts
+               Related Id(s): seq13242
+
+               Fix a quite rare bug causing VM crash during code
+               loading and the use of export funs (fun M:F/A) of not
+               yet loaded modules. Requires a very specfic timing of
+               concurrent scheduler threads. Has been seen on ARM but
+               can probably also occure on other architectures. Bug
+               has existed since OTP R16.
+
+
+ Full runtime dependencies of erts-8.2.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

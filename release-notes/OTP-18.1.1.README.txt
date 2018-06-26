@@ -1,0 +1,69 @@
+Patch Package:           OTP 18.1.1
+Git Tag:                 OTP-18.1.1
+Date:                    2015-10-06
+Trouble Report Id:       OTP-13013, OTP-13022, OTP-13025
+Seq num:                 seq12957
+System:                  OTP
+Release:                 18
+Application:             inets-6.0.2, mnesia-4.13.2
+Predecessor:             OTP 18.1
+
+ Check out the git tag OTP-18.1.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.0.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13022    Application(s): inets
+
+               Avoid crash in mod_auth_server and mod_security_server
+               due to using an atom instead of a string when creating
+               a name.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13013    Application(s): inets
+
+               Add function response_default_headers/0 to httpd
+               customize API, to allow user to specify default values
+               for HTTP response headers.
+
+
+ Full runtime dependencies of inets-6.0.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.13.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.13.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13025    Application(s): mnesia
+               Related Id(s): seq12957
+
+               Fixed a process and file descriptor leak in
+               mnesia:restore/2.
+
+
+ Full runtime dependencies of mnesia-4.13.2: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

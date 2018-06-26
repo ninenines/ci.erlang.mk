@@ -1,0 +1,43 @@
+Patch Package:           OTP 20.3.3
+Git Tag:                 OTP-20.3.3
+Date:                    2018-04-19
+Trouble Report Id:       OTP-15017
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             sasl-3.1.2
+Predecessor:             OTP 20.3.2
+
+ Check out the git tag OTP-20.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- sasl-3.1.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The sasl-3.1.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15017    Application(s): sasl
+
+               When upgrading with instruction 'restart_new_emulator',
+               the generated temporary boot file used 'kernelProcess'
+               statements from the old release instead of the new
+               release. This is now corrected.
+
+               This correction is needed for upgrade to OTP-21.
+
+
+ Full runtime dependencies of sasl-3.1.2: erts-9.0, kernel-5.3,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

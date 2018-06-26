@@ -1,0 +1,42 @@
+Patch Package:           OTP 19.1.2
+Git Tag:                 OTP-19.1.2
+Date:                    2016-10-06
+Trouble Report Id:       OTP-13905, OTP-13932
+Seq num:                 seq13189
+System:                  OTP
+Release:                 19
+Application:             ssh-4.3.3
+Predecessor:             OTP 19.1.1
+
+  ---------------------------------------------------------------------
+  --- ssh-4.3.3 -------------------------------------------------------
+  ---------------------------------------------------------------------
+
+  Note! The ssh-4.3.3 application can *not* be applied independently of
+        other applications on an arbitrary OTP 19 installation.
+
+        On a full OTP 19 installation, also the following runtime
+        dependency has to be satisfied:
+        -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+  --- Fixed Bugs and Malfunctions ---
+
+
+   OTP-13932    Application(s): ssh
+                Related Id(s): seq13189
+
+                Handle all possible exit values that should be
+                interpreted as {error, closed}. Failing to do so could
+                lead to unexpected crashes for users of the ssh
+                application.
+
+
+  Full runtime dependencies of ssh-4.3.3: crypto-3.3, erts-6.0,
+  kernel-3.0, public_key-1.1, stdlib-3.1
+
+
+  ---------------------------------------------------------------------
+  ---------------------------------------------------------------------
+  ---------------------------------------------------------------------
+

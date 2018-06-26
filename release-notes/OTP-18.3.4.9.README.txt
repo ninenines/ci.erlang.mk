@@ -1,0 +1,44 @@
+Patch Package:           OTP 18.3.4.9
+Git Tag:                 OTP-18.3.4.9
+Date:                    2018-04-24
+Trouble Report Id:       OTP-15018
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             ssh-4.2.2.6
+Predecessor:             OTP 18.3.4.8
+
+ Check out the git tag OTP-18.3.4.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.2.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.2.2.6 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-3.6.3.1 (first satisfied in OTP 18.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15018    Application(s): ssh
+
+               Fix rare spurios shutdowns of ssh servers when
+               receiveing {'EXIT',_,normal} messages.
+
+
+ Full runtime dependencies of ssh-4.2.2.6: crypto-3.6.3.1, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

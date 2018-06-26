@@ -1,0 +1,46 @@
+Patch Package:           OTP 19.3.6.8
+Git Tag:                 OTP-19.3.6.8
+Date:                    2018-04-06
+Trouble Report Id:       OTP-15004
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             ssh-4.4.2.3
+Predecessor:             OTP 19.3.6.7
+
+ Check out the git tag OTP-19.3.6.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.4.2.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.4.2.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-3.7.3 (first satisfied in OTP 19.3)
+       -- public_key-1.4 (first satisfied in OTP 19.3)
+       -- stdlib-3.3 (first satisfied in OTP 19.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15004    Application(s): ssh
+
+               An ssh_sftp server (running version 6) could fail if it
+               is told to remove a file which in fact is a directory.
+
+
+ Full runtime dependencies of ssh-4.4.2.3: crypto-3.7.3, erts-6.0,
+ kernel-3.0, public_key-1.4, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

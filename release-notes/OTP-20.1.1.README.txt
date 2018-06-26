@@ -1,0 +1,96 @@
+Patch Package:           OTP 20.1.1
+Git Tag:                 OTP-20.1.1
+Date:                    2017-10-03
+Trouble Report Id:       OTP-14638, OTP-14640, OTP-14645, OTP-14648,
+                         OTP-14649
+Seq num:                 ERL-490
+System:                  OTP
+Release:                 20
+Application:             compiler-7.1.3, erts-9.1.1, ssh-4.6.1
+Predecessor:             OTP 20.1
+
+ Check out the git tag OTP-20.1.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.1.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.1.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14640    Application(s): compiler
+               Related Id(s): ERL-490
+
+               The compiler could issue an incorrect internal
+               consistency failure diagnostic for some complicated bit
+               syntax maches.
+
+
+ Full runtime dependencies of compiler-7.1.3: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.1.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14648    Application(s): erts
+
+               The new zlib module returned a data_error when
+               inflating concatenated streams, which was incompatible
+               with the old module's behavior of returning the
+               uncompressed data up to the end of the first stream.
+
+
+  OTP-14649    Application(s): erts
+
+               zlib:gunzip/1 will no longer stop at the end of the
+               first stream when decompressing concatenated gzip
+               files.
+
+
+ Full runtime dependencies of erts-9.1.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.6.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14645    Application(s): ssh
+
+               Fixed broken printout
+
+
+ --- Improvements and New Features ---
+
+  OTP-14638    Application(s): ssh
+
+               Disable aes_gcm ciphers if peer is OpenSSH 6.2 which is
+               known to have trouble with them in some cases.
+
+
+ Full runtime dependencies of ssh-4.6.1: crypto-3.7.3, erts-6.0,
+ kernel-3.0, public_key-1.4, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

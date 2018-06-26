@@ -1,0 +1,104 @@
+Patch Package:           OTP 20.0.3
+Git Tag:                 OTP-20.0.3
+Date:                    2017-08-24
+Trouble Report Id:       OTP-13011, OTP-14522, OTP-14524, OTP-14541
+Seq num:                 ERIERL-48, ERIERL-60
+System:                  OTP
+Release:                 20
+Application:             asn1-5.0.2, compiler-7.1.1, erts-9.0.3,
+                         ssh-4.5.1
+Predecessor:             OTP 20.0.2
+
+ Check out the git tag OTP-20.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13011    Application(s): asn1
+               Related Id(s): ERIERL-60
+
+               Default values now work in extension for PER, so if you
+               give the atom asn1_DEFAULT instead of a value it will
+               become the default value.
+
+
+ Full runtime dependencies of asn1-5.0.2: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.1.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14522    Application(s): compiler
+               Related Id(s): ERIERL-48
+
+               Fail labels on guard BIFs weren't taken into account
+               during an optimization pass, and a bug in the
+               validation pass sometimes prevented this from being
+               noticed when a fault occurred.
+
+
+ Full runtime dependencies of compiler-7.1.1: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.0.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.0.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14524    Application(s): erts
+
+               Binary append operations did not check for overflow,
+               resulting in nonsensical results when huge binaries
+               were appended.
+
+
+ Full runtime dependencies of erts-9.0.3: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.5.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.5.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14541    Application(s): ssh
+               Related Id(s): EIRERL-63
+
+               All unknown options are sent to the transport handler
+               regardless of type.
+
+
+ Full runtime dependencies of ssh-4.5.1: crypto-3.7.3, erts-6.0,
+ kernel-3.0, public_key-1.4, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

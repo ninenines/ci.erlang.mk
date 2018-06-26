@@ -1,0 +1,73 @@
+Patch Package:           OTP 19.1.6
+Git Tag:                 OTP-19.1.6
+Date:                    2016-11-09
+Trouble Report Id:       OTP-13956, OTP-13997, OTP-14009
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             erts-8.1.1
+Predecessor:             OTP 19.1.5
+
+ Check out the git tag OTP-19.1.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.1.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13956    Application(s): erts
+               Related Id(s): ERL-133, ERL-262
+
+               The emulator got a dynamic library dependency towards
+               libsctp, which on Linux was not intended since the
+               emulator there loads and resolves the needed sctp
+               functions in runtime. This has been fixed and a
+               configure switch --enable-sctp=lib has been added for
+               those who want such a library dependency.
+
+
+  OTP-13997    Application(s): erts
+
+               Fix SIGUSR1 crashdump generation
+
+               Do not generate a core when a crashdump is asked for.
+
+
+  OTP-14009    Application(s): erts
+
+               The new functions in code that allows loading of many
+               modules at once had a performance problem. While
+               executing a helper function in the erl_prim_loader
+               process, garbage messages were produced. The garbages
+               messages were ignored and ultimately discarded, but
+               there would be a negative impact on performance and
+               memory usage. The number of garbage message depended on
+               both the number of modules to be loaded and the length
+               of the code path.
+
+               The functions affected of this problem were:
+               atomic_load/1, ensure_modules_loaded/1, and
+               prepare_loading/1.
+
+
+ Full runtime dependencies of erts-8.1.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

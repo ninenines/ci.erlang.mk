@@ -1,0 +1,157 @@
+Patch Package:           OTP 19.3.1
+Git Tag:                 OTP-19.3.1
+Date:                    2017-04-04
+Trouble Report Id:       OTP-14242, OTP-14290, OTP-14298, OTP-14300,
+                         OTP-14308, OTP-14313
+Seq num:                 seq13294
+System:                  OTP
+Release:                 19
+Application:             crypto-3.7.4, erts-8.3.1, inets-6.3.7,
+                         ssh-4.4.2, ssl-8.1.2
+Predecessor:             OTP 19.3
+
+ Check out the git tag OTP-19.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-3.7.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-3.7.4 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14313    Application(s): crypto
+               Related Id(s): PR-1393
+
+               Fix a bug with AES CFB 128 for 192 and 256 bit keys.
+               Thanks to kellymclaughlin !
+
+
+ Full runtime dependencies of crypto-3.7.4: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14308    Application(s): erts
+               Related Id(s): ERL-383
+
+               Trying to open a directory with file:read_file/1 on
+               Unix leaked a file descriptor. This bug has now been
+               fixed.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-14290    Application(s): erts
+
+               Invoking init:stop/0 via the SIGTERM signal, in a
+               non-SMP BEAM, could cause BEAM to terminate with fatal
+               error. This has now been fixed and the BEAM will
+               terminate normally when SIGTERM is received.
+
+
+ Full runtime dependencies of erts-8.3.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.7 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.7 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14242    Application(s): inets
+
+               Fixed a bug in ftp that made further operations after a
+               recv_chunk operation impossible.
+
+
+ Full runtime dependencies of inets-6.3.7: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.4.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.4.2 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-3.7.3 (first satisfied in OTP 19.3)
+       -- public_key-1.4 (first satisfied in OTP 19.3)
+       -- stdlib-3.3 (first satisfied in OTP 19.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14298    Application(s): ssh
+               Related Id(s): seq13294
+
+               ssh:daemon_info/1 crashed if the listening IP was not
+               'any'
+
+
+ Full runtime dependencies of ssh-4.4.2: crypto-3.7.3, erts-6.0,
+ kernel-3.0, public_key-1.4, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.1.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.1.2 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.2 (first satisfied in OTP 19.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14300    Application(s): ssl
+
+               Correct active once emulation, for TLS. Now all data
+               received by the connection process will be delivered
+               through active once, even when the active once arrives
+               after that the gen_tcp socket is closed by the peer.
+
+
+ Full runtime dependencies of ssl-8.1.2: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.2, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Bram Verburg, Kelly McLaughlin
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,66 @@
+Patch Package:           OTP 18.3.2
+Git Tag:                 OTP-18.3.2
+Date:                    2016-04-27
+Trouble Report Id:       OTP-13261, OTP-13510, OTP-13511
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             inets-6.2.2, ssl-7.3.1
+Predecessor:             OTP 18.3.1
+
+ Check out the git tag OTP-18.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.2.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13510    Application(s): inets
+
+               Add environment information item peer_cert to mod_esi
+
+
+ Full runtime dependencies of inets-6.2.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-7.3.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-7.3.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13511    Application(s): ssl
+
+               Corrections to cipher suite handling using the 3 and 4
+               tuple format in addition to commit
+               89d7e21cf4ae988c57c8ef047bfe85127875c70c
+
+
+ --- Improvements and New Features ---
+
+  OTP-13261    Application(s): ssl
+
+               Make values for the TLS-1.2 signature_algorithms
+               extension configurable
+
+
+ Full runtime dependencies of ssl-7.3.1: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,45 @@
+Patch Package:           OTP 18.2.4
+Git Tag:                 OTP-18.2.4
+Date:                    2016-02-23
+Trouble Report Id:       OTP-13323
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             common_test-1.11.2
+Predecessor:             OTP 18.2.3
+
+ Check out the git tag OTP-18.2.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.11.2 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.11.2 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13323    Application(s): common_test
+
+               If a ssh package contained more than one netconf end
+               tag, then the second end tag was never detected in
+               ct_netconfc:handle_data. Instead it was included in the
+               XML data given to the xmerl parser, which then failed.
+               The problem was introduced by OTP-13007, and has now
+               been corrected.
+
+
+ Full runtime dependencies of common_test-1.11.2: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-2.5, test_server-3.9, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,52 @@
+Patch Package:           OTP 18.0.3
+Git Tag:                 OTP-18.0.3
+Date:                    2015-08-20
+Trouble Report Id:       OTP-12941, OTP-12942
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             erts-7.0.3
+Predecessor:             OTP 18.0.2
+
+ Check out the git tag OTP-18.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.0.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.0.3 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-12941    Application(s): erts
+
+               Fixed a binary memory leak when printing to shell using
+               the tty driver (i.e. not -oldshell).
+
+
+  OTP-12942    Application(s): erts
+
+               Fix a bug where the standard error port sometimes
+               crashes with eagain as the reason.
+
+
+ Full runtime dependencies of erts-7.0.3: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Steve Vinoski
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

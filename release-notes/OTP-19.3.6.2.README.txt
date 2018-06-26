@@ -1,0 +1,63 @@
+Patch Package:           OTP 19.3.6.2
+Git Tag:                 OTP-19.3.6.2
+Date:                    2017-07-28
+Trouble Report Id:       OTP-14491, OTP-14509, OTP-14514
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5.2
+Predecessor:             OTP 19.3.6.1
+
+ Check out the git tag OTP-19.3.6.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.2 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14491    Application(s): erts
+
+               Fix performance bug in pre-allocators that could cause
+               them to permanently fall back on normal more expensive
+               memory allocation. Pre-allocators are used for quick
+               allocation of short lived meta data used by messages
+               and other scheduled tasks. Bug exists since OTP_R15B02.
+
+
+  OTP-14509    Application(s): erts
+
+               Fixed a bug that prevented TCP sockets from being
+               closed properly on send timeouts.
+
+
+  OTP-14514    Application(s): erts
+
+               Fixed bug in operator bxor causing erroneuos result
+               when one operand is a big *negative* integer with the
+               lowest N*W bits as zero and the other operand not
+               larger than N*W bits. N is an integer of 1 or larger
+               and W is 32 or 64 depending on word size.
+
+
+ Full runtime dependencies of erts-8.3.5.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ 
+ 

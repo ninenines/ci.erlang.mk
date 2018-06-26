@@ -1,0 +1,58 @@
+Patch Package:           OTP 19.3.6
+Git Tag:                 OTP-19.3.6
+Date:                    2017-06-08
+Trouble Report Id:       OTP-14441, OTP-14444, OTP-14451
+Seq num:                 ERIERL-24, ERL-430
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5
+Predecessor:             OTP 19.3.5
+
+ Check out the git tag OTP-19.3.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14441    Application(s): erts
+               Related Id(s): ERL-430
+
+               Active-mode TCP sockets are now cleaned up properly on
+               send/shutdown errors.
+
+
+  OTP-14444    Application(s): erts
+               Related Id(s): ERIERL-24
+
+               A code purge operation could under certain
+               circumstances expand the size of hibernated processes.
+
+
+  OTP-14451    Application(s): erts
+
+               Fix so that the ERL_ZZ_SIGTERM_KILL introduced in
+               erts-8.3.4 works.
+
+
+ Full runtime dependencies of erts-8.3.5: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

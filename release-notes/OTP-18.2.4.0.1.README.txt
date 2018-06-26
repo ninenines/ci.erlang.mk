@@ -1,0 +1,49 @@
+Patch Package:           OTP 18.2.4.0.1
+Git Tag:                 OTP-18.2.4.0.1
+Date:                    2017-05-10
+Trouble Report Id:       OTP-13201
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             erts-7.2.1.1
+Predecessor:             OTP 18.2.4
+
+ Check out the git tag OTP-18.2.4.0.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.2.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.2.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13201    Application(s): erts
+
+               Introduced new statistics functionality in order to
+               more efficiently retrieve information about runnable
+               and active processes and ports. For more information
+               see:
+
+               -- statistics(total_run_queue_lengths)
+
+               -- statistics(run_queue_lengths)
+
+               -- statistics(total_active_tasks)
+
+               -- statistics(active_tasks)
+
+
+ Full runtime dependencies of erts-7.2.1.1: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

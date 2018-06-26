@@ -1,0 +1,89 @@
+Patch Package:           OTP 19.0.2
+Git Tag:                 OTP-19.0.2
+Date:                    2016-07-15
+Trouble Report Id:       OTP-13719, OTP-13731, OTP-13732, OTP-13738
+Seq num:                 seq13142
+System:                  OTP
+Release:                 19
+Application:             compiler-7.0.1, erts-8.0.2, stdlib-3.0.1
+Predecessor:             OTP 19.0.1
+
+ Check out the git tag OTP-19.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13738    Application(s): compiler
+
+               A literal binary matching regression was introduced in
+               19.0 where a match could fail to resolve to the right
+               clause. This has now been fixed.
+
+
+ Full runtime dependencies of compiler-7.0.1: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-8.0.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13731    Application(s): erts
+               Related Id(s): ERL-188
+
+               Fix scheduler deadlock bug in ets:update_counter/4 when
+               key is not found and inserting the default object
+               causes the table to grow.
+
+
+  OTP-13732    Application(s): erts
+               Related Id(s): seq13142
+
+               Fix VM abort "Overrun stack and heap" in garbage
+               collection triggered by a bsl operation and some very
+               specific heap conditions.
+
+
+ Full runtime dependencies of erts-8.0.2: kernel-5.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.0.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13719    Application(s): stdlib
+               Related Id(s): ERL-182
+
+               Correct a bug regarding typed records in the Erlang
+               shell. The bug was introduced in OTP-19.0.
+
+
+ Full runtime dependencies of stdlib-3.0.1: compiler-5.0, crypto-3.3,
+ erts-8.0, kernel-5.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,39 @@
+Patch Package:           OTP 18.1.2
+Git Tag:                 OTP-18.1.2
+Date:                    2015-10-14
+Trouble Report Id:       OTP-13036
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             ssh-4.1.1
+Predecessor:             OTP 18.1.1
+
+ Check out the git tag OTP-18.1.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.1.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13036    Application(s): ssh
+
+               A new option max_channels limits the number of channels
+               with active server-side subsystems that are accepted.
+
+
+ Full runtime dependencies of ssh-4.1.1: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

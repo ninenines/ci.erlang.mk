@@ -1,0 +1,106 @@
+Patch Package:           OTP 19.3.3
+Git Tag:                 OTP-19.3.3
+Date:                    2017-05-02
+Trouble Report Id:       OTP-14360, OTP-14363, OTP-14368, OTP-14383
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             dialyzer-3.1.1, erts-8.3.3, inets-6.3.8
+Predecessor:             OTP 19.3.2
+
+ Check out the git tag OTP-19.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The dialyzer-3.1.1 application can *not* be applied
+       independently of other applications on an arbitrary OTP 19
+       installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- hipe-3.15.4 (first satisfied in OTP 19.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14368    Application(s): dialyzer
+
+               Report unknown types properly. A bug was introduced in
+               Erlang/OTP 19.3, where warnings about unknown types
+               were simply discarded.
+
+
+ Full runtime dependencies of dialyzer-3.1.1: compiler-7.0, erts-8.0,
+ hipe-3.15.4, kernel-5.0, stdlib-3.0, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14360    Application(s): erts
+               Related Id(s): ERL-401, PR-1417
+
+               Fixed memory segment cache used for multiblock
+               carriers. Huge (> 2GB) memory segments could cause a VM
+               crash. Creation of such huge memory segments used for
+               multiblock carriers is however very uncommon.
+
+
+  OTP-14363    Application(s): erts
+               Related Id(s): OTP-14290
+
+               Fix release note for OTP-14290 in ERTS version 8.3.1.
+               It was erroneously placed under "Known Bugs and
+               Problems".
+
+
+ Full runtime dependencies of erts-8.3.3: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.8 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.8 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-14383    Application(s): inets
+
+               Added missing release note for inets-6.3.7
+
+
+ Full runtime dependencies of inets-6.3.8: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Mikael Pettersson
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

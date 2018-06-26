@@ -1,0 +1,157 @@
+Patch Package:           OTP 19.0.1
+Git Tag:                 OTP-19.0.1
+Date:                    2016-06-30
+Trouble Report Id:       OTP-13674, OTP-13702, OTP-13708, OTP-13709,
+                         OTP-13712, OTP-13715, OTP-13716
+Seq num:                 seq13143
+System:                  OTP
+Release:                 19
+Application:             dialyzer-3.0.1, erts-8.0.1, inets-6.3.1,
+                         observer-2.2.1, ssh-4.3.1, tools-2.8.5
+Predecessor:             OTP 19.0
+
+ Check out the git tag OTP-19.0.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-3.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13709    Application(s): dialyzer
+               Related Id(s): ERL-177, PR-1115
+
+               Fix a map related bug.
+
+
+ Full runtime dependencies of dialyzer-3.0.1: compiler-7.0, erts-8.0,
+ hipe-3.15.1, kernel-5.0, stdlib-3.0, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-8.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13716    Application(s): erts
+
+               A memory allocation bug in group_leader/2 could cause
+               an emulator crash when garbage collecting a process
+               that had been assigned a remote group leader. This bug
+               was introduced in ERTS version 8.0.
+
+
+ Full runtime dependencies of erts-8.0.1: kernel-5.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13712    Application(s): inets
+               Related Id(s): seq13143
+
+               A debug message was accidently left enabled in the ftp
+               client.
+
+
+ Full runtime dependencies of inets-6.3.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.2.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13702    Application(s): observer
+               Related Id(s): ERL-171
+
+               Fixed a crash happening when observing another node,
+               who have a different number of schedulers than the
+               current one.
+
+
+ Full runtime dependencies of observer-2.2.1: erts-7.0, et-1.5,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.3.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.3.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13674    Application(s): ssh
+               Related Id(s): TR-HU92273
+
+               SSH client does not any longer retry a bad password
+               given as option to ssh:connect et al.
+
+
+  OTP-13715    Application(s): ssh
+
+               Removed possible hanging risk for a certain timing
+               sequence when communicating client and server executes
+               on the same node.
+
+
+ Full runtime dependencies of ssh-4.3.1: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-1.1, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.8.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-2.8.5 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13708    Application(s): tools
+               Related Id(s): ERL-173
+
+               Correct a bug when adding multiple modules to an Xref
+               server. The bug was introduced in OTP-19.0.
+
+
+ Full runtime dependencies of tools-2.8.5: compiler-5.0, erts-7.0,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Magnus Lång
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

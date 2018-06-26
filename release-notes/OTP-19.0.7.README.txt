@@ -1,0 +1,40 @@
+Patch Package:           OTP 19.0.7
+Git Tag:                 OTP-19.0.7
+Date:                    2016-09-14
+Trouble Report Id:       OTP-13890
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             erts-8.0.5
+Predecessor:             OTP 19.0.6
+
+ Check out the git tag OTP-19.0.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.0.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-8.0.5 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13890    Application(s): erts
+
+               Fixed a VM crash that occured in a garbage collection
+               of a process when it had received binaries. This bug
+               was introduced in ERTS version 8.0 (OTP 19.0).
+
+
+ Full runtime dependencies of erts-8.0.5: kernel-5.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

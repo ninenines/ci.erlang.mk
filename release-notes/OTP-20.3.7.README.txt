@@ -1,0 +1,89 @@
+Patch Package:           OTP 20.3.7
+Git Tag:                 OTP-20.3.7
+Date:                    2018-06-05
+Trouble Report Id:       OTP-15080, OTP-15085, OTP-15091, OTP-15092
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             erl_docgen-0.7.3, erts-9.3.2, inets-6.5.2
+Predecessor:             OTP 20.3.6
+
+ Check out the git tag OTP-20.3.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.7.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.7.3 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15091    Application(s): erl_docgen
+
+               Update makefile so db_funcs.xsl is a part of the
+               installed application.
+
+
+ Full runtime dependencies of erl_docgen-0.7.3: edoc-0.7.13, erts-9.0,
+ stdlib-3.4, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15080    Application(s): erts
+
+               Fixed bug in enif_binary_to_term which could cause
+               memory corruption for immediate terms (atoms, small
+               integers, pids, ports, empty lists).
+
+
+  OTP-15085    Application(s): erts
+
+               Fixed bug in erlang:system_profile/2 that could cause
+               superfluous {profile,_,active,_,_} messages for
+               terminating processes.
+
+
+ Full runtime dependencies of erts-9.3.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.5.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.5.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15092    Application(s): inets
+
+               inets: httpd - Gracefully handle bad headers
+
+               The option max_headers operated on the individual
+               header length instead of the total length of all
+               headers. Also headers with empty keys are now
+               discarded.
+
+
+ Full runtime dependencies of inets-6.5.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,63 @@
+Patch Package:           OTP 18.1.4
+Git Tag:                 OTP-18.1.4
+Date:                    2015-11-13
+Trouble Report Id:       OTP-13061, OTP-13062
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             inets-6.0.3
+Predecessor:             OTP 18.1.3
+
+ Check out the git tag OTP-18.1.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-13062    Application(s): inets
+
+               Add possibility to set socket options, such as nodelay,
+               for httpd. Also phase out legacy option value inet6bf4
+               for the ipfamily option. This value will be translated
+               to the value inet.
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.0.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.0.3 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13061    Application(s): inets
+
+               Improved error handling and gracfully termination when
+               an invalid chunked length header is encountered.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13062    Application(s): inets
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Add possibility to set socket options, such as nodelay,
+               for httpd. Also phase out legacy option value inet6bf4
+               for the ipfamily option. This value will be translated
+               to the value inet.
+
+
+ Full runtime dependencies of inets-6.0.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

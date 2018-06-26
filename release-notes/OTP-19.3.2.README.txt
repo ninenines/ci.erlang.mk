@@ -1,0 +1,47 @@
+Patch Package:           OTP 19.3.2
+Git Tag:                 OTP-19.3.2
+Date:                    2017-04-24
+Trouble Report Id:       OTP-14358
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.2
+Predecessor:             OTP 19.3.1
+
+ Check out the git tag OTP-19.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.2 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14358    Application(s): erts
+               Related Id(s): OTP-14085
+
+               The +Bi command line argument of erl erroneously caused
+               SIGTERM to be ignored by the VM as well as of all its
+               child processes. This bug was introduced in erts
+               version 8.3.
+
+
+ Full runtime dependencies of erts-8.3.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

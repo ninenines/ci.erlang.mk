@@ -1,0 +1,47 @@
+Patch Package:           OTP 20.2.1
+Git Tag:                 OTP-20.2.1
+Date:                    2017-12-15
+Trouble Report Id:       OTP-14827
+Seq num:                 ERL-531
+System:                  OTP
+Release:                 20
+Application:             ssh-4.6.4
+Predecessor:             OTP 20.2
+
+ Check out the git tag OTP-20.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.4 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.4 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14827    Application(s): ssh
+               Related Id(s): ERL-531
+
+               Fix problem with OpenSSH 7.2 (and later) clients that
+               has used sha1 instead of sha2 for rsa-sha-256/512
+               user's public keys.
+
+
+ Full runtime dependencies of ssh-4.6.4: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

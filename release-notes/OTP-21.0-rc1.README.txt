@@ -1,0 +1,2773 @@
+Patch Package:           OTP 21.0
+Git Tag:                 OTP-21.0
+Date:                    2018-05-02
+Trouble Report Id:       OTP-10551, OTP-11462, OTP-11694, OTP-13019,
+                         OTP-13073, OTP-13133, OTP-13295, OTP-13370,
+                         OTP-13413, OTP-13713, OTP-13760, OTP-13761,
+                         OTP-13764, OTP-14012, OTP-14015, OTP-14019,
+                         OTP-14113, OTP-14256, OTP-14346, OTP-14370,
+                         OTP-14439, OTP-14459, OTP-14465, OTP-14469,
+                         OTP-14492, OTP-14493, OTP-14496, OTP-14497,
+                         OTP-14501, OTP-14502, OTP-14503, OTP-14505,
+                         OTP-14508, OTP-14513, OTP-14518, OTP-14525,
+                         OTP-14537, OTP-14543, OTP-14547, OTP-14575,
+                         OTP-14577, OTP-14586, OTP-14589, OTP-14594,
+                         OTP-14604, OTP-14610, OTP-14613, OTP-14615,
+                         OTP-14624, OTP-14626, OTP-14637, OTP-14651,
+                         OTP-14652, OTP-14654, OTP-14666, OTP-14667,
+                         OTP-14675, OTP-14680, OTP-14681, OTP-14682,
+                         OTP-14683, OTP-14687, OTP-14692, OTP-14712,
+                         OTP-14713, OTP-14719, OTP-14726, OTP-14729,
+                         OTP-14747, OTP-14764, OTP-14768, OTP-14769,
+                         OTP-14774, OTP-14780, OTP-14782, OTP-14785,
+                         OTP-14788, OTP-14789, OTP-14795, OTP-14797,
+                         OTP-14808, OTP-14824, OTP-14826, OTP-14830,
+                         OTP-14834, OTP-14844, OTP-14851, OTP-14855,
+                         OTP-14861, OTP-14864, OTP-14880, OTP-14882,
+                         OTP-14884, OTP-14896, OTP-14899, OTP-14900,
+                         OTP-14901, OTP-14902, OTP-14903, OTP-14904,
+                         OTP-14909, OTP-14910, OTP-14928, OTP-14931,
+                         OTP-14932, OTP-14934, OTP-14937, OTP-14941,
+                         OTP-14943, OTP-14948, OTP-14950, OTP-14951,
+                         OTP-14954, OTP-14955, OTP-14956, OTP-14957,
+                         OTP-14958, OTP-14959, OTP-14960, OTP-14961,
+                         OTP-14965, OTP-14966, OTP-14968, OTP-14969,
+                         OTP-14970, OTP-14971, OTP-14975, OTP-14976,
+                         OTP-14977, OTP-14978, OTP-14979, OTP-14983,
+                         OTP-14986, OTP-14988, OTP-14991, OTP-14992,
+                         OTP-14993, OTP-14994, OTP-14996, OTP-15001,
+                         OTP-15002, OTP-15003, OTP-15004, OTP-15006,
+                         OTP-15008, OTP-15009, OTP-15013, OTP-15015,
+                         OTP-15021, OTP-15024, OTP-15025, OTP-15026,
+                         OTP-15027, OTP-15028, OTP-15029, OTP-15030,
+                         OTP-15031, OTP-15032, OTP-15033, OTP-15035,
+                         OTP-15036, OTP-15037, OTP-15039, OTP-15041,
+                         OTP-15042, OTP-15044, OTP-15045, OTP-15047,
+                         OTP-15048, OTP-15049, OTP-15050
+Seq num:                 ERL-327, ERL-370, ERL-444, ERL-500, ERL-503,
+                         ERL-511, ERL-514, ERL-549, ERL-550, ERL-557,
+                         ERL-563, ERL-572, ERL-576, ERL-579, ERL-598,
+                         ERL-601, ERL-613, ERL-614, ERL-88
+System:                  OTP
+Release:                 21
+Application:             asn1-5.0.6, common_test-1.16, compiler-7.2,
+                         crypto-4.3, debugger-4.2.5, dialyzer-3.3,
+                         diameter-2.1.5, edoc-0.9.3, eldap-1.2.4,
+                         erl_docgen-0.8, erl_interface-3.10.3,
+                         erts-10.0, et-1.6.2, eunit-2.3.6, ftp-1.0,
+                         hipe-3.18, inets-7.0, jinterface-1.9,
+                         kernel-6.0, mnesia-4.15.4, observer-2.8,
+                         os_mon-2.4.5, parsetools-2.1.7,
+                         public_key-1.6, reltool-0.7.6,
+                         runtime_tools-1.13, sasl-3.2, ssh-4.7,
+                         ssl-9.0, stdlib-3.5, syntax_tools-2.1.5,
+                         tftp-1.0, tools-3.0, wx-1.8.4, xmerl-1.3.17
+Predecessor:             OTP
+
+ Check out the git tag OTP-21.0, and build a full OTP system including
+ documentation.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-14370    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Truly asynchronous auto-connect. Earlier, when
+               erlang:send was done toward an unconnected node, the
+               function would not return until the connection setup
+               had completed (or failed). Now the function returns
+               directly after the signal has been enqueued and the
+               connection setup started.
+
+               The same applies to all distributed operations that may
+               trigger auto-connect, i.e. '!', send, link, monitor,
+               monitor_node, exit/2 and group_leader.
+
+               The interface for all these functions are unchanged as
+               they do not return connection failures. The only
+               exception is erlang:monitor where a *possible
+               incompatibility* is introduced: An attempt to monitor a
+               process on a primitive node (such as erl_interface or
+               jinterface), where remote process monitoring is not
+               implemented, will no longer fail with badarg exception.
+               Instead a monitor will be created, but it will only
+               supervise the connection to the node.
+
+
+  OTP-14459    Application(s): erts, kernel
+
+               New functionality for implementation of alternative
+               carriers for the Erlang distribution has been
+               introduced. This mainly consists of support for usage
+               of distribution controller processes (previously only
+               ports could be used as distribution controllers). For
+               more information see ERTS User's Guide ➜ How to
+               implement an Alternative Carrier for the Erlang
+               Distribution ➜ Distribution Module.
+
+
+  OTP-14497    Application(s): compiler, erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Support for "tuple calls" have been removed from the
+               run-time system. Tuple calls was an undocumented and
+               unsupported feature which allowed the module argument
+               for an apply operation to be a tuple: Var = dict:new(),
+               Var:size(). This "feature" frequently caused confuses,
+               especially when such call failed. The stacktrace would
+               point out functions that don't exist in the source
+               code.
+
+               For legacy code that need to use parameterized modules
+               or tuple calls for some other reason, there is a new
+               compiler option called tuple_calls. When this option is
+               given, the compiler will generate extra code that
+               emulates the old behavior for calls where the module is
+               a variable.
+
+
+  OTP-14502    Application(s): erts
+
+               Creation of small maps with literal keys has been
+               optimized to be faster and potentially use less memory
+               . The keys are combined into a literal key tuple which
+               is put into the literal pool. The key tuple can be
+               shared between many instances of maps having the same
+               keys.
+
+
+  OTP-14518    Application(s): erts, otp
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The non-smp emulators have been removed. This means
+               that the configure options --disable-threads and
+               --enable-plain-emulator have been removed and configure
+               will now refuse to build Erlang/OTP on platforms
+               without thread support.
+
+               In order to achieve a similar setup as the non-smp
+               emulator, it is possible to start Erlang/OTP with the
+               +S 1 option.
+
+
+  OTP-14626    Application(s): compiler, erts
+
+               Loaded BEAM code in a 64-bit system requires less
+               memory because of better packing of operands for
+               instructions.
+
+               These memory savings were achieved by major
+               improvements to the beam_makeops scripts used when
+               building the run time system and BEAM compiler. There
+               is also new for documentation for beam_makeops that
+               describes how new BEAM instructions and loader
+               transformations can be implemented. The documentation
+               is found in here in a source directory or git
+               repository: erts/emulator/internal_doc/beam_makeops.md.
+               An online version can be found here:
+               https://github.com/erlang/otp/blob/master/erts/emulator/internal_doc/beam_makeops.md
+
+
+  OTP-14692    Application(s): compiler, erts
+
+               There is a new syntax in 'try/catch' for retrieving the
+               stacktrace without calling 'erlang:get_stacktrace/0'.
+               See the reference manual for a description of the new
+               syntax. The 'erlang:get_stacktrace/0' BIF is now
+               deprecated.
+
+
+  OTP-14899    Application(s): erts, kernel
+
+               seq_trace labels may now be any erlang term.
+
+
+  OTP-14928    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The number of driver async threads will now default to
+               1 as the standard drivers do not use them anymore.
+               Users that changed this value to tweak the file driver
+               should replace +A with +SDio since it now uses dirty IO
+               schedulers instead of async threads.
+
+
+  OTP-14968    Application(s): compiler
+               Related Id(s): ERL-563
+
+               When compiling modules with huge functions, the
+               compiler would generate a lot of atoms for its
+               internal, sometimes so many that the atom table would
+               overflow. The compiler has been rewritten to generate
+               far less internal atoms to avoid filling the atom
+               table.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-11694    Application(s): erts
+
+               The erlang:system_flag(scheduler_wall_time,Bool) call
+               is now reference counted and will be turned off if the
+               (last) process that started the performance statistics
+               dies. Thus it is no longer possible to start the
+               statistics with rpc:call(Node, erlang, system_flag,
+               [scheduler_wall_time, true]) since it will be turned
+               off directly afterwards when the rpc process dies.
+
+
+  OTP-13073    Application(s): stdlib
+               Related Id(s): PR-1595
+
+               The semantics of timeout parameter
+               {clean_timeout,infinity} to gen_statem:call/3 has been
+               changed to use a proxy process for the call. With this
+               change clean_timeout implicates a proxy process with no
+               exceptions. This may be a hard to observe
+               incompatibility: in the presence of network problems a
+               late reply could arrive in the caller's message queue
+               when catching errors. That will not happen after this
+               correction.
+
+               The semantics of timeout parameter infinity has not
+               been changed.
+
+
+  OTP-13761    Application(s): kernel
+               Related Id(s): ERL-503
+
+               No resolver backend returns V4Mapped IPv6 addresses any
+               more. This was inconsistent before, some did, some did
+               not. To facilitate working with such addresses a new
+               function inet:ipv4_mapped_ipv6_address/1 has been
+               added.
+
+
+  OTP-14256    Application(s): erts
+
+               The file driver has been rewritten as a NIF, decreasing
+               the latency of file operations. Two notable
+               incompatibilities are:
+
+               -- The use_threads option for file:sendfile/5 no longer
+               has any effect; we either use non-blocking sendfile(2)
+               or fall back to file:read + gen_tcp:send.
+
+               -- The file-specific DTrace probes have been removed.
+               The same effect can be achieved with normal tracing
+               together with the nif__entry/nif__return probes to
+               track scheduling.
+
+
+  OTP-14370    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               Truly asynchronous auto-connect. Earlier, when
+               erlang:send was done toward an unconnected node, the
+               function would not return until the connection setup
+               had completed (or failed). Now the function returns
+               directly after the signal has been enqueued and the
+               connection setup started.
+
+               The same applies to all distributed operations that may
+               trigger auto-connect, i.e. '!', send, link, monitor,
+               monitor_node, exit/2 and group_leader.
+
+               The interface for all these functions are unchanged as
+               they do not return connection failures. The only
+               exception is erlang:monitor where a *possible
+               incompatibility* is introduced: An attempt to monitor a
+               process on a primitive node (such as erl_interface or
+               jinterface), where remote process monitoring is not
+               implemented, will no longer fail with badarg exception.
+               Instead a monitor will be created, but it will only
+               supervise the connection to the node.
+
+
+  OTP-14439    Application(s): compiler, dialyzer, erts, stdlib
+
+               Changed the default behaviour of .erlang loading:
+               .erlang is no longer loaded from the current directory.
+               c:erlangrc(PathList) can be used to search and load an
+               .erlang file from user specified directories.
+
+               escript, erlc, dialyzer and typer no longer load an
+               .erlang at all.
+
+
+  OTP-14469    Application(s): sasl
+
+               The old and out-dated "Status Inspection" tool (modules
+               si and si_sasl_sup) is removed.
+
+
+  OTP-14497    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               Support for "tuple calls" have been removed from the
+               run-time system. Tuple calls was an undocumented and
+               unsupported feature which allowed the module argument
+               for an apply operation to be a tuple: Var = dict:new(),
+               Var:size(). This "feature" frequently caused confuses,
+               especially when such call failed. The stacktrace would
+               point out functions that don't exist in the source
+               code.
+
+               For legacy code that need to use parameterized modules
+               or tuple calls for some other reason, there is a new
+               compiler option called tuple_calls. When this option is
+               given, the compiler will generate extra code that
+               emulates the old behavior for calls where the module is
+               a variable.
+
+
+  OTP-14508    Application(s): erts
+
+               When an exception is thrown, include the arguments of
+               the call in the stacktrace for BIFs band, bor, bsl,
+               bsr, bxor, div, rem and the operators +, -, * and /.
+
+
+  OTP-14518    Application(s): erts, otp
+
+               *** HIGHLIGHT ***
+
+               The non-smp emulators have been removed. This means
+               that the configure options --disable-threads and
+               --enable-plain-emulator have been removed and configure
+               will now refuse to build Erlang/OTP on platforms
+               without thread support.
+
+               In order to achieve a similar setup as the non-smp
+               emulator, it is possible to start Erlang/OTP with the
+               +S 1 option.
+
+
+  OTP-14543    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-370
+
+               File operations used to accept filenames containing
+               null characters (integer value zero). This caused the
+               name to be truncated and in some cases arguments to
+               primitive operations to be mixed up. Filenames
+               containing null characters inside the filename are now
+               *rejected* and will cause primitive file operations to
+               fail.
+
+               Also environment variable operations used to accept
+               names and values of environment variables containing
+               null characters (integer value zero). This caused
+               operations to silently produce erroneous results.
+               Environment variable names and values containing null
+               characters inside the name or value are now *rejected*
+               and will cause environment variable operations to fail.
+
+               Primitive environment variable operations also used to
+               accept the $= character in environment variable names
+               causing various problems. $= characters in environment
+               variable names are now also *rejected*.
+
+               Also os:cmd/1 now reject null characters inside its
+               command.
+
+               erlang:open_port/2 will also reject null characters
+               inside the port name from now on.
+
+
+  OTP-14577    Application(s): stdlib
+
+               filelib:wildcard() now allows characters with a special
+               meaning to be escaped using backslashes.
+
+               This is an incompatible change, but note that the use
+               of backslashes in wildcards would already work
+               differently on Windows and Unix. Existing calls to
+               filelib:wildcard() needs to be updated. On Windows,
+               directory separators must always be written as a slash.
+
+
+  OTP-14666    Application(s): erts, kernel
+
+               os:putenv and os:getenv no longer access the process
+               environment directly and instead work on a thread-safe
+               emulation. The only observable difference is that it's
+               *not* kept in sync with libc getenv(3) / putenv(3), so
+               those who relied on that behavior in drivers or NIFs
+               will need to add manual synchronization.
+
+               On Windows this means that you can no longer resolve
+               DLL dependencies by modifying the PATH just before
+               loading the driver/NIF. To make this less of a problem,
+               the emulator now adds the target DLL's folder to the
+               DLL search path.
+
+
+  OTP-14768    Application(s): ssl
+
+               For security reasons no longer support 3-DES cipher
+               suites by default
+
+
+  OTP-14769    Application(s): ssl
+
+               For security reasons RSA-key exchange cipher suites are
+               no longer supported by default
+
+
+  OTP-14789    Application(s): ssl
+
+               The interoperability option to fallback to insecure
+               renegotiation now has to be explicitly turned on.
+
+
+  OTP-14824    Application(s): ssl
+
+               Drop support for SSLv2 enabled clients. SSLv2 has been
+               broken for decades and never supported by the Erlang
+               SSL/TLS implementation. This option was by default
+               disabled and enabling it has proved to sometimes break
+               connections not using SSLv2 enabled clients.
+
+
+  OTP-14851    Application(s): ssh
+
+               An option exec for daemons implementing the 'exec' has
+               existed a long time but has been undocumented. The old
+               behaviour is kept for compatibility EXCEPT that error
+               messages are changed and are sent as "stderror" text.
+
+               A new option value is defined to make it much more easy
+               to implement an own exec server.
+
+
+  OTP-14882    Application(s): ssl
+
+               Remove CHACHA20_POLY1305 ciphers form default for now.
+               We have discovered interoperability problems, ERL-538,
+               that we believe needs to be solved in crypto.
+
+
+  OTP-14928    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               The number of driver async threads will now default to
+               1 as the standard drivers do not use them anymore.
+               Users that changed this value to tweak the file driver
+               should replace +A with +SDio since it now uses dirty IO
+               schedulers instead of async threads.
+
+
+  OTP-14961    Application(s): erts, tools
+
+               Added instrument:allocations and instrument:carriers
+               for retrieving information about memory utilization and
+               fragmentation.
+
+               The old instrument interface has been removed, as have
+               the related options +Mim and +Mis.
+
+
+  OTP-14986    Application(s): erts
+               Related Id(s): PR-1745
+
+               erlang:process_info/1 has been changed to no longer
+               include messages by default. Instead
+               erlang:process_info/2 should be used.
+
+
+  OTP-15002    Application(s): ssh
+               Related Id(s): OTP-15030
+
+               The type specifications in SSH are reworked and the
+               following types are renamed:
+
+               ssh:ssh_connection_ref() is changed to
+               ssh:connection_ref(),
+
+               ssh:ssh_daemon_ref() is changed to ssh:daemon_ref(),
+
+               ssh:ssh_channel_id() is changed to ssh:channel_id().
+
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.6 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15036    Application(s): asn1, edoc, eldap, syntax_tools
+
+               Update to use the new string api instead of the old.
+
+
+ Full runtime dependencies of asn1-5.0.6: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.16 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14902    Application(s): common_test, observer, public_key, ssl
+
+               Use uri_string module instead of http_uri.
+
+
+ Full runtime dependencies of common_test-1.16: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14855    Application(s): compiler
+               Related Id(s): ERL-549
+
+               Fixed an error in an optimization pass that caused
+               impossible tuple matching.
+
+
+  OTP-14992    Application(s): compiler
+               Related Id(s): ERL-572
+
+               The exception thrown when a list comprehension was
+               given a non-list term was not always correct.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14439    Application(s): compiler, dialyzer, erts, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the default behaviour of .erlang loading:
+               .erlang is no longer loaded from the current directory.
+               c:erlangrc(PathList) can be used to search and load an
+               .erlang file from user specified directories.
+
+               escript, erlc, dialyzer and typer no longer load an
+               .erlang at all.
+
+
+  OTP-14497    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Support for "tuple calls" have been removed from the
+               run-time system. Tuple calls was an undocumented and
+               unsupported feature which allowed the module argument
+               for an apply operation to be a tuple: Var = dict:new(),
+               Var:size(). This "feature" frequently caused confuses,
+               especially when such call failed. The stacktrace would
+               point out functions that don't exist in the source
+               code.
+
+               For legacy code that need to use parameterized modules
+               or tuple calls for some other reason, there is a new
+               compiler option called tuple_calls. When this option is
+               given, the compiler will generate extra code that
+               emulates the old behavior for calls where the module is
+               a variable.
+
+
+  OTP-14505    Application(s): compiler
+
+               In code such as example({ok, Val}) -> {ok, Val}. a
+               tuple would be built. The compiler will now
+               automatically rewrite the code to
+               example({ok,Val}=Tuple) -> Tuple. which will reduce
+               code size, execution time, and remove GC pressure.
+
+
+  OTP-14525    Application(s): compiler
+
+               The optimization of case expression where only one of
+               the case arms can execute successfully has been
+               improved.
+
+
+  OTP-14594    Application(s): compiler
+               Related Id(s): ERL-444
+
+               Some uses of binary matching has been slightly
+               improved, eliminating unnecessary register shuffling.
+
+
+  OTP-14615    Application(s): compiler
+               Related Id(s): PR-1558
+
+               There is a new {compile_info,Info} option for the
+               compiler that allows BEAM-based languages such as
+               Elixir and LFE to add their own compiler versions.
+
+
+  OTP-14626    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               Loaded BEAM code in a 64-bit system requires less
+               memory because of better packing of operands for
+               instructions.
+
+               These memory savings were achieved by major
+               improvements to the beam_makeops scripts used when
+               building the run time system and BEAM compiler. There
+               is also new for documentation for beam_makeops that
+               describes how new BEAM instructions and loader
+               transformations can be implemented. The documentation
+               is found in here in a source directory or git
+               repository: erts/emulator/internal_doc/beam_makeops.md.
+               An online version can be found here:
+               https://github.com/erlang/otp/blob/master/erts/emulator/internal_doc/beam_makeops.md
+
+
+  OTP-14654    Application(s): compiler
+
+               Size calculations for binary constructions has been
+               somewhat optimized, producing smaller code.
+
+
+  OTP-14683    Application(s): compiler, erts
+
+               When the value returned from a 'catch' expression is
+               ignored, no stacktrace will be built if an exception is
+               caught. That will save time and produce less garbage.
+               There are also some minor optimizations of 'try/catch'
+               both in the compiler and run-time system.
+
+
+  OTP-14692    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               There is a new syntax in 'try/catch' for retrieving the
+               stacktrace without calling 'erlang:get_stacktrace/0'.
+               See the reference manual for a description of the new
+               syntax. The 'erlang:get_stacktrace/0' BIF is now
+               deprecated.
+
+
+  OTP-14712    Application(s): compiler
+
+               The following is an internal change in the compiler,
+               that is not noticeable for normal use of the compiler:
+               The module v3_life has been removed. Its functionality
+               has been simplified and integrated into v3_codegen.
+
+
+  OTP-14774    Application(s): compiler
+
+               The optimization of binary matching that delays
+               creation of sub binaries (see the Efficiency Guide)
+               could be thwarted by the argument order and could be
+               necessary to change the argument order. The compiler
+               has now become smarter and can handle any argument
+               order.
+
+
+  OTP-14808    Application(s): compiler
+               Related Id(s): ERL-514
+
+               When the compiler was faced with complex case
+               expressions it would unnecessarily allocate stack
+               elements and shuffle data between x and y registers.
+               Improved code generation to only allocate a stack frame
+               when strictly necessary.
+
+
+  OTP-14830    Application(s): compiler, erts
+
+               There is a new option 'makedep_side_effect' for the
+               compiler and -MMD for 'erlc' that generates
+               dependencies and continues to compile as normal.
+
+
+  OTP-14968    Application(s): compiler
+               Related Id(s): ERL-563
+
+               *** HIGHLIGHT ***
+
+               When compiling modules with huge functions, the
+               compiler would generate a lot of atoms for its
+               internal, sometimes so many that the atom table would
+               overflow. The compiler has been rewritten to generate
+               far less internal atoms to avoid filling the atom
+               table.
+
+
+  OTP-15003    Application(s): compiler, stdlib
+
+               External funs with literal values for module, name, and
+               arity (e.g. erlang:abs/1) are now treated as literals.
+               That means more efficient code that produces less
+               garbage on the heap.
+
+
+  OTP-15037    Application(s): compiler, erts
+               Related Id(s): PR-1784
+
+               The map_get/2 guard BIF has been added. It works the
+               same way as maps:get/2, except that it is allowed to
+               use it in guards.
+
+
+  OTP-15044    Application(s): compiler
+               Related Id(s): ERL-614
+
+               A call or apply of a literal external fun will be
+               replaced with a direct call.
+
+
+ Full runtime dependencies of compiler-7.2: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14956    Application(s): crypto
+               Related Id(s): ERL-579
+
+               Removed two undocumented and erroneous functions
+               (crypto:dh_generate_parameters/2 and
+               crypto:dh_check/1).
+
+
+ --- Improvements and New Features ---
+
+  OTP-13370    Application(s): crypto
+               Related Id(s): PR-1573
+
+               A new rand plugin algorithm has been implemented in
+               crypto, that is: crypto_cache. It uses strong random
+               bytes as randomness source and caches them to get good
+               speed. See crypto:rand_seed_alg/1.
+
+
+  OTP-14864    Application(s): crypto
+
+               Diffie-Hellman key functions are re-written with the
+               EVP_PKEY api.
+
+
+ Full runtime dependencies of crypto-4.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- debugger-4.2.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14957    Application(s): debugger
+               Related Id(s): PR-1741
+
+               Fix a bug where calling a fun inside a binary would
+               crash the Debugger.
+
+
+ Full runtime dependencies of debugger-4.2.5: compiler-5.0, erts-9.0,
+ kernel-5.3, stdlib-3.4, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14439    Application(s): compiler, dialyzer, erts, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the default behaviour of .erlang loading:
+               .erlang is no longer loaded from the current directory.
+               c:erlangrc(PathList) can be used to search and load an
+               .erlang file from user specified directories.
+
+               escript, erlc, dialyzer and typer no longer load an
+               .erlang at all.
+
+
+  OTP-14493    Application(s): dialyzer
+               Related Id(s): PR-1434
+
+               Dialyzer can no longer read BEAM files created with OTP
+               19 or earlier.
+
+
+  OTP-14937    Application(s): dialyzer
+               Related Id(s): PR-1719
+
+               Speed up the computation of MD5 sums.
+
+
+  OTP-14970    Application(s): dialyzer
+               Related Id(s): PR-1722
+
+               Fix a situation where Dialyzer unnecessarily discarded
+               contract information, resulting in missed warnings.
+
+
+ Full runtime dependencies of dialyzer-3.3: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.1.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15045    Application(s): diameter
+
+               Fix documentation typos.
+
+
+ Full runtime dependencies of diameter-2.1.5: erts-6.4, kernel-3.2,
+ ssl-6.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ --- edoc-0.9.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15036    Application(s): asn1, edoc, eldap, syntax_tools
+
+               Update to use the new string api instead of the old.
+
+
+ Full runtime dependencies of edoc-0.9.3: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15036    Application(s): asn1, edoc, eldap, syntax_tools
+
+               Update to use the new string api instead of the old.
+
+
+ Full runtime dependencies of eldap-1.2.4: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.8 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14979    Application(s): erl_docgen, otp
+
+               Add a hoverable element to the titles in the html
+               documentation with a link to github where the
+               documentation can be edited.
+
+               Make the anchors in the html User's Guide and system
+               documentation use the title of the sections instead of
+               a generated id.
+
+
+ Full runtime dependencies of erl_docgen-0.8: edoc-0.7.13, erts-9.0,
+ stdlib-3.4, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.10.3 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15033    Application(s): erl_interface
+
+               Fix bug where calling erl_init on certain platforms
+               could result in a buffer overflow bug.
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.0 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14019    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-550
+
+               The type specifications for file:posix/0 and
+               inet:posix/0 have been updated according to which
+               errors file and socket operations should be able to
+               return.
+
+
+  OTP-14537    Application(s): erts
+               Related Id(s): PR1529
+
+               Fix error printout from run_erl and a bug that could
+               cause unintended fds to be leaked into the started
+               program.
+
+
+  OTP-14543    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-370
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               File operations used to accept filenames containing
+               null characters (integer value zero). This caused the
+               name to be truncated and in some cases arguments to
+               primitive operations to be mixed up. Filenames
+               containing null characters inside the filename are now
+               *rejected* and will cause primitive file operations to
+               fail.
+
+               Also environment variable operations used to accept
+               names and values of environment variables containing
+               null characters (integer value zero). This caused
+               operations to silently produce erroneous results.
+               Environment variable names and values containing null
+               characters inside the name or value are now *rejected*
+               and will cause environment variable operations to fail.
+
+               Primitive environment variable operations also used to
+               accept the $= character in environment variable names
+               causing various problems. $= characters in environment
+               variable names are now also *rejected*.
+
+               Also os:cmd/1 now reject null characters inside its
+               command.
+
+               erlang:open_port/2 will also reject null characters
+               inside the port name from now on.
+
+
+  OTP-14652    Application(s): erts
+
+               Fix bugs related to the bookkeeping of microstate
+               accounting states.
+
+
+  OTP-14666    Application(s): erts, kernel
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               os:putenv and os:getenv no longer access the process
+               environment directly and instead work on a thread-safe
+               emulation. The only observable difference is that it's
+               *not* kept in sync with libc getenv(3) / putenv(3), so
+               those who relied on that behavior in drivers or NIFs
+               will need to add manual synchronization.
+
+               On Windows this means that you can no longer resolve
+               DLL dependencies by modifying the PATH just before
+               loading the driver/NIF. To make this less of a problem,
+               the emulator now adds the target DLL's folder to the
+               DLL search path.
+
+
+  OTP-14713    Application(s): erts
+               Related Id(s): ERL-500
+
+               Corrected erlang:is_builtin(erlang, M, F) to return
+               true for apply/2 and yield/0.
+
+
+  OTP-14719    Application(s): erts
+
+               Fixed a bug where the PATH environment variable wasn't
+               updated correctly on a release downgrade, effectively
+               keeping the PATH of the new release.
+
+
+  OTP-14782    Application(s): erts
+               Related Id(s): ERL-511
+
+               A receive optimization that avoids scanning the entire
+               message queue when receiving a message containing a
+               freshly created reference could in rare circumstances
+               (involving recursive calls to the functions that does
+               the receive) cause the receive to hang. This has been
+               corrected.
+
+
+  OTP-14909    Application(s): erts
+               Related Id(s): PR-1692
+
+               Fix building of Erlang/OTP on platforms which have
+               small data area with short addressing. For example the
+               PowerPC/RTEMS platform.
+
+
+  OTP-14931    Application(s): erts
+
+               Fixed a crash when enif_make_binary is called with a
+               binary produced by enif_inspect_binary in a different
+               environment.
+
+
+  OTP-14932    Application(s): erts
+
+               Fixed a crash when enif_make_binary is called more than
+               once with a binary that had previously been added to an
+               enif_ioq.
+
+
+  OTP-14943    Application(s): erts
+               Related Id(s): ERL-576
+
+               The erl_child_setup program now ignores SIGTERM
+               signals.
+
+
+  OTP-14977    Application(s): erts
+
+               Force 64-bit alignment on pre-allocators on
+               architectures which needs it.
+
+
+  OTP-14978    Application(s): erts
+
+               Fixed a bug where dirty scheduler picked up non-dirty
+               work.
+
+
+  OTP-15001    Application(s): erts, kernel
+
+               Calls to gen_tcp:send/2 on closed sockets now returns
+               {error, closed} instead of {error,enotconn}.
+
+
+  OTP-15008    Application(s): erts
+
+               erlang:monotonic_time/1 failed with badarg when passing
+               the perf_counter time unit as argument.
+
+
+  OTP-15013    Application(s): erts
+
+               Fix bug where rapid init:restart() calls would
+               sometimes crash because a code load request leaked in
+               between the restarts.
+
+
+  OTP-15015    Application(s): erts
+               Related Id(s): OTP-14890
+
+               Improve float_to_list(F, [{decimals,D}]) to closer
+               conform with io_lib:format("~.*f", [D,F]).
+
+               There are however, still cases when float_to_list does
+               not produce the exact same result as io_lib:format,
+               especially for large values F and/or many decimals D.
+
+
+  OTP-15024    Application(s): erts
+
+               Fixed a deadlock that would occur on certain allocators
+               when a reallocation failed with +ramv enabled.
+
+
+  OTP-15029    Application(s): erts
+
+               Fix bug that made it impossible to use an erl_tracer as
+               the seq_trace trace receiver.
+
+
+  OTP-15032    Application(s): erts
+
+               Fix bug where a large (> 1 GB) emulator generated error
+               logger message would cause the emulator to crash.
+
+
+ --- Improvements and New Features ---
+
+  OTP-11462    Application(s): erts
+
+               It is now possible to open device files and FIFOs with
+               file:open/2.
+
+
+  OTP-11694    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The erlang:system_flag(scheduler_wall_time,Bool) call
+               is now reference counted and will be turned off if the
+               (last) process that started the performance statistics
+               dies. Thus it is no longer possible to start the
+               statistics with rpc:call(Node, erlang, system_flag,
+               [scheduler_wall_time, true]) since it will be turned
+               off directly afterwards when the rpc process dies.
+
+
+  OTP-13295    Application(s): erts, kernel, sasl, stdlib
+
+               A new logging API is added to OTP. This is implemented
+               in the Kernel application, module logger.
+
+               Legacy calls to error_logger will be automatically
+               redirected to the new API.
+
+               See the reference manual for module logger, and the
+               User's Guide for the Kernel application for more
+               information.
+
+
+  OTP-13760    Application(s): erts
+               Related Id(s): PR-1592
+
+               gen_sctp:connect_init/4 or rather connect in inet_drv.c
+               for SCTP has been fixed to not check the write file
+               descriptor for writeability after a connect, since for
+               SCTP (SOCK_SEQPACKET) that property does not seem to be
+               any kind of indicator for when a connect has finished.
+               This fixes connects that the OS returned as "in
+               progress" that was misinterpreted by
+               gen_sctp:connect_init as failed.
+
+
+  OTP-14256    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The file driver has been rewritten as a NIF, decreasing
+               the latency of file operations. Two notable
+               incompatibilities are:
+
+               -- The use_threads option for file:sendfile/5 no longer
+               has any effect; we either use non-blocking sendfile(2)
+               or fall back to file:read + gen_tcp:send.
+
+               -- The file-specific DTrace probes have been removed.
+               The same effect can be achieved with normal tracing
+               together with the nif__entry/nif__return probes to
+               track scheduling.
+
+
+  OTP-14346    Application(s): erts
+
+               The I/O polling functionality of erts has been
+               re-written to better make use of the OSs polling
+               mechanisms. This change means that erts will now always
+               prefer to use a kernel-polling mechanism if possible.
+               Also all of the I/O polling has been moved to dedicated
+               threads instead of being placed in the scheduler loops.
+
+               As a result of this, the erl options +K and +secio have
+               been removed. It is still possible to disable
+               kernel-poll, but it has to be done at compile time
+               through the configure option --disable-kernel-poll.
+
+               The new erl options +IOt and +IOp can be used to change
+               how many IO poll threads and poll sets that erts should
+               use. See their respective documentation for more
+               details.
+
+
+  OTP-14370    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Truly asynchronous auto-connect. Earlier, when
+               erlang:send was done toward an unconnected node, the
+               function would not return until the connection setup
+               had completed (or failed). Now the function returns
+               directly after the signal has been enqueued and the
+               connection setup started.
+
+               The same applies to all distributed operations that may
+               trigger auto-connect, i.e. '!', send, link, monitor,
+               monitor_node, exit/2 and group_leader.
+
+               The interface for all these functions are unchanged as
+               they do not return connection failures. The only
+               exception is erlang:monitor where a *possible
+               incompatibility* is introduced: An attempt to monitor a
+               process on a primitive node (such as erl_interface or
+               jinterface), where remote process monitoring is not
+               implemented, will no longer fail with badarg exception.
+               Instead a monitor will be created, but it will only
+               supervise the connection to the node.
+
+
+  OTP-14439    Application(s): compiler, dialyzer, erts, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the default behaviour of .erlang loading:
+               .erlang is no longer loaded from the current directory.
+               c:erlangrc(PathList) can be used to search and load an
+               .erlang file from user specified directories.
+
+               escript, erlc, dialyzer and typer no longer load an
+               .erlang at all.
+
+
+  OTP-14459    Application(s): erts, kernel
+
+               *** HIGHLIGHT ***
+
+               New functionality for implementation of alternative
+               carriers for the Erlang distribution has been
+               introduced. This mainly consists of support for usage
+               of distribution controller processes (previously only
+               ports could be used as distribution controllers). For
+               more information see ERTS User's Guide ➜ How to
+               implement an Alternative Carrier for the Erlang
+               Distribution ➜ Distribution Module.
+
+
+  OTP-14492    Application(s): erts
+
+               Add support for the lcc compiler and in extension the
+               Elbrus 2000 platform.
+
+
+  OTP-14497    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Support for "tuple calls" have been removed from the
+               run-time system. Tuple calls was an undocumented and
+               unsupported feature which allowed the module argument
+               for an apply operation to be a tuple: Var = dict:new(),
+               Var:size(). This "feature" frequently caused confuses,
+               especially when such call failed. The stacktrace would
+               point out functions that don't exist in the source
+               code.
+
+               For legacy code that need to use parameterized modules
+               or tuple calls for some other reason, there is a new
+               compiler option called tuple_calls. When this option is
+               given, the compiler will generate extra code that
+               emulates the old behavior for calls where the module is
+               a variable.
+
+
+  OTP-14502    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               Creation of small maps with literal keys has been
+               optimized to be faster and potentially use less memory
+               . The keys are combined into a literal key tuple which
+               is put into the literal pool. The key tuple can be
+               shared between many instances of maps having the same
+               keys.
+
+
+  OTP-14508    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               When an exception is thrown, include the arguments of
+               the call in the stacktrace for BIFs band, bor, bsl,
+               bsr, bxor, div, rem and the operators +, -, * and /.
+
+
+  OTP-14518    Application(s): erts, otp
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The non-smp emulators have been removed. This means
+               that the configure options --disable-threads and
+               --enable-plain-emulator have been removed and configure
+               will now refuse to build Erlang/OTP on platforms
+               without thread support.
+
+               In order to achieve a similar setup as the non-smp
+               emulator, it is possible to start Erlang/OTP with the
+               +S 1 option.
+
+
+  OTP-14575    Application(s): erts
+
+               Modules that use floating point constants compiled with
+               R15 or earlier will need to be re-compiled before they
+               can be loaded.
+
+
+  OTP-14589    Application(s): erts
+
+               Implementation of true asynchronous signaling between
+               processes in order to improve scalability. Signals
+               affected include exit, monitor, demonitor, monitor
+               triggered, link, unlink, and group leader.
+
+
+  OTP-14604    Application(s): erts
+
+               Added a PGO (profile guided optimization) pass to the
+               build step of erts. This can be disabled by passing
+               --disable-pgo to configure.
+
+
+  OTP-14610    Application(s): erts
+               Related Id(s): PR-1480
+
+               Improved the performance of binary:split and
+               binary:match.
+
+
+  OTP-14613    Application(s): erts
+
+               It is not longer possible to disable dirty schedulers
+               when building erlang.
+
+
+  OTP-14626    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               Loaded BEAM code in a 64-bit system requires less
+               memory because of better packing of operands for
+               instructions.
+
+               These memory savings were achieved by major
+               improvements to the beam_makeops scripts used when
+               building the run time system and BEAM compiler. There
+               is also new for documentation for beam_makeops that
+               describes how new BEAM instructions and loader
+               transformations can be implemented. The documentation
+               is found in here in a source directory or git
+               repository: erts/emulator/internal_doc/beam_makeops.md.
+               An online version can be found here:
+               https://github.com/erlang/otp/blob/master/erts/emulator/internal_doc/beam_makeops.md
+
+
+  OTP-14637    Application(s): erts
+               Related Id(s): ERL-327, PR-1524
+
+               file:read_file has been changed to read the content of
+               files that report a size of 0 even when data can be
+               read from them. An example of such a file is
+               /proc/cpuinfo on Linux.
+
+
+  OTP-14651    Application(s): erts
+
+               It is no longer possible to disable the temp_alloc
+               allocator. Disabling it caused serious performance
+               degradations and was never what was wanted.
+
+
+  OTP-14667    Application(s): erts
+
+               The reduction cost of sending messages is now constant.
+               It will no longer scale according to the length of the
+               receiving process' message queue.
+
+
+  OTP-14680    Application(s): erts
+
+               Improved loading of modules with -on_load directive, to
+               no longer block all schedulers when the load operation
+               is completed.
+
+
+  OTP-14682    Application(s): erts
+
+               On platforms with real-time signals available,
+               SIGRTMIN+1 is now used as the internal scheduler
+               suspend signal instead of SIGUSR2.
+
+
+  OTP-14683    Application(s): compiler, erts
+
+               When the value returned from a 'catch' expression is
+               ignored, no stacktrace will be built if an exception is
+               caught. That will save time and produce less garbage.
+               There are also some minor optimizations of 'try/catch'
+               both in the compiler and run-time system.
+
+
+  OTP-14687    Application(s): erts
+
+               The guarantees and non-guarantees of
+               erlang:get_stacktrace/0 are now documented.
+
+
+  OTP-14692    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               There is a new syntax in 'try/catch' for retrieving the
+               stacktrace without calling 'erlang:get_stacktrace/0'.
+               See the reference manual for a description of the new
+               syntax. The 'erlang:get_stacktrace/0' BIF is now
+               deprecated.
+
+
+  OTP-14780    Application(s): erts
+
+               New 'used' option for binary_to_term/2 that will also
+               return number of bytes actually read from the binary.
+               This enables easy access to any extra data in the
+               binary located directly after the returned term.
+
+
+  OTP-14795    Application(s): erts
+               Related Id(s): ERL-88
+
+               Added more statistics for
+               erlang:system_info({allocator,A}) in the mbcs_pool
+               section.
+
+
+  OTP-14797    Application(s): erts
+
+               Added enif_ioq_peek_head to allow retrieving Erlang
+               terms from NIF IO queues without having to resort to
+               copying.
+
+
+  OTP-14830    Application(s): compiler, erts
+
+               There is a new option 'makedep_side_effect' for the
+               compiler and -MMD for 'erlc' that generates
+               dependencies and continues to compile as normal.
+
+
+  OTP-14884    Application(s): erts, stdlib
+
+               Added ets:whereis/1 for retrieving the table identifier
+               of a named table.
+
+
+  OTP-14899    Application(s): erts, kernel
+
+               *** HIGHLIGHT ***
+
+               seq_trace labels may now be any erlang term.
+
+
+  OTP-14901    Application(s): erts
+
+               Optimized the common case of monitor followed by send
+               to the same local process. The monitor signal is now
+               delayed in order to be piggybacked with the sent
+               message and thereby only get one lock operation on the
+               message queue of the receiver. A delayed monitor signal
+               is flushed if no send has been done at the latest when
+               the process is scheduled out.
+
+
+  OTP-14903    Application(s): erts, hipe
+
+               Make hipe compiled code work on x86_64 (amd64) with OS
+               security feature PIE, where executable code can be
+               loaded into a random location. Old behavior, if hipe
+               was enabled, was to disable PIE build options for the
+               VM.
+
+
+  OTP-14928    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The number of driver async threads will now default to
+               1 as the standard drivers do not use them anymore.
+               Users that changed this value to tweak the file driver
+               should replace +A with +SDio since it now uses dirty IO
+               schedulers instead of async threads.
+
+
+  OTP-14934    Application(s): erts
+               Related Id(s): PR-1708
+
+               Optimize == and /= for binaries with different sizes to
+               be constant in time instead of proportional to the size
+               of their common prefix.
+
+
+  OTP-14948    Application(s): erts
+
+               Refactorings making some internal process flags
+               available for other usage.
+
+
+  OTP-14951    Application(s): erts
+
+               Removed need for HiPE to allocate native executable
+               memory in low 2GB address space on x86_64. Command line
+               option +MXscs is thereby obsolete and ignored.
+
+
+  OTP-14954    Application(s): erts
+
+               Added enif_make_map_from_arrays for creating a
+               populated map, analogous to enif_make_list_from_array.
+
+
+  OTP-14959    Application(s): erts
+
+               Added configuration switches for busy-wait and wake up
+               thresholds for dirty schedulers, and changing these
+               settings for normal schedulers will no longer affect
+               dirty schedulers.
+
+               Refer to the documentation for details. The new
+               switches are +sbwtdcpu, +sbwtdio, +swtdcpu, and
+               +swtdio.
+
+               The default busy wait threshold for dirty scheduler
+               threads has also been lowered to short.
+
+
+  OTP-14960    Application(s): erts
+
+               The list of "taints" now also includes dynamic loaded
+               drivers in addition to NIF libraries. Statically linked
+               drivers and NIF libraries that are part of erts are not
+               included. The "taints" are returned by
+               system_info(taints) and printed in the header of
+               erl_crash.dump files.
+
+
+  OTP-14961    Application(s): erts, tools
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Added instrument:allocations and instrument:carriers
+               for retrieving information about memory utilization and
+               fragmentation.
+
+               The old instrument interface has been removed, as have
+               the related options +Mim and +Mis.
+
+
+  OTP-14965    Application(s): erts
+
+               Added the nifs option to ?MODULE:module_info/1 for
+               listing a module's installed NIF functions.
+
+
+  OTP-14966    Application(s): erts
+
+               New implementation of erlang:process_info/[1,2].
+
+               In the general case when inspecting another process,
+               the new implementation sends an asynchronous
+               process-info request signal to the other process and
+               waits for the result instead of locking the other
+               process and reading the result directly. In some
+               special cases where no conflicts occur, signal order
+               wont be violated, and the amount of data requested is
+               guaranteed to be small, the inspected process may be
+               inspected directly.
+
+               Appropriate amount of reductions are now also bumped
+               when inspecting a process.
+
+
+  OTP-14975    Application(s): erts
+               Related Id(s): PR-1597
+
+               Removed process start time from crash dump in order to
+               save memory in process control block.
+
+
+  OTP-14976    Application(s): erts
+
+               Optimize erlang:put/2 when updating existing key with a
+               new immediate value (atom, small integer, pid, port).
+
+
+  OTP-14986    Application(s): erts
+               Related Id(s): PR-1745
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               erlang:process_info/1 has been changed to no longer
+               include messages by default. Instead
+               erlang:process_info/2 should be used.
+
+
+  OTP-14994    Application(s): erts
+
+               New NIF functions: enif_mutex_name, enif_cond_name,
+               enif_rwlock_name, enif_thread_name, enif_vfprintf,
+               enif_vsnprintf.
+
+
+  OTP-15026    Application(s): erts
+
+               When erlang:system_flag(backtrace_depth, 0) has been
+               called, all exceptions will now contain the entry for
+               *one* function (despite the zero). It used to be that a
+               hand-made stack backtrace passed to erlang:raise/3
+               would be be truncated to an empty list.
+
+
+  OTP-15031    Application(s): erts
+
+               Fixed bug for named ets tables which could cause
+               unexpected results from matchspec iteration functions
+               (ets:select* and ets:match*) if the table was deleted
+               and recreated with the same name during the iteration.
+               The iteration could incorrectly continue through the
+               recreated table. The expected correct behavior is now
+               for the iteration call to fail with a badarg exception
+               if the table is deleted before the iteration has
+               completed.
+
+
+  OTP-15037    Application(s): compiler, erts
+               Related Id(s): PR-1784
+
+               The map_get/2 guard BIF has been added. It works the
+               same way as maps:get/2, except that it is allowed to
+               use it in guards.
+
+
+ Full runtime dependencies of erts-10.0: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- et-1.6.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14861    Application(s): et, eunit, mnesia, parsetools, reltool
+
+               Calls to erlang:get_stacktrace() are removed.
+
+
+ Full runtime dependencies of et-1.6.2: erts-9.0, kernel-5.3,
+ runtime_tools-1.10, stdlib-3.4, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.3.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14861    Application(s): et, eunit, mnesia, parsetools, reltool
+
+               Calls to erlang:get_stacktrace() are removed.
+
+
+ Full runtime dependencies of eunit-2.3.6: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.0 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14113    Application(s): inets
+
+               Split inets and create separate ftp and tftp apps.
+
+
+ Full runtime dependencies of ftp-1.0: erts-7.0, kernel-6.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.18 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14785    Application(s): hipe
+               Related Id(s): PR-1632
+
+               Optimize receive statements that are only waiting for
+               messages containing a reference created before the
+               receive. All messages that existed in the queue when
+               the reference was created will be bypassed, as they
+               cannot possibly contain the reference. This
+               optimization has existed for vanilla BEAM since OTP
+               R14.
+
+
+  OTP-14900    Application(s): hipe
+               Related Id(s): PR-1621, PR-1685
+
+               Add validation pass to hipe compiler to detect internal
+               errors causing primop calls that may trigger an unsafe
+               GC at run-time. The pass can be disabled with option
+               no_verify_gcsafe.
+
+
+  OTP-14903    Application(s): erts, hipe
+
+               Make hipe compiled code work on x86_64 (amd64) with OS
+               security feature PIE, where executable code can be
+               loaded into a random location. Old behavior, if hipe
+               was enabled, was to disable PIE build options for the
+               VM.
+
+
+  OTP-14941    Application(s): hipe
+               Related Id(s): PR-1718
+
+               Inline more type test BIFs; is_number, is_bitstring,
+               is_map.
+
+
+ Full runtime dependencies of hipe-3.18: compiler-5.0, erts-9.3,
+ kernel-5.3, stdlib-3.4, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.0 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14726    Application(s): inets
+
+               Fixed HTTP content injection bug in httpc (ERL-456).
+
+
+  OTP-14729    Application(s): inets
+
+               Fixed support for URI-references in HTTP 'Location'
+               header (ERL-333).
+
+
+  OTP-15006    Application(s): inets
+
+               Fix broken 'Content-Type' handling in httpc (ERL-536).
+
+
+  OTP-15021    Application(s): inets
+
+               Fix handling of relative paths in the script_alias
+               property of httpd (ERL-574).
+
+
+  OTP-15025    Application(s): inets
+
+               Fix httpd:reload_config/2 with path() as the first
+               argument (ERL-578).
+
+
+  OTP-15042    Application(s): inets
+
+               Improved gracefulness.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14113    Application(s): inets
+
+               Split inets and create separate ftp and tftp apps.
+
+
+ Full runtime dependencies of inets-7.0: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.9 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14844    Application(s): jinterface
+
+               Add module package name for Java 9
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.0 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-10551    Application(s): kernel
+
+               Clarify the documentation of rpc:multicall/5.
+
+
+  OTP-13133    Application(s): kernel
+               Related Id(s): PR-1557
+
+               The DNS resolver when getting econnrefused from a
+               server retained an invalid socket so look up towards
+               the next server(s) also failed.
+
+
+  OTP-13761    Application(s): kernel
+               Related Id(s): ERL-503
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               No resolver backend returns V4Mapped IPv6 addresses any
+               more. This was inconsistent before, some did, some did
+               not. To facilitate working with such addresses a new
+               function inet:ipv4_mapped_ipv6_address/1 has been
+               added.
+
+
+  OTP-14019    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-550
+
+               The type specifications for file:posix/0 and
+               inet:posix/0 have been updated according to which
+               errors file and socket operations should be able to
+               return.
+
+
+  OTP-14501    Application(s): kernel
+
+               Fix name resolving in IPv6 only environments when doing
+               the initial distributed connection.
+
+
+  OTP-14543    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-370
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               File operations used to accept filenames containing
+               null characters (integer value zero). This caused the
+               name to be truncated and in some cases arguments to
+               primitive operations to be mixed up. Filenames
+               containing null characters inside the filename are now
+               *rejected* and will cause primitive file operations to
+               fail.
+
+               Also environment variable operations used to accept
+               names and values of environment variables containing
+               null characters (integer value zero). This caused
+               operations to silently produce erroneous results.
+               Environment variable names and values containing null
+               characters inside the name or value are now *rejected*
+               and will cause environment variable operations to fail.
+
+               Primitive environment variable operations also used to
+               accept the $= character in environment variable names
+               causing various problems. $= characters in environment
+               variable names are now also *rejected*.
+
+               Also os:cmd/1 now reject null characters inside its
+               command.
+
+               erlang:open_port/2 will also reject null characters
+               inside the port name from now on.
+
+
+  OTP-14666    Application(s): erts, kernel
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               os:putenv and os:getenv no longer access the process
+               environment directly and instead work on a thread-safe
+               emulation. The only observable difference is that it's
+               *not* kept in sync with libc getenv(3) / putenv(3), so
+               those who relied on that behavior in drivers or NIFs
+               will need to add manual synchronization.
+
+               On Windows this means that you can no longer resolve
+               DLL dependencies by modifying the PATH just before
+               loading the driver/NIF. To make this less of a problem,
+               the emulator now adds the target DLL's folder to the
+               DLL search path.
+
+
+  OTP-14681    Application(s): kernel
+
+               Fixed connection tick toward primitive hidden nodes
+               (erl_interface) that could cause faulty tick timeout in
+               rare cases when payload data is sent to hidden node but
+               not received.
+
+
+  OTP-14991    Application(s): kernel
+               Related Id(s): PR1705
+
+               Make group react immediately on an EXIT-signal from
+               shell in e.g ssh.
+
+
+  OTP-15001    Application(s): erts, kernel
+
+               Calls to gen_tcp:send/2 on closed sockets now returns
+               {error, closed} instead of {error,enotconn}.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13295    Application(s): erts, kernel, sasl, stdlib
+
+               A new logging API is added to OTP. This is implemented
+               in the Kernel application, module logger.
+
+               Legacy calls to error_logger will be automatically
+               redirected to the new API.
+
+               See the reference manual for module logger, and the
+               User's Guide for the Kernel application for more
+               information.
+
+
+  OTP-13713    Application(s): kernel
+               Related Id(s): PR-1645
+
+               The function inet:i/0 has been documented.
+
+
+  OTP-14459    Application(s): erts, kernel
+
+               *** HIGHLIGHT ***
+
+               New functionality for implementation of alternative
+               carriers for the Erlang distribution has been
+               introduced. This mainly consists of support for usage
+               of distribution controller processes (previously only
+               ports could be used as distribution controllers). For
+               more information see ERTS User's Guide ➜ How to
+               implement an Alternative Carrier for the Erlang
+               Distribution ➜ Distribution Module.
+
+
+  OTP-14899    Application(s): erts, kernel
+
+               *** HIGHLIGHT ***
+
+               seq_trace labels may now be any erlang term.
+
+
+  OTP-14969    Application(s): kernel, ssl
+               Related Id(s): ERL-598, OTP-14465
+
+               The SSL distribution protocol -proto inet_tls has
+               stopped setting the SSL option server_name_indication.
+               New verify funs for client and server in inet_tls_dist
+               has been added, not documented yet, that checks node
+               name if present in peer certificate. Usage is still
+               also yet to be documented.
+
+
+  OTP-15009    Application(s): kernel
+               Related Id(s): ERL-601
+
+               Changed timeout of gen_server calls to auth server from
+               default 5 seconds to infinity.
+
+
+ Full runtime dependencies of kernel-6.0: erts-10.0, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.15.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14861    Application(s): et, eunit, mnesia, parsetools, reltool
+
+               Calls to erlang:get_stacktrace() are removed.
+
+
+ Full runtime dependencies of mnesia-4.15.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.8 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14993    Application(s): observer
+               Related Id(s): PR-1666
+
+               Added possibility to garbage collect selected processes
+               and fixed a crash when the saved config file contained
+               bad data.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14902    Application(s): common_test, observer, public_key, ssl
+
+               Use uri_string module instead of http_uri.
+
+
+ Full runtime dependencies of observer-2.8: erts-7.0, et-1.5,
+ kernel-3.0, runtime_tools-1.8.14, stdlib-3.5, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.4.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14513    Application(s): os_mon
+
+               Fix disksup to handle mount paths with spaces in them.
+
+
+ Full runtime dependencies of os_mon-2.4.5: erts-6.0, kernel-3.0,
+ mnesia-4.12, otp_mibs-1.0.9, sasl-2.4, snmp-4.25.1, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.1.7 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14861    Application(s): et, eunit, mnesia, parsetools, reltool
+
+               Calls to erlang:get_stacktrace() are removed.
+
+
+ Full runtime dependencies of parsetools-2.1.7: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.6 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14788    Application(s): public_key
+               Related Id(s): OTP-14624
+
+               Update calls to the base64 module to conform to that
+               module's type specifications.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14902    Application(s): common_test, observer, public_key, ssl
+
+               Use uri_string module instead of http_uri.
+
+
+ Full runtime dependencies of public_key-1.6: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- reltool-0.7.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14861    Application(s): et, eunit, mnesia, parsetools, reltool
+
+               Calls to erlang:get_stacktrace() are removed.
+
+
+ Full runtime dependencies of reltool-0.7.6: erts-7.0, kernel-3.0,
+ sasl-2.4, stdlib-3.4, tools-2.6.14, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.13 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14904    Application(s): runtime_tools
+
+               New utility module scheduler which makes it easier to
+               measure scheduler utilization.
+
+
+ Full runtime dependencies of runtime_tools-1.13: erts-8.0,
+ kernel-5.0, mnesia-4.12, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- sasl-3.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-13295    Application(s): erts, kernel, sasl, stdlib
+
+               A new logging API is added to OTP. This is implemented
+               in the Kernel application, module logger.
+
+               Legacy calls to error_logger will be automatically
+               redirected to the new API.
+
+               See the reference manual for module logger, and the
+               User's Guide for the Kernel application for more
+               information.
+
+
+  OTP-14469    Application(s): sasl
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The old and out-dated "Status Inspection" tool (modules
+               si and si_sasl_sup) is removed.
+
+
+  OTP-14950    Application(s): sasl
+               Related Id(s): PR-1560
+
+               When creating the release tar file, systools now
+               includes sys.config.src if it exists in the
+               $ROOT/releases/<vsn>/ directory. This is to allow
+               adjustments, e.g. resolving environment variables,
+               after unpacking the release, but before installing it.
+               This functionality requires a custom tool which uses
+               sys.config.src as input and creates a correct
+               sys.config file.
+
+
+ Full runtime dependencies of sasl-3.2: erts-9.0, kernel-5.3,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14880    Application(s): ssh
+
+               Updated ssh_connection:shell/2 documentation.
+
+
+  OTP-14955    Application(s): ssh
+
+               If the daemon port listener is restarted, it could
+               potentially fail with eaddrinuse if the timing is
+               unlucky. It will now retry and exponentially back off
+               the listener restart a few times before failing.
+
+
+  OTP-15004    Application(s): ssh
+
+               An ssh_sftp server (running version 6) could fail if it
+               is told to remove a file which in fact is a directory.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14851    Application(s): ssh
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               An option exec for daemons implementing the 'exec' has
+               existed a long time but has been undocumented. The old
+               behaviour is kept for compatibility EXCEPT that error
+               messages are changed and are sent as "stderror" text.
+
+               A new option value is defined to make it much more easy
+               to implement an own exec server.
+
+
+  OTP-14896    Application(s): ssh
+
+               The undocumented ssh_dbg module is completely
+               re-written to facilitate tracing/debugging.
+
+
+  OTP-14988    Application(s): ssh
+
+               The SSH supervisor structure has been slightly changed.
+               This makes stopping the ssh application considerably
+               faster if there are open connections. This is important
+               in for example restarts.
+
+
+  OTP-15002    Application(s): ssh
+               Related Id(s): OTP-15030
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The type specifications in SSH are reworked and the
+               following types are renamed:
+
+               ssh:ssh_connection_ref() is changed to
+               ssh:connection_ref(),
+
+               ssh:ssh_daemon_ref() is changed to ssh:daemon_ref(),
+
+               ssh:ssh_channel_id() is changed to ssh:channel_id().
+
+
+  OTP-15028    Application(s): ssh
+
+               Removed unused ssh_client_key.erl and
+               ssh_server_key.erl.
+
+
+  OTP-15030    Application(s): ssh
+               Related Id(s): OTP-15002
+
+               The Reference Manual pages are partly updated.
+
+               The ssh page is now generated from specs and types, is
+               restructured and is partly rephrased.
+
+               The ssh_channel, ssh_connection, ssh_client_key_api,
+               ssh_server_key_api and ssh_sftp pages are updated with
+               links, correct type names and some minor changes.
+
+
+  OTP-15041    Application(s): ssh
+
+               The behaviors ssh_channel and ssh_daemon_channel are
+               renamed to ssh_client_channel and ssh_server_channel
+               respectively.
+
+               The old modules are kept for compatibility but should
+               preferably be replaced when updating callback modules
+               referring them.
+
+
+ Full runtime dependencies of ssh-4.7: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.0 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15050    Application(s): ssl
+
+               Proper handling of clients that choose to send an empty
+               answer to a certificate request
+
+
+ --- Improvements and New Features ---
+
+  OTP-14465    Application(s): ssl
+
+               Distribution over SSL (inet_tls) has, to improve
+               performance, been rewritten to not use intermediate
+               processes and ports.
+
+
+  OTP-14547    Application(s): ssl
+
+               Add suport for ECDHE_PSK cipher suites
+
+
+  OTP-14768    Application(s): ssl
+
+               *** INCOMPATIBILITY with possibly ***
+
+               For security reasons no longer support 3-DES cipher
+               suites by default
+
+
+  OTP-14769    Application(s): ssl
+
+               *** INCOMPATIBILITY with possible ***
+
+               For security reasons RSA-key exchange cipher suites are
+               no longer supported by default
+
+
+  OTP-14789    Application(s): ssl
+
+               *** INCOMPATIBILITY with possibly ***
+
+               The interoperability option to fallback to insecure
+               renegotiation now has to be explicitly turned on.
+
+
+  OTP-14824    Application(s): ssl
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Drop support for SSLv2 enabled clients. SSLv2 has been
+               broken for decades and never supported by the Erlang
+               SSL/TLS implementation. This option was by default
+               disabled and enabling it has proved to sometimes break
+               connections not using SSLv2 enabled clients.
+
+
+  OTP-14882    Application(s): ssl
+
+               *** INCOMPATIBILITY with possibly ***
+
+               Remove CHACHA20_POLY1305 ciphers form default for now.
+               We have discovered interoperability problems, ERL-538,
+               that we believe needs to be solved in crypto.
+
+
+  OTP-14902    Application(s): common_test, observer, public_key, ssl
+
+               Use uri_string module instead of http_uri.
+
+
+  OTP-14969    Application(s): kernel, ssl
+               Related Id(s): ERL-598, OTP-14465
+
+               The SSL distribution protocol -proto inet_tls has
+               stopped setting the SSL option server_name_indication.
+               New verify funs for client and server in inet_tls_dist
+               has been added, not documented yet, that checks node
+               name if present in peer certificate. Usage is still
+               also yet to be documented.
+
+
+ Full runtime dependencies of ssl-9.0: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14015    Application(s): stdlib
+
+               When using an exception that is valid but not allowed
+               in a state enter call, the reason has been changed from
+               {bad_action_from_state_function,Action} to
+               {bad_state_enter_action_from_state_function,Action}.
+
+               Timer parsing has been improved. Many erroneous timeout
+               tuples was not handled correctly.
+
+               The documentation has been updated, in particular the
+               User's Guide and the pointer to it from the Reference
+               Manual is much more obvious.
+
+
+  OTP-14019    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-550
+
+               The type specifications for file:posix/0 and
+               inet:posix/0 have been updated according to which
+               errors file and socket operations should be able to
+               return.
+
+
+  OTP-14543    Application(s): erts, kernel, stdlib
+               Related Id(s): ERL-370
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               File operations used to accept filenames containing
+               null characters (integer value zero). This caused the
+               name to be truncated and in some cases arguments to
+               primitive operations to be mixed up. Filenames
+               containing null characters inside the filename are now
+               *rejected* and will cause primitive file operations to
+               fail.
+
+               Also environment variable operations used to accept
+               names and values of environment variables containing
+               null characters (integer value zero). This caused
+               operations to silently produce erroneous results.
+               Environment variable names and values containing null
+               characters inside the name or value are now *rejected*
+               and will cause environment variable operations to fail.
+
+               Primitive environment variable operations also used to
+               accept the $= character in environment variable names
+               causing various problems. $= characters in environment
+               variable names are now also *rejected*.
+
+               Also os:cmd/1 now reject null characters inside its
+               command.
+
+               erlang:open_port/2 will also reject null characters
+               inside the port name from now on.
+
+
+  OTP-14958    Application(s): stdlib
+               Related Id(s): PR-1735
+
+               Make io_lib:unscan_format/1 work with pad char and
+               default precision.
+
+
+  OTP-14971    Application(s): stdlib
+               Related Id(s): PR-1743
+
+               The control sequence modifiers t and l can be used
+               together in the same control sequence which makes it
+               possible to have Unicode atoms and no detection of
+               printable character lists at the same time.
+
+
+  OTP-15035    Application(s): stdlib
+               Related Id(s): ERL-613
+
+               Fix a bug in the Erlang code linter: the check of guard
+               expressions no longer returns false if the map syntax
+               is used. The bug affected the Erlang shell, the
+               Debugger, and other modules evaluating abstract code.
+
+
+  OTP-15049    Application(s): stdlib
+
+               A sys debug fun of type {Fun,State} should not be
+               possible to install twice. This was, however, possible
+               if the current State was 'undefined', which was
+               mistaken for non-existing fun. This has been corrected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13019    Application(s): stdlib
+               Related Id(s): PR-1490
+
+               The gen_server has gotten a new callback
+               handle_continue/2 for check pointing the state. This is
+               useful at least when implementing behaviours on top of
+               gen_server and for some start up scenarios.
+
+
+  OTP-13073    Application(s): stdlib
+               Related Id(s): PR-1595
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The semantics of timeout parameter
+               {clean_timeout,infinity} to gen_statem:call/3 has been
+               changed to use a proxy process for the call. With this
+               change clean_timeout implicates a proxy process with no
+               exceptions. This may be a hard to observe
+               incompatibility: in the presence of network problems a
+               late reply could arrive in the caller's message queue
+               when catching errors. That will not happen after this
+               correction.
+
+               The semantics of timeout parameter infinity has not
+               been changed.
+
+
+  OTP-13295    Application(s): erts, kernel, sasl, stdlib
+
+               A new logging API is added to OTP. This is implemented
+               in the Kernel application, module logger.
+
+               Legacy calls to error_logger will be automatically
+               redirected to the new API.
+
+               See the reference manual for module logger, and the
+               User's Guide for the Kernel application for more
+               information.
+
+
+  OTP-13413    Application(s): stdlib
+
+               Add functions calendar:system_time_to_local_time/2 and
+               calendar:system_time_to_universal_time/2.
+
+
+  OTP-13764    Application(s): stdlib
+               Related Id(s): PR-1574
+
+               Functions rand:uniform_real/0 and rand:uniform_real_s/1
+               have been added. They produce uniformly distributed
+               numbers in the range 0.0 =< X < 1.0 that are as close
+               to random real numbers as Normalized IEEE 754 Double
+               Precision allows. Because the random real number
+               exactly 0.0 is infinitely improbable they will never
+               return exactly 0.0.
+
+               These properties are useful when you need to call for
+               example math:log(X) or 1 / X on a random value X, since
+               that will never fail with a number from these new
+               functions.
+
+
+  OTP-14012    Application(s): stdlib
+
+               Added maps:iterator/0 and maps:next/1 to be used for
+               iterating over the key-value associations in a map.
+
+
+  OTP-14439    Application(s): compiler, dialyzer, erts, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the default behaviour of .erlang loading:
+               .erlang is no longer loaded from the current directory.
+               c:erlangrc(PathList) can be used to search and load an
+               .erlang file from user specified directories.
+
+               escript, erlc, dialyzer and typer no longer load an
+               .erlang at all.
+
+
+  OTP-14496    Application(s): stdlib
+
+               Added new uri_string module to stdlib for handling URIs
+               (RFC 3986).
+
+
+  OTP-14503    Application(s): stdlib
+
+               Update Unicode specification to version 10.0.
+
+
+  OTP-14577    Application(s): stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               filelib:wildcard() now allows characters with a special
+               meaning to be escaped using backslashes.
+
+               This is an incompatible change, but note that the use
+               of backslashes in wildcards would already work
+               differently on Windows and Unix. Existing calls to
+               filelib:wildcard() needs to be updated. On Windows,
+               directory separators must always be written as a slash.
+
+
+  OTP-14586    Application(s): stdlib
+
+               The supervisor now stores its child specifications in a
+               map instead of a list. This causes a significant
+               improvement when starting many children under a
+               non-simple_one_for_one supervisor.
+
+
+  OTP-14624    Application(s): stdlib
+               Related Id(s): PR-1565
+
+               The base64 module is optimized.
+
+               Note that the functions encode/1, decode/1, and
+               mime_decode/1 fail unless called with an argument of
+               the documented type. They used to accept any iodata().
+
+
+  OTP-14675    Application(s): stdlib
+               Related Id(s): PR-102
+
+               Add function lists:search/2.
+
+
+  OTP-14747    Application(s): stdlib
+
+               uri_string module extended with functions for handling
+               application/x-www-form-urlencoded query strings based
+               on the HTML5 specification.
+
+
+  OTP-14764    Application(s): stdlib
+
+               Add functions calendar:rfc3339_to_system_time/1,2 and
+               calendar:system_time_to_rfc3339/1,2.
+
+
+  OTP-14826    Application(s): stdlib
+               Related Id(s): 1540, PR
+
+               The stack traces returned by the functions of the
+               erl_eval module more accurately reflect where the
+               exception occurred.
+
+
+  OTP-14834    Application(s): stdlib
+               Related Id(s): 1608, PR
+
+               Add options atime, mtime, ctime, uid, and gid to the
+               erl_tar:add/3,4 functions.
+
+
+  OTP-14884    Application(s): erts, stdlib
+
+               Added ets:whereis/1 for retrieving the table identifier
+               of a named table.
+
+
+  OTP-14910    Application(s): stdlib
+
+               Improved URI normalization functions in the uri_string
+               module.
+
+
+  OTP-14983    Application(s): stdlib
+
+               The new functions io_lib:fwrite/3 and io_lib:format/3
+               take a third argument, an option list. The only option
+               is chars_limit, which is used for limiting the number
+               of returned characters. The limit is soft, which means
+               that the number of returned characters exceeds the
+               limit with at most a smallish amount. If the limit is
+               set, the functions format/3 and fwrite/3 try to
+               distribute the number of characters evenly over the
+               control sequences pPswW. Furthermore, the control
+               sequences pPwP try to distribute the number of
+               characters evenly over substructures.
+
+               A modification of the control sequences pPwW is that
+               even if there is no limit on the number of returned
+               characters, all associations of a map are printed to
+               the same depth. The aim is to give a more consistent
+               output as the order of map keys is not defined. As
+               before, if the depth is less than the number of
+               associations of a map, the selection of associations to
+               print is arbitrary.
+
+
+  OTP-14996    Application(s): stdlib
+               Related Id(s): ERL-557, PR-1703
+
+               Add functions ordsets:is_empty/1 and sets:is_empty/1.
+
+
+  OTP-15003    Application(s): compiler, stdlib
+
+               External funs with literal values for module, name, and
+               arity (e.g. erlang:abs/1) are now treated as literals.
+               That means more efficient code that produces less
+               garbage on the heap.
+
+
+  OTP-15047    Application(s): stdlib
+
+               sys:statistics(Pid,get) did not report 'out' messages
+               from gen_server. This is now corrected.
+
+
+  OTP-15048    Application(s): stdlib
+
+               A sys debug function can now have the format
+               {Id,Fun,State} in addition to the old {Fun,State}. This
+               allows installing multiple instances of a debug fun.
+
+
+ Full runtime dependencies of stdlib-3.5: compiler-5.0, crypto-3.3,
+ erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.1.5 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15036    Application(s): asn1, edoc, eldap, syntax_tools
+
+               Update to use the new string api instead of the old.
+
+
+ Full runtime dependencies of syntax_tools-2.1.5: compiler-7.0,
+ erts-9.0, kernel-5.0, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- tftp-1.0 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14113    Application(s): inets
+
+               Split inets and create separate ftp and tftp apps.
+
+
+ Full runtime dependencies of tftp-1.0: kernel-6.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.0 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-14961    Application(s): erts, tools
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Added instrument:allocations and instrument:carriers
+               for retrieving information about memory utilization and
+               fragmentation.
+
+               The old instrument interface has been removed, as have
+               the related options +Mim and +Mis.
+
+
+ Full runtime dependencies of tools-3.0: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.8.4 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15027    Application(s): wx
+
+               Changed implementation so wx can now be built towards
+               wxWidgets-3.1.1.
+
+
+ Full runtime dependencies of wx-1.8.4: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.17 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15039    Application(s): xmerl
+
+               Fix typos in documentation.
+
+
+ Full runtime dependencies of xmerl-1.3.17: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

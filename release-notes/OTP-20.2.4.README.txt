@@ -1,0 +1,58 @@
+Patch Package:           OTP 20.2.4
+Git Tag:                 OTP-20.2.4
+Date:                    2018-02-22
+Trouble Report Id:       OTP-14907, OTP-14930, OTP-14935
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             ssh-4.6.5
+Predecessor:             OTP 20.2.3
+
+ Check out the git tag OTP-20.2.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.5 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.5 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14907    Application(s): ssh
+
+               Adjusted supervisor timeouts
+
+
+  OTP-14930    Application(s): ssh
+
+               Remove ERROR messages for slow process exits
+
+
+ --- Improvements and New Features ---
+
+  OTP-14935    Application(s): ssh
+
+               Add option save_accepted_host to ssh:connection. This
+               option, if set to false, inhibits saving host keys to
+               e.g the file known_hosts.
+
+
+ Full runtime dependencies of ssh-4.6.5: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

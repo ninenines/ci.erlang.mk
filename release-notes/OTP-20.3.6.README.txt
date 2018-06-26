@@ -1,0 +1,75 @@
+Patch Package:           OTP 20.3.6
+Git Tag:                 OTP-20.3.6
+Date:                    2018-05-08
+Trouble Report Id:       OTP-15064, OTP-15066, OTP-15073, OTP-15074
+Seq num:                 ERL-618
+System:                  OTP
+Release:                 20
+Application:             crypto-4.2.2, ssh-4.6.9
+Predecessor:             OTP 20.3.5
+
+ Check out the git tag OTP-20.3.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.2.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.2.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15073    Application(s): crypto
+
+               If OPENSSL_NO_EC was set, the compilation of the crypto
+               nifs failed.
+
+
+  OTP-15074    Application(s): crypto
+               Related Id(s): ERL-618
+
+               C-compile errors for LibreSSL 2.7.0 - 2.7.2 fixed
+
+
+ Full runtime dependencies of crypto-4.2.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.9 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.9 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15064    Application(s): ssh
+
+               Host key hash erroneously calculated for clients
+               following draft-00 of RFC 4419, for example PuTTY
+
+
+  OTP-15066    Application(s): ssh
+
+               Renegotiation could fail in some states
+
+
+ Full runtime dependencies of ssh-4.6.9: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

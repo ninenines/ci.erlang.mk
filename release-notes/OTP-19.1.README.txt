@@ -1,0 +1,1363 @@
+Patch Package:           OTP 19.1
+Git Tag:                 OTP-19.1
+Date:                    2016-09-21
+Trouble Report Id:       OTP-11993, OTP-13564, OTP-13624, OTP-13633,
+                         OTP-13681, OTP-13682, OTP-13698, OTP-13701,
+                         OTP-13706, OTP-13718, OTP-13720, OTP-13721,
+                         OTP-13723, OTP-13724, OTP-13725, OTP-13730,
+                         OTP-13733, OTP-13734, OTP-13735, OTP-13740,
+                         OTP-13742, OTP-13744, OTP-13746, OTP-13752,
+                         OTP-13755, OTP-13758, OTP-13759, OTP-13763,
+                         OTP-13765, OTP-13770, OTP-13773, OTP-13775,
+                         OTP-13776, OTP-13777, OTP-13778, OTP-13780,
+                         OTP-13781, OTP-13782, OTP-13783, OTP-13787,
+                         OTP-13789, OTP-13795, OTP-13800, OTP-13802,
+                         OTP-13803, OTP-13804, OTP-13808, OTP-13809,
+                         OTP-13816, OTP-13818, OTP-13822, OTP-13833,
+                         OTP-13834, OTP-13841, OTP-13843, OTP-13845,
+                         OTP-13846, OTP-13847, OTP-13848, OTP-13849,
+                         OTP-13850, OTP-13851, OTP-13852, OTP-13853,
+                         OTP-13854, OTP-13855, OTP-13859, OTP-13861,
+                         OTP-13863, OTP-13866, OTP-13867, OTP-13868,
+                         OTP-13869, OTP-13871, OTP-13876, OTP-13877,
+                         OTP-13878, OTP-13880, OTP-13883, OTP-13891,
+                         OTP-13892, OTP-13893
+Seq num:                 seq13135, seq13158, seq13177, seq13178
+System:                  OTP
+Release:                 19
+Application:             asn1-4.0.4, common_test-1.12.3,
+                         compiler-7.0.2, crypto-3.7.1, debugger-4.2.1,
+                         dialyzer-3.0.2, diameter-1.12.1, edoc-0.8,
+                         erl_docgen-0.6, erl_interface-3.9.1,
+                         erts-8.1, eunit-2.3.1, gs-1.6.2, hipe-3.15.2,
+                         ic-4.4.2, inets-6.3.3, jinterface-1.7.1,
+                         kernel-5.1, mnesia-4.14.1, observer-2.2.2,
+                         odbc-2.11.3, parsetools-2.1.3, reltool-0.7.2,
+                         runtime_tools-1.10.1, sasl-3.0.1, snmp-5.2.4,
+                         ssh-4.3.2, ssl-8.0.2, stdlib-3.1,
+                         syntax_tools-2.1, tools-2.8.6, wx-1.7.1,
+                         xmerl-1.3.12
+Predecessor:             OTP 19.0.7
+
+ Check out the git tag OTP-19.1, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-13808    Application(s): erts, sasl
+               Related Id(s): OTP-13833
+
+               Improved dirty scheduler support. A purge of a module
+               can now be performed without having to wait for
+               completion of all ongoing dirty NIF calls.
+
+               Note that when enabling support for dirty schedulers, a
+               new purge strategy will as of ERTS version 8.1 be
+               enabled. This new strategy is not fully backwards
+               compatible with the strategy used by default. For more
+               information see the documentation of
+               erlang:check_process_code/3.
+
+
+  OTP-13808    Application(s): erts, sasl
+               Related Id(s): OTP-13833
+
+               Improved dirty scheduler support. A purge of a module
+               can now be performed without having to wait for
+               completion of all ongoing dirty NIF calls.
+
+               Note that when enabling support for dirty schedulers, a
+               new purge strategy will as of ERTS version 8.1 be
+               enabled. This new strategy is not fully backwards
+               compatible with the strategy used by default. For more
+               information see the documentation of
+               erlang:check_process_code/3.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-13752    Application(s): stdlib
+
+               gen_statem has been changed to set the callback mode
+               for a server to what Module:callback_mode/0 returns.
+               This facilitates e.g code downgrade since the callback
+               mode now becomes a property of the currently active
+               code, not of the server process.
+
+               Exception handling from Module:init/1 has also been
+               improved.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-4.0.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-4.0.4 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13624    Application(s): asn1
+
+               Compiling multiple ASN.1 modules in the same directory
+               with parallel make (make -j) should now be safe.
+
+
+ Full runtime dependencies of asn1-4.0.4: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.12.3 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.12.3 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13730    Application(s): common_test
+               Related Id(s): seq13135
+
+               If the telnet server would pause during transmission of
+               a line of text before terminating the line, the
+               ct_telnet:expect/3 function would print the line twice
+               in the test case HTML log. This problem has been fixed.
+
+
+  OTP-13841    Application(s): common_test
+
+               The functions ct:set_verbosity/2 and ct:get_verbosity/1
+               have been added in order to make it possible for test
+               cases, CT Hooks, or test framework functions, to modify
+               and read verbosity levels for logging.
+
+
+  OTP-13855    Application(s): common_test, tools
+
+               make (tools) and ct_make (common_test) would crash if
+               an Erlang source file contained a -warning() directive.
+
+
+ Full runtime dependencies of common_test-1.12.3: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-2.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.0.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.0.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13701    Application(s): compiler
+
+               If the compiler fails to write the BEAM file, it will
+               now report the reason of the error for the write
+               operation.
+
+
+  OTP-13780    Application(s): compiler
+               Related Id(s): ERL-202
+
+               Fixed an internal compiler error. (Thanks to Svilen
+               Ivanov for reporting this bug.)
+
+
+  OTP-13804    Application(s): compiler
+               Related Id(s): ERL-209
+
+               The compiler could crash when trying to compile a
+               complicated expression with multiple catches all on one
+               line . (Thanks to Thomas Arts for reporting this bug.)
+
+
+  OTP-13863    Application(s): compiler
+
+               Eliminated a few internal compiler failures.
+
+
+ Full runtime dependencies of compiler-7.0.2: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-3.7.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-3.7.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13783    Application(s): crypto
+               Related Id(s): ERL-203
+
+               Crypto has been fixed to work against OpenSSL versions
+               with disabled DES ciphers. Correct spelling of cipher
+               algorithm 'des3_cfb' has been introduced; the previous
+               misspeling still works.
+
+
+  OTP-13789    Application(s): crypto
+               Related Id(s): PR-1140
+
+               The size of an internal array in crypto has been fixed
+               to not segfault when having all possible ciphers. Bug
+               fix by Duncan Overbruck.
+
+
+ Full runtime dependencies of crypto-3.7.1: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- debugger-4.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-4.2.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+ Full runtime dependencies of debugger-4.2.1: compiler-5.0, erts-6.0,
+ kernel-3.0, stdlib-2.5, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.0.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-3.0.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13682    Application(s): dialyzer
+
+               The translation of forms to types is improved for
+               opaque types in a few cases.
+
+
+  OTP-13723    Application(s): dialyzer
+               Related Id(s): ERL-159, PR-1121
+
+               Add warning suppression to compiler-generated case
+               statements. Warnings about clauses that cannot match
+               and are also compiler generated are suppressed unless
+               none of the clauses return.
+
+
+ Full runtime dependencies of dialyzer-3.0.2: compiler-7.0, erts-8.0,
+ hipe-3.15.1, kernel-5.0, stdlib-3.0, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- diameter-1.12.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-1.12.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13787    Application(s): diameter
+               Related Id(s): OTP-13611
+
+               Close diameter_tcp/sctp listening sockets at
+               diameter:stop_service/1.
+
+               Broken by OTP-13611.
+
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+ Full runtime dependencies of diameter-1.12.1: erts-6.0, kernel-3.0,
+ ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- edoc-0.8 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The edoc-0.8 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13720    Application(s): edoc, erl_docgen, syntax_tools
+               Related Id(s): ERL-120
+
+               Improve types and specs in OTP documentation generated
+               from Erlang source files.
+
+
+ Full runtime dependencies of edoc-0.8: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.6 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.6 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13720    Application(s): edoc, erl_docgen, syntax_tools
+               Related Id(s): ERL-120
+
+               Improve types and specs in OTP documentation generated
+               from Erlang source files.
+
+
+ Full runtime dependencies of erl_docgen-0.6: edoc-0.7.13, erts-6.0,
+ stdlib-2.5, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.9.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.9.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13849    Application(s): erl_interface
+
+               Look for .erlang.cookie in windows system directory if
+               HOMEDRIVE and HOMEPATH is not set. The same behaviour
+               as the VM.
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.1 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.1 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13724    Application(s): erts
+               Related Id(s): PR-1116
+
+               Fix bug for calls from hipe code to BIFs that disable
+               GC while yielding. Has been causing Dialyzer crashes on
+               ARM (and presumably all other non-intel platforms).
+
+
+  OTP-13733    Application(s): erts
+               Related Id(s): ERL-175
+
+               Fix a bug where changing the current working directory
+               of the VM would not change the current working
+               directory of programs spawned using
+               erlang:open_port({spawn,""}, ...).
+
+
+  OTP-13734    Application(s): erts
+
+               Fix a bug where disabling tracing from a process that
+               had return_to tracing enabled and was tracing on
+               erlang:trace/3 would cause a segmentation fault.
+
+
+  OTP-13740    Application(s): erts
+
+               Update all erts documentation to use simpler English,
+               use consistent terminology and be easier to navigate.
+
+
+  OTP-13744    Application(s): erts
+
+               Add dirty schedulers to the microstate accounting
+               statistics.
+
+
+  OTP-13759    Application(s): erts
+
+               Fixed dirty scheduler build support on 32-bit windows.
+
+
+  OTP-13773    Application(s): erts
+               Related Id(s): ERL-102
+
+               inet:getstat(Socket) on an SCTP socket returned 0 for
+               send stats. This bug has now been corrected. Reported
+               by systra as issue ERL-102 on bugs.erlang.org.
+
+
+  OTP-13775    Application(s): erts
+
+               AF_UNSPEC and unknown address families were misread by
+               UDP receive in prim_inet resulting in an exception.
+               This bug has now been corrected.
+
+
+  OTP-13777    Application(s): erts
+               Related Id(s): PR-1122
+
+               Sweep HiPE stack for literals during code purge.
+
+
+  OTP-13795    Application(s): erts
+
+               Fix bug in run_erl for OpenBSD that could cause it on
+               rare occations to exit without starting the program
+               (erl) at all.
+
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+  OTP-13802    Application(s): erts, kernel
+
+               Fixed a bug where init:stop could deadlock if a process
+               with infinite shutdown timeout (e.g. a supervisor)
+               attempted to load code while terminating.
+
+
+  OTP-13803    Application(s): erts
+
+               Fixed a segmentation fault on sparc CPUs when free'ing
+               a tracer module's state.
+
+
+  OTP-13809    Application(s): erts
+
+               funs was not properly handled during purge of a module.
+               This could cause a crash of the VM after a purge of a
+               module.
+
+
+  OTP-13818    Application(s): erts
+
+               Fixed a memory leak when the process monitoring a port
+               crashed.
+
+
+  OTP-13822    Application(s): erts
+
+               Fixed multiple dirty scheduler related tracing bugs.
+
+
+  OTP-13848    Application(s): erts
+               Related Id(s): ERL-216
+
+               Fix error handling in beam code runtime loader for a
+               number of cases when index and size fields got
+               corrupted (negative) values.
+
+
+  OTP-13852    Application(s): erts
+
+               Minor fix of dirty scheduler implementation.
+
+
+  OTP-13866    Application(s): erts
+
+               Calls to erl_drv_send_term() or erl_drv_output_term()
+               from a non-scheduler thread while the corresponding
+               port was invalid caused the emulator to enter an
+               inconsistent state which eventually caused an emulator
+               crash.
+
+
+  OTP-13868    Application(s): erts
+
+               Fix a rare race condition in erlang:open_port({spawn,
+               ""}, ...) that would result in the erl_child_setup
+               program aborting and cause the emulator to exit.
+
+
+  OTP-13869    Application(s): erts
+
+               Driver and NIF operations accessing processes or ports
+               could cause an emulator crash when used from
+               non-scheduler threads. Those operations are:
+
+               -- erl_drv_send_term()
+
+               -- driver_send_term()
+
+               -- erl_drv_output_term()
+
+               -- driver_output_term()
+
+               -- enif_send()
+
+               -- enif_port_command()
+
+
+  OTP-13871    Application(s): erts
+               Related Id(s): ERL-241
+
+               Fix start scripts generation dependency in Makefile
+
+
+  OTP-13877    Application(s): erts
+
+               The VM could crash if erlang:get_stacktrace() was
+               called after a rescheduled NIF had thrown an exception.
+
+
+  OTP-13893    Application(s): erts
+               Related Id(s): ERL-240
+
+               Calling code:delete/1 before a loading a module with an
+               on_load function, the old code would be overwritten,
+               causing a memory or a crash if NIFs were involved.
+               (Thanks to vans163 for reporting this bug.)
+
+
+ --- Improvements and New Features ---
+
+  OTP-13698    Application(s): erts
+
+               Improved accuracy of timeouts on MacOS X. This by
+               setting premature timeouts followed by a short actual
+               timeout during scheduler wait.
+
+
+  OTP-13735    Application(s): erts
+
+               Added the following symbolic time unit representations
+               to the erlang:time_unit() type:
+
+               -- second
+
+               -- millisecond
+
+               -- microsecond
+
+               -- nanosecond
+
+               The following symbolic time unit representations are
+               now *deprecated*, but still part of the
+               erlang:time_unit() type:
+
+               -- seconds
+
+               -- milli_seconds
+
+               -- micro_seconds
+
+               -- nano_seconds
+
+
+  OTP-13763    Application(s): erts
+               Related Id(s): ERL-199
+
+               Fix maps hashing entropy of maps with maps keys.
+
+
+  OTP-13808    Application(s): erts, sasl
+               Related Id(s): OTP-13833
+
+               *** HIGHLIGHT ***
+
+               Improved dirty scheduler support. A purge of a module
+               can now be performed without having to wait for
+               completion of all ongoing dirty NIF calls.
+
+               Note that when enabling support for dirty schedulers, a
+               new purge strategy will as of ERTS version 8.1 be
+               enabled. This new strategy is not fully backwards
+               compatible with the strategy used by default. For more
+               information see the documentation of
+               erlang:check_process_code/3.
+
+
+  OTP-13833    Application(s): erts, sasl
+
+               A new purge strategy has been introduced. The new
+               strategy will by default be disabled during the OTP 19
+               release, but will be the only strategy available as of
+               the OTP 20 release.
+
+               The new strategy is slightly incompatible with the
+               strategy being used by default in OTP 19. Using the
+               default strategy, processes holding funs that refer to
+               the module being purged either fail a soft purge, or
+               will be killed during a hard purge. The new strategy
+               completely ignores funs. If funs referring to the code
+               being purged exist, and are used after a purge, an
+               exception will be raised upon usage. That is, the
+               behavior will be exactly the same as the case when a
+               fun is received by a process after the purge.
+
+               The new strategy can optionally be enabled when
+               building OTP during OTP 19, and will automatically be
+               enabled if the runtime system is built with support for
+               dirty schedulers.
+
+               For more information see the documentation of
+               erlang:check_process_code/3.
+
+
+  OTP-13851    Application(s): erts
+
+               Fixed unnecessary overestimation of heap size need
+               during garbage collection.
+
+
+ Full runtime dependencies of erts-8.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.3.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13892    Application(s): eunit
+
+               When asserts were moved out to a separate header file,
+               the automatic enabling of asserts when testing is
+               enabled stopped working.
+
+
+ Full runtime dependencies of eunit-2.3.1: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- gs-1.6.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The gs-1.6.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+ Full runtime dependencies of gs-1.6.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.15.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The hipe-3.15.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13846    Application(s): hipe
+               Related Id(s): PR-1146
+
+               Fixed various hipe compiler backend bugs affecting
+               mostly ARM and SPARC.
+
+
+  OTP-13861    Application(s): hipe
+               Related Id(s): PR-1148
+
+               Fixed some Dialyzer warnings and code cleanup for the
+               Sparc compiler backend.
+
+
+  OTP-13878    Application(s): hipe
+               Related Id(s): ERL-249, PR-1161
+
+               Fix erl_bif_types opaque bug.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13876    Application(s): hipe
+
+               Fix erl_types opaque match order
+
+
+ Full runtime dependencies of hipe-3.15.2: compiler-5.0, erts-7.1,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- ic-4.4.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ic-4.4.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13718    Application(s): ic, snmp
+               Related Id(s): ERL-179
+
+               Correct bugs when path to mib or idl spec files
+               contains UTF-8 characters.
+
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+ Full runtime dependencies of ic-4.4.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13776    Application(s): inets
+               Related Id(s): ERL-200, PR-1132
+
+               The legacy option 'inet6fb4' for inets had stopped
+               working. This bug has now been corrected. Fix by Edwin
+               Fine in bugs.erlang.org ERL-200 and Github PR#1132.
+
+
+ Full runtime dependencies of inets-6.3.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.7.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.7.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13800    Application(s): debugger, diameter, erts, gs, ic,
+               jinterface, otp
+
+               Update build scripts to not make assumtions about where
+               env, cp and perl are located.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-5.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13742    Application(s): kernel
+
+               Fix a memory leak when calling
+               seq_trace:get_system_tracer().
+
+
+  OTP-13758    Application(s): kernel
+               Related Id(s): ERL-195
+
+               Fix for the problem that when adding the ebin directory
+               of an application to the code path, the code:priv_dir/1
+               function returns an incorrect path to the priv
+               directory of the same application.
+
+
+  OTP-13765    Application(s): kernel
+               Related Id(s): ERL-194
+
+               Fix code_server crash when adding code paths of two
+               levels.
+
+
+  OTP-13770    Application(s): kernel
+               Related Id(s): PR-1129
+
+               Respect -proto_dist switch while connection to EPMD
+
+
+  OTP-13802    Application(s): erts, kernel
+
+               Fixed a bug where init:stop could deadlock if a process
+               with infinite shutdown timeout (e.g. a supervisor)
+               attempted to load code while terminating.
+
+
+  OTP-13867    Application(s): kernel
+               Related Id(s): seq13178
+
+               Close stdin of commands run in os:cmd. This is a
+               backwards compatiblity fix that restores the behaviour
+               of pre 19.0 os:cmd.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13564    Application(s): kernel
+
+               Add net_kernel:setopts/2 and net_kernel:getopts/2 to
+               control options for distribution sockets in runtime.
+
+
+ Full runtime dependencies of kernel-5.1: erts-8.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.14.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.14.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13891    Application(s): mnesia, runtime_tools
+
+               Correct some minor documentation issues.
+
+
+ Full runtime dependencies of mnesia-4.14.1: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.2.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13845    Application(s): observer
+               Related Id(s): ERL-237
+
+               Fixed error handling in observer when mnesia tables was
+               requested and not available.
+
+
+ Full runtime dependencies of observer-2.2.2: erts-7.0, et-1.5,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.11.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The odbc-2.11.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13781    Application(s): odbc
+
+               ODBC build configure has been updated to accept Mac OS
+               X El Capitan. Fixed by Lee Bannard.
+
+
+ Full runtime dependencies of odbc-2.11.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.1.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The parsetools-2.1.3 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13681    Application(s): parsetools
+
+               Yecc generates Dialyzer suppressions to avoid warnings
+               when operator precedence declarations are used.
+
+
+ Full runtime dependencies of parsetools-2.1.3: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- reltool-0.7.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The reltool-0.7.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-11993    Application(s): reltool
+
+               Dependencies specified in .app files would earlier only
+               be followed for applications that are included in a
+               'rel' spec in the reltool config. For other
+               applications, only xref would decide the dependencies.
+
+               Some dependency chains would even be missed for
+               applications that are included in a 'rel' spec in the
+               reltool config. E.g.
+
+               -- Application x has y as included application, and y
+               in turn has z as included application. Then z is not
+               included.
+
+               -- Application x has y in its 'applications' tag in the
+               .app file, and y in turn has z as included application.
+               Then z is not included.
+
+               These bugs are now corrected.
+
+
+ Full runtime dependencies of reltool-0.7.2: erts-7.0, kernel-3.0,
+ sasl-2.4, stdlib-2.0, tools-2.6.14, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.10.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.10.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13891    Application(s): mnesia, runtime_tools
+
+               Correct some minor documentation issues.
+
+
+ Full runtime dependencies of runtime_tools-1.10.1: erts-8.0,
+ kernel-5.0, mnesia-4.12, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- sasl-3.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The sasl-3.0.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-8.1 (first satisfied in OTP 19.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-13808    Application(s): erts, sasl
+               Related Id(s): OTP-13833
+
+               *** HIGHLIGHT ***
+
+               Improved dirty scheduler support. A purge of a module
+               can now be performed without having to wait for
+               completion of all ongoing dirty NIF calls.
+
+               Note that when enabling support for dirty schedulers, a
+               new purge strategy will as of ERTS version 8.1 be
+               enabled. This new strategy is not fully backwards
+               compatible with the strategy used by default. For more
+               information see the documentation of
+               erlang:check_process_code/3.
+
+
+  OTP-13833    Application(s): erts, sasl
+
+               A new purge strategy has been introduced. The new
+               strategy will by default be disabled during the OTP 19
+               release, but will be the only strategy available as of
+               the OTP 20 release.
+
+               The new strategy is slightly incompatible with the
+               strategy being used by default in OTP 19. Using the
+               default strategy, processes holding funs that refer to
+               the module being purged either fail a soft purge, or
+               will be killed during a hard purge. The new strategy
+               completely ignores funs. If funs referring to the code
+               being purged exist, and are used after a purge, an
+               exception will be raised upon usage. That is, the
+               behavior will be exactly the same as the case when a
+               fun is received by a process after the purge.
+
+               The new strategy can optionally be enabled when
+               building OTP during OTP 19, and will automatically be
+               enabled if the runtime system is built with support for
+               dirty schedulers.
+
+               For more information see the documentation of
+               erlang:check_process_code/3.
+
+
+ Full runtime dependencies of sasl-3.0.1: erts-8.1, kernel-5.0,
+ stdlib-3.0, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.2.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.2.4 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13718    Application(s): ic, snmp
+               Related Id(s): ERL-179
+
+               Correct bugs when path to mib or idl spec files
+               contains UTF-8 characters.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13706    Application(s): snmp
+
+               Solves snmp config string handling as reported by
+               ERL-164 and solved by PR-1100
+
+
+ Full runtime dependencies of snmp-5.2.4: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.3.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.3.2 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13782    Application(s): ssh
+               Related Id(s): seq13158
+
+               Upgrade of an established client connection could crash
+               because the ssh client supervisors children had wrong
+               type. This is fixed now.
+
+
+  OTP-13847    Application(s): ssh
+               Related Id(s): 0-190243, 1, 205277, 219318,
+               defensics-ssh3
+
+               Partly checks the public key early in public key
+               authorization
+
+
+  OTP-13850    Application(s): ssh
+               Related Id(s): 0-214168, 1, defensics-ssh3
+
+               Corrected handling of SHA for ECDSA (Elliptic curve
+               public keys)
+
+
+  OTP-13854    Application(s): ssh
+
+               Problems found by test suites as well as by
+               Codenomicon/Defensics fixed: - reduce max random
+               padding to 15 bytes (Codenomicon/Defensics) -
+               inclomplete pdu handling (Codenomicon/Defensics) -
+               badmatch in test suite - non-blocking send fixes
+               deadlock in ssh_connection_SUITE:interrupted_send
+
+
+  OTP-13859    Application(s): ssh
+               Related Id(s): seq13177
+
+               Caller is now notified when a tcp close is received.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13843    Application(s): ssh
+               Related Id(s): PR-1147
+
+               Use application:ensure_all_started/2 instead of
+               hard-coding deps
+
+
+ Full runtime dependencies of ssh-4.3.2: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-1.1, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.0.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.0.2 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13853    Application(s): ssl
+
+               Correctly formed handshake messages received out of
+               order will now correctly fail the connection with
+               unexpected message.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13834    Application(s): ssl
+
+               ssl application now behaves gracefully also on
+               partially incorrect input from peer.
+
+
+  OTP-13883    Application(s): ssl
+
+               Add application environment configuration
+               bypass_pem_cache. This can be used as a workaround for
+               the current implementation of the PEM-cache that has
+               proven to be a bottleneck.
+
+
+ Full runtime dependencies of ssl-8.0.2: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.2, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13633    Application(s): stdlib
+
+               The zip:unzip/1,2 and zip:extract/1,2 functions have
+               been updated to handle directory traversal exploits.
+               Any element in the zip file that contains a path that
+               points to a directory above the top level working
+               directory, cwd, will instead be extracted in cwd. An
+               error message is printed for any such element in the
+               zip file during the unzip operation. The keep_old_files
+               option determines if a file will overwrite a previous
+               file with the same name within the zip file.
+
+
+  OTP-13721    Application(s): stdlib
+               Related Id(s): PR-1113
+
+               Correct the contracts for ets:match_object/1,3.
+
+
+  OTP-13746    Application(s): stdlib, tools
+               Related Id(s): ERL-172, ERL-187
+
+               Errors in type specification and Emacs template
+               generation for gen_statem:code_change/4 has been fixed
+               from bugs.erlang.org's Jira cases ERL-172 and ERL-187.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13752    Application(s): stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               gen_statem has been changed to set the callback mode
+               for a server to what Module:callback_mode/0 returns.
+               This facilitates e.g code downgrade since the callback
+               mode now becomes a property of the currently active
+               code, not of the server process.
+
+               Exception handling from Module:init/1 has also been
+               improved.
+
+
+ Full runtime dependencies of stdlib-3.1: compiler-5.0, crypto-3.3,
+ erts-8.0, kernel-5.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-2.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13725    Application(s): syntax_tools
+               Related Id(s): ERL-151, PR-1071
+
+               Fix a bug where erl_tidy crashed on the tilde character
+               when printing to standard output.
+
+
+  OTP-13755    Application(s): syntax_tools
+
+               merl_transform could get into an infinite loop when
+               syntactically incorrect text was passed to a
+               merl:qquote/2,3 call.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13720    Application(s): edoc, erl_docgen, syntax_tools
+               Related Id(s): ERL-120
+
+               Improve types and specs in OTP documentation generated
+               from Erlang source files.
+
+
+ Full runtime dependencies of syntax_tools-2.1: compiler-7.0,
+ erts-8.0, kernel-5.0, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.8.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The tools-2.8.6 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13746    Application(s): stdlib, tools
+               Related Id(s): ERL-172, ERL-187
+
+               Errors in type specification and Emacs template
+               generation for gen_statem:code_change/4 has been fixed
+               from bugs.erlang.org's Jira cases ERL-172 and ERL-187.
+
+
+  OTP-13778    Application(s): tools
+               Related Id(s): PR-1136
+
+               Fix gc_start/gc_end in fprof tags when parsing old
+               trace logs.
+
+
+  OTP-13855    Application(s): common_test, tools
+
+               make (tools) and ct_make (common_test) would crash if
+               an Erlang source file contained a -warning() directive.
+
+
+ Full runtime dependencies of tools-2.8.6: compiler-5.0, erts-7.0,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.7.1 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.7.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13816    Application(s): wx
+
+               Increased the stacksize for the wx thread. The default
+               stacksize on Windows is 1MB which is not enough if the
+               user created many nested dialogs.
+
+
+ Full runtime dependencies of wx-1.7.1: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.12 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.12 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13880    Application(s): xmerl
+
+               Fix a number of broken links in the xmerl
+               documentation.
+
+
+ Full runtime dependencies of xmerl-1.3.12: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Aleksei Magusev, Alexey Lebedeff, Andreas Schultz, Bernhard Schwarz,
+ Brujo Benavides, Cherep, Daniel Goertzen, Duncaen, Edwin Fine, Fred
+ Hebert, ILYA Khlopotov, Ignacio Martínez, Johan Claesson, Kostis
+ Sagonas, Lee Bannard, Linus.yuan, Magnus Henoch, Magnus Lång, Mahesh
+ Baheti, Mark Bucciarelli, Peter Lemenkov, Philip Arndt, Pierre
+ Fenoll, Péter Gömöri, Richard Carlsson, Stavros Aronis, Tihon, Tony
+ Han, Vlad Dumitrescu, jonasf, okumin, xsipewe
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

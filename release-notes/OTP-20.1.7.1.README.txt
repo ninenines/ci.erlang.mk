@@ -1,0 +1,48 @@
+Patch Package:           OTP 20.1.7.1
+Git Tag:                 OTP-20.1.7.1
+Date:                    2017-12-13
+Trouble Report Id:       OTP-14823
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             kernel-5.4.0.1
+Predecessor:             OTP 20.1.7
+
+ Check out the git tag OTP-20.1.7.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- kernel-5.4.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-5.4.0.1 application can *not* be applied
+       independently of other applications on an arbitrary OTP 20
+       installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-9.1 (first satisfied in OTP 20.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-14823    Application(s): kernel
+
+               Add os:cmd/2 that takes an options map as the second
+               argument.
+
+               Add max_size as an option to os:cmd/2 that control the
+               maximum size of the result that os:cmd/2 will return.
+
+
+ Full runtime dependencies of kernel-5.4.0.1: erts-9.1, sasl-3.0,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,114 @@
+Patch Package:           OTP 19.3.6.5
+Git Tag:                 OTP-19.3.6.5
+Date:                    2017-12-18
+Trouble Report Id:       OTP-14763, OTP-14775, OTP-14776, OTP-14781,
+                         OTP-14829
+Seq num:                 ERIERL-103, ERIERL-74, ERIERL-84
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5.4, mnesia-4.14.3.1, ssh-4.4.2.1
+Predecessor:             OTP 19.3.6.4
+
+ Check out the git tag OTP-19.3.6.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.4 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14775    Application(s): erts
+
+               Fixed a bug in file closure on Unix; close(2) was
+               retried on EINTR which could cause a different
+               (recently opened) file to be closed as well.
+
+
+  OTP-14781    Application(s): erts
+               Related Id(s): OTP-13047
+
+               A race-condition when tearing down a connection with
+               active node monitors could cause the runtime system to
+               crash.
+
+               This bug was introduced in ERTS version 8.0 (OTP 19.0).
+
+
+ Full runtime dependencies of erts-8.3.5.4: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.14.3.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.14.3.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14776    Application(s): mnesia
+               Related Id(s): ERIERL-103
+
+               Fix backup error handling, the real failure reason was
+               not returned.
+
+
+  OTP-14829    Application(s): mnesia
+               Related Id(s): ERIERL-84
+
+               Removed a quadratic behavior in startup. This change
+               implies that backend plugins (if used) must be set when
+               the schema is created or via configuration parameters
+               before mnesia is started.
+
+
+ Full runtime dependencies of mnesia-4.14.3.1: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.4.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.4.2.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-3.7.3 (first satisfied in OTP 19.3)
+       -- public_key-1.4 (first satisfied in OTP 19.3)
+       -- stdlib-3.3 (first satisfied in OTP 19.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14763    Application(s): ssh
+               Related Id(s): ERIERL-74
+
+               Trailing white space was removed at end of the
+               hello-string. This caused interoperability problems
+               with some other ssh-implementations (e.g OpenSSH 7.3p1
+               on Solaris 11)
+
+
+ Full runtime dependencies of ssh-4.4.2.1: crypto-3.7.3, erts-6.0,
+ kernel-3.0, public_key-1.4, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

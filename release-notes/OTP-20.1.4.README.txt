@@ -1,0 +1,54 @@
+Patch Package:           OTP 20.1.4
+Git Tag:                 OTP-20.1.4
+Date:                    2017-11-02
+Trouble Report Id:       OTP-14656, OTP-14696, OTP-14716
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             inets-6.4.3
+Predecessor:             OTP 20.1.3
+
+ Check out the git tag OTP-20.1.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.4.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.4.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-14656    Application(s): inets
+
+               Fix broken handling of POST requests
+
+               New chunk mechanism of body data in POST requests added
+               in 5d01c70ca399edf28e99dc760506329689fab6ba broke
+               handling of POST body data not using the new mechanism.
+
+
+  OTP-14696    Application(s): inets
+
+               Make sure ints:stop/2 of the service httpd is
+               synchronous
+
+
+  OTP-14716    Application(s): inets
+
+               Honor status code returned by ESI script and modernize
+               "location" header handling.
+
+
+ Full runtime dependencies of inets-6.4.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

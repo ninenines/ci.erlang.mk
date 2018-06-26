@@ -1,0 +1,64 @@
+Patch Package:           OTP 20.3.5
+Git Tag:                 OTP-20.3.5
+Date:                    2018-05-03
+Trouble Report Id:       OTP-15034, OTP-15050
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             erts-9.3.1, ssl-8.2.6
+Predecessor:             OTP 20.3.4
+
+ Check out the git tag OTP-20.3.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15034    Application(s): erts
+
+               Fixed a crash in heart:get_cmd/0 when the stored
+               command was too long.
+
+
+ Full runtime dependencies of erts-9.3.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.2.6 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.2.6 application can *not* be applied independently of
+       other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15050    Application(s): ssl
+
+               Proper handling of clients that choose to send an empty
+               answer to a certificate request
+
+
+ Full runtime dependencies of ssl-8.2.6: crypto-4.2, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.5, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

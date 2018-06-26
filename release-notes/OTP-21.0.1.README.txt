@@ -1,0 +1,60 @@
+Patch Package:           OTP 21.0.1
+Git Tag:                 OTP-21.0.1
+Date:                    2018-06-26
+Trouble Report Id:       OTP-15147, OTP-15150
+Seq num:                 ERL-644, ERL-650
+System:                  OTP
+Release:                 21
+Application:             compiler-7.2.1, erts-10.0.1
+Predecessor:             OTP 21.0
+
+ Check out the git tag OTP-21.0.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15150    Application(s): compiler
+               Related Id(s): ERL-650
+
+               The compiler could could crash when compiling a
+               complicated function that used the binary syntax.
+
+
+ Full runtime dependencies of compiler-7.2.1: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15147    Application(s): erts
+               Related Id(s): ERL-644
+
+               The keys used in os:getenv and os:putenv are
+               case-insensitive again on Windows.
+
+
+ Full runtime dependencies of erts-10.0.1: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

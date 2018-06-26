@@ -1,0 +1,164 @@
+Patch Package:           OTP 18.3.4.5
+Git Tag:                 OTP-18.3.4.5
+Date:                    2017-02-02
+Trouble Report Id:       OTP-13425, OTP-13866, OTP-13869, OTP-14159,
+                         OTP-14166, OTP-14169, OTP-14173
+Seq num:                 seq13261, seq13262
+System:                  OTP
+Release:                 18
+Application:             crypto-3.6.3.1, erts-7.3.1.3, inets-6.2.4.1,
+                         ssh-4.2.2.3
+Predecessor:             OTP 18.3.4.4
+
+ Check out the git tag OTP-18.3.4.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-3.6.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-3.6.3.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-14169    Application(s): crypto, ssh
+               Related Id(s): seq13261
+
+               Key exchange algorithms
+               diffie-hellman-group-exchange-sha* optimized, up to a
+               factor of 11 for the slowest ( = biggest and safest)
+               one.
+
+
+ Full runtime dependencies of crypto-3.6.3.1: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1.3 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13425    Application(s): erts
+               Related Id(s): ERL-94
+
+               A bug has been fixed where if erlang was started +B on
+               a unix platform it would be killed by a SIGUSR2 signal
+               when creating a crash dump.
+
+
+  OTP-13866    Application(s): erts
+
+               Calls to erl_drv_send_term() or erl_drv_output_term()
+               from a non-scheduler thread while the corresponding
+               port was invalid caused the emulator to enter an
+               inconsistent state which eventually caused an emulator
+               crash.
+
+
+  OTP-13869    Application(s): erts
+
+               Driver and NIF operations accessing processes or ports
+               could cause an emulator crash when used from
+               non-scheduler threads. Those operations are:
+
+               -- erl_drv_send_term()
+
+               -- driver_send_term()
+
+               -- erl_drv_output_term()
+
+               -- driver_output_term()
+
+               -- enif_send()
+
+               -- enif_port_command()
+
+
+  OTP-14159    Application(s): erts
+               Related Id(s): ERL-340
+
+               Fix bug in binary_to_term for binaries created by
+               term_to_binary with option compressed. The bug can
+               cause badarg exception for a valid binary when Erlang
+               VM is linked against a zlib library of version 1.2.9 or
+               newer. Bug exists since OTP 17.0.
+
+
+ Full runtime dependencies of erts-7.3.1.3: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.2.4.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.2.4.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14173    Application(s): inets
+               Related Id(s): seq13262
+
+               Shutdown gracefully on connection or TLS handshake
+               errors
+
+
+ Full runtime dependencies of inets-6.2.4.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.2.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.2.2.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-3.6.3.1 (first satisfied in OTP 18.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14166    Application(s): ssh
+
+               The key exchange algorithm
+               diffie-hellman-group-exchange-sha* has a server-option
+               {dh_gex_limits,{Min,Max}}. There was a hostkey
+               signature validation error on the client side if the
+               option was used and the Min or the Max differed from
+               the corresponding values obtained from the client.
+
+               This bug is now corrected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14169    Application(s): crypto, ssh
+               Related Id(s): seq13261
+
+               Key exchange algorithms
+               diffie-hellman-group-exchange-sha* optimized, up to a
+               factor of 11 for the slowest ( = biggest and safest)
+               one.
+
+
+ Full runtime dependencies of ssh-4.2.2.3: crypto-3.6.3.1, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

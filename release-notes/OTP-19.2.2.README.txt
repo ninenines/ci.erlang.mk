@@ -1,0 +1,39 @@
+Patch Package:           OTP 19.2.2
+Git Tag:                 OTP-19.2.2
+Date:                    2017-02-01
+Trouble Report Id:       OTP-14167
+Seq num:                
+System:                  OTP
+Release:                 19
+Application:             mnesia-4.14.3
+Predecessor:             OTP 19.2.1
+
+ Check out the git tag OTP-19.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.14.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.14.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14167    Application(s): mnesia
+
+               Fixed crash in checkpoint handling when table was
+               deleted during backup.
+
+
+ Full runtime dependencies of mnesia-4.14.3: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

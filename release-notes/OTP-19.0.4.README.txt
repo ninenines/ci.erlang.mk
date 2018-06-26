@@ -1,0 +1,47 @@
+Patch Package:           OTP 19.0.4
+Git Tag:                 OTP-19.0.4
+Date:                    2016-08-12
+Trouble Report Id:       OTP-13798, OTP-13799
+Seq num:
+System:                  OTP
+Release:                 19
+Application:             erts-8.0.3
+Predecessor:             OTP 19.0.3
+
+  Check out the git tag OTP-19.0.4, and build a full OTP system
+  including documentation. Apply one or more applications from this
+  build as patches to your installation using the 'otp_patch_apply'
+  tool. For information on install requirements, see descriptions for
+  each application version below.
+
+  ---------------------------------------------------------------------
+  --- erts-8.0.3 ------------------------------------------------------
+  ---------------------------------------------------------------------
+
+  The erts-8.0.3 application can be applied independently of other
+  applications on a full OTP 19 installation.
+
+  --- Fixed Bugs and Malfunctions ---
+
+   OTP-13798    Application(s): erts
+                Related Id(s): OTP-11997
+
+                Fixed a race that could cause a lost wakeup of a
+                process that timed out in a receive ... after. This bug
+                was introduced in ERTS version 7.0.
+
+
+   OTP-13799    Application(s): erts
+
+                Fixed segfault after writing an erl crash dump.
+
+
+  Full runtime dependencies of erts-8.0.3: kernel-5.0, sasl-3.0,
+  stdlib-3.0
+
+
+  ---------------------------------------------------------------------
+  ---------------------------------------------------------------------
+  ---------------------------------------------------------------------
+  
+  

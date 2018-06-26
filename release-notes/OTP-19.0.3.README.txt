@@ -1,0 +1,84 @@
+Patch Package:           OTP 19.0.3
+Git Tag:                 OTP-19.0.3
+Date:                    2016-08-09
+Trouble Report Id:       OTP-13688, OTP-13741, OTP-13753
+Seq num:                 seq13149, seq13150
+System:                  OTP
+Release:                 19
+Application:             inets-6.3.2, kernel-5.0.1, ssl-8.0.1
+Predecessor:             OTP 19.0.2
+
+ Check out the git tag OTP-19.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13688    Application(s): inets
+               Related Id(s): seq13149
+
+               PUT and DELETE support has been added to mod_esi
+
+
+ Full runtime dependencies of inets-6.3.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.0.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-5.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13741    Application(s): kernel
+
+               Fix a os:cmd bug where creating a background job using
+               & would cause os:cmd to hang until the background
+               job terminated or closed its stdout and stderr file
+               descriptors. This bug has existed from kernel 5.0.
+
+
+ Full runtime dependencies of kernel-5.0.1: erts-8.0, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.0.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-8.0.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13753    Application(s): ssl
+               Related Id(s): seq13150
+
+               The TLS/SSL protocol version selection for the SSL
+               server has been corrected to follow RFC 5246 Appendix
+               E.1 especially in case where the list of supported
+               versions has gaps. Now the server selects the highest
+               protocol version it supports that is not higher than
+               what the client supports.
+
+
+ Full runtime dependencies of ssl-8.0.1: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.2, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

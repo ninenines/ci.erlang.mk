@@ -1,0 +1,71 @@
+Patch Package:           OTP 19.3.4
+Git Tag:                 OTP-19.3.4
+Date:                    2017-05-12
+Trouble Report Id:       OTP-14391, OTP-14396
+Seq num:                 seq13306
+System:                  OTP
+Release:                 19
+Application:             inets-6.3.9, ssl-8.1.3
+Predecessor:             OTP 19.3.3
+
+ Check out the git tag OTP-19.3.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.9 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.9 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14391    Application(s): inets
+               Related Id(s): seq13306
+
+               The close of a chunked file reception crashed in a
+               certain timing sequence.
+
+
+ Full runtime dependencies of inets-6.3.9: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.1.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.1.3 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.2 (first satisfied in OTP 19.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14396    Application(s): ssl
+
+               Remove debug printout
+
+
+ Full runtime dependencies of ssl-8.1.3: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.2, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Joe DeVivo
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ 
+ 

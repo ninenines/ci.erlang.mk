@@ -1,0 +1,1096 @@
+Patch Package:           OTP 19.2
+Git Tag:                 OTP-19.2
+Date:                    2016-12-13
+Trouble Report Id:       OTP-11403, OTP-12982, OTP-13693, OTP-13829,
+                         OTP-13857, OTP-13887, OTP-13888, OTP-13895,
+                         OTP-13896, OTP-13902, OTP-13904, OTP-13905,
+                         OTP-13907, OTP-13916, OTP-13919, OTP-13920,
+                         OTP-13925, OTP-13926, OTP-13927, OTP-13928,
+                         OTP-13929, OTP-13930, OTP-13931, OTP-13933,
+                         OTP-13934, OTP-13944, OTP-13945, OTP-13947,
+                         OTP-13948, OTP-13951, OTP-13955, OTP-13959,
+                         OTP-13960, OTP-13965, OTP-13967, OTP-13970,
+                         OTP-13971, OTP-13973, OTP-13974, OTP-13979,
+                         OTP-13980, OTP-13981, OTP-13982, OTP-13985,
+                         OTP-13992, OTP-13996, OTP-13998, OTP-14003,
+                         OTP-14005, OTP-14010, OTP-14018, OTP-14022,
+                         OTP-14026, OTP-14027, OTP-14028, OTP-14031,
+                         OTP-14040, OTP-14041, OTP-14043, OTP-14044,
+                         OTP-14046, OTP-14048, OTP-14049, OTP-14050,
+                         OTP-14051, OTP-14055, OTP-14064, OTP-14074,
+                         OTP-14082, OTP-14083, OTP-14084
+Seq num:                 seq13171, seq13198, seq13223, seq13226
+System:                  OTP
+Release:                 19
+Application:             common_test-1.13, compiler-7.0.3,
+                         crypto-3.7.2, dialyzer-3.0.3, edoc-0.8.1,
+                         erl_docgen-0.6.1, erl_interface-3.9.2,
+                         erts-8.2, eunit-2.3.2, hipe-3.15.3,
+                         inets-6.3.4, kernel-5.1.1, mnesia-4.14.2,
+                         observer-2.3, odbc-2.12, parsetools-2.1.4,
+                         public_key-1.3, runtime_tools-1.11,
+                         sasl-3.0.2, ssh-4.4, ssl-8.1, stdlib-3.2,
+                         syntax_tools-2.1.1, tools-2.9, wx-1.8
+Predecessor:             OTP 19.1.6
+
+ Check out the git tag OTP-19.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-12982    Application(s): ssl
+
+               Experimental version of DTLS. It is runnable but not
+               complete and cannot be considered reliable for
+               production usage. To use DTLS add the option{protocol,
+               dtls} to ssl:connect and ssl:listen.
+
+
+  OTP-13887    Application(s): ssh
+               Related Id(s): OTP-13888
+
+               Extended the option silently_accept_hosts for
+               ssh:connect to make it possible for the client to check
+               the SSH host key fingerprint string. Se the reference
+               manual for SSH.
+
+
+  OTP-13929    Application(s): stdlib
+               Related Id(s): ERL-284, PR-1170
+
+               The new behaviour gen_statem has been improved with 3
+               new features: the possibility to use old style
+               non-proxy timeouts for gen_statem:call/2,3, state entry
+               code, and state timeouts. These are backwards
+               compatible. Minor code and documentation improvements
+               has been performed including a borderline semantics
+               correction of timeout zero handling.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-14083    Application(s): odbc
+
+               Change configure to skip odbc for old MACs, the change
+               in PR-1227 is not backwards compatible with old MACs,
+               and we do not see a need to continue support for such
+               old versions. However it is still possible to make it
+               work on such machines using the --with-odbc configure
+               option.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.13 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.13 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13973    Application(s): common_test
+               Related Id(s): ERL-279
+
+               Some types of printouts to screen during test runs
+               (including ct:print/1,2,3,4) used the local user
+               process as IO device and these printouts would not be
+               visible when e.g. running tests via a shell on a remote
+               node. A default Common Test group leader process has
+               been introduced to solve the problem. This process
+               routes printouts to the group leader of the starting
+               process, if available, otherwise to user.
+
+
+  OTP-14026    Application(s): common_test
+               Related Id(s): ERL-287
+
+               Some Common Test processes, that act as I/O group
+               leaders for test cases, would not terminate as expected
+               at the end of test runs. This error has been corrected.
+
+
+  OTP-14044    Application(s): common_test
+               Related Id(s): seq13223
+
+               The logging verbosity feature was incorrectly
+               documented. The default verbosity levels for test runs
+               is e.g. not 50 (?STD_VERBOSITY), but 100
+               (?MAX_VERBOSITY). Also, some of the examples had errors
+               and flaws. The corresponding chapter (5.18) in the
+               User's Guide has been updated.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14043    Application(s): common_test
+               Related Id(s): seq13226
+
+               A feature to let the user specify headings to log
+               printouts has been added. The heading is specified as
+               {heading,string()} in the Opts list argument to
+               ct:pal/3,4,5, ct:print/3,4,5, or ct:log/3,4,5. If the
+               heading option is omitted, the category name, or
+               "User", is used as the heading instead.
+
+
+ Full runtime dependencies of common_test-1.13: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-2.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.0.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13931    Application(s): compiler
+               Related Id(s): ERL-266
+
+               Fixed a compiler crash when maps were matched.
+
+
+  OTP-13947    Application(s): compiler
+               Related Id(s): ERL-268
+
+               Fixed a compiler crash having to with the delayed
+               sub-creation optimization. (Thanks to Jose Valim for
+               reporting this bug.)
+
+
+  OTP-13985    Application(s): compiler
+
+               The compiler option inline_list_funcs accidentally
+               turned off some other optimizations.
+
+
+  OTP-14040    Application(s): compiler
+               Related Id(s): ERL-301
+
+               The compiler could sometimes generate spurious warnings
+               when inlining was enabled.
+
+
+ Full runtime dependencies of compiler-7.0.3: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-3.7.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-3.7.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13895    Application(s): crypto
+               Related Id(s): PR-1163
+
+               The crypto application has been fixed to not use RC2
+               against OpenSSL built with RC2 disabled.
+
+
+  OTP-13896    Application(s): crypto
+               Related Id(s): PR-1169
+
+               The crypto application has been fixed to not use RC4
+               against OpenSSL built with RC4 disabled.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13951    Application(s): crypto, erts
+
+               To ease troubleshooting, erlang:load_nif/2 now includes
+               the return value from a failed call to
+               load/reload/upgrade in the text part of the error
+               tuple. The crypto NIF makes use of this feature by
+               returning the source line where/if the initialization
+               fails.
+
+
+ Full runtime dependencies of crypto-3.7.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-3.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-3.0.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13693    Application(s): dialyzer
+
+               Fix bugs regarding opaque types.
+
+
+  OTP-13979    Application(s): dialyzer
+               Related Id(s): ERL-283
+
+               Fix error handling of bad -dialyzer() attributes.
+
+
+ --- Improvements and New Features ---
+
+  OTP-11403    Application(s): dialyzer
+
+               A few warning messages have been improved.
+
+
+ Full runtime dependencies of dialyzer-3.0.3: compiler-7.0, erts-8.0,
+ hipe-3.15.1, kernel-5.0, stdlib-3.0, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- edoc-0.8.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The edoc-0.8.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13930    Application(s): edoc
+               Related Id(s): PR-1175
+
+               Document the function tags @param and @returns.
+
+
+ Full runtime dependencies of edoc-0.8.1: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.6.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.6.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13971    Application(s): erl_docgen
+
+               Docgen would previously emit "utf8" as the default
+               encoding in xml. This has now been remedied by emitting
+               the correct string "UTF-8" instead.
+
+
+ Full runtime dependencies of erl_docgen-0.6.1: edoc-0.7.13, erts-6.0,
+ stdlib-2.5, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.9.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.9.2 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13981    Application(s): erl_interface
+
+               Fix ei_connect_init and ei_connect_xinit to adjust the
+               creation argument to be compatible with nodes older
+               than OTP-19.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13980    Application(s): erl_interface
+
+               Editorial documentation changes
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.2 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13904    Application(s): erts
+               Related Id(s): ERL-256
+
+               Fixed configure failures on MacOSX. Most important
+               clock_gettime() was detected when building for MacOSX -
+               El Capitan using XCode 8 despite it is not available
+               until MacOSX - Sierra.
+
+
+  OTP-13920    Application(s): erts, kernel, sasl
+               Related Id(s): ERL-267
+
+               code:add_pathsa/1 and command line option -pa both
+               revert the given list of directories when adding it at
+               the beginning of the code path. This is now documented.
+
+
+  OTP-13927    Application(s): erts
+
+               Fix a compilation error of erts in OpenBSD related to
+               the usage of the __errno variable.
+
+
+  OTP-13928    Application(s): erts
+
+               Fixed so that when enabling tracing on a process that
+               had an invalid tracer associated with it, the new
+               tracer overwrites the old tracer. Before this fix,
+               calling erlang:trace/3 would behave as if the tracer
+               was still alive and not apply the new trace.
+
+               This fault was introduced in ERTS 8.0.
+
+
+  OTP-13955    Application(s): erts
+               Related Id(s): ERL-280
+
+               Fix parsing of -profile_boot 'true' | 'false'
+
+
+  OTP-13992    Application(s): erts
+
+               A slight improvement of erlang:get_stacktrace/0 for
+               exceptions raised in hipe compiled code. Beam compiled
+               functions in such stack trace was earlier replaced by
+               some unrelated function. They are now instead omitted.
+               This is an attempt to reduce the confusion in the
+               absence of a complete and correct stack trace for mixed
+               beam and hipe functions.
+
+
+  OTP-13996    Application(s): erts
+
+               Correct type declaration of match specification head.
+
+
+  OTP-14031    Application(s): erts
+               Related Id(s): ERL-294, PR-1239
+
+               HiPE code loading failed for x86_64 if gcc was
+               configured with --enable-default-pie. Fixed by
+               disabling PIE, if needed for HiPE, when building the
+               VM.
+
+
+  OTP-14048    Application(s): erts
+
+               Faulty arguments could be presented on exception from a
+               NIF that had rescheduled itself using
+               enif_schedule_nif().
+
+
+  OTP-14049    Application(s): erts
+
+               The runtime system could crash if a garbage collection
+               on a process was performed immediately after a NIF had
+               been rescheduled using enif_schedule_nif().
+
+
+  OTP-14050    Application(s): erts
+
+               A reference to purged code could be left undetected by
+               the purge operation if a process just had rescheduled a
+               NIF call using enif_schedule_nif() when the process was
+               checked. This could cause a runtime system crash.
+
+
+  OTP-14051    Application(s): erts
+
+               Fixed a number of dirty scheduler related bugs:
+
+               -- Process priority was not handled correct when
+               scheduling on a dirty scheduler.
+
+               -- The runtime system could crash when an exit signal
+               with a compound exit reason was sent to a process
+               executing on a dirty scheduler.
+
+               -- The runtime system crashed when call tracing a
+               process executing on a dirty scheduler.
+
+               -- A code purge operation could end up hanging forever
+               when a process executed on a dirty scheduler
+
+
+  OTP-14055    Application(s): erts
+
+               Fixed a number of bugs that caused faulty stack-traces
+               to be created on exception when a process was traced.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13925    Application(s): erts
+
+               Fix minor soft purge race bug that could incorrectly
+               trigger code_server to load new code for the module if
+               the soft purge failed and no current version of the
+               module existed.
+
+
+  OTP-13951    Application(s): crypto, erts
+
+               To ease troubleshooting, erlang:load_nif/2 now includes
+               the return value from a failed call to
+               load/reload/upgrade in the text part of the error
+               tuple. The crypto NIF makes use of this feature by
+               returning the source line where/if the initialization
+               fails.
+
+
+  OTP-14046    Application(s): erts
+
+               New environment variable ERL_CRASH_DUMP_BYTES can be
+               used to limit the size of crash dumps. If the limit is
+               reached, crash dump generation is aborted and the
+               generated file will be truncated.
+
+
+ Full runtime dependencies of erts-8.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.3.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.3.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14084    Application(s): eunit, syntax_tools
+
+               The address to the FSF in the license header has been
+               updated.
+
+
+ Full runtime dependencies of eunit-2.3.2: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.15.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The hipe-3.15.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13965    Application(s): hipe
+               Related Id(s): PR-1253
+
+               Fix flow control bug in hipe compiler that may cause
+               compile time crash.
+
+
+  OTP-14005    Application(s): hipe
+
+               Fix bug in native compilation of bitstring pattern
+               matching causing erroneous runtime matching result. The
+               bug only affects code containing constant-valued
+               segments whose size is expressed in bits; it is
+               triggered when the pattern matching against these
+               segments fails (i.e., when the next clause needs to be
+               tried).
+
+
+  OTP-14027    Application(s): hipe
+               Related Id(s): ERL-292, PR-1237
+
+               Workaround in HiPE LLVM backend for a bug in LLVM 3.9.
+               The bug could cause LLVM-compiled modules to be
+               rejected during loading with a badarg exception in
+               hipe_bifs:enter_sdecs/1, but also cause corruption or
+               segmentation faults i runtime.
+
+
+  OTP-14028    Application(s): hipe
+               Related Id(s): PR-1237
+
+               Fix a bug in HiPE LLVM backend involving incorrect type
+               tests of atoms sometimes causing incorrect behaviour or
+               even segfaults.
+
+
+ Full runtime dependencies of hipe-3.15.3: compiler-5.0, erts-7.1,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.3.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.3.4 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13960    Application(s): inets
+               Related Id(s): PR1196
+
+               Fixes a bug that makes the ftp client end up in bad
+               state if there is a multi line response from the server
+               and the response number is in the message being sent.
+
+
+  OTP-13967    Application(s): inets
+
+               The ftp client could stop consuming messages when the
+               multiline response handling was corrected.
+
+
+  OTP-14041    Application(s): inets
+
+               Fix keep-alive https through proxy connections so that
+               all requests, following the first one, will run as
+               expected instead of failing.
+
+
+  OTP-14082    Application(s): inets
+
+               Fix bug from commit
+               fdfda2fab0921d409789174556582db28141448e that could
+               make listing of group members in mod_auth callbacks
+               fail.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13902    Application(s): inets
+
+               Update behavior of httpc:request to match RFC-7231
+
+
+  OTP-13982    Application(s): inets
+               Related Id(s): PR-1207
+
+               Fixed dialyzer warnings as well as some white-space
+               issues. Thanks to Kostis.
+
+
+ Full runtime dependencies of inets-6.3.4: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-5.1.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-8.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13920    Application(s): erts, kernel, sasl
+               Related Id(s): ERL-267
+
+               code:add_pathsa/1 and command line option -pa both
+               revert the given list of directories when adding it at
+               the beginning of the code path. This is now documented.
+
+
+  OTP-14003    Application(s): kernel
+
+               Add lost runtime dependency to erts-8.1. This should
+               have been done in kernel-5.1 (OTP-19.1) as it cannot
+               run without at least erts-8.1 (OTP-19.1).
+
+
+  OTP-14022    Application(s): kernel
+               Related Id(s): PR-1208
+
+               Type and doc for
+               gen_{tcp,udp,sctp}:controlling_process/2 has been
+               improved.
+
+
+ Full runtime dependencies of kernel-5.1.1: erts-8.1, sasl-3.0,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.14.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.14.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13944    Application(s): mnesia
+               Related Id(s): PR-1184
+
+               A continuation returned by mnesia:select/[14] should be
+               reusable in different, non-transactional activities.
+
+
+  OTP-13970    Application(s): mnesia
+               Related Id(s): seq13198
+
+               Fixed crash when calling block_table multiple times.
+               Could happen when having locks for a long time and
+               restarting mnesia.
+
+
+  OTP-14074    Application(s): mnesia
+
+               Change mnesia_tm process to have off-heap messages
+               since mnesia_tm can be the receiver of many
+               non-synchronized message from other nodes.
+
+
+ Full runtime dependencies of mnesia-4.14.2: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14010    Application(s): observer
+
+               The shell script (priv/bin/cdv) and bat file
+               (priv/bin/cdv.bat) which can be used for starting
+               crashdump_viewer both started a distributed erlang
+               node. This would cause any attempt at starting a second
+               instance of the crashdump_viewer to fail. To solve this
+               problem, cdv and cdv.bat now use non-distributed nodes
+               when starting the crashdump_viewer.
+
+
+  OTP-14064    Application(s): observer
+
+               A bug caused the number of buckets to be shown in the
+               'Objects' column, and the number of objects to be shown
+               in the 'Memory' column for ets table in
+               crashdump_viewer. This is now corrected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13829    Application(s): observer, runtime_tools
+               Related Id(s): seq13171
+
+               Add option queue_size to ttb:tracer/2. This sets the
+               maximum queue size for the IP trace driver which is
+               used when tracing to shell and/or {local,File}.
+
+               The default value for queue_size is specified by dbg,
+               and it is now changed from 50 to 200.
+
+
+  OTP-13948    Application(s): observer, runtime_tools
+               Related Id(s): ERL-272
+
+               The port information page is updated to show more
+               information per port.
+
+
+ Full runtime dependencies of observer-2.3: erts-7.0, et-1.5,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.12 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The odbc-2.12 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-14083    Application(s): odbc
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Change configure to skip odbc for old MACs, the change
+               in PR-1227 is not backwards compatible with old MACs,
+               and we do not see a need to continue support for such
+               old versions. However it is still possible to make it
+               work on such machines using the --with-odbc configure
+               option.
+
+
+ Full runtime dependencies of odbc-2.12: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.1.4 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The parsetools-2.1.4 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13916    Application(s): parsetools
+               Related Id(s): ERL-263
+
+               Correct counting of newlines when rules with newlines
+               are used in Leex.
+
+
+  OTP-13919    Application(s): parsetools
+
+               Correct handling of Unicode in Leex.
+
+
+ Full runtime dependencies of parsetools-2.1.4: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.3 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13888    Application(s): public_key
+               Related Id(s): OTP-13887
+
+               New function public_key:ssh_hostkey_fingerprint/1,2 to
+               calculate the SSH host key fingerprint string.
+
+
+ Full runtime dependencies of public_key-1.3: asn1-3.0, crypto-3.3,
+ erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.11 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.11 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13829    Application(s): observer, runtime_tools
+               Related Id(s): seq13171
+
+               Add option queue_size to ttb:tracer/2. This sets the
+               maximum queue size for the IP trace driver which is
+               used when tracing to shell and/or {local,File}.
+
+               The default value for queue_size is specified by dbg,
+               and it is now changed from 50 to 200.
+
+
+  OTP-13948    Application(s): observer, runtime_tools
+               Related Id(s): ERL-272
+
+               The port information page is updated to show more
+               information per port.
+
+
+ Full runtime dependencies of runtime_tools-1.11: erts-8.0,
+ kernel-5.0, mnesia-4.12, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- sasl-3.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The sasl-3.0.2 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-8.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13920    Application(s): erts, kernel, sasl
+               Related Id(s): ERL-267
+
+               code:add_pathsa/1 and command line option -pa both
+               revert the given list of directories when adding it at
+               the beginning of the code path. This is now documented.
+
+
+ Full runtime dependencies of sasl-3.0.2: erts-8.1, kernel-5.0,
+ stdlib-3.0, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.4 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.4 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13857    Application(s): ssh
+               Related Id(s): ERL-238, OTP-13858
+
+               A file read with an sftp client could loose data if the
+               packet_size is set to larger than 64k. This is
+               corrected now in such a way that the packet_size is
+               silently lowered if there is a risk for data loss.
+
+
+  OTP-13905    Application(s): ssh
+               Related Id(s): PR-1173
+
+               When user defined SSH shell REPL process exits with
+               reason normal, the SSH channel callback module should
+               report successful exit status to the SSH client. This
+               provides simple way for SSH clients to check for
+               successful completion of executed commands. (Thanks to
+               isvilen)
+
+
+ --- Improvements and New Features ---
+
+  OTP-13887    Application(s): ssh
+               Related Id(s): OTP-13888
+
+               *** HIGHLIGHT ***
+
+               Extended the option silently_accept_hosts for
+               ssh:connect to make it possible for the client to check
+               the SSH host key fingerprint string. Se the reference
+               manual for SSH.
+
+
+ Full runtime dependencies of ssh-4.4: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-1.1, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.1 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.1 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13926    Application(s): ssl
+
+               List of possible anonymous suites, never supported by
+               default, where incorrect for some TLS versions.
+
+
+ --- Improvements and New Features ---
+
+  OTP-12982    Application(s): ssl
+
+               *** HIGHLIGHT ***
+
+               Experimental version of DTLS. It is runnable but not
+               complete and cannot be considered reliable for
+               production usage. To use DTLS add the option{protocol,
+               dtls} to ssl:connect and ssl:listen.
+
+
+  OTP-13959    Application(s): ssl
+
+               Add API options to handle ECC curve selection.
+
+
+ Full runtime dependencies of ssl-8.1: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.2, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.2 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13907    Application(s): stdlib
+               Related Id(s): ERL-163, PR-1158
+
+               When a simple_one_for_one supervisor is shutting down,
+               and a child exits with an exit reason of the form
+               {shutdown, Term}, an error report was earlier printed.
+               This is now corrected.
+
+
+  OTP-13974    Application(s): stdlib
+
+               Allow empty list as parameter of the fun used with
+               dbg:fun2ms/1.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13929    Application(s): stdlib
+               Related Id(s): ERL-284, PR-1170
+
+               *** HIGHLIGHT ***
+
+               The new behaviour gen_statem has been improved with 3
+               new features: the possibility to use old style
+               non-proxy timeouts for gen_statem:call/2,3, state entry
+               code, and state timeouts. These are backwards
+               compatible. Minor code and documentation improvements
+               has been performed including a borderline semantics
+               correction of timeout zero handling.
+
+
+ Full runtime dependencies of stdlib-3.2: compiler-5.0, crypto-3.3,
+ erts-8.0, kernel-5.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.1.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-2.1.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14084    Application(s): eunit, syntax_tools
+
+               The address to the FSF in the license header has been
+               updated.
+
+
+ Full runtime dependencies of syntax_tools-2.1.1: compiler-7.0,
+ erts-8.0, kernel-5.0, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.9 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The tools-2.9 application can *not* be applied independently of
+       other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-3.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13998    Application(s): tools
+
+               Fix unhandled trace event send_to_non_existing_process
+               in fprof.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13945    Application(s): tools
+               Related Id(s): PR-1157
+
+               Improved edoc support in emacs erlang-mode.
+
+
+  OTP-14018    Application(s): tools
+               Related Id(s): PR-1197
+
+               Added erldoc to emacs mode which opens html
+               documentation in browser from emacs. For example M-x
+               erldoc-browse RET lists:foreach/2.
+
+
+ Full runtime dependencies of tools-2.9: compiler-5.0, erts-7.0,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-3.1
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.8 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.8 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13934    Application(s): wx
+               Related Id(s): ERL-270
+
+               Allow string arguments to be binaries as specified,
+               i.e. unicode:chardata().
+
+
+ --- Improvements and New Features ---
+
+  OTP-13933    Application(s): wx
+
+               Add wxWindow:dragAcceptFiles/2 and wxDropFilesEvent to
+               support simple drag and drop from file browser.
+
+
+ Full runtime dependencies of wx-1.8: erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Ahmed Shafeeq Bin Mohd Shariff, Alexander Clouter, Alexandre
+ Snarskii, Andreas Schultz, Andrey Teplyashin, Bozhidar Batsov, Doug
+ Rohrer, Dániel Szoboszlay, Eric Meadows-Jönsson, Evgeny M, Fred
+ Hebert, Ildar Khizbulin, JT Turner, Johan Sommerfeld, José Valim,
+ Jxck, Kostis Sagonas, Leo Liu, Loïc Hoguin, Luca Favatella, Lutz
+ Behnke, Magnus Henoch, Magnus Lång, Matwey V. Kornilov, Michael
+ Truog, Péter Gömöri, Richard Carlsson, Svilen Ivanov, Tom Richards,
+ Trevor Brown, Tuncer Ayaz, Victor Ren, Will, xsipewe
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

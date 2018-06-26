@@ -1,0 +1,1201 @@
+Patch Package:           OTP 18.2
+Git Tag:                 OTP-18.2
+Date:                    2015-12-16
+Trouble Report Id:       OTP-12003, OTP-12392, OTP-12457, OTP-12699,
+                         OTP-12759, OTP-12787, OTP-12792, OTP-12836,
+                         OTP-12837, OTP-12838, OTP-12936, OTP-12939,
+                         OTP-12966, OTP-12985, OTP-13000, OTP-13007,
+                         OTP-13008, OTP-13010, OTP-13015, OTP-13017,
+                         OTP-13018, OTP-13026, OTP-13029, OTP-13030,
+                         OTP-13031, OTP-13032, OTP-13035, OTP-13040,
+                         OTP-13042, OTP-13044, OTP-13048, OTP-13052,
+                         OTP-13054, OTP-13055, OTP-13063, OTP-13066,
+                         OTP-13067, OTP-13068, OTP-13069, OTP-13070,
+                         OTP-13071, OTP-13076, OTP-13078, OTP-13079,
+                         OTP-13083, OTP-13084, OTP-13091, OTP-13092,
+                         OTP-13093, OTP-13101, OTP-13102, OTP-13105,
+                         OTP-13106, OTP-13107, OTP-13109, OTP-13110,
+                         OTP-13113, OTP-13115, OTP-13116, OTP-13117,
+                         OTP-13125, OTP-13130, OTP-13132, OTP-13134,
+                         OTP-13137, OTP-13141, OTP-13142, OTP-13143,
+                         OTP-13144, OTP-13145, OTP-13146, OTP-13147,
+                         OTP-13149, OTP-13150, OTP-13155, OTP-13156,
+                         OTP-13157, OTP-13158, OTP-13159, OTP-13160,
+                         OTP-13162, OTP-13163, OTP-13165, OTP-13166,
+                         OTP-13173, OTP-13181, OTP-13188, OTP-13189
+Seq num:                 seq12945, seq12959, seq12978
+System:                  OTP
+Release:                 18
+Application:             asn1-4.0.1, common_test-1.11.1,
+                         compiler-6.0.2, crypto-3.6.2, dialyzer-2.8.2,
+                         diameter-1.11.1, erl_docgen-0.4.1,
+                         erl_interface-3.8.1, erts-7.2, eunit-2.2.12,
+                         hipe-3.14, inets-6.1, jinterface-1.6.1,
+                         kernel-4.1.1, observer-2.1.1,
+                         parsetools-2.1.1, public_key-1.1,
+                         runtime_tools-1.9.2, sasl-2.6.1, snmp-5.2.1,
+                         ssh-4.2, ssl-7.2, stdlib-2.7,
+                         test_server-3.9.1, tools-2.8.2, typer-0.9.10,
+                         wx-1.6, xmerl-1.3.9
+Predecessor:             OTP 18.1.5
+
+ Check out the git tag OTP-18.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-12392    Application(s): ssl
+
+               Add upper limit for session cache, configurable on ssl
+               application level.
+
+               If upper limit is reached, invalidate the current cache
+               entries, e.i the session lifetime is the max time a
+               session will be keept, but it may be invalidated
+               earlier if the max limit for the table is reached. This
+               will keep the ssl manager process well behaved, not
+               exhusting memeory. Invalidating the entries will
+               incrementally empty the cache to make room for fresh
+               sessions entries.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-4.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-4.0.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13149    Application(s): asn1
+
+               Trying to encode an empty named BIT STRING in BER would
+               fail with a function_clause exception. (Thanks to
+               Svilen Ivanov for reporting this bug.)
+
+
+ Full runtime dependencies of asn1-4.0.1: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.11.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.11.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13007    Application(s): common_test
+
+               When data from the netconf server was split into many
+               ssh packages, the netconf client performed really bad.
+               This is now improved.
+
+
+  OTP-13008    Application(s): common_test
+
+               In ct_netconfc, if a timer expired 'at the same time'
+               as the server sent the rpc-reply, the timeout message
+               might already be in the client's message queue when the
+               client removed the timer ref from its 'pending' list.
+               This caused a crash in the client since the timer ref
+               could no longer be found when handling the timeout
+               message. This problem is now fixed by always flushing
+               the timeout message from the message queue when
+               canceling a timer.
+
+
+  OTP-13035    Application(s): common_test
+
+               The error logger handler ct_conn_log_h did not respect
+               the 'silent' option, and tried to print to an undefined
+               file descriptor. This has been corrected.
+
+
+  OTP-13173    Application(s): common_test
+               Related Id(s): seq12978
+
+               If the user would let the test run proceed after test
+               suite compilation failure, Common Test did not set the
+               exit status to indicate failure as expected. This has
+               been corrected. Also, the 'abort_if_missing_suites'
+               option now makes Common Test abort the test run without
+               asking the user if compilation fails, even if access to
+               stdin/stdout exists.
+
+
+  OTP-13181    Application(s): common_test, test_server
+
+               With the Common Test 'create_priv_dir' start option set
+               to 'auto_per_tc', the name of the priv directory for a
+               configuration function could clash with the name of the
+               priv directory for a test case, which would cause Test
+               Server failure. This error has been corrected.
+
+
+ Full runtime dependencies of common_test-1.11.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-2.5, test_server-3.9, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-6.0.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-6.0.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13091    Application(s): compiler
+
+               Fix cerl_trees:label/2 bug with map K/V swap
+
+
+  OTP-13113    Application(s): compiler
+
+               Warnings produced when the 'bin_opt_info' option was
+               given could sometimes lack filenames and line numbers.
+               (Thanks to José Valim for reporting this bug.)
+
+
+ Full runtime dependencies of compiler-6.0.2: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-3.6.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-3.6.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13017    Application(s): crypto, erts, eunit, snmp
+
+               Small documentation fixes
+
+
+ Full runtime dependencies of crypto-3.6.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-2.8.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The dialyzer-2.8.2 application can *not* be applied
+       independently of other applications on an arbitrary OTP 18
+       installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependency has to be satisfied:
+       -- hipe-3.13 (first satisfied in OTP 18.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13068    Application(s): dialyzer, hipe
+
+               Reintroduce the erlang:make_fun/3 BIF in erl_bif_types.
+
+
+ Full runtime dependencies of dialyzer-2.8.2: compiler-5.0, erts-7.0,
+ hipe-3.13, kernel-3.0, stdlib-2.5, syntax_tools-1.6.14, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- diameter-1.11.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-1.11.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13137    Application(s): diameter
+
+               Fix request table leaks
+
+               The End-to-End and Hop-by-Hop identifiers of outgoing
+               Diameter requests are stored in a table in order for
+               the caller to be located when the corresponding answer
+               message is received. Entries were orphaned if the
+               handler was terminated by an exit signal as a
+               consequence of actions taken by callback functions, or
+               if callbacks modified identifiers in retransmission
+               cases.
+
+
+ Full runtime dependencies of diameter-1.11.1: erts-6.0, kernel-3.0,
+ ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.4.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.4.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13026    Application(s): erl_docgen, erts
+
+               Updated the xmllint target to just check the xml files
+               with real documentation content.
+               Corrected some errors and added some missing target in
+               the DTD's.
+
+
+ Full runtime dependencies of erl_docgen-0.4.1: edoc-0.7.13, erts-6.0,
+ stdlib-2.5, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.8.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.8.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13188    Application(s): erl_interface
+
+               Fix the conditional selection of gethostbyname_r and
+               gethostbyaddr_r.
+
+
+ ---------------------------------------------------------------------
+ --- erts-7.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13017    Application(s): crypto, erts, eunit, snmp
+
+               Small documentation fixes
+
+
+  OTP-13076    Application(s): erts
+               Related Id(s): seq12959
+
+               Fix memory corruption bug caused by disabling
+               distribution and then re-enable distribution with a
+               node name that has previously been used by a remote
+               node.
+
+
+  OTP-13079    Application(s): erts
+
+               Renamed variables with name bool as Visual Studio 2015
+               now treats this is a keyword.
+
+
+  OTP-13102    Application(s): erts
+
+               erl_prim_loader has not supported custom loaders for
+               several releases. In the documentation for
+               erl_prim_loader, all references to custom loaders have
+               now been removed.
+
+
+  OTP-13105    Application(s): erts
+
+               Fixed compilation of erts together with libc versions
+               that do not define __uint32_t.
+
+
+  OTP-13107    Application(s): erts
+
+               erl -make now returns non-zero exit codes on failure
+
+
+  OTP-13115    Application(s): erts
+
+               Fix crash on init:restart in embedded mode caused by
+               on_load handler process not being relaunched leading to
+               load failure for modules such as crypto and asn1rt_nif
+               that need it to be present for correct NIF loading.
+
+
+  OTP-13125    Application(s): erts
+
+               Fix maps decode in erlang:binary_to_term/1
+
+               Decoding a term with a large (HAMT) map in an small
+               (FLAT) map could cause a critical error if the external
+               format was not produced by beam.
+
+
+  OTP-13146    Application(s): erts
+
+               Fix very rare bug in GC when big maps with a lot of
+               hash collisions from a remote node are waiting in inner
+               message queue.
+
+
+  OTP-13150    Application(s): erts
+
+               Fixed a bug that could cause a crash dump to become
+               almost empty.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13026    Application(s): erl_docgen, erts
+
+               Updated the xmllint target to just check the xml files
+               with real documentation content.
+               Corrected some errors and added some missing target in
+               the DTD's.
+
+
+  OTP-13147    Application(s): erts
+
+               Add function enif_getenv to read OS environment
+               variables in a portable way from NIFs.
+
+
+ Full runtime dependencies of erts-7.2: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.2.12 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.2.12 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13017    Application(s): crypto, erts, eunit, snmp
+
+               Small documentation fixes
+
+
+ Full runtime dependencies of eunit-2.2.12: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.14 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The hipe-3.14 application can *not* be applied independently of
+       other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-7.1 (first satisfied in OTP 18.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13048    Application(s): hipe
+
+               Fix hipe bug causing segfaults when native code
+               constructs binaries starting with a zero-length integer
+               field.
+
+
+  OTP-13068    Application(s): dialyzer, hipe
+
+               Reintroduce the erlang:make_fun/3 BIF in erl_bif_types.
+
+
+  OTP-13092    Application(s): hipe
+
+               In certain cases of matching with very big binaries,
+               the HiPE compiler generated code that would fail the
+               match, even in cases that the matching was successful.
+               The problem was more quite noticeable on 32-bit
+               platforms.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13159    Application(s): hipe
+
+               mikpe/hipe_x86_signal-musl-support
+
+
+ Full runtime dependencies of hipe-3.14: compiler-5.0, erts-7.1,
+ kernel-3.0, stdlib-2.5, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13069    Application(s): inets
+
+               Replace obs-folds with spaces instead of failing
+
+
+  OTP-13071    Application(s): inets
+
+               Add validation fun for URI scheme to http_uri API
+
+
+  OTP-13093    Application(s): inets
+
+               Handle stream bodies as documented.
+
+
+  OTP-13110    Application(s): inets
+
+               Correct error handling of mod_esi generated chunks.
+               Send warning headers in chunk trailers instead of
+               generating an unexpected additional 500 request
+               response, when problems, such as a timeout occurs.
+
+
+  OTP-13117    Application(s): inets
+
+               HTTP client terminates gracefully when an invalid
+               chunked length header is encountered.
+
+
+ --- Improvements and New Features ---
+
+  OTP-12985    Application(s): inets
+
+               Add default for SNI (Server Name Indication) when
+               running https using the inets HTTP-client.
+
+
+  OTP-13116    Application(s): inets
+
+               Be forgiving to chunked sizes that have trailing
+               whitespaces as prior implementation was. Also some
+               legacy embedded devices does actually have trailing
+               whitespaces even though this in not according to the
+               spec.
+
+
+ Full runtime dependencies of inets-6.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.6.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.6.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13106    Application(s): jinterface
+
+               Add missing Term tag matching switch statement that was
+               missing an external fun tag.
+
+
+  OTP-13165    Application(s): jinterface
+
+               fixed writing small compressed values.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-4.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-4.1.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- sasl-2.6 (first satisfied in OTP 18.1)
+       -- stdlib-2.6 (first satisfied in OTP 18.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-12836    Application(s): kernel
+
+               Host name lookups though inet_res, the Erlang DNS
+               resolver, are now done case insensitively according to
+               RFC 4343. Patch by Holger Weiß.
+
+
+  OTP-13040    Application(s): kernel
+
+               IPv6 distribution handler has been updated to share
+               code with IPv4 so that all features are supported in
+               IPv6 as well. A bug when using an IPv4 address as
+               hostname has been fixed.
+
+
+  OTP-13083    Application(s): kernel
+
+               Caching of host names in the internal DNS resolver
+               inet_res has been made character case insensitive for
+               host names according to RFC 4343.
+
+
+  OTP-13155    Application(s): kernel
+               Related Id(s): PR#646
+
+               Cooked file mode buffering has been fixed so
+               file:position/2 now works according to Posix on Posix
+               systems i.e. when file:position/2 returns an error the
+               file pointer is unaffected.
+
+               The Windows system documentation, however, is unclear
+               on this point so the documentation of file:position/2
+               still does not promise anything.
+
+               Cooked file mode file:pread/2,3 and file:pwrite/2,3
+               have been corrected to honor character encoding like
+               the combination of file:position/2 and file:read/2 or
+               file:write/2 already does. This is probably not very
+               useful since the character representation on the
+               caller's side is latin1, period.
+
+
+ --- Improvements and New Features ---
+
+  OTP-12837    Application(s): kernel
+
+               Add {line_delim, byte()} option to inet:setopts/2 and
+               decode_packet/3
+
+
+ Full runtime dependencies of kernel-4.1.1: erts-7.0, sasl-2.6,
+ stdlib-2.6
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13030    Application(s): observer
+
+               Show ets owner pid in crashdump viewers popup window,
+               thanks Leo Liu.
+
+
+  OTP-13044    Application(s): observer
+
+               Several initialisms (eg, ERTS, ETS, SMP) are used as
+               headings. They were being capitalized incorrectly.
+
+
+  OTP-13163    Application(s): observer
+
+               Fixed a crash in crashdump viewer when dump contained a
+               truncated binary.
+
+
+ Full runtime dependencies of observer-2.1.1: erts-7.0, et-1.5,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.1.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The parsetools-2.1.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13031    Application(s): parsetools
+
+               Correct the documentation of the error tuple returned
+               by Yecc and Leex.
+
+
+ Full runtime dependencies of parsetools-2.1.1: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-12936    Application(s): public_key, ssh
+
+               The 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384' and
+               'ecdsa-sha2-nistp521' signature algorithms for ssh are
+               implemented. See RFC 5656.
+
+
+  OTP-13054    Application(s): public_key, ssh
+               Related Id(s): OTP-13052
+
+               There is now a file (public_key/priv/moduli) which
+               lists size-generator-modulus triples. The purpose is to
+               give servers the possibility to select the crypto
+               primes randomly among a list of pregenerated triples.
+               This reduces the risk for some attacks on
+               diffie-hellman negotiation.
+
+               See the reference manual for public_key:dh_gex_group/4
+               where the handling of this is described.
+
+               The ssh server (ssh:daemon) uses this.
+
+
+  OTP-13132    Application(s): public_key
+
+               Add different upper bounds for diffrent string types as
+               suggested by comment in PKIX1Explicit88.
+
+
+ Full runtime dependencies of public_key-1.1: asn1-3.0, crypto-3.3,
+ erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.9.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.9.2 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13078    Application(s): runtime_tools
+
+               Clarified dbg:stop documentation
+
+
+ Full runtime dependencies of runtime_tools-1.9.2: erts-7.0,
+ kernel-3.0, mnesia-4.12, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- sasl-2.6.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The sasl-2.6.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-4.1 (first satisfied in OTP 18.1)
+       -- stdlib-2.6 (first satisfied in OTP 18.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-13000    Application(s): sasl
+
+               Documentation improvements
+
+
+ Full runtime dependencies of sasl-2.6.1: erts-6.0, kernel-4.1,
+ stdlib-2.6, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.2.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13017    Application(s): crypto, erts, eunit, snmp
+
+               Small documentation fixes
+
+
+ --- Improvements and New Features ---
+
+  OTP-13101    Application(s): snmp
+
+               Update configuration check of imask ( list of ones and
+               zeros) to allow the empty list.
+
+
+ Full runtime dependencies of snmp-5.2.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-12699    Application(s): ssh
+               Related Id(s): OTP-11688
+
+               Better error handling in ssh_file. There was some rare
+               errors when a NFS-mounted file was opened by ssh_file
+               and then remotely deleted during reading. That caused
+               an endless loop.
+
+               That bug is now fixed.
+
+
+  OTP-12759    Application(s): ssh
+
+               Fixed a bug in the compression algorithm
+               zlib@openssh.com.
+
+
+  OTP-12966    Application(s): ssh
+               Related Id(s): seq12945
+
+               It is now possible to start more than one daemon with a
+               file descriptor given in option fd. Each daemon must of
+               course have a unique file descriptor.
+
+
+  OTP-13029    Application(s): ssh
+
+               Fixed a bug that caused the option dh_gex_limit to be
+               ignored.
+
+
+  OTP-13158    Application(s): ssh
+
+               A problem is fixed with the ssh:connect option
+               pref_public_key_algs specifying user keys.
+
+
+ --- Improvements and New Features ---
+
+  OTP-12003    Application(s): ssh
+
+               Document updates in the ssh reference manual: app doc
+               file and ssh_connection.
+
+
+  OTP-12787    Application(s): ssh
+
+               The authorization phase is made stateful to prevent ssh
+               acting on messages sent in wrong order.
+
+
+  OTP-12792    Application(s): ssh
+               Related Id(s): #5214, 6166, Codenomicon
+
+               Testcases for bad message lengths and for bad subfield
+               lengths added.
+
+
+  OTP-12936    Application(s): public_key, ssh
+
+               The 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384' and
+               'ecdsa-sha2-nistp521' signature algorithms for ssh are
+               implemented. See RFC 5656.
+
+
+  OTP-12939    Application(s): ssh
+
+               The crypto algorithms 'aes192-ctr' and 'aes256-ctr' are
+               implemented. See RFC 4344.
+
+
+  OTP-13018    Application(s): ssh
+
+               The ciphers and macs AEAD_AES_128_GCM and
+               AEAD_AES_256_GCM are implemented but not enabled per
+               default. See the SSH App Reference Manual and RFC5647
+               for details.
+
+               The ciphers aes128-gcm@openssh.com and
+               aes256-gcm@openssh.com are also implemented and
+               available in the default configuration.
+
+
+  OTP-13052    Application(s): ssh
+               Related Id(s): OTP-13054
+
+               The ssh:daemon option dh_gex_groups is extended to read
+               a user provided ssh moduli file with generator-modulus
+               pairs. The file is in openssh format.
+
+
+  OTP-13054    Application(s): public_key, ssh
+               Related Id(s): OTP-13052
+
+               There is now a file (public_key/priv/moduli) which
+               lists size-generator-modulus triples. The purpose is to
+               give servers the possibility to select the crypto
+               primes randomly among a list of pregenerated triples.
+               This reduces the risk for some attacks on
+               diffie-hellman negotiation.
+
+               See the reference manual for public_key:dh_gex_group/4
+               where the handling of this is described.
+
+               The ssh server (ssh:daemon) uses this.
+
+
+  OTP-13055    Application(s): ssh
+               Related Id(s): OTP-13053
+
+               The ssh:daemon option pwdfun now also takes a fun/4.
+               This enables the user to 1) check userid-password in
+               another way than the builtin algorithm, 2) implement
+               rate limiting per user or source IP or IP+Port, and 3)
+               implement blocking of missbehaving peers.
+
+               The old fun/2 still works as previously.
+
+
+  OTP-13066    Application(s): ssh
+
+               There is now a new option to make the server limit the
+               size range of moduli available for the diffie-hellman
+               group exchange negotiation. See option
+               {dh_gex_limits,{Min,Max}} in ssh:daemon/3.
+
+
+  OTP-13067    Application(s): ssh
+
+               Ecdh key exchange now validates compressed and
+               uncompressed keys as defined in rfc5656
+
+
+  OTP-13109    Application(s): ssh
+
+               Search order for the .ssh directory are changed so
+               $HOME is tried before init:get_argument(home).
+
+
+  OTP-13130    Application(s): ssh
+
+               The sftp receive window handling is optimized so it
+               will not update the remote end too often. This makes
+               "sftp mget" considerable faster.
+
+
+  OTP-13156    Application(s): ssh
+
+               The option key_cb is extended to take an optional list
+               that is passed to the callback module as an option.
+               With this it is possible to have different keys
+               depending on which host that is connected. Another
+               possibility is to write a callback module that fetches
+               keys etc from a database.
+
+               Thanks to Vipin Nair.
+
+
+ Full runtime dependencies of ssh-4.2: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ --- ssl-7.2 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-7.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-12838    Application(s): ssl
+
+               Honor distribution port range options
+
+
+  OTP-13134    Application(s): ssl
+
+               Correct supervisor specification in TLS distribution.
+
+
+  OTP-13141    Application(s): ssl
+
+               Correct cache timeout
+
+
+  OTP-13144    Application(s): ssl
+
+               Avoid crash and restart of ssl process when key file
+               does not exist.
+
+
+  OTP-13166    Application(s): ssl
+
+               Enable passing of raw socket options on the format
+               {raw,_,_,_} to the underlying socket.
+
+
+  OTP-13189    Application(s): ssl
+
+               Hibernation with small or a zero timeout will now work
+               as expected
+
+
+ --- Improvements and New Features ---
+
+  OTP-12392    Application(s): ssl
+
+               *** HIGHLIGHT ***
+
+               Add upper limit for session cache, configurable on ssl
+               application level.
+
+               If upper limit is reached, invalidate the current cache
+               entries, e.i the session lifetime is the max time a
+               session will be keept, but it may be invalidated
+               earlier if the max limit for the table is reached. This
+               will keep the ssl manager process well behaved, not
+               exhusting memeory. Invalidating the entries will
+               incrementally empty the cache to make room for fresh
+               sessions entries.
+
+
+  OTP-12457    Application(s): ssl
+
+               Use new time functions to measure passed time.
+
+
+  OTP-13142    Application(s): ssl
+
+               Improved error handling in TLS distribution
+
+
+  OTP-13143    Application(s): ssl
+
+               Distribution over TLS now honors the nodelay
+               distribution flag
+
+
+ Full runtime dependencies of ssl-7.2: crypto-3.3, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-2.7 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-2.7 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-4.1 (first satisfied in OTP 18.1)
+       -- sasl-2.6 (first satisfied in OTP 18.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13084    Application(s): stdlib
+
+               The Erlang Pretty Printer uses :: for function type
+               constraints.
+
+               A bug concerning pretty printing of annotated type
+               union elements in map pair types has been fixed.
+
+               Some minor issues regarding the documentation of types
+               and specs have been corrected.
+
+
+  OTP-13145    Application(s): stdlib
+
+               The shell command rp prints strings as lists of
+               integers if pretty printing of lists is set to false.
+
+
+  OTP-13157    Application(s): stdlib
+
+               The shell would crash if a bit syntax expression with
+               conflicting types were given (e.g. if a field type was
+               given as 'integer-binary'). (Thanks to Aleksei Magusev
+               for reporting this bug.)
+
+
+  OTP-13162    Application(s): stdlib
+
+               The rand:export_seed/0 would never return 'undefined'
+               even if no seed has previously been created. Fixed to
+               return 'undefined' if there is no seed in the process
+               dictionary.
+
+
+ --- Improvements and New Features ---
+
+  OTP-13032    Application(s): stdlib
+
+               Add support for the Delete, Home and End keys in the
+               Erlang shell.
+
+
+  OTP-13063    Application(s): stdlib
+
+               beam_lib:all_chunks/1 and beam_lib:build_module/1 have
+               been documented.
+
+
+ Full runtime dependencies of stdlib-2.7: compiler-5.0, crypto-3.3,
+ erts-7.0, kernel-4.1, sasl-2.6
+
+
+ ---------------------------------------------------------------------
+ --- test_server-3.9.1 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The test_server-3.9.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13015    Application(s): test_server
+
+               When generating Makefile from Makefile.src,
+               ts_lib:get_arg/4 earlier removed all spaces in the
+               extracted argument. The code was probably meant for
+               removing leading and trailing spaces only, and is now
+               corrected to do so.
+
+
+  OTP-13181    Application(s): common_test, test_server
+
+               With the Common Test 'create_priv_dir' start option set
+               to 'auto_per_tc', the name of the priv directory for a
+               configuration function could clash with the name of the
+               priv directory for a test case, which would cause Test
+               Server failure. This error has been corrected.
+
+
+ Full runtime dependencies of test_server-3.9.1: erts-7.0, inets-6.0,
+ kernel-4.0, observer-2.1, runtime_tools-1.8.16, stdlib-2.5,
+ syntax_tools-1.7, tools-2.8
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.8.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-2.8.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13042    Application(s): tools
+
+               The emacs mode does not add a newline after the arrow
+               on -callback lines anymore.
+
+
+ Full runtime dependencies of tools-2.8.2: compiler-5.0, erts-7.0,
+ inets-5.10, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5,
+ webtool-0.8.10
+
+
+ ---------------------------------------------------------------------
+ --- typer-0.9.10 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The typer-0.9.10 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13010    Application(s): typer
+
+               Fix a bug that could result in a crash when printing
+               warnings onto standard error.
+
+
+ Full runtime dependencies of typer-0.9.10: compiler-5.0,
+ dialyzer-2.7, erts-6.0, hipe-3.10.3, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.6 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.6 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-13160    Application(s): wx
+
+               Add wxOverlay and make wxPostScripDC optional to make
+               it easier to build on windows.
+
+               Correct some function specifications.
+
+               The driver implementation have been optimized and now
+               invokes commands after events have been sent to erlang.
+
+
+ Full runtime dependencies of wx-1.6: erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.9 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.9 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13070    Application(s): xmerl
+
+               Removed the built-in definitions of xml.xsd from the
+               xmerl_xsd module.
+
+
+ Full runtime dependencies of xmerl-1.3.9: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Andrey Mayorov, Ben Tyler, Constantin Rack, Danil Zagoskin, David
+ Whitlock, Derek Brown, Eric Appelt, Gary Coulbourne,
+ Holger Weiß, Ian Denhardt, Johannes Weißl, Josh Adams, Kirill
+ Zaborsky, Kirilll Zaborsky, Kostis Sagonas, Loïc Hoguin, Luca
+ Favatella, Luis Rascao, Magnus Henoch, Magnus Lång, Magnus
+ Ottenklinger, Mikael Pettersson, Nico Kruber, Pawel Pikula, Pierre
+ Fenoll, Péter Gömöri, Riccardo, Rich Morin, Roger Lipscombe, Rory
+ Byrne, Serge Aleynikov, Sergey Savenko, Steven Danna, Tobias
+ Schlager, Tom Briden, Tom Szilagyi, Tuncer Ayaz, Vipin Nair, Vlad
+ Dumitrescu, soranoba, xsipewe
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

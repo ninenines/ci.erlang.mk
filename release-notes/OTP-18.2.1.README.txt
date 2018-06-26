@@ -1,0 +1,51 @@
+Patch Package:           OTP 18.2.1
+Git Tag:                 OTP-18.2.1
+Date:                    2015-12-18
+Trouble Report Id:       OTP-13202, OTP-13204
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             erts-7.2.1
+Predecessor:             OTP 18.2
+
+ Check out the git tag OTP-18.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.2.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13202    Application(s): erts
+
+               Revert "Fix erroneous splitting of emulator path"
+
+
+  OTP-13204    Application(s): erts
+               Related Id(s): pr926
+
+               Fix HiPE enabled emulator for FreeBSD.
+
+
+ Full runtime dependencies of erts-7.2.1: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Kenji Rikitake
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

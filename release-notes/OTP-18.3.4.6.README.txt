@@ -1,0 +1,143 @@
+Patch Package:           OTP 18.3.4.6
+Git Tag:                 OTP-18.3.4.6
+Date:                    2017-11-16
+Trouble Report Id:       OTP-14491, OTP-14514, OTP-14522, OTP-14548,
+                         OTP-14590, OTP-14763, OTP-14765
+Seq num:                 ERIERL-48, ERIERL-74, ERL-468, ERL-474
+System:                  OTP
+Release:                 18
+Application:             compiler-6.0.3.1, eldap-1.2.1.1,
+                         erts-7.3.1.4, ssh-4.2.2.4
+Predecessor:             OTP 18.3.4.5
+
+ Check out the git tag OTP-18.3.4.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-6.0.3.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-6.0.3.1 application can be applied independently of
+ other applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14522    Application(s): compiler
+               Related Id(s): ERIERL-48
+
+               Fail labels on guard BIFs weren't taken into account
+               during an optimization pass, and a bug in the
+               validation pass sometimes prevented this from being
+               noticed when a fault occurred.
+
+
+ Full runtime dependencies of compiler-6.0.3.1: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.1.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.1.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-14765    Application(s): eldap, jinterface
+
+               Misc building environment updates
+
+
+ Full runtime dependencies of eldap-1.2.1.1: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1.4 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14491    Application(s): erts
+
+               Fix performance bug in pre-allocators that could cause
+               them to permanently fall back on normal more expensive
+               memory allocation. Pre-allocators are used for quick
+               allocation of short lived meta data used by messages
+               and other scheduled tasks. Bug exists since OTP_R15B02.
+
+
+  OTP-14514    Application(s): erts
+
+               Fixed bug in operator bxor causing erroneuos result
+               when one operand is a big *negative* integer with the
+               lowest N*W bits as zero and the other operand not
+               larger than N*W bits. N is an integer of 1 or larger
+               and W is 32 or 64 depending on word size.
+
+
+  OTP-14548    Application(s): erts
+               Related Id(s): ERL-468, OTP-11997
+
+               A timer internal bit-field used for storing scheduler
+               id was too small. As a result, VM internal timer data
+               structures could become inconsistent when using 1024
+               schedulers on the system. Note that systems with less
+               than 1024 schedulers are not effected by this bug.
+
+               This bug was introduced in ERTS version 7.0 (OTP 18.0).
+
+
+  OTP-14590    Application(s): erts
+               Related Id(s): ERL-474
+
+               Fixed bug in binary_to_term and binary_to_atom that
+               could cause VM crash. Typically happens when the last
+               character of an UTF8 string is in the range 128 to 255,
+               but truncated to only one byte. Bug exists in
+               binary_to_term since ERTS version 5.10.2 (OTP_R16B01)
+               and binary_to_atom since ERTS version 9.0 (OTP-20.0).
+
+
+ Full runtime dependencies of erts-7.3.1.4: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.2.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.2.2.4 application can *not* be applied independently
+       of other applications on an arbitrary OTP 18 installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-3.6.3.1 (first satisfied in OTP 18.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14763    Application(s): ssh
+               Related Id(s): ERIERL-74
+
+               Trailing white space was removed at end of the
+               hello-string. This caused interoperability problems
+               with some other ssh-implementations (e.g OpenSSH 7.3p1
+               on Solaris 11)
+
+
+ Full runtime dependencies of ssh-4.2.2.4: crypto-3.6.3.1, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

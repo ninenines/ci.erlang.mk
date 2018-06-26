@@ -1,0 +1,99 @@
+Patch Package:           OTP 19.3.6.3
+Git Tag:                 OTP-19.3.6.3
+Date:                    2017-10-05
+Trouble Report Id:       OTP-14522, OTP-14548, OTP-14590, OTP-14612,
+                         OTP-14661
+Seq num:                 ERIERL-48, ERIERL-80, ERL-468, ERL-474
+System:                  OTP
+Release:                 19
+Application:             compiler-7.0.4.1, erts-8.3.5.3
+Predecessor:             OTP 19.3.6.2
+
+ Check out the git tag OTP-19.3.6.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.0.4.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.0.4.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14522    Application(s): compiler
+               Related Id(s): ERIERL-48
+
+               Fail labels on guard BIFs weren't taken into account
+               during an optimization pass, and a bug in the
+               validation pass sometimes prevented this from being
+               noticed when a fault occurred.
+
+
+ Full runtime dependencies of compiler-7.0.4.1: crypto-3.6, erts-7.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14548    Application(s): erts
+               Related Id(s): ERL-468, OTP-11997
+
+               A timer internal bit-field used for storing scheduler
+               id was too small. As a result, VM internal timer data
+               structures could become inconsistent when using 1024
+               schedulers on the system. Note that systems with less
+               than 1024 schedulers are not effected by this bug.
+
+               This bug was introduced in ERTS version 7.0 (OTP 18.0).
+
+
+  OTP-14590    Application(s): erts
+               Related Id(s): ERL-474
+
+               Fixed bug in binary_to_term and binary_to_atom that
+               could cause VM crash. Typically happens when the last
+               character of an UTF8 string is in the range 128 to 255,
+               but truncated to only one byte. Bug exists in
+               binary_to_term since ERTS version 5.10.2 (OTP_R16B01)
+               and binary_to_atom since ERTS version 9.0 (OTP-20.0).
+
+
+  OTP-14612    Application(s): erts
+
+               Fix bug causing VM crash when a module with -on_load
+               directive is loaded while erlang:trace(on_load, ...) is
+               enabled.
+
+
+  OTP-14661    Application(s): erts
+               Related Id(s): ERIERL-80
+
+               Fixed bug that could cause a VM crash when a corrupt
+               message is received on distribution channel from other
+               node.
+
+
+ Full runtime dependencies of erts-8.3.5.3: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

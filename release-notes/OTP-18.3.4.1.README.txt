@@ -1,0 +1,40 @@
+Patch Package:           OTP 18.3.4.1
+Git Tag:                 OTP-18.3.4.1
+Date:                    2016-06-27
+Trouble Report Id:       OTP-13674
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             ssh-4.2.2.1
+Predecessor:             OTP 18.3.4
+
+ Check out the git tag OTP-18.3.4.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.2.2.1 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13674    Application(s): ssh
+               Related Id(s): TR-HU92273
+
+               SSH client does not any longer retry a bad password
+               given as option to ssh:connect et al.
+
+
+ Full runtime dependencies of ssh-4.2.2.1: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
