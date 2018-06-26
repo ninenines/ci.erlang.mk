@@ -1,0 +1,41 @@
+Patch Package:           OTP 18.3.4.3
+Git Tag:                 OTP-18.3.4.3
+Date:                    2016-08-05
+Trouble Report Id:       OTP-13782
+Seq num:                 seq13158
+System:                  OTP
+Release:                 18
+Application:             ssh-4.2.2.2
+Predecessor:             OTP 18.3.4.2
+
+ Check out the git tag OTP-18.3.4.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.2.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.2.2.2 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13782    Application(s): ssh
+               Related Id(s): seq13158
+
+               Upgrade of an established client connection could crash
+               because the ssh client supervisors children had wrong
+               type. This is fixed now.
+
+
+ Full runtime dependencies of ssh-4.2.2.2: crypto-3.3, erts-6.0,
+ kernel-3.0, public_key-0.22, stdlib-2.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
