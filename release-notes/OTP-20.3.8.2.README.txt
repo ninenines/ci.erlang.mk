@@ -1,0 +1,110 @@
+Patch Package:           OTP 20.3.8.2
+Git Tag:                 OTP-20.3.8.2
+Date:                    2018-06-29
+Trouble Report Id:       OTP-15067, OTP-15160, OTP-15161, OTP-15162
+Seq num:                 ERIERL-191, ERL-573
+System:                  OTP
+Release:                 20
+Application:             erl_interface-3.10.2.1, erts-9.3.3.1,
+                         ic-4.4.4.1, kernel-5.4.3.1
+Predecessor:             OTP 20.3.8.1
+
+ Check out the git tag OTP-20.3.8.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.10.2.1 ------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.10.2.1 application can be applied independently
+ of other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15161    Application(s): erl_interface
+               Related Id(s): ERIERL-191
+
+               Make ei_connect and friends also accept state
+               ok_simultaneous during handshake, which means the other
+               node has initiated a connection setup that will be
+               cancelled in favor of this connection.
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15067    Application(s): erts
+               Related Id(s): ERL-573
+
+               Fixed a rare bug that could cause processes to be
+               scheduled after they had been freed.
+
+
+ Full runtime dependencies of erts-9.3.3.1: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ic-4.4.4.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ic-4.4.4.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15160    Application(s): ic
+               Related Id(s): ERIERL-191
+
+               Fixed bug in ic causing potential buffer overrun in
+               funtion oe_ei_encode_atom. Bug exists since ic-4.4.4
+               (OTP-20.3.4).
+
+
+ Full runtime dependencies of ic-4.4.4.1: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.4.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-5.4.3.1 application can *not* be applied
+       independently of other applications on an arbitrary OTP 20
+       installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-9.3 (first satisfied in OTP 20.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15162    Application(s): kernel
+               Related Id(s): ERIERL-191
+
+               Fix some potential buggy behavior in how ticks are sent
+               on inter node distribution connections. Tick is now
+               sent to c-node even if there are unsent buffered data,
+               as c-nodes need ticks in order to send reply ticks. The
+               amount of sent data was also calculated wrongly when
+               ticks were suppressed due to unsent buffered data.
+
+
+ Full runtime dependencies of kernel-5.4.3.1: erts-9.3, sasl-3.0,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
