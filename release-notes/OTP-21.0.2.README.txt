@@ -1,0 +1,129 @@
+Patch Package:           OTP 21.0.2
+Git Tag:                 OTP-21.0.2
+Date:                    2018-07-04
+Trouble Report Id:       OTP-15067, OTP-15151, OTP-15156, OTP-15157,
+                         OTP-15158, OTP-15159, OTP-15166
+Seq num:                 ERL-573, ERL-654, ERL-655, ERL-660
+System:                  OTP
+Release:                 21
+Application:             compiler-7.2.2, erts-10.0.2,
+                         public_key-1.6.1, stdlib-3.5.1
+Predecessor:             OTP 21.0.1
+
+ Check out the git tag OTP-21.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.2.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15156    Application(s): compiler
+               Related Id(s): ERL-655
+
+               In rare cases involving matching of binary literal
+               strings, the compiler could optimize away code that
+               should be executed.
+
+
+  OTP-15157    Application(s): compiler
+
+               There could be an internal consistency check failure
+               when compiling code that called map_get(Key, Map) and
+               then updated the same map.
+
+
+  OTP-15166    Application(s): compiler
+               Related Id(s): ERL-660
+
+               In rare circumstances, the compiler could crash in
+               beam_jump when compiling a floating point operation.
+
+
+ Full runtime dependencies of compiler-7.2.2: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15067    Application(s): erts
+               Related Id(s): ERL-573
+
+               Fixed a rare bug that could cause processes to be
+               scheduled after they had been freed.
+
+
+  OTP-15158    Application(s): erts
+               Related Id(s): ERL-654
+
+               Fixed a race condition in the inet driver that could
+               cause receive to hang when the emulator was compiled
+               with gcc 8.
+
+
+ Full runtime dependencies of erts-10.0.2: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.6.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.6.1 application can be applied independently of
+ other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15151    Application(s): public_key
+               Related Id(s): OTP-15113
+
+               Some of the keylengths in the newly generated moduli
+               file in public_key are not universally supported. This
+               could cause the SSH key exchange
+               diffie-hellman-group-exchange-sha* to fail.
+
+               Those keylengths are now removed.
+
+
+ Full runtime dependencies of public_key-1.6.1: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.5.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15159    Application(s): stdlib
+
+               Fix a bug that could cause a crash when formatting a
+               list of non-characters using the control sequences p or
+               P and limiting the output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.5.1: compiler-5.0, crypto-3.3,
+ erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
