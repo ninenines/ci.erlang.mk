@@ -1,0 +1,59 @@
+Patch Package:           OTP 21.0.3
+Git Tag:                 OTP-21.0.3
+Date:                    2018-07-13
+Trouble Report Id:       OTP-15154, OTP-15183, OTP-15176
+Seq num:                 ERIERL-198, ERIERL-202, ERL-640, ERL-670
+System:                  OTP
+Release:                 21
+Application:             erts-10.0.3
+Predecessor:             OTP 21.0.2
+
+ Check out the git tag OTP-21.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- otp-21.0.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-15176    Application(s): otp
+               Related Id(s): ERIERL-198, ERIERL-202, ERL-640,
+               OTP-14283, OTP-15177
+
+               Build support for the erlang/corba repository.
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.3 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15154    Application(s): erts
+
+               Fixed a scheduler bug that caused normal schedulers to
+               run dirty code.
+
+
+  OTP-15183    Application(s): erts
+               Related Id(s): ERL-670
+
+               Fixed a bug in erlang:trace_info/2 which caused the
+               emulator to crash when a bad argument was passed. The
+               bug was introduced in ERTS version 10.0.
+
+
+ Full runtime dependencies of erts-10.0.3: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
