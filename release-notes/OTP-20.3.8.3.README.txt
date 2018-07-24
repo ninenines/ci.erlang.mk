@@ -1,0 +1,154 @@
+Patch Package:           OTP 20.3.8.3
+Git Tag:                 OTP-20.3.8.3
+Date:                    2018-07-24
+Trouble Report Id:       OTP-15158, OTP-15170, OTP-15178, OTP-15179,
+                         OTP-15181, OTP-15192, OTP-15193
+Seq num:                 ERIERL-208, ERL-654
+System:                  OTP
+Release:                 20
+Application:             erts-9.3.3.2, ic-4.4.4.2, inets-6.5.2.2,
+                         kernel-5.4.3.2, ssl-8.2.6.1
+Predecessor:             OTP 20.3.8.2
+
+ Check out the git tag OTP-20.3.8.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15158    Application(s): erts
+               Related Id(s): ERL-654
+
+               Fixed a race condition in the inet driver that could
+               cause receive to hang when the emulator was compiled
+               with gcc 8.
+
+
+  OTP-15181    Application(s): erts
+
+               Fix bug in generation of erl_crash.dump, which could
+               cause VM to crash.
+
+               Bug exist since erts-9.2 (OTP-20.2).
+
+
+ Full runtime dependencies of erts-9.3.3.2: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ic-4.4.4.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ic-4.4.4.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15179    Application(s): ic
+               Related Id(s): ERIERL-208
+
+               Fixed potential buffer overflow bugs in
+               oe_ei_encode_long/ulong/longlong/ulonglong functions on
+               64-bit architectures. These functions expect 32 bit
+               integers as the IDL type "long" is defined as 32 bits.
+               But there is nothing preventing user code from
+               "breaking" the interface and pass larger values on
+               64-bit architectures where the C type "long" is 64
+               bits.
+
+
+ Full runtime dependencies of ic-4.4.4.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- inets-6.5.2.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.5.2.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15192    Application(s): inets
+
+               Enhance error handling, that is mod_get will return 403
+               if a path is a directory and not a file.
+
+
+ Full runtime dependencies of inets-6.5.2.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-5.4.3.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-5.4.3.2 application can *not* be applied
+       independently of other applications on an arbitrary OTP 20
+       installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-9.3 (first satisfied in OTP 20.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15170    Application(s): kernel
+
+               Non semantic change in dist_util.erl to silence
+               dialyzer warning.
+
+
+ Full runtime dependencies of kernel-5.4.3.2: erts-9.3, sasl-3.0,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ssl-8.2.6.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-8.2.6.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15178    Application(s): ssl
+
+               Improve cipher suite handling correcting ECC and
+               TLS-1.2 requierments. Backport of solution for ERL-641
+
+
+ --- Improvements and New Features ---
+
+  OTP-15193    Application(s): ssl
+
+               Option keyfile defaults to certfile and should be
+               trumped with key. This failed for engine keys.
+
+
+ Full runtime dependencies of ssl-8.2.6.1: crypto-4.2, erts-7.0,
+ inets-5.10.7, kernel-3.0, public_key-1.5, stdlib-3.2
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
