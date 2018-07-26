@@ -1,0 +1,52 @@
+Patch Package:           OTP 21.0.4
+Git Tag:                 OTP-21.0.4
+Date:                    2018-07-26
+Trouble Report Id:       OTP-15169, OTP-15184, OTP-15196
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             erts-10.0.4
+Predecessor:             OTP 21.0.3
+
+ Check out the git tag OTP-21.0.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.4 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15169    Application(s): erts
+
+               Fixed a bug that prevented the noshell option from
+               working correctly on Mac OS X and BSD.
+
+
+  OTP-15184    Application(s): erts
+
+               Fixed a crash when matching directly against a literal
+               map using a single key that had been saved on the
+               stack.
+
+
+  OTP-15196    Application(s): erts
+
+               Fix node crash when passing a bad time option to
+               file:read_file_info/2.
+
+
+ Full runtime dependencies of erts-10.0.4: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
