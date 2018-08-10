@@ -1,0 +1,49 @@
+Patch Package:           OTP 20.3.8.4
+Git Tag:                 OTP-20.3.8.4
+Date:                    2018-08-03
+Trouble Report Id:       OTP-14440
+Seq num:                 ERIERL-220
+System:                  OTP
+Release:                 20
+Application:             asn1-5.0.5.1
+Predecessor:             OTP 20.3.8.3
+
+ Check out the git tag OTP-20.3.8.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.5.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14440    Application(s): asn1
+               Related Id(s): ERIERL-220
+
+               A bug in ASN.1 BER decoding has been fixed. When
+               decoding a recursively enclosed term the length was not
+               propagated to that term decoding, so if the length of
+               the enclosed term was longer than the enclosing that
+               error was not dectected.
+
+               A hard coded C stack limitation for decoding recursive
+               ASN.1 terms has been introduced. This is currently set
+               to 8 kWords giving a nesting depth of about 1000
+               levels. Deeper terms can not be decoded, which should
+               not be much of a real world limitation.
+
+
+ Full runtime dependencies of asn1-5.0.5.1: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
