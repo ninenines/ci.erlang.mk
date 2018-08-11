@@ -1,0 +1,95 @@
+Patch Package:           OTP 19.3.6.10
+Git Tag:                 OTP-19.3.6.10
+Date:                    2018-08-11
+Trouble Report Id:       OTP-15098, OTP-15158, OTP-15225
+Seq num:                 ERIERL-177, ERL-654
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5.5, syntax_tools-2.1.1.1
+Predecessor:             OTP 19.3.6.9
+
+ Check out the git tag OTP-19.3.6.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15225    Application(s): erts
+
+               Fixed a bug causing some Erlang references to be
+               inconsistently ordered. This could for example cause
+               failure to look up certain elements with references as
+               keys in search data structures. This bug was introduced
+               in R13B02.
+
+               Thanks to Simon Cornish for finding the bug and
+               supplying a fix.
+
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.5 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15158    Application(s): erts
+               Related Id(s): ERL-654
+
+               Fixed a race condition in the inet driver that could
+               cause receive to hang when the emulator was compiled
+               with gcc 8.
+
+
+  OTP-15225    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Fixed a bug causing some Erlang references to be
+               inconsistently ordered. This could for example cause
+               failure to look up certain elements with references as
+               keys in search data structures. This bug was introduced
+               in R13B02.
+
+               Thanks to Simon Cornish for finding the bug and
+               supplying a fix.
+
+
+ Full runtime dependencies of erts-8.3.5.5: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.1.1.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-2.1.1.1 application can be applied independently of
+ other applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15098    Application(s): syntax_tools
+               Related Id(s): ERIERL-177
+
+               Fix a bug regarding reverting map types.
+
+
+ Full runtime dependencies of syntax_tools-2.1.1.1: compiler-7.0,
+ erts-8.0, kernel-5.0, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
