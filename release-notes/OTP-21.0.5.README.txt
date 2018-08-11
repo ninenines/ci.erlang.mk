@@ -1,0 +1,113 @@
+Patch Package:           OTP 21.0.5
+Git Tag:                 OTP-21.0.5
+Date:                    2018-08-11
+Trouble Report Id:       OTP-15194, OTP-15204, OTP-15223, OTP-15225
+Seq num:                 ERL-673, ERL-679
+System:                  OTP
+Release:                 21
+Application:             compiler-7.2.3, crypto-4.3.1, erts-10.0.5
+Predecessor:             OTP 21.0.4
+
+ Check out the git tag OTP-21.0.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15225    Application(s): erts
+
+               Fixed a bug causing some Erlang references to be
+               inconsistently ordered. This could for example cause
+               failure to look up certain elements with references as
+               keys in search data structures. This bug was introduced
+               in R13B02.
+
+               Thanks to Simon Cornish for finding the bug and
+               supplying a fix.
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.2.3 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15204    Application(s): compiler
+               Related Id(s): ERL-679
+
+               Fixed an issue where files compiled with the
+               +deterministic option differed if they were compiled in
+               a different directory but were otherwise identical.
+
+
+ Full runtime dependencies of compiler-7.2.3: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.3.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15194    Application(s): crypto
+               Related Id(s): ERL-673
+
+               Fixed a node crash in crypto:compute_key(ecdh, ...)
+               when passing a wrongly typed Others argument.
+
+
+ Full runtime dependencies of crypto-4.3.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.5 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15223    Application(s): erts
+
+               Fixed a bug which caused an emulator crash when
+               enif_send() was called by a NIF that executed on a
+               dirty scheduler. The bug was either triggered when the
+               NIF called enif_send() without a message environment,
+               or when the process executing the NIF was send traced.
+
+
+  OTP-15225    Application(s): erts
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Fixed a bug causing some Erlang references to be
+               inconsistently ordered. This could for example cause
+               failure to look up certain elements with references as
+               keys in search data structures. This bug was introduced
+               in R13B02.
+
+               Thanks to Simon Cornish for finding the bug and
+               supplying a fix.
+
+
+ Full runtime dependencies of erts-10.0.5: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
