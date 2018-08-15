@@ -1,0 +1,39 @@
+Patch Package:           OTP 20.3.8.6
+Git Tag:                 OTP-20.3.8.6
+Date:                    2018-08-15
+Trouble Report Id:       OTP-15215
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             inets-6.5.2.3
+Predecessor:             OTP 20.3.8.5
+
+ Check out the git tag OTP-20.3.8.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.5.2.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.5.2.3 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15215    Application(s): inets
+
+               Change status code for no mod found to handle request
+               to 501
+
+
+ Full runtime dependencies of inets-6.5.2.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
