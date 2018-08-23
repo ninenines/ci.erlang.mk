@@ -1,0 +1,83 @@
+Patch Package:           OTP 20.3.8.7
+Git Tag:                 OTP-20.3.8.7
+Date:                    2018-08-23
+Trouble Report Id:       OTP-15233, OTP-15243
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             crypto-4.2.2.2, mnesia-4.15.3.2
+Predecessor:             OTP 20.3.8.6
+
+ Check out the git tag OTP-20.3.8.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.2.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.2.2.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15233    Application(s): crypto
+
+               Update the crypto engine functions to handle multiple
+               loads of an engine.
+
+               engine_load/3/4 is updated so it doesn't add the engine
+               ID to OpenSSLs internal list of engines which makes it
+               possible to run the engine_load more than once if it
+               doesn't contain global data.
+
+               Added ensure_engine_loaded/2/3 which guarantees that
+               the engine just is loaded once and the following calls
+               just returns a reference to it. This is done by add the
+               ID to the internal OpenSSL list and check if it is
+               already registered when the function is called.
+
+               Added ensure_engine_unloaded/1/2 to unload engines
+               loaded with ensure_engine_loaded.
+
+               Then some more utility functions are added.
+
+               engine_add/1, adds the engine to OpenSSL internal list
+
+               engine_remove/1, remove the engine from OpenSSL
+               internal list
+
+               engine_get_id/1, fetch the engines id
+
+               engine_get_name/1, fetch the engine name
+
+
+ Full runtime dependencies of crypto-4.2.2.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.15.3.2 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.15.3.2 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15243    Application(s): mnesia
+
+               Fixed a bug where the bag table index data was not
+               deleted when objects were deleted.
+
+
+ Full runtime dependencies of mnesia-4.15.3.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
