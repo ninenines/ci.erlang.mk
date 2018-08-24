@@ -1,0 +1,103 @@
+Patch Package:           OTP 21.0.6
+Git Tag:                 OTP-21.0.6
+Date:                    2018-08-24
+Trouble Report Id:       OTP-15203, OTP-15215, OTP-15233
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             crypto-4.3.2, inets-7.0.1, ssl-9.0.1
+Predecessor:             OTP 21.0.5
+
+ Check out the git tag OTP-21.0.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.3.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.3.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15233    Application(s): crypto
+
+               Update the crypto engine functions to handle multiple
+               loads of an engine.
+
+               engine_load/3/4 is updated so it doesn't add the engine
+               ID to OpenSSLs internal list of engines which makes it
+               possible to run the engine_load more than once if it
+               doesn't contain global data.
+
+               Added ensure_engine_loaded/2/3 which guarantees that
+               the engine just is loaded once and the following calls
+               just returns a reference to it. This is done by add the
+               ID to the internal OpenSSL list and check if it is
+               already registered when the function is called.
+
+               Added ensure_engine_unloaded/1/2 to unload engines
+               loaded with ensure_engine_loaded.
+
+               Then some more utility functions are added.
+
+               engine_add/1, adds the engine to OpenSSL internal list
+
+               engine_remove/1, remove the engine from OpenSSL
+               internal list
+
+               engine_get_id/1, fetch the engines id
+
+               engine_get_name/1, fetch the engine name
+
+
+ Full runtime dependencies of crypto-4.3.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15215    Application(s): inets
+
+               Change status code for no mod found to handle request
+               to 501
+
+
+ Full runtime dependencies of inets-7.0.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.0.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.0.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15203    Application(s): ssl
+
+               Correct cipher suite handling for ECDHE_*, the
+               incorrect handling could cause an incorrrect suite to
+               be selected and most likly fail the handshake.
+
+
+ Full runtime dependencies of ssl-9.0.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
