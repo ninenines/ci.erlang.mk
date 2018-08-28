@@ -1,0 +1,50 @@
+Patch Package:           OTP 20.3.8.8
+Git Tag:                 OTP-20.3.8.8
+Date:                    2018-08-28
+Trouble Report Id:       OTP-15241, OTP-15242
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             inets-6.5.2.4
+Predecessor:             OTP 20.3.8.7
+
+ Check out the git tag OTP-20.3.8.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-6.5.2.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-6.5.2.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15241    Application(s): inets
+
+               Do not use chunked-encoding with 1xx, 204 and 304
+               responses when using mod_esi. Old behavior was not
+               compliant with HTTP/1.1 RFC and could cause clients to
+               hang when they received 1xx, 204 or 304 responses that
+               included an empty chunked-encoded body.
+
+
+  OTP-15242    Application(s): inets
+
+               Add robust handling of chunked-encoded HTTP responses
+               with an empty body (1xx, 204, 304). Old behavior could
+               cause the client to hang when connecting to a faulty
+               server implementation.
+
+
+ Full runtime dependencies of inets-6.5.2.4: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
