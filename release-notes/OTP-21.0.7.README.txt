@@ -1,0 +1,49 @@
+Patch Package:           OTP 21.0.7
+Git Tag:                 OTP-21.0.7
+Date:                    2018-08-30
+Trouble Report Id:       OTP-15237, OTP-15269
+Seq num:                 ERL-713
+System:                  OTP
+Release:                 21
+Application:             erts-10.0.6
+Predecessor:             OTP 21.0.6
+
+ Check out the git tag OTP-21.0.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.6 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15237    Application(s): erts
+
+               A race between termination of a process and resume of
+               the same process via erlang:resume_process/1 could
+               cause the VM to crash. This bug was introduced in erts
+               version 10.0 (OTP 21.0).
+
+
+  OTP-15269    Application(s): erts
+               Related Id(s): ERL-713
+
+               When tracing on running, in trace events could be lost
+               when a process was rescheduled between a dirty and a
+               normal scheduler.
+
+
+ Full runtime dependencies of erts-10.0.6: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
