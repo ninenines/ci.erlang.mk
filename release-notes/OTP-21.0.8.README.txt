@@ -1,0 +1,73 @@
+Patch Package:           OTP 21.0.8
+Git Tag:                 OTP-21.0.8
+Date:                    2018-09-06
+Trouble Report Id:       OTP-15275, OTP-15279, OTP-15280
+Seq num:                 ERIERL-226
+System:                  OTP
+Release:                 21
+Application:             erts-10.0.7, kernel-6.0.1
+Predecessor:             OTP 21.0.7
+
+ Check out the git tag OTP-21.0.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.7 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.7 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15275    Application(s): erts
+               Related Id(s): PR-1943
+
+               A process could get stuck in an infinite rescheduling
+               loop between normal and dirty schedulers. This bug was
+               introduced in ERTS version 10.0.
+
+               Thanks to Maxim Fedorov for finding and fixing this
+               issue.
+
+
+  OTP-15279    Application(s): erts
+               Related Id(s): ERIERL-226
+
+               Garbage collection of a distribution entry could cause
+               an emulator crash if net_kernel had not brought
+               previous connection attempts on it down properly.
+
+
+ Full runtime dependencies of erts-10.0.7: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.0.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-6.0.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15280    Application(s): kernel
+               Related Id(s): ERIERL-226, OTP-15279
+
+               Fixed bug in net_kernel that could cause an emulator
+               crash if certain connection attempts failed. Bug exists
+               since kernel-6.0 (OTP-21.0).
+
+
+ Full runtime dependencies of kernel-6.0.1: erts-10.0, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
