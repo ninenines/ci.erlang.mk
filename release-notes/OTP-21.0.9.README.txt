@@ -1,0 +1,72 @@
+Patch Package:           OTP 21.0.9
+Git Tag:                 OTP-21.0.9
+Date:                    2018-09-12
+Trouble Report Id:       OTP-15289, OTP-15292, OTP-15296
+Seq num:                 ERIERL-226, ERIERL-235, ERL-576
+System:                  OTP
+Release:                 21
+Application:             compiler-7.2.4, erts-10.0.8
+Predecessor:             OTP 21.0.8
+
+ Check out the git tag OTP-21.0.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.2.4 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15292    Application(s): compiler
+
+               Fix a regression in OTP-15204 that removed .beam file
+               metadata that some external build tools relied on.
+
+
+ Full runtime dependencies of compiler-7.2.4: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.0.8 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.0.8 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15289    Application(s): erts
+               Related Id(s): ERIERL-235, ERL-576, OTP-14943
+
+               As of ERTS version 10.0 (OTP 21.0) the erl_child_setup
+               program, which creates port programs, ignores TERM
+               signals. This setting was unintentionally inherited by
+               port programs. Handling of TERM signals in port
+               programs has now been restored to the default behavior.
+               That is, terminate the process.
+
+
+  OTP-15296    Application(s): erts
+               Related Id(s): ERIERL-226, OTP-15279
+
+               The fix made for OTP-15279 in erts-10.07 (OTP-21.0.8)
+               was not complete. It could cause a new connection
+               attempt to be incorrectly aborted in certain cases.
+               This fix will amend that flaw.
+
+
+ Full runtime dependencies of erts-10.0.8: kernel-6.0, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
