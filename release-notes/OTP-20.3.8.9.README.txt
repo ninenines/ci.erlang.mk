@@ -1,0 +1,39 @@
+Patch Package:           OTP 20.3.8.9
+Git Tag:                 OTP-20.3.8.9
+Date:                    2018-09-18
+Trouble Report Id:       OTP-15292
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             compiler-7.1.5.2
+Predecessor:             OTP 20.3.8.8
+
+ Check out the git tag OTP-20.3.8.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.1.5.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.1.5.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15292    Application(s): compiler
+
+               Fix a regression in OTP-15204 that removed .beam file
+               metadata that some external build tools relied on.
+
+
+ Full runtime dependencies of compiler-7.1.5.2: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
