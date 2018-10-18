@@ -1,0 +1,61 @@
+Patch Package:           OTP 20.3.8.10
+Git Tag:                 OTP-20.3.8.10
+Date:                    2018-10-18
+Trouble Report Id:       OTP-15342, OTP-15346
+Seq num:                 ERIERL-242
+System:                  OTP
+Release:                 20
+Application:             eldap-1.2.3.1, erts-9.3.3.4
+Predecessor:             OTP 20.3.8.9
+
+ Check out the git tag OTP-20.3.8.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.3.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.3.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15342    Application(s): eldap
+               Related Id(s): ERIERL-242
+
+               A race condition at close could cause the eldap client
+               to exit with a badarg message as cause.
+
+
+ Full runtime dependencies of eldap-1.2.3.1: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15346    Application(s): erts
+
+               Fixed bug in ets:select_replace when called with a
+               fully bound key could cause a following call to
+               ets:next or ets:prev to crash the emulator or return
+               invalid result.
+
+
+ Full runtime dependencies of erts-9.3.3.4: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
