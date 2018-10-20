@@ -1,0 +1,40 @@
+Patch Package:           OTP 19.3.6.12
+Git Tag:                 OTP-19.3.6.12
+Date:                    2018-10-19
+Trouble Report Id:       OTP-15342
+Seq num:                 ERIERL-242
+System:                  OTP
+Release:                 19
+Application:             eldap-1.2.2.1
+Predecessor:             OTP 19.3.6.11
+
+ Check out the git tag OTP-19.3.6.12, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.2.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.2.1 application can be applied independently of other
+ applications on a full OTP 19 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15342    Application(s): eldap
+               Related Id(s): ERIERL-242
+
+               A race condition at close could cause the eldap client
+               to exit with a badarg message as cause.
+
+
+ Full runtime dependencies of eldap-1.2.2.1: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
