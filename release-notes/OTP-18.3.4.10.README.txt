@@ -1,0 +1,40 @@
+Patch Package:           OTP 18.3.4.10
+Git Tag:                 OTP-18.3.4.10
+Date:                    2018-10-29
+Trouble Report Id:       OTP-14609
+Seq num:                 ERIERL-238
+System:                  OTP
+Release:                 18
+Application:             erts-7.3.1.5
+Predecessor:             OTP 18.3.4.9
+
+ Check out the git tag OTP-18.3.4.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1.5 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14609    Application(s): erts
+               Related Id(s): ERIERL-238
+
+               Fixed small memory leak that could occur when sending
+               to a terminating port.
+
+
+ Full runtime dependencies of erts-7.3.1.5: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
