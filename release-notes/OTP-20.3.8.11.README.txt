@@ -1,0 +1,48 @@
+Patch Package:           OTP 20.3.8.11
+Git Tag:                 OTP-20.3.8.11
+Date:                    2018-11-01
+Trouble Report Id:       OTP-15399
+Seq num:                 ERIERL-262, ERL-751
+System:                  OTP
+Release:                 20
+Application:             erts-9.3.3.5
+Predecessor:             OTP 20.3.8.10
+
+ Check out the git tag OTP-20.3.8.11, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.5 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15399    Application(s): erts
+               Related Id(s): ERIERL-262, ERL-751, OTP-14205
+
+               ERTS internal trees of monitor structures could get
+               into an inconsistent state. This could cause 'DOWN'
+               messages not to be delivered when they should, as well
+               as delivery of 'DOWN' messages that should not be
+               delivered.
+
+               This bug was introduced in ERTS version 9.0 (OTP 20.0)
+               and was fixed in ERTS version 10.0 (OTP 21.0) due to a
+               rewrite of the monitor code. That is, this bug only
+               exist in the OTP 20 release.
+
+
+ Full runtime dependencies of erts-9.3.3.5: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
