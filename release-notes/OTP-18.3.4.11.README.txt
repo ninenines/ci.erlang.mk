@@ -1,0 +1,66 @@
+Patch Package:           OTP 18.3.4.11
+Git Tag:                 OTP-18.3.4.11
+Date:                    2018-11-14
+Trouble Report Id:       OTP-15371
+Seq num:                
+System:                  OTP
+Release:                 18
+Application:             erts-7.3.1.6, stdlib-2.8.0.1
+Predecessor:             OTP 18.3.4.10
+
+ Check out the git tag OTP-18.3.4.11, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-7.3.1.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-7.3.1.6 application can be applied independently of other
+ applications on a full OTP 18 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15371    Application(s): erts, stdlib
+
+               List subtraction (The -- operator) will now yield
+               properly on large inputs.
+
+
+ Full runtime dependencies of erts-7.3.1.6: kernel-4.0, sasl-2.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-2.8.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-2.8.0.1 application can *not* be applied
+       independently of other applications on an arbitrary OTP 18
+       installation.
+
+       On a full OTP 18 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-7.3 (first satisfied in OTP 18.3)
+       -- kernel-4.1 (first satisfied in OTP 18.1)
+       -- sasl-2.6 (first satisfied in OTP 18.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-15371    Application(s): erts, stdlib
+
+               List subtraction (The -- operator) will now yield
+               properly on large inputs.
+
+
+ Full runtime dependencies of stdlib-2.8.0.1: compiler-5.0,
+ crypto-3.3, erts-7.3, kernel-4.1, sasl-2.6
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
