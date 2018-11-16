@@ -1,0 +1,84 @@
+Patch Package:           OTP 21.1.2
+Git Tag:                 OTP-21.1.2
+Date:                    2018-11-16
+Trouble Report Id:       OTP-15353, OTP-15367, OTP-15421
+Seq num:                 ERL-753
+System:                  OTP
+Release:                 21
+Application:             compiler-7.2.7, erts-10.1.2, public_key-1.6.3
+Predecessor:             OTP 21.1.1
+
+ Check out the git tag OTP-21.1.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.2.7 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.2.7 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15353    Application(s): compiler
+               Related Id(s): ERL-753
+
+               Fixed a bug where incorrect code was generated
+               following a binary match guard.
+
+
+ Full runtime dependencies of compiler-7.2.7: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.1.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.1.2 application can *not* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15421    Application(s): erts
+
+               Fixed a rare bug where files could be closed on a
+               normal instead of an IO scheduler, resulting in system
+               instability if the operation blocked.
+
+
+ Full runtime dependencies of erts-10.1.2: kernel-6.1, sasl-3.0.1,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.6.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.6.3 application can be applied independently of
+ other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15367    Application(s): public_key
+
+               Add DSA SHA2 oids in public_keys ASN1-spec and
+               public_key:pkix_sign_types/1
+
+
+ Full runtime dependencies of public_key-1.6.3: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
