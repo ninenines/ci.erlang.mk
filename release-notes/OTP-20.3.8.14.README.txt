@@ -1,0 +1,45 @@
+Patch Package:           OTP 20.3.8.14
+Git Tag:                 OTP-20.3.8.14
+Date:                    2018-11-15
+Trouble Report Id:       OTP-15413
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             ssh-4.6.9.2
+Predecessor:             OTP 20.3.8.13
+
+ Check out the git tag OTP-20.3.8.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.9.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.9.2 application can *not* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15413    Application(s): ssh
+
+               Incompatibility with newer OpenSSH fixed. Previously
+               versions 7.8 and later could cause Erlang SSH to exit.
+
+
+ Full runtime dependencies of ssh-4.6.9.2: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
