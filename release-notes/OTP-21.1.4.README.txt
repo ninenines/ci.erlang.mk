@@ -1,0 +1,45 @@
+Patch Package:           OTP 21.1.4
+Git Tag:                 OTP-21.1.4
+Date:                    2018-11-30
+Trouble Report Id:       OTP-15438
+Seq num:                 ERL-781
+System:                  OTP
+Release:                 21
+Application:             kernel-6.1.1
+Predecessor:             OTP 21.1.3
+
+ Check out the git tag OTP-21.1.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- kernel-6.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.1.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.1 (first satisfied in OTP 21.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15438    Application(s): kernel
+               Related Id(s): ERL-781
+
+               Fix bug causing net_kernel process crash on connection
+               attempt from node with name identical to local node.
+
+
+ Full runtime dependencies of kernel-6.1.1: erts-10.1, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
