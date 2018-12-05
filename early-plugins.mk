@@ -60,9 +60,38 @@ OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) $(OTP-21-DR
 
 # Configure Erlang.mk's CI plugin.
 
-CI_OTP := $(foreach otp,$(AUTO_CI_OTP),$($(otp)))
+CI_OTP := $(foreach otp,$(AUTO_CI_OTP),$($(otp))) $(if $(AUTO_CI_MASTER),master)
 CI_HIPE := $(foreach otp,$(AUTO_CI_HIPE),$($(otp)))
 CI_ERLLVM := $(foreach otp,$(AUTO_CI_ERLLVM),$($(otp)))
+
+# Remove the existing master if necessary.
+
+ifdef AUTO_CI_MASTER
+
+ifeq ($(AUTO_CI_MASTER),daily)
+AUTO_CI_MASTER_MINS = 1440
+else
+ifeq ($(AUTO_CI_MASTER),weekly)
+AUTO_CI_MASTER_MINS = 10080
+else
+ifeq ($(AUTO_CI_MASTER),monthly)
+AUTO_CI_MASTER_MINS = 43200
+endif
+endif
+endif
+
+ifdef AUTO_CI_MASTER_MINS
+ci:: $(KERL)
+ifneq ($(wildcard $(KERL_INSTALL_DIR)/master),)
+	$(verbose) if find $(KERL_INSTALL_DIR)/master/activate \
+			-mmin +$(AUTO_CI_MASTER_MINS) | grep -q master; then \
+		$(KERL) delete build master || true; \
+		$(KERL) delete installation master || true; \
+	fi
+endif
+endif
+
+endif
 
 # Cleanup older OTP versions we don't care about anymore.
 
