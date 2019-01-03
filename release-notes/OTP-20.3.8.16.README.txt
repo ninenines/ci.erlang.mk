@@ -1,0 +1,69 @@
+Patch Package:           OTP 20.3.8.16
+Git Tag:                 OTP-20.3.8.16
+Date:                    2019-01-03
+Trouble Report Id:       OTP-15397, OTP-15487
+Seq num:                 ERL-801, ERL-804
+System:                  OTP
+Release:                 20
+Application:             erts-9.3.3.7, ssh-4.6.9.3
+Predecessor:             OTP 20.3.8.15
+
+ Check out the git tag OTP-20.3.8.16, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.7 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.7 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15487    Application(s): erts
+               Related Id(s): ERL-804
+
+               Fixed bug in operator band of two negative operands
+               causing erroneous result if the absolute value of one
+               of the operands have the lowest N*W bits as zero and
+               the other absolute value is not larger than N*W bits. N
+               is an integer of 1 or larger and W is 32 or 64
+               depending on word size.
+
+
+ Full runtime dependencies of erts-9.3.3.7: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.9.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.9.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15397    Application(s): ssh
+               Related Id(s): ERL-801
+
+               Fixed port leakage if a ssh:daemon call failed.
+
+
+ Full runtime dependencies of ssh-4.6.9.3: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
