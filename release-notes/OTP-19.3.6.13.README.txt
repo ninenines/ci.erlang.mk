@@ -1,0 +1,63 @@
+Patch Package:           OTP 19.3.6.13
+Git Tag:                 OTP-19.3.6.13
+Date:                    2019-01-11
+Trouble Report Id:       OTP-15430, OTP-15487
+Seq num:                 ERIERL-237, ERL-804
+System:                  OTP
+Release:                 19
+Application:             erts-8.3.5.7
+Predecessor:             OTP 19.3.6.12
+
+ Check out the git tag OTP-19.3.6.13, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-8.3.5.7 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-8.3.5.7 application can *not* be applied independently
+       of other applications on an arbitrary OTP 19 installation.
+
+       On a full OTP 19 installation, also the following runtime
+       dependency has to be satisfied:
+       -- sasl-3.0.1 (first satisfied in OTP 19.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15487    Application(s): erts
+               Related Id(s): ERL-804
+
+               Fixed bug in operator band of two negative operands
+               causing erroneous result if the absolute value of one
+               of the operands have the lowest N*W bits as zero and
+               the other absolute value is not larger than N*W bits. N
+               is an integer of 1 or larger and W is 32 or 64
+               depending on word size.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15430    Application(s): erts
+               Related Id(s): ERIERL-237
+
+               Added an optional ./configure flag to compile the
+               emulator with spectre mitigation:
+               --with-spectre-mitigation
+
+               Note that this requires a recent version of GCC with
+               support for spectre mitigation and the
+               --mindirect-branch=thunk flag, such as 8.1.
+
+
+ Full runtime dependencies of erts-8.3.5.7: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
