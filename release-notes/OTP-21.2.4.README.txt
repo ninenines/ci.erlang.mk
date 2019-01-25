@@ -1,0 +1,97 @@
+Patch Package:           OTP 21.2.4
+Git Tag:                 OTP-21.2.4
+Date:                    2019-01-25
+Trouble Report Id:       OTP-15536, OTP-15537, OTP-15538, OTP-15544
+Seq num:                 ERIERL-229, ERIERL-289, ERL-827
+System:                  OTP
+Release:                 21
+Application:             erts-10.2.3, inets-7.0.4
+Predecessor:             OTP 21.2.3
+
+ Check out the git tag OTP-21.2.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.2.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.2.3 application can *not* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15536    Application(s): erts
+               Related Id(s): ERL-827
+
+               Fix bug where doing a gen_tcp:send on a socket with
+               delay_send set to true could cause a segfault if the
+               other side closes the connection.
+
+               Bug was introduced in erts-10.2 (OTP-21.2).
+
+
+  OTP-15537    Application(s): erts
+
+               Fix a race condition when a port program closes that
+               could result in the next started port to hang during
+               startup.
+
+               When this fault happens the following error is normally
+               (but not always) logged:
+
+               =ERROR REPORT==== 14-Jan-2019::10:45:52.868246 ===
+               Bad input fd in erts_poll()! fd=11, port=#Port<0.505>,
+               driver=spawn, name=/bin/sh -s unix:cmd
+
+               Bug was introduced in erts-10.0 (OTP-21.0).
+
+
+  OTP-15538    Application(s): erts
+               Related Id(s): ERIERL-229
+
+               Fix a bug where polling for external events could be
+               delayed for a very long time if all active schedulers
+               were 100% loaded.
+
+               Bug was introduced in erts-10.2 (OTP-21.2).
+
+
+ Full runtime dependencies of erts-10.2.3: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.4 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15544    Application(s): inets
+               Related Id(s): ERIERL-289
+
+               Make sure ipv6 addresses with brackets in URIs are
+               converted correctly before passing to lower level
+               functions like gen_tcp and ssl functions. Could cause
+               connection to fail.
+
+
+ Full runtime dependencies of inets-7.0.4: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
