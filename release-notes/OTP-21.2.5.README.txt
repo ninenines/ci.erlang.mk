@@ -1,0 +1,46 @@
+Patch Package:           OTP 21.2.5
+Git Tag:                 OTP-21.2.5
+Date:                    2019-02-04
+Trouble Report Id:       OTP-15554
+Seq num:                 ERIERL-289
+System:                  OTP
+Release:                 21
+Application:             inets-7.0.5
+Predecessor:             OTP 21.2.4
+
+ Check out the git tag OTP-21.2.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.5 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15554    Application(s): inets
+               Related Id(s): ERIERL-289
+
+               Fixed bug that causes a crash in http client when using
+               hostnames (e.g. localhost) with the the option
+               ipv6_host_with_brackets set to true.
+
+               This change also fixes a regression: httpc:request
+               fails with connection error (nxdomain) if option
+               ipv6_host_with_brackets set to true and host component
+               of the URI is an IPv6 address.
+
+
+ Full runtime dependencies of inets-7.0.5: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
