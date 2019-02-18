@@ -1,0 +1,68 @@
+Patch Package:           OTP 21.2.6
+Git Tag:                 OTP-21.2.6
+Date:                    2019-02-18
+Trouble Report Id:       OTP-14728, OTP-15573
+Seq num:                 ERIERL-303, ERIERL-306
+System:                  OTP
+Release:                 21
+Application:             erts-10.2.4, stdlib-3.7.1
+Predecessor:             OTP 21.2.5
+
+ Check out the git tag OTP-21.2.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.2.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.2.4 application can *not* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14728    Application(s): erts
+               Related Id(s): ERIERL-303
+
+               When using the {linger,{true,T}} option;
+               gen_tcp:listen/2 used the full linger time before
+               returning for example eaddrinuse. This bug has now been
+               corrected.
+
+
+ Full runtime dependencies of erts-10.2.4: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.7.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.7.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15573    Application(s): stdlib
+               Related Id(s): ERIERL-306
+
+               Optimize pretty printing of terms. The slower behaviour
+               was introduced in Erlang/OTP 20.
+
+
+ Full runtime dependencies of stdlib-3.7.1: compiler-5.0, crypto-3.3,
+ erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
