@@ -159,7 +159,7 @@ WINDOWS-OTP-20.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.1/bin)
 WINDOWS-OTP-20.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.2/bin)
 WINDOWS-OTP-20.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl9.3/bin)
 
-WINDOWS-OTP-21.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.0.1/bin)
+WINDOWS-OTP-21.0.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.0.1/bin)
 WINDOWS-OTP-21.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.1/bin)
 WINDOWS-OTP-21.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.2/bin)
 
