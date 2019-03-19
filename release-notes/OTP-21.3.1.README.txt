@@ -1,0 +1,68 @@
+Patch Package:           OTP 21.3.1
+Git Tag:                 OTP-21.3.1
+Date:                    2019-03-19
+Trouble Report Id:       OTP-14701, OTP-15676, OTP-15679
+Seq num:                 ERL-861, ERL-881, ERL-883, ERL-884
+System:                  OTP
+Release:                 21
+Application:             erl_interface-3.11.1, ssl-9.2.1
+Predecessor:             OTP 21.3
+
+ Check out the git tag OTP-21.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.11.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.11.1 application can be applied independently of
+ other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15676    Application(s): erl_interface
+               Related Id(s): ERL-881, OTP-15442
+
+               Fixed two bugs in the erl_call program. A missing
+               initialization (introduced in erl_interface-3.11) which
+               either caused a crash or failure to connect to or start
+               a node, and an incorrectly calculated timeout which
+               could cause failure to start an erlang node. These bugs
+               only caused failures on some platforms.
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14701    Application(s): ssl
+               Related Id(s): ERL-883, ERL-884
+
+               The timeout for a passive receive was sometimes not
+               cancelled and later caused a server crash. This bug has
+               now been corrected.
+
+
+  OTP-15679    Application(s): ssl
+               Related Id(s): ERL-861
+
+               Add tag for passive message (active N) in cb_info to
+               retain transport transparency.
+
+
+ Full runtime dependencies of ssl-9.2.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
