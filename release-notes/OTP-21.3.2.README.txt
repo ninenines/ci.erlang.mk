@@ -1,0 +1,89 @@
+Patch Package:           OTP 21.3.2
+Git Tag:                 OTP-21.3.2
+Date:                    2019-03-21
+Trouble Report Id:       OTP-15684, OTP-15685, OTP-15688, OTP-15690
+Seq num:                 ERL-475, ERL-837
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.1, xmerl-1.3.20
+Predecessor:             OTP 21.3.1
+
+ Check out the git tag OTP-21.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.1 application can *not* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15688    Application(s): erts
+
+               If a suspend/resume signal pair was sent to a process
+               while it was executing dirty, the receiving process
+               could later end up in a suspended state indefinitely.
+               This bug was introduced in ERTS version 10.0 (OTP
+               21.0).
+
+               Suspend/resume signals are sent from
+               erlang:suspend_process()/erlang:resume_process(). The
+               dbg trace tool utilize this functionality and could
+               thus trigger this bug.
+
+
+  OTP-15690    Application(s): erts
+               Related Id(s): PR-2172
+
+               Fix a possible deadlock when terminating the ERTS
+               caused by a dirty scheduler not releasing it's
+               run-queue lock when terminating.
+
+
+ Full runtime dependencies of erts-10.3.1: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.20 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.20 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15684    Application(s): xmerl
+               Related Id(s): ERL-837
+
+               Handling of character references in attributes are
+               fixed.
+
+
+  OTP-15685    Application(s): xmerl
+               Related Id(s): ERL-475
+
+               Normalization of whitespace characters in attributes
+               are fixed so it works when character references are
+               used.
+
+
+ Full runtime dependencies of xmerl-1.3.20: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
