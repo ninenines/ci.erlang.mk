@@ -1,0 +1,97 @@
+Patch Package:           OTP 21.3.3
+Git Tag:                 OTP-21.3.3
+Date:                    2019-04-01
+Trouble Report Id:       OTP-15704, OTP-15706, OTP-15709
+Seq num:                 ERIERL-336, ERIERL-337
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.2, kernel-6.3.1, stdlib-3.8.1
+Predecessor:             OTP 21.3.2
+
+ Check out the git tag OTP-21.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15704    Application(s): erts
+
+               Fixed a bug in seq_trace:reset_trace/0 that could crash
+               the emulator.
+
+
+  OTP-15709    Application(s): erts
+               Related Id(s): ERIERL-337
+
+               Fixed bug in process_info(reductions) causing it to
+               sometimes return invalid results.
+
+
+ Full runtime dependencies of erts-10.3.2: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.3.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.2.5 (first satisfied in OTP 21.2.7)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15706    Application(s): kernel, stdlib
+               Related Id(s): ERIERL-336
+
+               Fixed a performance regression when reading files
+               opened with the compressed flag.
+
+
+ Full runtime dependencies of kernel-6.3.1: erts-10.2.5, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.8.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.8.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15706    Application(s): kernel, stdlib
+               Related Id(s): ERIERL-336
+
+               Fixed a performance regression when reading files
+               opened with the compressed flag.
+
+
+ Full runtime dependencies of stdlib-3.8.1: compiler-5.0, crypto-3.3,
+ erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
