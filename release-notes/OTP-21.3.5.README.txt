@@ -1,0 +1,99 @@
+Patch Package:           OTP 21.3.5
+Git Tag:                 OTP-21.3.5
+Date:                    2019-04-15
+Trouble Report Id:       OTP-15766, OTP-15768, OTP-15769
+Seq num:                 ERIERL-345
+System:                  OTP
+Release:                 21
+Application:             diameter-2.2.1, erts-10.3.4, inets-7.0.7
+Predecessor:             OTP 21.3.4
+
+ Check out the git tag OTP-21.3.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- diameter-2.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15768    Application(s): diameter
+
+               Fix inadvertently broad monitor that resulted in
+               gen_server cast messages to hidden nodes from module
+               diameter_dist.
+
+
+ Full runtime dependencies of diameter-2.2.1: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15766    Application(s): erts
+
+               Add missing documentation of new external tags NEW_PID,
+               NEW_PORT and NEWER_REFERENCE introduced in OTP 19.
+
+               These new tags are planned to be "activated" in OTP 23
+               when distribution capability flag DFLAG_BIG_CREATION
+               becomes mandatory. Older nodes (>= 19) are able to
+               decode these new tags and send them back to the new
+               node. Nodes older than OTP 23 will however never encode
+               their own local pids, ports and references using the
+               new tags.
+
+
+ Full runtime dependencies of erts-10.3.4: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.7 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.7 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15769    Application(s): inets
+               Related Id(s): ERIERL-345
+
+               Fix the internal handling of the option
+               erl_script_timeout in httpd. If explicit
+               erl_script_timeout value was supplied in seconds it was
+               not correctly converted to millisecond units for
+               internal usage.
+
+               This change fixes the handling of erl_script_timeout in
+               all possible configuration scenarios.
+
+
+ Full runtime dependencies of inets-7.0.7: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
