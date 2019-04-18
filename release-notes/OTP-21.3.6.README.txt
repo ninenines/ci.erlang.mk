@@ -1,0 +1,41 @@
+Patch Package:           OTP 21.3.6
+Git Tag:                 OTP-21.3.6
+Date:                    2019-04-18
+Trouble Report Id:       OTP-15054
+Seq num:                 ERIERL-346
+System:                  OTP
+Release:                 21
+Application:             ssl-9.2.2
+Predecessor:             OTP 21.3.5
+
+ Check out the git tag OTP-21.3.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15054    Application(s): ssl
+               Related Id(s): ERIERL-346
+
+               With the default BEAST Mitigation strategy for TLS 1.0
+               an empty TLS fragment could be sent after a one-byte
+               fragment. This glitch has been fixed.
+
+
+ Full runtime dependencies of ssl-9.2.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
