@@ -1,0 +1,45 @@
+Patch Package:           OTP 21.3.7
+Git Tag:                 OTP-21.3.7
+Date:                    2019-04-26
+Trouble Report Id:       OTP-15772
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             ssh-4.7.6
+Predecessor:             OTP 21.3.6
+
+ Check out the git tag OTP-21.3.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7.6 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.7.6 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15772    Application(s): ssh
+
+               When an SSH server receives the very first message on a
+               new TCP connection, and that message is not the
+               expected one, the 64 first bytes of the received
+               message are now dumped in the INFO REPORT that reports
+               the Protocol Error.
+
+               This facilitates the debugging of who sends the bad
+               message or of detecting a possible port scanning.
+
+
+ Full runtime dependencies of ssh-4.7.6: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
