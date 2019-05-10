@@ -1,0 +1,53 @@
+Patch Package:           OTP 21.3.7.1
+Git Tag:                 OTP-21.3.7.1
+Date:                    2019-05-09
+Trouble Report Id:       OTP-15781
+Seq num:                 ERIERL-356
+System:                  OTP
+Release:                 21
+Application:             erl_interface-3.11.2.1
+Predecessor:             OTP 21.3.7
+
+ Check out the git tag OTP-21.3.7.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.11.2.1 ------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.11.2.1 application can be applied independently
+ of other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15781    Application(s): erl_interface
+               Related Id(s): ERIERL-356
+
+               erl_interface/ei refused to use node names with an
+               alive name (the part of the node name preceding the @
+               sign) longer than 63 characters and a host name longer
+               than 64 characters. The total amount of characters
+               allowed in a node name (alivename@hostname) was thus
+               limited to 128 characters. These limits applied both to
+               the own node name as well as node names of other nodes.
+               Ordinary Erlang nodes limit the node name length to 256
+               characters, which meant that you could not communicate
+               with certain Erlang nodes due to their node name used.
+
+               erl_interface/ei now allow the total amount of
+               characters in a node name to be up to 256 characters.
+               These characters may be distributed between alive name
+               and host name in whatever way needed. That is, the
+               maximum amount of characters in the alive name may be
+               254 and the maximum amount of characters in the host
+               name may be 254, but in total the node name must not
+               exceed 256 characters.
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
