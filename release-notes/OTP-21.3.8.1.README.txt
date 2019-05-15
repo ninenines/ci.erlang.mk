@@ -1,0 +1,88 @@
+Patch Package:           OTP 21.3.8.1
+Git Tag:                 OTP-21.3.8.1
+Date:                    2019-05-15
+Trouble Report Id:       OTP-15813, OTP-15819, OTP-15823
+Seq num:                 ERL-934, ERL-938, ERL-943, ERL-944
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.1, ssl-9.2.3.1, tools-3.1.0.1
+Predecessor:             OTP 21.3.8
+
+ Check out the git tag OTP-21.3.8.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15819    Application(s): erts
+               Related Id(s): ERL-944
+
+               Fixed a buffer overflow when binary_to_existing_atom/2
+               and list_to_existing_atom/2 was used with the latin1
+               encoding.
+
+
+ Full runtime dependencies of erts-10.3.5.1: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15823    Application(s): ssl
+               Related Id(s): ERL-934, ERL-938
+
+               Correct solution for retaining tcp flow control
+               OTP-15802 (ERL-934) as to not break ssl:recv as
+               reported in (ERL-938)
+
+
+ Full runtime dependencies of ssl-9.2.3.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.1.0.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.1.0.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15813    Application(s): tools
+               Related Id(s): ERL-943
+
+               cover would fail to start if two processes tried to
+               start it at the exact same time.
+
+
+ Full runtime dependencies of tools-3.1.0.1: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
