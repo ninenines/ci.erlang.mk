@@ -1,0 +1,40 @@
+Patch Package:           OTP 21.3.8.2
+Git Tag:                 OTP-21.3.8.2
+Date:                    2019-05-20
+Trouble Report Id:       OTP-15826
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             xmerl-1.3.20.1
+Predecessor:             OTP 21.3.8.1
+
+ Check out the git tag OTP-21.3.8.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.20.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.20.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15826    Application(s): xmerl
+
+               xmerl_sax_parser crashed during charset detection when
+               the xml declarations attribute values was missing the
+               closing quotation (&apos; or &quot;).
+
+
+ Full runtime dependencies of xmerl-1.3.20.1: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
