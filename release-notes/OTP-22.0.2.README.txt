@@ -1,0 +1,155 @@
+Patch Package:           OTP 22.0.2
+Git Tag:                 OTP-22.0.2
+Date:                    2019-06-03
+Trouble Report Id:       OTP-15828, OTP-15829, OTP-15832, OTP-15834,
+                         OTP-15838, OTP-15839, OTP-15841, OTP-15845,
+                         OTP-15846, OTP-15847, OTP-15848
+Seq num:                 ERIERL-367, ERL-948, ERL-950, ERL-954,
+                         ERL-955, ERL-956, ERL-957
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.1, crypto-4.5.1, erts-10.4.1,
+                         stdlib-3.9.1
+Predecessor:             OTP 22.0.1
+
+ Check out the git tag OTP-22.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15828    Application(s): compiler
+               Related Id(s): ERL-948
+
+               The type optimization pass of the compiler could hang
+               or loop for a long time when analyzing a setelement/3
+               call with a varible position.
+
+
+  OTP-15832    Application(s): compiler
+               Related Id(s): ERL-950
+
+               Certain complex receive statements would result in an
+               internal compiler failure.
+
+
+  OTP-15838    Application(s): compiler
+
+               Fixed an unsafe type optimization.
+
+
+  OTP-15839    Application(s): compiler
+               Related Id(s): ERL-954
+
+               Fixed a crash when optimizing compiler-generated
+               exceptions (like badmatch) whose offending term was a
+               constructed binary.
+
+
+  OTP-15841    Application(s): compiler
+
+               Fixed a bad optimization related to the ++/2 operator,
+               where the compiler assumed that it always produced a
+               list ([] ++ RHS returns RHS verbatim, even if it's not
+               a list).
+
+
+  OTP-15845    Application(s): compiler
+
+               An is_binary/1 test followed by is_bitstring/1 (or vice
+               versa) could fail because of an usafe optimization.
+
+
+  OTP-15846    Application(s): compiler
+               Related Id(s): ERL-955
+
+               A Core Erlang module where the last clause in a case
+               matched a map would fail to load.
+
+
+  OTP-15848    Application(s): compiler
+               Related Id(s): ERL-956
+
+               Fixed a bug that could cause the compiler to crash when
+               compiling complex nested case expressions.
+
+
+ Full runtime dependencies of compiler-7.4.1: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.5.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15829    Application(s): crypto
+
+               The cipher aes-ctr was disabled by misstake in
+               crypto:supports for cryptolibs before 1.0.1. It worked
+               however in the encrypt and decrypt functions.
+
+
+ Full runtime dependencies of crypto-4.5.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.4.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.4.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15834    Application(s): erts
+               Related Id(s): ERIERL-367
+
+               In nested use of try/catch, rethrowing an exception
+               using erlang:raise/3 with a different class would not
+               always be able to change the class of the exception.
+
+
+ Full runtime dependencies of erts-10.4.1: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.9.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.9.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15847    Application(s): stdlib
+               Related Id(s): ERL-957
+
+               Fix a bug that could cause a failure when formatting
+               binaries using the control sequences p or P and
+               limiting the output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.9.1: compiler-5.0, crypto-3.3,
+ erts-10.4, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
