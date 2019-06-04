@@ -1,0 +1,132 @@
+Patch Package:           OTP 21.3.8.3
+Git Tag:                 OTP-21.3.8.3
+Date:                    2019-06-04
+Trouble Report Id:       OTP-15834, OTP-15844, OTP-15847, OTP-15849,
+                         OTP-15858, OTP-15859
+Seq num:                 ERIERL-367, ERL-700, ERL-957
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.2, kernel-6.3.1.1, ssl-9.2.3.2,
+                         stdlib-3.8.2.1
+Predecessor:             OTP 21.3.8.2
+
+ Check out the git tag OTP-21.3.8.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15834    Application(s): erts
+               Related Id(s): ERIERL-367
+
+               In nested use of try/catch, rethrowing an exception
+               using erlang:raise/3 with a different class would not
+               always be able to change the class of the exception.
+
+
+  OTP-15849    Application(s): erts
+               Related Id(s): ERL-700
+
+               Fixed bug in seq_trace:set_token(label,Term) which
+               could cause VM crash if Term was heap allocated (not an
+               atom, small integer, local pid or port). Bug exists
+               since OTP 21.0 when terms other than small integers
+               were first allowed as labels.
+
+
+  OTP-15859    Application(s): erts
+               Related Id(s): ERL-700
+
+               Fix seq_trace:print/2 not to raise badarg exception if
+               label is not a small integer. Bug exists since OTP
+               21.0.
+
+
+ Full runtime dependencies of erts-10.3.5.2: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.3.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.3.1.1 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.2.5 (first satisfied in OTP 21.2.7)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15858    Application(s): kernel
+               Related Id(s): ERL-700
+
+               Fix type spec for seq_trace:set_token/2.
+
+
+ Full runtime dependencies of kernel-6.3.1.1: erts-10.2.5, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15844    Application(s): ssl
+
+               Returned "alert error string" is now same as logged
+               alert string
+
+
+ Full runtime dependencies of ssl-9.2.3.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.8.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.8.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15847    Application(s): stdlib
+               Related Id(s): ERL-957
+
+               Fix a bug that could cause a failure when formatting
+               binaries using the control sequences p or P and
+               limiting the output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.8.2.1: compiler-5.0,
+ crypto-3.3, erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
