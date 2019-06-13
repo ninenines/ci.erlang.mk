@@ -1,0 +1,157 @@
+Patch Package:           OTP 22.0.3
+Git Tag:                 OTP-22.0.3
+Date:                    2019-06-13
+Trouble Report Id:       OTP-15844, OTP-15861, OTP-15862, OTP-15864,
+                         OTP-15865, OTP-15871, OTP-15872, OTP-15873,
+                         OTP-15875
+Seq num:                 ERIERL-374, ERL-951, ERL-953, ERL-962,
+                         ERL-964, ERL-965, ERL-967
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.2, dialyzer-4.0.1, erts-10.4.2,
+                         ssl-9.3.2, stdlib-3.9.2
+Predecessor:             OTP 22.0.2
+
+ Check out the git tag OTP-22.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15872    Application(s): compiler
+
+               Fixed an incorrect type determination for constructed
+               binaries, which could cause is_binary checks to succeed
+               when they shouldn't have.
+
+
+ Full runtime dependencies of compiler-7.4.2: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.0.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15861    Application(s): dialyzer
+               Related Id(s): ERL-953
+
+               Fix a bug that caused a crash when indenting a Dialyzer
+               warning mentioning more than one record field.
+
+
+ Full runtime dependencies of dialyzer-4.0.1: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.4.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.4.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15865    Application(s): erts
+               Related Id(s): ERL-964
+
+               Fixed process_info(Pid,reductions) to not categorically
+               increase reduction count of the measured process Pid.
+               Repeated reduction measure of an idle process will most
+               often (but not guaranteed) return the same value, like
+               it behaved before OTP 21.3.8.
+
+
+  OTP-15871    Application(s): erts
+               Related Id(s): ERIERL-374
+
+               Fixed an incorrect load-time optimization that could
+               cause a crash when extracting deeply nested tuple
+               elements.
+
+
+  OTP-15873    Application(s): erts
+               Related Id(s): ERL-965
+
+               Fix bug causing VM crash when pressing P for "proc
+               info" in Erlang shell break menu. Bug exists since OTP
+               22.0.
+
+
+ Full runtime dependencies of erts-10.4.2: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.3.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.3.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15844    Application(s): ssl
+
+               Returned "alert error string" is now same as logged
+               alert string
+
+
+  OTP-15862    Application(s): ssl
+               Related Id(s): ERL-951
+
+               Fix returned extension map fields to follow the
+               documentation.
+
+
+  OTP-15864    Application(s): ssl
+               Related Id(s): ERL-962
+
+               Avoid DTLS crash due to missing gen_server return value
+               in DTLS packet demux process.
+
+
+ Full runtime dependencies of ssl-9.3.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.9.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.9.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15875    Application(s): stdlib
+               Related Id(s): ERL-967
+
+               Fix a bug that could cause a loop when formatting terms
+               using the control sequences p or P and limiting the
+               output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.9.2: compiler-5.0, crypto-3.3,
+ erts-10.4, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
