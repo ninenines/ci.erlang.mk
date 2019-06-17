@@ -1,0 +1,300 @@
+Patch Package:           OTP 20.3.8.21
+Git Tag:                 OTP-20.3.8.21
+Date:                    2019-04-17
+Trouble Report Id:       OTP-14746, OTP-15551, OTP-15657, OTP-15660,
+                         OTP-15690, OTP-15691, OTP-15716, OTP-15717,
+                         OTP-15757, OTP-15758, OTP-15763, OTP-15766
+Seq num:                 ERIERL-143, ERIERL-324, ERIERL-334,
+                         ERIERL-342, ERL-869
+System:                  OTP
+Release:                 20
+Application:             common_test-1.15.4.2, erl_interface-3.10.2.2,
+                         erts-9.3.3.10, snmp-5.2.11.1, ssh-4.6.9.4,
+                         tools-2.11.2.1
+Predecessor:             OTP 20.3.8.20
+
+ Check out the git tag OTP-20.3.8.21, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15691    Application(s): snmp
+               Related Id(s): ERIERL-324
+
+               [snmp|agent] Add a get-mechanism callback module (and a
+               corresponding behaviour). The agent calls this module
+               to handle each get (get, get-next and get-bulk)
+               request.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15717    Application(s): common_test
+               Related Id(s): ERIERL-334
+
+               The test result when a hook function fails is in
+               general the same as if the function that the hook is
+               associated with fails. For example, if
+               post_init_per_testcase fails the result is that the
+               test case is skipped, as is the case when
+               init_per_testcase fails.This, however, was earlier not
+               true for timetrap timeouts or other error situations
+               where the process running the hook function was killed.
+               This is now corrected, so the error handling should be
+               the same no matter how the hook function fails.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-20.3.8.21 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15551    Application(s): erts, otp
+
+               Fixes of install/release phase in build system.
+
+               -- The source tree was modified when
+               installing/releasing and/or applying a patch.
+
+               -- Some files were installed with wrong access rights.
+
+               -- If applying a patch (using otp_patch_apply) as
+               another user (except root) than the user that built the
+               source, the documentation was not properly updated.
+
+
+  OTP-15657    Application(s): erts, otp, tools
+
+               Minor fixes for make clean.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.15.4.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.15.4.2 application can be applied independently of
+ other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15717    Application(s): common_test
+               Related Id(s): ERIERL-334
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The test result when a hook function fails is in
+               general the same as if the function that the hook is
+               associated with fails. For example, if
+               post_init_per_testcase fails the result is that the
+               test case is skipped, as is the case when
+               init_per_testcase fails.This, however, was earlier not
+               true for timetrap timeouts or other error situations
+               where the process running the hook function was killed.
+               This is now corrected, so the error handling should be
+               the same no matter how the hook function fails.
+
+
+  OTP-15758    Application(s): common_test
+               Related Id(s): ERIERL-342
+
+               In some rare cases, when two common_test nodes used the
+               same log directory, a timing problem could occur which
+               caused common_test to crash because it's log cache file
+               was unexpectedly empty. This is now corrected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-14746    Application(s): common_test
+               Related Id(s): ERIERL-143
+
+               Two new common_test hook functions are introduced:
+
+               post_groups/2, which is called after Suite:groups/0
+               post_all/3, which is called after Suite:all/0
+
+               These functions allow modifying the return values from
+               the groups/0 and all/0 functions, respectively.
+
+               A new term, {testcase,TestCase,RepeatProperties} is now
+               also allowed in the return from all/0. This can be used
+               for repeating a single test case a specific number of
+               times, or until it fails or succeeds once.
+
+
+  OTP-15716    Application(s): common_test
+
+               OTP internal test improvements.
+
+
+ Full runtime dependencies of common_test-1.15.4.2: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.4, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.10.2.2 ------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.10.2.2 application can be applied independently
+ of other applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15757    Application(s): erl_interface
+
+               Fix handling of Makefile dependencies so that parallel
+               make works properly.
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.10 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.10 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15551    Application(s): erts, otp
+
+               Fixes of install/release phase in build system.
+
+               -- The source tree was modified when
+               installing/releasing and/or applying a patch.
+
+               -- Some files were installed with wrong access rights.
+
+               -- If applying a patch (using otp_patch_apply) as
+               another user (except root) than the user that built the
+               source, the documentation was not properly updated.
+
+
+  OTP-15657    Application(s): erts, otp, tools
+
+               Minor fixes for make clean.
+
+
+  OTP-15660    Application(s): erts
+               Related Id(s): ERL-869
+
+               Fixed a bug in all ets:select* and ets:match* functions
+               that could in some rare cases lead to very poor
+               performance.
+
+
+  OTP-15690    Application(s): erts
+               Related Id(s): PR-2172
+
+               Fix a possible deadlock when terminating the ERTS
+               caused by a dirty scheduler not releasing it's
+               run-queue lock when terminating.
+
+
+  OTP-15766    Application(s): erts
+
+               Add missing documentation of new external tags NEW_PID,
+               NEW_PORT and NEWER_REFERENCE introduced in OTP 19.
+
+               These new tags are planned to be "activated" in OTP 23
+               when distribution capability flag DFLAG_BIG_CREATION
+               becomes mandatory. Older nodes (>= 19) are able to
+               decode these new tags and send them back to the new
+               node. Nodes older than OTP 23 will however never encode
+               their own local pids, ports and references using the
+               new tags.
+
+
+ Full runtime dependencies of erts-9.3.3.10: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.2.11.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.2.11.1 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15691    Application(s): snmp
+               Related Id(s): ERIERL-324
+
+               *** HIGHLIGHT ***
+
+               [snmp|agent] Add a get-mechanism callback module (and a
+               corresponding behaviour). The agent calls this module
+               to handle each get (get, get-next and get-bulk)
+               request.
+
+
+ Full runtime dependencies of snmp-5.2.11.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.9.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.9.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2 (first satisfied in OTP 20.2)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15763    Application(s): ssh
+
+               If a client was connected to an server on an already
+               open socket, the callback fun(PeerName,FingerPrint) in
+               the accept_callback option passed the local name in the
+               argument PeerName instead of the remote name.
+
+
+ Full runtime dependencies of ssh-4.6.9.4: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- tools-2.11.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The tools-2.11.2.1 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 20
+       installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-9.1 (first satisfied in OTP 20.1)
+       -- kernel-5.4 (first satisfied in OTP 20.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15657    Application(s): erts, otp, tools
+
+               Minor fixes for make clean.
+
+
+ Full runtime dependencies of tools-2.11.2.1: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
