@@ -1,0 +1,208 @@
+Patch Package:           OTP 21.3.8.4
+Git Tag:                 OTP-21.3.8.4
+Date:                    2019-06-18
+Trouble Report Id:       OTP-15370, OTP-15747, OTP-15863, OTP-15865,
+                         OTP-15867, OTP-15869, OTP-15870, OTP-15875,
+                         OTP-15879
+Seq num:                 ERIERL-294, ERIERL-350, ERIERL-353,
+                         ERIERL-370, ERIERL-373, ERL-952, ERL-964,
+                         ERL-967, ERL-968
+System:                  OTP
+Release:                 21
+Application:             common_test-1.17.2.1, erts-10.3.5.3,
+                         kernel-6.3.1.2, public_key-1.6.6.1,
+                         ssl-9.2.3.3, stdlib-3.8.2.2
+Predecessor:             OTP 21.3.8.3
+
+ Check out the git tag OTP-21.3.8.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.17.2.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.17.2.1 application can be applied independently of
+ other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15863    Application(s): common_test
+               Related Id(s): ERIERL-370
+
+               If a ct hook is installed in the suite/0 function in a
+               test suite, then the hook's terminate/1 function would
+               be called several times without it's init/2 function
+               being called first. This is now corrected.
+
+
+  OTP-15869    Application(s): common_test
+               Related Id(s): ERIERL-350
+
+               If init_per_testcase fails, the test itself is skipped.
+               According to the documentation, it should be possible
+               to change the result to failed in a hook function. The
+               only available hook function in this case is
+               post_init_per_testcase, but changing the return value
+               there did not affect the test case result. This is now
+               corrected.
+
+
+ Full runtime dependencies of common_test-1.17.2.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15370    Application(s): erts
+               Related Id(s): ERIERL-353
+
+               If you set {linger,{true,0}} on a gen_tcp listen
+               socket, accept a connection on that socket, and then
+               close the accepted socket, now the linger zero setting
+               is transferred to the accepted socket. Before this
+               correction that information was lost and the close
+               behaviour on the accepted socket incorrect.
+
+
+  OTP-15865    Application(s): erts
+               Related Id(s): ERL-964
+
+               Fixed process_info(Pid,reductions) to not categorically
+               increase reduction count of the measured process Pid.
+               Repeated reduction measure of an idle process will most
+               often (but not guaranteed) return the same value, like
+               it behaved before OTP 21.3.8.
+
+
+  OTP-15867    Application(s): erts
+               Related Id(s): ERIERL-373
+
+               The runtime system disconnected a connection if it
+               received an exit/2 signal where the recipient was a
+               process on an old incarnation of the current node. That
+               is, the receiving node had the same node name, but
+               another "creation" number. The signal will now just be
+               dropped since the receiving process no longer exists.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15747    Application(s): erts, kernel
+               Related Id(s): ERIERL-294
+
+               The possibility to send ancillary data, in particular
+               the TOS field, has been added to gen_udp:send/4,5.
+
+
+ Full runtime dependencies of erts-10.3.5.3: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.3.1.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.3.1.2 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.2.5 (first satisfied in OTP 21.2.7)
+
+
+ --- Improvements and New Features ---
+
+  OTP-15747    Application(s): erts, kernel
+               Related Id(s): ERIERL-294
+
+               The possibility to send ancillary data, in particular
+               the TOS field, has been added to gen_udp:send/4,5.
+
+
+ Full runtime dependencies of kernel-6.3.1.2: erts-10.2.5, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.6.6.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.6.6.1 application can be applied independently of
+ other applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15870    Application(s): public_key
+               Related Id(s): ERL-952
+
+               Support Pasword based encryption with AES
+
+
+ Full runtime dependencies of public_key-1.6.6.1: asn1-3.0,
+ crypto-3.8, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.3 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15879    Application(s): ssl
+               Related Id(s): ERL-968
+
+               Correct handshake handling, might cause strange
+               symptoms such as ASN.1 certificate decoding issues.
+
+
+ Full runtime dependencies of ssl-9.2.3.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.8.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.8.2.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15875    Application(s): stdlib
+               Related Id(s): ERL-967
+
+               Fix a bug that could cause a loop when formatting terms
+               using the control sequences p or P and limiting the
+               output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.8.2.2: compiler-5.0,
+ crypto-3.3, erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

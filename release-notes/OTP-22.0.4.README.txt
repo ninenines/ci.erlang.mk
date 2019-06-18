@@ -1,0 +1,109 @@
+Patch Package:           OTP 22.0.4
+Git Tag:                 OTP-22.0.4
+Date:                    2019-06-18
+Trouble Report Id:       OTP-15805, OTP-15819, OTP-15867, OTP-15879,
+                         OTP-15887, OTP-15888
+Seq num:                 ERIERL-373, ERL-944, ERL-968, ERL-973,
+                         ERL-975
+System:                  OTP
+Release:                 22
+Application:             erts-10.4.3, kernel-6.4.1, ssl-9.3.3
+Predecessor:             OTP 22.0.3
+
+ Check out the git tag OTP-22.0.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.4.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.4.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15819    Application(s): erts
+               Related Id(s): ERL-944
+
+               Fixed a buffer overflow when binary_to_existing_atom/2
+               and list_to_existing_atom/2 was used with the latin1
+               encoding.
+
+
+  OTP-15867    Application(s): erts
+               Related Id(s): ERIERL-373
+
+               The runtime system disconnected a connection if it
+               received an exit/2 signal where the recipient was a
+               process on an old incarnation of the current node. That
+               is, the receiving node had the same node name, but
+               another "creation" number. The signal will now just be
+               dropped since the receiving process no longer exists.
+
+
+ Full runtime dependencies of erts-10.4.3: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.4.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-6.4.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15805    Application(s): kernel
+
+               user/user_drv could respond to io requests before they
+               had been processed, which could cause data to be
+               dropped if the emulator was halted soon after a call to
+               io:format/2, such as in an escript.
+
+
+ Full runtime dependencies of kernel-6.4.1: erts-10.2.5, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.3.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.3.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15879    Application(s): ssl
+               Related Id(s): ERL-968
+
+               Correct handshake handling, might cause strange
+               symptoms such as ASN.1 certificate decoding issues.
+
+
+  OTP-15887    Application(s): ssl
+               Related Id(s): ERL-973
+
+               Fix handling of the signature_algorithms_cert extension
+               in the ClientHello handshake message.
+
+
+  OTP-15888    Application(s): ssl
+               Related Id(s): ERL-975
+
+               Handle new ClientHello extensions when handshake is
+               paused by the {handshake, hello} ssl option.
+
+
+ Full runtime dependencies of ssl-9.3.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
