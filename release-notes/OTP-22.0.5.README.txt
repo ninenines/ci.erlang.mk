@@ -1,0 +1,150 @@
+Patch Package:           OTP 22.0.5
+Git Tag:                 OTP-22.0.5
+Date:                    2019-07-03
+Trouble Report Id:       OTP-15900, OTP-15908, OTP-15909, OTP-15910,
+                         OTP-15913, OTP-15922, OTP-15930, OTP-15938,
+                         OTP-15939, OTP-15941
+Seq num:                 ERL-949, ERL-969, ERL-979, ERL-980, ERL-986
+System:                  OTP
+Release:                 22
+Application:             dialyzer-4.0.2, erts-10.4.4, inets-7.0.9,
+                         ssl-9.3.4
+Predecessor:             OTP 22.0.4
+
+ Check out the git tag OTP-22.0.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.0.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.0.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15922    Application(s): dialyzer
+               Related Id(s): ERL-949, PR-2240
+
+               Make sure Dialyzer does not crash if the formatting of
+               results fails. Instead of crashing, an unformatted
+               version of the results is returned.
+
+
+ Full runtime dependencies of dialyzer-4.0.2: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.4.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.4.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15908    Application(s): erts
+               Related Id(s): ERL-980
+
+               An invalid value test caused the socket:setopt(Socket,
+               ip, add_membership, ip_mreq()) to fail with badarg. The
+               same for drop_membership.
+
+
+  OTP-15909    Application(s): erts
+               Related Id(s): ERL-979
+
+               Fixed bug causing VM crash when doing textual dump of a
+               process containing an unhandled monitor down signal.
+               Textual process dumps can be done with
+               erlang:system_info(procs), trace feature process_dump,
+               Erlang shell break menu and a crashdump. Bug exist
+               since OTP 21.0.
+
+
+  OTP-15938    Application(s): erts
+               Related Id(s): ERL-986
+
+               lists:subtract/2 would produce incorrect results for
+               some inputs on 64-bit platforms.
+
+
+  OTP-15939    Application(s): erts
+
+               Fixed a bug in the loader that was similar to
+               OTP-15938, yielding incorrect code for some inputs on
+               64-bit platforms.
+
+
+  OTP-15941    Application(s): erts
+               Related Id(s): PR-2313
+
+               Fixed bug causing scheduler threads in rare cases to
+               block spinnning indefinitely. Bug exists since OTP
+               21.0.
+
+
+ Full runtime dependencies of erts-10.4.4: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.9 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.9 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15930    Application(s): inets
+               Related Id(s): ERL-969
+
+               Fix a regression in http client that causes a crash
+               when request URI has no scheme.
+
+
+ Full runtime dependencies of inets-7.0.9: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.3.4 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.3.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15900    Application(s): ssl
+
+               Fix handling of certificate decoding problems in TLS
+               1.3 similarly as in TLS 1.2.
+
+
+  OTP-15910    Application(s): ssl
+
+               Hibernation now works as expected in all cases, was
+               accidently broken by optimization efforts.
+
+
+  OTP-15913    Application(s): ssl
+
+               Fix interoperability problems with openssl when the TLS
+               1.3 server is configured wirh the option
+               signature_algs_cert.
+
+
+ Full runtime dependencies of ssl-9.3.4: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

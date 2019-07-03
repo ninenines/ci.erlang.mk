@@ -1,0 +1,92 @@
+Patch Package:           OTP 21.3.8.5
+Git Tag:                 OTP-21.3.8.5
+Date:                    2019-07-03
+Trouble Report Id:       OTP-15909, OTP-15910, OTP-15938, OTP-15939,
+                         OTP-15941
+Seq num:                 ERL-979, ERL-986
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.4, ssl-9.2.3.4
+Predecessor:             OTP 21.3.8.4
+
+ Check out the git tag OTP-21.3.8.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15909    Application(s): erts
+               Related Id(s): ERL-979
+
+               Fixed bug causing VM crash when doing textual dump of a
+               process containing an unhandled monitor down signal.
+               Textual process dumps can be done with
+               erlang:system_info(procs), trace feature process_dump,
+               Erlang shell break menu and a crashdump. Bug exist
+               since OTP 21.0.
+
+
+  OTP-15938    Application(s): erts
+               Related Id(s): ERL-986
+
+               lists:subtract/2 would produce incorrect results for
+               some inputs on 64-bit platforms.
+
+
+  OTP-15939    Application(s): erts
+
+               Fixed a bug in the loader that was similar to
+               OTP-15938, yielding incorrect code for some inputs on
+               64-bit platforms.
+
+
+  OTP-15941    Application(s): erts
+               Related Id(s): PR-2313
+
+               Fixed bug causing scheduler threads in rare cases to
+               block spinnning indefinitely. Bug exists since OTP
+               21.0.
+
+
+ Full runtime dependencies of erts-10.3.5.4: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.4 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15910    Application(s): ssl
+
+               Hibernation now works as expected in all cases, was
+               accidently broken by optimization efforts.
+
+
+ Full runtime dependencies of ssl-9.2.3.4: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
