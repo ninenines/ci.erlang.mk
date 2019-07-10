@@ -1,0 +1,138 @@
+Patch Package:           OTP 22.0.6
+Git Tag:                 OTP-22.0.6
+Date:                    2019-07-10
+Trouble Report Id:       OTP-15943, OTP-15945, OTP-15946, OTP-15949,
+                         OTP-15952
+Seq num:                
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.3, dialyzer-4.0.3, hipe-3.19.1,
+                         ssl-9.3.5
+Predecessor:             OTP 22.0.5
+
+ Check out the git tag OTP-22.0.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15949    Application(s): dialyzer, hipe
+
+               The HiPE compiler would badly miscompile certain
+               try/catch expressions, so it will now refuse to compile
+               modules containing try or catch.
+
+               As a consequence of this, dialyzer will no longer
+               compile key modules to native code.
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15945    Application(s): compiler
+
+               Fixed an unsafe optimization when matching tuple_size/1
+               outside of guards, which could crash the emulator if
+               the argument was not a tuple.
+
+
+  OTP-15946    Application(s): compiler
+
+               Fixed a rare bug that could cause the wrong kind of
+               exception to be thrown when a BIF failed in a function
+               that matched bitstrings.
+
+
+  OTP-15952    Application(s): compiler
+
+               Fixed a bug where receive statements inside try/catch
+               blocks could return incorrect results.
+
+
+ Full runtime dependencies of compiler-7.4.3: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.0.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15949    Application(s): dialyzer, hipe
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The HiPE compiler would badly miscompile certain
+               try/catch expressions, so it will now refuse to compile
+               modules containing try or catch.
+
+               As a consequence of this, dialyzer will no longer
+               compile key modules to native code.
+
+
+ Full runtime dependencies of dialyzer-4.0.3: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.19.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The hipe-3.19.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15949    Application(s): dialyzer, hipe
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The HiPE compiler would badly miscompile certain
+               try/catch expressions, so it will now refuse to compile
+               modules containing try or catch.
+
+               As a consequence of this, dialyzer will no longer
+               compile key modules to native code.
+
+
+ Full runtime dependencies of hipe-3.19.1: compiler-5.0, erts-9.3,
+ kernel-5.3, stdlib-3.4, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.3.5 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.3.5 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15943    Application(s): ssl
+
+               Enhance error handling for erroneous alerts from the
+               peer.
+
+
+ Full runtime dependencies of ssl-9.3.5: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
