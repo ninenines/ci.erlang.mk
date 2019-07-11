@@ -1,0 +1,40 @@
+Patch Package:           OTP 22.0.7
+Git Tag:                 OTP-22.0.7
+Date:                    2019-07-11
+Trouble Report Id:       OTP-15953
+Seq num:                 ERL-999
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.4
+Predecessor:             OTP 22.0.6
+
+ Check out the git tag OTP-22.0.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15953    Application(s): compiler
+               Related Id(s): ERL-999
+
+               Fixed a compiler crash introduced in 22.0.6
+               (OTP-15952).
+
+
+ Full runtime dependencies of compiler-7.4.4: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
