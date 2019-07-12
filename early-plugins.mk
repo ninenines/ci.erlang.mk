@@ -72,8 +72,11 @@ OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
 # Configure Erlang.mk's CI plugin.
 
 CI_OTP := $(foreach otp,$(AUTO_CI_OTP),$($(otp))) $(if $(AUTO_CI_MASTER),master)
-CI_HIPE := $(foreach otp,$(AUTO_CI_HIPE),$($(otp)))
-CI_ERLLVM := $(foreach otp,$(AUTO_CI_ERLLVM),$($(otp)))
+
+# Disable HiPE builds; Erlang/OTP's HiPE support is broken
+# starting from Erlang/OTP 22.0.6. Use explicit versions instead.
+#CI_HIPE := $(foreach otp,$(AUTO_CI_HIPE),$($(otp)))
+#CI_ERLLVM := $(foreach otp,$(AUTO_CI_ERLLVM),$($(otp)))
 
 # Remove the existing master if necessary.
 
