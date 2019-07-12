@@ -1,0 +1,40 @@
+Patch Package:           OTP 21.3.8.6
+Git Tag:                 OTP-21.3.8.6
+Date:                    2019-07-12
+Trouble Report Id:       OTP-15328
+Seq num:                 ERIERL-379
+System:                  OTP
+Release:                 21
+Application:             ssl-9.2.3.5
+Predecessor:             OTP 21.3.8.5
+
+ Check out the git tag OTP-21.3.8.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.5 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15328    Application(s): ssl
+               Related Id(s): ERIERL-379
+
+               Handling of zero size fragments in TLS could cause an
+               infinite loop. This has now been corrected.
+
+
+ Full runtime dependencies of ssl-9.2.3.5: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
