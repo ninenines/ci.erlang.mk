@@ -157,6 +157,15 @@ WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
 WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
 WINDOWS-OTP-22+ := $(WINDOWS-OTP-22)
 
+WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
+	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
+WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
+	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
+WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
+	$(lastword $(WINDOWS-OTP-22))
+WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
+WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22))
+
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
 
 msys2_path = $(shell cygpath -u $1)
