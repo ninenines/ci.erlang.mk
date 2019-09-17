@@ -35,6 +35,14 @@ OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22)
 OTP-21+ := $(OTP-21) $(OTP-22)
 OTP-22+ := $(OTP-22)
 
+OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
+	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22))
+OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
+	$(lastword $(OTP-21)) $(lastword $(OTP-22))
+OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22))
+OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22))
+OTP-LATEST-22+ := $(lastword $(OTP-22))
+
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
 
