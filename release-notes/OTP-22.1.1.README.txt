@@ -1,0 +1,99 @@
+Patch Package:           OTP 22.1.1
+Git Tag:                 OTP-22.1.1
+Date:                    2019-09-27
+Trouble Report Id:       OTP-16069, OTP-16092, OTP-16103, OTP-16107
+Seq num:                 ERIERL-410, ERL-1049, ERL-1050
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.6, erts-10.5.1, snmp-5.4.1
+Predecessor:             OTP 22.1
+
+ Check out the git tag OTP-22.1.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.6 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.6 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16103    Application(s): compiler
+               Related Id(s): ERL-1050
+
+               Fixed a bug in the bit-syntax optimization pass that
+               could crash the compiler.
+
+
+ Full runtime dependencies of compiler-7.4.6: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.5.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.5.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16069    Application(s): erts
+
+               A terminating process sending distributed 'EXIT' or
+               'DOWN' signals while terminating could end up in a
+               state where no progress at all was made. This was
+               triggered by a distribution channel that the
+               terminating process was sending on got busy. This bug
+               has existed since ERTS version 10.4 (OTP 22.0).
+
+
+  OTP-16107    Application(s): erts
+               Related Id(s): ERL-1049
+
+               When communicating with a simultaneously exiting port
+               via the erlang:port_*() BIFs one could sometimes get
+               stray {Ref, What} messages. Where Ref was a reference
+               and What usually were the atom badarg.
+
+
+ Full runtime dependencies of erts-10.5.1: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16092    Application(s): snmp
+               Related Id(s): ERIERL-410
+
+               Made it possible to add 'extra socket options' to the
+               (gen_udp) socket open call (for both manager and
+               agent). A new option has been added, extra_sock_opts,
+               which makes it possible for the user to add a list of
+               extra socket options that will be appended to the other
+               socket options for the open call. See the snmp
+               application config man page (erl -man 6 snmp) or the
+               "Configuring the application" chapter of the Users
+               Guide for more info.
+
+
+ Full runtime dependencies of snmp-5.4.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
