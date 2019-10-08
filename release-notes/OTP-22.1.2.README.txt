@@ -1,0 +1,41 @@
+Patch Package:           OTP 22.1.2
+Git Tag:                 OTP-22.1.2
+Date:                    2019-10-08
+Trouble Report Id:       OTP-16125
+Seq num:                 ERIERL-412
+System:                  OTP
+Release:                 22
+Application:             erts-10.5.2
+Predecessor:             OTP 22.1.1
+
+ Check out the git tag OTP-22.1.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.5.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.5.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16125    Application(s): erts
+               Related Id(s): ERIERL-412
+
+               Added the environment variable ERLC_SERVER_ID, which
+               allows multiple compile servers to run separately under
+               the same user.
+
+
+ Full runtime dependencies of erts-10.5.2: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

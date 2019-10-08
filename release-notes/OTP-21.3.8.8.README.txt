@@ -1,0 +1,83 @@
+Patch Package:           OTP 21.3.8.8
+Git Tag:                 OTP-21.3.8.8
+Date:                    2019-10-08
+Trouble Report Id:       OTP-16058, OTP-16107, OTP-16133, OTP-16134
+Seq num:                 ERL-1049
+System:                  OTP
+Release:                 21
+Application:             crypto-4.4.2.1, erts-10.3.5.6
+Predecessor:             OTP 21.3.8.7
+
+ Check out the git tag OTP-21.3.8.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.4.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.4.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16133    Application(s): crypto
+               Related Id(s): PR-2407
+
+               The chipers aes_cfb8 and aes_cfb128 are now using the
+               EVP interface. The supported key lengths are 128, 192
+               and 256 bits.
+
+
+  OTP-16134    Application(s): crypto
+               Related Id(s): PR-2407
+
+               The chipers aes_cfb8 and aes_cfb128 are now available
+               in FIPS enabled mode.
+
+
+ Full runtime dependencies of crypto-4.4.2.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16058    Application(s): erts
+               Related Id(s): PR-2382
+
+               Fix a bug in binary_to_term that would crash the
+               emulator if a term larger than 16GB was to be decoded.
+
+
+  OTP-16107    Application(s): erts
+               Related Id(s): ERL-1049
+
+               When communicating with a simultaneously exiting port
+               via the erlang:port_*() BIFs one could sometimes get
+               stray {Ref, What} messages. Where Ref was a reference
+               and What usually were the atom badarg.
+
+
+ Full runtime dependencies of erts-10.3.5.6: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
