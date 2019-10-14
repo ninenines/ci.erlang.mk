@@ -150,7 +150,7 @@ WINDOWS-OTP-18 := 18.0 18.1 18.2.1 18.3
 WINDOWS-OTP-19 := 19.0 19.1 19.2 19.3
 WINDOWS-OTP-20 := 20.0 20.1 20.2 20.3
 WINDOWS-OTP-21 := 21.0.1 21.1 21.2 21.3
-WINDOWS-OTP-22 := 22.0
+WINDOWS-OTP-22 := 22.0 22.1
 
 WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
@@ -192,6 +192,7 @@ WINDOWS-OTP-21.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.2/bin)
 WINDOWS-OTP-21.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.3/bin)
 
 WINDOWS-OTP-22.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.4/bin)
+WINDOWS-OTP-22.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl10.5/bin)
 
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
