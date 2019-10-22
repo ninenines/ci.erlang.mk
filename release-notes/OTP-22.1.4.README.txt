@@ -1,0 +1,80 @@
+Patch Package:           OTP 22.1.4
+Git Tag:                 OTP-22.1.4
+Date:                    2019-10-22
+Trouble Report Id:       OTP-16177, OTP-16199, OTP-16202
+Seq num:                 ERL-1063
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.7, crypto-4.6.1, erts-10.5.3
+Predecessor:             OTP 22.1.3
+
+ Check out the git tag OTP-22.1.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.7 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.7 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16199    Application(s): compiler
+
+               Fixed a bug where the compiler could generate incorrect
+               code for a 'receive' statement inside a 'try'.
+
+
+ Full runtime dependencies of compiler-7.4.7: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16202    Application(s): crypto
+
+               FIxed a bug if the erlang emulator was linked with a
+               very old cryptolib version (1.0.1 or earlier).
+
+               The bug now fixed could have triggered a core dump if
+               an unknown cipher name was used in crypto functions.
+
+
+ Full runtime dependencies of crypto-4.6.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.5.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.5.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16177    Application(s): erts
+               Related Id(s): ERL-1063
+
+               Erlang/OTP can now be built on macOS Catalina (10.15).
+
+
+ Full runtime dependencies of erts-10.5.3: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
