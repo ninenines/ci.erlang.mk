@@ -1,0 +1,38 @@
+Patch Package:           OTP 21.3.8.9
+Git Tag:                 OTP-21.3.8.9
+Date:                    2019-10-16
+Trouble Report Id:       OTP-16019
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             inets-7.0.7.2
+Predecessor:             OTP 21.3.8.8
+
+ Check out the git tag OTP-21.3.8.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-7.0.7.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.0.7.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16019    Application(s): inets
+
+               Add HTTP server error logging vi logger
+
+
+ Full runtime dependencies of inets-7.0.7.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

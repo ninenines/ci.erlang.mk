@@ -1,0 +1,60 @@
+Patch Package:           OTP 21.3.8.10
+Git Tag:                 OTP-21.3.8.10
+Date:                    2019-10-25
+Trouble Report Id:       OTP-14849, OTP-16056
+Seq num:                 ERL-545
+System:                  OTP
+Release:                 21
+Application:             ftp-1.0.2.1, ssh-4.7.6.2
+Predecessor:             OTP 21.3.8.9
+
+ Check out the git tag OTP-21.3.8.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ftp-1.0.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.0.2.1 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16056    Application(s): ftp
+
+               A possibly infinite loop when receiving messages
+               divided in parts is removed.
+
+
+ Full runtime dependencies of ftp-1.0.2.1: erts-7.0, kernel-6.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7.6.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.7.6.2 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14849    Application(s): ssh
+               Related Id(s): ERL-545
+
+               The ssh cli (e.g shell) server behaved strangely when
+               characters were inserted in a string so that the last
+               characters tried to wrap the line.
+
+
+ Full runtime dependencies of ssh-4.7.6.2: crypto-4.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
