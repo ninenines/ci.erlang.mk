@@ -1,0 +1,40 @@
+Patch Package:           OTP 22.1.5
+Git Tag:                 OTP-22.1.5
+Date:                    2019-10-28
+Trouble Report Id:       OTP-16207
+Seq num:                 ERIERL-427
+System:                  OTP
+Release:                 22
+Application:             snmp-5.4.2
+Predecessor:             OTP 22.1.4
+
+ Check out the git tag OTP-22.1.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16207    Application(s): snmp
+               Related Id(s): ERIERL-427
+
+               The agent discovery process has been made to work with
+               snmptrapd..
+
+
+ Full runtime dependencies of snmp-5.4.2: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
