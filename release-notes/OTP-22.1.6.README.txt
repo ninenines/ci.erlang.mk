@@ -1,0 +1,123 @@
+Patch Package:           OTP 22.1.6
+Git Tag:                 OTP-22.1.6
+Date:                    2019-11-06
+Trouble Report Id:       OTP-16219, OTP-16228, OTP-16241, OTP-16242
+Seq num:                 ERIERL-427, ERL-1076, ERL-1078
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.8, crypto-4.6.2, erts-10.5.4,
+                         snmp-5.4.3
+Predecessor:             OTP 22.1.5
+
+ Check out the git tag OTP-22.1.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.8 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.8 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16219    Application(s): compiler, erts
+               Related Id(s): ERL-1076
+
+               The compiler could do an unsafe optimization of
+               receives, which would cause a receive to only scan part
+               of the message queue.
+
+               This bug fix in the compiler fixes a bug in the socket
+               module.
+
+
+ Full runtime dependencies of compiler-7.4.8: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16242    Application(s): crypto
+               Related Id(s): ERL-1078
+
+               The AEAD tag was not previously checked on decrypt with
+               chacha20_poly1305
+
+
+ Full runtime dependencies of crypto-4.6.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.5.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.5.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16219    Application(s): compiler, erts
+               Related Id(s): ERL-1076
+
+               The compiler could do an unsafe optimization of
+               receives, which would cause a receive to only scan part
+               of the message queue.
+
+               This bug fix in the compiler fixes a bug in the socket
+               module.
+
+
+  OTP-16241    Application(s): erts
+               Related Id(s): ERL-1076, OTP-16219
+
+               Fix bug where the receive marker used by the runtime to
+               do the receive queue optimization could be incorrectly
+               set. The symptom of this would be that a message that
+               should match in a receive never matches.
+
+               The bug requires the OTP-22 compiler and multiple
+               selective receives to trigger. See OTP-16219 for
+               details about the bug fix in the compiler.
+
+
+ Full runtime dependencies of erts-10.5.4: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16228    Application(s): snmp
+               Related Id(s): ERIERL-427
+
+               Agent discovery cleanup. If there is no receiver of
+               INFORM then #state.reqs in snmpa_net_if keeps on
+               growing for DISCOVERY.
+
+
+ Full runtime dependencies of snmp-5.4.3: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
