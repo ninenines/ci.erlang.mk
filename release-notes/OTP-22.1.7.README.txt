@@ -1,0 +1,85 @@
+Patch Package:           OTP 22.1.7
+Git Tag:                 OTP-22.1.7
+Date:                    2019-11-11
+Trouble Report Id:       OTP-16193, OTP-16224, OTP-16259, OTP-16265
+Seq num:                 ERIERL-436, ERL-1044, ERL-1064
+System:                  OTP
+Release:                 22
+Application:             compiler-7.4.9, erts-10.5.5
+Predecessor:             OTP 22.1.6
+
+ Check out the git tag OTP-22.1.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.4.9 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.4.9 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16259    Application(s): compiler
+               Related Id(s): ERIERL-436
+
+               Fixed a performance bug that caused repeated matches of
+               large records to take a very long time to compile.
+
+
+ Full runtime dependencies of compiler-7.4.9: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.5.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-10.5.5 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16193    Application(s): erts
+
+               A literal area could prematurely be released before all
+               uses of it had been removed. This occurred either when
+               a terminating process had a complex exit reason
+               referring to a literal that concurrently was removed,
+               or when a terminating process continued executing a
+               dirty NIF accessing a literal (via the heap) that
+               concurrently was removed.
+
+
+  OTP-16224    Application(s): erts
+               Related Id(s): ERL-1044
+
+               Fix bug causing VM crash due to memory corruption of
+               distribution entry. Probability of crash increases if
+               Erlang distribution is frequently disconnected and
+               reestablished towards same node names. Bug exists since
+               OTP-21.0.
+
+
+  OTP-16265    Application(s): erts
+               Related Id(s): ERL-1064
+
+               Fixed bug causing crash of VM built with configuration
+               --enable--sharing-preserving. Provoked when a sent
+               message contains both a bit string and the heap binary
+               (< 65 bytes) which the bit string was matched from. Bug
+               exists since OTP-19.0 but has seen to be easier to
+               provoke since OTP-22.1.
+
+
+ Full runtime dependencies of erts-10.5.5: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
