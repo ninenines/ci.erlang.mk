@@ -1,0 +1,1183 @@
+Patch Package:           OTP 22.2
+Git Tag:                 OTP-22.2
+Date:                    2019-12-10
+Trouble Report Id:       OTP-14849, OTP-15417, OTP-15524, OTP-15809,
+                         OTP-15940, OTP-15947, OTP-15972, OTP-16043,
+                         OTP-16047, OTP-16052, OTP-16053, OTP-16054,
+                         OTP-16061, OTP-16074, OTP-16085, OTP-16108,
+                         OTP-16113, OTP-16123, OTP-16132, OTP-16133,
+                         OTP-16134, OTP-16145, OTP-16146, OTP-16149,
+                         OTP-16150, OTP-16151, OTP-16152, OTP-16153,
+                         OTP-16156, OTP-16159, OTP-16163, OTP-16164,
+                         OTP-16169, OTP-16170, OTP-16172, OTP-16173,
+                         OTP-16174, OTP-16180, OTP-16181, OTP-16186,
+                         OTP-16191, OTP-16192, OTP-16194, OTP-16195,
+                         OTP-16196, OTP-16197, OTP-16203, OTP-16204,
+                         OTP-16205, OTP-16206, OTP-16208, OTP-16209,
+                         OTP-16211, OTP-16212, OTP-16216, OTP-16223,
+                         OTP-16235, OTP-16243, OTP-16262, OTP-16266,
+                         OTP-16269, OTP-16279, OTP-16285, OTP-16286,
+                         OTP-16287, OTP-16290, OTP-16291, OTP-16292,
+                         OTP-16293, OTP-16295, OTP-16296, OTP-16297,
+                         OTP-16298, OTP-16300, OTP-16302, OTP-16303,
+                         OTP-16308, OTP-16310, OTP-16313, OTP-16315,
+                         OTP-16316, OTP-16317, OTP-16318, OTP-16323,
+                         OTP-16324, OTP-16339
+Seq num:                 ERIERL-378, ERIERL-435, ERL-1027, ERL-1030,
+                         ERL-1034, ERL-1036, ERL-1039, ERL-1041,
+                         ERL-1042, ERL-1043, ERL-1053, ERL-1060,
+                         ERL-1061, ERL-1065, ERL-1066, ERL-1067,
+                         ERL-1070, ERL-1077, ERL-1082, ERL-1083,
+                         ERL-1088, ERL-1090, ERL-1091, ERL-1095,
+                         ERL-545, ERL-917
+System:                  OTP
+Release:                 22
+Application:             common_test-1.18.1, compiler-7.5,
+                         crypto-4.6.3, debugger-4.2.8, dialyzer-4.1.1,
+                         erl_docgen-0.11, erl_interface-3.13.1,
+                         erts-10.6, eunit-2.4, ftp-1.0.4, hipe-3.19.2,
+                         inets-7.1.2, kernel-6.5.1, megaco-3.18.7,
+                         mnesia-4.16.2, observer-2.9.3,
+                         public_key-1.7.1, snmp-5.4.4, ssh-4.8.1,
+                         ssl-9.5, stdlib-3.11, tftp-1.0.2, tools-3.3,
+                         wx-1.9, xmerl-1.3.23
+Predecessor:             OTP 22.1.8
+
+ Check out the git tag OTP-22.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-16208    Application(s): erts
+
+               The Kernel application's User's Guide now contain a
+               Logger Cookbook with with common usage patterns.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-22.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16298    Application(s): otp
+               Related Id(s): ERL-1088
+
+               Fix the top level Makefile target noboot to work when
+               PGO (Profile Guided Optimizations) is enabled.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.18.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.18.1 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16287    Application(s): common_test
+
+               The ct_property_test logging is improved.
+
+
+ Full runtime dependencies of common_test-1.18.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.5 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16053    Application(s): compiler, stdlib
+               Related Id(s): ERL-1039
+
+               Fixed a bug in the linter where list and binary
+               comprehensions could suppress unsafe variable errors.
+
+
+  OTP-16181    Application(s): compiler
+               Related Id(s): ERL-1065
+
+               When a compilation starts from Core Erlang code, the
+               core_lint pass will always be run and the compilation
+               will be aborted if any errors are found.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16054    Application(s): compiler
+               Related Id(s): OTP-11791
+
+               The warning message that appears when the compiler
+               detects a non-utf-8 encoded source file without an
+               encoding string in the beginning of the file has been
+               changed to contain information about that support for
+               latin1 encoded source files without an encoding string
+               will be removed in Erlang/OTP 24.
+
+
+ Full runtime dependencies of compiler-7.5: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16133    Application(s): crypto
+               Related Id(s): PR-2407
+
+               The chipers aes_cfb8 and aes_cfb128 are now using the
+               EVP interface. The supported key lengths are 128, 192
+               and 256 bits.
+
+
+  OTP-16134    Application(s): crypto
+               Related Id(s): PR-2407
+
+               The chipers aes_cfb8 and aes_cfb128 are now available
+               in FIPS enabled mode.
+
+
+ Full runtime dependencies of crypto-4.6.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- debugger-4.2.8 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-4.2.8 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16186    Application(s): debugger
+
+               Fix a bug where Unicode atoms are printed differently
+               depending on if integer lists are printed as strings or
+               not.
+
+
+ Full runtime dependencies of debugger-4.2.8: compiler-5.0, erts-9.0,
+ kernel-5.3, stdlib-3.4, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.1.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16292    Application(s): dialyzer
+
+               Fix a bug where warnings about overspecified functions
+               were erroneously emitted. Only overloaded functions
+               were affected by the bug.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16146    Application(s): dialyzer
+
+               Remove test data with GNU license.
+
+
+ Full runtime dependencies of dialyzer-4.1.1: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-0.11 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-0.11 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15940    Application(s): erl_docgen
+
+               Fixed a cosmetic formatting bug in the data types
+               section of generated HTML documentation.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16209    Application(s): erl_docgen
+
+               Added support for specifying what language a code
+               snippet should be highlighted as.
+
+               Updated the code examples syntax highlighting library.
+
+
+ Full runtime dependencies of erl_docgen-0.11: edoc-0.7.13, erts-9.0,
+ stdlib-3.4, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.13.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.13.1 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16308    Application(s): erl_interface
+
+               Fix user supplied socket implementation for Windows and
+               other platforms without gcc atomics.
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.6 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.6 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16052    Application(s): erts, stdlib
+
+               The functions unicode:characters_to_list() and
+               unicode:characters_to_binary() raised a badarg
+               exception instead of returning an error tuple when
+               passed very large invalid code points as input.
+
+
+  OTP-16074    Application(s): erts
+               Related Id(s): ERL-1042, PR-2386
+
+               file:allocate/3 will now work properly on Mac OS.
+
+
+  OTP-16149    Application(s): erts
+
+               For socket, invalid encoding of send and receive flags
+               caused badarg and send failure.
+
+
+  OTP-16150    Application(s): erts
+               Related Id(s): ERL-1043
+
+               Fix a bug in re on platforms where the native stack
+               grows upwards, for instance on HP PA-RISC.
+
+
+  OTP-16151    Application(s): erts
+               Related Id(s): #2400
+
+               For socket, unable to properly decode the timestamp
+               control message header on FreeBSD. We incorrectly used
+               the SO_TIMESTAMP flag for the timestamp control message
+               header type. It should have been SCM_TIMESTAMP. This
+               caused the timestamp control message header to not be
+               fully decoded.
+
+
+  OTP-16152    Application(s): erts
+               Related Id(s): OTP-16114
+
+               For socket, when setting the ip option 'recvtos' to
+               true, thereby indicating that we want to receive the
+               TOS control message header, we don't actually get TOS
+               but RECVTOS on FreeBSD (and maybe others)! This was
+               previously not handled.
+
+
+  OTP-16159    Application(s): erts
+               Related Id(s): ERL-1060
+
+               Fixed a bug where the emulator would print out error
+               messages forever if it crashed during startup.
+
+
+  OTP-16163    Application(s): erts
+               Related Id(s): ERL-1061
+
+               For socket, wrong type for protocol caused segmentation
+               fault if protocol was provided as {raw, integer()}.
+
+
+  OTP-16172    Application(s): erts
+               Related Id(s): OTP-16114
+
+               For socket, when setting the ip option 'recvttl' to
+               true, thereby indicating that we want to receive the
+               TTL control message header, we don't actually get TTL
+               but RECVTTL on Solaris (and maybe others)! This was
+               previously not handled.
+
+
+  OTP-16173    Application(s): erts
+
+               For socket, IPv6 control message headers was
+               incorrectly decoded with level ip instead of ipv6.
+
+
+  OTP-16191    Application(s): erts
+               Related Id(s): ERL-1067
+
+               Fix configure bug where clock_getres would not
+               correctly be detected causing
+               erlang:system_info(os_system_time_source) to return an
+               incorrect resolution.
+
+               This bug effects all OSs that use clock_gettime to get
+               time (basically all OSs except windows) and has been
+               present since OTP-19.2.
+
+
+  OTP-16192    Application(s): erts
+
+               Fix bugs when using ERLC_USE_SERVER=true on Windows
+               when building Erlang/OTP.
+
+               Change the cookie used by the compile server to be hard
+               coded instead of using the users cookie.
+
+
+  OTP-16194    Application(s): erts
+
+               Fix so that persistent_term is listed in the erts
+               application file.
+
+
+  OTP-16195    Application(s): erts
+               Related Id(s): ERL-1027
+
+               Fix bug in call_time tracing which could sometimes
+               cause call time measurements being attributed to the
+               wrong function.
+
+
+  OTP-16196    Application(s): erts
+
+               The socket socket option 'peek_off' has been disabled.
+               If peek_off was set and then socket:recv/3 was called
+               with the peek flag, the call could hang.
+
+
+  OTP-16197    Application(s): erts
+
+               Handle possibly uninitiated (control message header)
+               data.
+
+
+  OTP-16203    Application(s): erts
+
+               For net, a couple of NI macros was deprecated in new
+               versions of glibc, so these are no longer used
+               (IDN_ALLOW_UNASSIGNED and IDN_USE_STD3_ASCII_RULES).
+
+
+  OTP-16204    Application(s): erts
+
+               The string value from a get operation needed to be
+               truncated.
+
+
+  OTP-16206    Application(s): erts
+               Related Id(s): PR-2423
+
+               Fix misleading seq_trace message for remote send
+               operation toward named process. Changed receiver to be
+               {Name,Node} instead of just Name.
+
+
+  OTP-16216    Application(s): erts, kernel
+
+               Fixed a bug causing actual nodedown reason reported by
+               net_kernel:monitor_nodes(true, [nodedown_reason]) to be
+               lost and replaced by the reason killed.
+
+
+  OTP-16223    Application(s): erts
+
+               For socket, the timestamp creation used when printing
+               warning messages and debug printouts did not work. The
+               used buffer was too small.
+
+
+  OTP-16235    Application(s): erts
+
+               Fix compiler warnings generated by GCC 8
+
+
+  OTP-16297    Application(s): erts
+
+               Fix erl -emu_type to accept the option opt which means
+               the normal optimized emulator. This can be used to
+               override the -emu_type option from environment
+               variables.
+
+
+  OTP-16310    Application(s): erts
+               Related Id(s): ERL-1082
+
+               Corrected the function spec to reflect the actual code
+               of the function socket:bind.
+
+
+  OTP-16316    Application(s): erts, stdlib
+
+               Fixed a performance issue in ETS lookup when using the
+               compressed option and the term contained atoms. Before
+               this fix the decompress algorithm for atoms would
+               unnecessarily take a global lock to validate the atom.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16153    Application(s): erts
+
+               For socket, not all send and receive flags are
+               supported on all platforms. In order to (at least)
+               simplify testing, the socket:supports/0,1,2,3 functions
+               has been extended with send_flags and recv_flags items,
+               which indicates what the current platform can manage.
+
+
+  OTP-16180    Application(s): erts
+
+               For socket, add support for IPv6 socket options tclass
+               and recvtclass. Both has been added, but the use of
+               them are platform dependent. Call
+               socket:supports(options, ipv6, Opt) to be sure what
+               option to use in order to request a TCLASS control
+               message header.
+
+
+  OTP-16205    Application(s): erts
+
+               For socket, the TCP socket option cork was not
+               supported even though the supports function reported it
+               as such.
+
+
+  OTP-16208    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               The Kernel application's User's Guide now contain a
+               Logger Cookbook with with common usage patterns.
+
+
+  OTP-16212    Application(s): erts
+               Related Id(s): ERL-1070
+
+               Add a "full featured" version of getifaddrs in the net
+               module.
+
+
+  OTP-16269    Application(s): erts
+               Related Id(s): OTP-16241
+
+               Fix an inefficiency introduced by the bug fix in
+               OTP-16241 which fixed a problem with the receive
+               optimization. That bug fix introduced an inefficiency
+               when using the receive optimization and a burst of
+               messages arrive at once when the receiving process'
+               mailbox was empty.
+
+
+  OTP-16302    Application(s): erts
+               Related Id(s): #2449
+
+               For socket, added support for the socket option
+               extended_err. Andreas Schultz.
+
+
+  OTP-16315    Application(s): erts, stdlib
+
+               ETS tables have been optimized to not use any locks
+               when running in a system with only one scheduler
+               enabled. This can provide significant performance gains
+               for applications that use ETS tables heavily.
+
+
+ Full runtime dependencies of erts-10.6: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.4 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16313    Application(s): eunit
+
+               Remove compiler warnings from eunit.
+
+
+ Full runtime dependencies of eunit-2.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.0.4 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.0.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16243    Application(s): ftp
+               Related Id(s): OTP-16056, PR-2436
+
+               A possibly infinite loop is removed.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16318    Application(s): ftp
+               Related Id(s): OTP-16183
+
+               Removed compiler warnings.
+
+
+ Full runtime dependencies of ftp-1.0.4: erts-7.0, kernel-6.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- hipe-3.19.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The hipe-3.19.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16323    Application(s): hipe
+
+               Correct the range type of erlang:is_record/3.
+
+
+ Full runtime dependencies of hipe-3.19.2: compiler-5.0, erts-9.3,
+ kernel-5.3, stdlib-3.4, syntax_tools-1.6.14
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.1.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.1.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16169    Application(s): inets
+               Related Id(s): ERL-1053
+
+               Inets will honor that valid HTTP headers can not have
+               white space between field-name and the colon.
+
+
+  OTP-16290    Application(s): inets
+               Related Id(s): ERL-1083, PR-2437
+
+               Changed error propagation in httpc:request/1 to return
+               expected error tuple instead of crashing.
+
+
+  OTP-16300    Application(s): inets
+               Related Id(s): ERL-1090
+
+               Fix handling of HEAD request with chunked
+               transfer-encoding (httpc).
+
+
+ Full runtime dependencies of inets-7.1.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.5.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16043    Application(s): kernel
+               Related Id(s): ERL-1036
+
+               The 'socket state' info provided by the inet info
+               function has been improved
+
+
+  OTP-16145    Application(s): kernel
+               Related Id(s): ERL-1034
+
+               Fix bug where logger would crash when starting when a
+               very large log file needed to be rotated and
+               compressed.
+
+
+  OTP-16216    Application(s): erts, kernel
+
+               Fixed a bug causing actual nodedown reason reported by
+               net_kernel:monitor_nodes(true, [nodedown_reason]) to be
+               lost and replaced by the reason killed.
+
+
+  OTP-16279    Application(s): kernel
+               Related Id(s): ERL-1066
+
+               The documentation for rpc:call/4,5/ has been updated to
+               describe what happens when the called function throws
+               or return an 'EXIT' tuple.
+
+
+ Full runtime dependencies of kernel-6.5.1: erts-10.6, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.18.7 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.18.7 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16061    Application(s): megaco
+
+               The meas example had not been updated for a long time,
+               which caused it to not work. Also, it made use of
+               deprecated functions (now()). This has now been fixed.
+
+
+ Full runtime dependencies of megaco-3.18.7: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.16.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.16.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16286    Application(s): mnesia
+               Related Id(s): ERL-1077
+
+               Fixed mnesia crash which could happen when trying to
+               recover from failures in transactions containing
+               sticky_locks.
+
+
+  OTP-16291    Application(s): mnesia
+               Related Id(s): ERL-1091
+
+               Fixed mnesia index issue. Could happen when updating
+               records with a index plugin backend.
+
+
+ Full runtime dependencies of mnesia-4.16.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.9.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.9.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16296    Application(s): observer
+
+               Crashdump Viewer how handles crash dumps where the Old
+               Binary VHeap has overflowed.
+
+
+ Full runtime dependencies of observer-2.9.3: erts-7.0, et-1.5,
+ kernel-3.0, runtime_tools-1.8.14, stdlib-3.5, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.7.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.7.1 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16156    Application(s): public_key, ssl
+               Related Id(s): ERL-1030
+
+               Corrected CRL handling which could cause CRL
+               verification to fail. This could happen when the CRL
+               distribution point explicitly specifies the CRL issuer,
+               that is not using the fallback.
+
+
+ Full runtime dependencies of public_key-1.7.1: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-15947    Application(s): snmp
+               Related Id(s): ERIERL-378
+
+               [manager] The callbacks where executed in a (new)
+               'temporary' process, that executed the callback call
+               and then exited. This has now been made configurable so
+               that is also possible to specify a 'permanent' callback
+               proxy process. All callback calls will then be executed
+               in this (permanent) process (in sequence).
+
+
+ Full runtime dependencies of snmp-5.4.4: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.8.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.8.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-14849    Application(s): ssh
+               Related Id(s): ERL-545
+
+               The ssh cli (e.g shell) server behaved strangely when
+               characters were inserted in a string such that the last
+               characters tried to wrap the line.
+
+
+  OTP-15417    Application(s): ssh
+               Related Id(s): OTP-16108
+
+               If an OTP SSH server was serving an "exec" request and
+               the executed code used Erlang standard_io for
+               input/output, the I/O was erroneously handled by the
+               *server's* group leader, so the I/O turned up in the
+               the server's Erlang shell (if any). The user at the
+               client side did therefor not see that I/O.
+
+               This is corrected now, so the client - for example the
+               ssh OS shell command - handles the I/O. The user could
+               send input to the server side exec handling code by
+               writing on the terminal, and server side output from
+               for example io:format is presented on the terminal -
+               not only the functional result.
+
+               NOTE 1: Servers executing exec requests with the old,
+               undocumented ways of specifying the custom exec handler
+               is not changed. Changed are only the two cases where
+               the server's 'exec' option either:
+               1) is not specified (i.e. using the default shell) or,
+               2) it has the {direct, fun(...) -> ... end} value
+               format.
+
+               NOTE 2: Previously an end-of-line marker was appended
+               on the result and error reports at the client side.
+               They are removed now and the error reports are slightly
+               enhanced.
+
+               TECHNICAL DETAILS: The server's device standard_input
+               receives data events from the exec request's channel,
+               and the device standard_output is sending its data by
+               data events to the client on that channel. The result
+               is that standard_io is now performed by the client's
+               group leader.
+
+
+  OTP-16047    Application(s): ssh
+
+               The functions ssh:shell/1,2,3 left the connection open
+               when they returned. That leakage is fixed now.
+
+
+  OTP-16123    Application(s): ssh
+
+               Corrected that an Erlang SSH server could return the
+               status code 4294967295 instead of 255 on some errors of
+               an exec request.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15972    Application(s): ssh
+
+               Internal simplification of ssh_sftp/ssh_xfer
+
+
+  OTP-16108    Application(s): ssh
+               Related Id(s): OTP-15417
+
+               The documentation of One-Time Execution in the User's
+               Guide is updated with more examples.
+
+
+  OTP-16113    Application(s): ssh
+
+               The new value 'disabled' is introduced in the SSH
+               daemon options 'exec' and 'shell'. Previously they
+               lacked a clear way of disabling them.
+
+
+  OTP-16170    Application(s): ssh
+
+               The old algorithms 'aes192_cbc', 'aes256_cbc' and
+               'hmac-sha1-96' are added for compatibility with older
+               peers.
+
+               The mac 'hmac-sha1-96' is nowadays not recommended and
+               must therefore be explicitly enabled. Use for example
+               the Option value {modify_algorithms, [{append,
+               [{mac,['hmac-sha1-96']}]}]}
+
+
+ Full runtime dependencies of ssh-4.8.1: crypto-4.5, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.5 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.5 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16156    Application(s): public_key, ssl
+               Related Id(s): ERL-1030
+
+               Corrected CRL handling which could cause CRL
+               verification to fail. This could happen when the CRL
+               distribution point explicitly specifies the CRL issuer,
+               that is not using the fallback.
+
+
+  OTP-16293    Application(s): ssl
+
+               Correct handling of unordered chains so that it works
+               as expected
+
+
+  OTP-16295    Application(s): ssl
+               Related Id(s): ERL-1095
+
+               Fix bug causing ssl application to crash when handshake
+               is paused and ClientHello contains extensions for
+               session resumption (psk_key_exchange_modes,
+               pre_shared_key).
+
+
+  OTP-16303    Application(s): ssl
+
+               Fix connectivity problems with legacy servers when
+               client is configured to support a range of protocol
+               versions including TLS 1.3.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15524    Application(s): ssl
+               Related Id(s): OTP-15352
+
+               Improve session handling for TLS-1.3 compatibility mode
+               and cleaner internal handling so that removal of old
+               session data can be more efficient, hopefully
+               mitigating problems with big session tables during
+               heavy load.
+
+
+  OTP-15809    Application(s): ssl
+               Related Id(s): ERL-917
+
+               Correct handling of DTLS listen socket emulation. Could
+               cause failure to create new listen socket after process
+               that owned previous listen socket died.
+
+
+  OTP-16266    Application(s): ssl
+
+               Add detailed info in ALERT description when client does
+               not send a requested cert.
+
+
+ Full runtime dependencies of ssl-9.5: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.11 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-3.11 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16052    Application(s): erts, stdlib
+
+               The functions unicode:characters_to_list() and
+               unicode:characters_to_binary() raised a badarg
+               exception instead of returning an error tuple when
+               passed very large invalid code points as input.
+
+
+  OTP-16053    Application(s): compiler, stdlib
+               Related Id(s): ERL-1039
+
+               Fixed a bug in the linter where list and binary
+               comprehensions could suppress unsafe variable errors.
+
+
+  OTP-16085    Application(s): stdlib
+               Related Id(s): PR-2379
+
+               Fixed incorrect type specifications for erl_tar:open/2,
+               create/2,3, and add/4.
+
+
+  OTP-16132    Application(s): stdlib
+               Related Id(s): ERL-1041
+
+               Fixed erroneous type spec for binary:list_to_bin/1.
+               Argument type was changed from iodata() to iolist().
+
+
+  OTP-16211    Application(s): stdlib
+
+               Fix a race in pool:pspawn_link that caused a noproc
+               error to be thrown when using it to spawn a very short
+               lived process.
+
+
+  OTP-16316    Application(s): erts, stdlib
+
+               Fixed a performance issue in ETS lookup when using the
+               compressed option and the term contained atoms. Before
+               this fix the decompress algorithm for atoms would
+               unnecessarily take a global lock to validate the atom.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16262    Application(s): stdlib
+               Related Id(s): ERIERL-435
+
+               Added a new compiler/linter option to disable warnings
+               for unused types (nowarn_unused_type).
+
+
+  OTP-16315    Application(s): erts, stdlib
+
+               ETS tables have been optimized to not use any locks
+               when running in a system with only one scheduler
+               enabled. This can provide significant performance gains
+               for applications that use ETS tables heavily.
+
+
+ Full runtime dependencies of stdlib-3.11: compiler-5.0, crypto-3.3,
+ erts-10.6, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tftp-1.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tftp-1.0.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16317    Application(s): tftp
+               Related Id(s): OTP-16183
+
+               Removed compiler warnings.
+
+
+ Full runtime dependencies of tftp-1.0.2: kernel-6.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16164    Application(s): tools
+
+               Improve -spec indentation in emacs mode.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16174    Application(s): tools
+
+               The Emacs erlang-mode function that lets the user open
+               the documentation for an Erlang/OTP function in an
+               Emacs buffer has been improved. Bugs in this function
+               has been fixed and and the user will now be asked if
+               the man pages should be downloaded automatically by
+               Emacs when they can't be found on the system. To test
+               this functionality, put the cursor over the function
+               name in a call to an Erlang/OTP function (e.g.,
+               "io:format("arg")") and type C-c C-d (i.e., Ctrl-key
+               and c-key and then Ctrl-key and d-key). There is also a
+               new menu item under the Erlang menu (labeled "Man -
+               Function Under Cursor").
+
+
+ Full runtime dependencies of tools-3.3: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.9 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.9 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16285    Application(s): wx
+
+               Added wxWindow:isShownOnScreen/1,
+               wxMouseEvent:getWheelAxis and mac specific menubar
+               functions. Fixed defines that have changed in newer
+               wxWidgets versions, that caused some literals to become
+               run-time dependent on wxWidgets version.
+
+
+ Full runtime dependencies of wx-1.9: erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.23 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.23 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16324    Application(s): xmerl
+
+               Replace a local floor/1 function with erlang:floor/1.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16339    Application(s): xmerl
+
+               Implement handling of parsed entity content and some
+               other improvements.
+
+               -- Updated the SAX test-suite (xmerl_sax_std_SUITE) to
+               more recent version
+
+               -- Test now uses its own data directory since the
+               non-SAX xmerl test suite (xmerl_std_SUITE) uses a
+               different version of the other suite
+
+               -- Canonical XML checks have been added to all tests
+               that apply. Canonical, as it applies here, is regular
+               canonical XML with the addition of notation
+               declarations if any. Output must match byte-for-byte.
+
+               -- External entities implemented, both as markup and
+               replacement text
+
+               -- Cyclic references are checked at the end of the DTD
+               parse; also when a reference is found
+
+               -- Default attributes are reported in events
+
+               -- Attributes are whitespace normalized if their type
+               demands it
+
+               -- External entities can have a different encoding than
+               the base document and will be transcoded to the
+               document encoding
+
+               -- Conditional sections (IGNORE/INCLUDE) handling has
+               been added to DTD parsing
+
+               -- Element content-model is now checked for
+               well-formed-ness
+
+               -- A few missing function clauses have been added
+
+
+ Full runtime dependencies of xmerl-1.3.23: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
