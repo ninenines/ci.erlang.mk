@@ -1,0 +1,114 @@
+Patch Package:           OTP 22.2.1
+Git Tag:                 OTP-22.2.1
+Date:                    2019-12-19
+Trouble Report Id:       OTP-16314, OTP-16349, OTP-16357, OTP-16359,
+                         OTP-16360, OTP-16361
+Seq num:                 ERIERL-444, ERIERL-451, ERL-1098, ERL-1166
+System:                  OTP
+Release:                 22
+Application:             erts-10.6.1, snmp-5.4.5, ssl-9.5.1
+Predecessor:             OTP 22.2
+
+ Check out the git tag OTP-22.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.6.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.6.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16314    Application(s): erts
+               Related Id(s): ERL-1098
+
+               Corrected an issue with the new socket api which could
+               cause a core dump. A race during socket close could
+               cause a core dump (an invalid nif environment free).
+
+
+  OTP-16359    Application(s): erts
+
+               Corrected an issue with the new socket api which could
+               cause a core dump. When multiple accept processes
+               waiting for a connect a connect could cause a core
+               dump.
+
+
+ Full runtime dependencies of erts-10.6.1: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.5 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16349    Application(s): snmp
+               Related Id(s): ERIERL-444
+
+               Its now possible to remove selected varbinds (from the
+               final message) when sending a notification. This is
+               done by setting the 'value' (in the varbind(s) of the
+               varbinds list) to '?NOTIFICATION_IGNORE_VB_VALUE'.
+
+
+  OTP-16360    Application(s): snmp
+               Related Id(s): ERIERL-451
+
+               Its now possible to specify that an oid shall be
+               "truncated" (trailing ".0" to be removed) when sending
+               an notification.
+
+
+ Full runtime dependencies of snmp-5.4.5: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.5.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.5.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16357    Application(s): ssl
+               Related Id(s): ERL-1166
+
+               Add missing alert handling clause for TLS record
+               handling. Could sometimes cause confusing error
+               behaviors of TLS connections.
+
+
+  OTP-16361    Application(s): ssl
+
+               Fix handling of ssl:recv that happens during a
+               renegotiation. Using the passive receive function
+               ssl:recv/[2,3] during a renegotiation would fail the
+               connection with unexpected msg.
+
+
+ Full runtime dependencies of ssl-9.5.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
