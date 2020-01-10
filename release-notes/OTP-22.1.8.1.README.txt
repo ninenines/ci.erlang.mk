@@ -1,0 +1,50 @@
+Patch Package:           OTP 22.1.8.1
+Git Tag:                 OTP-22.1.8.1
+Date:                    2020-01-10
+Trouble Report Id:       OTP-16349, OTP-16360
+Seq num:                 ERIERL-444, ERIERL-451
+System:                  OTP
+Release:                 22
+Application:             snmp-5.4.3.1
+Predecessor:             OTP 22.1.8
+
+ Check out the git tag OTP-22.1.8.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- snmp-5.4.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.4.3.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16349    Application(s): snmp
+               Related Id(s): ERIERL-444
+
+               Its now possible to remove selected varbinds (from the
+               final message) when sending a notification. This is
+               done by setting the 'value' (in the varbind(s) of the
+               varbinds list) to '?NOTIFICATION_IGNORE_VB_VALUE'.
+
+
+  OTP-16360    Application(s): snmp
+               Related Id(s): ERIERL-451
+
+               Its now possible to specify that an oid shall be
+               "truncated" (trailing ".0" to be removed) when sending
+               an notification.
+
+
+ Full runtime dependencies of snmp-5.4.3.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
