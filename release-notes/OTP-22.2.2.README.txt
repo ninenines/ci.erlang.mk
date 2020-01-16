@@ -1,0 +1,150 @@
+Patch Package:           OTP 22.2.2
+Git Tag:                 OTP-22.2.2
+Date:                    2020-01-13
+Trouble Report Id:       OTP-16333, OTP-16371, OTP-16373, OTP-16375,
+                         OTP-16376, OTP-16378, OTP-16379
+Seq num:                 ERL-1104, ERL-1125
+System:                  OTP
+Release:                 22
+Application:             crypto-4.6.4, erts-10.6.2, ssh-4.8.2,
+                         stdlib-3.11.1
+Predecessor:             OTP 22.2.1
+
+ Check out the git tag OTP-22.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16376    Application(s): crypto, ssh
+
+               Constant time comparisons added.
+
+
+ Full runtime dependencies of crypto-4.6.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.6.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.6.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16371    Application(s): erts
+
+               Taking a scheduler offline could cause timers set while
+               executing on that scheduler to be delayed until the
+               scheduler was put online again. This bug was introduced
+               in ERTS version 10.0 (OTP 21.0).
+
+
+  OTP-16378    Application(s): erts, stdlib
+               Related Id(s): ERL-1125
+
+               The ets:update_counter/4 core dumped when given an
+               ordered_set with write_concurrency enabled and an
+               invalid position. This bug has been fixed.
+
+
+  OTP-16379    Application(s): erts
+
+               A process calling erlang:system_flag(multi_scheduling,
+               block) could end up blocked waiting for the operation
+               to complete indefinitely.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16333    Application(s): erts
+               Related Id(s): ERL-1104
+
+               Duplicate entries for [socket:]getopt and
+               [socket:]setopt in man page.
+
+
+ Full runtime dependencies of erts-10.6.2: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.8.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.8.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.6.4 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16373    Application(s): ssh
+
+               Fixed that ssh_connection:send could allocate a large
+               amount of memory if given an iolist() as input data.
+
+
+  OTP-16375    Application(s): ssh
+
+               Safe atom conversions.
+
+
+  OTP-16376    Application(s): crypto, ssh
+
+               Constant time comparisons added.
+
+
+ Full runtime dependencies of ssh-4.8.2: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.11.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-3.11.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6.2 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16378    Application(s): erts, stdlib
+               Related Id(s): ERL-1125
+
+               The ets:update_counter/4 core dumped when given an
+               ordered_set with write_concurrency enabled and an
+               invalid position. This bug has been fixed.
+
+
+ Full runtime dependencies of stdlib-3.11.1: compiler-5.0, crypto-3.3,
+ erts-10.6.2, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
