@@ -1,0 +1,93 @@
+Patch Package:           OTP 20.3.8.25
+Git Tag:                 OTP-20.3.8.25
+Date:                    2020-01-20
+Trouble Report Id:       OTP-16373, OTP-16375, OTP-16376, OTP-16379
+Seq num:                
+System:                  OTP
+Release:                 20
+Application:             crypto-4.2.2.4, erts-9.3.3.14, ssh-4.6.9.6
+Predecessor:             OTP 20.3.8.24
+
+ Check out the git tag OTP-20.3.8.25, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.2.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.2.2.4 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16376    Application(s): crypto, ssh
+
+               Constant time comparisons added.
+
+
+ Full runtime dependencies of crypto-4.2.2.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-9.3.3.14 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-9.3.3.14 application can be applied independently of other
+ applications on a full OTP 20 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16379    Application(s): erts
+
+               A process calling erlang:system_flag(multi_scheduling,
+               block) could end up blocked waiting for the operation
+               to complete indefinitely.
+
+
+ Full runtime dependencies of erts-9.3.3.14: kernel-5.0, sasl-3.0.1,
+ stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.6.9.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.6.9.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 20 installation.
+
+       On a full OTP 20 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-4.2.2.4 (first satisfied in OTP 20.3.8.25)
+       -- public_key-1.5.2 (first satisfied in OTP 20.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16373    Application(s): ssh
+
+               Fixed that ssh_connection:send could allocate a large
+               amount of memory if given an iolist() as input data.
+
+
+  OTP-16375    Application(s): ssh
+
+               Safe atom conversions.
+
+
+  OTP-16376    Application(s): crypto, ssh
+
+               Constant time comparisons added.
+
+
+ Full runtime dependencies of ssh-4.6.9.6: crypto-4.2.2.4, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
