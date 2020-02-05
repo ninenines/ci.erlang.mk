@@ -1,0 +1,81 @@
+Patch Package:           OTP 21.3.8.13
+Git Tag:                 OTP-21.3.8.13
+Date:                    2020-02-03
+Trouble Report Id:       OTP-16436, OTP-16438, OTP-16441
+Seq num:                 ERL-1152
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.9, stdlib-3.8.2.3
+Predecessor:             OTP 21.3.8.12
+
+ Check out the git tag OTP-21.3.8.13, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.9 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16436    Application(s): erts
+               Related Id(s): ERL-1152
+
+               A process could end up in a state where it got
+               endlessly rescheduled without making any progress. This
+               occurred when a system task, such as check of process
+               code (part of a code purge), was scheduled on a high
+               priority process trying to execute on a dirty
+               scheduler.
+
+
+  OTP-16438    Application(s): erts
+
+               Fixed bug in erlang:list_to_ref/1 when called with a
+               reference created by a remote note. Function
+               list_to_ref/1 is intended for debugging and not to be
+               used in application programs. Bug exist since OTP 20.0.
+
+
+ Full runtime dependencies of erts-10.3.5.9: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.8.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.8.2.3 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16441    Application(s): stdlib
+
+               A directory traversal vulnerability has been eliminated
+               in erl_tar. erl_tar will now refuse to extract symlinks
+               that points outside the targeted extraction directory
+               and will return {error,{Path,unsafe_symlink}}. (Thanks
+               to Eric Meadows-Jönsson for the bug report and for
+               suggesting a fix.)
+
+
+ Full runtime dependencies of stdlib-3.8.2.3: compiler-5.0,
+ crypto-3.3, erts-10.0, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

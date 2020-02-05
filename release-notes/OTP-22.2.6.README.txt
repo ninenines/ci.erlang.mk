@@ -1,0 +1,48 @@
+Patch Package:           OTP 22.2.6
+Git Tag:                 OTP-22.2.6
+Date:                    2020-02-05
+Trouble Report Id:       OTP-16446
+Seq num:                 ERL-1157
+System:                  OTP
+Release:                 22
+Application:             erts-10.6.4
+Predecessor:             OTP 22.2.5
+
+ Check out the git tag OTP-22.2.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.6.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.6.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16446    Application(s): erts
+               Related Id(s): ERL-1157
+
+               A process could get into an inconsistent state where it
+               was runnable, but never scheduled for execution. This
+               could occur when a mix of normal and low priority
+               processes where scheduled on the same type of dirty
+               scheduler simultaneously.
+
+
+ Full runtime dependencies of erts-10.6.4: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
