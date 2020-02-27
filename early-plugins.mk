@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2019, Loïc Hoguin <essen@ninenines.eu>
+# Copyright (c) 2017-2020, Loïc Hoguin <essen@ninenines.eu>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -28,20 +28,25 @@ OTP-19 := OTP-19.0.7 OTP-19.1.6 OTP-19.2.3 OTP-19.3.6.13
 OTP-20 := OTP-20.0.5 OTP-20.1.7 OTP-20.2.4 OTP-20.3.8.25
 OTP-21 := OTP-21.0.9 OTP-21.1.4 OTP-21.2.7 OTP-21.3.8.13
 OTP-22 := OTP-22.0.7 OTP-22.1.8 OTP-22.2.7
+OTP-23 := OTP-23.0-rc1
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22)
-OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22)
-OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22)
-OTP-21+ := $(OTP-21) $(OTP-22)
-OTP-22+ := $(OTP-22)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
+OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
+OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23)
+OTP-22+ := $(OTP-22) $(OTP-23)
+OTP-23+ := $(OTP-23)
 
 OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
-	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22))
+	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
+	$(lastword $(OTP-23))
 OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
-	$(lastword $(OTP-21)) $(lastword $(OTP-22))
-OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22))
-OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22))
-OTP-LATEST-22+ := $(lastword $(OTP-22))
+	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23))
+OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) \
+	$(lastword $(OTP-22)) $(lastword $(OTP-23))
+OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23))
+OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23))
+OTP-LATEST-23+ := $(lastword $(OTP-23))
 
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
@@ -77,9 +82,10 @@ OTP-22-DROPPED := OTP-22.0-rc1 OTP-22.0-rc2 OTP-22.0-rc3 OTP-22.0 \
 	OTP-22.1 OTP-22.1.1 OTP-22.1.2 OTP-22.1.3 OTP-22.1.4 OTP-22.1.5 \
 	OTP-22.1.6 OTP-22.1.7 OTP-22.2 OTP-22.2.1 OTP-22.2.2 OTP-22.2.3 \
 	OTP-22.2.4 OTP-22.2.6
+OTP-23-DROPPED :=
 
 OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
-	$(OTP-21-DROPPED) $(OTP-22-DROPPED)
+	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED)
 
 # Configure Erlang.mk's CI plugin.
 
@@ -154,21 +160,28 @@ WINDOWS-OTP-19 := 19.0 19.1 19.2 19.3
 WINDOWS-OTP-20 := 20.0 20.1 20.2 20.3
 WINDOWS-OTP-21 := 21.0.1 21.1 21.2 21.3
 WINDOWS-OTP-22 := 22.0 22.1 22.2
+WINDOWS-OTP-23 :=
 
-WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
-WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
-WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
-WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22)
-WINDOWS-OTP-22+ := $(WINDOWS-OTP-22)
+WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) \
+	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
+WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) \
+	$(WINDOWS-OTP-23)
+WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
+WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
+WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
+WINDOWS-OTP-23+ := $(WINDOWS-OTP-23)
 
 WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
-	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
+	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
+	$(lastword $(WINDOWS-OTP-23))
 WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
-	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
+	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
 WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
-	$(lastword $(WINDOWS-OTP-22))
-WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22))
-WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22))
+	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
+WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
+	$(lastword $(WINDOWS-OTP-23))
+WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
+WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23))
 
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
 
