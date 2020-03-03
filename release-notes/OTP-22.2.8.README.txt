@@ -1,0 +1,75 @@
+Patch Package:           OTP 22.2.8
+Git Tag:                 OTP-22.2.8
+Date:                    2020-02-28
+Trouble Report Id:       OTP-16457, OTP-16459
+Seq num:                
+System:                  OTP
+Release:                 22
+Application:             diameter-2.2.2
+Predecessor:             OTP 22.2.7
+
+ Check out the git tag OTP-22.2.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- diameter-2.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.2.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16457    Application(s): diameter
+
+               The possibility of choosing a handler process for an
+               incoming Diameter request with a configured MFA was
+               documented in OTP 20.0, but counters (with
+               {traffic_counters, true}) were not incremented when
+               this process was on a remote node. Counters are now
+               incremented on the node that configures the transport
+               in question.
+
+               Introduced in OTP 21.3.
+
+
+  OTP-16459    Application(s): diameter
+
+               Transport options differing from those passed to
+               diameter:add_transport/2 were used in several
+               situations: when starting a transport process after
+               connect_timer expiry after an initial connection
+               attempt has failed, when starting a transport process
+               after a connection has been accepted, when sending
+               events, when returning options in
+               diameter:service_info/2, and possibly more. In
+               particular, the following configuration options to
+               diameter:add_transport/2 were dropped:
+               avp_dictionaries, incoming_maxlen, spawn_opt,
+               strict_mbit.
+
+               Moreover, any service options mistakenly passed to
+               diameter:add_transport/2 were interpreted as such,
+               instead of being ignored as the documentation states,
+               with the consequence that outgoing and incoming
+               requests saw different values of some options, some
+               were always taken from transport options, and others
+               from service options.
+
+               diameter:add_transport/2 must be called in new code for
+               the fix to have effect.
+
+               Introduced in OTP 20.1.
+
+
+ Full runtime dependencies of diameter-2.2.2: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
