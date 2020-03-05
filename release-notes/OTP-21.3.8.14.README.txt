@@ -1,0 +1,68 @@
+Patch Package:           OTP 21.3.8.14
+Git Tag:                 OTP-21.3.8.14
+Date:                    2020-03-05
+Trouble Report Id:       OTP-16404, OTP-16446, OTP-16481
+Seq num:                 ERL-1127, ERL-1157
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.10
+Predecessor:             OTP 21.3.8.13
+
+ Check out the git tag OTP-21.3.8.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.10 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.10 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16404    Application(s): erts
+               Related Id(s): ERL-1127
+
+               Fixed bug in ets:update_counter/4, when called with an
+               invalid UpdateOp and a Key that does not exist, causing
+               ets:info(T,size) to return incorrect values. Bug exists
+               since OTP-19.0.2.
+
+
+  OTP-16446    Application(s): erts
+               Related Id(s): ERL-1157
+
+               A process could get into an inconsistent state where it
+               was runnable, but never scheduled for execution. This
+               could occur when a mix of normal and low priority
+               processes where scheduled on the same type of dirty
+               scheduler simultaneously.
+
+
+  OTP-16481    Application(s): erts
+
+               Corrected the valid range of the erl command line
+               argument +SDio <NumberOfDirtyIoSchedulers> from 0..1024
+               to 1..1024. +SDio 0 was erroneously allowed which just
+               caused the VM to crash on the first dirty I/O job
+               scheduled.
+
+
+ Full runtime dependencies of erts-10.3.5.10: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
