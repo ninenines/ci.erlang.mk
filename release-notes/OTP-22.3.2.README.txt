@@ -1,0 +1,41 @@
+Patch Package:           OTP 22.3.2
+Git Tag:                 OTP-22.3.2
+Date:                    2020-04-09
+Trouble Report Id:       OTP-16030
+Seq num:                
+System:                  OTP
+Release:                 22
+Application:             asn1-5.0.11
+Predecessor:             OTP 22.3.1
+
+ Check out the git tag OTP-22.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.11 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.11 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16030    Application(s): asn1
+
+               The compiler now has limited support for the JSON
+               encoding rules (ITU-T X.697 ASN.1 encoding rules:
+               Specification of JavaScript Object Notation Encoding
+               Rules).
+
+
+ Full runtime dependencies of asn1-5.0.11: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
