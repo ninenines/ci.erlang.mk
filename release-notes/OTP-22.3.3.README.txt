@@ -1,0 +1,70 @@
+Patch Package:           OTP 22.3.3
+Git Tag:                 OTP-22.3.3
+Date:                    2020-04-27
+Trouble Report Id:       OTP-16462, OTP-16619
+Seq num:                 ERIERL-464, ERL-1213
+System:                  OTP
+Release:                 22
+Application:             ssh-4.9.1, ssl-9.6.2
+Predecessor:             OTP 22.3.2
+
+ Check out the git tag OTP-22.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.9.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.9.1 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.6.4 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16462    Application(s): ssh
+               Related Id(s): ERIERL-464
+
+               Potential hazard between re-keying decision and socket
+               close.
+
+
+ Full runtime dependencies of ssh-4.9.1: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.6.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-9.6.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.7.2 (first satisfied in OTP 22.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16619    Application(s): ssl
+               Related Id(s): ERL-1213
+
+               Fix timing bug that could cause ssl sockets to become
+               unresponsive after an ssl:recv/3 call timed out
+
+
+ Full runtime dependencies of ssl-9.6.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.7.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,130 @@
+Patch Package:           OTP 21.3.8.15
+Git Tag:                 OTP-21.3.8.15
+Date:                    2020-04-27
+Trouble Report Id:       OTP-16462, OTP-16553, OTP-16555, OTP-16619
+Seq num:                 ERIERL-464, ERL-1188, ERL-1213
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.11, ssh-4.7.6.4, ssl-9.2.3.6,
+                         stdlib-3.8.2.4
+Predecessor:             OTP 21.3.8.14
+
+ Check out the git tag OTP-21.3.8.15, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.11 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.11 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16553    Application(s): erts, stdlib
+
+               re:run(Subject, RE, [unicode]) returned nomatch instead
+               of failing with a badarg error exception when Subject
+               contained illegal utf8 and RE was passed as a binary.
+               This has been corrected along with corrections of
+               reduction counting in re:run() error cases.
+
+
+  OTP-16555    Application(s): erts
+               Related Id(s): ERL-1188
+
+               Fixed a bug that could cause the emulator to crash when
+               purging modules or persistent terms.
+
+
+ Full runtime dependencies of erts-10.3.5.11: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7.6.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.7.6.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.4.2.2 (first satisfied in OTP 21.3.8.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16462    Application(s): ssh
+               Related Id(s): ERIERL-464
+
+               Potential hazard between re-keying decision and socket
+               close.
+
+
+ Full runtime dependencies of ssh-4.7.6.4: crypto-4.4.2.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.2.3.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-9.2.3.6 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16619    Application(s): ssl
+               Related Id(s): ERL-1213
+
+               Fix timing bug that could cause ssl sockets to become
+               unresponsive after an ssl:recv/3 call timed out
+
+
+ Full runtime dependencies of ssl-9.2.3.6: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.5, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.8.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-3.8.2.4 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.3.5.11 (first satisfied in OTP 21.3.8.15)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16553    Application(s): erts, stdlib
+
+               re:run(Subject, RE, [unicode]) returned nomatch instead
+               of failing with a badarg error exception when Subject
+               contained illegal utf8 and RE was passed as a binary.
+               This has been corrected along with corrections of
+               reduction counting in re:run() error cases.
+
+
+ Full runtime dependencies of stdlib-3.8.2.4: compiler-5.0,
+ crypto-3.3, erts-10.3.5.11, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
