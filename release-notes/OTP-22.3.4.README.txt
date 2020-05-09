@@ -1,0 +1,87 @@
+Patch Package:           OTP 22.3.4
+Git Tag:                 OTP-22.3.4
+Date:                    2020-05-08
+Trouble Report Id:       OTP-16636, OTP-16640, OTP-16641, OTP-16642
+Seq num:                 ERIERL-145
+System:                  OTP
+Release:                 22
+Application:             asn1-5.0.12, erts-10.7.2
+Predecessor:             OTP 22.3.3
+
+ Check out the git tag OTP-22.3.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.12 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.12 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16636    Application(s): asn1
+               Related Id(s): ERIERL-145
+
+               Dialyzer warnings of type no_match are now suppressed
+               in the generated files.
+
+
+ Full runtime dependencies of asn1-5.0.12: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16640    Application(s): erts
+               Related Id(s): OTP-16193
+
+               A literal area could prematurely be released before all
+               uses of it had been removed. This occurred either when
+               a terminating process had a complex exit reason
+               referring to a literal that concurrently was removed,
+               or when a terminating process continued executing a
+               dirty NIF accessing a literal (via the heap) that
+               concurrently was removed.
+
+
+  OTP-16641    Application(s): erts
+
+               The VM could potentially crash when checking process
+               code of a process that terminated while executing a
+               dirty NIF. The checking of process code is part of a
+               code purge operation.
+
+
+  OTP-16642    Application(s): erts
+
+               System tasks of low priority were not interleaved with
+               normal priority system tasks as they should. This could
+               potentially delay garbage collection of another process
+               longer than intended if the garbage collection was
+               requested from a low priority process.
+
+
+ Full runtime dependencies of erts-10.7.2: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
