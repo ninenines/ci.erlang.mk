@@ -1,0 +1,86 @@
+Patch Package:           OTP 21.3.8.16
+Git Tag:                 OTP-21.3.8.16
+Date:                    2020-05-20
+Trouble Report Id:       OTP-16639, OTP-16640, OTP-16641, OTP-16642
+Seq num:                 ERL-1236
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.12
+Predecessor:             OTP 21.3.8.15
+
+ Check out the git tag OTP-21.3.8.16, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.12 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.12 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16639    Application(s): erts
+               Related Id(s): ERL-1236
+
+               The functionality utilized by BIFs for temporary
+               disabling of garbage collection while yielding could
+               cause system task queues to become inconsistent on a
+               process executing such a BIF. Process system tasks are
+               for example utilized when purging code, garbage
+               collecting literal data, and when issuing an ordinary
+               garbage collection from another process.
+
+               The bug does not trigger frequently. Multiple code
+               purges in direct sequence makes it more likely that
+               this bug is triggered. In the cases observed, this has
+               resulted in a hanging code purge operation.
+
+
+  OTP-16640    Application(s): erts
+               Related Id(s): OTP-16193
+
+               A literal area could prematurely be released before all
+               uses of it had been removed. This occurred either when
+               a terminating process had a complex exit reason
+               referring to a literal that concurrently was removed,
+               or when a terminating process continued executing a
+               dirty NIF accessing a literal (via the heap) that
+               concurrently was removed.
+
+
+  OTP-16641    Application(s): erts
+
+               The VM could potentially crash when checking process
+               code of a process that terminated while executing a
+               dirty NIF. The checking of process code is part of a
+               code purge operation.
+
+
+  OTP-16642    Application(s): erts
+
+               System tasks of low priority were not interleaved with
+               normal priority system tasks as they should. This could
+               potentially delay garbage collection of another process
+               longer than intended if the garbage collection was
+               requested from a low priority process.
+
+
+ Full runtime dependencies of erts-10.3.5.12: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

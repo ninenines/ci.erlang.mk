@@ -1,0 +1,119 @@
+Patch Package:           OTP 22.3.4.1
+Git Tag:                 OTP-22.3.4.1
+Date:                    2020-05-20
+Trouble Report Id:       OTP-16596, OTP-16627, OTP-16631, OTP-16639,
+                         OTP-16654
+Seq num:                 ERIERL-491, ERL-1105, ERL-1236, ERL-1242
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.1, kernel-6.5.2.1,
+                         megaco-3.18.8.1
+Predecessor:             OTP 22.3.4
+
+ Check out the git tag OTP-22.3.4.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16596    Application(s): erts
+               Related Id(s): ERL-1105, PR-2606
+
+               Fixed bug in erl_crash.dump generation that could cause
+               a SEGV core dump if a recently cancelled timer was
+               found.
+
+
+  OTP-16639    Application(s): erts
+               Related Id(s): ERL-1236
+
+               The functionality utilized by BIFs for temporary
+               disabling of garbage collection while yielding could
+               cause system task queues to become inconsistent on a
+               process executing such a BIF. Process system tasks are
+               for example utilized when purging code, garbage
+               collecting literal data, and when issuing an ordinary
+               garbage collection from another process.
+
+               The bug does not trigger frequently. Multiple code
+               purges in direct sequence makes it more likely that
+               this bug is triggered. In the cases observed, this has
+               resulted in a hanging code purge operation.
+
+
+  OTP-16654    Application(s): erts
+               Related Id(s): ERL-1242
+
+               SCTP and UDP recv/2,3 hangs indefinitely if socket is
+               closed while recv is called (socket in passive mode).
+
+
+ Full runtime dependencies of erts-10.7.2.1: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.5.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.5.2.1 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16627    Application(s): kernel
+               Related Id(s): PR-2601
+
+               Fix bug in application:loaded_applications/0 that could
+               cause it to fail with badarg if for example a
+               concurrent upgrade/downgrade is running.
+
+
+ Full runtime dependencies of kernel-6.5.2.1: erts-10.6, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.18.8.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.18.8.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16631    Application(s): megaco
+               Related Id(s): ERIERL-491
+
+               The mini parser could not properly decode some IPv6
+               addresses.
+
+
+ Full runtime dependencies of megaco-3.18.8.1: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

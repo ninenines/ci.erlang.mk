@@ -1,0 +1,98 @@
+Patch Package:           OTP 23.0.1
+Git Tag:                 OTP-23.0.1
+Date:                    2020-05-20
+Trouble Report Id:       OTP-16582, OTP-16639, OTP-16652, OTP-16654,
+                         OTP-16657
+Seq num:                 ERL-1236, ERL-1242, ERL-1246, ERL-1253,
+                         ERL-984
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.1, erts-11.0.1
+Predecessor:             OTP 23.0
+
+ Check out the git tag OTP-23.0.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-23.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-16582    Application(s): otp
+               Related Id(s): ERL-984
+
+               Windows installer now contains full version.
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16652    Application(s): compiler
+               Related Id(s): ERL-1246
+
+               In rare circumstances, a guard using 'not' could
+               evaluate to the wrong boolean value.
+
+
+  OTP-16657    Application(s): compiler
+               Related Id(s): ERL-1253
+
+               A guard expression that referenced a variable bound to
+               a boolean expression could evaluate to the wrong value.
+
+
+ Full runtime dependencies of compiler-7.6.1: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.0.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.0.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16639    Application(s): erts
+               Related Id(s): ERL-1236
+
+               The functionality utilized by BIFs for temporary
+               disabling of garbage collection while yielding could
+               cause system task queues to become inconsistent on a
+               process executing such a BIF. Process system tasks are
+               for example utilized when purging code, garbage
+               collecting literal data, and when issuing an ordinary
+               garbage collection from another process.
+
+               The bug does not trigger frequently. Multiple code
+               purges in direct sequence makes it more likely that
+               this bug is triggered. In the cases observed, this has
+               resulted in a hanging code purge operation.
+
+
+  OTP-16654    Application(s): erts
+               Related Id(s): ERL-1242
+
+               SCTP and UDP recv/2,3 hangs indefinitely if socket is
+               closed while recv is called (socket in passive mode).
+
+
+ Full runtime dependencies of erts-11.0.1: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
