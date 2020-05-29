@@ -1,0 +1,61 @@
+Patch Package:           OTP 23.0.2
+Git Tag:                 OTP-23.0.2
+Date:                    2020-05-28
+Trouble Report Id:       OTP-16631, OTP-16693
+Seq num:                 ERIERL-491, ERL-1254
+System:                  OTP
+Release:                 23
+Application:             erts-11.0.2, megaco-3.19.1
+Predecessor:             OTP 23.0.1
+
+ Check out the git tag OTP-23.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.0.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16693    Application(s): erts
+               Related Id(s): ERL-1254, PR-2640
+
+               Fixed bug when sending an export fun (eg
+               lists:reverse/1) on a not yet established connection.
+               It could cause VM crash. Bug exists since OTP 23.0.
+
+
+ Full runtime dependencies of erts-11.0.2: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.19.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.19.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16631    Application(s): megaco
+               Related Id(s): ERIERL-491
+
+               The mini parser could not properly decode some IPv6
+               addresses.
+
+
+ Full runtime dependencies of megaco-3.19.1: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
