@@ -1,0 +1,61 @@
+Patch Package:           OTP 22.3.4.3
+Git Tag:                 OTP-22.3.4.3
+Date:                    2020-07-10
+Trouble Report Id:       OTP-16747, OTP-16760
+Seq num:                 ERIERL-511, ERL-1290
+System:                  OTP
+Release:                 22
+Application:             compiler-7.5.4.1, snmp-5.5.0.1
+Predecessor:             OTP 22.3.4.2
+
+ Check out the git tag OTP-22.3.4.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.5.4.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.5.4.1 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16747    Application(s): compiler
+               Related Id(s): ERL-1290
+
+               Fixed a bug that could cause the compiler to crash on
+               code that constructed binaries.
+
+
+ Full runtime dependencies of compiler-7.5.4.1: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.5.0.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.5.0.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16760    Application(s): snmp
+               Related Id(s): ERIERL-511
+
+               A file descriptor leak has been plugged. When calling
+               the reconfigure function of a mib, it opened the config
+               file(s) but never closed them on successful read.
+
+
+ Full runtime dependencies of snmp-5.5.0.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
