@@ -1,0 +1,107 @@
+Patch Package:           OTP 23.0.3
+Git Tag:                 OTP-23.0.3
+Date:                    2020-07-20
+Trouble Report Id:       OTP-16704, OTP-16708, OTP-16711, OTP-16717,
+                         OTP-16745, OTP-16766, OTP-16772
+Seq num:                 ERL-1273, ERL-1276, ERL-1289, ERL-1304
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.2, erts-11.0.3
+Predecessor:             OTP 23.0.2
+
+ Check out the git tag OTP-23.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-23.0.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-16711    Application(s): otp
+
+               Update WSL build scripts to work on newer versions.
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16708    Application(s): compiler
+               Related Id(s): ERL-1276
+
+               When calls to is_map_key were repeated, the compiler
+               could terminate with an internal consistency failure.
+
+
+  OTP-16745    Application(s): compiler
+               Related Id(s): ERL-1289
+
+               Fixed a bug in the type inference pass that could cause
+               the compiler to hang.
+
+
+ Full runtime dependencies of compiler-7.6.2: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.0.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.0.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16704    Application(s): erts
+               Related Id(s): ERL-1273, PR-16704
+
+               Fixed bug in erlang:load_nif/2 that could cause it to
+               throw badarg exception if a concurrent code change
+               operation was in progress. Bug existed since OTP 23.0.
+
+
+  OTP-16717    Application(s): erts
+
+               Minor fix of debug compiled VM.
+
+
+  OTP-16766    Application(s): erts
+               Related Id(s): ERL-1304
+
+               An unintentional reuse of an already used emulator
+               internal event object could cause a wakeup signal to a
+               thread to be lost. In worst case this could cause the
+               runtime system to hang. This hang was however quite
+               rare.
+
+
+  OTP-16772    Application(s): erts
+               Related Id(s): ERL-1304
+
+               NIF threads and driver threads on non-Linux systems
+               leaked internal resources when terminating. On Windows
+               these resources were one event per thread. On most
+               other systems one mutex and one condition variable per
+               thread. On these other systems that also lacked
+               pthread_cond_timedwait() also a pipe with its file
+               descriptors was leaked.
+
+
+ Full runtime dependencies of erts-11.0.3: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
