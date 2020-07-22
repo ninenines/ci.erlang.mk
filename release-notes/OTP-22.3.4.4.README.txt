@@ -1,0 +1,119 @@
+Patch Package:           OTP 22.3.4.4
+Git Tag:                 OTP-22.3.4.4
+Date:                    2020-07-22
+Trouble Report Id:       OTP-16764, OTP-16766, OTP-16767, OTP-16771,
+                         OTP-16772
+Seq num:                 ERIERL-509, ERIERL-512, ERL-1304
+System:                  OTP
+Release:                 22
+Application:             crypto-4.6.5.1, erts-10.7.2.2, ssl-9.6.2.2
+Predecessor:             OTP 22.3.4.3
+
+ Check out the git tag OTP-22.3.4.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.5.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.5.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16771    Application(s): crypto
+               Related Id(s): ERIERL-509
+
+               Implemented a workaround to allow fallback from using
+               the EVP API for Diffie-Hellman key generation
+
+
+ Full runtime dependencies of crypto-4.6.5.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16766    Application(s): erts
+               Related Id(s): ERL-1304
+
+               An unintentional reuse of an already used emulator
+               internal event object could cause a wakeup signal to a
+               thread to be lost. In worst case this could cause the
+               runtime system to hang. This hang was however quite
+               rare.
+
+
+  OTP-16772    Application(s): erts
+               Related Id(s): ERL-1304
+
+               NIF threads and driver threads on non-Linux systems
+               leaked internal resources when terminating. On Windows
+               these resources were one event per thread. On most
+               other systems one mutex and one condition variable per
+               thread. On these other systems that also lacked
+               pthread_cond_timedwait() also a pipe with its file
+               descriptors was leaked.
+
+
+ Full runtime dependencies of erts-10.7.2.2: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.6.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-9.6.2.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.7.2 (first satisfied in OTP 22.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16764    Application(s): ssl
+
+               Data deliver with ssl:recv/2,3 could fail for when
+               using packet mode. This has been fixed by correcting
+               the flow control handling of passive sockets when
+               packet mode is used.
+
+
+  OTP-16767    Application(s): ssl
+               Related Id(s): ERIERL-512
+
+               Fix the internal handling of options 'verify' and
+               'verify_fun'.
+
+               This change fixes a vulnerability when setting the ssl
+               option 'verify' to verify_peer in a continued handshake
+               won't take any effect resulting in the acceptance of
+               expired peer certificates.
+
+
+ Full runtime dependencies of ssl-9.6.2.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.7.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
