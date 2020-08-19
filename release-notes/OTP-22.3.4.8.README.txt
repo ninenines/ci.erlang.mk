@@ -1,0 +1,40 @@
+Patch Package:           OTP 22.3.4.8
+Git Tag:                 OTP-22.3.4.8
+Date:                    2020-08-19
+Trouble Report Id:       OTP-15130
+Seq num:                 ERIERL-524
+System:                  OTP
+Release:                 22
+Application:             snmp-5.5.0.3
+Predecessor:             OTP 22.3.4.7
+
+ Check out the git tag OTP-22.3.4.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- snmp-5.5.0.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.5.0.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-15130    Application(s): snmp
+               Related Id(s): ERIERL-524, OTP-16541
+
+               For agent fix PrivParams for SNMPv3 USM with AES
+               privacy, as earlier fixed for the manager in OTP_16541.
+
+
+ Full runtime dependencies of snmp-5.5.0.3: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

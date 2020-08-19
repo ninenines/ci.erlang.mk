@@ -1,0 +1,63 @@
+Patch Package:           OTP 22.3.4.6
+Git Tag:                 OTP-22.3.4.6
+Date:                    2020-08-13
+Trouble Report Id:       OTP-16780, OTP-16790
+Seq num:                 ERIERL-522, PR-2701
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.3, inets-7.1.3.3
+Predecessor:             OTP 22.3.4.5
+
+ Check out the git tag OTP-22.3.4.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16780    Application(s): erts
+               Related Id(s): PR-2701
+
+               The ERTS internal I/O poll implementation could get
+               into an inconsistent state causing input events to be
+               ignored.
+
+ Full runtime dependencies of erts-10.7.2.3: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+ ---------------------------------------------------------------------
+ --- inets-7.1.3.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.1.3.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16790    Application(s): inets
+               Related Id(s): ERIERL-522
+
+               Corrected an error regarding decode of percent encoded
+               URLs introduced in inets-7.1.3.
+
+
+ Full runtime dependencies of inets-7.1.3.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
