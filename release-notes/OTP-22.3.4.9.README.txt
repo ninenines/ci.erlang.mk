@@ -1,0 +1,56 @@
+Patch Package:           OTP 22.3.4.9
+Git Tag:                 OTP-22.3.4.9
+Date:                    2020-08-21
+Trouble Report Id:       OTP-16791, OTP-16803
+Seq num:                 ERIERL-520
+System:                  OTP
+Release:                 22
+Application:             ssh-4.9.1.1
+Predecessor:             OTP 22.3.4.8
+
+ Check out the git tag OTP-22.3.4.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.9.1.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.9.1.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.6.4 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16791    Application(s): ssh
+               Related Id(s): ERIERL-520
+
+               Fix a bug that could crash the cli server if a too
+               large cli-window was requested from the client.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16803    Application(s): ssh
+
+               A new timeout is defined for daemons: hello_timeout.
+
+               It closes an incoming TCP-connection if no valid 1st
+               message is received from the client within the timeout
+               limit.
+
+
+ Full runtime dependencies of ssh-4.9.1.1: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
