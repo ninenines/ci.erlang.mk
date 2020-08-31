@@ -1,0 +1,40 @@
+Patch Package:           OTP 22.3.4.10
+Git Tag:                 OTP-22.3.4.10
+Date:                    2020-08-28
+Trouble Report Id:       OTP-16818
+Seq num:                 ERIERL-526
+System:                  OTP
+Release:                 22
+Application:             megaco-3.18.8.2
+Predecessor:             OTP 22.3.4.9
+
+ Check out the git tag OTP-22.3.4.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- megaco-3.18.8.2 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.18.8.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16818    Application(s): megaco
+               Related Id(s): ERIERL-526
+
+               The v2 and v3 parsers could not properly decode some
+               IPv6 addresses.
+
+
+ Full runtime dependencies of megaco-3.18.8.2: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
