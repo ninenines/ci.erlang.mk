@@ -1,0 +1,85 @@
+Patch Package:           OTP 23.0.4
+Git Tag:                 OTP-23.0.4
+Date:                    2020-09-11
+Trouble Report Id:       OTP-16780, OTP-16804, OTP-16818
+Seq num:                 ERIERL-526
+System:                  OTP
+Release:                 23
+Application:             erts-11.0.4, megaco-3.19.2, stdlib-3.13.1
+Predecessor:             OTP 23.0.3
+
+ Check out the git tag OTP-23.0.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.0.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.0.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16780    Application(s): erts
+               Related Id(s): PR-2701
+
+               The ERTS internal I/O poll implementation could get
+               into an inconsistent state causing input events to be
+               ignored.
+
+
+ Full runtime dependencies of erts-11.0.4: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.19.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.19.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16818    Application(s): megaco
+               Related Id(s): ERIERL-526
+
+               The v2 and v3 parsers could not properly decode some
+               IPv6 addresses.
+
+
+ Full runtime dependencies of megaco-3.19.2: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.13.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.13.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16804    Application(s): stdlib
+
+               When a temporary child of a simple_one_for_one
+               supervisor died, the internal state of the supervisor
+               would be corrupted in a way that would cause the
+               supervisor to retain the start arguments for subsequent
+               children started by the supervisor, causing unnecessary
+               growth of the supervisor's heap. There state corruption
+               could potentially cause other problems as well.
+
+
+ Full runtime dependencies of stdlib-3.13.1: compiler-5.0, crypto-3.3,
+ erts-11.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
