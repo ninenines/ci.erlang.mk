@@ -1,0 +1,103 @@
+Patch Package:           OTP 21.3.8.18
+Git Tag:                 OTP-21.3.8.18
+Date:                    2020-10-02
+Trouble Report Id:       OTP-16780, OTP-16866, OTP-16870, OTP-16874,
+                         OTP-16904
+Seq num:                 ERL-1355, ERL-1356
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.14, ssh-4.7.6.5
+Predecessor:             OTP 21.3.8.17
+
+ Check out the git tag OTP-21.3.8.18, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.14 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.14 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16780    Application(s): erts
+               Related Id(s): PR-2701
+
+               The ERTS internal I/O poll implementation could get
+               into an inconsistent state causing input events to be
+               ignored.
+
+
+  OTP-16866    Application(s): erts
+               Related Id(s): ERL-1355
+
+               The documentation of statistics(run_queue) erroneously
+               stated that it returns the total length of all normal
+               run queues when it is the total length of all normal
+               and dirty CPU run queues that is returned. The
+               documentation has been updated to reflect the actual
+               behavior.
+
+
+  OTP-16870    Application(s): erts
+
+               Two bugs in the ERTS internal thread wakeup
+               functionality have been fixed. These bugs mainly hit
+               when all threads in the system tried to go to sleep.
+               When the bugs were triggered, certain operations were
+               delayed until a thread woke up due to some other
+               reason. Most important operations effected were code
+               loading, persistent term updates, and memory
+               deallocation.
+
+
+  OTP-16874    Application(s): erts
+               Related Id(s): ERL-1356, PR-2763
+
+               Fixed bug in ets:select_replace/2 on compressed tables
+               that could produce faulty results or VM crash. Bug
+               exists since OTP 20.
+
+
+ Full runtime dependencies of erts-10.3.5.14: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7.6.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.7.6.5 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.4.2.2 (first satisfied in OTP 21.3.8.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16904    Application(s): ssh
+
+               Fix decoder bug.
+
+
+ Full runtime dependencies of ssh-4.7.6.5: crypto-4.4.2.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
