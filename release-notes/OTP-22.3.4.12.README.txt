@@ -1,0 +1,80 @@
+Patch Package:           OTP 22.3.4.12
+Git Tag:                 OTP-22.3.4.12
+Date:                    2020-10-20
+Trouble Report Id:       OTP-16837, OTP-16921, OTP-16939
+Seq num:                 ERL-1319
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.5, ssl-9.6.2.3
+Predecessor:             OTP 22.3.4.11
+
+ Check out the git tag OTP-22.3.4.12, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.5 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.5 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16939    Application(s): erts
+
+               Fixed bugs causing issues when enabling the ERTS
+               internal allocators on a system built with the
+               undocumented and unsupported SMALL_MEMORY feature.
+
+
+ Full runtime dependencies of erts-10.7.2.5: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-9.6.2.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-9.6.2.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.7.2 (first satisfied in OTP 22.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16837    Application(s): ssl
+               Related Id(s): ERL-1319, OTP-16764
+
+               Correct flow ctrl checks from OTP-16764 to work as
+               intended. Probably will not have a noticeable affect
+               but will make connections more well behaved under some
+               circumstances.
+
+
+  OTP-16921    Application(s): ssl
+
+               Fix a bug that causes cross-build failure.
+
+               This change excludes the ssl.d dependency file from the
+               source tar balls.
+
+
+ Full runtime dependencies of ssl-9.6.2.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.7.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
