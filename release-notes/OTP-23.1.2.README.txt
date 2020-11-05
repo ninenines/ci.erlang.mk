@@ -1,0 +1,93 @@
+Patch Package:           OTP 23.1.2
+Git Tag:                 OTP-23.1.2
+Date:                    2020-11-05
+Trouble Report Id:       OTP-16939, OTP-16951, OTP-16955, OTP-16991
+Seq num:                 ERL-1343, ERL-1384
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.5, erts-11.1.2
+Predecessor:             OTP 23.1.1
+
+ Check out the git tag OTP-23.1.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.5 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16951    Application(s): compiler
+               Related Id(s): ERL-1384
+
+               Fixed a bug in the boolean optimization pass that
+               caused the compiler to confuse different clauses.
+
+
+ Full runtime dependencies of compiler-7.6.5: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.1.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.1.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16939    Application(s): erts
+
+               Fixed bugs causing issues when enabling the ERTS
+               internal allocators on a system built with the
+               undocumented and unsupported SMALL_MEMORY feature.
+
+
+  OTP-16955    Application(s): erts
+               Related Id(s): ERL-1343, OTP-15618
+
+               The inet driver used to use 16 as maximum elements in
+               an I/O vector passed to writev() (and WSASend() on
+               Windows). When the data to send contained lots of
+               elements, this caused a performance degradation since
+               repeated calls to writev() had to be made to a much
+               larger extent. The inet driver now looks up actual
+               maximum amount of elements that can be used on the
+               system, instead of just assuming 16. On most systems
+               this will result in a maximum amount of I/O vector
+               elements of 1024.
+
+               As of OTP 23.0 the term encoding of signals to send
+               over the distribution are encoded into I/O vectors of
+               buffers instead of into a single buffer. Reference
+               counted binaries are referred to directly from the I/O
+               vector instead of being copied into the single buffer.
+               That is, Erlang signals containing huge amounts of
+               reference counted binaries was effected by this
+               performance degradation.
+
+
+  OTP-16991    Application(s): erts
+               Related Id(s): OTP-15251
+
+               In the distributed case, a faulty reply option in a
+               call to the spawn_request() BIF erroneously caused a
+               badarg exception instead of a badopt error message
+               reply.
+
+
+ Full runtime dependencies of erts-11.1.2: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
