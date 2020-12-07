@@ -1,0 +1,44 @@
+Patch Package:           OTP 23.1.5
+Git Tag:                 OTP-23.1.5
+Date:                    2020-12-07
+Trouble Report Id:       OTP-17021
+Seq num:                 ERIERL-567
+System:                  OTP
+Release:                 23
+Application:             ssh-4.10.5
+Predecessor:             OTP 23.1.4
+
+ Check out the git tag OTP-23.1.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.10.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.10.5 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17021    Application(s): ssh
+               Related Id(s): ERIERL-567
+
+               An ssh-client can take an accepted socket from a
+               listening socket and do an ssh:connect/2 on it.
+
+               Multiple clients on sockets accepted from the same
+               listening socket had stopped working. This is corrected
+               now.
+
+
+ Full runtime dependencies of ssh-4.10.5: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

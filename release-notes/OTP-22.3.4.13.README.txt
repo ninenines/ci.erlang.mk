@@ -1,0 +1,138 @@
+Patch Package:           OTP 22.3.4.13
+Git Tag:                 OTP-22.3.4.13
+Date:                    2020-12-07
+Trouble Report Id:       OTP-16869, OTP-16989, OTP-17012, OTP-17022,
+                         OTP-17039
+Seq num:                 ERIERL-492, ERIERL-544, ERL-1337, ERL-1405,
+                         ERL-1426
+System:                  OTP
+Release:                 22
+Application:             compiler-7.5.4.2, erts-10.7.2.6,
+                         megaco-3.18.8.3, snmp-5.5.0.4
+Predecessor:             OTP 22.3.4.12
+
+ Check out the git tag OTP-22.3.4.13, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17022    Application(s): snmp
+               Related Id(s): ERIERL-492
+
+               It is now possible to configure the agent in such a way
+               that the order of outgoing notifications are processed
+               in order in the agent. What happens after the
+               notification message has left the agent (been sent) is
+               of course still out of our control.
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.5.4.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.5.4.2 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17039    Application(s): compiler
+               Related Id(s): ERL-1426
+
+               Fixed a bug in the validator that could cause it to
+               reject valid code
+
+
+ Full runtime dependencies of compiler-7.5.4.2: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16869    Application(s): erts
+               Related Id(s): ERL-1337
+
+               Fixed rare distribution bug in race between received
+               signal (link/monitor/spawn_request/spawn_reply) and
+               disconnection. Symptom: VM crash. Since: OTP 21.0.
+
+
+ Full runtime dependencies of erts-10.7.2.6: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.18.8.3 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.18.8.3 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17012    Application(s): megaco
+               Related Id(s): ERL-1405
+
+               Empty statistics descriptor (now) allowed in both
+               encode and decode for version 3.
+
+
+ Full runtime dependencies of megaco-3.18.8.3: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.5.0.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.5.0.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16989    Application(s): snmp
+               Related Id(s): ERIERL-544
+
+               The mib server cache handling has been improved. First,
+               the default gclimit has been changed from 100 to
+               infinity (in order to ensure the size is as small as
+               possible). Also the method of removing old elements has
+               been optimized.
+
+
+  OTP-17022    Application(s): snmp
+               Related Id(s): ERIERL-492
+
+               *** HIGHLIGHT ***
+
+               It is now possible to configure the agent in such a way
+               that the order of outgoing notifications are processed
+               in order in the agent. What happens after the
+               notification message has left the agent (been sent) is
+               of course still out of our control.
+
+
+ Full runtime dependencies of snmp-5.5.0.4: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
