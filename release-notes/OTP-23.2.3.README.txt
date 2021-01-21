@@ -1,0 +1,102 @@
+Patch Package:           OTP 23.2.3
+Git Tag:                 OTP-23.2.3
+Date:                    2021-01-20
+Trouble Report Id:       OTP-17097, OTP-17107, OTP-17108, OTP-17110
+Seq num:                 ERIERL-586, ERL-1442
+System:                  OTP
+Release:                 23
+Application:             crypto-4.8.3, erts-11.1.7, snmp-5.7.2,
+                         ssh-4.10.7
+Predecessor:             OTP 23.2.2
+
+ Check out the git tag OTP-23.2.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.8.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.8.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17107    Application(s): crypto
+
+               Adding missing flag in BN-calls in SRP.
+
+
+ Full runtime dependencies of crypto-4.8.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.1.7 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.1.7 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17097    Application(s): erts
+
+               Make windows installer remove write access rights for
+               non admin users when installing to a non default
+               directory. Reduces the risk for DLL sideloading, but
+               the user should always be aware of the access rights
+               for the installation.
+
+
+ Full runtime dependencies of erts-11.1.7: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.7.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.7.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17110    Application(s): snmp
+               Related Id(s): ERIERL-586
+
+               [manager] Misspelled priv protocol (atom) made it
+               impossible to update usm user 'priv_key' configuration
+               for usmAesCfb128Protocol via function calls.
+
+
+ Full runtime dependencies of snmp-5.7.2: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.10.7 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.10.7 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17108    Application(s): ssh
+               Related Id(s): ERL-1442
+
+               The SSH daemon erroneously replaced LF with CRLF also
+               when there was no pty requested from the server.
+
+
+ Full runtime dependencies of ssh-4.10.7: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,38 @@
+Patch Package:           OTP 22.3.4.15
+Git Tag:                 OTP-22.3.4.15
+Date:                    2021-01-20
+Trouble Report Id:       OTP-17107
+Seq num:                
+System:                  OTP
+Release:                 22
+Application:             crypto-4.6.5.2
+Predecessor:             OTP 22.3.4.14
+
+ Check out the git tag OTP-22.3.4.15, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.5.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.5.2 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17107    Application(s): crypto
+
+               Adding missing flag in BN-calls in SRP.
+
+
+ Full runtime dependencies of crypto-4.6.5.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,221 @@
+Patch Package:           OTP 23.2.2
+Git Tag:                 OTP-23.2.2
+Date:                    2021-01-15
+Trouble Report Id:       OTP-16607, OTP-17080, OTP-17088, OTP-17093,
+                         OTP-17098, OTP-17099, OTP-17100
+Seq num:                 ERIERL-580, ERIERL-585, ERL-1447
+System:                  OTP
+Release:                 23
+Application:             crypto-4.8.2, erl_interface-4.0.2,
+                         erts-11.1.6, megaco-3.19.5, odbc-2.13.2,
+                         snmp-5.7.1, ssl-10.2.1
+Predecessor:             OTP 23.2.1
+
+ Check out the git tag OTP-23.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-23.2.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17093    Application(s): crypto, megaco, odbc, otp, snmp
+               Related Id(s): ERL-1447, PR-2948
+
+               Fixed usage of AC_CONFIG_AUX_DIRS() macros in configure
+               script sources.
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.8.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.8.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17093    Application(s): crypto, megaco, odbc, otp, snmp
+               Related Id(s): ERL-1447, PR-2948
+
+               Fixed usage of AC_CONFIG_AUX_DIRS() macros in configure
+               script sources.
+
+
+ Full runtime dependencies of crypto-4.8.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-4.0.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-4.0.2 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17099    Application(s): erl_interface
+               Related Id(s): ERIERL-585
+
+               Integers outside of the range [-(1 bsl 32) - 1, (1 bsl
+               32) -1] were previously intended to be printed in an
+               internal bignum format by ei_print_term() and
+               ei_s_print_term(). Unfortunately the implementation has
+               been buggy since OTP R13B02 and since then produced
+               results with random content which also could crash the
+               calling program.
+
+               This fix replaces the printing of the internal format
+               with printing in hexadecimal form and extend the range
+               for printing in decimal form. Currently integers in the
+               range [-(1 bsl 64), (1 bsl 64)] are printed in decimal
+               form and integers outside of this range in Erlang
+               hexadecimal form.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.1.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.1.6 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17080    Application(s): erts
+
+               The suspend_process() and resume_process() BIFs did not
+               check their arguments properly which could cause an
+               emulator crash.
+
+
+  OTP-17088    Application(s): erts
+               Related Id(s): ERIERL-580
+
+               The runtime system would get into an infinite loop if
+               the runtime system was started with more than 1023 file
+               descriptors already open.
+
+
+ Full runtime dependencies of erts-11.1.6: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- megaco-3.19.5 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-3.19.5 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17093    Application(s): crypto, megaco, odbc, otp, snmp
+               Related Id(s): ERL-1447, PR-2948
+
+               Fixed usage of AC_CONFIG_AUX_DIRS() macros in configure
+               script sources.
+
+
+ Full runtime dependencies of megaco-3.19.5: asn1-3.0, debugger-4.0,
+ erts-7.0, et-1.5, kernel-3.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.13.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The odbc-2.13.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17093    Application(s): crypto, megaco, odbc, otp, snmp
+               Related Id(s): ERL-1447, PR-2948
+
+               Fixed usage of AC_CONFIG_AUX_DIRS() macros in configure
+               script sources.
+
+
+ Full runtime dependencies of odbc-2.13.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.7.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.7.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17093    Application(s): crypto, megaco, odbc, otp, snmp
+               Related Id(s): ERL-1447, PR-2948
+
+               Fixed usage of AC_CONFIG_AUX_DIRS() macros in configure
+               script sources.
+
+
+ Full runtime dependencies of snmp-5.7.1: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17098    Application(s): ssl
+
+               Fix CVE-2020-35733 this only affects ssl-10.2
+               (OTP-23.2). This vulnerability could enable a man in
+               the middle attack using a fake chain to a known trusted
+               ROOT. Also limits alternative chain handling, for
+               handling of possibly extraneous certs, to improve
+               memory management.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17100    Application(s): ssl
+
+               Add support for AES CCM based cipher suites defined in
+               RFC 7251
+
+               Also Correct cipher suite name conversion to OpenSSL
+               names. A few names where corrected earlier in OTP-16267
+               For backwards compatible reasons we support usage of
+               openSSL names for cipher suites. Mostly anonymous
+               suites names where incorrect, but also some legacy
+               suites.
+
+
+ Full runtime dependencies of ssl-10.2.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

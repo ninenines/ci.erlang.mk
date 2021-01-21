@@ -1,0 +1,81 @@
+Patch Package:           OTP 21.3.8.19
+Git Tag:                 OTP-21.3.8.19
+Date:                    2021-01-20
+Trouble Report Id:       OTP-16869, OTP-17080, OTP-17088, OTP-17107
+Seq num:                 ERIERL-580, ERL-1337
+System:                  OTP
+Release:                 21
+Application:             crypto-4.4.2.3, erts-10.3.5.15
+Predecessor:             OTP 21.3.8.18
+
+ Check out the git tag OTP-21.3.8.19, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.4.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.4.2.3 application can be applied independently of other
+ applications on a full OTP 21 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17107    Application(s): crypto
+
+               Adding missing flag in BN-calls in SRP.
+
+
+ Full runtime dependencies of crypto-4.4.2.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.15 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.15 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16869    Application(s): erts
+               Related Id(s): ERL-1337
+
+               Fixed rare distribution bug in race between received
+               signal (link/monitor/spawn_request/spawn_reply) and
+               disconnection. Symptom: VM crash. Since: OTP 21.0.
+
+
+  OTP-17080    Application(s): erts
+
+               The suspend_process() and resume_process() BIFs did not
+               check their arguments properly which could cause an
+               emulator crash.
+
+
+  OTP-17088    Application(s): erts
+               Related Id(s): ERIERL-580
+
+               The runtime system would get into an infinite loop if
+               the runtime system was started with more than 1023 file
+               descriptors already open.
+
+
+ Full runtime dependencies of erts-10.3.5.15: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

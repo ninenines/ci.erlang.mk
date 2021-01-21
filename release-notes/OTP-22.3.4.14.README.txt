@@ -1,0 +1,73 @@
+Patch Package:           OTP 22.3.4.14
+Git Tag:                 OTP-22.3.4.14
+Date:                    2021-01-13
+Trouble Report Id:       OTP-17073, OTP-17080, OTP-17088
+Seq num:                 ERIERL-580
+System:                  OTP
+Release:                 22
+Application:             compiler-7.5.4.3, erts-10.7.2.7
+Predecessor:             OTP 22.3.4.13
+
+ Check out the git tag OTP-22.3.4.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.5.4.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.5.4.3 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17073    Application(s): compiler
+
+               Fixed a bug in the type optimization pass that could
+               yield incorrect values or cause the wrong clauses to be
+               executed.
+
+
+ Full runtime dependencies of compiler-7.5.4.3: crypto-3.6, erts-9.0,
+ hipe-3.12, kernel-4.0, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.7 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.7 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17080    Application(s): erts
+
+               The suspend_process() and resume_process() BIFs did not
+               check their arguments properly which could cause an
+               emulator crash.
+
+
+  OTP-17088    Application(s): erts
+               Related Id(s): ERIERL-580
+
+               The runtime system would get into an infinite loop if
+               the runtime system was started with more than 1023 file
+               descriptors already open.
+
+
+ Full runtime dependencies of erts-10.7.2.7: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
