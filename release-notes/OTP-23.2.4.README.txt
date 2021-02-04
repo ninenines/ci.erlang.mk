@@ -1,0 +1,80 @@
+Patch Package:           OTP 23.2.4
+Git Tag:                 OTP-23.2.4
+Date:                    2021-02-04
+Trouble Report Id:       OTP-16239, OTP-17139, OTP-17161, OTP-17174
+Seq num:                 ERIERL-597, ERL-1458
+System:                  OTP
+Release:                 23
+Application:             snmp-5.7.3, ssl-10.2.2
+Predecessor:             OTP 23.2.3
+
+ Check out the git tag OTP-23.2.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- snmp-5.7.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.7.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17161    Application(s): snmp
+
+               [manager] In a function handling snmp errors, an unused
+               result (_Error) could result in matching issues and
+               therefor case clause runtime errors (crash). Note that
+               this would only happen in *very* unusual error cases.
+
+
+ Full runtime dependencies of snmp-5.7.3: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17139    Application(s): ssl
+               Related Id(s): ERL-1458, OTP-16239
+
+               Avoid that upgrade (from TCP to TLS) servers starts
+               multiple session cache handlers for the same server.
+               This applies to Erlang distribution over TLS servers.
+
+
+  OTP-17174    Application(s): ssl
+               Related Id(s): ERIERL-597
+
+               Legacy cipher suites defined before TLS-1.2 (but still
+               supported) should be possible to use in TLS-1.2. They
+               where accidentally excluded for available cipher suites
+               for TLS-1.2 in OTP-23.2.2.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16239    Application(s): ssl
+               Related Id(s): ERL-1458, OTP-17139
+
+               Enable Erlang distribution over TLS to run TLS-1.3,
+               although TLS-1.2 will still be default.
+
+
+ Full runtime dependencies of ssl-10.2.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
