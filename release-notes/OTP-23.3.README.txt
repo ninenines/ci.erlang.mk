@@ -1,0 +1,803 @@
+Patch Package:           OTP 23.3
+Git Tag:                 OTP-23.3
+Date:                    2021-03-24
+Trouble Report Id:       OTP-13641, OTP-16876, OTP-16907, OTP-16959,
+                         OTP-16978, OTP-16985, OTP-17002, OTP-17042,
+                         OTP-17064, OTP-17073, OTP-17081, OTP-17089,
+                         OTP-17091, OTP-17096, OTP-17109, OTP-17111,
+                         OTP-17113, OTP-17116, OTP-17124, OTP-17126,
+                         OTP-17127, OTP-17145, OTP-17162, OTP-17163,
+                         OTP-17164, OTP-17166, OTP-17167, OTP-17178,
+                         OTP-17182, OTP-17187, OTP-17188, OTP-17194,
+                         OTP-17195, OTP-17197, OTP-17200, OTP-17202,
+                         OTP-17208, OTP-17209, OTP-17212, OTP-17223,
+                         OTP-17225, OTP-17229, OTP-17242, OTP-17244,
+                         OTP-17249, OTP-17252, OTP-17253, OTP-17256,
+                         OTP-17261, OTP-17265, OTP-17271, OTP-17273,
+                         OTP-17274, OTP-17281, OTP-17282, OTP-17283
+Seq num:                 ERIERL-583, ERL-1410, ERL-1448, ERL-1471,
+                         ERL-845, GH-4353, GH-4445, GH-4451, GH-4500,
+                         GH-4502, GH-4546, GH-4549, GH-4573, GH-4589,
+                         GH-4616, GH-4620
+System:                  OTP
+Release:                 23
+Application:             common_test-1.20, compiler-7.6.7, crypto-4.9,
+                         dialyzer-4.3.1, eldap-1.2.9, erts-11.2,
+                         jinterface-1.11.1, kernel-7.3, mnesia-4.19,
+                         odbc-2.13.3, public_key-1.10,
+                         runtime_tools-1.16, sasl-4.0.2, snmp-5.8,
+                         ssh-4.11, ssl-10.3, stdlib-3.14.1,
+                         syntax_tools-2.5, tools-3.4.4, wx-1.9.3
+Predecessor:             OTP 23.2.7
+
+ Check out the git tag OTP-23.3, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-23.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17164    Application(s): otp
+               Related Id(s): ERL-845, PR-2613
+
+               Correct documentation of specifications of remote
+               functions.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.20 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.20 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-16959    Application(s): common_test, crypto, erts
+               Related Id(s): PR-2965
+
+               Various address sanitizer support.
+
+
+ Full runtime dependencies of common_test-1.20: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.7 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.7 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17073    Application(s): compiler
+
+               Fixed a bug in the type optimization pass that could
+               yield incorrect values or cause the wrong clauses to be
+               executed.
+
+
+  OTP-17126    Application(s): compiler
+               Related Id(s): ERL-1471
+
+               Fixed a bug in the validator that could cause it to
+               reject valid code.
+
+
+ Full runtime dependencies of compiler-7.6.7: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.9 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.9 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17212    Application(s): crypto
+
+               Fix minor memory leaks in crypto ENGINE and robustify
+               the code.
+
+
+  OTP-17256    Application(s): crypto
+               Related Id(s): GH-4573, PR-4580
+
+               The otp_test_engine no longer fails if NO_EC* is set in
+               the OpenSSL configuration.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16959    Application(s): common_test, crypto, erts
+               Related Id(s): PR-2965
+
+               Various address sanitizer support.
+
+
+  OTP-17116    Application(s): crypto
+               Related Id(s): PR-2972
+
+               EVP is now disabled for OpenSSL cryptolib versions up
+               to and including 1.0.2
+
+
+  OTP-17145    Application(s): crypto
+               Related Id(s): OTP-17105, PR-2872
+
+               Warning for unused C function removed
+
+
+ Full runtime dependencies of crypto-4.9: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.3.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17091    Application(s): dialyzer
+
+               Correct handling of PLTs in the GUI.
+
+
+ Full runtime dependencies of dialyzer-4.3.1: compiler-7.0, erts-9.0,
+ hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.9 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.9 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17166    Application(s): eldap
+               Related Id(s): PR-2904
+
+               Add ability to specify size limit on ldap requests
+
+
+ Full runtime dependencies of eldap-1.2.9: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17081    Application(s): erts
+               Related Id(s): PR-2930
+
+               Fix memory leak of about 6 words when
+               erlang:process_flag/3 is called with a pid of an
+               already dead process. Bug exists since OTP-21.0.
+
+
+  OTP-17089    Application(s): erts
+               Related Id(s): PR-2934
+
+               Fixed small memory leak in erl_drv_send_term and
+               erl_drv_output_term when failing due to the term being
+               invalid.
+
+
+  OTP-17096    Application(s): erts
+               Related Id(s): PR-2932
+
+               The DTrace/SystemTap process_heap_grow probe is now
+               called with valid the heap and stack pointers for the
+               process in question.
+
+
+  OTP-17124    Application(s): erts
+
+               Fixed a performance issue in memory allocation for
+               Linux kernels that didn't support MADV_FREE.
+
+
+  OTP-17127    Application(s): erts, jinterface
+
+               A new link protocol has been introduced which prevents
+               links from ending up in an inconsistent state where one
+               participant considers itself linked while the other
+               doesn't. This bug has always existed in the distributed
+               case, but has since OTP 21 also existed in the node
+               local case since the distributed link protocol then was
+               adopted also for node local links. The bug could,
+               however, only trigger if both participants operated on
+               the link simultaneously.
+
+
+  OTP-17163    Application(s): erts
+
+               Fix memory leak when receiving sigchld from port
+               program to already dead port.
+
+
+  OTP-17209    Application(s): erts, kernel
+               Related Id(s): PR-3039
+
+               Fix bug where complex seq_trace tokens (that is lists,
+               tuples, maps etc) could becomes corrupted by the GC.
+               The bug was introduced in OTP-21.
+
+
+  OTP-17229    Application(s): erts
+
+               Fixed WSLPATH environment variable addition to PATH on
+               windows, the last character was lost.
+
+
+  OTP-17253    Application(s): erts
+
+               Fixed a bug in the timer implementation which could
+               cause timers that were set to more than 37.25 hours in
+               the future to be delayed. This could occur if there
+               were multiple timers scheduled to be triggered very
+               close in time, but still at different times, and the
+               scheduler thread handling the timers was not able to
+               handle them quickly enough. Delayed timers were in this
+               case triggered when another unrelated timer was
+               triggered.
+
+
+  OTP-17265    Application(s): erts
+               Related Id(s): PR-4596
+
+               Fixed small memory leak in erlang:trace/3 if option
+               {tracer,_} is included and the option list is invalid
+               or the call races with a concurrent trace or code
+               change operation.
+
+
+  OTP-17283    Application(s): erts
+
+               Fix configure check for inet_pton on 32-bit windows.
+               The failure of this check would cause epmd to be built
+               without ipv6 support.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16959    Application(s): common_test, crypto, erts
+               Related Id(s): PR-2965
+
+               Various address sanitizer support.
+
+
+  OTP-17002    Application(s): erts
+
+               The emulator will now honor cgroup2 CPU quotas.
+
+
+  OTP-17195    Application(s): erts
+               Related Id(s): PR-4505, PR-4538
+
+               Improved memory barrier usage on ARMv8 hardware, and
+               specifically on Apple silicon.
+
+
+  OTP-17200    Application(s): erts
+               Related Id(s): PR-4510
+
+               Improved memory barrier usage on 64-bit POWER hardware.
+
+
+  OTP-17244    Application(s): erts
+
+               Fix a file descriptor leak when using sendfile and the
+               remote side closes the connection. This bug has been
+               present since OTP-21.0.
+
+
+  OTP-17252    Application(s): erts
+               Related Id(s): PR-4568
+
+               Refinement of the documentation of the
+               message_queue_data process flag.
+
+
+ Full runtime dependencies of erts-11.2: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.11.1 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.11.1 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17127    Application(s): erts, jinterface
+
+               A new link protocol has been introduced which prevents
+               links from ending up in an inconsistent state where one
+               participant considers itself linked while the other
+               doesn't. This bug has always existed in the distributed
+               case, but has since OTP 21 also existed in the node
+               local case since the distributed link protocol then was
+               adopted also for node local links. The bug could,
+               however, only trigger if both participants operated on
+               the link simultaneously.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-7.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-13641    Application(s): kernel
+               Related Id(s): PR-2959
+
+               The range check for compression pointers in DNS
+               encoding was faulty, which caused incorrect label
+               compression encoding for very large DNS messages;
+               larger than about 16 kBytes, such as AXFR responses.
+               This more than 11 year old bug has now been corrected.
+
+
+  OTP-17202    Application(s): kernel
+               Related Id(s): PR-4516
+
+               Fix of internal links in the erpc documentation.
+
+
+  OTP-17209    Application(s): erts, kernel
+               Related Id(s): PR-3039
+
+               Fix bug where complex seq_trace tokens (that is lists,
+               tuples, maps etc) could becomes corrupted by the GC.
+               The bug was introduced in OTP-21.
+
+
+  OTP-17223    Application(s): kernel
+               Related Id(s): GH-4546, PR-4554
+
+               When running Xref in the modules mode, the Debugger
+               application would show up as a depency for the Kernel
+               applications.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17178    Application(s): kernel
+               Related Id(s): PR-3003
+
+               erl_epmd (the epmd client) will now try to reconnect to
+               the local EPMD if the connection is broken.
+
+
+ Full runtime dependencies of kernel-7.3: erts-11.0, sasl-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.19 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.19 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17249    Application(s): mnesia
+               Related Id(s): PR-4578
+
+               Fixed the type spec for disc_only_copies.
+
+
+  OTP-17274    Application(s): mnesia
+               Related Id(s): GH-4616
+
+               Do not crash in mnesia:change_config/2 if mnesia is
+               stopping or starting.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17271    Application(s): mnesia
+               Related Id(s): PR-4575
+
+               Optimized table loading time for tables that are
+               updated during the loading.
+
+
+ Full runtime dependencies of mnesia-4.19: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.13.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The odbc-2.13.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17188    Application(s): odbc
+               Related Id(s): ERL-1448
+
+               Make sure odbc c-process exits when erlang process
+               orders it to shutdown.
+
+
+ Full runtime dependencies of odbc-2.13.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.10 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.10 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17242    Application(s): public_key
+               Related Id(s): GH-4500
+
+               Fixed case insensitive hostname check.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16907    Application(s): public_key
+
+               Add sanity check of trusted anchor certificate
+               expiration to pkix_path_validation/3. Although the
+               anchor is considered a trusted input this sanity check
+               does provide extra security for the users of the
+               public_key application as this property needs to be
+               checked at time of usage and fits very well with the
+               other checks performed here.
+
+
+  OTP-17111    Application(s): public_key
+
+               Adjust generation of test certificates to conform to
+               RFC 5280 rules for formatting of the certificates
+               validity
+
+
+ Full runtime dependencies of public_key-1.10: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.16 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.16 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17208    Application(s): runtime_tools
+               Related Id(s): GH-4502, PR-4532
+
+               Clarify documentation of module 'scheduler'.
+
+
+ Full runtime dependencies of runtime_tools-1.16: erts-11.0,
+ kernel-7.0, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- sasl-4.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The sasl-4.0.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17113    Application(s): sasl
+               Related Id(s): ERL-1410, PR-2882
+
+               Fix dependent application to be stopped after the
+               primary application when upgrading a release and the
+               primary and dependent application is removed.
+
+               Example: In a release where app1 depends on app2 and we
+               should remove app1 and app2 using a release upgrade.
+               When the release upgrade is done app1 should be stopped
+               and purged before app2 as otherwise app1 could start
+               crashing when its dependency is removed.
+
+               This bugfix changes the order of removal to be correct.
+
+
+ Full runtime dependencies of sasl-4.0.2: erts-10.2, kernel-5.3,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.8 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.8 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17109    Application(s): snmp
+               Related Id(s): ERIERL-583
+
+               Add function to get a list of configured agent
+               transports. Also improved agent info with regards to
+               transports.
+
+
+ Full runtime dependencies of snmp-5.8: crypto-3.3, erts-6.0,
+ kernel-3.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17197    Application(s): ssh
+               Related Id(s): 3049, PR-
+
+               The long name field in SSH_FXP_NAME responses to
+               display file information in sftp version 3 now contains
+               the expanded format defined in the sftp draft. It is
+               similar to what is returned by "ls -l" on Unix systems.
+
+
+ Full runtime dependencies of ssh-4.11: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17261    Application(s): ssl
+               Related Id(s): GH-4589
+
+               Fix CRL handling that previously could fail to find the
+               issuer cert under some circumstances.
+
+
+  OTP-17281    Application(s): ssl
+               Related Id(s): GH-4620
+
+               TLS-1.3 client could, under some circumstances, select
+               an incorrect algorithm to sign the certificate
+               verification message causing a TLS Decrypt Alert being
+               issued by the server.
+
+
+  OTP-17282    Application(s): ssl
+
+               Correct handling of default values for emulated socket
+               options and retain the order of the ssl options list to
+               ensure backwards compatible behavior if options should
+               be set more than once.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16876    Application(s): ssl
+
+               Enhance pre TLS-1.3 session handling so the client and
+               server side handling is completely separated and client
+               disregards oldest session when reaching max limit of
+               the session table.
+
+
+  OTP-16985    Application(s): ssl
+
+               This change implements the early data feature for TLS
+               1.3 clients.
+
+               TLS 1.3 allows clients to send data in the first flight
+               using a Pre-Shared Key to authenticate the server and
+               to encrypt the early data.
+
+
+  OTP-17042    Application(s): ssl
+
+               This change implements the early data feature for TLS
+               1.3 servers.
+
+
+ Full runtime dependencies of ssl-10.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.14.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.14.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16978    Application(s): stdlib
+
+               Handle maps in erl_parse:tokens().
+
+
+  OTP-17182    Application(s): stdlib
+               Related Id(s): PR-3002
+
+               The erlang shell function rr has been fixed to be able
+               to read records from files within a code archive.
+
+
+  OTP-17194    Application(s): stdlib, tools
+               Related Id(s): GH-4353
+
+               If beam_lib is asked to return abstract code for a BEAM
+               file produced by Elixir and Elixir is not installed on
+               the computer, beam_lib will no longer crash, but will
+               return an error tuple. The cover:compile_beam() and
+               cover:compile_beam_directory() functions have been
+               updated to also return an error tuple in that
+               situation.
+
+
+  OTP-17273    Application(s): stdlib
+
+               Correct example module erl_id_trans regarding the
+               {char, C} type.
+
+
+ Full runtime dependencies of stdlib-3.14.1: compiler-5.0, crypto-3.3,
+ erts-11.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-2.5 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-2.5 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17064    Application(s): syntax_tools
+               Related Id(s): GH-4445, PR-2964
+
+               epp_dodger was unable to handle a parameterized macro
+               in a function head.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17167    Application(s): syntax_tools
+               Related Id(s): OTP-17046
+
+               All functions in erl_tidy in syntax_tools have now been
+               deprecated and are scheduled for removal in OTP 24.
+               Users who still need it can find it at
+               https://github.com/richcarl/erl_tidy.
+
+
+ Full runtime dependencies of syntax_tools-2.5: compiler-7.0,
+ erts-9.0, kernel-5.0, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.4.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.4.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17162    Application(s): tools
+               Related Id(s): GH-4549, PR-2997, PR-4555,
+               elixir-lang/elixir#10666
+
+               cover would crash when compiling a module having an
+               exported function named clauses.
+
+
+  OTP-17194    Application(s): stdlib, tools
+               Related Id(s): GH-4353
+
+               If beam_lib is asked to return abstract code for a BEAM
+               file produced by Elixir and Elixir is not installed on
+               the computer, beam_lib will no longer crash, but will
+               return an error tuple. The cover:compile_beam() and
+               cover:compile_beam_directory() functions have been
+               updated to also return an error tuple in that
+               situation.
+
+
+  OTP-17225    Application(s): tools
+               Related Id(s): GH-4451, PR-4542
+
+               Make emacs mode work on emacs-27.
+
+
+ Full runtime dependencies of tools-3.4.4: compiler-5.0, erts-11.0,
+ erts-9.1, kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-1.9.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-1.9.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17187    Application(s): wx
+
+               Fixed wx initialization on mac, top level menus did not
+               always work on newer MacOS versions. The menues will
+               not work until wxWidgets-3.1.5 is released and used on
+               these MacOS versions.
+
+
+ Full runtime dependencies of wx-1.9.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Abdullah Al-Shehabi, Alexander Clouter, Andrew Shymanel, Bruce Yinhe,
+ Dieter Schoen, Erwan Le Pape, Henrik Lagebrand, Jonatas Cardador,
+ José Valim, Jérôme de Bretagne, Leo Liu, Maria-12648430, Mark Peek,
+ Maxim Fedorov, Mikael Pettersson, Niklas Åholm, Péter Gömöri, Radek
+ Szymczyszyn, Robert Gionea, Sebastian Smyczyński, Sergei Trofimovich,
+ Simon Cornish, Stavros Aronis, Steve Vinoski, Tyler Stromberg,
+ dong50252409, ergl, tehprofessor
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,150 @@
+Patch Package:           OTP 22.3.4.17
+Git Tag:                 OTP-22.3.4.17
+Date:                    2021-04-06
+Trouble Report Id:       OTP-17162, OTP-17223, OTP-17244, OTP-17253,
+                         OTP-17279, OTP-17290
+Seq num:                 GH-4546, GH-4549, GH-4635
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.9, kernel-6.5.2.2, ssh-4.9.1.3,
+                         tools-3.3.1.1
+Predecessor:             OTP 22.3.4.16
+
+ Check out the git tag OTP-22.3.4.17, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.9 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17253    Application(s): erts
+
+               Fixed a bug in the timer implementation which could
+               cause timers that were set to more than 37.25 hours in
+               the future to be delayed. This could occur if there
+               were multiple timers scheduled to be triggered very
+               close in time, but still at different times, and the
+               scheduler thread handling the timers was not able to
+               handle them quickly enough. Delayed timers were in this
+               case triggered when another unrelated timer was
+               triggered.
+
+
+  OTP-17290    Application(s): erts
+               Related Id(s): GH-4635
+
+               Fix bug in call_time tracing (used by eprof) that could
+               cause VM crash. Bug exists since OTP-22.2 (but not in
+               OTP-23).
+
+
+ --- Improvements and New Features ---
+
+  OTP-17244    Application(s): erts
+
+               Fix a file descriptor leak when using sendfile and the
+               remote side closes the connection. This bug has been
+               present since OTP-21.0.
+
+
+ Full runtime dependencies of erts-10.7.2.9: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.5.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.5.2.2 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17223    Application(s): kernel
+               Related Id(s): GH-4546, PR-4554
+
+               When running Xref in the modules mode, the Debugger
+               application would show up as a depency for the Kernel
+               applications.
+
+
+ Full runtime dependencies of kernel-6.5.2.2: erts-10.6, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.9.1.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.9.1.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.6.4 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17279    Application(s): ssh
+
+               The idle_time timer was not cancelled when a channel
+               was opened within the timeout time on an empty
+               connection that have had channels previously.
+
+
+ Full runtime dependencies of ssh-4.9.1.3: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.3.1.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.3.1.1 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17162    Application(s): tools
+               Related Id(s): GH-4549, PR-2997, PR-4555,
+               elixir-lang/elixir#10666
+
+               cover would crash when compiling a module having an
+               exported function named clauses.
+
+
+ Full runtime dependencies of tools-3.3.1.1: compiler-5.0, erts-9.1,
+ kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ José Valim
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

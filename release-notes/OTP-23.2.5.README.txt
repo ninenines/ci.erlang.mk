@@ -1,0 +1,116 @@
+Patch Package:           OTP 23.2.5
+Git Tag:                 OTP-23.2.5
+Date:                    2021-02-16
+Trouble Report Id:       OTP-17185, OTP-17190, OTP-17191
+Seq num:                 ERIERL-606, ERL-1476, GH-4192
+System:                  OTP
+Release:                 23
+Application:             erts-11.1.8, ssl-10.2.3, tools-3.4.3
+Predecessor:             OTP 23.2.4
+
+ Check out the git tag OTP-23.2.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.1.8 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.1.8 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17185    Application(s): erts
+
+               Fixed a bug that could cause some work scheduled for
+               execution on scheduler threads to be delayed until
+               other similar work appeared. Beside delaying various
+               cleanup of internal data structures also the following
+               could be delayed:
+
+               -- Termination of a distribution controller process
+
+               -- Disabling of the distribution on a node
+
+               -- Gathering of memory allocator information using the
+               instrument module
+
+               -- Enabling, disabling, and gathering of msacc
+               information
+
+               -- Delivery of 'CHANGE' messages when time offset is
+               monitored
+
+               -- A call to erlang:cancel_timer()
+
+               -- A call to erlang:read_timer()
+
+               -- A call to erlang:statistics(io | garbage_collection
+               | scheduler_wall_time)
+
+               -- A call to ets:all()
+
+               -- A call to erlang:memory()
+
+               -- A call to erlang:system_info({allocator |
+               allocator_sizes, _})
+
+               -- A call to erlang:trace_delivered()
+
+               The bug existed on runtime systems running on all types
+               of hardware except for x86/x86_64.
+
+
+ Full runtime dependencies of erts-11.1.8: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17190    Application(s): ssl
+               Related Id(s): ERIERL-606
+
+               Avoid race when the first two upgrade server handshakes
+               (that is servers that use a gen_tcp socket as input to
+               ssl:handshake/2,3) start close to each other. Could
+               lead to that one of the handshakes would fail.
+
+
+ Full runtime dependencies of ssl-10.2.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.4.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.4.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17191    Application(s): tools
+               Related Id(s): ERL-1476, GH-4192, OTP-16922
+
+               Correct the Xref analysis undefined_functions to not
+               report internally generated behaviour_info/1.
+
+
+ Full runtime dependencies of tools-3.4.3: compiler-5.0, erts-11.0,
+ erts-9.1, kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,46 @@
+Patch Package:           OTP 23.2.7.2
+Git Tag:                 OTP-23.2.7.2
+Date:                    2021-04-08
+Trouble Report Id:       OTP-17305
+Seq num:                
+System:                  OTP
+Release:                 23
+Application:             ssl-10.2.4.2
+Predecessor:             OTP 23.2.7.1
+
+ Check out the git tag OTP-23.2.7.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.4.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.4.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17305    Application(s): ssl
+
+               Fix handling of emulated socket options, the previous
+               patch was incomplete,
+
+
+ Full runtime dependencies of ssl-10.2.4.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

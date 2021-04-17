@@ -1,0 +1,47 @@
+Patch Package:           OTP 23.3.1
+Git Tag:                 OTP-23.3.1
+Date:                    2021-03-30
+Trouble Report Id:       OTP-17279
+Seq num:                
+System:                  OTP
+Release:                 23
+Application:             ssh-4.11.1
+Predecessor:             OTP 23.3
+
+ Check out the git tag OTP-23.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17279    Application(s): ssh
+
+               The idle_time timer was not cancelled when a channel
+               was opened within the timeout time on an empty
+               connection that have had channels previously.
+
+
+ Full runtime dependencies of ssh-4.11.1: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,51 @@
+Patch Package:           OTP 23.2.7.1
+Git Tag:                 OTP-23.2.7.1
+Date:                    2021-03-26
+Trouble Report Id:       OTP-17289
+Seq num:                 GH-4585
+System:                  OTP
+Release:                 23
+Application:             ssl-10.2.4.1
+Predecessor:             OTP 23.2.7
+
+ Check out the git tag OTP-23.2.7.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.4.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.4.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17289    Application(s): ssl
+               Related Id(s): GH-4585
+
+               Backport of OTP-17282
+
+               Correct handling of default values for emulated socket
+               options and retain the order of the ssl options list to
+               ensure backwards compatible behavior if options should
+               be set more than once.
+
+
+ Full runtime dependencies of ssl-10.2.4.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

@@ -1,0 +1,93 @@
+Patch Package:           OTP 22.3.4.16
+Git Tag:                 OTP-22.3.4.16
+Date:                    2021-02-19
+Trouble Report Id:       OTP-16779, OTP-17185
+Seq num:                 ERL-1305
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.8
+Predecessor:             OTP 22.3.4.15
+
+ Check out the git tag OTP-22.3.4.16, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-22.3.4.16 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-16779    Application(s): otp
+               Related Id(s): ERL-1305, PR-2700
+
+               Changes in build system to make it build for macOS 11.0
+               with Apple Silicon. Also corrected execution of match
+               specs to work on Apple Silicon.
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.8 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.8 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17185    Application(s): erts
+
+               Fixed a bug that could cause some work scheduled for
+               execution on scheduler threads to be delayed until
+               other similar work appeared. Beside delaying various
+               cleanup of internal data structures also the following
+               could be delayed:
+
+               -- Termination of a distribution controller process
+
+               -- Disabling of the distribution on a node
+
+               -- Gathering of memory allocator information using the
+               instrument module
+
+               -- Enabling, disabling, and gathering of msacc
+               information
+
+               -- Delivery of 'CHANGE' messages when time offset is
+               monitored
+
+               -- A call to erlang:cancel_timer()
+
+               -- A call to erlang:read_timer()
+
+               -- A call to erlang:statistics(io | garbage_collection
+               | scheduler_wall_time)
+
+               -- A call to ets:all()
+
+               -- A call to erlang:memory()
+
+               -- A call to erlang:system_info({allocator |
+               allocator_sizes, _})
+
+               -- A call to erlang:trace_delivered()
+
+               The bug existed on runtime systems running on all types
+               of hardware except for x86/x86_64.
+
+
+ Full runtime dependencies of erts-10.7.2.8: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

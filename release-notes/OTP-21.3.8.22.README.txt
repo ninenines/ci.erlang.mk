@@ -1,0 +1,94 @@
+Patch Package:           OTP 21.3.8.22
+Git Tag:                 OTP-21.3.8.22
+Date:                    2021-03-30
+Trouble Report Id:       OTP-17244, OTP-17253, OTP-17279
+Seq num:                
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.17, ssh-4.7.6.6
+Predecessor:             OTP 21.3.8.21
+
+ Check out the git tag OTP-21.3.8.22, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.17 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.17 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17253    Application(s): erts
+
+               Fixed a bug in the timer implementation which could
+               cause timers that were set to more than 37.25 hours in
+               the future to be delayed. This could occur if there
+               were multiple timers scheduled to be triggered very
+               close in time, but still at different times, and the
+               scheduler thread handling the timers was not able to
+               handle them quickly enough. Delayed timers were in this
+               case triggered when another unrelated timer was
+               triggered.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17244    Application(s): erts
+
+               Fix a file descriptor leak when using sendfile and the
+               remote side closes the connection. This bug has been
+               present since OTP-21.0.
+
+
+ Full runtime dependencies of erts-10.3.5.17: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.7.6.6 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.7.6.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 21 installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.4.2.2 (first satisfied in OTP 21.3.8.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17279    Application(s): ssh
+
+               The idle_time timer was not cancelled when a channel
+               was opened within the timeout time on an empty
+               connection that have had channels previously.
+
+
+ Full runtime dependencies of ssh-4.7.6.6: crypto-4.4.2.2, erts-6.0,
+ kernel-3.0, public_key-1.5.2, stdlib-3.3
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
