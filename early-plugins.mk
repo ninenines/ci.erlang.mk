@@ -12,41 +12,35 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# We do not keep track of anything below patch releases.
-# They are meant for OTP customers, are not announced
-# and do not come with an easy to read changelog. They
-# are also unlikely to be used by anyone other than
-# OTP customers.
-#
-# Patch releases are announced on erlang-questions,
-# and add a third component to the version number.
-# A fourth component is also added once the next
-# major release is out.
-
 OTP-18 := OTP-18.0.3 OTP-18.1.5 OTP-18.2.4 OTP-18.3.4.11
 OTP-19 := OTP-19.0.7 OTP-19.1.6 OTP-19.2.3 OTP-19.3.6.13
 OTP-20 := OTP-20.0.5 OTP-20.1.7 OTP-20.2.4 OTP-20.3.8.26
 OTP-21 := OTP-21.0.9 OTP-21.1.4 OTP-21.2.7 OTP-21.3.8.22
 OTP-22 := OTP-22.0.7 OTP-22.1.8 OTP-22.2.8 OTP-22.3.4.17
 OTP-23 := OTP-23.0.4 OTP-23.1.5 OTP-23.2.7.2 OTP-23.3.1
+OTP-24 := OTP-24.0-rc2
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
-OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
-OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23)
-OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23)
-OTP-22+ := $(OTP-22) $(OTP-23)
-OTP-23+ := $(OTP-23)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
+OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
+OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
+OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24)
+OTP-23+ := $(OTP-23) $(OTP-24)
+OTP-24+ := $(OTP-24)
 
 OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
 	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
-	$(lastword $(OTP-23))
+	$(lastword $(OTP-23)) $(lastword $(OTP-24))
 OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
-	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23))
+	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
+	$(lastword $(OTP-24))
 OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) \
-	$(lastword $(OTP-22)) $(lastword $(OTP-23))
-OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23))
-OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23))
-OTP-LATEST-23+ := $(lastword $(OTP-23))
+	$(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24))
+OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
+	$(lastword $(OTP-23)) $(lastword $(OTP-24))
+OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24))
+OTP-LATEST-23+ := $(lastword $(OTP-23)) $(lastword $(OTP-24))
+OTP-LATEST-24+ := $(lastword $(OTP-24))
 
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
@@ -90,9 +84,10 @@ OTP-22-DROPPED := OTP-22.0-rc1 OTP-22.0-rc2 OTP-22.0-rc3 OTP-22.0 \
 OTP-23-DROPPED := OTP-23.0-rc1 OTP-23.0-rc2 OTP-23.0-rc3 OTP-23.0 OTP-23.0.1 \
 	OTP-23.0.2 OTP-23.0.3 OTP-23.1 OTP-23.1.1 OTP-23.1.2 OTP-23.1.3 OTP-23.1.4 \
 	OTP-23.2 OTP-23.2.1 OTP-23.2.3 OTP-23.2.4
+OTP-24-DROPPED :=
 
 OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
-	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED)
+	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED) $(OTP-24-DROPPED)
 
 # Configure Erlang.mk's CI plugin.
 
@@ -168,27 +163,33 @@ WINDOWS-OTP-20 := 20.0 20.1 20.2 20.3
 WINDOWS-OTP-21 := 21.0.1 21.1 21.2 21.3
 WINDOWS-OTP-22 := 22.0 22.1 22.2 22.3
 WINDOWS-OTP-23 := 23.0 23.1 23.2 23.3
+WINDOWS-OTP-24 :=
 
 WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) \
-	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
+	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) \
-	$(WINDOWS-OTP-23)
-WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
-WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
-WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23)
-WINDOWS-OTP-23+ := $(WINDOWS-OTP-23)
+	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) \
+	$(WINDOWS-OTP-24)
+WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+WINDOWS-OTP-24+ := $(WINDOWS-OTP-24)
 
 WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
 	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
 WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
-	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
+	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
+	$(lastword $(WINDOWS-OTP-24))
 WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
-	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
+	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
 WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23))
-WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23))
-WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
+WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
+	$(lastword $(WINDOWS-OTP-24))
+WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
+WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24))
 
 # @todo Add support for release candidates (we don't want them as the "latest").
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
@@ -224,6 +225,8 @@ WINDOWS-OTP-23.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.0/bin)
 WINDOWS-OTP-23.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.1/bin)
 WINDOWS-OTP-23.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.2/bin)
 WINDOWS-OTP-23.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.3/bin)
+
+#WINDOWS-OTP-24.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-24.0/bin)
 
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
