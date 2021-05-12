@@ -1,0 +1,39 @@
+Patch Package:           OTP 22.3.4.12.1
+Git Tag:                 OTP-22.3.4.12.1
+Date:                    2021-05-07
+Trouble Report Id:       OTP-17358
+Seq num:                 ERIERL-610
+System:                  OTP
+Release:                 22
+Application:             erl_interface-3.13.2.0.1
+Predecessor:             OTP 22.3.4.12
+
+ Check out the git tag OTP-22.3.4.12.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.13.2.0.1 ----------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.13.2.0.1 application can be applied independently
+ of other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17358    Application(s): erl_interface
+               Related Id(s): ERIERL-610
+
+               Fix bug where sending of large data with
+               ei_send_*/ei_rpc with infinite timeout could fail when
+               the tcp buffer becomes full.
+
+               Fault has existed since OTP-21.
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
