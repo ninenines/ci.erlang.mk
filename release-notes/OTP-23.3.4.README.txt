@@ -1,0 +1,93 @@
+Patch Package:           OTP 23.3.4
+Git Tag:                 OTP-23.3.4
+Date:                    2021-05-10
+Trouble Report Id:       OTP-17366, OTP-17379, OTP-17386
+Seq num:                 ERIERL-650, GH-4775
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.9, diameter-2.2.4, erts-11.2.2
+Predecessor:             OTP 23.3.3
+
+ Check out the git tag OTP-23.3.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.9 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.9 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17386    Application(s): compiler
+               Related Id(s): ERIERL-650, OTP-17357
+
+               Reverted the fix for OTP-17357 as it turned out to be
+               incomplete and made the validator reject much more
+               legal code than before.
+
+               It will be fixed more thoroughly in a later patch.
+
+
+ Full runtime dependencies of compiler-7.6.9: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.2.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17366    Application(s): diameter
+               Related Id(s): GH-4775
+
+               The unordered option was ignored on a client
+               diameter_sctp transport, causing all delivery to be
+               ordered.
+
+               The association id was not specified to gen_sctp when
+               requesting unordered delivery, causing the setting to
+               be applied to the whole endpoint.
+
+               Thanks to Bengt Kleberg and Andreas Schultz.
+
+
+ Full runtime dependencies of diameter-2.2.4: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17379    Application(s): erts
+               Related Id(s): PR-4804
+
+               Fix bug in match spec compilator seen to cause a stack
+               overflow crash on debug VM for certain match specs.
+               Could potentially cause problems for standard VM, but
+               has not been verified. Match specs are used by
+               ets:match/select functions and erlang:trace_pattern.
+
+
+ Full runtime dependencies of erts-11.2.2: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
