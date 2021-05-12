@@ -1,0 +1,148 @@
+Patch Package:           OTP 22.3.4.18
+Git Tag:                 OTP-22.3.4.18
+Date:                    2021-05-06
+Trouble Report Id:       OTP-16607, OTP-16930, OTP-17291, OTP-17307,
+                         OTP-17349, OTP-17358
+Seq num:                 ERL-1371, ERL-ERL-610, GH-4396
+System:                  OTP
+Release:                 22
+Application:             erl_interface-3.13.2.1, erts-10.7.2.10,
+                         runtime_tools-1.14.0.1
+Predecessor:             OTP 22.3.4.17
+
+ Check out the git tag OTP-22.3.4.18, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-3.13.2.1 ------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-3.13.2.1 application can be applied independently
+ of other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17358    Application(s): erl_interface
+               Related Id(s): ERL-ERL-610
+
+               Fix bug where sending of large data with
+               ei_send_*/ei_rpc with infinite timeout could fail when
+               the tcp buffer becomes full.
+
+               Fault has existed since OTP-21.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.10 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.10 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17291    Application(s): erts
+
+               The following signals could pass before other signals
+               from the same sender to the same receiver. That is,
+               these signals could arrive too early.
+
+               -- garbage-collect request. Sent from one process to
+               another using one of the garbage_collect() BIFs.
+
+               -- check-process-code request. Sent from one process to
+               another using one of the check_process_code() BIFs.
+
+               -- is-process-alive reply. Sent as a response to a
+               process calling the is_process_alive() BIF.
+
+               -- process-info reply. Sent as a response to a process
+               calling one of the process_info() BIFs.
+
+               -- port-command reply. Sent as a response to a process
+               calling one of the port_command() BIFs.
+
+               -- port-connect reply. Sent as a response to a process
+               calling the port_connect() BIF.
+
+               -- port-close reply. Sent as a response to a process
+               calling the port_close() BIF.
+
+               -- port-control reply. Sent as a response to a process
+               calling the port_control() BIF.
+
+               -- port-call reply. Sent as a response to a process
+               calling the port_call() BIF.
+
+               -- port-info reply. Sent as a response to a process
+               calling one of the port_info() BIFs.
+
+
+  OTP-17307    Application(s): erts
+
+               A garbage collection of a literal area missed messages
+               that entirely consisted of a term in a literal area.
+               This could in turn lead to a crash of the runtime
+               system.
+
+
+  OTP-17349    Application(s): erts
+
+               A call to process_flag(message_queue_data, off_heap)
+               could cause a crash of the runtime system when
+               sequential tracing was enabled.
+
+
+ Full runtime dependencies of erts-10.7.2.10: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.14.0.1 ------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.14.0.1 application can be applied independently
+ of other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16930    Application(s): runtime_tools
+               Related Id(s): ERL-1371, GH-4396
+
+               The function dbg:n/1 used a local fun to set up a
+               tracer on a remote node. This works fine as long as the
+               remote node is running exactly the same version of
+               Erlang/OTP but does not work at all otherwise. This is
+               fixed by exporting the relevant function and by calling
+               this function on the remote node to set up remote
+               tracing.
+
+
+ Full runtime dependencies of runtime_tools-1.14.0.1: erts-8.0,
+ kernel-5.0, mnesia-4.12, stdlib-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
