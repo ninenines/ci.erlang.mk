@@ -1,0 +1,144 @@
+Patch Package:           OTP 23.3.3
+Git Tag:                 OTP-23.3.3
+Date:                    2021-05-06
+Trouble Report Id:       OTP-16607, OTP-16930, OTP-17347, OTP-17357,
+                         OTP-17358, OTP-17361
+Seq num:                 ERL-1371, ERL-1439, ERL-ERL-610, GH-3480,
+                         GH-4396, GH-4774
+System:                  OTP
+Release:                 23
+Application:             common_test-1.20.2, compiler-7.6.8,
+                         erl_interface-4.0.3, kernel-7.3.1,
+                         runtime_tools-1.16.1
+Predecessor:             OTP 23.3.2
+
+ Check out the git tag OTP-23.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.20.2 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.20.2 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17347    Application(s): common_test
+               Related Id(s): ERL-1439, GH-3480
+
+               Before this change Config leaked between test groups in
+               case of a subgroup was skipped (GH-3480).
+
+
+ Full runtime dependencies of common_test-1.20.2: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.8 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.8 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17357    Application(s): compiler
+               Related Id(s): GH-4774
+
+               Fixed a bug in the validator that could cause it to
+               reject valid code.
+
+
+ Full runtime dependencies of compiler-7.6.8: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-4.0.3 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-4.0.3 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17358    Application(s): erl_interface
+               Related Id(s): ERL-ERL-610
+
+               Fix bug where sending of large data with
+               ei_send_*/ei_rpc with infinite timeout could fail when
+               the tcp buffer becomes full.
+
+               Fault has existed since OTP-21.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-7.3.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17361    Application(s): kernel
+
+               A bug in the Erlang DNS resolver has been fixed, where
+               it could be made to bring down the kernel supervisor
+               and thereby the whole node, when getting an incorrect
+               (IN A reply to an IN CNAME query) reply from the DNS
+               server and used the reply record's value without
+               verifying its type.
+
+
+ Full runtime dependencies of kernel-7.3.1: erts-11.0, sasl-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.16.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-1.16.1 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16930    Application(s): runtime_tools
+               Related Id(s): ERL-1371, GH-4396
+
+               The function dbg:n/1 used a local fun to set up a
+               tracer on a remote node. This works fine as long as the
+               remote node is running exactly the same version of
+               Erlang/OTP but does not work at all otherwise. This is
+               fixed by exporting the relevant function and by calling
+               this function on the remote node to set up remote
+               tracing.
+
+
+ Full runtime dependencies of runtime_tools-1.16.1: erts-11.0,
+ kernel-7.0, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
