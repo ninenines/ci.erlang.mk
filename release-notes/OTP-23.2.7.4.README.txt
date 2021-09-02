@@ -1,0 +1,40 @@
+Patch Package:           OTP 23.2.7.4
+Git Tag:                 OTP-23.2.7.4
+Date:                    2021-05-28
+Trouble Report Id:       OTP-17435
+Seq num:                 ERIERL-653
+System:                  OTP
+Release:                 23
+Application:             ssl-10.2.4.3
+Predecessor:             OTP 23.2.7.3
+
+ Check out the git tag OTP-23.2.7.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.4.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.4.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17435    Application(s): ssl
+               Related Id(s): ERIERL-653
+
+               Fix cache invalidation problem for CA certs provided by
+               the cacertfile option.
+
+
+ Full runtime dependencies of ssl-10.2.4.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

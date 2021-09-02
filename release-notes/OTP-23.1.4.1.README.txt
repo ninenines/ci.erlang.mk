@@ -1,0 +1,40 @@
+Patch Package:           OTP 23.1.4.1
+Git Tag:                 OTP-23.1.4.1
+Date:                    2021-06-07
+Trouble Report Id:       OTP-17468
+Seq num:                 ERIERL-656
+System:                  OTP
+Release:                 23
+Application:             ssh-4.10.4.1
+Predecessor:             OTP 23.1.4
+
+ Check out the git tag OTP-23.1.4.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.10.4.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.10.4.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17468    Application(s): ssh
+               Related Id(s): ERIERL-656
+
+               Filter out sensitive data (passwords etc) from progress
+               reports and supervisor reports.
+
+
+ Full runtime dependencies of ssh-4.10.4.1: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

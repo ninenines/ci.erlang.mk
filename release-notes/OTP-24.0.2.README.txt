@@ -1,0 +1,325 @@
+Patch Package:           OTP 24.0.2
+Git Tag:                 OTP-24.0.2
+Date:                    2021-06-01
+Trouble Report Id:       OTP-16033, OTP-17427, OTP-17428, OTP-17431,
+                         OTP-17433, OTP-17435, OTP-17436, OTP-17437,
+                         OTP-17439, OTP-17442, OTP-17448, OTP-17451,
+                         OTP-17452, OTP-17459, OTP-17462
+Seq num:                 ERIERL-329, ERIERL-653, ERL-1414, ERL-885,
+                         GH-3923, GH-4448, GH-4774, GH-4824, GH-4827,
+                         GH-4838, GH-4842, GH-4849, GH-4858, GH-4859,
+                         GH-4861, GH-4885, GH-4898
+System:                  OTP
+Release:                 24
+Application:             compiler-8.0.1, crypto-5.0.2,
+                         erl_docgen-1.1.1, erts-12.0.2, kernel-8.0.1,
+                         ssh-4.12.2, ssl-10.4.1, stdlib-3.15.1
+Predecessor:             OTP 24.0.1
+
+ Check out the git tag OTP-24.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.0.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17428    Application(s): compiler
+               Related Id(s): GH-4859
+
+               Fixed a bug that could cause after blocks to be ignored
+               when erlang:raise/3 was used in a catch block.
+
+
+  OTP-17437    Application(s): compiler
+               Related Id(s): GH-4774, OTP-17357
+
+               Fixed a bug in the validation pass that could cause it
+               to reject valid code.
+
+
+ Full runtime dependencies of compiler-8.0.1: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.0.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.0.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17442    Application(s): crypto
+               Related Id(s): GH-4861
+
+               EC keys are now zero-padded to the expected length if
+               needed.
+
+
+ Full runtime dependencies of crypto-5.0.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-1.1.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-1.1.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17433    Application(s): erl_docgen
+               Related Id(s): GH-4849, PR-4857
+
+               Fix links generated in specs to types in other
+               applications to point to the correct place. This bug
+               was introduced in Erlang/OTP 24.0.
+
+
+ Full runtime dependencies of erl_docgen-1.1.1: edoc-1.0, erts-9.0,
+ kernel-8.0, stdlib-3.15, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.0.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17431    Application(s): erts
+               Related Id(s): GH-4858, OTP-16718, PR-4870
+
+               Not yet handled alias-message signals in the signal
+               queue at the time when a garbage collection was
+               performed could cause a memory corruption which in turn
+               could result in a crash of the runtime system. This bug
+               was introduced in OTP 24.0.
+
+
+  OTP-17436    Application(s): erts
+               Related Id(s): PR-4875
+
+               Fixed bug when using external pids/ports in keys of big
+               maps (> 32). Could cause runtime crash. Bug exists
+               since OTP 24.0.
+
+
+  OTP-17439    Application(s): erts, kernel
+               Related Id(s): GH-4827, GH-4838, PR-4888
+
+               After a node restart with init:restart/0,1, the module
+               socket was not usable because supporting tables had
+               been cleared and not re-initialized. This has now been
+               fixed.
+
+               Handling of the "." domain as a search domain was
+               incorrect and caused a crash in the DNS resolver
+               inet_res, which has now been fixed.
+
+
+  OTP-17448    Application(s): erts
+               Related Id(s): GH-4898, OTP-17291, PR-4903
+
+               A call to port_command() could cause a scheduler to end
+               up in an eternal loop if the port was busy and the
+               calling process had incoming signals at the time of the
+               call. This bug was introduced in OTP 23.3.2 (ERTS
+               version 11.2.1), OTP 22.3.4.18 (ERTS version
+               10.7.2.10), and OTP 21.3.8.23 (ERTS version 10.3.5.18).
+
+
+  OTP-17452    Application(s): erts, kernel
+
+               Bug fixes and code cleanup for the new socket
+               implementation, such as:
+
+               Assertions on the result of demonitoring has been added
+               in the NIF code, where appropriate.
+
+               Internal state handling for socket close in the NIF
+               code has been reviewed.
+
+               Looping over close() for EINTR in the NIF code has been
+               removed, since it is strongly discouraged on Linux and
+               Posix is not clear about if it is allowed.
+
+               The inet_backend temporary socket option for legacy
+               gen_tcp sockets has been documented.
+
+               The return value from net:getaddrinfo/2 has been
+               corrected: the protocol field is now an atom(), instead
+               of, incorrectly, list(atom()). The documentation has
+               also been corrected about this return type.
+
+               Deferred close of a socket:sendfile/* file was broken
+               and has been corrected.
+
+               Some debug code, not enabled by default, in the socket
+               NIF has been corrected to not accidentally core dump
+               for debug printouts of more or less innocent events.
+
+
+  OTP-17462    Application(s): erts
+               Related Id(s): GH-4885, OTP-17127, PR-4914
+
+               Dirty execution of a process in combination with an
+               unlink signal from a port to the process could cause
+               the signal queue of the process to enter into an
+               inconsistent state. The result of the inconsistency
+               typically caused a crash of the runtime system. This
+               bug was introduced in OTP 23.3 (ERTS version 11.2).
+
+
+ Full runtime dependencies of erts-12.0.2: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.0.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-8.0.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16033    Application(s): kernel
+               Related Id(s): ERIERL-329, ERL-1414, ERL-885, GH-3923,
+               GH-4448
+
+               Fix a race condition in Global.
+
+
+  OTP-17439    Application(s): erts, kernel
+               Related Id(s): GH-4827, GH-4838, PR-4888
+
+               After a node restart with init:restart/0,1, the module
+               socket was not usable because supporting tables had
+               been cleared and not re-initialized. This has now been
+               fixed.
+
+               Handling of the "." domain as a search domain was
+               incorrect and caused a crash in the DNS resolver
+               inet_res, which has now been fixed.
+
+
+  OTP-17451    Application(s): kernel
+               Related Id(s): OTP-17374
+
+               Handling of combinations of the fd option and binding
+               to an address has been corrected, especially for the
+               local address family.
+
+
+  OTP-17452    Application(s): erts, kernel
+
+               Bug fixes and code cleanup for the new socket
+               implementation, such as:
+
+               Assertions on the result of demonitoring has been added
+               in the NIF code, where appropriate.
+
+               Internal state handling for socket close in the NIF
+               code has been reviewed.
+
+               Looping over close() for EINTR in the NIF code has been
+               removed, since it is strongly discouraged on Linux and
+               Posix is not clear about if it is allowed.
+
+               The inet_backend temporary socket option for legacy
+               gen_tcp sockets has been documented.
+
+               The return value from net:getaddrinfo/2 has been
+               corrected: the protocol field is now an atom(), instead
+               of, incorrectly, list(atom()). The documentation has
+               also been corrected about this return type.
+
+               Deferred close of a socket:sendfile/* file was broken
+               and has been corrected.
+
+               Some debug code, not enabled by default, in the socket
+               NIF has been corrected to not accidentally core dump
+               for debug printouts of more or less innocent events.
+
+
+ Full runtime dependencies of kernel-8.0.1: crypto-5.0, erts-12.0,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.12.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.12.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17427    Application(s): ssh
+
+               Avoid an extra blank line in the ssh known_hosts file
+
+
+ Full runtime dependencies of ssh-4.12.2: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.4.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.4.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17435    Application(s): ssl
+               Related Id(s): ERIERL-653
+
+               Fix cache invalidation problem for CA certs provided by
+               the cacertfile option.
+
+
+ Full runtime dependencies of ssl-10.4.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.15.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.15.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17459    Application(s): stdlib
+               Related Id(s): GH-4824, GH-4842
+
+               Fix a bug that could cause a loop when formatting terms
+               using the control sequences p or P and limiting the
+               output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.15.1: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

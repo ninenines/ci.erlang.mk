@@ -1,0 +1,104 @@
+Patch Package:           OTP 23.3.4.3
+Git Tag:                 OTP-23.3.4.3
+Date:                    2021-06-09
+Trouble Report Id:       OTP-17450, OTP-17468, OTP-17472, OTP-17473,
+                         OTP-17476
+Seq num:                 ERIERL-655, ERIERL-656, GH-4838, GH-4931
+System:                  OTP
+Release:                 23
+Application:             erts-11.2.2.3, kernel-7.3.1.2, ssh-4.11.1.3
+Predecessor:             OTP 23.3.4.2
+
+ Check out the git tag OTP-23.3.4.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17472    Application(s): erts
+               Related Id(s): PR-4932
+
+               A call to erlang:cancel_timer(_, [{info, false}]) could
+               cause the calling process to block forever in the call.
+               Note that only the synchronous version of the call
+               (that is, the async option is false) in combination
+               with the info option set to false was effected by this
+               bug.
+
+
+ Full runtime dependencies of erts-11.2.2.3: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3.1.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-7.3.1.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17473    Application(s): kernel
+               Related Id(s): GH-4838, OTP-17439
+
+               Handling of the "." domain as a search domain was
+               incorrect and caused a crash in the DNS resolver
+               inet_res, which has now been fixed.
+
+
+  OTP-17476    Application(s): kernel
+               Related Id(s): GH-4931, PR-4934
+
+               Fixed rare bug that could cause net_kernel process to
+               hang for ever. Have seen to happen with massive number
+               of TLS connections while remote nodes are restarting.
+               Bug exists since OTP-22.0.
+
+
+ Full runtime dependencies of kernel-7.3.1.2: erts-11.0, sasl-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17468    Application(s): ssh
+               Related Id(s): ERIERL-656
+
+               Filter out sensitive data (passwords etc) from progress
+               reports and supervisor reports.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17450    Application(s): ssh
+               Related Id(s): ERIERL-655
+
+               The "Key exchange failed" Info Report is now more
+               informative.
+
+
+ Full runtime dependencies of ssh-4.11.1.3: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

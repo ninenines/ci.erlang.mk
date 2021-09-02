@@ -1,0 +1,144 @@
+Patch Package:           OTP 24.0.4
+Git Tag:                 OTP-24.0.4
+Date:                    2021-07-22
+Trouble Report Id:       OTP-17150, OTP-17475, OTP-17506, OTP-17509,
+                         OTP-17525, OTP-17529
+Seq num:                 GH-4877, GH-4958, GH-5053
+System:                  OTP
+Release:                 24
+Application:             common_test-1.20.5, public_key-1.11.1,
+                         ssl-10.4.2, stdlib-3.15.2
+Predecessor:             OTP 24.0.3
+
+ Check out the git tag OTP-24.0.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.20.5 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.20.5 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17506    Application(s): common_test
+
+               An incoming NETCONF notification received before a call
+               to ct_netconfc:create_subscription/* caused the
+               connection process to fail with badarg. Unexpected
+               notifications are now logged in the same way as other
+               unexpected messages.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17509    Application(s): common_test
+
+               Add 'receiver' option to ct_netconfc
+
+               To allow a destination for incoming NETCONF
+               notifications to be specified at sessions creation.
+               Previously, a caller of create_subscription/* became
+               the destination, but RFC 5277 create-subscription is no
+               longer the only way in which NETCONF notifications can
+               be ordered.
+
+
+ Full runtime dependencies of common_test-1.20.5: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.11.1 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.11.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17475    Application(s): public_key, ssl
+               Related Id(s): GH-4877
+
+               Handle cross-signed root certificates when old root
+               expired as reported in GH-4877.
+
+
+ Full runtime dependencies of public_key-1.11.1: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.4.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.4.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.1 (first satisfied in OTP 24.0.4)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17475    Application(s): public_key, ssl
+               Related Id(s): GH-4877
+
+               Handle cross-signed root certificates when old root
+               expired as reported in GH-4877.
+
+
+  OTP-17529    Application(s): ssl
+               Related Id(s): GH-4958, PR-4979
+
+               The signature selection algorithm has been changed to
+               also verify if the client supports signatures using the
+               elliptic curve of the server's public/private key pair.
+               This change fixes #4958.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17150    Application(s): ssl
+               Related Id(s): GH-4877
+
+               Slight optimization of certificate decoding.
+
+
+ Full runtime dependencies of ssl-10.4.2: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.11.1, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.15.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.15.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17525    Application(s): stdlib
+               Related Id(s): GH-5053
+
+               Fix a bug that could cause a crash when formatting
+               tuples using the control sequences p or P and limiting
+               the output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.15.2: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

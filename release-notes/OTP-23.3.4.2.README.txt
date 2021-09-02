@@ -1,0 +1,179 @@
+Patch Package:           OTP 23.3.4.2
+Git Tag:                 OTP-23.3.4.2
+Date:                    2021-05-31
+Trouble Report Id:       OTP-16033, OTP-17427, OTP-17435, OTP-17437,
+                         OTP-17442, OTP-17448, OTP-17459, OTP-17462
+Seq num:                 ERIERL-329, ERIERL-653, ERL-1414, ERL-885,
+                         GH-3923, GH-4448, GH-4774, GH-4824, GH-4842,
+                         GH-4861, GH-4885, GH-4898
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.9.1, crypto-4.9.0.2,
+                         erts-11.2.2.2, kernel-7.3.1.1, ssh-4.11.1.2,
+                         ssl-10.3.1.1, stdlib-3.14.2.1
+Predecessor:             OTP 23.3.4.1
+
+ Check out the git tag OTP-23.3.4.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.9.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.9.1 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17437    Application(s): compiler
+               Related Id(s): GH-4774, OTP-17357
+
+               Fixed a bug in the validation pass that could cause it
+               to reject valid code.
+
+
+ Full runtime dependencies of compiler-7.6.9.1: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.9.0.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.9.0.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17442    Application(s): crypto
+               Related Id(s): GH-4861
+
+               EC keys are now zero-padded to the expected length if
+               needed.
+
+
+ Full runtime dependencies of crypto-4.9.0.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17448    Application(s): erts
+               Related Id(s): GH-4898, OTP-17291, PR-4903
+
+               A call to port_command() could cause a scheduler to end
+               up in an eternal loop if the port was busy and the
+               calling process had incoming signals at the time of the
+               call. This bug was introduced in OTP 23.3.2 (ERTS
+               version 11.2.1), OTP 22.3.4.18 (ERTS version
+               10.7.2.10), and OTP 21.3.8.23 (ERTS version 10.3.5.18).
+
+
+  OTP-17462    Application(s): erts
+               Related Id(s): GH-4885, OTP-17127, PR-4914
+
+               Dirty execution of a process in combination with an
+               unlink signal from a port to the process could cause
+               the signal queue of the process to enter into an
+               inconsistent state. The result of the inconsistency
+               typically caused a crash of the runtime system. This
+               bug was introduced in OTP 23.3 (ERTS version 11.2).
+
+
+ Full runtime dependencies of erts-11.2.2.2: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-7.3.1.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16033    Application(s): kernel
+               Related Id(s): ERIERL-329, ERL-1414, ERL-885, GH-3923,
+               GH-4448
+
+               Fix a race condition in Global.
+
+
+ Full runtime dependencies of kernel-7.3.1.1: erts-11.0, sasl-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17427    Application(s): ssh
+
+               Avoid an extra blank line in the ssh known_hosts file
+
+
+ Full runtime dependencies of ssh-4.11.1.2: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.3.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.3.1.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17435    Application(s): ssl
+               Related Id(s): ERIERL-653
+
+               Fix cache invalidation problem for CA certs provided by
+               the cacertfile option.
+
+
+ Full runtime dependencies of ssl-10.3.1.1: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.14.2.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.14.2.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17459    Application(s): stdlib
+               Related Id(s): GH-4824, GH-4842
+
+               Fix a bug that could cause a loop when formatting terms
+               using the control sequences p or P and limiting the
+               output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.14.2.1: compiler-5.0,
+ crypto-3.3, erts-11.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

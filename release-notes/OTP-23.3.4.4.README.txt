@@ -1,0 +1,60 @@
+Patch Package:           OTP 23.3.4.4
+Git Tag:                 OTP-23.3.4.4
+Date:                    2021-06-17
+Trouble Report Id:       OTP-17482, OTP-17490
+Seq num:                
+System:                  OTP
+Release:                 23
+Application:             dialyzer-4.3.1.1, inets-7.3.2.1
+Predecessor:             OTP 23.3.4.3
+
+ Check out the git tag OTP-23.3.4.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.3.1.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.3.1.1 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17482    Application(s): dialyzer
+
+               In rare circumstances, Dialyzer could crash analyzing
+               code with a list comprehension whose value was ignored.
+               (Thanks to Ulf Wiger for reporting this bug.)
+
+
+ Full runtime dependencies of dialyzer-4.3.1.1: compiler-7.0,
+ erts-9.0, hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0,
+ wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.3.2.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.3.2.1 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17490    Application(s): inets
+
+               Improved user input handling in inets/mod_esi
+               preventing unnecessary atom creation.
+
+
+ Full runtime dependencies of inets-7.3.2.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
