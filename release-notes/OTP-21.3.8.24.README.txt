@@ -1,0 +1,61 @@
+Patch Package:           OTP 21.3.8.24
+Git Tag:                 OTP-21.3.8.24
+Date:                    2021-06-01
+Trouble Report Id:       OTP-17379, OTP-17448
+Seq num:                 GH-4898
+System:                  OTP
+Release:                 21
+Application:             erts-10.3.5.19
+Predecessor:             OTP 21.3.8.23
+
+ Check out the git tag OTP-21.3.8.24, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.3.5.19 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.3.5.19 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 21
+       installation.
+
+       On a full OTP 21 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-6.1 (first satisfied in OTP 21.1)
+       -- sasl-3.3 (first satisfied in OTP 21.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17379    Application(s): erts
+               Related Id(s): PR-4804
+
+               Fix bug in match spec compilator seen to cause a stack
+               overflow crash on debug VM for certain match specs.
+               Could potentially cause problems for standard VM, but
+               has not been verified. Match specs are used by
+               ets:match/select functions and erlang:trace_pattern.
+
+
+  OTP-17448    Application(s): erts
+               Related Id(s): GH-4898, OTP-17291, PR-4903
+
+               A call to port_command() could cause a scheduler to end
+               up in an eternal loop if the port was busy and the
+               calling process had incoming signals at the time of the
+               call. This bug was introduced in OTP 23.3.2 (ERTS
+               version 11.2.1), OTP 22.3.4.18 (ERTS version
+               10.7.2.10), and OTP 21.3.8.23 (ERTS version 10.3.5.18).
+
+
+ Full runtime dependencies of erts-10.3.5.19: kernel-6.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
