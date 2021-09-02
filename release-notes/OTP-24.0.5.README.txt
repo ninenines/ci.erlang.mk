@@ -1,0 +1,49 @@
+Patch Package:           OTP 24.0.5
+Git Tag:                 OTP-24.0.5
+Date:                    2021-07-30
+Trouble Report Id:       OTP-17536
+Seq num:                 ERIERL-677
+System:                  OTP
+Release:                 24
+Application:             kernel-8.0.2
+Predecessor:             OTP 24.0.4
+
+ Check out the git tag OTP-24.0.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- kernel-8.0.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-8.0.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17536    Application(s): kernel
+               Related Id(s): ERIERL-677, OTP-17216
+
+               For gen_tcp:connect/3,4 it is possible to specify a
+               specific source port, which should be enough to bind
+               the socket to an address with that port before
+               connecting.
+
+               Unfortunately that feature was lost in OTP-17216 that
+               made it mandatory to specify the source address to get
+               an address binding, and ignored a specified source port
+               if no source address was specified.
+
+               That bug has now been corrected.
+
+
+ Full runtime dependencies of kernel-8.0.2: crypto-5.0, erts-12.0,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
