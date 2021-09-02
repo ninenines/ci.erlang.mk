@@ -1,0 +1,125 @@
+Patch Package:           OTP 22.3.4.20
+Git Tag:                 OTP-22.3.4.20
+Date:                    2021-06-01
+Trouble Report Id:       OTP-16033, OTP-17442, OTP-17448, OTP-17459
+Seq num:                 ERIERL-329, ERL-1414, ERL-885, GH-3923,
+                         GH-4448, GH-4824, GH-4842, GH-4861, GH-4898
+System:                  OTP
+Release:                 22
+Application:             crypto-4.6.5.4, erts-10.7.2.12,
+                         kernel-6.5.2.3, stdlib-3.12.1.1
+Predecessor:             OTP 22.3.4.19
+
+ Check out the git tag OTP-22.3.4.20, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.6.5.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.6.5.4 application can be applied independently of other
+ applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17442    Application(s): crypto
+               Related Id(s): GH-4861
+
+               EC keys are now zero-padded to the expected length if
+               needed.
+
+
+ Full runtime dependencies of crypto-4.6.5.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.12 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.12 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17448    Application(s): erts
+               Related Id(s): GH-4898, OTP-17291, PR-4903
+
+               A call to port_command() could cause a scheduler to end
+               up in an eternal loop if the port was busy and the
+               calling process had incoming signals at the time of the
+               call. This bug was introduced in OTP 23.3.2 (ERTS
+               version 11.2.1), OTP 22.3.4.18 (ERTS version
+               10.7.2.10), and OTP 21.3.8.23 (ERTS version 10.3.5.18).
+
+
+ Full runtime dependencies of erts-10.7.2.12: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.5.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.5.2.3 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.6 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-16033    Application(s): kernel
+               Related Id(s): ERIERL-329, ERL-1414, ERL-885, GH-3923,
+               GH-4448
+
+               Fix a race condition in Global.
+
+
+ Full runtime dependencies of kernel-6.5.2.3: erts-10.6, sasl-3.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.12.1.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-3.12.1.1 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.7.1 (first satisfied in OTP 22.3.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17459    Application(s): stdlib
+               Related Id(s): GH-4824, GH-4842
+
+               Fix a bug that could cause a loop when formatting terms
+               using the control sequences p or P and limiting the
+               output with the option chars_limit.
+
+
+ Full runtime dependencies of stdlib-3.12.1.1: compiler-5.0,
+ crypto-3.3, erts-10.7.1, kernel-6.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
