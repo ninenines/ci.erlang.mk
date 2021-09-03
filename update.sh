@@ -14,7 +14,7 @@ echo Variable: $VAR
 echo Old version: $OLD
 echo New version: $NEW
 
-sed "s/\(^$VAR := .*\) [a-zA-Z0-9.-]*$/\1 $NEW/" -- early-plugins.mk > early-plugins.1.tmp
+sed "s/\(^$VAR :=.*\) [a-zA-Z0-9.-]*$/\1 $NEW/" -- early-plugins.mk > early-plugins.1.tmp
 sed "/^$VAR-DROPPED := .*\\\\$/ { : again; /\\\\$/ { N; b again }; s/$/ $OLD/ }" -- early-plugins.1.tmp > early-plugins.2.tmp
 
 rm early-plugins.1.tmp
