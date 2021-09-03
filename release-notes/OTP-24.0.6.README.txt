@@ -1,0 +1,76 @@
+Patch Package:           OTP 24.0.6
+Git Tag:                 OTP-24.0.6
+Date:                    2021-09-03
+Trouble Report Id:       OTP-17548, OTP-17560, OTP-17568, OTP-17585,
+                         OTP-17594
+Seq num:                 GH-5116, GH-5150
+System:                  OTP
+Release:                 24
+Application:             erts-12.0.4
+Predecessor:             OTP 24.0.5
+
+ Check out the git tag OTP-24.0.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.0.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.0.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17548    Application(s): erts
+               Related Id(s): OTP-10391, PR-5078
+
+               A call to the process_info() BIF could end up hanging
+               for ever due to a bug introduced when the new selective
+               receive optimization was introduced in OTP 24.0. Note
+               that this bug only effects process_info().
+
+
+  OTP-17560    Application(s): erts
+               Related Id(s): GH-5116
+
+               Fix buffer overrun problem in the tty driver. The
+               problem happens on some platforms when using the CTRL+R
+               functionality of newshell with very long strings in the
+               history.
+
+
+  OTP-17568    Application(s): erts
+               Related Id(s): PR-4940
+
+               Fix race-condition that could cause a crash when
+               tracing scheduling or garbage collections on a process
+               that was running on a dirty scheduler.
+
+
+  OTP-17585    Application(s): erts
+               Related Id(s): GH-5150
+
+               Fix rare bug where re:run would crash/return invalid
+               results when given a subbinary as subject.
+
+               This bug has existed since Erlang/OTP 20.0.
+
+
+  OTP-17594    Application(s): erts
+
+               binary_to_term/1,2 is now more resilient against
+               corrupted binaries containing maps in the external
+               format.
+
+
+ Full runtime dependencies of erts-12.0.4: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
