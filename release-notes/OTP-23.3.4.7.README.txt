@@ -1,0 +1,85 @@
+Patch Package:           OTP 23.3.4.7
+Git Tag:                 OTP-23.3.4.7
+Date:                    2021-09-08
+Trouble Report Id:       OTP-17578, OTP-17600, OTP-17604
+Seq num:                 ERIERL-683
+System:                  OTP
+Release:                 23
+Application:             erts-11.2.2.6, inets-7.3.2.2, kernel-7.3.1.4
+Predecessor:             OTP 23.3.4.6
+
+ Check out the git tag OTP-23.3.4.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2.6 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17578    Application(s): erts, kernel
+               Related Id(s): ERIERL-683
+
+               Parsing of the result value in the native DNS resolver
+               has been made more defensive against incorrect results.
+
+
+  OTP-17604    Application(s): erts
+
+               On 32-bit computers, binary_to_term/1,2 is now more
+               resilient against corrupted binaries containing maps in
+               the external format.
+
+
+ Full runtime dependencies of erts-11.2.2.6: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.3.2.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.3.2.2 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17600    Application(s): inets
+
+               Restored HTTP headers handling in inets/mod_esi.
+
+
+ Full runtime dependencies of inets-7.3.2.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3.1.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-7.3.1.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17578    Application(s): erts, kernel
+               Related Id(s): ERIERL-683
+
+               Parsing of the result value in the native DNS resolver
+               has been made more defensive against incorrect results.
+
+
+ Full runtime dependencies of kernel-7.3.1.4: erts-11.0, sasl-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
