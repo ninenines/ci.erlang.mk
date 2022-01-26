@@ -1,0 +1,104 @@
+Patch Package:           OTP 24.2.1
+Git Tag:                 OTP-24.2.1
+Date:                    2022-01-25
+Trouble Report Id:       OTP-17794, OTP-17827, OTP-17829, OTP-17831,
+                         OTP-17871, OTP-17879
+Seq num:                 ERIERL-708, GH-4450, GH-5341, GH-5527,
+                         GH-5624
+System:                  OTP
+Release:                 24
+Application:             erts-12.2.1, ssl-10.6.1
+Predecessor:             OTP 24.2
+
+ Check out the git tag OTP-24.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.2.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17827    Application(s): erts
+               Related Id(s): GH-5527
+
+               Fixed a memory leak in file:read_file_info/2 and
+               file:read_file/1 on Windows.
+
+
+  OTP-17871    Application(s): erts
+               Related Id(s): PR-5612
+
+               Fix GC emulator crash when spawn_request was used when
+               message tracing was enabled.
+
+
+ Full runtime dependencies of erts-12.2.1: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.6.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.6.1 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17794    Application(s): ssl
+               Related Id(s): GH-4450, GH-5341
+
+               Improve SNI (server name indication) handling so that
+               protocol version can be selected with regards to SNI.
+               Also, make sure that ssl:connection_information/1
+               returns the correct SNI value.
+
+
+  OTP-17829    Application(s): ssl
+               Related Id(s): ERIERL-708
+
+               Fixed cipher suite listing functions so that the
+               listing of all cipher suites will be complete. Another
+               fix for cipher suite handling in OTP-24.1 accidentally
+               excludes a few cipher suites from the listing of all
+               cipher suites.
+
+
+  OTP-17879    Application(s): ssl
+               Related Id(s): GH-5624
+
+               Reenable legacy cipher suite
+               TLS_RSA_WITH_3DES_EDE_CBC_SHA for explicit
+               configuration in TLS-1.2, not supported by default.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17831    Application(s): ssl
+
+               Avoid unnecessary logs by better adjusting the
+               tls_sender process to the new supervisor structure in
+               OTP-24.2
+
+
+ Full runtime dependencies of ssl-10.6.1: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
