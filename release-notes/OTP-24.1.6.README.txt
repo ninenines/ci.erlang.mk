@@ -1,0 +1,54 @@
+Patch Package:           OTP 24.1.6
+Git Tag:                 OTP-24.1.6
+Date:                    2021-11-18
+Trouble Report Id:       OTP-17756, OTP-17757
+Seq num:                 GH-5352, GH-5383
+System:                  OTP
+Release:                 24
+Application:             ssl-10.5.3
+Predecessor:             OTP 24.1.5
+
+ Check out the git tag OTP-24.1.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-10.5.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.5.3 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17756    Application(s): ssl
+               Related Id(s): GH-5383, PR-5397
+
+               Correct typo of ECC curve name in signature algorithm
+               handling. Will make the signature algorithm
+               ecdsa_secp521r1_sha512 succeed.
+
+
+  OTP-17757    Application(s): ssl
+               Related Id(s): GH-5352, PR-5395
+
+               Suppress authenticity warning when option verify_none
+               is explicitly supplied.
+
+
+ Full runtime dependencies of ssl-10.5.3: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
