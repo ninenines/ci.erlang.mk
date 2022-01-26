@@ -1,0 +1,152 @@
+Patch Package:           OTP 24.1.1
+Git Tag:                 OTP-24.1.1
+Date:                    2021-09-30
+Trouble Report Id:       OTP-17640, OTP-17641, OTP-17642, OTP-17646,
+                         OTP-17647, OTP-17649, OTP-17651, OTP-17665
+Seq num:                 GH-5193, GH-5221, GH-5225, GH-5235
+System:                  OTP
+Release:                 24
+Application:             erts-12.1.1, kernel-8.1.1, snmp-5.10.1,
+                         stdlib-3.16.1
+Predecessor:             OTP 24.1
+
+ Check out the git tag OTP-24.1.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.1.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.1.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17642    Application(s): erts
+               Related Id(s): PR-5248
+
+               A race between an exiting port and handling of
+               simultaneously received signals to that port could
+               cause a runtime system crash. The effected signals are
+               link, monitor and demonitor. On OTP 22 a similiar race
+               could also cause a memory leak when receiving an unlink
+               signal.
+
+
+  OTP-17646    Application(s): erts
+               Related Id(s): GH-5221, PR-5232
+
+               A user defined tag on a monitor message could cause the
+               runtime system to crash when the monitor message had
+               been received.
+
+
+  OTP-17647    Application(s): erts
+               Related Id(s): GH-5225, PR-5230
+
+               A call to erlang:demonitor(Ref) where the reference Ref
+               referred to an active alias, but not an active monitor,
+               caused the runtime system to crash.
+
+
+  OTP-17651    Application(s): erts
+               Related Id(s): GH-5235, PR-5244
+
+               The message queue of a process entered an inconsistent
+               state after a receive expression with an invalid
+               timeout value was executed. If the exception raised due
+               to the invalid timeout value was caught, the following
+               receive expression executed by the process could fail
+               to match messages already present in the message queue.
+
+               On OTP 24 this could also cause the whole runtime
+               system to crash.
+
+
+  OTP-17665    Application(s): erts
+               Related Id(s): PR-5248
+
+               Sending a Port ! {PortOwner, close} signal from a
+               process other than the port owner could erroneously
+               trigger a badsig exit signal being sent to the port
+               owner process even though the correct PortOwner had
+               been passed in the signal.
+
+
+ Full runtime dependencies of erts-12.1.1: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-8.1.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17640    Application(s): kernel
+
+               Add more info about the socket 'type' ('socket' or
+               'port') for the DOWN message when monitoring sockets.
+
+
+ Full runtime dependencies of kernel-8.1.1: crypto-5.0, erts-12.0,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.10.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.10.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17641    Application(s): snmp
+               Related Id(s): OTP-17640
+
+               Sockets are monitored, but the handling of the 'DOWN'
+               message expected a new style socket ('socket'), old
+               style (port) was not handled.
+
+
+ Full runtime dependencies of snmp-5.10.1: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.16.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.16.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17649    Application(s): stdlib
+               Related Id(s): GH-5193, PR-5201
+
+               Fixed a bug that could cause a child to become orphaned
+               when a supervisor died between unlinking and sending
+               the shutdown signal to this child.
+
+               There was also a possibility for erratic supervisor
+               reports caused by a race between a supervisor shutting
+               down a child and that child exiting by itself at the
+               same time.
+
+
+ Full runtime dependencies of stdlib-3.16.1: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
