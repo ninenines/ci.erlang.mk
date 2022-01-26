@@ -1,0 +1,147 @@
+Patch Package:           OTP 22.3.4.22
+Git Tag:                 OTP-22.3.4.22
+Date:                    2021-10-19
+Trouble Report Id:       OTP-17604, OTP-17628, OTP-17642, OTP-17651,
+                         OTP-17665, OTP-17677, OTP-17700, OTP-17707
+Seq num:                 ERIERL-706, GH-5235, GH-5271
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.14, ssh-4.9.1.4
+Predecessor:             OTP 22.3.4.21
+
+ Check out the git tag OTP-22.3.4.22, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.14 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.14 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17604    Application(s): erts
+
+               On 32-bit computers, binary_to_term/1,2 is now more
+               resilient against corrupted binaries containing maps in
+               the external format.
+
+
+  OTP-17628    Application(s): erts
+
+               A call to process_info(Pid, status) could erroneously
+               report the status running when it should have reported
+               waiting. This occurred when the calling process was
+               executing on a higher priority than the process being
+               inspected. This bug has been present since OTP 21.0
+               (erts version 10.0).
+
+
+  OTP-17642    Application(s): erts
+               Related Id(s): PR-5248
+
+               A race between an exiting port and handling of
+               simultaneously received signals to that port could
+               cause a runtime system crash. The effected signals are
+               link, monitor and demonitor. On OTP 22 a similiar race
+               could also cause a memory leak when receiving an unlink
+               signal.
+
+
+  OTP-17651    Application(s): erts
+               Related Id(s): GH-5235, PR-5244
+
+               The message queue of a process entered an inconsistent
+               state after a receive expression with an invalid
+               timeout value was executed. If the exception raised due
+               to the invalid timeout value was caught, the following
+               receive expression executed by the process could fail
+               to match messages already present in the message queue.
+
+               On OTP 24 this could also cause the whole runtime
+               system to crash.
+
+
+  OTP-17665    Application(s): erts
+               Related Id(s): PR-5248
+
+               Sending a Port ! {PortOwner, close} signal from a
+               process other than the port owner could erroneously
+               trigger a badsig exit signal being sent to the port
+               owner process even though the correct PortOwner had
+               been passed in the signal.
+
+
+  OTP-17677    Application(s): erts
+
+               This fixes a bug in erts_factory_undo that caused the
+               heap to not be reset correctly. The erts_factory_undo
+               function is, for example, called when a
+               binary_to_term/1 call fails to reset the heap to its
+               state before the binary_to_term/1 call. This can cause
+               the heap to contain invalid terms which potentially can
+               cause issues (e.g., crashes) when the whole heap is
+               scanned.
+
+
+  OTP-17700    Application(s): erts
+               Related Id(s): GH-5271, PR-5273
+
+               Fix bug in persistent_term when a key-value pair
+               contains a magic reference that is referred more than
+               once. Magic references are NIF resources or returned
+               from BIFs like ets:new, atomics:new. The bug could
+               cause the memory of the referred resource to be
+               prematurely deallocated.
+
+               The bug also apply to magic references in message
+               passing on a runtime built with configure option
+               --enable-sharing-preserving.
+
+               Bug exist for 64-bit since OTP-24.0 and for 32-bit
+               since OTP-20.0.
+
+
+ Full runtime dependencies of erts-10.7.2.14: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.9.1.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssh-4.9.1.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 22 installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-4.6.4 (first satisfied in OTP 22.2.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17707    Application(s): ssh
+               Related Id(s): ERIERL-706
+
+               The value of the connect_timeout option is now used as
+               default value for the negotiation timeout.
+
+
+ Full runtime dependencies of ssh-4.9.1.4: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
