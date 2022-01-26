@@ -1,0 +1,1416 @@
+Patch Package:           OTP 24.1
+Git Tag:                 OTP-24.1
+Date:                    2021-09-22
+Trouble Report Id:       OTP-16590, OTP-16607, OTP-17317, OTP-17325,
+                         OTP-17346, OTP-17376, OTP-17377, OTP-17383,
+                         OTP-17389, OTP-17390, OTP-17392, OTP-17410,
+                         OTP-17413, OTP-17421, OTP-17423, OTP-17424,
+                         OTP-17425, OTP-17426, OTP-17429, OTP-17430,
+                         OTP-17432, OTP-17434, OTP-17438, OTP-17440,
+                         OTP-17441, OTP-17445, OTP-17446, OTP-17449,
+                         OTP-17450, OTP-17453, OTP-17454, OTP-17456,
+                         OTP-17458, OTP-17460, OTP-17463, OTP-17464,
+                         OTP-17469, OTP-17476, OTP-17477, OTP-17478,
+                         OTP-17483, OTP-17491, OTP-17492, OTP-17495,
+                         OTP-17499, OTP-17501, OTP-17503, OTP-17505,
+                         OTP-17507, OTP-17508, OTP-17510, OTP-17511,
+                         OTP-17512, OTP-17513, OTP-17514, OTP-17517,
+                         OTP-17519, OTP-17520, OTP-17521, OTP-17522,
+                         OTP-17526, OTP-17530, OTP-17533, OTP-17534,
+                         OTP-17535, OTP-17537, OTP-17538, OTP-17539,
+                         OTP-17540, OTP-17541, OTP-17542, OTP-17549,
+                         OTP-17552, OTP-17559, OTP-17564, OTP-17567,
+                         OTP-17570, OTP-17571, OTP-17572, OTP-17573,
+                         OTP-17574, OTP-17575, OTP-17576, OTP-17577,
+                         OTP-17578, OTP-17580, OTP-17581, OTP-17583,
+                         OTP-17584, OTP-17586, OTP-17590, OTP-17591,
+                         OTP-17593, OTP-17596, OTP-17600, OTP-17602,
+                         OTP-17604, OTP-17609, OTP-17613, OTP-17616,
+                         OTP-17618, OTP-17622, OTP-17624, OTP-17626,
+                         OTP-17628, OTP-17632, OTP-17634, OTP-17635
+Seq num:                 ERIERL-648, ERIERL-655, ERIERL-668,
+                         ERIERL-679, ERIERL-683, ERIERL-685, ERL-1261,
+                         ERL-1264, ERL-625, GH-3533, GH-4256, GH-4270,
+                         GH-4501, GH-4677, GH-4761, GH-4772, GH-4796,
+                         GH-4801, GH-4823, GH-4846, GH-4855, GH-4862,
+                         GH-4900, GH-4902, GH-4916, GH-4918, GH-4920,
+                         GH-4931, GH-4964, GH-4978, GH-4985, GH-4995,
+                         GH-4999, GH-5007, GH-5009, GH-5014, GH-5029,
+                         GH-5031, GH-5040, GH-5054, GH-5058, GH-5063,
+                         GH-5067, GH-5092, GH-5103, GH-5118, GH-5122,
+                         GH-5136, GH-5156, GH-5157, GH-5171, GH-5192,
+                         GH-5196
+System:                  OTP
+Release:                 24
+Application:             asn1-5.0.17, common_test-1.21,
+                         compiler-8.0.3, crypto-5.0.3, debugger-5.2,
+                         dialyzer-4.4.2, edoc-1.0.1, erl_docgen-1.1.2,
+                         erl_interface-5.1, erts-12.1, eunit-2.7,
+                         inets-7.4.2, jinterface-1.12.1, kernel-8.1,
+                         megaco-4.1, mnesia-4.20, observer-2.10,
+                         os_mon-2.7.1, parsetools-2.3.1,
+                         public_key-1.11.2, runtime_tools-1.17,
+                         snmp-5.10, ssh-4.12.4, ssl-10.5, stdlib-3.16,
+                         tools-3.5.1, wx-2.1
+Predecessor:             OTP 24.0.6
+
+ Check out the git tag OTP-24.1, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17317    Application(s): stdlib
+               Related Id(s): PR-4757
+
+               Most output functions in the io module now print extra
+               error information when provided with invalid arguments.
+               The functions are: io:format, io:fwrite, io:put_chars,
+               io:nl and io:write.
+
+
+  OTP-17483    Application(s): otp
+
+               The Efficiency Guide has been extended with a chapter
+               about maps.
+
+
+  OTP-17542    Application(s): erts
+               Related Id(s): GH-5031, PR-5032
+
+               init:stop() no longer unloads loaded code before
+               terminating the runtime system. On systems with slow
+               CPUs (such as Raspberry PI Zero), that can
+               significantly speed up termination of the runtime
+               system.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-24.1 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17432    Application(s): otp
+               Related Id(s): GH-4862
+
+               In the Reference manual, the shadowing rules for list
+               comprehensions have been clarified.
+
+
+  OTP-17491    Application(s): otp
+               Related Id(s): PR-4909
+
+               Fixed configure issue on BSD.
+
+
+  OTP-17540    Application(s): otp
+               Related Id(s): PR-5101
+
+               The guard BIF is_map_key/2 is now included in the list
+               of guard BIFs in the Reference Manual.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17483    Application(s): otp
+
+               *** HIGHLIGHT ***
+
+               The Efficiency Guide has been extended with a chapter
+               about maps.
+
+
+  OTP-17514    Application(s): otp
+               Related Id(s): ERIERL-668
+
+               The configure stage now fails if the canonicalized host
+               value is equal to the canonicalized build value when
+               cross compiling. Previously the configure stage
+               succeeded and the cross build continued by overwriting
+               the bootstrap build results with cross build results
+               which caused failure to build Erlang code.
+
+
+  OTP-17549    Application(s): otp
+               Related Id(s): GH-3533
+
+               A new section about accidental loss of sharing has been
+               added to the "Common Caveat" chapter of the Efficiency
+               Guide.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.17 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.17 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17522    Application(s): asn1
+               Related Id(s): GH-4902
+
+               A parameterized type with a SEQUENCE with extension
+               ("...") made the compiler backend to crash. The
+               previous fix for this in GH-4514 was not complete.
+
+
+ Full runtime dependencies of asn1-5.0.17: erts-7.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.21 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.21 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17413    Application(s): common_test
+               Related Id(s): PR-4767
+
+               Float allowed as multiply_timetraps parameter.
+
+
+  OTP-17632    Application(s): common_test
+               Related Id(s): PR-5022
+
+               Remove usage of legacy API macro and functions.
+
+
+ Full runtime dependencies of common_test-1.21: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.0.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17421    Application(s): compiler
+
+               If a parse transform raised an exception using throw/1
+               or exit/1, the compiler would report that as an
+               internal compiler error, which would be confusing.
+               Amended to report that the parse transform failed.
+
+
+  OTP-17430    Application(s): compiler, stdlib
+
+               The failing call io:format("~p\n") would result in a
+               warning for line number 0 instead of the correct line
+               and column numbers. This has been corrected, and all
+               warnings for failing calls to io:format() has been
+               rephrased to make it clearer exactly what the problem
+               is.
+
+
+  OTP-17434    Application(s): compiler, stdlib
+               Related Id(s): GH-4772
+
+               When the options warn_missing_spec and export_all were
+               given, there would only be warnings for missing specs
+               for functions that had been explicitly exported using
+               an -export attribute.
+
+
+  OTP-17446    Application(s): compiler
+               Related Id(s): PR-4899
+
+               In rare circumstances, the compiler could emit an
+               incorrect warning for a term that was constructed but
+               never used.
+
+
+  OTP-17495    Application(s): compiler, erts
+               Related Id(s): PR-5153
+
+               Corrected bugs where builds were not reducible even
+               when the deterministic option was given. In particular,
+               modules with map literals with more than 32 elements
+               could cause this problem.
+
+               As part of this fix, the term_to_binary BIF now accepts
+               the option deterministic.
+
+
+  OTP-17505    Application(s): compiler, stdlib
+               Related Id(s): GH-4995
+
+               The MODULE and MODULE_STRING macros would always appear
+               to be defined (when tested by -ifdef), even though no
+               -module() declaration had been seen yet. Changed so
+               that -ifdef ?MODULE. will not consider ?MODULE defined
+               if -module() has not been previously seen.
+
+
+  OTP-17510    Application(s): compiler
+               Related Id(s): GH-5007
+
+               In a guard, not (X =:= true) would incorrectly evaluate
+               to false for non-boolean values of X.
+
+
+  OTP-17581    Application(s): compiler, stdlib
+               Related Id(s): PR-5141
+
+               When the deterministic option was given to the
+               compiler, the ?FILE macro would be expanded to full
+               path of the source file before the first include
+               directive and to base part of the filename after
+               include directive.
+
+
+ Full runtime dependencies of compiler-8.0.3: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.0.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.0.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17593    Application(s): crypto
+               Related Id(s): ERIERL-679
+
+               Fix bug in crypto:ensure_engine_unloaded. Also fixed
+               minor memory leak related to engine unloading.
+
+
+  OTP-17618    Application(s): crypto
+               Related Id(s): GH-4920, PR-5126
+
+               Fixes that FIPS enable and disable (or vice versa) on
+               Windows sometimes leads to core dump at the time of
+               process exit.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17389    Application(s): crypto
+
+               Disable fips if cryptolib < 1.0.1 and OTP/crypto is
+               configured with --enable-fips
+
+               If not, there could be compiling or loading problems
+               with antique OpenSSL versions.
+
+
+ Full runtime dependencies of crypto-5.0.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-5.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17574    Application(s): debugger
+
+               Improve record handling, print known records with
+               record syntax.
+
+
+ Full runtime dependencies of debugger-5.2: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.4.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.4.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17511    Application(s): dialyzer
+               Related Id(s): GH-4501
+
+               Do not crash if a PLT file no longer exists.
+
+
+  OTP-17537    Application(s): dialyzer
+
+               Fix bug in erl_types related to maps.
+
+
+  OTP-17541    Application(s): dialyzer
+
+               Fix bugs in erl_types regarding improper lists.
+
+
+  OTP-17616    Application(s): dialyzer
+               Related Id(s): GH-5118
+
+               The underspecs and overspecs options will now generate
+               correct warnings for misused opaque types.
+
+
+ Full runtime dependencies of dialyzer-4.4.2: compiler-7.0, erts-9.0,
+ kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- edoc-1.0.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The edoc-1.0.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17552    Application(s): edoc
+               Related Id(s): GH-5058
+
+               Fix broken documentation link in edoc_extract:file/4.
+
+
+ Full runtime dependencies of edoc-1.0.1: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-3.15, syntax_tools-1.6.14, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-1.1.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-1.1.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17458    Application(s): erl_docgen
+               Related Id(s): PR-4764
+
+               Fix codeinclude tags to work as part of reference
+               manual documentation.
+
+
+  OTP-17575    Application(s): erl_docgen
+               Related Id(s): PR-5132
+
+               Fix creation of link elements with anchors in EEP-48
+               style documentation.
+
+
+ Full runtime dependencies of erl_docgen-1.1.2: edoc-1.0, erts-9.0,
+ kernel-8.0, stdlib-3.15, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.1 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17626    Application(s): erl_interface
+
+               erl_call now prints an error when the arguments cannot
+               be parsed.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17377    Application(s): erts, observer
+
+               Atoms with Unicode code points greater than 255 (for
+               example Greek or Cyrillic characters) would not be
+               displayed correctly by crashdump_viewer.
+
+
+  OTP-17445    Application(s): erts
+               Related Id(s): PR-4843
+
+               Fix rare minor memory leak related to jit code loading.
+
+
+  OTP-17449    Application(s): erts, kernel
+               Related Id(s): GH-4900
+
+               The extended error information has been corrected and
+               improved for the following BIFs:
+               binary_to_existing_atom/2, list_to_existing_atom/1,
+               erlang:send_after/{3,4}, and erlang:start_timer/{3,4}.
+
+
+  OTP-17477    Application(s): erts
+               Related Id(s): GH-4846, PR-4894
+
+               Fix bug provoked when building with gcc 10 and link
+               time optimization (-flto), causing Erlang compiler to
+               crash. Bug exists since OTP-24.0.
+
+
+  OTP-17495    Application(s): compiler, erts
+               Related Id(s): PR-5153
+
+               Corrected bugs where builds were not reducible even
+               when the deterministic option was given. In particular,
+               modules with map literals with more than 32 elements
+               could cause this problem.
+
+               As part of this fix, the term_to_binary BIF now accepts
+               the option deterministic.
+
+
+  OTP-17512    Application(s): erts
+
+               After an exception has been caught in a process, the
+               stack trace would be kept in the process longer than
+               necessary.
+
+
+  OTP-17513    Application(s): erts
+               Related Id(s): GH-4964, PR-5015
+
+               Fix rare race bug in memory management of distribution
+               entries. Have been seen to cause VM crash when massive
+               number of repeated concurrent failing connection
+               attempts.
+
+
+  OTP-17539    Application(s): erts
+
+               The configure test for --disable-esock-socket-registry
+               has been corrected so disabling now works.
+
+
+  OTP-17542    Application(s): erts
+               Related Id(s): GH-5031, PR-5032
+
+               *** HIGHLIGHT ***
+
+               init:stop() no longer unloads loaded code before
+               terminating the runtime system. On systems with slow
+               CPUs (such as Raspberry PI Zero), that can
+               significantly speed up termination of the runtime
+               system.
+
+
+  OTP-17567    Application(s): erts
+               Related Id(s): PR-4915, PR-5115
+
+               Fixed match specifications that use maps in either the
+               guard or the body to work properly.
+
+               With this fix both keys and values in maps can be
+               expressions.
+
+               Various other crashes and bugs when using maps in match
+               specifications have also been fixed.
+
+
+  OTP-17578    Application(s): erts, kernel
+               Related Id(s): ERIERL-683
+
+               Parsing of the result value in the native DNS resolver
+               has been made more defensive against incorrect results.
+
+
+  OTP-17591    Application(s): erts
+               Related Id(s): GH-5171
+
+               When binary_to_term/2 failed, the extended error
+               information would always blame the second argument even
+               if the actual error was in the first argument.
+
+
+  OTP-17604    Application(s): erts
+
+               On 32-bit computers, binary_to_term/1,2 is now more
+               resilient against corrupted binaries containing maps in
+               the external format.
+
+
+  OTP-17628    Application(s): erts
+
+               A call to process_info(Pid, status) could erroneously
+               report the status running when it should have reported
+               waiting. This occurred when the calling process was
+               executing on a higher priority than the process being
+               inspected. This bug has been present since OTP 21.0
+               (erts version 10.0).
+
+
+ --- Improvements and New Features ---
+
+  OTP-17426    Application(s): erts
+               Related Id(s): PR-4785
+
+               Optimize memory usage of erts internal processes used
+               during code loading/purging by hibernating them after a
+               long time of inactivity.
+
+
+  OTP-17453    Application(s): erts
+               Related Id(s): PR-4764
+
+               Add the type erlang:stacktrace/0.
+
+
+  OTP-17456    Application(s): erts
+               Related Id(s): PR-4764
+
+               The arity argument of error/2,3 can now be none to
+               indicate that the calling functions arity should be
+               used.
+
+
+  OTP-17469    Application(s): erts
+
+               Optimize match spec compiler for immediate (single
+               word) constant terms.
+
+
+  OTP-17538    Application(s): erts, kernel
+               Related Id(s): GH-5063, PR-5111
+
+               Functions erlang:set_cookie(Cookie) and
+               erlang:get_cookie(Node) have been added for
+               completeness and to facilitate configuring distributed
+               nodes with different cookies.
+
+               The documentation regarding distribution cookies has
+               been improved to be less vague.
+
+
+  OTP-17559    Application(s): erts, kernel
+               Related Id(s): GH-5092, PR-5120
+
+               A workaround has been implemented for Linux's quirky
+               behaviour to not adjust the source IP address when
+               connecting a connected (reconnecing) UDP socket.
+
+               The workaround is to, on Linux, always dissolve any
+               connection before connecting an UDP socket.
+
+
+  OTP-17596    Application(s): erts
+
+               The internal documentation for how to use Yielding C
+               Fun (YCF) has been updated to contain text about best
+               practices for using YCF for ERTS.
+
+
+  OTP-17602    Application(s): erts
+               Related Id(s): PR-5149
+
+               Optimize garbage collection for processes with large
+               number of binaries, funs and/or external
+               pids/ports/refs.
+
+
+ Full runtime dependencies of erts-12.1: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.7 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.7 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17613    Application(s): eunit
+               Related Id(s): PR-5185
+
+               In an eunit test, when a test case times out, include a
+               stacktrace.
+
+
+ Full runtime dependencies of eunit-2.7: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.4.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.4.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17383    Application(s): inets
+               Related Id(s): GH-4677
+
+               Before this change hrefs in dir listing page contained
+               percentage encoded forward slashes which did not work
+               properly with httpd.
+
+
+  OTP-17600    Application(s): inets
+
+               Restored HTTP headers handling in inets/mod_esi.
+
+
+  OTP-17624    Application(s): inets
+               Related Id(s): GH-4855
+
+               inets/httpd dir listing icons and other improvements
+
+
+ --- Improvements and New Features ---
+
+  OTP-17460    Application(s): inets
+
+               httpc: Improve performance by removing redundant URI
+               handling
+
+
+ Full runtime dependencies of inets-7.4.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.12.1 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.12.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17478    Application(s): jinterface
+               Related Id(s): PR-4837
+
+               Fixed rare race bug that could cause
+               NullPointerException on local close of connection.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-8.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17449    Application(s): erts, kernel
+               Related Id(s): GH-4900
+
+               The extended error information has been corrected and
+               improved for the following BIFs:
+               binary_to_existing_atom/2, list_to_existing_atom/1,
+               erlang:send_after/{3,4}, and erlang:start_timer/{3,4}.
+
+
+  OTP-17476    Application(s): kernel
+               Related Id(s): GH-4931, PR-4934
+
+               Fixed rare bug that could cause net_kernel process to
+               hang for ever. Have seen to happen with massive number
+               of TLS connections while remote nodes are restarting.
+               Bug exists since OTP-22.0.
+
+
+  OTP-17492    Application(s): kernel
+
+               Improve handling of closed sockets for inet:info/1.
+
+
+  OTP-17519    Application(s): kernel
+
+               This change fixes a performance problem introduced in
+               pull-request #2675. Pull-request #2675 made so the
+               system tried to start children of already started
+               applications which is unnecessary. This change fixes
+               this performance problem.
+
+
+  OTP-17570    Application(s): kernel
+               Related Id(s): ERL-1261, GH-4256, PR-5139
+
+               Fix code:get_doc/1 to not crash when module is located
+               in an escript.
+
+
+  OTP-17578    Application(s): erts, kernel
+               Related Id(s): ERIERL-683
+
+               Parsing of the result value in the native DNS resolver
+               has been made more defensive against incorrect results.
+
+
+  OTP-17580    Application(s): kernel
+               Related Id(s): GH-5122
+
+               A bug in the option handling for the legacy socket
+               adaptor, that is; when using inet_backend = socket, has
+               been fixed. Now socket options are set before the
+               bind() call so options regarding, for example address
+               reuse have the desired effect.
+
+
+  OTP-17583    Application(s): kernel
+               Related Id(s): GH-5136
+
+               inet:ntoa/1 has been fixed to not accept invalid
+               numerical addresses.
+
+
+  OTP-17584    Application(s): kernel
+               Related Id(s): PR-5145
+
+               Parsing of DNS records has been improved for records of
+               known types to not accept and present malformed ones in
+               raw format.
+
+
+  OTP-17590    Application(s): kernel
+               Related Id(s): PR-5170
+
+               The ip_mreq() type for the {ip,add_membership} and
+               {ip,drop_membership} socket options has been corrected
+               to have an interface field instead of, incorrectly, an
+               address field.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17376    Application(s): kernel
+               Related Id(s): OTP-17157
+
+               Add simple utility function to display existing sockets
+               i the erlang shell (socket:i/0).
+
+
+  OTP-17410    Application(s): kernel
+
+               gen_udp can now be configured to use the socket
+               inet-backend (in the same way as gen_tcp).
+
+
+  OTP-17538    Application(s): erts, kernel
+               Related Id(s): GH-5063, PR-5111
+
+               Functions erlang:set_cookie(Cookie) and
+               erlang:get_cookie(Node) have been added for
+               completeness and to facilitate configuring distributed
+               nodes with different cookies.
+
+               The documentation regarding distribution cookies has
+               been improved to be less vague.
+
+
+  OTP-17559    Application(s): erts, kernel
+               Related Id(s): GH-5092, PR-5120
+
+               A workaround has been implemented for Linux's quirky
+               behaviour to not adjust the source IP address when
+               connecting a connected (reconnecing) UDP socket.
+
+               The workaround is to, on Linux, always dissolve any
+               connection before connecting an UDP socket.
+
+
+  OTP-17576    Application(s): kernel
+               Related Id(s): ERIERL-685
+
+               Documented our recommendation against opening
+               NFS-mounted files, FIFOs, devices, and similar using
+               file:open/2.
+
+
+ Full runtime dependencies of kernel-8.1: crypto-5.0, erts-12.0,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-4.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17533    Application(s): megaco
+
+               It is now possible to configure the built-in transports
+               (megaco_tcp and megaco udp) to use the new (gen_udp-
+               and gen_tcp-) option 'inet_backend'.
+
+
+ Full runtime dependencies of megaco-4.1: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17564    Application(s): mnesia
+               Related Id(s): GH-5040
+
+               Fixed that index keys was deleted for set tables when
+               mnesia:delete_object/1 tried to delete a non-existing
+               record.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17508    Application(s): mnesia
+
+               Optimized table loading and added max_transfer_size
+               configuration parameter.
+
+
+ Full runtime dependencies of mnesia-4.20: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.10 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The observer-2.10 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.1 (first satisfied in OTP 24.1)
+       -- runtime_tools-1.17 (first satisfied in OTP 24.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17377    Application(s): erts, observer
+
+               Atoms with Unicode code points greater than 255 (for
+               example Greek or Cyrillic characters) would not be
+               displayed correctly by crashdump_viewer.
+
+
+  OTP-17425    Application(s): observer
+               Related Id(s): PR-4799
+
+               Fix the crashdump_viewer to be able to parse
+               monitor_node/2 monitors correctly.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17346    Application(s): observer, runtime_tools
+
+               Observer now has a sectiion for new socket.
+
+
+  OTP-17520    Application(s): observer
+               Related Id(s): PR-4962
+
+               Added a trace all button to the trace window.
+
+
+ Full runtime dependencies of observer-2.10: erts-11.0, et-1.5,
+ kernel-8.1, runtime_tools-1.17, stdlib-3.13, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.7.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.7.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17441    Application(s): os_mon
+
+               On a Mac with Apple Silicon, memsup:get_os_wordsize/0
+               would return 32 instead of 64.
+
+
+ Full runtime dependencies of os_mon-2.7.1: erts-6.0, kernel-3.0,
+ sasl-2.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.3.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The parsetools-2.3.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17499    Application(s): parsetools
+               Related Id(s): GH-4918
+
+               Fix a bug in Leex which caused the Erlang Compiler to
+               generate warnings.
+
+
+  OTP-17535    Application(s): parsetools
+               Related Id(s): GH-5067
+
+               Fix a bug in Yecc which caused the Erlang Compiler to
+               generate warnings.
+
+
+ Full runtime dependencies of parsetools-2.3.1: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.11.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.11.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17534    Application(s): public_key
+               Related Id(s): GH-5054, PR-5057
+
+               public_key:pkix_sign/2 now honors the salt length from
+               the provided input parameters. Earlier this could
+               result in incorrect signatures if not using recommended
+               defaults.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17609    Application(s): public_key
+               Related Id(s): GH-5156, GH-5157
+
+               When decoding an 'ECPrivateKey' unwrap the private key.
+               For more precise information see RFC 8410, section 7.
+
+
+ Full runtime dependencies of public_key-1.11.2: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.17 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The runtime_tools-1.17 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.1 (first satisfied in OTP 24.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-17346    Application(s): observer, runtime_tools
+
+               Observer now has a sectiion for new socket.
+
+
+  OTP-17572    Application(s): runtime_tools
+               Related Id(s): PR-5117
+
+               The dbg docs have been expanded to include the meaning
+               of all the function name acronyms.
+
+
+ Full runtime dependencies of runtime_tools-1.17: erts-11.0,
+ kernel-8.1, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.10 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.10 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17526    Application(s): snmp
+
+               It is now possible to configure the built-in net-if
+               processes (both agent and manager) to use the new
+               (gen_udp-) option 'inet_backend'.
+
+
+ Full runtime dependencies of snmp-5.10: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.12.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.12.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17390    Application(s): ssh
+               Related Id(s): ERIERL-648
+
+               Fixed that a slow start (>30s) of a client subsystem
+               could cause a log entry with the password.
+
+
+  OTP-17586    Application(s): ssh
+               Related Id(s): GH-5014
+
+               Fixed an error when running as an sftp server and a
+               client requests a directory contents listing.
+
+               The fix is to handle the error code {error, eacces} as
+               {error, enoent} in the ssh_sftpd:get_attrs/5 internal
+               function; that is, just skip it.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17450    Application(s): ssh
+               Related Id(s): ERIERL-655
+
+               The "Key exchange failed" Info Report is now more
+               informative.
+
+
+ Full runtime dependencies of ssh-4.12.4: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.5 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.5 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.1 (first satisfied in OTP 24.0.4)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17423    Application(s): ssl
+               Related Id(s): GH-4823, PR-4829
+
+               Fix Makefile dependency generation to work no matter
+               what the ERL_TOP folder is called.
+
+
+  OTP-17517    Application(s): ssl
+               Related Id(s): GH-5009
+
+               If trying to downgrade a TLS-1.3 connection to a plain
+               TCP connection, possible TLS-1.3 session ticket
+               messages will be ignored in the "downgrade" state while
+               waiting for the close notify alert.
+
+
+  OTP-17521    Application(s): ssl
+
+               Corrected error handling to correctly generate an
+               insufficient security alert when there are no suitable
+               groups that can be negotiated in TLS-1.3 instead of
+               crashing resulting in an internal error alert.
+
+
+  OTP-17635    Application(s): ssl
+               Related Id(s): GH-5192
+
+               Properly handle default session data storage.
+
+               When a client tries to reuse an expired session the
+               default server storage handling would crash loosing
+               other session data. This would cause a error report and
+               possible loss of abbreviated handshakes.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16590    Application(s): ssl
+               Related Id(s): ERL-625, GH-5029
+
+               Add support for RSA-PSS-PSS signatures and
+               signature_algorithms_cert in TLS-1.2. This is a TLS-1.3
+               RFC requirement to backport this functionality.
+
+
+  OTP-17392    Application(s): ssl
+               Related Id(s): PR-5050
+
+               Use inet:monitor/1 to monitor listen-sockets so that we
+               are compatible with the new socket backend for gen_tcp.
+
+
+  OTP-17464    Application(s): ssl
+
+               Enhance ssl:prf/4 handling and testing
+
+
+  OTP-17501    Application(s): ssl
+               Related Id(s): GH-4978
+
+               Enhanced cipher suite filtering functionality, making
+               sure TLS-1.3 and TLS-1.2 cipher suites can be supported
+               correctly together even when TLS-1.2 anonymous ciphers
+               are included.
+
+
+  OTP-17530    Application(s): ssl
+
+               Enhance gracefulness especially in TLS-1.3
+
+
+ Full runtime dependencies of ssl-10.5: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.1, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.16 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.16 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17424    Application(s): stdlib
+               Related Id(s): GH-4801, PR-4803
+
+               Fix io:format with ~p to no longer interpret floats as
+               printable characters.
+
+
+  OTP-17429    Application(s): stdlib
+               Related Id(s): GH-4761
+
+               Fix specs for base64 encode/decode functions to also
+               include 0.
+
+
+  OTP-17430    Application(s): compiler, stdlib
+
+               The failing call io:format("~p\n") would result in a
+               warning for line number 0 instead of the correct line
+               and column numbers. This has been corrected, and all
+               warnings for failing calls to io:format() has been
+               rephrased to make it clearer exactly what the problem
+               is.
+
+
+  OTP-17434    Application(s): compiler, stdlib
+               Related Id(s): GH-4772
+
+               When the options warn_missing_spec and export_all were
+               given, there would only be warnings for missing specs
+               for functions that had been explicitly exported using
+               an -export attribute.
+
+
+  OTP-17463    Application(s): stdlib
+               Related Id(s): GH-4916
+
+               Calling c:ls/1 with an atom whose contents is the the
+               name of a file (as opposed to a directory) would crash.
+
+
+  OTP-17505    Application(s): compiler, stdlib
+               Related Id(s): GH-4995
+
+               The MODULE and MODULE_STRING macros would always appear
+               to be defined (when tested by -ifdef), even though no
+               -module() declaration had been seen yet. Changed so
+               that -ifdef ?MODULE. will not consider ?MODULE defined
+               if -module() has not been previously seen.
+
+
+  OTP-17573    Application(s): stdlib
+               Related Id(s): ERL-1264, GH-4270
+
+               Fix bug with rendering of missing types and callbacks
+               in shell_docs.
+
+
+  OTP-17581    Application(s): compiler, stdlib
+               Related Id(s): PR-5141
+
+               When the deterministic option was given to the
+               compiler, the ?FILE macro would be expanded to full
+               path of the source file before the first include
+               directive and to base part of the filename after
+               include directive.
+
+
+  OTP-17622    Application(s): stdlib
+               Related Id(s): PR-5038
+
+               Fixed broken win32reg:delete_key and fixed
+               win32reg:value for default value.
+
+
+  OTP-17634    Application(s): stdlib
+               Related Id(s): GH-5196
+
+               Fixed error information for the call maps:get(some_key,
+               #{}).
+
+
+ --- Improvements and New Features ---
+
+  OTP-17317    Application(s): stdlib
+               Related Id(s): PR-4757
+
+               *** HIGHLIGHT ***
+
+               Most output functions in the io module now print extra
+               error information when provided with invalid arguments.
+               The functions are: io:format, io:fwrite, io:put_chars,
+               io:nl and io:write.
+
+
+  OTP-17454    Application(s): stdlib
+               Related Id(s): PR-4764
+
+               EEP-54 (Provide more information about errors) now
+               includes two new return values for the format_error
+               callback, general and reason.
+
+               Multi-line error descriptions returned from a
+               format_error callback are now correctly indented.
+
+               The documentation for erl_error, error/3 and Errors and
+               Error Handling in the Erlang Reference Manual have been
+               extended.
+
+
+  OTP-17503    Application(s): stdlib
+               Related Id(s): GH-4985
+
+               In the documentation for the lists module, it has been
+               clarified that predicate funs must return a boolean.
+
+
+  OTP-17571    Application(s): stdlib
+               Related Id(s): GH-5103
+
+               The documentation for c:c/1, c:c/2, and c:c/3 has been
+               clarified.
+
+
+ Full runtime dependencies of stdlib-3.16: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.5.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tools-3.5.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17440    Application(s): tools
+               Related Id(s): GH-4796
+
+               The cover tool would not work on modules compiled with
+               the tuple_calls option.
+
+
+ Full runtime dependencies of tools-3.5.1: compiler-5.0, erts-11.0,
+ erts-9.1, kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.1 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17507    Application(s): wx
+
+               Fix crash when closing an application.
+
+
+  OTP-17577    Application(s): wx
+               Related Id(s): GH-4999
+
+               Some functions with overloaded color arguments could
+               not be used. For example the copy constructor
+               wxTextAttr:new(TextAttr) did not work.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17325    Application(s): wx
+
+               Added the Microsoft Edge WebView loader dll to the
+               installer on windows.
+
+
+  OTP-17438    Application(s): wx
+               Related Id(s): PR-4780
+
+               Handle specific Mac gui application events.
+
+
+ Full runtime dependencies of wx-2.1: erts-6.0, kernel-3.0, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
