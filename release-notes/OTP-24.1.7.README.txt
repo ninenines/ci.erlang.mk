@@ -1,0 +1,42 @@
+Patch Package:           OTP 24.1.7
+Git Tag:                 OTP-24.1.7
+Date:                    2021-11-22
+Trouble Report Id:       OTP-17764
+Seq num:                 ERIERL-726
+System:                  OTP
+Release:                 24
+Application:             ssh-4.12.5
+Predecessor:             OTP 24.1.6
+
+ Check out the git tag OTP-24.1.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.12.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.12.5 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17764    Application(s): ssh
+               Related Id(s): ERIERL-726
+
+               Fixed a race condition in the acceptor loop: if a
+               client disconnected immediately after the tcp connect,
+               the server could cease handling connection on that
+               address:port.
+
+
+ Full runtime dependencies of ssh-4.12.5: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
