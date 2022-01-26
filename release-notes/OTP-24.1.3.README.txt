@@ -1,0 +1,163 @@
+Patch Package:           OTP 24.1.3
+Git Tag:                 OTP-24.1.3
+Date:                    2021-10-27
+Trouble Report Id:       OTP-17675, OTP-17677, OTP-17679, OTP-17686,
+                         OTP-17688, OTP-17700, OTP-17712, OTP-17722,
+                         OTP-17723
+Seq num:                 GH-5255, GH-5271, GH-5300, GH-5310
+System:                  OTP
+Release:                 24
+Application:             erts-12.1.3, ssl-10.5.2
+Predecessor:             OTP 24.1.2
+
+ Check out the git tag OTP-24.1.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- OTP-24.1.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17679    Application(s): otp
+               Related Id(s): PR-5251
+
+               Fix handling of the top configure command line
+               arguments --srcdir=<DIR>, --cache-file=<FILE>,
+               --without-<APP>, CFLAGS=<FLAGS>, and LDFLAGS=<FLAGS>
+               which failed on some platforms.
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.1.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-12.1.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17675    Application(s): erts
+
+               Reduction counter was not updated before and after
+               doing apply operations on the runtime system with the
+               jit enabled. This caused reduction counting to get out
+               of sync if a garbage collection was made as part of the
+               apply operation.
+
+
+  OTP-17677    Application(s): erts
+
+               This fixes a bug in erts_factory_undo that caused the
+               heap to not be reset correctly. The erts_factory_undo
+               function is, for example, called when a
+               binary_to_term/1 call fails to reset the heap to its
+               state before the binary_to_term/1 call. This can cause
+               the heap to contain invalid terms which potentially can
+               cause issues (e.g., crashes) when the whole heap is
+               scanned.
+
+
+  OTP-17686    Application(s): erts
+
+               When attempting to construct a binary with an segment
+               having an illegal type for the size (e.g. an atom),
+               there could be an unnecessary memory allocation (and
+               subsequent deallocation) before the operation failed.
+               Amended to fail before allocating any memory for the
+               binary.
+
+
+  OTP-17700    Application(s): erts
+               Related Id(s): GH-5271, PR-5273
+
+               Fix bug in persistent_term when a key-value pair
+               contains a magic reference that is referred more than
+               once. Magic references are NIF resources or returned
+               from BIFs like ets:new, atomics:new. The bug could
+               cause the memory of the referred resource to be
+               prematurely deallocated.
+
+               The bug also apply to magic references in message
+               passing on a runtime built with configure option
+               --enable-sharing-preserving.
+
+               Bug exist for 64-bit since OTP-24.0 and for 32-bit
+               since OTP-20.0.
+
+
+  OTP-17712    Application(s): erts
+
+               Fixed a crash when inspecting the stack trace of an
+               exception raised at a very high line number.
+
+               This bug was introduced in OTP 24.
+
+
+  OTP-17722    Application(s): erts
+               Related Id(s): GH-5310, PR-5313
+
+               The following two bugs that caused erlang:demonitor()
+               to behave erroneously have been fixed. The bugs were
+               only triggered if the monitor that was removed by
+               demonitor() had previously been created simultaneously
+               as a monitor and as an alias.
+
+               -- A demonitor operation on a monitor created using the
+               {alias, reply_demonitor} option erroneously behaved as
+               if the {alias, explicit_unalias} option had been used.
+
+               -- A demonitor operation did not prevent a
+               corresponding 'DOWN' message from being delivered if
+               the monitor reference was kept as an active alias after
+               the operation. This could only occur if the monitored
+               process simultaneously terminated before the demonitor
+               signal reached it, and the exit reason was not an
+               immediate term. That is, a term larger than one machine
+               word.
+
+
+ Full runtime dependencies of erts-12.1.3: kernel-8.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.5.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.5.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17688    Application(s): ssl
+               Related Id(s): GH-5255
+
+               Fix TLS-1.2 RSA-PSS negotiation and also fix broken
+               certificate request message for pre-TLS-1.3 servers.
+
+
+  OTP-17723    Application(s): ssl
+               Related Id(s): GH-5300
+
+               Fix CRL issuer verification that under some
+               circumstances could fail with a function_clause error.
+
+
+ Full runtime dependencies of ssl-10.5.2: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
