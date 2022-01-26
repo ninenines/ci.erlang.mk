@@ -1,0 +1,67 @@
+Patch Package:           OTP 22.3.4.23
+Git Tag:                 OTP-22.3.4.23
+Date:                    2021-11-11
+Trouble Report Id:       OTP-17735, OTP-17737
+Seq num:                 GH-4989, GH-5339, GH-5346
+System:                  OTP
+Release:                 22
+Application:             erts-10.7.2.15
+Predecessor:             OTP 22.3.4.22
+
+ Check out the git tag OTP-22.3.4.23, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.15 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.15 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.1 (first satisfied in OTP 22.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17735    Application(s): erts
+               Related Id(s): GH-5339
+
+               The runtime system could call select() with a too large
+               timeout value when executing on MacOS. This could in
+               turn cause the runtime system to crash.
+
+
+  OTP-17737    Application(s): erts
+               Related Id(s): GH-4989, GH-5346
+
+               Certain distributed signals that for various reasons
+               must to be forced into the distribution buffer even
+               when it is full would instead be lost if the
+               distribution buffer was full when sent. The effected
+               signals:
+
+               -- EXIT signals with exit reasons of one word size.
+
+               -- DOWN signals with exit reasons of one word size.
+
+               -- demonitor signals from a terminating process.
+
+               -- unlink_ack signals on OTP 23 and 24.
+
+               -- spawn_reply signals on OTP 23 and 24.
+
+
+ Full runtime dependencies of erts-10.7.2.15: kernel-6.5.1, sasl-3.3,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
