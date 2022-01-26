@@ -1,0 +1,61 @@
+Patch Package:           OTP 23.3.4.11
+Git Tag:                 OTP-23.3.4.11
+Date:                    2022-01-26
+Trouble Report Id:       OTP-17835, OTP-17871
+Seq num:                 ERIERL-721
+System:                  OTP
+Release:                 23
+Application:             erts-11.2.2.10, ssh-4.11.1.5
+Predecessor:             OTP 23.3.4.10
+
+ Check out the git tag OTP-23.3.4.11, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.10 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2.10 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17871    Application(s): erts
+               Related Id(s): PR-5612
+
+               Fix GC emulator crash when spawn_request was used when
+               message tracing was enabled.
+
+
+ Full runtime dependencies of erts-11.2.2.10: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1.5 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17835    Application(s): ssh
+               Related Id(s): ERIERL-721
+
+               Fixed problem with blocked server after multiple
+               restarts. Applies to daemons with options
+               {parallel_login,true} and also {max_sessions, int()>0}.
+
+
+ Full runtime dependencies of ssh-4.11.1.5: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
