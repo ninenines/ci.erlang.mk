@@ -1,0 +1,104 @@
+Patch Package:           OTP 23.3.4.10
+Git Tag:                 OTP-23.3.4.10
+Date:                    2021-12-21
+Trouble Report Id:       OTP-17796, OTP-17827
+Seq num:                 ERIERL-729, GH-5527
+System:                  OTP
+Release:                 23
+Application:             erts-11.2.2.9
+Predecessor:             OTP 23.3.4.9
+
+ Check out the git tag OTP-23.3.4.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17796    Application(s): erts
+               Related Id(s): ERIERL-729, PR-5473
+
+               Responsiveness of processes executing on normal or low
+               priority could suffer due to code purging or literal
+               area removal on systems with a huge amount of
+               processes. This since during these operations all
+               processes on the system were scheduled for execution at
+               once.
+
+               This problem has been fixed by introducing a limit on
+               outstanding purge and copy literal requests in the
+               system. By default this limit is set to twice the
+               amount of schedulers on the system. This will ensure
+               that schedulers will have enough work scheduled to
+               perform these operations as quickly as possible at the
+               same time as other work will be interleaved to a much
+               higher degree. Performance of these operations will
+               however be somewhat degraded due to the overhead of
+               enforcing this limit compared to when using a very
+               large limit.
+
+               This limit can be set by passing the +zosrl command
+               line argument to erl, or by calling
+               erlang:system_flag(outstanding_system_requests_limit,
+               NewLimit).
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-11.2.2.9 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17827    Application(s): erts
+               Related Id(s): GH-5527
+
+               Fixed a memory leak in file:read_file_info/2 and
+               file:read_file/1 on Windows.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17796    Application(s): erts
+               Related Id(s): ERIERL-729, PR-5473
+
+               *** HIGHLIGHT ***
+
+               Responsiveness of processes executing on normal or low
+               priority could suffer due to code purging or literal
+               area removal on systems with a huge amount of
+               processes. This since during these operations all
+               processes on the system were scheduled for execution at
+               once.
+
+               This problem has been fixed by introducing a limit on
+               outstanding purge and copy literal requests in the
+               system. By default this limit is set to twice the
+               amount of schedulers on the system. This will ensure
+               that schedulers will have enough work scheduled to
+               perform these operations as quickly as possible at the
+               same time as other work will be interleaved to a much
+               higher degree. Performance of these operations will
+               however be somewhat degraded due to the overhead of
+               enforcing this limit compared to when using a very
+               large limit.
+
+               This limit can be set by passing the +zosrl command
+               line argument to erl, or by calling
+               erlang:system_flag(outstanding_system_requests_limit,
+               NewLimit).
+
+
+ Full runtime dependencies of erts-11.2.2.9: kernel-7.0, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
