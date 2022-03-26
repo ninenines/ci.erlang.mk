@@ -1,0 +1,2206 @@
+Inital Release:          OTP 25.0
+Git Tag:                 OTP-25.0
+Date:                    2022-02-16
+Trouble Report Id:       OTP-15991, OTP-16607, OTP-16702, OTP-16852,
+                         OTP-16982, OTP-17119, OTP-17151, OTP-17224,
+                         OTP-17304, OTP-17318, OTP-17323, OTP-17351,
+                         OTP-17370, OTP-17414, OTP-17447, OTP-17471,
+                         OTP-17479, OTP-17480, OTP-17481, OTP-17504,
+                         OTP-17523, OTP-17524, OTP-17544, OTP-17550,
+                         OTP-17551, OTP-17554, OTP-17555, OTP-17556,
+                         OTP-17558, OTP-17561, OTP-17562, OTP-17566,
+                         OTP-17569, OTP-17589, OTP-17592, OTP-17608,
+                         OTP-17612, OTP-17617, OTP-17627, OTP-17630,
+                         OTP-17636, OTP-17644, OTP-17654, OTP-17660,
+                         OTP-17661, OTP-17667, OTP-17669, OTP-17676,
+                         OTP-17681, OTP-17682, OTP-17683, OTP-17684,
+                         OTP-17685, OTP-17705, OTP-17710, OTP-17717,
+                         OTP-17720, OTP-17728, OTP-17729, OTP-17733,
+                         OTP-17752, OTP-17753, OTP-17755, OTP-17758,
+                         OTP-17762, OTP-17772, OTP-17778, OTP-17779,
+                         OTP-17802, OTP-17810, OTP-17819, OTP-17820,
+                         OTP-17821, OTP-17824, OTP-17826, OTP-17832,
+                         OTP-17836, OTP-17841, OTP-17842, OTP-17846,
+                         OTP-17855, OTP-17860, OTP-17866, OTP-17869,
+                         OTP-17870, OTP-17878, OTP-17881, OTP-17882,
+                         OTP-17884, OTP-17885, OTP-17889, OTP-17890,
+                         OTP-17892, OTP-17894, OTP-17897, OTP-17899,
+                         OTP-17901, OTP-17909, OTP-17910, OTP-17911,
+                         OTP-17920, OTP-17921, OTP-17923, OTP-17925,
+                         OTP-17930, OTP-17935
+Seq num:                 ERIERL-590, ERIERL-663, ERIERL-760, ERL-1347,
+                         GH-4492, GH-4673, GH-4784, GH-4819, GH-4853,
+                         GH-4965, GH-4968, GH-4971, GH-5016, GH-5071,
+                         GH-5093, GH-5094, GH-5140, GH-5204, GH-5214,
+                         GH-5297, GH-5368, GH-5379, GH-5402, GH-5403,
+                         GH-5513, GH-5617
+System:                  OTP
+Release:                 25
+Application:             common_test-1.23, compiler-8.1, crypto-5.1,
+                         debugger-5.3, dialyzer-5.0, edoc-1.2,
+                         erl_docgen-1.3, erl_interface-5.2, erts-13.0,
+                         eunit-2.7.1, inets-8.0, jinterface-1.13,
+                         kernel-8.3, megaco-4.3, mnesia-4.21,
+                         observer-2.11, odbc-2.14, parsetools-2.4,
+                         public_key-1.12, runtime_tools-1.18,
+                         sasl-4.2, snmp-5.12, ssh-4.14, ssl-10.7,
+                         stdlib-4.0, syntax_tools-3.0, tools-3.5.3,
+                         wx-2.2, xmerl-1.3.29
+Predecessor:             OTP
+
+ Check out the git tag OTP-25.0, and build a full OTP system including
+ documentation.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-15991    Application(s): erts, stdlib
+               Related Id(s): PR-5208
+
+               Users can now configure ETS tables with the
+               {write_concurrency, auto} option. This option forces
+               tables to automatically change the number of locks that
+               are used at run-time depending on how much concurrency
+               is detected. The {decentralized_counters, true} option
+               is enabled by default when {write_concurrency, auto} is
+               active.
+
+               Benchmark results comparing this option with the other
+               ETS optimization options are available here:
+
+               https://erlang.org/bench/ets_bench_result_lock_config.html
+
+
+  OTP-16702    Application(s): compiler, erts
+
+               To enable more optimizations, BEAM files compiled with
+               OTP 21 and earlier cannot be loaded in OTP 25.
+
+
+  OTP-16982    Application(s): erts
+               Related Id(s): PR-5020
+
+               The signal queue of a process with
+               message_queue_data=off_heap* has been optimized to
+               allow parallel reception of signals from multiple
+               processes.
+
+               This is possible to do as Erlang only guarantees that
+               signals (i.e., message signals and non-message signals)
+               sent from a single process to another process are
+               ordered in send order. However, there are no ordering
+               guarantees for signals sent from different processes to
+               a particular process. Therefore, several processes can
+               send signals in parallel to a specific process without
+               synchronizing with each other. However, such signal
+               sending was previously always serialized as the senders
+               had to acquire the lock for the outer signal queue of
+               the receiving process. This parallel signal sending
+               optimization yields much better scalability for signal
+               sending than what was previously possible, see
+               https://erlang.org/bench/sigq_bench_result.html for
+               benchmark results.
+
+               * Information about how to enable the
+               message_queue_data=off_heap setting can be found in the
+               documentation of the function erlang:process_flag/2.
+
+
+  OTP-17119    Application(s): erts
+               Related Id(s): PR-4869
+
+               The JIT now works for 64-bit ARM processors.
+
+
+  OTP-17351    Application(s): stdlib
+               Related Id(s): GH-4673, PR-4952
+
+               The format_status/2 callback for gen_server, gen_statem
+               and gen_event has been deprecated in favor of the new
+               format_status/1 callback.
+
+               The new callback adds the possibility to limit and
+               change many more things than the just the state, such
+               as the last received message, the reason for
+               terminating and more events specific to each type of
+               behavior. See the respective modules documentation for
+               more details.
+
+
+  OTP-17481    Application(s): stdlib
+               Related Id(s): PR-4811
+
+               The timer module has been modernized and made more
+               efficient, which makes the timer server less
+               susceptible to being overloaded. The timer:sleep/1
+               function now accepts an arbitrarily large integer.
+
+
+  OTP-17504    Application(s): compiler, erts
+               Related Id(s): GH-4971
+
+               When binary construction using the binary syntax fails,
+               the error message printed in the shell and by
+               erl_error:format_exception/3,4 will contain more
+               detailed information about what went wrong.
+
+
+  OTP-17684    Application(s): compiler, erts
+               Related Id(s): PR-5316
+
+               The JIT now does type-based optimizations based on type
+               information in the BEAM files.
+
+
+  OTP-17705    Application(s): compiler
+               Related Id(s): PR-5411
+
+               The maybe ... end construction has proposed in EEP-49
+               has been implemented. It can simplify complex code
+               where otherwise deeply nested cases would have to be
+               used.
+
+               To enable maybe, give the option {enable,maybe_expr} to
+               the compiler. (The exact option to use will change in
+               the next release candidate.) That option will not work
+               if given inside the module being compiled. We hope to
+               lift that restriction in the next release candidate.
+
+
+  OTP-17710    Application(s): otp
+               Related Id(s): PR-5597
+
+               A new DEVELOPMENT how-to guide has been added that
+               describes how to build and test Erlang/OTP when fixing
+               bugs or developing new functionality.
+
+               The makefile system has been extended to make it easier
+               to run tests at different granulates directly from the
+               command line. This new functionality is described in
+               the development how-to.
+
+               Using the extended makefile system, testing has been
+               added to the Github actions run for each opened PR so
+               that more bugs are caught earlier when bug fixes and
+               new features are proposed.
+
+
+  OTP-17720    Application(s): common_test, kernel, stdlib
+               Related Id(s): PR-5162
+
+               The new module peer supersedes the slave module. The
+               slave module is now deprecated and will be removed in
+               OTP 27.
+
+               peer contains an extended and more robust API for
+               starting erlang nodes.
+
+
+  OTP-17841    Application(s): compiler, erts
+               Related Id(s): PR-5694
+
+               When a record matching or record update fails, a
+               {badrecord,ExpectedRecordTag} exception used to be
+               raised. In this release, the exception has been changed
+               to {badrecord,ActualValue}, where ActualValue is the
+               actual that was found instead of the expected record.
+
+
+  OTP-17911    Application(s): kernel
+               Related Id(s): OTP-17843, PR-5611, PR-5687
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               As of OTP 25, global will by default prevent
+               overlapping partitions due to network issues by
+               actively disconnecting from nodes that reports that
+               they have lost connections to other nodes. This will
+               cause fully connected partitions to form instead of
+               leaving the network in a state with overlapping
+               partitions.
+
+               Prevention of overlapping partitions can be disabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter, making global behave like it used to do.
+               This is, however, problematic for all applications
+               expecting a fully connected network to be provided,
+               such as for example mnesia, but also for global itself.
+               A network of overlapping partitions might cause the
+               internal state of global to become inconsistent. Such
+               an inconsistency can remain even after such partitions
+               have been brought together to form a fully connected
+               network again. The effect on other applications that
+               expects that a fully connected network is maintained
+               may vary, but they might misbehave in very subtle hard
+               to detect ways during such a partitioning. Since you
+               might get hard to detect issues without this fix, you
+               are strongly advised not to disable this fix. Also note
+               that this fix has to be enabled on all nodes in the
+               network in order to work properly.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17544    Application(s): stdlib
+               Related Id(s): PR-5008
+
+               Fix gen_server:call with the first argument as self()
+               to throw an error instead of failing with a timeout.
+
+               The same fix has also been done for gen_statem:call/3,
+               gen_event:sync_notify/2 and any other functionality
+               relying on the internal gen:call/3 function.
+
+               A similar fix was also done when using io:format/2 and
+               the current group_leader was set to the current
+               process.
+
+
+  OTP-17569    Application(s): erts
+               Related Id(s): PR-4793
+
+               The growth rate of writable binaries has been adjusted
+               to only increase by 20% after 16MB in size. Before this
+               change the size would always double.
+
+               This change may degrade write performance of large
+               binaries.
+
+
+  OTP-17627    Application(s): inets, stdlib
+
+               Adjust uri_string:normalize behavior for URIs with
+               undefined port (URI string with a port colon but no
+               port value or URI map with port => undefined).
+
+               Remove redundant normalization from http_request
+               module.
+
+               Before this change, normalize would not remove port
+               subcomponent in such cases and could for example return
+               "http://localhost:" URI.
+
+
+  OTP-17644    Application(s): dialyzer
+               Related Id(s): PR-5223
+
+               Fixed a bug that could cause the type analyzer to enter
+               an infinite loop.
+
+
+  OTP-17681    Application(s): kernel
+               Related Id(s): PR-5307
+
+               The most, or at least the most used, rpc operations now
+               require erpc support in order to communicate with other
+               Erlang nodes. erpc was introduced in OTP 23. That is,
+               rpc operations against Erlang nodes of releases prior
+               to OTP 23 will fail.
+
+
+  OTP-17683    Application(s): erts
+               Related Id(s): PR-5306
+
+               Distributed spawn operations now require distributed
+               spawn_request() support. Distributed spawn_request()
+               was introduced in OTP 23. That is, distributed spawn
+               operations against Erlang nodes of releases prior to
+               OTP 23 will fail.
+
+
+  OTP-17821    Application(s): dialyzer
+               Related Id(s): GH-5016, OTP-17554, PR-5408
+
+               The default location of the plt has been changed from
+               $HOME to filename:basedir(user_cache,"erlang").
+
+
+  OTP-17866    Application(s): inets
+
+               This change removes deprecated functions:
+               http_uri:parse/1, http_uri:parse/2 and
+               http_uri:scheme_defaults/0.
+
+               This change delays until OTP-26 removal of deprecated
+               functions: http_uri:encode/1 and http_uri:decode/1.
+
+               This change marks httpd_util:decode_hex/1 and
+               httpd_util:encode_hex/1 as deprecated.
+
+
+  OTP-17889    Application(s): inets
+
+               Fixed typo in Reason term returned from
+               httpc_handler:handle_http_body.
+
+               After this change, could_not_establish_ssl_tunnel atom
+               is returned within Reason term.
+
+
+  OTP-17894    Application(s): syntax_tools
+               Related Id(s): PR-5509
+
+               The erl_syntax_lib:analyze_attribute/1 function would
+               return {Name, {Name, Value}} instead of {Name, Value}
+               (which is the documented return value).
+
+
+  OTP-17911    Application(s): kernel
+               Related Id(s): OTP-17843, PR-5611, PR-5687
+
+               *** HIGHLIGHT ***
+
+               As of OTP 25, global will by default prevent
+               overlapping partitions due to network issues by
+               actively disconnecting from nodes that reports that
+               they have lost connections to other nodes. This will
+               cause fully connected partitions to form instead of
+               leaving the network in a state with overlapping
+               partitions.
+
+               Prevention of overlapping partitions can be disabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter, making global behave like it used to do.
+               This is, however, problematic for all applications
+               expecting a fully connected network to be provided,
+               such as for example mnesia, but also for global itself.
+               A network of overlapping partitions might cause the
+               internal state of global to become inconsistent. Such
+               an inconsistency can remain even after such partitions
+               have been brought together to form a fully connected
+               network again. The effect on other applications that
+               expects that a fully connected network is maintained
+               may vary, but they might misbehave in very subtle hard
+               to detect ways during such a partitioning. Since you
+               might get hard to detect issues without this fix, you
+               are strongly advised not to disable this fix. Also note
+               that this fix has to be enabled on all nodes in the
+               network in order to work properly.
+
+
+  OTP-17920    Application(s): ssh
+
+               The representation of Edward curves (ed25519 and ed448)
+               inside ssh had a temporary representation (ed_pri and
+               ed_pub).
+
+               That is now changed to the public_key form. See the
+               manual for more information.
+
+
+  OTP-17921    Application(s): public_key
+
+               The deprecated public_key functions ssh_decode/2,
+               ssh_encode/2, ssh_hostkey_fingerprint/1 and
+               ssh_hostkey_fingerprint/2 are removed.
+
+               They are replaced by ssh_file:decode/2,
+               ssh_file:encode/2, ssh:hostkey_fingerprint/1 and
+               ssh:hostkey_fingerprint/2 respectively.
+
+               Note that the decode/2 and encode/2 are not exact
+               replacement functions, some minor changes may be
+               needed. Se the manual for more information.
+
+
+  OTP-17925    Application(s): stdlib
+               Related Id(s): PR-5631
+
+               The non-local function handler for the erl_eval can now
+               be called with either two or three arguments. When
+               called with three arguments, the first argument is the
+               annotation for the node in the abstract format.
+
+               All errors during evaluation will now be passed through
+               erlang:raise/3. If the restricted shell is active and
+               it does not let erlang:raise/3 through, evaluation
+               errors will be printed in less clear way. See the
+               documentation for restricted shell in shell.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-25.0 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17224    Application(s): erts, otp
+
+               A test case has been added to the otp_SUITE that test
+               that the dependency versions for OTP's applications are
+               correct. The test case uses xref to check if the used
+               functions are available in the specified dependency
+               versions. The test case depends on the Erlang/OTP
+               team's testing infrastructure and will be skipped if
+               its dependencies are not met.
+
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17669    Application(s): erl_docgen, otp
+               Related Id(s): PR-5226
+
+               Any exported, but private function or module in
+               Erlang/OTP now generate an EEP-48 style documentation
+               entry with the content set to hidden.
+
+               Before this change, exported but private functions and
+               modules did not have any entry at all.
+
+
+  OTP-17710    Application(s): otp
+               Related Id(s): PR-5597
+
+               *** HIGHLIGHT ***
+
+               A new DEVELOPMENT how-to guide has been added that
+               describes how to build and test Erlang/OTP when fixing
+               bugs or developing new functionality.
+
+               The makefile system has been extended to make it easier
+               to run tests at different granulates directly from the
+               command line. This new functionality is described in
+               the development how-to.
+
+               Using the extended makefile system, testing has been
+               added to the Github actions run for each opened PR so
+               that more bugs are caught earlier when bug fixes and
+               new features are proposed.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.23 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17881    Application(s): common_test
+               Related Id(s): PR-5581
+
+               Fix bug when running parallel testcases and together
+               with one or more ct hooks that would cause the hook
+               lock process to crash and produce printouts in the ct
+               logs.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17676    Application(s): common_test
+               Related Id(s): PR-5021
+
+               Remove unused and undocumented tracer node
+               functionality.
+
+
+  OTP-17720    Application(s): common_test, kernel, stdlib
+               Related Id(s): PR-5162
+
+               *** HIGHLIGHT ***
+
+               The new module peer supersedes the slave module. The
+               slave module is now deprecated and will be removed in
+               OTP 27.
+
+               peer contains an extended and more robust API for
+               starting erlang nodes.
+
+
+  OTP-17882    Application(s): common_test
+               Related Id(s): PR-5581
+
+               The cth_surefire ct hook has been updated to include
+               the file and line number of the executed test case in
+               the xml output.
+
+               The performance of the hook has also been improved
+               greatly for test runs with many test cases.
+
+
+ Full runtime dependencies of common_test-1.23: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.3,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17820    Application(s): compiler
+
+               Fixed a rare bug that would crash the compiler during
+               type optimization.
+
+
+  OTP-17860    Application(s): compiler
+               Related Id(s): GH-5513, OTP-17226
+
+               Starting in OTP 24, when a fun was created and
+               immediately used, it would be inlined. An unintended
+               consequence of the inlining was that what would be a
+               function_clause exception without the inlining would
+               now be a rather confusing case_clause exception. This
+               has been corrected, so that function_clause exceptions
+               remain function_clause exceptions in inlined code.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16702    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               To enable more optimizations, BEAM files compiled with
+               OTP 21 and earlier cannot be loaded in OTP 25.
+
+
+  OTP-17151    Application(s): compiler, erts
+               Related Id(s): ERIERL-590, PR-5479
+
+               Add compile attribute -nifs() to empower compiler and
+               loader with information about which functions may be
+               overridden as NIFs by erlang:load_nif/2.
+
+
+  OTP-17504    Application(s): compiler, erts
+               Related Id(s): GH-4971
+
+               *** HIGHLIGHT ***
+
+               When binary construction using the binary syntax fails,
+               the error message printed in the shell and by
+               erl_error:format_exception/3,4 will contain more
+               detailed information about what went wrong.
+
+
+  OTP-17684    Application(s): compiler, erts
+               Related Id(s): PR-5316
+
+               *** HIGHLIGHT ***
+
+               The JIT now does type-based optimizations based on type
+               information in the BEAM files.
+
+
+  OTP-17685    Application(s): compiler, erts
+
+               Improved the JIT's support for external tools like perf
+               and gdb, allowing them to show line numbers and even
+               the original Erlang source code when that can be found.
+
+               To aid them in finding the source code, the
+               absolute_path compiler option has been added to embed
+               the absolute file path of a module.
+
+
+  OTP-17705    Application(s): compiler
+               Related Id(s): PR-5411
+
+               *** HIGHLIGHT ***
+
+               The maybe ... end construction has proposed in EEP-49
+               has been implemented. It can simplify complex code
+               where otherwise deeply nested cases would have to be
+               used.
+
+               To enable maybe, give the option {enable,maybe_expr} to
+               the compiler. (The exact option to use will change in
+               the next release candidate.) That option will not work
+               if given inside the module being compiled. We hope to
+               lift that restriction in the next release candidate.
+
+
+  OTP-17810    Application(s): compiler
+               Related Id(s): GH-5379
+
+               A subtle bug regarding variable scoping has been
+               corrected. Consider this example:
+
+               (A=1) + fun() -> A = 2()
+
+               In the shell, the expression correctly evaluates to 3.
+               In compiled code, it raised a {badmatch, 2} exception.
+
+
+  OTP-17841    Application(s): compiler, erts
+               Related Id(s): PR-5694
+
+               *** HIGHLIGHT ***
+
+               When a record matching or record update fails, a
+               {badrecord,ExpectedRecordTag} exception used to be
+               raised. In this release, the exception has been changed
+               to {badrecord,ActualValue}, where ActualValue is the
+               actual that was found instead of the expected record.
+
+
+  OTP-17842    Application(s): compiler
+
+               Improved optimization of try/catch expressions.
+
+
+  OTP-17885    Application(s): compiler
+               Related Id(s): GH-5140
+
+               The beam_trim pass of the compiler could be extremely
+               slow for huge straight-line functions. It will now
+               compile such functions much faster (down to seconds
+               from minutes for some huge functions).
+
+
+ Full runtime dependencies of compiler-8.1: crypto-5.1, erts-13.0,
+ kernel-8.3, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17471    Application(s): crypto
+               Related Id(s): PR-4750
+
+               Add crypto:hash_equals/2
+
+
+  OTP-17561    Application(s): crypto
+
+               Add /opt/homebrew/opt/openssl to standard locations to
+               search for OpenSSL cryptolib.
+
+
+  OTP-17870    Application(s): crypto
+
+               crypto_dyn_iv_init/3 and crypto_dyn_iv_update/3 are
+               deprecated.
+
+
+ Full runtime dependencies of crypto-5.1: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17554    Application(s): debugger, erts, kernel, observer,
+               stdlib
+               Related Id(s): GH-5016, OTP-17821, PR-5408
+
+               The configuration files .erlang, .erlang.cookie and
+               .erlang.crypt can now be located in the XDG Config Home
+               directory.
+
+               See the documentation for each file and
+               filename:basedir/2 for more details.
+
+
+ Full runtime dependencies of debugger-5.3: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.0 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17644    Application(s): dialyzer
+               Related Id(s): PR-5223
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Fixed a bug that could cause the type analyzer to enter
+               an infinite loop.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17524    Application(s): dialyzer
+
+               Optimize operations in the erl_types module.
+               Parallelize the Dialyzer pass remote.
+
+
+  OTP-17654    Application(s): dialyzer
+               Related Id(s): GH-5214
+
+               Added the missing_return and extra_return options to
+               raise warnings when specifications differ from inferred
+               types. These are similar to, but not quite as verbose
+               as overspecs and underspecs.
+
+
+  OTP-17819    Application(s): dialyzer
+
+               The race_conditions option has been removed.
+
+
+  OTP-17821    Application(s): dialyzer
+               Related Id(s): GH-5016, OTP-17554, PR-5408
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The default location of the plt has been changed from
+               $HOME to filename:basedir(user_cache,"erlang").
+
+
+  OTP-17826    Application(s): dialyzer
+               Related Id(s): PR-5498
+
+               dialyzer will now honor dependencies inside type
+               declarations. That is, if the declaration of an
+               exported type changes, all modules using said type will
+               be revisited.
+
+
+  OTP-17897    Application(s): dialyzer
+               Related Id(s): PR-5651
+
+               Dialyzer now better understands the types for min/2,
+               max/2, and erlang:raise/3. Because of that, Dialyzer
+               can potentially generate new warnings. In particular,
+               functions that use erlang:raise/3 could now need a spec
+               with a no_return() return type to avoid an unwanted
+               warning.
+
+
+ Full runtime dependencies of dialyzer-5.0: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- edoc-1.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17550    Application(s): edoc
+               Related Id(s): GH-5094, PR-5106
+
+               Fix unused types warnings in internal edoc module.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17556    Application(s): edoc
+               Related Id(s): PR-5023
+
+               Add source file to the warning on skipped tags when
+               generating EEP-48 style docs.
+
+
+  OTP-17733    Application(s): edoc
+               Related Id(s): PR-5205
+
+               Fix the doc chunks generators to emit documentation
+               even if there is not module level documentation.
+
+               Fix the doc chunks generators to respect the @hidden
+               and @private tags properly for both modules and
+               functions.
+
+
+ Full runtime dependencies of edoc-1.2: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-3.15, syntax_tools-2.0, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-1.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17669    Application(s): erl_docgen, otp
+               Related Id(s): PR-5226
+
+               Any exported, but private function or module in
+               Erlang/OTP now generate an EEP-48 style documentation
+               entry with the content set to hidden.
+
+               Before this change, exported but private functions and
+               modules did not have any entry at all.
+
+
+ Full runtime dependencies of erl_docgen-1.3: edoc-1.0, erts-11.0,
+ kernel-8.0, stdlib-3.15, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17846    Application(s): erl_interface
+               Related Id(s): PR-5558
+
+               erl_call no longer links against nsl on platforms where
+               gethostbyname is provided by libc.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17318    Application(s): erl_interface, erts, jinterface,
+               kernel
+               Related Id(s): PR-4972
+
+               The following distribution flags are now mandatory:
+               DFLAG_BIT_BINARIES, DFLAG_EXPORT_PTR_TAG,
+               DFLAG_MAP_TAGS, DFLAG_NEW_FLOATS, and DFLAG_FUN_TAGS.
+               This mainly concerns libraries or application that
+               implement the distribution protocol themselves.
+
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17682    Application(s): erl_interface, erts, jinterface
+               Related Id(s): PR-5347
+
+               Removed use of node creation value zero as a wildcard.
+               Also prevent zero from being used as creation by
+               erl_interface and jinterface nodes.
+
+
+  OTP-17802    Application(s): erl_interface
+               Related Id(s): PR-5347
+
+               Changed creation arguments, of function ei_connet_init
+               and friends, from type short to unsigned int for full
+               32-bit range.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.0 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17447    Application(s): erts, kernel
+               Related Id(s): GH-4819
+
+               The socket option 'reuseaddr' is *no longer* ignored on
+               Windows.
+
+
+  OTP-17569    Application(s): erts
+               Related Id(s): PR-4793
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The growth rate of writable binaries has been adjusted
+               to only increase by 20% after 16MB in size. Before this
+               change the size would always double.
+
+               This change may degrade write performance of large
+               binaries.
+
+
+  OTP-17661    Application(s): erts, stdlib
+               Related Id(s): PR-5165
+
+               Fix reduction counting bug in re:run that caused the
+               function to yield too frequently when doing global
+               matches.
+
+
+  OTP-17758    Application(s): erts
+               Related Id(s): PR-5391
+
+               Fix spelling mistakes in epmd error messages.
+
+
+  OTP-17779    Application(s): erts
+               Related Id(s): GH-5403, PR-5599
+
+               Fix bug where the "newshell" would trigger a newline at
+               the column width of the terminal, even if the next
+               character to be printed was a newline. This would cause
+               the terminal to render two newlines instead of one.
+
+
+  OTP-17832    Application(s): erts, stdlib
+               Related Id(s): PR-5494
+
+               Fix the memory value returned from ets:info(Tid,memory)
+               when the read_concurrency option is used.
+
+               Before this fix the memory used by the scheduler
+               specific lock cache lines was not counted towards the
+               total. This caused the returned memory usage to be very
+               incorrect on systems with many schedulers for tables
+               with man locks.
+
+
+  OTP-17836    Application(s): erts
+               Related Id(s): PR-5546
+
+               Fix the undocumented --profile_boot option to work
+               again.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15991    Application(s): erts, stdlib
+               Related Id(s): PR-5208
+
+               *** HIGHLIGHT ***
+
+               Users can now configure ETS tables with the
+               {write_concurrency, auto} option. This option forces
+               tables to automatically change the number of locks that
+               are used at run-time depending on how much concurrency
+               is detected. The {decentralized_counters, true} option
+               is enabled by default when {write_concurrency, auto} is
+               active.
+
+               Benchmark results comparing this option with the other
+               ETS optimization options are available here:
+
+               https://erlang.org/bench/ets_bench_result_lock_config.html
+
+
+  OTP-16702    Application(s): compiler, erts
+
+               *** HIGHLIGHT ***
+
+               To enable more optimizations, BEAM files compiled with
+               OTP 21 and earlier cannot be loaded in OTP 25.
+
+
+  OTP-16852    Application(s): erts
+               Related Id(s): ERL-1347, PR-5195
+
+               Optimize minor garbage collection for processes with
+               large number of binaries, funs and/or external
+               pids/ports/refs. This is a continuation of the
+               optimization (OTP-17602) released in OTP-24.1.
+
+
+  OTP-16982    Application(s): erts
+               Related Id(s): PR-5020
+
+               *** HIGHLIGHT ***
+
+               The signal queue of a process with
+               message_queue_data=off_heap* has been optimized to
+               allow parallel reception of signals from multiple
+               processes.
+
+               This is possible to do as Erlang only guarantees that
+               signals (i.e., message signals and non-message signals)
+               sent from a single process to another process are
+               ordered in send order. However, there are no ordering
+               guarantees for signals sent from different processes to
+               a particular process. Therefore, several processes can
+               send signals in parallel to a specific process without
+               synchronizing with each other. However, such signal
+               sending was previously always serialized as the senders
+               had to acquire the lock for the outer signal queue of
+               the receiving process. This parallel signal sending
+               optimization yields much better scalability for signal
+               sending than what was previously possible, see
+               https://erlang.org/bench/sigq_bench_result.html for
+               benchmark results.
+
+               * Information about how to enable the
+               message_queue_data=off_heap setting can be found in the
+               documentation of the function erlang:process_flag/2.
+
+
+  OTP-17119    Application(s): erts
+               Related Id(s): PR-4869
+
+               *** HIGHLIGHT ***
+
+               The JIT now works for 64-bit ARM processors.
+
+
+  OTP-17151    Application(s): compiler, erts
+               Related Id(s): ERIERL-590, PR-5479
+
+               Add compile attribute -nifs() to empower compiler and
+               loader with information about which functions may be
+               overridden as NIFs by erlang:load_nif/2.
+
+
+  OTP-17224    Application(s): erts, otp
+
+               A test case has been added to the otp_SUITE that test
+               that the dependency versions for OTP's applications are
+               correct. The test case uses xref to check if the used
+               functions are available in the specified dependency
+               versions. The test case depends on the Erlang/OTP
+               team's testing infrastructure and will be skipped if
+               its dependencies are not met.
+
+
+  OTP-17304    Application(s): erts, kernel, sasl
+
+               An Erlang installation directory is now relocatable on
+               the file system given that the paths in the
+               installation's RELEASES file are paths that are
+               relative to the installations root directory. The
+               `release_handler:create_RELEASES/4 function can
+               generate a RELEASES file with relative paths if its
+               RootDir parameter is set to the empty string.
+
+
+  OTP-17318    Application(s): erl_interface, erts, jinterface,
+               kernel
+               Related Id(s): PR-4972
+
+               The following distribution flags are now mandatory:
+               DFLAG_BIT_BINARIES, DFLAG_EXPORT_PTR_TAG,
+               DFLAG_MAP_TAGS, DFLAG_NEW_FLOATS, and DFLAG_FUN_TAGS.
+               This mainly concerns libraries or application that
+               implement the distribution protocol themselves.
+
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17504    Application(s): compiler, erts
+               Related Id(s): GH-4971
+
+               *** HIGHLIGHT ***
+
+               When binary construction using the binary syntax fails,
+               the error message printed in the shell and by
+               erl_error:format_exception/3,4 will contain more
+               detailed information about what went wrong.
+
+
+  OTP-17554    Application(s): debugger, erts, kernel, observer,
+               stdlib
+               Related Id(s): GH-5016, OTP-17821, PR-5408
+
+               The configuration files .erlang, .erlang.cookie and
+               .erlang.crypt can now be located in the XDG Config Home
+               directory.
+
+               See the documentation for each file and
+               filename:basedir/2 for more details.
+
+
+  OTP-17555    Application(s): erts
+               Related Id(s): PR-5027
+
+               Make byte_size/1 and binary_part/2/3 callable from
+               match specs (in ETS and tracing).
+
+
+  OTP-17558    Application(s): erts, kernel
+               Related Id(s): GH-5402, OTP-17538, PR-5111
+
+               Dynamic node name improvements: erlang:is_alive/0
+               changed to return true for pending dynamic node name
+               and new function net_kernel:get_state/0.
+
+
+  OTP-17562    Application(s): erts
+               Related Id(s): GH-4492
+
+               A new option called short has been added to the
+               functions erlang:float_to_list and
+               erlang:float_to_binary. This option creates the
+               shortest correctly rounded string representation of the
+               given float that can be converted back to the same
+               float again.
+
+
+  OTP-17608    Application(s): erts, kernel, stdlib
+
+               The tagged tuple tests and fun-calls have been
+               optimized and are now a little bit cheaper than
+               previously.
+
+               These optimizations become possible after making sure
+               that all boxed terms have at least one word allocated
+               after the arity word. This has been accomplished by
+               letting all empty tuples refer to the same empty tuple
+               literal which also reduces memory usage for empty
+               tuples.
+
+
+  OTP-17630    Application(s): erts, stdlib
+
+               The signal queue benchmark in parallel_messages_SUITE
+               and the ETS benchmark in ets_SUITE have benchmark
+               result visualization HTML pages with "fill-screen"
+               buttons to make the graphs bigger. This button did not
+               work as intended before. When pressing the button for a
+               graph, the last graph got replaced with a bigger
+               version and not the one over the button. This is now
+               fixed.
+
+
+  OTP-17636    Application(s): erts
+
+               The test case num_bif_SUITE:t_float_to_string
+               previously failed sometimes as it assumed a certain
+               rounding of floats printed with sprintf but the
+               rounding type is platform specific.
+
+
+  OTP-17660    Application(s): erts
+               Related Id(s): PR-5164
+
+               Optimize interpreter to create heap binaries of small
+               match contexts if possible.
+
+               This optimization was already done in the JIT.
+
+
+  OTP-17667    Application(s): erts
+               Related Id(s): PR-5237
+
+               Optimize integer multiplication for x86 JIT
+
+
+  OTP-17682    Application(s): erl_interface, erts, jinterface
+               Related Id(s): PR-5347
+
+               Removed use of node creation value zero as a wildcard.
+               Also prevent zero from being used as creation by
+               erl_interface and jinterface nodes.
+
+
+  OTP-17683    Application(s): erts
+               Related Id(s): PR-5306
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Distributed spawn operations now require distributed
+               spawn_request() support. Distributed spawn_request()
+               was introduced in OTP 23. That is, distributed spawn
+               operations against Erlang nodes of releases prior to
+               OTP 23 will fail.
+
+
+  OTP-17684    Application(s): compiler, erts
+               Related Id(s): PR-5316
+
+               *** HIGHLIGHT ***
+
+               The JIT now does type-based optimizations based on type
+               information in the BEAM files.
+
+
+  OTP-17685    Application(s): compiler, erts
+
+               Improved the JIT's support for external tools like perf
+               and gdb, allowing them to show line numbers and even
+               the original Erlang source code when that can be found.
+
+               To aid them in finding the source code, the
+               absolute_path compiler option has been added to embed
+               the absolute file path of a module.
+
+
+  OTP-17717    Application(s): erts
+               Related Id(s): PR-5290
+
+               Add [32-bit] to the Erlang shell title row for 32-bit
+               VMs.
+
+
+  OTP-17728    Application(s): erts
+               Related Id(s): PR-5284
+
+               Instructions for how to build the runtime system for
+               iOS/iPadOS can now be found in HOWTO/INSTALL.md.
+
+
+  OTP-17729    Application(s): erts
+               Related Id(s): PR-5477
+
+               Add support for static Elixir NIF modules with
+               non-alphanumeric characters by using new macro
+               STATIC_ERLANG_NIF_LIBNAME.
+
+
+  OTP-17753    Application(s): erts
+               Related Id(s): GH-5297, PR-5305
+
+               Add new function caller_line to for trace match
+               specifications used by erlang:trace_pattern/3.
+
+               This new option puts the line number of the caller into
+               the trace message sent to the trace receiver.
+
+
+  OTP-17762    Application(s): erts
+               Related Id(s): GH-5204, PR-5219
+
+               A new erl command line argument +ssrct has been
+               introduced which will cause the runtime system to skip
+               reading CPU topology information. This reduce startup
+               time especially when the CPU topology is large. Reading
+               of CPU topology information is now also skipped if a
+               user defined CPU topology is set using the +sct command
+               line argument.
+
+
+  OTP-17772    Application(s): erts
+               Related Id(s): GH-4965, PR-5644
+
+               The default time warp mode will change in Erlang/OTP
+               26. Added a warning about this upcoming potential
+               incompatibility to the documentation.
+
+
+  OTP-17824    Application(s): erts
+
+               The emulator will no longer mark unused memory as
+               discardable (e.g. through madvise(2)), as it caused
+               more problems than it solved.
+
+
+  OTP-17841    Application(s): compiler, erts
+               Related Id(s): PR-5694
+
+               *** HIGHLIGHT ***
+
+               When a record matching or record update fails, a
+               {badrecord,ExpectedRecordTag} exception used to be
+               raised. In this release, the exception has been changed
+               to {badrecord,ActualValue}, where ActualValue is the
+               actual that was found instead of the expected record.
+
+
+  OTP-17892    Application(s): erts, tools
+               Related Id(s): PR-5591
+
+               Removed the previously undocumented and unsupported
+               emem tool.
+
+
+  OTP-17899    Application(s): erts
+               Related Id(s): PR-5524
+
+               Remove version number from the default install path on
+               Windows.
+
+
+ Full runtime dependencies of erts-13.0: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.7.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17884    Application(s): eunit
+               Related Id(s): GH-5617
+
+               Minor internal improvements.
+
+
+ Full runtime dependencies of eunit-2.7.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- inets-8.0 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17627    Application(s): inets, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Adjust uri_string:normalize behavior for URIs with
+               undefined port (URI string with a port colon but no
+               port value or URI map with port => undefined).
+
+               Remove redundant normalization from http_request
+               module.
+
+               Before this change, normalize would not remove port
+               subcomponent in such cases and could for example return
+               "http://localhost:" URI.
+
+
+  OTP-17889    Application(s): inets
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Fixed typo in Reason term returned from
+               httpc_handler:handle_http_body.
+
+               After this change, could_not_establish_ssl_tunnel atom
+               is returned within Reason term.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17866    Application(s): inets
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               This change removes deprecated functions:
+               http_uri:parse/1, http_uri:parse/2 and
+               http_uri:scheme_defaults/0.
+
+               This change delays until OTP-26 removal of deprecated
+               functions: http_uri:encode/1 and http_uri:decode/1.
+
+               This change marks httpd_util:decode_hex/1 and
+               httpd_util:encode_hex/1 as deprecated.
+
+
+ Full runtime dependencies of inets-8.0: erts-6.0, kernel-6.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-9.0, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.13 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17318    Application(s): erl_interface, erts, jinterface,
+               kernel
+               Related Id(s): PR-4972
+
+               The following distribution flags are now mandatory:
+               DFLAG_BIT_BINARIES, DFLAG_EXPORT_PTR_TAG,
+               DFLAG_MAP_TAGS, DFLAG_NEW_FLOATS, and DFLAG_FUN_TAGS.
+               This mainly concerns libraries or application that
+               implement the distribution protocol themselves.
+
+
+  OTP-17682    Application(s): erl_interface, erts, jinterface
+               Related Id(s): PR-5347
+
+               Removed use of node creation value zero as a wildcard.
+               Also prevent zero from being used as creation by
+               erl_interface and jinterface nodes.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17323    Application(s): kernel
+
+               The DNS resolver implementation has been rewritten to
+               validate replies more thoroughly, and a bit optimized
+               to create less garbage.
+
+
+  OTP-17447    Application(s): erts, kernel
+               Related Id(s): GH-4819
+
+               The socket option 'reuseaddr' is *no longer* ignored on
+               Windows.
+
+
+  OTP-17551    Application(s): kernel
+               Related Id(s): GH-5071, PR-5075
+
+               Fix bug where using the atoms string or report as the
+               format when calling logger:log(Level, Format, Args) (or
+               any other logging function) would cause a crash or
+               incorrect logging.
+
+
+  OTP-17911    Application(s): kernel
+               Related Id(s): OTP-17843, PR-5611, PR-5687
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               As of OTP 25, global will by default prevent
+               overlapping partitions due to network issues by
+               actively disconnecting from nodes that reports that
+               they have lost connections to other nodes. This will
+               cause fully connected partitions to form instead of
+               leaving the network in a state with overlapping
+               partitions.
+
+               Prevention of overlapping partitions can be disabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter, making global behave like it used to do.
+               This is, however, problematic for all applications
+               expecting a fully connected network to be provided,
+               such as for example mnesia, but also for global itself.
+               A network of overlapping partitions might cause the
+               internal state of global to become inconsistent. Such
+               an inconsistency can remain even after such partitions
+               have been brought together to form a fully connected
+               network again. The effect on other applications that
+               expects that a fully connected network is maintained
+               may vary, but they might misbehave in very subtle hard
+               to detect ways during such a partitioning. Since you
+               might get hard to detect issues without this fix, you
+               are strongly advised not to disable this fix. Also note
+               that this fix has to be enabled on all nodes in the
+               network in order to work properly.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17304    Application(s): erts, kernel, sasl
+
+               An Erlang installation directory is now relocatable on
+               the file system given that the paths in the
+               installation's RELEASES file are paths that are
+               relative to the installations root directory. The
+               `release_handler:create_RELEASES/4 function can
+               generate a RELEASES file with relative paths if its
+               RootDir parameter is set to the empty string.
+
+
+  OTP-17318    Application(s): erl_interface, erts, jinterface,
+               kernel
+               Related Id(s): PR-4972
+
+               The following distribution flags are now mandatory:
+               DFLAG_BIT_BINARIES, DFLAG_EXPORT_PTR_TAG,
+               DFLAG_MAP_TAGS, DFLAG_NEW_FLOATS, and DFLAG_FUN_TAGS.
+               This mainly concerns libraries or application that
+               implement the distribution protocol themselves.
+
+
+  OTP-17479    Application(s): kernel
+               Related Id(s): PR-4917
+
+               Fix os:cmd to work on Android OS.
+
+
+  OTP-17554    Application(s): debugger, erts, kernel, observer,
+               stdlib
+               Related Id(s): GH-5016, OTP-17821, PR-5408
+
+               The configuration files .erlang, .erlang.cookie and
+               .erlang.crypt can now be located in the XDG Config Home
+               directory.
+
+               See the documentation for each file and
+               filename:basedir/2 for more details.
+
+
+  OTP-17558    Application(s): erts, kernel
+               Related Id(s): GH-5402, OTP-17538, PR-5111
+
+               Dynamic node name improvements: erlang:is_alive/0
+               changed to return true for pending dynamic node name
+               and new function net_kernel:get_state/0.
+
+
+  OTP-17589    Application(s): kernel
+               Related Id(s): PR-4926
+
+               The types for callback result types in gen_statem has
+               bee augmented with arity 2 types where it is possible
+               for a callback module to specify the type of the
+               callback data, so the callback module can get type
+               validation of it.
+
+
+  OTP-17608    Application(s): erts, kernel, stdlib
+
+               The tagged tuple tests and fun-calls have been
+               optimized and are now a little bit cheaper than
+               previously.
+
+               These optimizations become possible after making sure
+               that all boxed terms have at least one word allocated
+               after the arity word. This has been accomplished by
+               letting all empty tuples refer to the same empty tuple
+               literal which also reduces memory usage for empty
+               tuples.
+
+
+  OTP-17617    Application(s): kernel
+               Related Id(s): PR-5069
+
+               A net_ticker_spawn_options kernel configuration
+               parameter with which one can set spawn options for the
+               distribution channel ticker processes has been
+               introduced.
+
+
+  OTP-17681    Application(s): kernel
+               Related Id(s): PR-5307
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The most, or at least the most used, rpc operations now
+               require erpc support in order to communicate with other
+               Erlang nodes. erpc was introduced in OTP 23. That is,
+               rpc operations against Erlang nodes of releases prior
+               to OTP 23 will fail.
+
+
+  OTP-17720    Application(s): common_test, kernel, stdlib
+               Related Id(s): PR-5162
+
+               *** HIGHLIGHT ***
+
+               The new module peer supersedes the slave module. The
+               slave module is now deprecated and will be removed in
+               OTP 27.
+
+               peer contains an extended and more robust API for
+               starting erlang nodes.
+
+
+  OTP-17923    Application(s): kernel
+               Related Id(s): PR-5646
+
+               IP address validation functions is_ipv4_address/1,
+               is_ipv6_address/1 and is_ip_address/1 have been added
+               to the module inet in Kernel.
+
+
+ Full runtime dependencies of kernel-8.3: crypto-5.0, erts-13.0,
+ sasl-3.0, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17910    Application(s): megaco
+
+               Megaco test suite(s) use the new peer module for node
+               starts.
+
+
+ Full runtime dependencies of megaco-4.3: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.21 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17930    Application(s): mnesia
+
+               Documentation fixes.
+
+
+ Full runtime dependencies of mnesia-4.21: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.11 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17554    Application(s): debugger, erts, kernel, observer,
+               stdlib
+               Related Id(s): GH-5016, OTP-17821, PR-5408
+
+               The configuration files .erlang, .erlang.cookie and
+               .erlang.crypt can now be located in the XDG Config Home
+               directory.
+
+               See the documentation for each file and
+               filename:basedir/2 for more details.
+
+
+ Full runtime dependencies of observer-2.11: erts-11.0, et-1.5,
+ kernel-8.1, runtime_tools-1.17, stdlib-3.13, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- odbc-2.14 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+ Full runtime dependencies of odbc-2.14: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- parsetools-2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17755    Application(s): parsetools
+
+               In the generated code, yecc will now quote all atoms
+               coming from terminals in the grammar, in order to avoid
+               conflicts with future reserved words.
+
+
+ Full runtime dependencies of parsetools-2.4: erts-6.0, kernel-3.0,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.12 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17890    Application(s): public_key, ssl
+
+               Allow key file passwords to be input as a single
+               binary, that is we change the datatype to be the more
+               for the purpose logical data type iodata() instead of
+               string().
+
+
+  OTP-17921    Application(s): public_key
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The deprecated public_key functions ssh_decode/2,
+               ssh_encode/2, ssh_hostkey_fingerprint/1 and
+               ssh_hostkey_fingerprint/2 are removed.
+
+               They are replaced by ssh_file:decode/2,
+               ssh_file:encode/2, ssh:hostkey_fingerprint/1 and
+               ssh:hostkey_fingerprint/2 respectively.
+
+               Note that the decode/2 and encode/2 are not exact
+               replacement functions, some minor changes may be
+               needed. Se the manual for more information.
+
+
+ Full runtime dependencies of public_key-1.12: asn1-3.0, crypto-4.6,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.18 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17909    Application(s): runtime_tools
+               Related Id(s): ERIERL-760
+
+               dbg:stop/0 now behaves like dbg:stop_clear/0, clearing
+               all global trace patterns for all functions.
+
+
+ Full runtime dependencies of runtime_tools-1.18: erts-11.0,
+ kernel-8.1, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- sasl-4.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17752    Application(s): sasl
+               Related Id(s): PR-5302
+
+               Fix systools:make* to recursively search for source
+               code when doing a src_tests.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17304    Application(s): erts, kernel, sasl
+
+               An Erlang installation directory is now relocatable on
+               the file system given that the paths in the
+               installation's RELEASES file are paths that are
+               relative to the installations root directory. The
+               `release_handler:create_RELEASES/4 function can
+               generate a RELEASES file with relative paths if its
+               RootDir parameter is set to the empty string.
+
+
+ Full runtime dependencies of sasl-4.2: erts-10.2, kernel-6.0,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.12 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+  OTP-17612    Application(s): snmp
+
+               Removed deprecated functions slated for removal in
+               OTP-25. Also removed "dead" code, kept for backward
+               compatibility reasons.
+
+
+ Full runtime dependencies of snmp-5.12: crypto-4.6, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.14 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17920    Application(s): ssh
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The representation of Edward curves (ed25519 and ed448)
+               inside ssh had a temporary representation (ed_pri and
+               ed_pub).
+
+               That is now changed to the public_key form. See the
+               manual for more information.
+
+
+ Full runtime dependencies of ssh-4.14: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17855    Application(s): ssl
+               Related Id(s): PR-5328
+
+               Add options for users to be able to set spawn_opts for
+               TLS processes (sender and receiver) this may be useful
+               for tuning trade-offs between CPU and Memory usage.
+
+
+  OTP-17890    Application(s): public_key, ssl
+
+               Allow key file passwords to be input as a single
+               binary, that is we change the datatype to be the more
+               for the purpose logical data type iodata() instead of
+               string().
+
+
+ Full runtime dependencies of ssl-10.7: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.3, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.0 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17370    Application(s): stdlib
+               Related Id(s): GH-4784
+
+               Improve the Erlang code linter's check of unused types.
+
+
+  OTP-17480    Application(s): stdlib
+               Related Id(s): GH-4853, PR-4872
+
+               Fix race condition in proc_lib:stop/3 where the process
+               is not stopped when the timeout given is very short.
+
+
+  OTP-17544    Application(s): stdlib
+               Related Id(s): PR-5008
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Fix gen_server:call with the first argument as self()
+               to throw an error instead of failing with a timeout.
+
+               The same fix has also been done for gen_statem:call/3,
+               gen_event:sync_notify/2 and any other functionality
+               relying on the internal gen:call/3 function.
+
+               A similar fix was also done when using io:format/2 and
+               the current group_leader was set to the current
+               process.
+
+
+  OTP-17566    Application(s): stdlib
+               Related Id(s): GH-5093, PR-5095
+
+               erl_pp printed unary - and + operators with a space
+               between the operator and the operand. This is fixed by
+               not having any space in between.
+
+
+  OTP-17627    Application(s): inets, stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Adjust uri_string:normalize behavior for URIs with
+               undefined port (URI string with a port colon but no
+               port value or URI map with port => undefined).
+
+               Remove redundant normalization from http_request
+               module.
+
+               Before this change, normalize would not remove port
+               subcomponent in such cases and could for example return
+               "http://localhost:" URI.
+
+
+  OTP-17661    Application(s): erts, stdlib
+               Related Id(s): PR-5165
+
+               Fix reduction counting bug in re:run that caused the
+               function to yield too frequently when doing global
+               matches.
+
+
+  OTP-17832    Application(s): erts, stdlib
+               Related Id(s): PR-5494
+
+               Fix the memory value returned from ets:info(Tid,memory)
+               when the read_concurrency option is used.
+
+               Before this fix the memory used by the scheduler
+               specific lock cache lines was not counted towards the
+               total. This caused the returned memory usage to be very
+               incorrect on systems with many schedulers for tables
+               with man locks.
+
+
+  OTP-17878    Application(s): stdlib
+
+               Avoid confusion by correcting the argument order in the
+               gen_event crash log printout.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15991    Application(s): erts, stdlib
+               Related Id(s): PR-5208
+
+               *** HIGHLIGHT ***
+
+               Users can now configure ETS tables with the
+               {write_concurrency, auto} option. This option forces
+               tables to automatically change the number of locks that
+               are used at run-time depending on how much concurrency
+               is detected. The {decentralized_counters, true} option
+               is enabled by default when {write_concurrency, auto} is
+               active.
+
+               Benchmark results comparing this option with the other
+               ETS optimization options are available here:
+
+               https://erlang.org/bench/ets_bench_result_lock_config.html
+
+
+  OTP-17351    Application(s): stdlib
+               Related Id(s): GH-4673, PR-4952
+
+               *** HIGHLIGHT ***
+
+               The format_status/2 callback for gen_server, gen_statem
+               and gen_event has been deprecated in favor of the new
+               format_status/1 callback.
+
+               The new callback adds the possibility to limit and
+               change many more things than the just the state, such
+               as the last received message, the reason for
+               terminating and more events specific to each type of
+               behavior. See the respective modules documentation for
+               more details.
+
+
+  OTP-17481    Application(s): stdlib
+               Related Id(s): PR-4811
+
+               *** HIGHLIGHT ***
+
+               The timer module has been modernized and made more
+               efficient, which makes the timer server less
+               susceptible to being overloaded. The timer:sleep/1
+               function now accepts an arbitrarily large integer.
+
+
+  OTP-17523    Application(s): stdlib
+               Related Id(s): PR-4928
+
+               Add lists:enumerate/[1,2].
+
+
+  OTP-17554    Application(s): debugger, erts, kernel, observer,
+               stdlib
+               Related Id(s): GH-5016, OTP-17821, PR-5408
+
+               The configuration files .erlang, .erlang.cookie and
+               .erlang.crypt can now be located in the XDG Config Home
+               directory.
+
+               See the documentation for each file and
+               filename:basedir/2 for more details.
+
+
+  OTP-17592    Application(s): stdlib
+               Related Id(s): ERIERL-663, PR-5243
+
+               Support native time unit in calendar functions
+               system_time_to_rfc3339/2 and rfc3339_to_system_time.
+
+
+  OTP-17608    Application(s): erts, kernel, stdlib
+
+               The tagged tuple tests and fun-calls have been
+               optimized and are now a little bit cheaper than
+               previously.
+
+               These optimizations become possible after making sure
+               that all boxed terms have at least one word allocated
+               after the arity word. This has been accomplished by
+               letting all empty tuples refer to the same empty tuple
+               literal which also reduces memory usage for empty
+               tuples.
+
+
+  OTP-17630    Application(s): erts, stdlib
+
+               The signal queue benchmark in parallel_messages_SUITE
+               and the ETS benchmark in ets_SUITE have benchmark
+               result visualization HTML pages with "fill-screen"
+               buttons to make the graphs bigger. This button did not
+               work as intended before. When pressing the button for a
+               graph, the last graph got replaced with a bigger
+               version and not the one over the button. This is now
+               fixed.
+
+
+  OTP-17720    Application(s): common_test, kernel, stdlib
+               Related Id(s): PR-5162
+
+               *** HIGHLIGHT ***
+
+               The new module peer supersedes the slave module. The
+               slave module is now deprecated and will be removed in
+               OTP 27.
+
+               peer contains an extended and more robust API for
+               starting erlang nodes.
+
+
+  OTP-17778    Application(s): stdlib
+               Related Id(s): GH-5368
+
+               This change introduces quote and unquote functions in
+               uri_string module - a replacement for deprecated encode
+               and decode functions from http_uri.
+
+
+  OTP-17869    Application(s): stdlib
+               Related Id(s): PR-5595
+
+               Update to the Unicode 14.0 specification.
+
+
+  OTP-17901    Application(s): stdlib
+               Related Id(s): GH-4968, PR-5649
+
+               The following ets types have been renamed to a clearer
+               name: tab/0 to table/0 and comp_match_spec/0 to
+               compiled_match_spec/0.
+
+               The types table_access/0 and table_type/0 have been
+               exported.
+
+
+  OTP-17925    Application(s): stdlib
+               Related Id(s): PR-5631
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The non-local function handler for the erl_eval can now
+               be called with either two or three arguments. When
+               called with three arguments, the first argument is the
+               annotation for the node in the abstract format.
+
+               All errors during evaluation will now be passed through
+               erlang:raise/3. If the restricted shell is active and
+               it does not let erlang:raise/3 through, evaluation
+               errors will be printed in less clear way. See the
+               documentation for restricted shell in shell.
+
+
+ Full runtime dependencies of stdlib-4.0: compiler-5.0, crypto-4.5,
+ erts-12.0, kernel-8.3, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-3.0 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17894    Application(s): syntax_tools
+               Related Id(s): PR-5509
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The erl_syntax_lib:analyze_attribute/1 function would
+               return {Name, {Name, Value}} instead of {Name, Value}
+               (which is the documented return value).
+
+
+ Full runtime dependencies of syntax_tools-3.0: compiler-7.0,
+ erts-9.0, kernel-5.0, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- tools-3.5.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17892    Application(s): erts, tools
+               Related Id(s): PR-5591
+
+               Removed the previously undocumented and unsupported
+               emem tool.
+
+
+ Full runtime dependencies of tools-3.5.3: compiler-5.0, erts-11.0,
+ erts-9.1, kernel-5.4, runtime_tools-1.8.14, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.2 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17414    Application(s): common_test, crypto, erl_interface,
+               erts, megaco, odbc, otp, snmp, wx
+               Related Id(s): PR-4967
+
+               Input for configure scripts adapted to autoconf 2.71.
+
+
+ Full runtime dependencies of wx-2.2: erts-6.0, kernel-3.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.29 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17935    Application(s): xmerl
+               Related Id(s): PR-5590
+
+               Fixed misspellings in both documentation, comments and
+               code (internal data structures).
+
+
+ Full runtime dependencies of xmerl-1.3.29: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Anatolii, Andrew Bennett, Anton Thomasson, Cheng Zhe, Danil Zagoskin,
+ David Buckley, Dominic Letz, Eksperimental, Frank Hunleth, Fred
+ Hebert, Frej Drejhammar, Garry Hill, Gustaw Lippa, Hakan Nilsson,
+ Harry Lawrence, Holger Weiß, Ilya Klyuchnikov, Jean-Sébastien Pédron,
+ Jon Carstens, José Valim, Justin Davis, Jérôme de Bretagne, Kaleb
+ Luedtke, Kian-Meng Ang, Kian-Meng, Ang, Leo Liu, Loïc Hoguin, Luke
+ Bakken, Mackenzie Morgan, Maintenance App, Marc-André Lafortune,
+ Marcel Lanz, Maria Scott, Maria-12648430, Mark McElroy, Matteo
+ Brancaleoni, Matteo Cafasso, Max Heiber, Maxim Fedorov, Maxwell
+ Elliot Heiber, Michał Muskała, Mikael Pettersson, Per Andersson,
+ Péter Gömöri, Radek Szymczyszyn, Sidharth Kshatriya, Thomas Depierre,
+ Tom Davies, Tomas Abrahamsson, Wojtek Mach, Yao Bao, Zeyu Zhang, Zhe
+ Cheng, bibajz, c-blair, gearnode, ilya-klyuchnikov, juhlig, kang,
+ massivefermion, nixxquality, obi458, radrow, skynet1, soulna, vk,
+ vkatsuba, Łukasz Niemier
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

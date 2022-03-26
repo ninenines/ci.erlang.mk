@@ -19,28 +19,33 @@ OTP-21 := OTP-21.0.9 OTP-21.1.4 OTP-21.2.7 OTP-21.3.8.24
 OTP-22 := OTP-22.0.7 OTP-22.1.8 OTP-22.2.8 OTP-22.3.4.24
 OTP-23 := OTP-23.0.4 OTP-23.1.5 OTP-23.2.7.3 OTP-23.3.4.12
 OTP-24 := OTP-24.0.6 OTP-24.1.7 OTP-24.2.2 OTP-24.3.2
+OTP-25 := OTP-25.0-rc2
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
-OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
-OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
-OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24)
-OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24)
-OTP-23+ := $(OTP-23) $(OTP-24)
-OTP-24+ := $(OTP-24)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-23+ := $(OTP-23) $(OTP-24) $(OTP-25)
+OTP-24+ := $(OTP-24) $(OTP-25)
+OTP-25+ := $(OTP-25)
 
 OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
 	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
-	$(lastword $(OTP-23)) $(lastword $(OTP-24))
+	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25))
 OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
 	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
-	$(lastword $(OTP-24))
+	$(lastword $(OTP-24)) $(lastword $(OTP-25))
 OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) \
-	$(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24))
+	$(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24)) \
+	$(lastword $(OTP-25))
 OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
-	$(lastword $(OTP-23)) $(lastword $(OTP-24))
-OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24))
-OTP-LATEST-23+ := $(lastword $(OTP-23)) $(lastword $(OTP-24))
-OTP-LATEST-24+ := $(lastword $(OTP-24))
+	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25))
+OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
+	$(lastword $(OTP-24)) $(lastword $(OTP-25))
+OTP-LATEST-23+ := $(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25))
+OTP-LATEST-24+ := $(lastword $(OTP-24)) $(lastword $(OTP-25))
+OTP-LATEST-25+ := $(lastword $(OTP-25))
 
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
@@ -91,6 +96,7 @@ OTP-23-DROPPED := OTP-23.0-rc1 OTP-23.0-rc2 OTP-23.0-rc3 OTP-23.0 OTP-23.0.1 \
 OTP-24-DROPPED := OTP-24.0-rc2 OTP-24.0-rc3 OTP-24.0 OTP-24.0.1 OTP-24.0.5 \
 	OTP-24.1 OTP-24.1.1 OTP-24.1.2 OTP-24.1.3 OTP-24.1.4 OTP-24.1.5 OTP-24.1.6 \
 	OTP-24.2 OTP-24.2.1 OTP-24.3 OTP-24.3.1
+OTP-25-DROPPED := OTP-25.0-rc2
 
 OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
 	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED) $(OTP-24-DROPPED)
