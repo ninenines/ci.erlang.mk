@@ -1,0 +1,70 @@
+Patch Package:           OTP 24.3.2
+Git Tag:                 OTP-24.3.2
+Date:                    2022-03-16
+Trouble Report Id:       OTP-17975, OTP-17979, OTP-17981
+Seq num:                 ERIERL-780
+System:                  OTP
+Release:                 24
+Application:             erl_interface-5.2.1, kernel-8.3.1
+Predecessor:             OTP 24.3.1
+
+ Check out the git tag OTP-24.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.2.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.2.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17975    Application(s): erl_interface
+               Related Id(s): PR-5763
+
+               Fix compile error regarding gethostbyaddr_r on Android.
+               Error introduced in OTP 24.3.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17979    Application(s): kernel
+               Related Id(s): ERIERL-780
+
+               Fix failed accepted connection setup after previous
+               established connection from same node closed down
+               silently.
+
+
+  OTP-17981    Application(s): kernel
+               Related Id(s): PR-5791
+
+               Fixed a problem where typing Ctrl-R in the shell could
+               hang if there were some problem with the history log
+               file.
+
+
+ Full runtime dependencies of kernel-8.3.1: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
