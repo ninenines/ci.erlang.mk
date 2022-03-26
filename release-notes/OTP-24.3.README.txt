@@ -1,0 +1,1078 @@
+Patch Package:           OTP 24.3
+Git Tag:                 OTP-24.3
+Date:                    2022-03-10
+Trouble Report Id:       OTP-15719, OTP-16559, OTP-16607, OTP-17455,
+                         OTP-17656, OTP-17718, OTP-17759, OTP-17800,
+                         OTP-17812, OTP-17815, OTP-17816, OTP-17822,
+                         OTP-17830, OTP-17838, OTP-17839, OTP-17840,
+                         OTP-17843, OTP-17847, OTP-17851, OTP-17852,
+                         OTP-17854, OTP-17857, OTP-17865, OTP-17868,
+                         OTP-17877, OTP-17880, OTP-17883, OTP-17886,
+                         OTP-17887, OTP-17888, OTP-17891, OTP-17893,
+                         OTP-17895, OTP-17900, OTP-17902, OTP-17903,
+                         OTP-17904, OTP-17905, OTP-17907, OTP-17912,
+                         OTP-17918, OTP-17924, OTP-17928, OTP-17929,
+                         OTP-17931, OTP-17941, OTP-17942, OTP-17947,
+                         OTP-17959, OTP-17962
+Seq num:                 ERIERL-688, ERIERL-724, ERIERL-732,
+                         ERIERL-750, ERIERL-757, ERIERL-761, GH-4852,
+                         GH-5140, GH-5332, GH-5367, GH-5402, GH-5425,
+                         GH-5548, GH-5571, GH-5662, GH-5667, GH-5680,
+                         GH-5686, GH-5708, GH-5757
+System:                  OTP
+Release:                 24
+Application:             asn1-5.0.18, common_test-1.22.1,
+                         compiler-8.1, crypto-5.0.6, debugger-5.2.1,
+                         diameter-2.2.5, eldap-1.2.10,
+                         erl_docgen-1.2.1, erl_interface-5.2,
+                         erts-12.3, inets-7.5.2, jinterface-1.12.2,
+                         kernel-8.3, megaco-4.3, mnesia-4.20.2,
+                         observer-2.11, public_key-1.12,
+                         runtime_tools-1.18, sasl-4.1.2, snmp-5.12,
+                         ssh-4.13.2, ssl-10.7, stdlib-3.17.1, wx-2.1.2
+Predecessor:             OTP 24.2.2
+
+ Check out the git tag OTP-24.3, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17455    Application(s): erts, kernel
+               Related Id(s): GH-4852
+
+               Add support for using socket:sockaddr_in() and
+               socket:sockaddr_in6() when using gen_sctp, gen_tcp and
+               gen_udp. This will make it possible to use Link Local
+               IPv6 addresses.
+
+
+  OTP-17812    Application(s): crypto
+               Related Id(s): OTP-16282, OTP-16646
+
+               The crypto app in OTP can since OTP-24.2 be compiled,
+               linked and used with the new OpenSSL 3.0 cryptolib.
+
+               The crypto app has 3.0 support has been improved, but
+               is still *not recommended* for other usages than
+               experiments and alpha testing. There are not yet any
+               guaranties that it works, not even together with other
+               OTP applications like for example SSL and SSH, although
+               there are no known errors.
+
+               Since the previous release, OTP-24.2, the following
+               improvements have been done:
+
+               - It has been tested during nearly every nightly test
+               on the OTP lab
+
+               - The hash algorithms md4 and ripemd160 have been
+               enabled with OpenSSL 3.0.
+
+               - The ciphers blowfish_cbc, blowfish_ecb, des_cbc,
+               des_cfb, des_ecb, rc2_cbc and rc4 have been enabled
+               with OpenSSL 3.0.
+
+               Disabled or unsupported with OpenSSL 3.0 are still:
+
+               - ENGINE support
+
+               - FIPS mode
+
+               - Other providers than the built-in ones
+
+               - Compiling and linking with OpenSSL 3.0 cryptolib in
+               compatibility modes (for example to behave as 1.1.1)
+
+               and, the ciphers blowfish_cfb64 and blowfish_ofb64 are
+               not supported and will not be either.
+
+               Deprecated functions in the OpenSSL 3.0 cryptolib must
+               not be disabled as OTP/crypto still uses some of the
+               deprecated API functions. The gcc flag
+               -Wno-deprecated-declarations is set to prevent
+               deprecation warnings to be printed when compiling.
+
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17928    Application(s): ssh
+               Related Id(s): PR-5679
+
+               Improper tag for private ED keys when encoding with
+               ssh:encode/2.
+
+               The tuple had ed_priv as first element, but should have
+               had ed_pri. This is now corrected.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-24.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-17893    Application(s): otp
+               Related Id(s): PR-5458
+
+               A cross compilation configuration for darwin aarch64
+               has been added.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.18 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.18 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17959    Application(s): asn1
+               Related Id(s): GH-5757
+
+               Add support for the maps option in combination with the
+               jer backend.
+
+
+ Full runtime dependencies of asn1-5.0.18: erts-11.0, kernel-7.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.22.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.22.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17888    Application(s): common_test
+
+               OTP internal test fix.
+
+
+ Full runtime dependencies of common_test-1.22.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17895    Application(s): compiler
+
+               The expression <<0/native-float>>=Bin would always fail
+               to match, while <<0/float-native>>=Bin would match
+               (provided that Bin contained the binary representation
+               of 0.0)
+
+
+ --- Improvements and New Features ---
+
+  OTP-17886    Application(s): compiler
+               Related Id(s): GH-5140, GH-5686
+
+               The compiler will now compile huge functions with
+               straight-line code faster.
+
+
+ Full runtime dependencies of compiler-8.1: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.0.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.0.6 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17812    Application(s): crypto
+               Related Id(s): OTP-16282, OTP-16646
+
+               *** HIGHLIGHT ***
+
+               The crypto app in OTP can since OTP-24.2 be compiled,
+               linked and used with the new OpenSSL 3.0 cryptolib.
+
+               The crypto app has 3.0 support has been improved, but
+               is still *not recommended* for other usages than
+               experiments and alpha testing. There are not yet any
+               guaranties that it works, not even together with other
+               OTP applications like for example SSL and SSH, although
+               there are no known errors.
+
+               Since the previous release, OTP-24.2, the following
+               improvements have been done:
+
+               - It has been tested during nearly every nightly test
+               on the OTP lab
+
+               - The hash algorithms md4 and ripemd160 have been
+               enabled with OpenSSL 3.0.
+
+               - The ciphers blowfish_cbc, blowfish_ecb, des_cbc,
+               des_cfb, des_ecb, rc2_cbc and rc4 have been enabled
+               with OpenSSL 3.0.
+
+               Disabled or unsupported with OpenSSL 3.0 are still:
+
+               - ENGINE support
+
+               - FIPS mode
+
+               - Other providers than the built-in ones
+
+               - Compiling and linking with OpenSSL 3.0 cryptolib in
+               compatibility modes (for example to behave as 1.1.1)
+
+               and, the ciphers blowfish_cfb64 and blowfish_ofb64 are
+               not supported and will not be either.
+
+               Deprecated functions in the OpenSSL 3.0 cryptolib must
+               not be disabled as OTP/crypto still uses some of the
+               deprecated API functions. The gcc flag
+               -Wno-deprecated-declarations is set to prevent
+               deprecation warnings to be printed when compiling.
+
+
+  OTP-17941    Application(s): crypto
+               Related Id(s): OTP-17942
+
+               Crypto is adapted to LibreSSL 3.5.0 on OpenBSD.
+
+
+  OTP-17942    Application(s): crypto
+               Related Id(s): OTP-17941
+
+               New configure option ( --disable-otp-test-engine) to
+               prohibit the build of the OTP test engine used in some
+               test suites.
+
+               The reason is that the test engine could be hard to
+               compile on for instance LibreSSL 3.5.0. For that
+               particular cryptolib version (or higher), this
+               configure option is set automatically.
+
+
+ Full runtime dependencies of crypto-5.0.6: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-5.2.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17865    Application(s): debugger
+               Related Id(s): GH-5571
+
+               Fix record index matching, it was broken and could
+               never match.
+
+
+ Full runtime dependencies of debugger-5.2.1: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.2.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.2.5 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17962    Application(s): diameter, inets, megaco, snmp, stdlib
+
+               The compilation time is no longer recorded in BEAM
+               files. There remained several undocumented functions
+               that attempted to retrieve compilation times. Those
+               have now been removed.
+
+
+ Full runtime dependencies of diameter-2.2.5: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-2.4
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.10 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.10 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17877    Application(s): eldap
+               Related Id(s): PR-5615
+
+               Fix eldap extensibleMatch dnAttributes option.
+
+               According to the ldap ASN1 the dnAttributes should be a
+               bool, instead it was generated as a string.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17924    Application(s): eldap
+               Related Id(s): PR-5538
+
+               Implemented paged searches according to
+               https://www.rfc-editor.org/rfc/rfc2696.txt
+
+
+ Full runtime dependencies of eldap-1.2.10: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-1.2.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-1.2.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17852    Application(s): erl_docgen
+
+               Fix css for large tables and images on small screens
+
+
+  OTP-17907    Application(s): erl_docgen
+               Related Id(s): GH-5662, PR-5666
+
+               Fix bug with codeinclude tag that caused it to not
+               include the code if used in a correct, but unexpected
+               way.
+
+
+ Full runtime dependencies of erl_docgen-1.2.1: edoc-1.0, erts-9.0,
+ kernel-8.0, stdlib-3.15, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17883    Application(s): erl_interface
+               Related Id(s): ERIERL-724, PR-5601
+
+               Add --enable-ei-dynamic-lib configure option that will
+               make erl_interface also release a dynamic library
+               version of libei.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17822    Application(s): erts
+
+               Fixed a bug in the x86 JIT that might cause floating
+               point instructions to wrongly throw an exception.
+
+
+  OTP-17838    Application(s): erts
+               Related Id(s): PR-5748
+
+               Preserve correct nodedown_reason if supervised
+               distribution controller processes exit with {shutdown,
+               Reason}.
+
+
+  OTP-17840    Application(s): erts, kernel
+
+               Handling of send_timeout for gen_tcp has been corrected
+               so that the timeout is honored also when sending 0
+               bytes.
+
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               *** HIGHLIGHT ***
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+  OTP-17900    Application(s): erts
+               Related Id(s): GH-5667
+
+               Corrected the type specification of erlang:seq_trace/2.
+
+
+  OTP-17904    Application(s): erts
+               Related Id(s): ERIERL-757
+
+               Fix memory leak when tracing on running on a process
+               that only handle system tasks or non-message signals
+               (for example process_info requests).
+
+
+ --- Improvements and New Features ---
+
+  OTP-17455    Application(s): erts, kernel
+               Related Id(s): GH-4852
+
+               *** HIGHLIGHT ***
+
+               Add support for using socket:sockaddr_in() and
+               socket:sockaddr_in6() when using gen_sctp, gen_tcp and
+               gen_udp. This will make it possible to use Link Local
+               IPv6 addresses.
+
+
+  OTP-17718    Application(s): erts
+               Related Id(s): PR-5199
+
+               Show on_load failure reasons in embedded mode.
+
+
+  OTP-17891    Application(s): erts
+               Related Id(s): PR-5589
+
+               Compile date saved in the Erlang VM executable has been
+               removed.
+
+
+  OTP-17918    Application(s): erts, kernel
+
+               Improve documentation for the dynamic node name
+               feature.
+
+
+ Full runtime dependencies of erts-12.3: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17962    Application(s): diameter, inets, megaco, snmp, stdlib
+
+               The compilation time is no longer recorded in BEAM
+               files. There remained several undocumented functions
+               that attempted to retrieve compilation times. Those
+               have now been removed.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17931    Application(s): inets
+               Related Id(s): ERIERL-761
+
+               Documentation fix for inets:services_info/0, which now
+               describes that Info might be a Reason term() in case
+               when {error, Reason} is returned as service info.
+
+
+ Full runtime dependencies of inets-7.5.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.12.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.12.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17887    Application(s): jinterface
+               Related Id(s): ERIERL-750, PR-5640
+
+               Fix bug in OtpOutputStream.write_pid/4 and write_ref/3
+               causing faulty encodig. Bug exists since OTP 23.0.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17840    Application(s): erts, kernel
+
+               Handling of send_timeout for gen_tcp has been corrected
+               so that the timeout is honored also when sending 0
+               bytes.
+
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               *** HIGHLIGHT ***
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+  OTP-17851    Application(s): kernel
+
+               Fix bug where logger would crash when logging a report
+               including improper lists.
+
+
+  OTP-17902    Application(s): kernel
+               Related Id(s): GH-5402, PR-5670
+
+               Make erlang:set_cookie work for dynamic node names.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17455    Application(s): erts, kernel
+               Related Id(s): GH-4852
+
+               *** HIGHLIGHT ***
+
+               Add support for using socket:sockaddr_in() and
+               socket:sockaddr_in6() when using gen_sctp, gen_tcp and
+               gen_udp. This will make it possible to use Link Local
+               IPv6 addresses.
+
+
+  OTP-17905    Application(s): kernel
+               Related Id(s): ERIERL-732, PR-5740
+
+               A net_tickintensity kernel parameter has been
+               introduced. It can be used to control the amount of
+               ticks during a net_ticktime period.
+
+               A new net_kernel:start/2 function has also been
+               introduced in order to make it easier to add new
+               options. The use of net_kernel:start/1 has been
+               deprecated.
+
+
+  OTP-17918    Application(s): erts, kernel
+
+               Improve documentation for the dynamic node name
+               feature.
+
+
+ Full runtime dependencies of kernel-8.3: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-4.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17962    Application(s): diameter, inets, megaco, snmp, stdlib
+
+               The compilation time is no longer recorded in BEAM
+               files. There remained several undocumented functions
+               that attempted to retrieve compilation times. Those
+               have now been removed.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17839    Application(s): megaco
+
+               Update the performance and debug chapters of the megaco
+               user's guide. Also some updates to the meas tools.
+
+
+ Full runtime dependencies of megaco-4.3: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17656    Application(s): mnesia
+               Related Id(s): ERIERL-688
+
+               Reduce the number of locks taken during table copying,
+               should reduce the startup time on large systems.
+
+
+ Full runtime dependencies of mnesia-4.20.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.11 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The observer-2.11 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.1 (first satisfied in OTP 24.1)
+       -- runtime_tools-1.17 (first satisfied in OTP 24.1)
+
+
+ --- Improvements and New Features ---
+
+  OTP-17880    Application(s): observer
+               Related Id(s): PR-5557
+
+               Calculate the display width in etop, instead of
+               hard-coding it to 89 characters.
+
+
+ Full runtime dependencies of observer-2.11: erts-11.0, et-1.5,
+ kernel-8.1, runtime_tools-1.17, stdlib-3.13, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.12 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.12 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17816    Application(s): public_key, ssl
+               Related Id(s): PR-5607
+
+               Support password fun for protected keyfiles in
+               ssl:connect function.
+
+
+ Full runtime dependencies of public_key-1.12: asn1-3.0, crypto-3.8,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-1.18 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The runtime_tools-1.18 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.1 (first satisfied in OTP 24.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17800    Application(s): runtime_tools
+               Related Id(s): PR-5425
+
+               Fixed bug in scheduler:utilization(Seconds) that would
+               leave the scheduler_wall_time system flag incorrectly
+               enabled.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17830    Application(s): runtime_tools
+               Related Id(s): GH-5425, PR-5444
+
+               Add scheduler:get_sample/0 and get_sample_all/0. Also
+               clarify scheduler module documentation about how it
+               depends on system flag scheduler_wall_time.
+
+
+ Full runtime dependencies of runtime_tools-1.18: erts-11.0,
+ kernel-8.1, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- sasl-4.1.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The sasl-4.1.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17854    Application(s): sasl
+               Related Id(s): PR-5596
+
+               Fix bug in systools:make_script/1 documentation.
+
+
+ Full runtime dependencies of sasl-4.1.2: erts-10.2, kernel-5.3,
+ stdlib-3.4, tools-2.6.14
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.12 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.12 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17962    Application(s): diameter, inets, megaco, snmp, stdlib
+
+               The compilation time is no longer recorded in BEAM
+               files. There remained several undocumented functions
+               that attempted to retrieve compilation times. Those
+               have now been removed.
+
+
+ --- Improvements and New Features ---
+
+  OTP-16559    Application(s): snmp
+
+               [agent] Remove expectation of socket being a port.
+
+
+ Full runtime dependencies of snmp-5.12: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.13.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.13.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17847    Application(s): ssh, ssl
+               Related Id(s): GH-5548, PR-5574
+
+               Fix makefile dependency bugs.
+
+
+  OTP-17868    Application(s): ssh
+               Related Id(s): PR-5520
+
+               Fixed faulty OpenSSH decoding of Ed25519/Ed448 keys in
+               the OpenSSH format openssh_key_v1.
+
+
+  OTP-17912    Application(s): ssh
+               Related Id(s): GH-5680
+
+               Correction of ssh_file typing, specially for the
+               experimental openssh-key-v1 encoding.
+
+
+  OTP-17928    Application(s): ssh
+               Related Id(s): PR-5679
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Improper tag for private ED keys when encoding with
+               ssh:encode/2.
+
+               The tuple had ed_priv as first element, but should have
+               had ed_pri. This is now corrected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17857    Application(s): ssh
+               Related Id(s): PR-5532
+
+               Add support for Ed25519/Ed448 SSH host keys in the RFC
+               4716 format ("-----BEGIN EC PRIVATE KEY-----")
+               generated by for example openssl or via Erlang
+               functions (i.e. public_key:generate_key({namedCurve,
+               ed25519})).
+
+               Ed25519 SSH host keys generated by ssh-keygen was, and
+               are still, supported.
+
+
+ Full runtime dependencies of ssh-4.13.2: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17759    Application(s): ssl
+               Related Id(s): GH-5367
+
+               Improved error handling.
+
+
+  OTP-17815    Application(s): ssl
+               Related Id(s): GH-5332
+
+               Before this change, net_kernel used with TLS
+               distribution might be leaking processes in case of
+               connectivity issues.
+
+
+  OTP-17847    Application(s): ssh, ssl
+               Related Id(s): GH-5548, PR-5574
+
+               Fix makefile dependency bugs.
+
+
+  OTP-17929    Application(s): ssl
+               Related Id(s): GH-5708
+
+               Make sure the TLS sender process handles explicit calls
+               to erlang:disconnect_node properly, avoiding potential
+               hanging problems in net_kernel.
+
+
+ --- Improvements and New Features ---
+
+  OTP-15719    Application(s): ssl
+
+               Add support for TLS-1.3 certificate_authorities
+               extension. And process certificate_authorities field in
+               pre-TLS-1.3 certificate requests.
+
+
+  OTP-17816    Application(s): public_key, ssl
+               Related Id(s): PR-5607
+
+               Support password fun for protected keyfiles in
+               ssl:connect function.
+
+
+  OTP-17903    Application(s): ssl
+
+               Add in some cases earlier detection of possible DoS
+               attacks by malicious clients sending unexpected TLS
+               messages instead of the client hello. Note that such
+               attacks are already mitigated by providing a timeout
+               for the TLS handshake.
+
+
+ Full runtime dependencies of ssl-10.7: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17962    Application(s): diameter, inets, megaco, snmp, stdlib
+
+               The compilation time is no longer recorded in BEAM
+               files. There remained several undocumented functions
+               that attempted to retrieve compilation times. Those
+               have now been removed.
+
+
+ Full runtime dependencies of stdlib-3.17.1: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.1.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.1.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17947    Application(s): wx
+
+               Removed the static_data option from wxImage creation
+               functions, as it was broken and could lead to crashes.
+               Now image data is always copied to wxWidgets as was the
+               default behavior.
+
+               Removed some non working wxGridEvent event types, which
+               have there own events in newer wxWidgets versions, and
+               added a couple of event types that where missing in wx.
+
+
+ Full runtime dependencies of wx-2.1.2: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
