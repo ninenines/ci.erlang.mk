@@ -1,0 +1,60 @@
+Patch Package:           OTP 24.2.2
+Git Tag:                 OTP-24.2.2
+Date:                    2022-02-25
+Trouble Report Id:       OTP-17850, OTP-17922
+Seq num:                 ERIERL-743, ERIERL-764
+System:                  OTP
+Release:                 24
+Application:             inets-7.5.1, ssh-4.13.1
+Predecessor:             OTP 24.2.1
+
+ Check out the git tag OTP-24.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17922    Application(s): inets
+               Related Id(s): ERIERL-743
+
+               Avoid intermediate ungraceful shutdown of the HTTP
+               server.
+
+
+ Full runtime dependencies of inets-7.5.1: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.13.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.13.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17850    Application(s): ssh
+               Related Id(s): ERIERL-764
+
+               The ssh sever parallel_login option was missing in
+               OTP-24
+
+
+ Full runtime dependencies of ssh-4.13.1: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
