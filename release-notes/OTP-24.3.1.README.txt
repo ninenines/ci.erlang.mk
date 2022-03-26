@@ -1,0 +1,68 @@
+Patch Package:           OTP 24.3.1
+Git Tag:                 OTP-24.3.1
+Date:                    2022-03-15
+Trouble Report Id:       OTP-17963, OTP-17971
+Seq num:                 GH-5764, GH-5783
+System:                  OTP
+Release:                 24
+Application:             dialyzer-4.4.4, ssl-10.7.1
+Predecessor:             OTP 24.3
+
+ Check out the git tag OTP-24.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.4.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.4.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17963    Application(s): dialyzer
+               Related Id(s): GH-5764
+
+               There could be spurious warnings for unknown types when
+               a type was a subtype of an existing type that was a
+               subtype of an unknown type.
+
+
+ Full runtime dependencies of dialyzer-4.4.4: compiler-7.0, erts-9.0,
+ kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.1 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17971    Application(s): ssl
+               Related Id(s): GH-5783
+
+               Client certification could fail for TLS-1.3 servers
+               that did not include the certificat_authorties
+               extension in its certificate request message.
+
+
+ Full runtime dependencies of ssl-10.7.1: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
