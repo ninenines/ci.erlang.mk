@@ -1,0 +1,229 @@
+Patch Package:           OTP 22.3.4.25
+Git Tag:                 OTP-22.3.4.25
+Date:                    2022-03-29
+Trouble Report Id:       OTP-17843, OTP-17888, OTP-17904, OTP-17905,
+                         OTP-17998
+Seq num:                 ERIERL-732, ERIERL-757, GH-5554
+System:                  OTP
+Release:                 22
+Application:             common_test-1.18.2.2, erts-10.7.2.17,
+                         kernel-6.5.2.5
+Predecessor:             OTP 22.3.4.24
+
+ Check out the git tag OTP-22.3.4.25, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.18.2.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.18.2.2 application can be applied independently of
+ other applications on a full OTP 22 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17888    Application(s): common_test
+
+               OTP internal test fix.
+
+
+ Full runtime dependencies of common_test-1.18.2.2: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-10.7.2.17 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-10.7.2.17 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-6.5.2.5 (first satisfied in OTP 22.3.4.25)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               *** HIGHLIGHT ***
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+  OTP-17904    Application(s): erts
+               Related Id(s): ERIERL-757
+
+               Fix memory leak when tracing on running on a process
+               that only handle system tasks or non-message signals
+               (for example process_info requests).
+
+
+  OTP-17998    Application(s): erts
+               Related Id(s): GH-5554, PR-5825
+
+               Fix Erlang monotonic time on MacOS. Previously used OS
+               monotonic time primitive on MacOS is buggy and will not
+               be used anymore. It has been replaced with usage of
+               another OS monotonic time primitive that does not
+               appear to be buggy.
+
+
+ Full runtime dependencies of erts-10.7.2.17: kernel-6.5.2.5,
+ sasl-3.3, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-6.5.2.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-6.5.2.5 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 22
+       installation.
+
+       On a full OTP 22 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-10.7.2.17 (first satisfied in OTP 22.3.4.25)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17843    Application(s): erts, kernel
+               Related Id(s): ERIERL-732, PR-5611
+
+               *** HIGHLIGHT ***
+
+               By default global does not take any actions to restore
+               a fully connected network when connections are lost due
+               to network issues. This is problematic for all
+               applications expecting a fully connected network to be
+               provided, such as for example mnesia, but also for
+               global itself. A network of overlapping partitions
+               might cause the internal state of global to become
+               inconsistent. Such an inconsistency can remain even
+               after such partitions have been brought together to
+               form a fully connected network again. The effect on
+               other applications that expects that a fully connected
+               network is maintained may vary, but they might
+               misbehave in very subtle hard to detect ways during
+               such a partitioning.
+
+               In order to prevent such issues, we have introduced a
+               prevent overlapping partitions fix which can be enabled
+               using the prevent_overlapping_partitions kernel(6)
+               parameter. When this fix has been enabled, global will
+               actively disconnect from nodes that reports that they
+               have lost connections to other nodes. This will cause
+               fully connected partitions to form instead of leaving
+               the network in a state with overlapping partitions.
+               Note that this fix has to be enabled on all nodes in
+               the network in order to work properly. Since this quite
+               substantially changes the behavior, this fix is
+               currently disabled by default. Since you might get hard
+               to detect issues without this fix you are, however,
+               strongly advised to enable this fix in order to avoid
+               issues such as the ones described above. As of OTP 25
+               this fix will become enabled by default.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17905    Application(s): kernel
+               Related Id(s): ERIERL-732, PR-5740
+
+               A net_tickintensity kernel parameter has been
+               introduced. It can be used to control the amount of
+               ticks during a net_ticktime period.
+
+               A new net_kernel:start/2 function has also been
+               introduced in order to make it easier to add new
+               options. The use of net_kernel:start/1 has been
+               deprecated.
+
+
+ Full runtime dependencies of kernel-6.5.2.5: erts-10.7.2.17,
+ sasl-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
