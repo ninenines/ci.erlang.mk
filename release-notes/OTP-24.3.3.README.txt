@@ -1,0 +1,207 @@
+Patch Package:           OTP 24.3.3
+Git Tag:                 OTP-24.3.3
+Date:                    2022-03-29
+Trouble Report Id:       OTP-17973, OTP-17978, OTP-17982, OTP-17987,
+                         OTP-17989, OTP-17993, OTP-17994, OTP-17995,
+                         OTP-17998
+Seq num:                 ERIERL-767, ERIERL-772, GH-5554, GH-5758,
+                         GH-5781
+System:                  OTP
+Release:                 24
+Application:             erl_interface-5.2.2, erts-12.3.1, ftp-1.1.1,
+                         mnesia-4.20.3, observer-2.11.1, ssl-10.7.2,
+                         wx-2.1.3
+Predecessor:             OTP 24.3.2
+
+ Check out the git tag OTP-24.3.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.2.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.2.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17987    Application(s): erl_interface
+               Related Id(s): GH-5781, PR-5787
+
+               Avoid attempt build dynamic libs if config option
+               --enable-ei-dynamic-lib is not given.
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17978    Application(s): erts
+               Related Id(s): OTP-17958
+
+               erlang:open_port({spawn, _},_) has been fixed on
+               Windows to handle whitespace characters in the path
+               correctly.
+
+               This could, for example, cause execution of the
+               resolver helper program inet_gethost to fail and
+               instead possibly execute a different program.
+
+
+  OTP-17993    Application(s): erts
+               Related Id(s): PR-5806
+
+               Fix race condition when creating crash dump that could
+               cause multiple threads to race when writing the initial
+               information in a crash dump.
+
+               The race condition was introduced in erts-12.2
+               (Erlang/OTP 24.2).
+
+
+  OTP-17998    Application(s): erts
+               Related Id(s): GH-5554, PR-5825
+
+               Fix Erlang monotonic time on MacOS. Previously used OS
+               monotonic time primitive on MacOS is buggy and will not
+               be used anymore. It has been replaced with usage of
+               another OS monotonic time primitive that does not
+               appear to be buggy.
+
+
+ Full runtime dependencies of erts-12.3.1: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.1.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.1.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17989    Application(s): ftp
+               Related Id(s): ERIERL-767
+
+               An unexpected timeout message on the FTP control
+               channel was observed in a real system and could not be
+               associated with anything that was expected to happen,
+               so we will ignore but info log such unexpected
+               messages.
+
+
+ Full runtime dependencies of ftp-1.1.1: erts-7.0, kernel-6.0,
+ runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-17973    Application(s): mnesia
+               Related Id(s): ERIERL-772
+
+               Optimize locker to handle many read locks on the same
+               record.
+
+
+ Full runtime dependencies of mnesia-4.20.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.11.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The observer-2.11.1 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.1 (first satisfied in OTP 24.1)
+       -- runtime_tools-1.17 (first satisfied in OTP 24.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17995    Application(s): observer
+               Related Id(s): PR-5804
+
+               Fixed node information lookup for remote process
+               identifiers in crashdump_viewer.
+
+
+ Full runtime dependencies of observer-2.11.1: erts-11.0, et-1.5,
+ kernel-8.1, runtime_tools-1.17, stdlib-3.13, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17994    Application(s): ssl
+
+               With this change, potential hanging of pre TLS1.3
+               client receiving OSCP staple message is avoided.
+
+
+ Full runtime dependencies of ssl-10.7.2: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.1.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.1.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17982    Application(s): wx
+               Related Id(s): GH-5758
+
+               Fixed a bug in callback handling which could lead to a
+               unresponsive gui.
+
+
+ Full runtime dependencies of wx-2.1.3: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
