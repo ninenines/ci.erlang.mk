@@ -1,0 +1,49 @@
+Patch Package:           OTP 23.3.4.13
+Git Tag:                 OTP-23.3.4.13
+Date:                    2022-03-29
+Trouble Report Id:       OTP-17998
+Seq num:                 GH-5554
+System:                  OTP
+Release:                 23
+Application:             erts-11.2.2.12
+Predecessor:             OTP 23.3.4.12
+
+ Check out the git tag OTP-23.3.4.13, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.12 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-11.2.2.12 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-7.3.1.5 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17998    Application(s): erts
+               Related Id(s): GH-5554, PR-5825
+
+               Fix Erlang monotonic time on MacOS. Previously used OS
+               monotonic time primitive on MacOS is buggy and will not
+               be used anymore. It has been replaced with usage of
+               another OS monotonic time primitive that does not
+               appear to be buggy.
+
+
+ Full runtime dependencies of erts-11.2.2.12: kernel-7.3.1.5,
+ sasl-3.3, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
