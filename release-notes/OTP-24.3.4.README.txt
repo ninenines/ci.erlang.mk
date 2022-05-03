@@ -1,0 +1,298 @@
+Patch Package:           OTP 24.3.4
+Git Tag:                 OTP-24.3.4
+Date:                    2022-05-03
+Trouble Report Id:       OTP-17970, OTP-18027, OTP-18028, OTP-18056,
+                         OTP-18061, OTP-18062, OTP-18064, OTP-18065,
+                         OTP-18066, OTP-18069, OTP-18071, OTP-18075,
+                         OTP-18076, OTP-18077, OTP-18078, OTP-18080,
+                         OTP-18081, OTP-18082
+Seq num:                 ERIERL-802, ERIERL-805, GH-5835, GH-5876,
+                         GH-5883, GH-5893, GH-5898, GH-5908, GH-5915,
+                         GH-5930
+System:                  OTP
+Release:                 24
+Application:             compiler-8.1.1, erts-12.3.2, inets-7.5.3,
+                         kernel-8.3.2, mnesia-4.20.4, ssl-10.7.3,
+                         stdlib-3.17.2, wx-2.1.4
+Predecessor:             OTP 24.3.3
+
+ Check out the git tag OTP-24.3.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18066    Application(s): compiler
+               Related Id(s): GH-5915
+
+               Fixed a performance bug in the validator that made
+               certain files take a very long time to compile.
+
+
+  OTP-18082    Application(s): compiler
+
+               In rare circumstances, the compiler would mistakenly
+               assume that a call to setelement/3 would always fail
+               and remove all code following the call.
+
+
+ Full runtime dependencies of compiler-8.1.1: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17970    Application(s): erts
+               Related Id(s): PR-5762
+
+               Let EPMD tolerate failure when binding to IPv4/IPv6
+               loopback intefaces in addition to user-supplied
+               addresses via ERL_EPMD_ADDRESS or the -address option.
+               This can happen, for example, if the host system has
+               ipv6 disabled via the disable_ipv6 sysctl.
+
+
+  OTP-18027    Application(s): erts
+
+               Fixed a rare bug in binary_to_term/1,
+               enif_make_map_from_arrays, erl_drv_send_term, and
+               Erlang distribution that could crash the emulator.
+
+
+  OTP-18065    Application(s): erts
+               Related Id(s): GH-5908
+
+               Fixed a rare race in persistent_term:get/1,2 that could
+               cause it to return the value of another key.
+
+
+  OTP-18075    Application(s): erts
+               Related Id(s): PR-5927
+
+               Fix bug where the process message queue was left in an
+               inconsistent state when changing from on_heap to
+               off_heap message queue data causing the GC to segfault.
+
+
+  OTP-18076    Application(s): erts
+               Related Id(s): ERIERL-802, PR-5905
+
+               Fix functions that convert universal to localtime (such
+               as erlang:localtime/0 and
+               erlang:universaltime_to_localtime/1) to fetch the
+               correct localtime if it is changed after the start of
+               the VM.
+
+
+  OTP-18077    Application(s): erts
+               Related Id(s): GH-5876, PR-5892
+
+               Fix memory leak when a process doing a distributed
+               fragmented send is sent an exit signal. Before this fix
+               the receiving node would be left with an incomplete
+               message that would remain until the nodes were
+               disconnected. The bug has existed since Erlang/OTP 21.
+
+
+  OTP-18080    Application(s): erts, kernel
+               Related Id(s): GH-5930
+
+               Corrected the behaviour of the shutdown function when
+               using with the inet_backend = socket. It was not
+               sufficiently compatible with the "old" gen_tcp.
+
+
+ Full runtime dependencies of erts-12.3.2: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18069    Application(s): inets
+               Related Id(s): ERIERL-805
+
+               Fix handling of erl_script_script option in httpd when
+               atom 'all' is used as AllowedModule.
+
+
+ Full runtime dependencies of inets-7.5.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18078    Application(s): kernel
+               Related Id(s): GH-5930
+
+               inet:getopts/2 for the 'raw' option for a socket
+               created with inet-backend 'socket' failed.
+
+
+  OTP-18080    Application(s): erts, kernel
+               Related Id(s): GH-5930
+
+               Corrected the behaviour of the shutdown function when
+               using with the inet_backend = socket. It was not
+               sufficiently compatible with the "old" gen_tcp.
+
+
+ Full runtime dependencies of kernel-8.3.2: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18056    Application(s): mnesia
+
+               Fixed mnesia:add_table_copy/3 so that calling it when
+               mnesia started on another node does not fail or cause
+               hanging nodes.
+
+
+ Full runtime dependencies of mnesia-4.20.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18028    Application(s): ssl
+               Related Id(s): GH-5835
+
+               Client certification could fail if TLS-1.3 enabled
+               client negotiated TLS-1.2 connection with the server,
+               this is due to the wrong version being used when
+               decoding the certificate request message from the
+               server.
+
+
+  OTP-18062    Application(s): ssl
+               Related Id(s): GH-5898
+
+               socket option packet_size was not handled in
+               ssl:setops/2 and ssl:getotps/2
+
+
+  OTP-18071    Application(s): ssl
+               Related Id(s): GH-5930
+
+               Remove legacy code to fix interoperability with new
+               socket inet_backend.
+
+
+ Full runtime dependencies of ssl-10.7.3: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18081    Application(s): stdlib
+
+               The type specifications for shell_docs:get_doc/3,
+               shell_docs:get_callback_doc/3, and
+               shell_docs:get_type_doc/3 incorrectly stated that the
+               returned Metadata was an empty map.
+
+
+ Full runtime dependencies of stdlib-3.17.2: compiler-5.0, crypto-3.3,
+ erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.1.4 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.1.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18064    Application(s): wx
+               Related Id(s): GH-5893
+
+               Fix build failure with wxWidgets-3.1.6.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18061    Application(s): wx
+               Related Id(s): GH-5883
+
+               Enable the possibility to build wx on windows with
+               wxWidgets-3.1.6.
+
+
+ Full runtime dependencies of wx-2.1.4: erts-6.0, kernel-3.0,
+ stdlib-2.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
