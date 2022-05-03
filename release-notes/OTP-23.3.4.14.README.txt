@@ -1,0 +1,112 @@
+Patch Package:           OTP 23.3.4.14
+Git Tag:                 OTP-23.3.4.14
+Date:                    2022-05-03
+Trouble Report Id:       OTP-17970, OTP-18027, OTP-18065, OTP-18075,
+                         OTP-18076, OTP-18077, OTP-18082
+Seq num:                 ERIERL-802, GH-5876, GH-5908
+System:                  OTP
+Release:                 23
+Application:             compiler-7.6.9.2, erts-11.2.2.13
+Predecessor:             OTP 23.3.4.13
+
+ Check out the git tag OTP-23.3.4.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-7.6.9.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-7.6.9.2 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18082    Application(s): compiler
+
+               In rare circumstances, the compiler would mistakenly
+               assume that a call to setelement/3 would always fail
+               and remove all code following the call.
+
+
+ Full runtime dependencies of compiler-7.6.9.2: crypto-3.6, erts-11.0,
+ hipe-3.12, kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.13 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-11.2.2.13 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-7.3.1.5 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17970    Application(s): erts
+               Related Id(s): PR-5762
+
+               Let EPMD tolerate failure when binding to IPv4/IPv6
+               loopback intefaces in addition to user-supplied
+               addresses via ERL_EPMD_ADDRESS or the -address option.
+               This can happen, for example, if the host system has
+               ipv6 disabled via the disable_ipv6 sysctl.
+
+
+  OTP-18027    Application(s): erts
+
+               Fixed a rare bug in binary_to_term/1,
+               enif_make_map_from_arrays, erl_drv_send_term, and
+               Erlang distribution that could crash the emulator.
+
+
+  OTP-18065    Application(s): erts
+               Related Id(s): GH-5908
+
+               Fixed a rare race in persistent_term:get/1,2 that could
+               cause it to return the value of another key.
+
+
+  OTP-18075    Application(s): erts
+               Related Id(s): PR-5927
+
+               Fix bug where the process message queue was left in an
+               inconsistent state when changing from on_heap to
+               off_heap message queue data causing the GC to segfault.
+
+
+  OTP-18076    Application(s): erts
+               Related Id(s): ERIERL-802, PR-5905
+
+               Fix functions that convert universal to localtime (such
+               as erlang:localtime/0 and
+               erlang:universaltime_to_localtime/1) to fetch the
+               correct localtime if it is changed after the start of
+               the VM.
+
+
+  OTP-18077    Application(s): erts
+               Related Id(s): GH-5876, PR-5892
+
+               Fix memory leak when a process doing a distributed
+               fragmented send is sent an exit signal. Before this fix
+               the receiving node would be left with an incomplete
+               message that would remain until the nodes were
+               disconnected. The bug has existed since Erlang/OTP 21.
+
+
+ Full runtime dependencies of erts-11.2.2.13: kernel-7.3.1.5,
+ sasl-3.3, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
