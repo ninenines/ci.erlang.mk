@@ -1,0 +1,144 @@
+Patch Package:           OTP 24.3.4.6
+Git Tag:                 OTP-24.3.4.6
+Date:                    2022-10-05
+Trouble Report Id:       OTP-18232, OTP-18245, OTP-18258, OTP-18263,
+                         OTP-18266
+Seq num:                 ERIERL-821, ERIERL-859, GH-6309, GH-6328
+System:                  OTP
+Release:                 24
+Application:             asn1-5.0.18.1, dialyzer-4.4.4.1,
+                         erts-12.3.2.6, kernel-8.3.2.2, ssl-10.7.3.5
+Predecessor:             OTP 24.3.4.5
+
+ Check out the git tag OTP-24.3.4.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.18.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.18.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18245    Application(s): asn1
+               Related Id(s): ERIERL-859
+
+               For the per and uper ASN.1 encoding rules, encoding and
+               decoding the SEQUENCE OF and SET OF constructs with
+               16384 items or more is now supported.
+
+
+ Full runtime dependencies of asn1-5.0.18.1: erts-11.0, kernel-7.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.4.4.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.4.4.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18263    Application(s): dialyzer
+               Related Id(s): ERIERL-821
+
+               The --input_list_file option has been added.
+
+
+ Full runtime dependencies of dialyzer-4.4.4.1: compiler-7.0,
+ erts-9.0, kernel-5.3, stdlib-3.4, syntax_tools-2.0, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18258    Application(s): erts
+               Related Id(s): GH-6309, PR-6324
+
+               Notifications about available distribution data sent to
+               distribution controller processes could be lost.
+               Distribution controller processes can be used when
+               implementing an alternative distribution carrier. The
+               default distribution over tcp was not effected and the
+               bug was also not present on x86/x86_64 platforms.
+
+
+ Full runtime dependencies of erts-12.3.2.6: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3.2.2 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Improvements and New Features ---
+
+  OTP-18232    Application(s): kernel
+               Related Id(s): OTP-17843, PR-6264
+
+               A new function global:disconnect/0 has been introduced
+               with which one can cleanly disconnect a node from all
+               other nodes in a cluster of global nodes.
+
+
+ Full runtime dependencies of kernel-8.3.2.2: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.5 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18266    Application(s): ssl
+               Related Id(s): GH-6328
+
+               Fixes handling of symlinks in cacertfile option.
+
+
+ Full runtime dependencies of ssl-10.7.3.5: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
