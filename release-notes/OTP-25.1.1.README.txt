@@ -1,0 +1,222 @@
+Patch Package:           OTP 25.1.1
+Git Tag:                 OTP-25.1.1
+Date:                    2022-10-03
+Trouble Report Id:       OTP-18240, OTP-18245, OTP-18249, OTP-18258,
+                         OTP-18262, OTP-18263, OTP-18264, OTP-18266
+Seq num:                 ERIERL-821, ERIERL-859, GH-6309, GH-6320,
+                         GH-6323, GH-6328
+System:                  OTP
+Release:                 25
+Application:             asn1-5.0.21, dialyzer-5.0.3, erts-13.1.1,
+                         eunit-2.8.1, kernel-8.5.1, ssl-10.8.5,
+                         stdlib-4.1.1
+Predecessor:             OTP 25.1
+
+ Check out the git tag OTP-25.1.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- asn1-5.0.21 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.0.21 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18245    Application(s): asn1
+               Related Id(s): ERIERL-859
+
+               For the per and uper ASN.1 encoding rules, encoding and
+               decoding the SEQUENCE OF and SET OF constructs with
+               16384 items or more is now supported.
+
+
+ Full runtime dependencies of asn1-5.0.21: erts-11.0, kernel-7.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-5.0.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18262    Application(s): dialyzer
+               Related Id(s): GH-6323
+
+               Dialyzer could crash when analyzing Elixir code that
+               used intricate macros.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18263    Application(s): dialyzer
+               Related Id(s): ERIERL-821
+
+               The --input_list_file option has been added.
+
+
+ Full runtime dependencies of dialyzer-5.0.3: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.1.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.1.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18240    Application(s): erts, kernel
+               Related Id(s): #6285
+
+               Listen sockets created with the socket module, leaked
+               (erlang-) monitors.
+
+
+  OTP-18258    Application(s): erts
+               Related Id(s): GH-6309, PR-6324
+
+               Notifications about available distribution data sent to
+               distribution controller processes could be lost.
+               Distribution controller processes can be used when
+               implementing an alternative distribution carrier. The
+               default distribution over tcp was not effected and the
+               bug was also not present on x86/x86_64 platforms.
+
+
+ Full runtime dependencies of erts-13.1.1: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.8.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.8.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18264    Application(s): eunit
+               Related Id(s): GH-6320, PR-6322
+
+               With this change, eunit exact_execution option works
+               with application primitive.
+
+
+ Full runtime dependencies of eunit-2.8.1: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.5.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.5.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- stdlib-4.1.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18240    Application(s): erts, kernel
+               Related Id(s): #6285
+
+               Listen sockets created with the socket module, leaked
+               (erlang-) monitors.
+
+
+  OTP-18249    Application(s): kernel, stdlib
+               Related Id(s): PR-6301
+
+               peer nodes failed to halt when the process supervising
+               the control connection crashed. When an alternative
+               control connection was used, this supervision process
+               also quite frequently crashed when the peer node was
+               stopped by the node that started it which caused the
+               peer node to linger without ever halting.
+
+
+ Full runtime dependencies of kernel-8.5.1: crypto-5.0, erts-13.1,
+ sasl-3.0, stdlib-4.1.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.8.5 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.8.5 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18266    Application(s): ssl
+               Related Id(s): GH-6328
+
+               Fixes handling of symlinks in cacertfile option.
+
+
+ Full runtime dependencies of ssl-10.8.5: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-4.1.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- kernel-8.5.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18249    Application(s): kernel, stdlib
+               Related Id(s): PR-6301
+
+               peer nodes failed to halt when the process supervising
+               the control connection crashed. When an alternative
+               control connection was used, this supervision process
+               also quite frequently crashed when the peer node was
+               stopped by the node that started it which caused the
+               peer node to linger without ever halting.
+
+
+ Full runtime dependencies of stdlib-4.1.1: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-8.5.1, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
