@@ -1,0 +1,68 @@
+Patch Package:           OTP 25.0.2
+Git Tag:                 OTP-25.0.2
+Date:                    2022-06-21
+Trouble Report Id:       OTP-18143, OTP-18145
+Seq num:                
+System:                  OTP
+Release:                 25
+Application:             erts-13.0.2, ssl-10.8.2
+Predecessor:             OTP 25.0.1
+
+ Check out the git tag OTP-25.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.0.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.4.1 (first satisfied in OTP 25.0.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18143    Application(s): erts
+
+               On computers with the ARM64 (AArch64) architecture
+               (such as Apple Silicon Macs) a rem expression followed
+               by a div expression with the same operands could
+               evaluate to the wrong result if the result of the rem
+               expression was unused.
+
+
+ Full runtime dependencies of erts-13.0.2: kernel-8.4.1, sasl-3.3,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.8.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.8.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18145    Application(s): ssl
+
+               Improved handling of unexpected messages during the
+               handshake, taking the right action for unexpected
+               messages.
+
+
+ Full runtime dependencies of ssl-10.8.2: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
