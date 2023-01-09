@@ -1,0 +1,248 @@
+Patch Package:           OTP 24.3.4.7
+Git Tag:                 OTP-24.3.4.7
+Date:                    2022-12-27
+Trouble Report Id:       OTP-18288, OTP-18296, OTP-18306, OTP-18315,
+                         OTP-18317, OTP-18319, OTP-18321, OTP-18325,
+                         OTP-18328, OTP-18352, OTP-18357, OTP-18358,
+                         OTP-18363, OTP-18365
+Seq num:                 ERIERL-868, ERIERL-875, ERIERL-879,
+                         ERIERL-881, GH-6393, GH-6439, GH-6465,
+                         GH-6466
+System:                  OTP
+Release:                 24
+Application:             common_test-1.22.1.1, compiler-8.1.1.2,
+                         erts-12.3.2.7, kernel-8.3.2.3,
+                         mnesia-4.20.4.2, snmp-5.12.0.1,
+                         stdlib-3.17.2.2
+Predecessor:             OTP 24.3.4.6
+
+ Check out the git tag OTP-24.3.4.7, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.22.1.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.22.1.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18363    Application(s): common_test
+               Related Id(s): ERIERL-879
+
+               Change timeout to infinity for gen_server calls in
+               cth_log_redirect
+
+
+ Full runtime dependencies of common_test-1.22.1.1: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1.1.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1.1.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18325    Application(s): compiler, stdlib
+               Related Id(s): GH-6465, GH-6466
+
+               It is not allowed to call functions from guards. The
+               compiler failed to reject a call in a guard when done
+               by constructing a record with a default initialization
+               expression that called a function.
+
+
+  OTP-18365    Application(s): compiler
+
+               Fixed a bug that could cause legal code to fail
+               validation.
+
+
+ Full runtime dependencies of compiler-8.1.1.2: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.7 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.7 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18296    Application(s): erts, kernel
+               Related Id(s): OTP-16464
+
+               Spec for function net:if_names/0 incorrect
+
+
+  OTP-18306    Application(s): erts
+               Related Id(s): GH-6393, PR-6401
+
+               Fix bug in binary_to_term decoding a binary term 2Gbyte
+               or larger.
+
+
+  OTP-18321    Application(s): erts
+
+               Fix list_to_atom/1 for negative code points. Could
+               either return with a positive code point or fail with
+               an incorrect exception.
+
+
+  OTP-18328    Application(s): erts
+               Related Id(s): GH-6439, PR-6440
+
+               Fix bug in binary_to_term decoding a list of length 1G
+               or longer.
+
+
+ Full runtime dependencies of erts-12.3.2.7: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3.2.3 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18296    Application(s): erts, kernel
+               Related Id(s): OTP-16464
+
+               Spec for function net:if_names/0 incorrect
+
+
+  OTP-18315    Application(s): kernel
+
+               Missing ctrl option name transation for TOS and TTL (on
+               FreeBSD) when using gen_udp with the 'socket'
+               inet_backend.
+
+
+  OTP-18357    Application(s): kernel
+               Related Id(s): #6509
+
+               The tcp connect option 'bind_to_device' could not be
+               used with inet_backend = 'socket'. 'inet' requires
+               value type binarry() and 'socket' requires value type
+               'string()'.
+
+
+  OTP-18358    Application(s): kernel
+               Related Id(s): #6528
+
+               Minor issue processing options when calling
+               gen_tcp:connect with a sockaddr() and inet_backend =
+               socket.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18317    Application(s): kernel
+
+               Improve warning message format for gen_tcp_socket.
+
+
+ Full runtime dependencies of kernel-8.3.2.3: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20.4.2 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20.4.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18288    Application(s): mnesia
+               Related Id(s): ERIERL-868
+
+               Don't fill the logs if mnesia can't connect to all
+               nodes, due to partitioned network.
+
+
+  OTP-18319    Application(s): mnesia
+               Related Id(s): ERIERL-875
+
+               Fixed crash which could happen during startup if too
+               many decisions where sent from remote nodes.
+
+
+ Full runtime dependencies of mnesia-4.20.4.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.12.0.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.12.0.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18352    Application(s): snmp
+               Related Id(s): ERIERL-881
+
+               Explicitly close the socket(s) when terminating
+               (default-) net-if process.
+
+
+ Full runtime dependencies of snmp-5.12.0.1: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.2.2 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.2.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18325    Application(s): compiler, stdlib
+               Related Id(s): GH-6465, GH-6466
+
+               It is not allowed to call functions from guards. The
+               compiler failed to reject a call in a guard when done
+               by constructing a record with a default initialization
+               expression that called a function.
+
+
+ Full runtime dependencies of stdlib-3.17.2.2: compiler-5.0,
+ crypto-3.3, erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
