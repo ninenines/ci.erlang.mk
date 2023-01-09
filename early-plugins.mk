@@ -166,33 +166,39 @@ WINDOWS-OTP-20 := 20.0 20.1 20.2 20.3
 WINDOWS-OTP-21 := 21.0.1 21.1 21.2 21.3
 WINDOWS-OTP-22 := 22.0 22.1 22.2 22.3
 WINDOWS-OTP-23 := 23.0 23.1 23.2 23.3
-WINDOWS-OTP-24 := 24.0
+WINDOWS-OTP-24 := 24.0 24.1 24.2 24.3
+WINDOWS-OTP-24 := 25.0 25.1 25.2
 
 WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) \
-	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) \
-	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
+	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
 WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) \
-	$(WINDOWS-OTP-24)
-WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
-WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
-WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24)
-WINDOWS-OTP-24+ := $(WINDOWS-OTP-24)
+	$(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) \
+	$(WINDOWS-OTP-25)
+WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+WINDOWS-OTP-24+ := $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+WINDOWS-OTP-25+ := $(WINDOWS-OTP-25)
 
 WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
 	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
 WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
 	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
-	$(lastword $(WINDOWS-OTP-24))
+	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
 WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
-	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
+	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
+	$(lastword $(WINDOWS-OTP-25))
 WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
 WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
-	$(lastword $(WINDOWS-OTP-24))
-WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24))
-WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24))
+	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
+	$(lastword $(WINDOWS-OTP-25))
+WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+WINDOWS-OTP-LATEST-25+ := $(lastword $(WINDOWS-OTP-25))
 
 # @todo Add support for release candidates (we don't want them as the "latest").
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
@@ -230,6 +236,13 @@ WINDOWS-OTP-23.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.2/bin)
 WINDOWS-OTP-23.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-23.3/bin)
 
 WINDOWS-OTP-24.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-24.0/bin)
+WINDOWS-OTP-24.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-24.1/bin)
+WINDOWS-OTP-24.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-24.2/bin)
+WINDOWS-OTP-24.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-24.3/bin)
+
+WINDOWS-OTP-25.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.0/bin)
+WINDOWS-OTP-25.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.1/bin)
+WINDOWS-OTP-25.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.2/bin)
 
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
