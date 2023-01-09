@@ -1,0 +1,92 @@
+Patch Package:           OTP 24.3.4.2
+Git Tag:                 OTP-24.3.4.2
+Date:                    2022-06-21
+Trouble Report Id:       OTP-18144, OTP-18145, OTP-18147
+Seq num:                 GH-5981, GH-6024
+System:                  OTP
+Release:                 24
+Application:             crypto-5.0.6.2, erts-12.3.2.2, ssl-10.7.3.2
+Predecessor:             OTP 24.3.4.1
+
+ Check out the git tag OTP-24.3.4.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-5.0.6.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.0.6.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18147    Application(s): crypto
+               Related Id(s): GH-6024, PR-6056
+
+               Fix configure with --with-ssl and
+               --disable-dynamic-ssl-lib on Windows.
+
+
+ Full runtime dependencies of crypto-5.0.6.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18144    Application(s): erts
+               Related Id(s): GH-5981
+
+               Fixed emulator crash that could happen during crashdump
+               generation of ETS tables with options ordered_set and
+               {write_concurrency,true}.
+
+
+ Full runtime dependencies of erts-12.3.2.2: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18145    Application(s): ssl
+
+               Improved handling of unexpected messages during the
+               handshake, taking the right action for unexpected
+               messages.
+
+
+ Full runtime dependencies of ssl-10.7.3.2: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
