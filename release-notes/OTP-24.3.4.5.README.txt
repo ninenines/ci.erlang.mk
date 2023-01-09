@@ -1,0 +1,143 @@
+Patch Package:           OTP 24.3.4.5
+Git Tag:                 OTP-24.3.4.5
+Date:                    2022-09-13
+Trouble Report Id:       OTP-18099, OTP-18219, OTP-18222, OTP-18233,
+                         OTP-18239
+Seq num:                 GH-6241, GH-6242, GH-6244
+System:                  OTP
+Release:                 24
+Application:             erts-12.3.2.5, ssl-10.7.3.4, stdlib-3.17.2.1
+Predecessor:             OTP 24.3.4.4
+
+ Check out the git tag OTP-24.3.4.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18239    Application(s): stdlib
+
+               When changing callback module in gen_statem the
+               state_enter calls flag from the old module was used in
+               for the first event in the new module, which could
+               confuse the new module and cause malfunction. This bug
+               has been corrected.
+
+               With this change some sys debug message formats have
+               been modified, which can be a problem for debug code
+               relying on the format.
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.5 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.5 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18222    Application(s): erts
+               Related Id(s): GH-6242, PR-6248
+
+               Fix writing and reading of more than 2 GB in a single
+               read/write operation on macOS. Before this fix
+               attempting to read/write more than 2GB would result in
+               {error,einval}.
+
+
+ Full runtime dependencies of erts-12.3.2.5: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18099    Application(s): ssl
+               Related Id(s): PR-6287
+
+               With this change, value of cacertfile option will be
+               adjusted before loading certs from the file.
+               Adjustments include converting relative paths to
+               absolute and converting symlinks to actual file path.
+
+               Thanks to Marcus Johansson
+
+
+  OTP-18219    Application(s): ssl
+               Related Id(s): GH-6241, PR-6249
+
+               Incorrect handling of client middlebox negotiation for
+               TLS-1.3 could result in that a TLS-1.3 server would not
+               use middlebox mode although the client was expecting it
+               too and failing the negotiation with unexpected
+               message.
+
+
+  OTP-18233    Application(s): ssl
+               Related Id(s): GH-6244, PR-6270
+
+               If the "User" process, the process starting the TLS
+               connection, gets killed in the middle of spawning the
+               dynamic connection tree make sure we do not leave any
+               processes behind.
+
+
+ Full runtime dependencies of ssl-10.7.3.4: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.2.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.2.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18239    Application(s): stdlib
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               When changing callback module in gen_statem the
+               state_enter calls flag from the old module was used in
+               for the first event in the new module, which could
+               confuse the new module and cause malfunction. This bug
+               has been corrected.
+
+               With this change some sys debug message formats have
+               been modified, which can be a problem for debug code
+               relying on the format.
+
+
+ Full runtime dependencies of stdlib-3.17.2.1: compiler-5.0,
+ crypto-3.3, erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
