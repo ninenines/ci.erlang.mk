@@ -1,0 +1,157 @@
+Patch Package:           OTP 25.0.3
+Git Tag:                 OTP-25.0.3
+Date:                    2022-07-15
+Trouble Report Id:       OTP-18164, OTP-18169, OTP-18170, OTP-18173,
+                         OTP-18175, OTP-18177
+Seq num:                
+System:                  OTP
+Release:                 25
+Application:             erts-13.0.3, ssl-10.8.3
+Predecessor:             OTP 25.0.2
+
+ Check out the git tag OTP-25.0.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.0.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.0.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.4.1 (first satisfied in OTP 25.0.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18164    Application(s): erts
+               Related Id(s): PR-6114
+
+               Distributed exit signals could be lost under the
+               following conditions:
+
+               -- An exit signal from a parent process to a child
+               process was lost if:
+
+               --- the parent process terminated before the spawn
+               request that created the child had completed,
+
+               --- the spawn request set up a link between parent and
+               child
+
+               --- the spawn request was distributed, and
+
+               --- the exit reason was larger than one machine word.
+
+               -- Loss of a connection over which a not yet completed
+               spawn request was ongoing could cause loss of exit
+               signals. Such loss of exit signals was very rare.
+               Besides the above described connection loss also the
+               following conditions had to be satisfied:
+
+               --- The spawn request that was interrupted by the
+               connection loss also had to set up a link between the
+               parent process and the child process.
+
+               --- The parent process that issued the spawn request
+               also had to be terminating while the spawn request was
+               interrupted by the connection loss.
+
+               --- The same parent process also had to have made other
+               spawn requests to other nodes than to the node to which
+               the connection was lost.
+
+               --- These spawn requests to the other nodes also had to
+               set up links.
+
+               --- These spawn requests to the other nodes also had to
+               be not yet completed at the time of the connection
+               loss. That is, the spawn reply from the child process
+               had not yet reached the parent process.
+
+               If all the conditions above were met, exit signals to
+               the children spawned due to the above described spawn
+               requests to other nodes *could* be lost.
+
+               The above bug also caused a significant memory leak
+               when it was triggered since the destruction of the
+               parent process never completed.
+
+
+  OTP-18169    Application(s): erts
+               Related Id(s): PR-6134
+
+               A race could cause process_info(Pid, message_queue_len)
+               on other processes to return invalid results.
+
+
+  OTP-18170    Application(s): erts
+               Related Id(s): PR-6135
+
+               Fixed reduction counting for handling process system
+               tasks.
+
+
+  OTP-18175    Application(s): erts
+               Related Id(s): PR-6142
+
+               Priority elevation of terminating processes did not
+               work which could cause execution of such processes to
+               be delayed.
+
+
+  OTP-18177    Application(s): erts
+               Related Id(s): PR-6150
+
+               An unlink operation made by a process that terminated
+               before the unlink operation completed, i.e., before it
+               had received an unlink-ack signal from the linked
+               process, caused an exit signal to erroneously be sent
+               from the terminating process to the process being
+               unlinked. This exit signal would most often be ignored
+               by the receiver, but if the receiver of the exit signal
+               concurrently set up a new link, it could receive the
+               exit signal with the actual exit reason of the
+               terminating process instead of a noproc exit reason. It
+               is however very hard to detect that this has happened
+               and has no obvious negative consequences, so it should
+               be considered harmless.
+
+               A distributed unlink-ack signal received by a
+               terminating process was also not properly removed which
+               could cause a minor memory leak.
+
+
+ Full runtime dependencies of erts-13.0.3: kernel-8.4.1, sasl-3.3,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.8.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.8.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18173    Application(s): ssl
+
+               The link to crypto:engine_load refered the function
+               with wrong arity.
+
+
+ Full runtime dependencies of ssl-10.8.3: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
