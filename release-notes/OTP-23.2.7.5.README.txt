@@ -1,0 +1,40 @@
+Patch Package:           OTP 23.2.7.5
+Git Tag:                 OTP-23.2.7.5
+Date:                    2022-06-22
+Trouble Report Id:       OTP-18145
+Seq num:                
+System:                  OTP
+Release:                 23
+Application:             ssl-10.2.4.4
+Predecessor:             OTP 23.2.7.4
+
+ Check out the git tag OTP-23.2.7.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssl-10.2.4.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-10.2.4.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18145    Application(s): ssl
+
+               Improved handling of unexpected messages during the
+               handshake, taking the right action for unexpected
+               messages.
+
+
+ Full runtime dependencies of ssl-10.2.4.4: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.8, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
