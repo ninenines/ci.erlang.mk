@@ -1,0 +1,98 @@
+Patch Package:           OTP 23.3.4.18
+Git Tag:                 OTP-23.3.4.18
+Date:                    2022-10-04
+Trouble Report Id:       OTP-18232, OTP-18258, OTP-18263
+Seq num:                 ERIERL-821, GH-6309
+System:                  OTP
+Release:                 23
+Application:             dialyzer-4.3.1.2, erts-11.2.2.17,
+                         kernel-7.3.1.7
+Predecessor:             OTP 23.3.4.17
+
+ Check out the git tag OTP-23.3.4.18, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- dialyzer-4.3.1.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-4.3.1.2 application can be applied independently of
+ other applications on a full OTP 23 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18263    Application(s): dialyzer
+               Related Id(s): ERIERL-821
+
+               The --input_list_file option has been added.
+
+
+ Full runtime dependencies of dialyzer-4.3.1.2: compiler-7.0,
+ erts-9.0, hipe-3.16.1, kernel-5.3, stdlib-3.4, syntax_tools-2.0,
+ wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.17 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-11.2.2.17 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-7.3.1.5 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18258    Application(s): erts
+               Related Id(s): GH-6309, PR-6324
+
+               Notifications about available distribution data sent to
+               distribution controller processes could be lost.
+               Distribution controller processes can be used when
+               implementing an alternative distribution carrier. The
+               default distribution over tcp was not effected and the
+               bug was also not present on x86/x86_64 platforms.
+
+
+ Full runtime dependencies of erts-11.2.2.17: kernel-7.3.1.5,
+ sasl-3.3, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-7.3.1.7 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-7.3.1.7 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-11.2.2.11 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Improvements and New Features ---
+
+  OTP-18232    Application(s): kernel
+               Related Id(s): OTP-17843, PR-6264
+
+               A new function global:disconnect/0 has been introduced
+               with which one can cleanly disconnect a node from all
+               other nodes in a cluster of global nodes.
+
+
+ Full runtime dependencies of kernel-7.3.1.7: erts-11.2.2.11,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
