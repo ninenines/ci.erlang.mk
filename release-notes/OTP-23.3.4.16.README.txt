@@ -1,0 +1,205 @@
+Patch Package:           OTP 23.3.4.16
+Git Tag:                 OTP-23.3.4.16
+Date:                    2022-07-13
+Trouble Report Id:       OTP-18104, OTP-18172, OTP-18173
+Seq num:                 ERIERL-826
+System:                  OTP
+Release:                 23
+Application:             crypto-4.9.0.4, erts-11.2.2.15, ssl-10.3.1.4
+Predecessor:             OTP 23.3.4.15
+
+ Check out the git tag OTP-23.3.4.16, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18172    Application(s): crypto
+               Related Id(s): ERIERL-826
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the behaviour of the engine load/unload
+               functions
+
+               The engine load/unload functions have got changed
+               semantics to get a more consistent behaviour and work
+               correct when variables are garbage collected.
+
+               The load functions now don't register the methods for
+               the engine to replace. That will now be handled with
+               the new functions engine_register/engine_unregister if
+               needed.
+
+               Some functions functions are removed from the
+               documentation and therefor the API, but they are left
+               in the code for compatibility.
+
+               -- engine_load/4: is now the same as engine_load/3
+
+               -- engine_unload/2: is now the same as engine_unload/1
+
+               -- ensure_engine_loaded/3: is now the same as
+               ensure_engine_loaded/2
+
+               -- ensure_engine_unloaded/1, ensure_engine_unloaded/2:
+               is now the same as engine_unload/1
+
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18172    Application(s): crypto
+               Related Id(s): ERIERL-826
+
+               *** HIGHLIGHT ***
+
+               Changed the behaviour of the engine load/unload
+               functions
+
+               The engine load/unload functions have got changed
+               semantics to get a more consistent behaviour and work
+               correct when variables are garbage collected.
+
+               The load functions now don't register the methods for
+               the engine to replace. That will now be handled with
+               the new functions engine_register/engine_unregister if
+               needed.
+
+               Some functions functions are removed from the
+               documentation and therefor the API, but they are left
+               in the code for compatibility.
+
+               -- engine_load/4: is now the same as engine_load/3
+
+               -- engine_unload/2: is now the same as engine_unload/1
+
+               -- ensure_engine_loaded/3: is now the same as
+               ensure_engine_loaded/2
+
+               -- ensure_engine_unloaded/1, ensure_engine_unloaded/2:
+               is now the same as engine_unload/1
+
+
+ ---------------------------------------------------------------------
+ --- crypto-4.9.0.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.9.0.4 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18172    Application(s): crypto
+               Related Id(s): ERIERL-826
+
+               *** HIGHLIGHT ***
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Changed the behaviour of the engine load/unload
+               functions
+
+               The engine load/unload functions have got changed
+               semantics to get a more consistent behaviour and work
+               correct when variables are garbage collected.
+
+               The load functions now don't register the methods for
+               the engine to replace. That will now be handled with
+               the new functions engine_register/engine_unregister if
+               needed.
+
+               Some functions functions are removed from the
+               documentation and therefor the API, but they are left
+               in the code for compatibility.
+
+               -- engine_load/4: is now the same as engine_load/3
+
+               -- engine_unload/2: is now the same as engine_unload/1
+
+               -- ensure_engine_loaded/3: is now the same as
+               ensure_engine_loaded/2
+
+               -- ensure_engine_unloaded/1, ensure_engine_unloaded/2:
+               is now the same as engine_unload/1
+
+
+ Full runtime dependencies of crypto-4.9.0.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.15 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-11.2.2.15 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-7.3.1.5 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18104    Application(s): erts
+               Related Id(s): OTP-18093
+
+               Fix faulty distribution encoding of terms with either
+
+               -- a fun with bit-string or export-fun in its
+               environment when encoded toward a not yet established
+               (pending) connection
+
+               -- or a fun with a binary/bitstring, in its
+               environment, referring to an off-heap binary (larger
+               than 64 bytes).
+
+               The symptom could be failed decoding on the receiving
+               side leading to aborted connection. Fix OTP-18093 is a
+               workaround for theses bugs that makes the VM accepts
+               such faulty encoded funs.
+
+               The first encoding bug toward pending connection exists
+               only in OTP 23 and 24, but the second one exists also
+               on OTP 25.
+
+
+ Full runtime dependencies of erts-11.2.2.15: kernel-7.3.1.5,
+ sasl-3.3, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.3.1.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.3.1.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 23 installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.10.0.1 (first satisfied in OTP 23.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18173    Application(s): ssl
+
+               The link to crypto:engine_load refered the function
+               with wrong arity.
+
+
+ Full runtime dependencies of ssl-10.3.1.4: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.10.0.1, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
