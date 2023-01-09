@@ -1,0 +1,47 @@
+Patch Package:           OTP 24.3.4.4
+Git Tag:                 OTP-24.3.4.4
+Date:                    2022-08-26
+Trouble Report Id:       OTP-18218
+Seq num:                 ERIERL-855
+System:                  OTP
+Release:                 24
+Application:             erts-12.3.2.4
+Predecessor:             OTP 24.3.4.3
+
+ Check out the git tag OTP-24.3.4.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18218    Application(s): erts
+               Related Id(s): ERIERL-855
+
+               Fix bug causing ets:info (and sometimes ets:whereis) to
+               return 'undefined' for an existing table if a
+               concurrent process were doing ets:insert with a long
+               list on the same table.
+
+
+ Full runtime dependencies of erts-12.3.2.4: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
