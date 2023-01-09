@@ -1,0 +1,782 @@
+Patch Package:           OTP 25.2
+Git Tag:                 OTP-25.2
+Date:                    2022-12-14
+Trouble Report Id:       OTP-18213, OTP-18250, OTP-18251, OTP-18252,
+                         OTP-18255, OTP-18256, OTP-18257, OTP-18267,
+                         OTP-18268, OTP-18269, OTP-18270, OTP-18273,
+                         OTP-18280, OTP-18281, OTP-18283, OTP-18284,
+                         OTP-18289, OTP-18291, OTP-18292, OTP-18293,
+                         OTP-18294, OTP-18295, OTP-18296, OTP-18298,
+                         OTP-18302, OTP-18304, OTP-18306, OTP-18307,
+                         OTP-18308, OTP-18313, OTP-18314, OTP-18315,
+                         OTP-18317, OTP-18319, OTP-18321, OTP-18322,
+                         OTP-18323, OTP-18324, OTP-18325, OTP-18326,
+                         OTP-18328, OTP-18332, OTP-18333, OTP-18336,
+                         OTP-18339, OTP-18343, OTP-18345, OTP-18347,
+                         OTP-18349, OTP-18351, OTP-18352
+Seq num:                 ERIERL-865, ERIERL-867, ERIERL-875,
+                         ERIERL-881, ERIERL-885, ERL-6435, GH-5823,
+                         GH-6106, GH-6245, GH-6290, GH-6307, GH-6332,
+                         GH-6341, GH-6363, GH-6373, GH-6387, GH-6393,
+                         GH-6419, GH-6426, GH-6435, GH-6439, GH-6461,
+                         GH-6465, GH-6466, GH-6473, GH-6496, GH-6501,
+                         GH-6518
+System:                  OTP
+Release:                 25
+Application:             common_test-1.23.2, compiler-8.2.2,
+                         dialyzer-5.0.4, erts-13.1.3, ftp-1.1.2,
+                         inets-8.2, kernel-8.5.2, megaco-4.4.2,
+                         mnesia-4.21.3, observer-2.14, os_mon-2.8,
+                         public_key-1.13.2, snmp-5.13.2, ssh-4.15.1,
+                         ssl-10.8.6, stdlib-4.2, wx-2.2.1
+Predecessor:             OTP 25.1.2
+
+ Check out the git tag OTP-25.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18324    Application(s): erts, kernel
+               Related Id(s): GH-6461, PR-6481
+
+               The inet:setopts/2 {reuseaddr, true} option will now be
+               ignored on Windows unless the socket is an UDP socket.
+               For more information see the documentation of the
+               reuseaddr option part of the documentation of
+               inet:setopts/2.
+
+               Prior to OTP 25 the {reuseaddr, true} option was
+               ignored for all sockets on Windows, but as of OTP 25.0
+               this was changed so that it was not ignored for any
+               sockets.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.23.2 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.23.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18255    Application(s): common_test
+               Related Id(s): PR-6314
+
+               Fix starting of peer nodes on old releases when the
+               compile server was active and the current Erlang
+               installation contained non-latin1 characters in its
+               path.
+
+
+ Full runtime dependencies of common_test-1.23.2: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.2.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.2.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18268    Application(s): compiler
+               Related Id(s): GH-6332
+
+               Line number in compiler messages would be truncated to
+               4 digits for line numbers greater than 9999.
+
+
+  OTP-18273    Application(s): compiler
+               Related Id(s): GH-6341
+
+               In rare circumstance, matching a binary as part of a
+               receive clause could cause the compiler to terminate
+               because of an internal consistency check failure.
+
+
+  OTP-18308    Application(s): compiler
+               Related Id(s): GH-6426
+
+               Compiling a function with complex bit syntax matching
+               such as f(<<X:0, _:X>>, <<Y:0, _:Y>>) -> ok. could
+               crash the compiler.
+
+
+  OTP-18325    Application(s): compiler, stdlib
+               Related Id(s): GH-6465, GH-6466
+
+               It is not allowed to call functions from guards. The
+               compiler failed to reject a call in a guard when done
+               by constructing a record with a default initialization
+               expression that called a function.
+
+
+  OTP-18336    Application(s): compiler, stdlib
+               Related Id(s): GH-6501, PR-6502
+
+               The compiler could crash when using a record with
+               complex field initialization expression as a filter in
+               a list comprehension.
+
+
+ Full runtime dependencies of compiler-8.2.2: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.0.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-5.0.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18307    Application(s): dialyzer
+               Related Id(s): GH-6419, GH-6473
+
+               Dialyzer would crash when attempting to analyze a bit
+               syntax segment size having an literal non-integer size
+               such as [].
+
+
+  OTP-18347    Application(s): dialyzer
+               Related Id(s): GH-6518, PR-6525
+
+               Dialyzer could crash when trying to analyze a
+               convoluted nested expression involving funs,
+
+
+ Full runtime dependencies of dialyzer-5.0.4: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.1.3 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.1.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18256    Application(s): erts
+               Related Id(s): PR-6316
+
+               Fix perf/gdb JIT symbols to not contain
+               CodeInfoPrologue for the JIT internal module
+               erts_beamasm.
+
+
+  OTP-18281    Application(s): erts
+               Related Id(s): PR-4840
+
+               Fixed minor memory leaks.
+
+
+  OTP-18284    Application(s): erts
+               Related Id(s): PR-6305
+
+               Fix bugs in ets:insert and ets:insert_new when called
+               with a list of tuples to insert while a concurrent
+               process either deletes or renames the table. The table
+               deletion could be done with ets:delete/1 or be caused
+               by termination of the table owning process.
+
+               Symptoms are either VM crash or strange incorrect
+               behavior from the insert operation. The risk of
+               triggering the bugs increases with the length of the
+               list of tuple to insert. Bugs exist since OTP 23.0.
+
+
+  OTP-18294    Application(s): erts
+               Related Id(s): PR-6390
+
+               Boost execution of scheduled thread progress jobs. This
+               to prevent memory exhaustion in extremely rapid
+               allocation/deallocation scenarios, such as repeated ETS
+               table creations/deletions.
+
+
+  OTP-18295    Application(s): erts
+
+               Fix segv crash during crash dumping an ETS table doing
+               ets:delete_all_objects.
+
+
+  OTP-18296    Application(s): erts, kernel
+               Related Id(s): OTP-16464
+
+               Spec for function net:if_names/0 incorrect
+
+
+  OTP-18306    Application(s): erts
+               Related Id(s): GH-6393, PR-6401
+
+               Fix bug in binary_to_term decoding a binary term 2Gbyte
+               or larger.
+
+
+  OTP-18313    Application(s): erts
+               Related Id(s): PR-6456
+
+               Documentation of erlang:module_loaded/1 has been
+               adjusted:
+
+               -- It did not previously say that the BIF only returns
+               true for modules loaded as current code.
+
+               -- The warning claiming that the BIF should only be
+               used by the code server has been removed.
+
+
+  OTP-18321    Application(s): erts
+
+               Fix list_to_atom/1 for negative code points. Could
+               either return with a positive code point or fail with
+               an incorrect exception.
+
+
+  OTP-18322    Application(s): erts
+               Related Id(s): PR-6479
+
+               Fix rare bug causing VM crash when sending to a pid of
+               a spawning process returned from erlang:processes/0.
+
+               Only seen when provoked by system process
+               literal_area_collector, triggered by a module purge
+               operation, on a VM started with +Meamin (no customized
+               allocators).
+
+
+  OTP-18323    Application(s): erts, kernel
+               Related Id(s): #6476
+
+               gen_udp:open/2 with option(s) add_membership or
+               drop_membership would drop earlier options.
+
+
+  OTP-18324    Application(s): erts, kernel
+               Related Id(s): GH-6461, PR-6481
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The inet:setopts/2 {reuseaddr, true} option will now be
+               ignored on Windows unless the socket is an UDP socket.
+               For more information see the documentation of the
+               reuseaddr option part of the documentation of
+               inet:setopts/2.
+
+               Prior to OTP 25 the {reuseaddr, true} option was
+               ignored for all sockets on Windows, but as of OTP 25.0
+               this was changed so that it was not ignored for any
+               sockets.
+
+
+  OTP-18328    Application(s): erts
+               Related Id(s): GH-6439, PR-6440
+
+               Fix bug in binary_to_term decoding a list of length 1G
+               or longer.
+
+
+  OTP-18343    Application(s): erts
+               Related Id(s): GH-6496
+
+               Fix bug in binary_to_term (and distributed receive)
+               when decoding a large map (>32 keys) with unsorted
+               small maps (<= 32) as keys of the large map.
+
+               This was only a problem if the term was encoded by
+               erl_interface, jinterface or otherwise, as the VM
+               itself always encodes small maps with sorted keys.
+
+               The "binary_to_term" would appear as successful but the
+               created large map was internally inconsistent. The
+               smaller key-maps could not be found with maps:get and
+               friends. Other operations such as map compare and merge
+               could probably also give incorrect results.
+
+
+  OTP-18345    Application(s): erts
+               Related Id(s): GH-6387, PR-6396
+
+               Fix Windows bug in open_port({spawn, Command}, ..) when
+               Command is found via the OS search PATH and that
+               directory path contains white spaces. The port program
+               would start but the command line arguments to it could
+               be incorrect.
+
+
+ Full runtime dependencies of erts-13.1.3: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.1.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.1.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18252    Application(s): ftp
+               Related Id(s): GH-5823
+
+               fix unexpected result ok when calling ftp:nlist
+               repeatedly
+
+
+ Full runtime dependencies of ftp-1.1.2: erts-7.0, kernel-6.0,
+ runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-8.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-8.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18250    Application(s): inets
+
+               This change allows body requests to httpc:request/5 be
+               an iolist()
+
+
+  OTP-18251    Application(s): inets
+               Related Id(s): GH-6245
+
+               addition of type specs in httpc.erl
+
+
+  OTP-18280    Application(s): inets
+               Related Id(s): GH-6290, PR-6291
+
+               httpc: Add support for HTTP 308 status code
+
+
+ Full runtime dependencies of inets-8.2: erts-6.0, kernel-6.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.5.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.5.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1.3 (first satisfied in OTP 25.2)
+       -- stdlib-4.1.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18270    Application(s): kernel
+               Related Id(s): #6331
+
+               Fixed shutdown crash in gen_tcp socket backend, when
+               the other end closed the socket.
+
+
+  OTP-18289    Application(s): kernel, stdlib
+               Related Id(s): PR-6343
+
+               erl_tar can now read gzip-compressed tar files that are
+               padded. There is a new option compressed_one for
+               file:open/2 that will read a single member from a gzip
+               file,
+
+
+  OTP-18291    Application(s): kernel
+               Related Id(s): PR-6382
+
+               Fix os:cmd to not translate all exceptions thrown to
+               badarg. For example emfile from erlang:open_port was
+               translated to badarg.
+
+               This bug has existed since Erlang/OTP 24.
+
+
+  OTP-18296    Application(s): erts, kernel
+               Related Id(s): OTP-16464
+
+               Spec for function net:if_names/0 incorrect
+
+
+  OTP-18315    Application(s): kernel
+
+               Missing ctrl option name transation for TOS and TTL (on
+               FreeBSD) when using gen_udp with the 'socket'
+               inet_backend.
+
+
+  OTP-18323    Application(s): erts, kernel
+               Related Id(s): #6476
+
+               gen_udp:open/2 with option(s) add_membership or
+               drop_membership would drop earlier options.
+
+
+  OTP-18324    Application(s): erts, kernel
+               Related Id(s): GH-6461, PR-6481
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               The inet:setopts/2 {reuseaddr, true} option will now be
+               ignored on Windows unless the socket is an UDP socket.
+               For more information see the documentation of the
+               reuseaddr option part of the documentation of
+               inet:setopts/2.
+
+               Prior to OTP 25 the {reuseaddr, true} option was
+               ignored for all sockets on Windows, but as of OTP 25.0
+               this was changed so that it was not ignored for any
+               sockets.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18293    Application(s): kernel
+
+               The distribution socket option handling in
+               inet_tcp_dist has been cleaned up to clarify which were
+               mandatory and which just had default values.
+
+
+  OTP-18317    Application(s): kernel
+
+               Improve warning message format for gen_tcp_socket.
+
+
+ Full runtime dependencies of kernel-8.5.2: crypto-5.0, erts-13.1.3,
+ sasl-3.0, stdlib-4.1.1
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.4.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-4.4.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18298    Application(s): megaco
+
+               A very minor improvement to the measurement tool.
+
+
+ Full runtime dependencies of megaco-4.4.2: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.21.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.21.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18319    Application(s): mnesia
+               Related Id(s): ERIERL-875
+
+               Fixed crash which could happen during startup if too
+               many decisions where sent from remote nodes.
+
+
+ Full runtime dependencies of mnesia-4.21.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- observer-2.14 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The observer-2.14 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18339    Application(s): observer
+
+               A WX event race could causes a crash in when handling
+               socket or port info.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18269    Application(s): observer
+               Related Id(s): PR-6030
+
+               Improve the nodes menu to include more nodes.
+
+
+ Full runtime dependencies of observer-2.14: erts-11.0, et-1.5,
+ kernel-8.1, runtime_tools-1.19, stdlib-3.13, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.8 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.8 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18304    Application(s): os_mon
+               Related Id(s): PR-6385
+
+               The disk_space_check_interval configuration parameter
+               of disksup can now be set to values smaller than a
+               minute.
+
+
+ Full runtime dependencies of os_mon-2.8: erts-6.0, kernel-3.0,
+ sasl-2.4, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.13.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.13.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18333    Application(s): public_key
+               Related Id(s): GH-6363
+
+               Disregard LDAP URIs when HTTP URIs are expected.
+
+
+ Full runtime dependencies of public_key-1.13.2: asn1-3.0, crypto-4.6,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.13.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.13.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18352    Application(s): snmp
+               Related Id(s): ERIERL-881
+
+               Explicitly close the socket(s) when terminating
+               (default-) net-if process.
+
+
+ Full runtime dependencies of snmp-5.13.2: crypto-4.6, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18326    Application(s): ssh
+               Related Id(s): ERIERL-865
+
+               graceful shutdown of ssh_conection_handler when
+               connection is closed by peer
+
+
+ Full runtime dependencies of ssh-4.15.1: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.8.6 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.8.6 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18314    Application(s): ssl
+               Related Id(s): GH-6373
+
+               With this change, tls_sender process is hibernated
+               after sufficient inactivity.
+
+
+  OTP-18332    Application(s): ssl
+               Related Id(s): ERL-6435, GH-6435, PR-6435
+
+               Correct handling of legacy schemes so that ECDSA certs
+               using sha1 may be used for some TLS-1.3 configurations.
+
+
+  OTP-18349    Application(s): ssl
+
+               With this change, tls_sender does not cause logger
+               crash upon key update.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18257    Application(s): ssl
+               Related Id(s): GH-6307
+
+               Enhance warning message
+
+
+  OTP-18267    Application(s): ssl
+               Related Id(s): GH-6106, PR-6228
+
+               Provide server option to make certificate_authorities
+               extension in the TLS-1.3 servers certificate request
+               optional. This will allow clients to send incomplete
+               chains that may be reconstructable and thereby
+               verifiable by the server, but that would not adhere to
+               the certificate_authorities extension.
+
+
+  OTP-18302    Application(s): ssl
+               Related Id(s): ERIERL-867
+
+               If the verify_fun handles four arguments the DER cert
+               will be supplied as one of the arguments.
+
+
+ Full runtime dependencies of ssl-10.8.6: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-4.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- kernel-8.5.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18289    Application(s): kernel, stdlib
+               Related Id(s): PR-6343
+
+               erl_tar can now read gzip-compressed tar files that are
+               padded. There is a new option compressed_one for
+               file:open/2 that will read a single member from a gzip
+               file,
+
+
+  OTP-18292    Application(s): stdlib
+               Related Id(s): PR-6366
+
+               A concurrent call to ets:rename could cause
+               ets:delete_all_objects to fail halfway through with
+               badarg.
+
+
+  OTP-18325    Application(s): compiler, stdlib
+               Related Id(s): GH-6465, GH-6466
+
+               It is not allowed to call functions from guards. The
+               compiler failed to reject a call in a guard when done
+               by constructing a record with a default initialization
+               expression that called a function.
+
+
+  OTP-18336    Application(s): compiler, stdlib
+               Related Id(s): GH-6501, PR-6502
+
+               The compiler could crash when using a record with
+               complex field initialization expression as a filter in
+               a list comprehension.
+
+
+  OTP-18351    Application(s): stdlib
+               Related Id(s): ERIERL-885, PR-6529
+
+               unicode:characters_to_binary() could build
+               unnecessarily large call stack.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18283    Application(s): stdlib
+               Related Id(s): PR-6338
+
+               Improve error message for ets:new/2 name clash. Say
+               "name already exists" instead of less specific "invalid
+               options".
+
+
+ Full runtime dependencies of stdlib-4.2: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-8.5.1, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.2.1 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.2.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18213    Application(s): wx
+               Related Id(s): PR-6113
+
+               Added environment variable WX_MACOS_NON_GUI_APP to
+               allow user to override OSXIsGUIApplication behavior.
+
+
+ Full runtime dependencies of wx-2.2.1: erts-12.0, kernel-8.0,
+ stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
