@@ -1,0 +1,72 @@
+Patch Package:           OTP 25.1.2
+Git Tag:                 OTP-25.1.2
+Date:                    2022-10-24
+Trouble Report Id:       OTP-18288, OTP-18290
+Seq num:                 ERIERL-866, ERIERL-868
+System:                  OTP
+Release:                 25
+Application:             erts-13.1.2, mnesia-4.21.2
+Predecessor:             OTP 25.1.1
+
+ Check out the git tag OTP-25.1.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.1.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.1.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18290    Application(s): erts
+               Related Id(s): ERIERL-866, PR-6378
+
+               Add abandon carrier free utilization limit (+Muacful)
+               option to erts_alloc. This option allows the user to
+               mark unused segments in a memory carrier as re-useable
+               by the OS if needed.
+
+               This functionality was a non-configurable default
+               before Erlang/OTP 25, but removed due to performance
+               issues.
+
+
+ Full runtime dependencies of erts-13.1.2: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.21.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.21.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18288    Application(s): mnesia
+               Related Id(s): ERIERL-868
+
+               Don't fill the logs if mnesia can't connect to all
+               nodes, due to partitioned network.
+
+
+ Full runtime dependencies of mnesia-4.21.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
