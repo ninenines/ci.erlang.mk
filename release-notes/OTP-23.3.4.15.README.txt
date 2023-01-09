@@ -1,0 +1,145 @@
+Patch Package:           OTP 23.3.4.15
+Git Tag:                 OTP-23.3.4.15
+Date:                    2022-06-21
+Trouble Report Id:       OTP-17858, OTP-18093, OTP-18094, OTP-18123,
+                         OTP-18144, OTP-18145, OTP-18152
+Seq num:                 ERIERL-728, GH-5981, GH-5994
+System:                  OTP
+Release:                 23
+Application:             crypto-4.9.0.3, erts-11.2.2.14, ssh-4.11.1.6,
+                         ssl-10.3.1.3
+Predecessor:             OTP 23.3.4.14
+
+ Check out the git tag OTP-23.3.4.15, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-4.9.0.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-4.9.0.3 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-17858    Application(s): crypto
+               Related Id(s): ERIERL-728
+
+               Fix timing bug in ensure_engine_loaded
+
+               When two ensure_engine_loaded() calls were done in
+               parallel there was a possibility that a crypto lib
+               function was called by both instead of just one of them
+               which resulted in an error. This is solved by moving
+               the implementation from erlang down into a NIF function
+               that uses a mutex to protect the sensitive part.
+
+
+  OTP-18152    Application(s): crypto
+
+               Remove all references correctly in the garbage
+               collection if an engine handle was not explicit
+               unloaded.
+
+
+ Full runtime dependencies of crypto-4.9.0.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-11.2.2.14 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-11.2.2.14 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 23
+       installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-7.3.1.5 (first satisfied in OTP 23.3.4.12)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18093    Application(s): erts
+               Related Id(s): OTP-18104, PR-5987
+
+               Accept funs (NEW_FUN_EXT) with incorrectly encoded size
+               field. This is a workaround for a bug (OTP-18104)
+               existing in OTP 23 and 24 that could cause incorrect
+               size fields in certain cases. The emulator does not use
+               the decoded size field, but erl_interface still does
+               and is not helped by this workaround.
+
+
+  OTP-18123    Application(s): erts
+               Related Id(s): GH-5994
+
+               The zlib built in to the runtime system has been
+               updated to version 1.2.12. (Note that on most
+               platforms, the platform's own zlib is used.)
+
+
+  OTP-18144    Application(s): erts
+               Related Id(s): GH-5981
+
+               Fixed emulator crash that could happen during crashdump
+               generation of ETS tables with options ordered_set and
+               {write_concurrency,true}.
+
+
+ Full runtime dependencies of erts-11.2.2.14: kernel-7.3.1.5,
+ sasl-3.3, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1.6 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18094    Application(s): ssh
+
+               Binaries can be limited in logs with the parameter
+               max_log_item_len. The default value is 500 bytes.
+
+
+ Full runtime dependencies of ssh-4.11.1.6: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.3.1.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.3.1.3 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 23 installation.
+
+       On a full OTP 23 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.10.0.1 (first satisfied in OTP 23.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18145    Application(s): ssl
+
+               Improved handling of unexpected messages during the
+               handshake, taking the right action for unexpected
+               messages.
+
+
+ Full runtime dependencies of ssl-10.3.1.3: crypto-4.2, erts-10.0,
+ inets-5.10.7, kernel-6.0, public_key-1.10.0.1, stdlib-3.12
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
