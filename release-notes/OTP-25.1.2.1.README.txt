@@ -1,0 +1,74 @@
+Patch Package:           OTP 25.1.2.1
+Git Tag:                 OTP-25.1.2.1
+Date:                    2023-01-18
+Trouble Report Id:       OTP-18379, OTP-18383, OTP-18388
+Seq num:                 ERIERL-904, ERIERL-905
+System:                  OTP
+Release:                 25
+Application:             erts-13.1.2.1, snmp-5.13.1.1
+Predecessor:             OTP 25.1.2
+
+ Check out the git tag OTP-25.1.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.1.2.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.1.2.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18383    Application(s): erts
+               Related Id(s): ERIERL-905
+
+               Fixed a bug in selective receive optimization that
+               could crash 32-bit emulators.
+
+
+  OTP-18388    Application(s): erts
+               Related Id(s): OTP-17462, PR-6662
+
+               A race condition which was very rarely triggered could
+               cause the signal queue of a process to become
+               inconsistent causing the runtime system to crash.
+
+
+ Full runtime dependencies of erts-13.1.2.1: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.13.1.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.13.1.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18379    Application(s): snmp
+               Related Id(s): ERIERL-904
+
+               Single threaded agent crash when vacm table not
+               properly initiated.
+
+
+ Full runtime dependencies of snmp-5.13.1.1: crypto-4.6, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
