@@ -1,0 +1,1150 @@
+Patch Package:           OTP 25.3
+Git Tag:                 OTP-25.3
+Date:                    2023-03-08
+Trouble Report Id:       OTP-16607, OTP-18316, OTP-18348, OTP-18356,
+                         OTP-18366, OTP-18371, OTP-18372, OTP-18373,
+                         OTP-18374, OTP-18375, OTP-18378, OTP-18380,
+                         OTP-18381, OTP-18382, OTP-18384, OTP-18387,
+                         OTP-18390, OTP-18391, OTP-18392, OTP-18393,
+                         OTP-18398, OTP-18404, OTP-18406, OTP-18407,
+                         OTP-18408, OTP-18411, OTP-18412, OTP-18418,
+                         OTP-18426, OTP-18429, OTP-18432, OTP-18434,
+                         OTP-18443, OTP-18446, OTP-18454, OTP-18457,
+                         OTP-18458, OTP-18460, OTP-18463, OTP-18469,
+                         OTP-18470, OTP-18472, OTP-18475, OTP-18496
+Seq num:                 GH-4232, GH-4733, GH-5984, GH-6160, GH-6356,
+                         GH-6402, GH-6403, GH-6448, GH-6475, GH-6506,
+                         GH-6537, GH-6573, GH-6580, GH-6591, GH-6595,
+                         GH-6601, GH-6604, GH-6656, GH-6672, GH-6677,
+                         GH-6701, GH-6707, GH-6717, GH-6873, GH-6947
+System:                  OTP
+Release:                 25
+Application:             common_test-1.24, compiler-8.2.4,
+                         crypto-5.1.3, debugger-5.3.1, dialyzer-5.0.5,
+                         erl_interface-5.3.1, erts-13.2, eunit-2.8.2,
+                         ftp-1.1.4, inets-8.3, jinterface-1.13.2,
+                         kernel-8.5.4, megaco-4.4.3, mnesia-4.21.4,
+                         os_mon-2.8.1, public_key-1.13.3,
+                         reltool-0.9.1, snmp-5.13.4, ssh-4.15.3,
+                         ssl-10.9, stdlib-4.3, syntax_tools-3.0.1,
+                         tftp-1.0.4, xmerl-1.3.31
+Predecessor:             OTP 25.2.3
+
+ Check out the git tag OTP-25.3, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18374    Application(s): erts
+               Related Id(s): PR-6632
+
+               Support for fully asynchronous distributed signaling
+               where send operations *never* block. This functionality
+               is by default disabled and can be enabled per process.
+               For more information see the documentation of
+               process_flag(async_dist, Bool).
+
+
+ ---------------------------------------------------------------------
+ --- OTP-25.3 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Improvements and New Features ---
+
+  OTP-18387    Application(s): otp
+
+               Clarified the documentation on how to enable maybe
+               expressions.
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.24 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.24 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18460    Application(s): common_test
+
+               Renamed undocumented macro CT_PEER/3 to CT_PEER_REL/3.
+
+
+ Full runtime dependencies of common_test-1.24: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- compiler-8.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.2.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18378    Application(s): compiler
+               Related Id(s): GH-6604
+
+               Fixed a bug that would cause the compiler to hang.
+
+
+  OTP-18381    Application(s): compiler
+               Related Id(s): GH-6601
+
+               Fixed a crash when compiling code that contained maybe
+               expressions.
+
+
+  OTP-18407    Application(s): compiler
+               Related Id(s): GH-6707
+
+               Constructing a binary with an explicit size of all for
+               a binary segment would crash the compiler.
+
+
+  OTP-18470    Application(s): compiler
+               Related Id(s): GH-6873, PR-6877
+
+               The compiler would generate incorrect code for the
+               following type of expression:
+
+               Pattern = BoundVar1 = . . . = BoundVarN = Expression
+
+               An exception should be raised if any of the bound
+               variables have different values than Expression. The
+               compiler would generate code that would cause the bound
+               variables to be bound to the value of Expressionwhether
+               the value matched or not.
+
+
+ Full runtime dependencies of compiler-8.2.4: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.1.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.1.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18384    Application(s): crypto
+               Related Id(s): PR-6596
+
+               A user defined runtime library path configured using
+               --with-ssl-rpath=<PATHS> could fail to be enabled.
+
+
+  OTP-18408    Application(s): crypto
+
+               Ensure that configure fails if a user defined runtime
+               library path has been passed by the user, but cannot
+               set.
+
+
+ Full runtime dependencies of crypto-5.1.3: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-5.3.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18372    Application(s): debugger, dialyzer, reltool, stdlib
+               Related Id(s): GH-6580
+
+               Fixed a bug that would cause analysis to crash.
+
+
+ Full runtime dependencies of debugger-5.3.1: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.0.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-5.0.5 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18372    Application(s): debugger, dialyzer, reltool, stdlib
+               Related Id(s): GH-6580
+
+               Fixed a bug that would cause analysis to crash.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of dialyzer-5.0.5: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.3.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.3.1 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18404    Application(s): erl_interface, jinterface, kernel
+               Related Id(s): GH-6595, PR-6625
+
+               Accept connection setup from OTP 23 and 24 nodes that
+               are not using epmd.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18348    Application(s): erts, kernel
+               Related Id(s): GH-6356
+
+               Fixed a bug on Windows where file:read_file_info/1
+               would fail for files with corrupt metadata.
+
+
+  OTP-18373    Application(s): erts
+               Related Id(s): GH-6573, PR-6574
+
+               Fix process_info(_, binary) to again include "writable
+               binaries" which were lost in OTP-25.0. Writable
+               binaries are an optimization used when binaries are
+               appended upon in a loop.
+
+
+  OTP-18382    Application(s): erts
+               Related Id(s): PR-6585
+
+               Fix rare race when receiving fragmented messages on a
+               terminating connection. Could potentially cause memory
+               leaks as well as double free crashes. Bug exists since
+               OTP 22.0.
+
+
+  OTP-18391    Application(s): erts
+
+               Fixed bug that could maybe cause problems when a file
+               descriptor number is closed by a linked in driver and
+               then opened (reused) and passed to enif_select by a
+               NIF. No actual symptoms seen, only failed internal
+               assertions in debug build.
+
+
+  OTP-18398    Application(s): erts
+               Related Id(s): GH-5984, GH-6448, PR-6495
+
+               The runtime system could crash when tracing a process
+               executing on a dirty scheduler.
+
+
+  OTP-18406    Application(s): erts
+               Related Id(s): GH-6701
+
+               In the binary syntax, attempting to match out integers
+               with size exceeding 2 GiB could crash the runtime
+               system.
+
+
+  OTP-18411    Application(s): erts
+               Related Id(s): GH-6717
+
+               Fixed edge case in floating-point negation where A =
+               0.0, B = -A did not produce B = -0.0 on x86_64 JIT.
+
+
+  OTP-18418    Application(s): erts
+
+               Fixed an issue in the JIT that could crash the emulator
+               on some platforms.
+
+
+  OTP-18429    Application(s): erts
+               Related Id(s): GH-4232, GH-6537, PR-6587
+
+               Added meta data to the windows installer.
+
+
+  OTP-18434    Application(s): erts
+               Related Id(s): PR-6752
+
+               Fixed ETS insertion order into bag and duplicate_bag of
+               tuples with identical keys when passed in a list to
+               ets:insert/2. The insert order has been head-to-tail
+               but was accidentally changed in OTP 23.0. For bag it
+               was reverted (tail-to-head), while for duplicate_bag it
+               was sometimes reverted depending on the length of the
+               list and number of "reductions" left for the calling
+               process.
+
+               This fix changes the insert order of ets:insert/2 back
+               to always be head-to-tail of the list argument.
+
+
+  OTP-18454    Application(s): erts
+               Related Id(s): PR-6839
+
+               With the JIT for AArch64 (AMD64), calling bxor in with
+               non-integer arguments in a guard would crash the
+               runtime system.
+
+
+  OTP-18457    Application(s): erts
+               Related Id(s): PR-6816
+
+               Fix bug regarding process flag max_heap_size. Could
+               cause strange behavior when a process was killed due to
+               exceeding the limit.
+
+
+  OTP-18458    Application(s): erts
+
+               Fixed binary comprehensions to be similar to other
+               creation of binary data with respect to its
+               contribution of triggering garbage collection.
+
+
+  OTP-18463    Application(s): erts
+               Related Id(s): PR-6858
+
+               In rare circumstances, when a process exceeded its
+               allowed heap size set by option max_heap_size, it would
+               not be killed as it should be, but instead enter a kind
+               of zombie state it would never get out of.
+
+
+  OTP-18475    Application(s): erts, stdlib
+               Related Id(s): PR-6897
+
+               Instead of crashing, the list_to_integer/1 and
+               list_to_integer/2 BIFs now raise the system_limit
+               exception for overlong lists that can't be converted to
+               integers. Similarly, the string:to_integer/1 BIF now
+               returns {error,system_limit} for overlong lists.
+
+
+  OTP-18496    Application(s): erts
+               Related Id(s): GH-6947, PR-6953
+
+               Active process aliases of a process at its termination
+               leaked memory.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18374    Application(s): erts
+               Related Id(s): PR-6632
+
+               *** HIGHLIGHT ***
+
+               Support for fully asynchronous distributed signaling
+               where send operations *never* block. This functionality
+               is by default disabled and can be enabled per process.
+               For more information see the documentation of
+               process_flag(async_dist, Bool).
+
+
+  OTP-18426    Application(s): erts
+
+               Added the +JPperf no_fp option to explicitly disable
+               Erlang frame pointers otherwise added when using the
+               +JPperf map option.
+
+
+ Full runtime dependencies of erts-13.2: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.8.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.8.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of eunit-2.8.2: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.1.4 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.1.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of ftp-1.1.4: erts-7.0, kernel-6.0,
+ runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-8.3 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-8.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18472    Application(s): inets
+               Related Id(s): DAFH-1592
+
+               With this change, handling of URI to a folder, with
+               missing trailing / and a query component present is
+               fixed.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18390    Application(s): inets
+               Related Id(s): PR-6661
+
+               Adds more type information to the inets app, thus
+               improving the errors that static analysis tools can
+               detect.
+
+               The addition of type information to records and the
+               updates to function heads help static analysis tools to
+               understand that some values in the records cannot be
+               'undefined', thus making static tools to type check
+               correctly more modules in the inets app
+
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of inets-8.3: erts-6.0, kernel-6.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- jinterface-1.13.2 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The jinterface-1.13.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18404    Application(s): erl_interface, jinterface, kernel
+               Related Id(s): GH-6595, PR-6625
+
+               Accept connection setup from OTP 23 and 24 nodes that
+               are not using epmd.
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.5.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.5.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1.3 (first satisfied in OTP 25.2)
+       -- stdlib-4.1.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18348    Application(s): erts, kernel
+               Related Id(s): GH-6356
+
+               Fixed a bug on Windows where file:read_file_info/1
+               would fail for files with corrupt metadata.
+
+
+  OTP-18404    Application(s): erl_interface, jinterface, kernel
+               Related Id(s): GH-6595, PR-6625
+
+               Accept connection setup from OTP 23 and 24 nodes that
+               are not using epmd.
+
+
+ Full runtime dependencies of kernel-8.5.4: crypto-5.0, erts-13.1.3,
+ sasl-3.0, stdlib-4.1.1
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.4.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-4.4.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of megaco-4.4.3: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.21.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.21.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18412    Application(s): mnesia
+
+               Improved consistency for dirty writes when a table was
+               added with add_table_copy/3.
+
+               Fixed a problem with sticky write, which could lead to
+               inconsistent data.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of mnesia-4.21.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.8.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.8.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18469    Application(s): os_mon
+               Related Id(s): PR-6689
+
+               The port programs used by cpu_sup and memsup are now
+               gracefully shut down when cpu_sup and memsup are shut
+               down.
+
+
+ Full runtime dependencies of os_mon-2.8.1: erts-6.0, kernel-3.0,
+ sasl-2.4, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.13.3 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.13.3 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18316    Application(s): public_key
+               Related Id(s): GH-6402, PR-6883
+
+               As different solutions of verifying certificate
+               revocation exists move the decode of
+               'CRLDistributionPoints' so that it will only be decode.
+               When it is actually used in the verification process.
+               This would enable interoperability with systems that
+               use certificates with an invalid empty
+               CRLDistributionPoints extension that they want to
+               ignore and make verification by other means.
+
+
+  OTP-18356    Application(s): public_key
+               Related Id(s): GH-6403
+
+               public_key:pkix_path_validation validates certificates
+               expiring after 2050
+
+
+  OTP-18392    Application(s): public_key
+               Related Id(s): GH-6656
+
+               Do not leave exit message in message queue after
+               calling cacerts_load() on MacOS.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of public_key-1.13.3: asn1-3.0, crypto-4.6,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- reltool-0.9.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The reltool-0.9.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18372    Application(s): debugger, dialyzer, reltool, stdlib
+               Related Id(s): GH-6580
+
+               Fixed a bug that would cause analysis to crash.
+
+
+ Full runtime dependencies of reltool-0.9.1: erts-7.0, kernel-3.0,
+ sasl-2.4, stdlib-3.4, tools-2.6.14, wx-1.2
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.13.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.13.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of snmp-5.13.4: crypto-4.6, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18446    Application(s): ssh
+               Related Id(s): GH-6475
+
+               With this change, PKCS8 formatted private key file is
+               properly decoded and SSH daemon with such key can be
+               started.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of ssh-4.15.3: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.9 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.9 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18371    Application(s): ssl
+               Related Id(s): GH-6160
+
+               Fixed that new dtls connections from the same client ip
+               port combination works. If there is a process waiting
+               for accept the new connection will connect to that,
+               otherwise it will try to re-connect to the old server
+               connection.
+
+
+  OTP-18443    Application(s): ssl
+               Related Id(s): PR-6810
+
+               When shutting down a node that uses SSL distribution
+               (-proto_dist inet_tls), a confusing error message about
+               an unexpected process exit was printed. This particular
+               message is no longer generated.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18366    Application(s): ssl
+               Related Id(s): GH-6506, PR-6565
+
+               fixes the type spec for ssl:format_error/1
+
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of ssl-10.9: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.3 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-4.3 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- kernel-8.5.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18372    Application(s): debugger, dialyzer, reltool, stdlib
+               Related Id(s): GH-6580
+
+               Fixed a bug that would cause analysis to crash.
+
+
+  OTP-18375    Application(s): stdlib
+               Related Id(s): GH-6591
+
+               Fixed a crash when formatting stack traces for error
+               reports.
+
+
+  OTP-18475    Application(s): erts, stdlib
+               Related Id(s): PR-6897
+
+               Instead of crashing, the list_to_integer/1 and
+               list_to_integer/2 BIFs now raise the system_limit
+               exception for overlong lists that can't be converted to
+               integers. Similarly, the string:to_integer/1 BIF now
+               returns {error,system_limit} for overlong lists.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18393    Application(s): stdlib
+               Related Id(s): PR-6666
+
+               Removal of non-necessary undefined types added to the
+               state's supervisor record.
+
+
+ Full runtime dependencies of stdlib-4.3: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-8.5.1, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- syntax_tools-3.0.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The syntax_tools-3.0.1 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18380    Application(s): syntax_tools
+               Related Id(s): GH-4733, PR-6523
+
+               erl_syntax_lib:annotate_bindings/1,2 will now properly
+               annotate named functions and their arguments.
+
+
+ Full runtime dependencies of syntax_tools-3.0.1: compiler-7.0,
+ erts-9.0, kernel-5.0, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- tftp-1.0.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tftp-1.0.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of tftp-1.0.4: erts-6.0, kernel-6.0,
+ stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.31 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.31 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18432    Application(s): dialyzer, eunit, ftp, inets, megaco,
+               mnesia, public_key, snmp, ssh, ssl, tftp, xmerl
+               Related Id(s): GH-6672, GH-6677, PR-6670, PR-6671,
+               PR-6673, PR-6674, PR-6682, PR-6684, PR-6694, PR-6696,
+               PR-6784, PR-6785, PR-6787, PR-6793, PR-6796, PR-6797,
+               PR-6798, PR-6799, PR-6800, PR-6813
+
+               Replace size/1 with either tuple_size/1 or byte_size/1
+
+               The size/1 BIF is not optimized by the JIT, and its use
+               can result in worse types for Dialyzer.
+
+               When one knows that the value being tested must be a
+               tuple, tuple_size/1 should always be preferred.
+
+               When one knows that the value being tested must be a
+               binary, byte_size/1 should be preferred. However,
+               byte_size/1 also accepts a bitstring (rounding up size
+               to a whole number of bytes), so one must make sure that
+               the call to byte_size/ is preceded by a call to
+               is_binary/1 to ensure that bitstrings are rejected.
+               Note that the compiler removes redundant calls to
+               is_binary/1, so if one is not sure whether previous
+               code had made sure that the argument is a binary, it
+               does not harm to add an is_binary/1 test immediately
+               before the call to byte_size/1.
+
+
+ Full runtime dependencies of xmerl-1.3.31: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
