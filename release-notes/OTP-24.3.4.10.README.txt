@@ -1,0 +1,87 @@
+Patch Package:           OTP 24.3.4.10
+Git Tag:                 OTP-24.3.4.10
+Date:                    2023-03-17
+Trouble Report Id:       OTP-18422, OTP-18496, OTP-18509
+Seq num:                 ERIERL-873, GH-6947
+System:                  OTP
+Release:                 24
+Application:             erts-12.3.2.10, inets-7.5.3.3, snmp-5.12.0.3
+Predecessor:             OTP 24.3.4.9
+
+ Check out the git tag OTP-24.3.4.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.10 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.10 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18496    Application(s): erts
+               Related Id(s): GH-6947, PR-6953
+
+               Active process aliases of a process at its termination
+               leaked memory.
+
+
+ Full runtime dependencies of erts-12.3.2.10: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.3.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.3.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18509    Application(s): inets
+               Related Id(s): OTP-18476
+
+               Correct timing related pipelining/keepalive queue bug,
+               that could result in unexpected "socket_remotly_closed"
+               errors.
+
+
+ Full runtime dependencies of inets-7.5.3.3: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.12.0.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.12.0.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18422    Application(s): snmp
+               Related Id(s): ERIERL-873
+
+               Attempts to minimize the number of the error reports
+               during a failed agent init.
+
+
+ Full runtime dependencies of snmp-5.12.0.3: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
