@@ -1,0 +1,73 @@
+Patch Package:           OTP 24.3.4.8
+Git Tag:                 OTP-24.3.4.8
+Date:                    2023-01-17
+Trouble Report Id:       OTP-18379, OTP-18383, OTP-18388
+Seq num:                 ERIERL-904, ERIERL-905
+System:                  OTP
+Release:                 24
+Application:             erts-12.3.2.8, snmp-5.12.0.2
+Predecessor:             OTP 24.3.4.7
+
+ Check out the git tag OTP-24.3.4.8, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.8 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.8 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18383    Application(s): erts
+               Related Id(s): ERIERL-905
+
+               Fixed a bug in selective receive optimization that
+               could crash 32-bit emulators.
+
+
+  OTP-18388    Application(s): erts
+               Related Id(s): OTP-17462, PR-6662
+
+               A race condition which was very rarely triggered could
+               cause the signal queue of a process to become
+               inconsistent causing the runtime system to crash.
+
+
+ Full runtime dependencies of erts-12.3.2.8: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.12.0.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.12.0.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18379    Application(s): snmp
+               Related Id(s): ERIERL-904
+
+               Single threaded agent crash when vacm table not
+               properly initiated.
+
+
+ Full runtime dependencies of snmp-5.12.0.2: crypto-3.3, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
