@@ -1,0 +1,170 @@
+Patch Package:           OTP 24.3.4.9
+Git Tag:                 OTP-24.3.4.9
+Date:                    2023-02-23
+Trouble Report Id:       OTP-18386, OTP-18417, OTP-18421, OTP-18433,
+                         OTP-18463, OTP-18467, OTP-18470, OTP-18472
+Seq num:                 ERIERL-888, GH-6772, GH-6807, GH-6873
+System:                  OTP
+Release:                 24
+Application:             compiler-8.1.1.3, erts-12.3.2.9,
+                         inets-7.5.3.2, ssh-4.13.2.2, ssl-10.7.3.6
+Predecessor:             OTP 24.3.4.8
+
+ Check out the git tag OTP-24.3.4.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1.1.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1.1.3 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18470    Application(s): compiler
+               Related Id(s): GH-6873, PR-6877
+
+               The compiler would generate incorrect code for the
+               following type of expression:
+
+               Pattern = BoundVar1 = . . . = BoundVarN = Expression
+
+               An exception should be raised if any of the bound
+               variables have different values than Expression. The
+               compiler would generate code that would cause the bound
+               variables to be bound to the value of Expressionwhether
+               the value matched or not.
+
+
+ Full runtime dependencies of compiler-8.1.1.3: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.9 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18421    Application(s): erts
+               Related Id(s): PR-6806
+
+               process_info(Pid, status) when Pid /= self() could
+               return an erroneous result.
+
+
+  OTP-18463    Application(s): erts
+               Related Id(s): PR-6858
+
+               In rare circumstances, when a process exceeded its
+               allowed heap size set by option max_heap_size, it would
+               not be killed as it should be, but instead enter a kind
+               of zombie state it would never get out of.
+
+
+ Full runtime dependencies of erts-12.3.2.9: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.3.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.3.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18472    Application(s): inets
+               Related Id(s): DAFH-1592
+
+               With this change, handling of URI to a folder, with
+               missing trailing / and a query component present is
+               fixed.
+
+
+ Full runtime dependencies of inets-7.5.3.2: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.13.2.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.13.2.2 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18386    Application(s): ssh
+               Related Id(s): PR-6611
+
+               With this change, ssh application does not crash when
+               formatting some of info reports for unsuccessful
+               connections.
+
+
+  OTP-18417    Application(s): ssh
+               Related Id(s): ERIERL-888, DAFH-1349, IA18357
+
+               With this change, ssh does not log extensively long
+               messages.
+
+
+ Full runtime dependencies of ssh-4.13.2.2: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Improvements and New Features ---
+
+  OTP-18433    Application(s): ssl
+               Related Id(s): GH-6772
+
+               Maximize compatibility by ignoring change_cipher_spec
+               during handshake even if middle_box_mode is not
+               negotiated (mandated by client)
+
+
+  OTP-18467    Application(s): ssl
+               Related Id(s): GH-6807
+
+               Move assert of middlebox message after an
+               hello_retry_request to maximize interoperability. Does
+               not changes semantics of the protocol only allows
+               unexpected message delay from server.
+
+
+ Full runtime dependencies of ssl-10.7.3.6: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
