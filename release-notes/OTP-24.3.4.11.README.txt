@@ -1,0 +1,136 @@
+Patch Package:           OTP 24.3.4.11
+Git Tag:                 OTP-24.3.4.11
+Date:                    2023-04-21
+Trouble Report Id:       OTP-18243, OTP-18343, OTP-18525, OTP-18545,
+                         OTP-18550, OTP-18557
+Seq num:                 ERIERL-928, ERIERL-937, GH-6247, GH-6496
+System:                  OTP
+Release:                 24
+Application:             erts-12.3.2.11, inets-7.5.3.4, ssl-10.7.3.7
+Predecessor:             OTP 24.3.4.10
+
+ Check out the git tag OTP-24.3.4.11, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.11 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.11 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18243    Application(s): erts
+               Related Id(s): GH-6247, PR-6258
+
+               Fix bug sometimes causing emulator crash at node
+               shutdown when there are pending connections. Only seen
+               when running duel distribution protocols, inet_drv and
+               inet_tls_dist.
+
+
+  OTP-18343    Application(s): erts
+               Related Id(s): GH-6496
+
+               Fix bug in binary_to_term (and distributed receive)
+               when decoding a large map (>32 keys) with unsorted
+               small maps (<= 32) as keys of the large map.
+
+               This was only a problem if the term was encoded by
+               erl_interface, jinterface or otherwise, as the VM
+               itself always encodes small maps with sorted keys.
+
+               The "binary_to_term" would appear as successful but the
+               created large map was internally inconsistent. The
+               smaller key-maps could not be found with maps:get and
+               friends. Other operations such as map compare and merge
+               could probably also give incorrect results.
+
+
+  OTP-18525    Application(s): erts
+               Related Id(s): PR-7049
+
+               Implementations of the call() driver callback that
+               returned a faulty encoded result could cause a memory
+               leak and could cause invalid data on the heap of the
+               processes calling erlang:port_call/3.
+
+
+  OTP-18557    Application(s): erts
+               Related Id(s): OTP-18496, PR-7131
+
+               Aliases created in combination with a monitor using the
+               {alias, explicit_unalias} option stopped working from
+               remote nodes when a 'DOWN' signal had been received due
+               to the monitor or if the monitor was removed using the
+               erlang:demonitor() BIF.
+
+               This bug was introduced in OTP 24.3.4.10 and OTP 25.3.
+
+
+ Full runtime dependencies of erts-12.3.2.11: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- inets-7.5.3.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-7.5.3.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18545    Application(s): inets
+               Related Id(s): ERIERL-928, ERIERL-937, OTP-18509
+
+               With this change, upon remote socket closure current
+               request is added to a retried queue (either pipeline or
+               keep_alive, but not both).
+
+
+ Full runtime dependencies of inets-7.5.3.4: erts-6.0, kernel-3.0,
+ mnesia-4.12, runtime_tools-1.8.14, ssl-5.3.4, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.7 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.7 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18550    Application(s): ssl
+
+               Client signature algorithm list input order is now
+               honored again , it was accidently reversed by a
+               previous fix.
+
+
+ Full runtime dependencies of ssl-10.7.3.7: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
