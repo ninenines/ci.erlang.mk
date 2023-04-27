@@ -1,0 +1,313 @@
+Patch Package:           OTP 25.3.1
+Git Tag:                 OTP-25.3.1
+Date:                    2023-04-27
+Trouble Report Id:       OTP-18422, OTP-18480, OTP-18489, OTP-18497,
+                         OTP-18506, OTP-18509, OTP-18512, OTP-18516,
+                         OTP-18519, OTP-18525, OTP-18545, OTP-18550,
+                         OTP-18553, OTP-18554, OTP-18555, OTP-18557,
+                         OTP-18560, OTP-18563
+Seq num:                 ERIERL-873, ERIERL-928, ERIERL-937, GH-6956,
+                         GH-6960, GH-6969, GH-7024, GH-7114
+System:                  OTP
+Release:                 25
+Application:             compiler-8.2.5, crypto-5.1.4, eldap-1.2.11,
+                         erl_interface-5.3.2, erts-13.2.1,
+                         inets-8.3.1, snmp-5.13.5, ssl-10.9.1,
+                         stdlib-4.3.1, wx-2.2.2
+Predecessor:             OTP 25.3
+
+ Check out the git tag OTP-25.3.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.2.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.2.5 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18497    Application(s): compiler
+               Related Id(s): GH-6960, PR-6965
+
+               When a map update such as #{}#{key:=value} that should
+               fail with an exception was unused, the exception would
+               be lost.
+
+
+  OTP-18516    Application(s): compiler
+               Related Id(s): GH-6969
+
+               Fixed bug in the validator that made it reject valid
+               code.
+
+
+ Full runtime dependencies of compiler-8.2.5: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.1.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.1.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18555    Application(s): crypto
+
+               With this change, random errors are fixed for
+               crypto:generate_key calls with OpenSSL 3.
+
+
+ Full runtime dependencies of crypto-5.1.4: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.11 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.11 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18480    Application(s): eldap
+
+               Added a new function eldap:info/1 that returns the
+               socket and the transport protocol for the eldap
+               connection.
+
+
+ Full runtime dependencies of eldap-1.2.11: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.3.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.3.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18554    Application(s): erl_interface, erts
+
+               Fixed configure tests for a few ARM-specific
+               instructions, which prevented the emulator from being
+               built on some platforms.
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18519    Application(s): erts
+               Related Id(s): GH-7024
+
+               Fixed a bug in the loader that prevented certain
+               modules compiled with no_ssa_opt from being loaded.
+
+
+  OTP-18525    Application(s): erts
+               Related Id(s): PR-7049
+
+               Implementations of the call() driver callback that
+               returned a faulty encoded result could cause a memory
+               leak and could cause invalid data on the heap of the
+               processes calling erlang:port_call/3.
+
+
+  OTP-18553    Application(s): erts
+
+               Fixed a memory corruption issue when upgrading code.
+               The bug was introduced in OTP 25.3
+
+
+  OTP-18554    Application(s): erl_interface, erts
+
+               Fixed configure tests for a few ARM-specific
+               instructions, which prevented the emulator from being
+               built on some platforms.
+
+
+  OTP-18557    Application(s): erts
+               Related Id(s): OTP-18496, PR-7131
+
+               Aliases created in combination with a monitor using the
+               {alias, explicit_unalias} option stopped working from
+               remote nodes when a 'DOWN' signal had been received due
+               to the monitor or if the monitor was removed using the
+               erlang:demonitor() BIF.
+
+               This bug was introduced in OTP 24.3.4.10 and OTP 25.3.
+
+
+  OTP-18560    Application(s): erts
+
+               In rare circumstances, bit syntax matching of an
+               invalid code point for a utf32 would crash the runtime
+               system.
+
+
+  OTP-18563    Application(s): erts
+               Related Id(s): GH-7114, PR-7159
+
+               Building the runtime system failed when native atomic
+               support was missing. Note that execution on such
+               systems have only been rudimentary tested.
+
+
+ Full runtime dependencies of erts-13.2.1: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- inets-8.3.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-8.3.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18509    Application(s): inets
+               Related Id(s): OTP-18476
+
+               Correct timing related pipelining/keepalive queue bug,
+               that could result in unexpected "socket_remotly_closed"
+               errors.
+
+
+  OTP-18545    Application(s): inets
+               Related Id(s): ERIERL-928, ERIERL-937, OTP-18509
+
+               With this change, upon remote socket closure current
+               request is added to a retried queue (either pipeline or
+               keep_alive, but not both).
+
+
+ Full runtime dependencies of inets-8.3.1: erts-6.0, kernel-6.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- snmp-5.13.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The snmp-5.13.5 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18422    Application(s): snmp
+               Related Id(s): ERIERL-873
+
+               Attempts to minimize the number of the error reports
+               during a failed agent init.
+
+
+ Full runtime dependencies of snmp-5.13.5: crypto-4.6, erts-12.0,
+ kernel-8.0, mnesia-4.12, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.9.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.9.1 application *cannot* be applied independently of
+       other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18489    Application(s): ssl
+
+               With this change, ssl:connection_information/2 returns
+               correct keylog data after TLS1.3 key update.
+
+
+  OTP-18550    Application(s): ssl
+
+               Client signature algorithm list input order is now
+               honored again , it was accidently reversed by a
+               previous fix.
+
+
+ Full runtime dependencies of ssl-10.9.1: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.3.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-4.3.1 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- kernel-8.5.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18506    Application(s): stdlib
+               Related Id(s): GH-6956
+
+               The type specs in the erl_parse module has been updated
+               to include the maybe construct and the ! operator.
+
+
+ Full runtime dependencies of stdlib-4.3.1: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-8.5.1, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.2.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.2.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18512    Application(s): wx
+
+               Improve debug prints from the nifs. Some minor fixes
+               for wxWidgets-3.2. Fixed OpenGL debug functions.
+
+
+ Full runtime dependencies of wx-2.2.2: erts-12.0, kernel-8.0,
+ stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
