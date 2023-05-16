@@ -1,0 +1,101 @@
+Patch Package:           OTP 25.3.2
+Git Tag:                 OTP-25.3.2
+Date:                    2023-05-05
+Trouble Report Id:       OTP-18559, OTP-18565, OTP-18570
+Seq num:                 ERIERL-942, GH-7147
+System:                  OTP
+Release:                 25
+Application:             compiler-8.2.6, erts-13.2.2, os_mon-2.8.2
+Predecessor:             OTP 25.3.1
+
+ Check out the git tag OTP-25.3.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.2.6 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.2.6 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18565    Application(s): compiler
+               Related Id(s): GH-7147
+
+               Fixed type handling bugs that could cause an internal
+               error in the compiler for correct code.
+
+
+ Full runtime dependencies of compiler-8.2.6: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.2 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18570    Application(s): erts
+               Related Id(s): PR-7190
+
+               If a runtime system which was starting the distribution
+               already had existing pids, ports, or references
+               referring to a node with the same nodename/creation
+               pair that the runtime system was about to use, these
+               already existing pids, ports, or references would not
+               work as expected in various situations after the node
+               had gone alive. This could only occur if the runtime
+               system was communicated such pids, ports, or references
+               prior to the distribution was started. That is, it was
+               extremely unlikely to happen unless the distribution
+               was started dynamically and was even then very unlikely
+               to happen. The runtime system now checks for already
+               existing pids, ports, and references with the same
+               nodename/creation pair that it is about to use. If such
+               are found another creation will be chosen in order to
+               avoid these issues.
+
+
+ Full runtime dependencies of erts-13.2.2: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.8.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.8.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18559    Application(s): os_mon
+               Related Id(s): ERIERL-942
+
+               Avoid error report from failing erlang:port_close at
+               shutdown of cpu_sup and memsup. Bug exists since OTP
+               25.3 (os_mon-2.8.1).
+
+
+ Full runtime dependencies of os_mon-2.8.2: erts-6.0, kernel-3.0,
+ sasl-2.4, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
