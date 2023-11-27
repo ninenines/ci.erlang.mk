@@ -118,6 +118,9 @@ OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
 
 CI_OTP := $(foreach otp,$(AUTO_CI_OTP),$($(otp))) $(if $(AUTO_CI_MASTER),master)
 
+ci-list:
+	$(verbose) printf "%s\n" $(CI_OTP)
+
 # Remove the existing master if necessary.
 
 ifdef AUTO_CI_MASTER
