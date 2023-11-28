@@ -280,6 +280,9 @@ endef
 
 CI_WINDOWS := $(foreach otp,$(AUTO_CI_WINDOWS),$(WINDOWS-$(otp)))
 
+ci-windows-list:
+	$(verbose) printf "%s\n" $(CI_WINDOWS)
+
 $(foreach otp,$(CI_WINDOWS),$(eval $(call ci_windows_target,$(otp))))
 
 ci-windows:: $(addprefix ci-windows-,$(CI_WINDOWS))
