@@ -1,0 +1,355 @@
+Patch Package:           OTP 26.0.2
+Git Tag:                 OTP-26.0.2
+Date:                    2023-06-29
+Trouble Report Id:       OTP-18580, OTP-18618, OTP-18624, OTP-18625,
+                         OTP-18626, OTP-18630, OTP-18634, OTP-18635,
+                         OTP-18636, OTP-18637, OTP-18640, OTP-18643,
+                         OTP-18646, OTP-18649, OTP-18650, OTP-18651,
+                         OTP-18652, OTP-18653, OTP-18656, OTP-18657,
+                         OTP-18659, OTP-18663
+Seq num:                 ERIERL-932, GH-6881, GH-7029, GH-7230,
+                         GH-7261, GH-7286, GH-7296, GH-7308, GH-7324,
+                         GH-7354, GH-7356, GH-7368, GH-7370, GH-7390,
+                         GH-7433
+System:                  OTP
+Release:                 26
+Application:             compiler-8.3.2, erts-14.0.2, kernel-9.0.2,
+                         ssh-5.0.1, ssl-11.0.2, stdlib-5.0.2
+Predecessor:             OTP 26.0.1
+
+ Check out the git tag OTP-26.0.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.3.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.3.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18625    Application(s): compiler
+               Related Id(s): GH-7354
+
+               Fixed a type handling bug that would cause an internal
+               consistence failure for correct code.
+
+
+  OTP-18626    Application(s): compiler
+               Related Id(s): GH-7356
+
+               Fixed a bug that could cause the stack trace of throw
+               exceptions to be erroneously optimized out.
+
+
+  OTP-18634    Application(s): compiler
+               Related Id(s): GH-7370
+
+               Complex guard expression using 'or' were not always
+               fully evaluated, making guards that were supposed to
+               fail succeed.
+
+
+ Full runtime dependencies of compiler-8.3.2: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.0.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.0.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18630    Application(s): erts
+               Related Id(s): GH-7029, PR-7275
+
+               Fix using the IME (Input Method Editor) to enter text
+               in cmd.exe and powershell.exe on Windows.
+
+
+  OTP-18635    Application(s): erts, kernel
+               Related Id(s): #7328
+
+               Multiple socket:accept calls issue. When making
+               multiple accept calls, only the last call is active.
+
+
+  OTP-18636    Application(s): erts, kernel
+               Related Id(s): GH-7308, PR-7352
+
+               Fix the shell to ignore terminal delay when the
+               terminal capabilities report that they should be used.
+
+
+  OTP-18637    Application(s): erts, kernel
+               Related Id(s): GH-7324, PR-7359
+
+               Fix "oldshell" to echo characters while typing on
+               Windows.
+
+
+  OTP-18646    Application(s): erts, kernel
+
+               On Windows, a call to the function socket:close, when
+               there are waiting active calls to read, write or accept
+               functions, could hang.
+
+
+  OTP-18649    Application(s): erts, kernel
+               Related Id(s): GH-7261, PR-7400
+
+               Fix issues when reading or configuring standard_io on
+               Windows when erl.exe is started using -noshell flag.
+
+
+  OTP-18659    Application(s): erts, stdlib
+               Related Id(s): PR-7426
+
+               The following functions are now much faster when given
+               a long list or binary:
+
+               -- erlang:list_to_integer/1
+
+               -- erlang:binary_to_integer/1
+
+               -- erlang:binary_to_integer/2
+
+               -- erlang:list_to_integer/2
+
+               -- string:to_integer/1
+
+
+  OTP-18663    Application(s): erts
+               Related Id(s): GH-7433, PR-7437
+
+               On AArch64 (ARM64), equality and non-equality tests
+               with literal bitstrings could succeed when they should
+               fail and vice versa.
+
+
+ Full runtime dependencies of erts-14.0.2: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.0.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.0.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18580    Application(s): kernel, stdlib
+               Related Id(s): PR-7242
+
+               Fix bug where when you entered Alt+Enter in the
+               terminal, the cursor would move to the last line,
+               instead of moving to the next line.
+
+
+  OTP-18624    Application(s): kernel
+               Related Id(s): GH-7296
+
+               Fix so that the shell does not crash on startup when
+               termcap is not available.
+
+
+  OTP-18635    Application(s): erts, kernel
+               Related Id(s): #7328
+
+               Multiple socket:accept calls issue. When making
+               multiple accept calls, only the last call is active.
+
+
+  OTP-18636    Application(s): erts, kernel
+               Related Id(s): GH-7308, PR-7352
+
+               Fix the shell to ignore terminal delay when the
+               terminal capabilities report that they should be used.
+
+
+  OTP-18637    Application(s): erts, kernel
+               Related Id(s): GH-7324, PR-7359
+
+               Fix "oldshell" to echo characters while typing on
+               Windows.
+
+
+  OTP-18640    Application(s): kernel, stdlib
+               Related Id(s): GH-6881, GH-7286, GH-7368, PR-7384
+
+               Fix eof handling when reading from stdin when erlang is
+               started using -noshell.
+
+
+  OTP-18646    Application(s): erts, kernel
+
+               On Windows, a call to the function socket:close, when
+               there are waiting active calls to read, write or accept
+               functions, could hang.
+
+
+  OTP-18649    Application(s): erts, kernel
+               Related Id(s): GH-7261, PR-7400
+
+               Fix issues when reading or configuring standard_io on
+               Windows when erl.exe is started using -noshell flag.
+
+
+  OTP-18650    Application(s): kernel
+
+               gen_udp:connect with inet_backend = socket fails when
+               the Address is a hostname (string or atom).
+
+
+  OTP-18651    Application(s): kernel
+               Related Id(s): PR-7242
+
+               Fixed problem which would cause shell to crash if
+               particular escape sequence was written to stdout.
+
+
+  OTP-18652    Application(s): kernel, stdlib
+               Related Id(s): PR-7242
+
+               Fixed problem where output would disappear if it was
+               received after a prompt was written in the shell.
+
+
+  OTP-18656    Application(s): kernel
+               Related Id(s): GH-7390, PR-7404
+
+               Fix a crash where the location of erts could not be
+               found in rebar3 dev builds.
+
+
+  OTP-18657    Application(s): kernel
+               Related Id(s): GH-7230, PR-7384
+
+               Introduce the KERNEL application parameter
+               standard_io_encoding that can be used to set the
+               default encoding for standard_io. This option needs to
+               be set to latin1 if the application wants to treat all
+               input data as bytes rather than utf-8 encoded
+               characters.
+
+
+ Full runtime dependencies of kernel-9.0.2: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.0.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.0.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18653    Application(s): ssh
+               Related Id(s): PR-7242
+
+               Added multiline editing support to ssh clients
+               connected through OTP ssh daemon.
+
+
+ Full runtime dependencies of ssh-5.0.1: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.0.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.0.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18643    Application(s): ssl
+               Related Id(s): ERIERL-932
+
+               Added keylog information to all protocol versions in
+               ssl:connection_information/2.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18618    Application(s): ssl
+               Related Id(s): ERIERL-932
+
+               Add RFC-6083 considerations for DTLS to enable gen_sctp
+               based callback for the transport.
+
+
+ Full runtime dependencies of ssl-11.0.2: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.0.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.0.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18580    Application(s): kernel, stdlib
+               Related Id(s): PR-7242
+
+               Fix bug where when you entered Alt+Enter in the
+               terminal, the cursor would move to the last line,
+               instead of moving to the next line.
+
+
+  OTP-18640    Application(s): kernel, stdlib
+               Related Id(s): GH-6881, GH-7286, GH-7368, PR-7384
+
+               Fix eof handling when reading from stdin when erlang is
+               started using -noshell.
+
+
+  OTP-18652    Application(s): kernel, stdlib
+               Related Id(s): PR-7242
+
+               Fixed problem where output would disappear if it was
+               received after a prompt was written in the shell.
+
+
+  OTP-18659    Application(s): erts, stdlib
+               Related Id(s): PR-7426
+
+               The following functions are now much faster when given
+               a long list or binary:
+
+               -- erlang:list_to_integer/1
+
+               -- erlang:binary_to_integer/1
+
+               -- erlang:binary_to_integer/2
+
+               -- erlang:list_to_integer/2
+
+               -- string:to_integer/1
+
+
+ Full runtime dependencies of stdlib-5.0.2: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
