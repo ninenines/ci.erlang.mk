@@ -1,0 +1,42 @@
+Patch Package:           OTP 25.3.2.5
+Git Tag:                 OTP-25.3.2.5
+Date:                    2023-07-31
+Trouble Report Id:       OTP-18688
+Seq num:                 ERIERL-962
+System:                  OTP
+Release:                 25
+Application:             inets-8.3.1.1
+Predecessor:             OTP 25.3.2.4
+
+ Check out the git tag OTP-25.3.2.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-8.3.1.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-8.3.1.1 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18688    Application(s): inets
+               Related Id(s): ERIERL-962
+
+               Fixed a bug so httpd does not crash when stopped at the
+               wrong time during TLS connection negotiation, or any
+               other theoretically as slow connection setup.
+
+
+ Full runtime dependencies of inets-8.3.1.1: erts-6.0, kernel-6.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
