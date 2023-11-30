@@ -1,0 +1,40 @@
+Patch Package:           OTP 25.3.2.2
+Git Tag:                 OTP-25.3.2.2
+Date:                    2023-06-07
+Trouble Report Id:       OTP-18617
+Seq num:                 GH-7338
+System:                  OTP
+Release:                 25
+Application:             compiler-8.2.6.2
+Predecessor:             OTP 25.3.2.1
+
+ Check out the git tag OTP-25.3.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.2.6.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.2.6.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18617    Application(s): compiler
+               Related Id(s): GH-7338
+
+               The compiler could be very slow when compiling guards
+               with multiple guard tests separated with 'or' or ';'.
+
+
+ Full runtime dependencies of compiler-8.2.6.2: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
