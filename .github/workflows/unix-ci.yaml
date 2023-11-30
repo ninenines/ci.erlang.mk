@@ -39,7 +39,6 @@ jobs:
       with:
         path: |
           ~/erlang/
-          ~/.kerl/
         key: ${{ runner.os }}-${{ runner.arch }}-Erlang-${{ inputs.erlang }}
 
     - name: Run ci-prepare
@@ -60,7 +59,6 @@ jobs:
       with:
         path: |
           ~/erlang/
-          ~/.kerl/
         key: ${{ runner.os }}-${{ runner.arch }}-Erlang-${{ inputs.erlang }}
 
     - name: Install required software
@@ -95,7 +93,6 @@ jobs:
       with:
         path: |
           ~/erlang/
-          ~/.kerl/
         key: ${{ runner.os }}-${{ runner.arch }}-Erlang-${{ inputs.latest }}
 
     - name: Run Dialyzer
