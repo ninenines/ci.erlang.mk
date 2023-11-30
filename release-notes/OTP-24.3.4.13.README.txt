@@ -1,0 +1,185 @@
+Patch Package:           OTP 24.3.4.13
+Git Tag:                 OTP-24.3.4.13
+Date:                    2023-06-29
+Trouble Report Id:       OTP-18617, OTP-18618, OTP-18620, OTP-18643,
+                         OTP-18644, OTP-18659
+Seq num:                 ERIERL-932, GH-7336, GH-7338
+System:                  OTP
+Release:                 24
+Application:             compiler-8.1.1.5, debugger-5.2.1.1,
+                         erts-12.3.2.13, ssh-4.13.2.3, ssl-10.7.3.8,
+                         stdlib-3.17.2.4
+Predecessor:             OTP 24.3.4.12
+
+ Check out the git tag OTP-24.3.4.13, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1.1.5 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1.1.5 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18617    Application(s): compiler
+               Related Id(s): GH-7338
+
+               The compiler could be very slow when compiling guards
+               with multiple guard tests separated with 'or' or ';'.
+
+
+ Full runtime dependencies of compiler-8.1.1.5: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.2.1.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-5.2.1.1 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18644    Application(s): debugger
+               Related Id(s): GH-7336
+
+               The call int:no_break(Module) did not remove any
+               breakpoints.
+
+
+ Full runtime dependencies of debugger-5.2.1.1: compiler-8.0,
+ erts-12.0, kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.13 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.13 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18659    Application(s): erts, stdlib
+               Related Id(s): PR-7426
+
+               The following functions are now much faster when given
+               a long list or binary:
+
+               -- erlang:list_to_integer/1
+
+               -- erlang:binary_to_integer/1
+
+               -- erlang:binary_to_integer/2
+
+               -- erlang:list_to_integer/2
+
+               -- string:to_integer/1
+
+
+ Full runtime dependencies of erts-12.3.2.13: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.13.2.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.13.2.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18620    Application(s): ssh
+               Related Id(s): OTP-18386, PR-6611
+
+               With this change, error logging related crashes in
+               ssh_connection_handler module are fixed.
+
+
+ Full runtime dependencies of ssh-4.13.2.3: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.8 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.8 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18643    Application(s): ssl
+               Related Id(s): ERIERL-932
+
+               Added keylog information to all protocol versions in
+               ssl:connection_information/2.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18618    Application(s): ssl
+               Related Id(s): ERIERL-932
+
+               Add RFC-6083 considerations for DTLS to enable gen_sctp
+               based callback for the transport.
+
+
+ Full runtime dependencies of ssl-10.7.3.8: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.2.4 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.2.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18659    Application(s): erts, stdlib
+               Related Id(s): PR-7426
+
+               The following functions are now much faster when given
+               a long list or binary:
+
+               -- erlang:list_to_integer/1
+
+               -- erlang:binary_to_integer/1
+
+               -- erlang:binary_to_integer/2
+
+               -- erlang:list_to_integer/2
+
+               -- string:to_integer/1
+
+
+ Full runtime dependencies of stdlib-3.17.2.4: compiler-5.0,
+ crypto-3.3, erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
