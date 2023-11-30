@@ -47,7 +47,7 @@ jobs:
       run: make -k ci-prepare CI_OTP=${{ inputs.erlang }}
 
   test:
-    name: Run tests using ${{ inputs.erlang }}
+    name: Run tests using ${{ inputs.erlang }} on ${{ inputs.os }}
     needs: build-erlang
     runs-on: ${{ inputs.os }}
     steps:
@@ -80,7 +80,7 @@ jobs:
           !logs/**/log_private
 
   dialyze:
-    name: Run Dialyzer
+    name: Run Dialyzer using ${{ inputs.erlang }}
     needs: build-erlang
     runs-on: ${{ inputs.os }}
     if: inputs.erlang == inputs.latest && inputs.os == 'ubuntu-latest'
