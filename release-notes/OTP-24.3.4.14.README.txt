@@ -1,0 +1,205 @@
+Patch Package:           OTP 24.3.4.14
+Git Tag:                 OTP-24.3.4.14
+Date:                    2023-10-12
+Trouble Report Id:       OTP-18670, OTP-18707, OTP-18711, OTP-18712,
+                         OTP-18718, OTP-18732, OTP-18752, OTP-18790,
+                         OTP-18797
+Seq num:                 ERIERL-963, GH-7431, GH-7436, GH-7444,
+                         GH-7546, GH-7683
+System:                  OTP
+Release:                 24
+Application:             crypto-5.0.6.4, erts-12.3.2.14,
+                         kernel-8.3.2.4, mnesia-4.20.4.3,
+                         public_key-1.12.0.2, ssl-10.7.3.9
+Predecessor:             OTP 24.3.4.13
+
+ Check out the git tag OTP-24.3.4.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-5.0.6.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.0.6.4 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18670    Application(s): crypto
+               Related Id(s): GH-7436, PR-7450
+
+               Fix VM crash caused by crypto being purged and reloaded
+               (by init:restart for example) on OS with musl libc
+               (such as Alpine linux).
+
+
+ Full runtime dependencies of crypto-5.0.6.4: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.14 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.14 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18732    Application(s): erts
+               Related Id(s): GH-7444, PR-7458
+
+               Fix bug causing "magic" references in a compressed ETS
+               table to not keep the referred object alive. The
+               symptom would be the referred object being garbage
+               collected prematurely and the reference appearing
+               stale, not referring to anything. Examples of such
+               magically referred objects are atomics and NIF
+               resources.
+
+
+  OTP-18752    Application(s): erts
+               Related Id(s): PR-7633
+
+               The cleanup operation of not yet delivered signals to a
+               terminated process yielded excessively.
+
+
+  OTP-18790    Application(s): erts
+               Related Id(s): PR-7742
+
+               If the external term format encoding of an argument
+               list part of a distributed spawn operation was faulty,
+               the newly spawned remote process could misbehave. The
+               misbehavior included hanging or interpret an incoming
+               message as an argument list to use. This was very
+               unlikely to happen unless using an alternate
+               implementation of the distribution protocol which made
+               a faulty encoding of the argument list. The child
+               process will now detect this error and terminate before
+               executing the user specified code.
+
+
+  OTP-18797    Application(s): erts
+               Related Id(s): GH-7683, PR-7712
+
+               Fix bugs where if the body of a matchspec would return
+               a map with a variable ('$1', '$_' etc) as one of the
+               keys or values and the variable was not an immidiate,
+               the term would not be copied to the receiving processes
+               heap. This would later corrupt the term in the table as
+               the GC could place move markers in it, which in turn
+               would cause the VM to crash.
+
+               Bug has been present for since OTP 17.0.
+
+
+ Full runtime dependencies of erts-12.3.2.14: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- kernel-8.3.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The kernel-8.3.2.4 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-12.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18707    Application(s): kernel
+               Related Id(s): #7530
+
+               gen_tcp:connect with socket address and socket (inet-)
+               backend fails because of missing callback function.
+
+
+ Full runtime dependencies of kernel-8.3.2.4: crypto-5.0, erts-12.3,
+ sasl-3.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.20.4.3 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.20.4.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18711    Application(s): mnesia
+               Related Id(s): ERIERL-963
+
+               Do not delete old backup file if the new backup fails.
+
+
+ Full runtime dependencies of mnesia-4.20.4.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.12.0.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.12.0.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18718    Application(s): public_key
+               Related Id(s): GH-7546
+
+               Country name comparison shall be case insensitive
+
+
+ Full runtime dependencies of public_key-1.12.0.2: asn1-3.0,
+ crypto-3.8, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.7.3.9 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.7.3.9 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 24 installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- public_key-1.11.3 (first satisfied in OTP 24.1.2)
+       -- stdlib-3.17.2.1 (first satisfied in OTP 24.3.4.5)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18712    Application(s): ssl
+               Related Id(s): GH-7431
+
+               When a client initiated renegotiation was rejected and
+               the client socket was in active mode the expected error
+               message to the controlling process was not sent.
+
+
+ Full runtime dependencies of ssl-10.7.3.9: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-3.17.2.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
