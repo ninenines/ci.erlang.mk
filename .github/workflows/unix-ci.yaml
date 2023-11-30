@@ -26,7 +26,7 @@ env:
 jobs:
 
   build-erlang:
-    name: Build Erlang
+    name: Build Erlang ${{ inputs.erlang }} on ${{ inputs.os }}
     runs-on: ${{ inputs.os }}
     steps:
 
@@ -47,7 +47,7 @@ jobs:
       run: make -k ci-prepare CI_OTP=${{ inputs.erlang }}
 
   test:
-    name: Run tests
+    name: Run tests using ${{ inputs.erlang }}
     needs: build-erlang
     runs-on: ${{ inputs.os }}
     steps:

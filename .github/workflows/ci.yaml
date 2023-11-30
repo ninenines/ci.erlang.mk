@@ -12,7 +12,7 @@ env:
 jobs:
 
   prepare-unix:
-    name: Prepare Unix CI
+    name: Prepare Unix
     runs-on: ubuntu-latest
     outputs:
       erlang: ${{ steps.versions.outputs.erlang }}
@@ -61,7 +61,7 @@ jobs:
       os: ${{ matrix.os }}
 
   prepare-windows:
-    name: Prepare Windows CI
+    name: Prepare Windows
     runs-on: windows-latest
     outputs:
       erlang: ${{ steps.versions.outputs.erlang }}
