@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2020, Loïc Hoguin <essen@ninenines.eu>
+# Copyright (c) 2017-2023, Loïc Hoguin <essen@ninenines.eu>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -173,6 +173,8 @@ ci-auto-cleanup: $(CI_AUTO_CLEANUP_TARGETS)
 # Right now we assume that the versions are already installed on
 # the test machines. In the future we may want to also automate
 # the installation.
+#
+# We only track main releases for simplicity's sake.
 
 ifeq ($(PLATFORM),msys2)
 
@@ -184,37 +186,44 @@ WINDOWS-OTP-22 := 22.0 22.1 22.2 22.3
 WINDOWS-OTP-23 := 23.0 23.1 23.2 23.3
 WINDOWS-OTP-24 := 24.0 24.1 24.2 24.3
 WINDOWS-OTP-25 := 25.0 25.1 25.2 25.3
+WINDOWS-OTP-26 := 26.0 26.1
 
 WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) \
-	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) \
-	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
 WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) \
-	$(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
+	$(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
 WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) \
-	$(WINDOWS-OTP-25)
-WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
-WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
-WINDOWS-OTP-24+ := $(WINDOWS-OTP-24) $(WINDOWS-OTP-25)
-WINDOWS-OTP-25+ := $(WINDOWS-OTP-25)
+	$(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
+WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) \
+	$(WINDOWS-OTP-26)
+WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
+WINDOWS-OTP-24+ := $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
+WINDOWS-OTP-25+ := $(WINDOWS-OTP-25) $(WINDOWS-OTP-26)
+WINDOWS-OTP-26+ := $(WINDOWS-OTP-26)
 
 WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
 	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
+	$(lastword $(WINDOWS-OTP-26))
 WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
 	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
-	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26))
 WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
 	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
-	$(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26))
 WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
-	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
+	$(lastword $(WINDOWS-OTP-26))
 WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
-	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26))
 WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
-	$(lastword $(WINDOWS-OTP-25))
-WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25))
-WINDOWS-OTP-LATEST-25+ := $(lastword $(WINDOWS-OTP-25))
+	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26))
+WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
+	$(lastword $(WINDOWS-OTP-26))
+WINDOWS-OTP-LATEST-25+ := $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26))
+WINDOWS-OTP-LATEST-26+ := $(lastword $(WINDOWS-OTP-26))
 
 # @todo Add support for release candidates (we don't want them as the "latest").
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
@@ -260,6 +269,9 @@ WINDOWS-OTP-25.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.0/bin)
 WINDOWS-OTP-25.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.1/bin)
 WINDOWS-OTP-25.2-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.2/bin)
 WINDOWS-OTP-25.3-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-25.3/bin)
+
+WINDOWS-OTP-26.0-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-26.0/bin)
+WINDOWS-OTP-26.1-INSTALL-DIR := $(call msys2_path,$(PROGRAMFILES)/erl-26.1/bin)
 
 # We have to duplicate this for it to work as
 # it is not yet defined when we define this.
