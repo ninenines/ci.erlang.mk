@@ -1,0 +1,42 @@
+Patch Package:           OTP 25.3.2.4
+Git Tag:                 OTP-25.3.2.4
+Date:                    2023-07-17
+Trouble Report Id:       OTP-18664
+Seq num:                 ERIERL-959
+System:                  OTP
+Release:                 25
+Application:             common_test-1.24.0.1
+Predecessor:             OTP 25.3.2.3
+
+ Check out the git tag OTP-25.3.2.4, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.24.0.1 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.24.0.1 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18664    Application(s): common_test
+               Related Id(s): ERIERL-959
+
+               With this change, prompt search functionality in
+               ct_telnet handles unicode input.
+
+
+ Full runtime dependencies of common_test-1.24.0.1: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
