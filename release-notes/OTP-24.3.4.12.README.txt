@@ -1,0 +1,181 @@
+Patch Package:           OTP 24.3.4.12
+Git Tag:                 OTP-24.3.4.12
+Date:                    2023-05-30
+Trouble Report Id:       OTP-18556, OTP-18560, OTP-18569, OTP-18570,
+                         OTP-18593, OTP-18595, OTP-18597
+Seq num:                 ERIERL-944, GH-7252
+System:                  OTP
+Release:                 24
+Application:             compiler-8.1.1.4, erts-12.3.2.12,
+                         stdlib-3.17.2.3, xmerl-1.3.28.1
+Predecessor:             OTP 24.3.4.11
+
+ Check out the git tag OTP-24.3.4.12, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.1.1.4 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.1.1.4 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18593    Application(s): compiler
+               Related Id(s): GH-7252
+
+               Complex guard expression using the or operator and
+               guard BIFs that can fail could sometimes be miscompiled
+               so that the guard would succeed even if a call to a
+               guard BIF failed.
+
+
+ Full runtime dependencies of compiler-8.1.1.4: crypto-3.6, erts-11.0,
+ kernel-7.0, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.12 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.12 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18560    Application(s): erts
+
+               In rare circumstances, bit syntax matching of an
+               invalid code point for a utf32 would crash the runtime
+               system.
+
+
+  OTP-18570    Application(s): erts
+               Related Id(s): PR-7190
+
+               If a runtime system which was starting the distribution
+               already had existing pids, ports, or references
+               referring to a node with the same nodename/creation
+               pair that the runtime system was about to use, these
+               already existing pids, ports, or references would not
+               work as expected in various situations after the node
+               had gone alive. This could only occur if the runtime
+               system was communicated such pids, ports, or references
+               prior to the distribution was started. That is, it was
+               extremely unlikely to happen unless the distribution
+               was started dynamically and was even then very unlikely
+               to happen. The runtime system now checks for already
+               existing pids, ports, and references with the same
+               nodename/creation pair that it is about to use. If such
+               are found another creation will be chosen in order to
+               avoid these issues.
+
+
+  OTP-18597    Application(s): erts
+
+               Constructing a binary segment not aligned with a byte
+               boundary, with a size not fitting in 31 bits, and with
+               a value not fitting in a 64-bit word could crash the
+               runtime system.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18569    Application(s): erts
+
+               Further robustify implementation of large maps (> 32
+               keys). Keys that happen to have same internal 32-bit
+               hash values are now put in collision nodes which are
+               traversed with linear search. This removes the demand
+               for the internal hash function when salted to
+               eventually produce different hashes for all possible
+               pairs of unequal terms.
+
+
+ Full runtime dependencies of erts-12.3.2.12: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-3.17.2.3 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-3.17.2.3 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18556    Application(s): stdlib
+
+               Static supervisors are very idle processes after they
+               have started so they will now be hibernated after start
+               to improve resource management.
+
+
+ Full runtime dependencies of stdlib-3.17.2.3: compiler-5.0,
+ crypto-3.3, erts-12.0, kernel-7.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.28.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.28.1 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18595    Application(s): xmerl
+               Related Id(s): ERIERL-944
+
+               New options to xmerl_scan and xmerl_sax_parser so one
+               can limit the behaviour of the parsers to avoid some
+               XML security issues.
+
+               xmerl_scan gets one new option:
+
+               -- {allow_entities, Boolean} -- Gives the possibility
+               to disallow entities by setting this option to false
+               (true is default)
+
+               xmerl_sax_parser gets the following options:
+
+               -- disallow_entities -- Don't allow entities in
+               document
+
+               -- {entity_recurse_limit, N} -- Set a limit on entity
+               recursion depth (default is 3)
+
+               -- {external_entities, AllowedType} -- Specify which
+               types of external entities that are allowed, this also
+               affect external DTD's. The types are all(default), file
+               and none
+
+               -- {fail_undeclared_ref, Boolean} -- Sets the behavior
+               for undeclared references due to an external file is
+               not parsed (true is default)
+
+               The old option skip_external_dtd is still valid and the
+               same as {external_entities, none} and
+               {fail_undeclared_ref, false} but just affects DTD's and
+               not other external references.
+
+
+ Full runtime dependencies of xmerl-1.3.28.1: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
