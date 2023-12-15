@@ -1,0 +1,1134 @@
+Patch Package:           OTP 26.2
+Git Tag:                 OTP-26.2
+Date:                    2023-12-13
+Trouble Report Id:       OTP-16607, OTP-17844, OTP-18728, OTP-18730,
+                         OTP-18735, OTP-18739, OTP-18749, OTP-18751,
+                         OTP-18760, OTP-18762, OTP-18764, OTP-18765,
+                         OTP-18767, OTP-18771, OTP-18772, OTP-18775,
+                         OTP-18776, OTP-18777, OTP-18782, OTP-18798,
+                         OTP-18799, OTP-18800, OTP-18802, OTP-18810,
+                         OTP-18811, OTP-18812, OTP-18814, OTP-18815,
+                         OTP-18817, OTP-18818, OTP-18821, OTP-18822,
+                         OTP-18823, OTP-18824, OTP-18826, OTP-18827,
+                         OTP-18828, OTP-18829, OTP-18830, OTP-18832,
+                         OTP-18833, OTP-18836, OTP-18838, OTP-18839,
+                         OTP-18840, OTP-18841, OTP-18842, OTP-18843,
+                         OTP-18844, OTP-18850, OTP-18853, OTP-18854,
+                         OTP-18855, OTP-18857, OTP-18858, OTP-18861,
+                         OTP-18866, OTP-18867, OTP-18868, OTP-18869,
+                         OTP-18871, OTP-18872, OTP-18873, OTP-18877,
+                         OTP-18880, OTP-18882, OTP-18883, OTP-18885,
+                         OTP-18886, OTP-18888, OTP-18891, OTP-18893,
+                         OTP-18895, OTP-18896, OTP-18899
+Seq num:                 ERIERL-738, ERIERL-994, ERIERL-997, GH-7515,
+                         GH-7548, GH-7571, GH-7580, GH-7591, GH-7608,
+                         GH-7621, GH-7625, GH-7676, GH-7685, GH-7735,
+                         GH-7736, GH-7766, GH-7795, GH-7801, GH-7827,
+                         GH-7832, GH-7834, GH-7838, GH-7875, GH-7890,
+                         GH-7914
+System:                  OTP
+Release:                 26
+Application:             asn1-5.2.1, common_test-1.26, crypto-5.4,
+                         debugger-5.3.3, dialyzer-5.1.2,
+                         diameter-2.3.1, edoc-1.2.1, eldap-1.2.12,
+                         erl_docgen-1.5.2, erl_interface-5.5,
+                         erts-14.2, eunit-2.9, ftp-1.2.1, inets-9.1,
+                         kernel-9.2, mnesia-4.23, os_mon-2.9.1,
+                         public_key-1.15, runtime_tools-2.0.1,
+                         ssh-5.1, ssl-11.1, stdlib-5.2, tftp-1.1.1,
+                         wx-2.4, xmerl-1.3.34
+Predecessor:             OTP 26.1.2
+
+ Check out the git tag OTP-26.2, and build a full OTP system including
+ documentation. Apply one or more applications from this build as
+ patches to your installation using the 'otp_patch_apply' tool. For
+ information on install requirements, see descriptions for each
+ application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18728    Application(s): common_test
+               Related Id(s): PR-7487, PR-7674
+
+               With this change, common_test returns an error when
+               suite with a badly defined group is executed.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-26.2 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18840    Application(s): otp, stdlib
+               Related Id(s): PR-7629
+
+               The removal of the deprecated slave module, originally
+               planned for OTP 27, has been postponed to OTP 29.
+
+
+  OTP-18896    Application(s): otp
+
+               Updated copyright and license information.
+
+
+ ---------------------------------------------------------------------
+ --- asn1-5.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The asn1-5.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18844    Application(s): asn1
+
+               Fix benign warning from gcc 11 about mismatching call
+               to free().
+
+
+ Full runtime dependencies of asn1-5.2.1: erts-11.0, kernel-7.0,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.26 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.26 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18728    Application(s): common_test
+               Related Id(s): PR-7487, PR-7674
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               With this change, common_test returns an error when
+               suite with a badly defined group is executed.
+
+
+  OTP-18760    Application(s): common_test
+
+               With this change, stylesheet option is applied to all
+               HTML report pages.
+
+
+  OTP-18799    Application(s): common_test, erl_docgen, xmerl
+               Related Id(s): PR-7695
+
+               Update all <tt> html tags to be <code> instead.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18858    Application(s): common_test
+               Related Id(s): PR-7825
+
+               This change fixes docs, so that historically deprecated
+               ?config macro is no longer recommended to be used.
+
+
+ Full runtime dependencies of common_test-1.26: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18895    Application(s): crypto, erl_interface, os_mon,
+               runtime_tools
+
+               Fixed some benign compile warnings on Windows.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18832    Application(s): crypto
+               Related Id(s): PR-7763
+
+               Enable engine support for OpenSSL versions 3.
+
+
+ Full runtime dependencies of crypto-5.4: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- debugger-5.3.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The debugger-5.3.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18888    Application(s): debugger
+               Related Id(s): GH-7914
+
+               Map comprehensions now work in the Debugger.
+
+
+ Full runtime dependencies of debugger-5.3.3: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-3.15, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.1.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-5.1.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18767    Application(s): dialyzer
+               Related Id(s): PR-7657
+
+               Fix dialyzer --output flag to work. This option was
+               accidentally removed in OTP 26.0.
+
+
+  OTP-18772    Application(s): dialyzer
+               Related Id(s): GH-7676
+
+               Fixed a crash in contract checking relating to opaque
+               types.
+
+
+ Full runtime dependencies of dialyzer-5.1.2: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-5.0, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.3.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+ Full runtime dependencies of diameter-2.3.1: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- edoc-1.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The edoc-1.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18782    Application(s): edoc
+               Related Id(s): PR-7643
+
+               Emit <code> instead of <tt>.
+
+
+ Full runtime dependencies of edoc-1.2.1: erts-6.0, inets-5.10,
+ kernel-3.0, stdlib-3.15, syntax_tools-2.0, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- eldap-1.2.12 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eldap-1.2.12 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18810    Application(s): eldap
+
+               Add missing dependency to asn1 application
+
+
+ Full runtime dependencies of eldap-1.2.12: asn1-3.0, erts-6.0,
+ kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- erl_docgen-1.5.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_docgen-1.5.2 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18775    Application(s): erl_docgen
+               Related Id(s): PR-7663
+
+               Fix erl_docgen dtd to only allow a single
+               datatype_title within a datatypes block.
+
+
+  OTP-18776    Application(s): erl_docgen
+               Related Id(s): PR-7663
+
+               Fix so that EEP-48 doc chunks include the module
+               summary and generates equiv tags in the correct order.
+
+               The function/type group title is now also included in
+               the entry metadata.
+
+
+  OTP-18799    Application(s): common_test, erl_docgen, xmerl
+               Related Id(s): PR-7695
+
+               Update all <tt> html tags to be <code> instead.
+
+
+ Full runtime dependencies of erl_docgen-1.5.2: edoc-1.0, erts-11.0,
+ kernel-8.0, stdlib-3.15, xmerl-1.3.7
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.5 -----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.5 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18895    Application(s): crypto, erl_interface, os_mon,
+               runtime_tools
+
+               Fixed some benign compile warnings on Windows.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18764    Application(s): erl_interface
+               Related Id(s): PR-7602
+
+               Add support to encode maps with ei_x_format.
+
+
+  OTP-18877    Application(s): erl_interface, erts
+
+               Replaced old md5 implementation with an implementation
+               from OpenSSL.
+
+
+ --- Known Bugs and Problems ---
+
+  OTP-16607    Application(s): erl_interface
+               Related Id(s): OTP-16608
+
+               The ei API for decoding/encoding terms is not fully
+               64-bit compatible since terms that have a
+               representation on the external term format larger than
+               2 GB cannot be handled.
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18751    Application(s): erts
+               Related Id(s): GH-7548, GH-7621
+
+               Fix erl.exe to to restore the console to its original
+               state when exiting. This bug was introduced in OTP 26.0
+               and only happens when erl.exe is run in cmd.exe.
+
+
+  OTP-18802    Application(s): erts
+
+               Fix faulty debug assert when page size is larger than
+               16kb, like on PowerPC. Did crash debug VM directly at
+               start.
+
+
+  OTP-18811    Application(s): erts
+               Related Id(s): ERIERL-994
+
+               zlib will no longer randomly return garbage (negative)
+               Adler32 checksums.
+
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18838    Application(s): erts
+               Related Id(s): GH-7801, PR-7822
+
+               A process with message_queue_data configured as
+               off_heap could end up in an inconsistent state when
+               being receive traced, inspected using process_info/2
+               with the message_queue_len item, or inspected using the
+               break menu (CTRL-C). When it ended up in this
+               inconsistent state, it was not enqueued into a run
+               queue even though it was set in a runnable state.This
+               also effected signals being sent to the process after
+               it had gotten into this inconsistent state, in such a
+               way that it was from this point not possible to
+               communicate with it.
+
+
+  OTP-18839    Application(s): erts
+               Related Id(s): GH-7801, PR-7822
+
+               A race occurring when a process was selected for dirty
+               execution simultaneously as it was scheduled for
+               handling a signal could cause the process to end up in
+               an inconsistent state. When it ended up in this
+               inconsistent state, it was not enqueued into a run
+               queue even though it was set in a runnable state. This
+               also effected signals being sent to the process after
+               it had gotten into this inconsistent state, in such a
+               way that it was from this point not possible to
+               communicate with it.
+
+
+  OTP-18841    Application(s): erts
+               Related Id(s): GH-7801, OTP-18737, PR-7822
+
+               When a process had to to wait in the run queue for a
+               long time before being selected for dirty execution, it
+               could not receive signals. This caused inspection of
+               such a process, for example using process_info/2, to
+               take a long time.
+
+               This issue was introduced in OTP 25.3.2.6 and 26.1 when
+               fixing an issue where a constant flow of signals
+               prevented a process from being able to execute dirty.
+
+
+  OTP-18842    Application(s): erts
+
+               Fixed a bug in the JIT that miscompiled large
+               select_val instructions.
+
+
+  OTP-18871    Application(s): erts
+               Related Id(s): GH-7838
+
+               Fix bug on Windows where large writes to standard_io
+               could cause duplicate data to be written.
+
+
+  OTP-18880    Application(s): erts
+               Related Id(s): GH-7736, PR-7761
+
+               The struct ip_mreqn field imr_ifindex had got an
+               incorrect byte order conversion that has been
+               corrected.
+
+
+  OTP-18885    Application(s): erts
+               Related Id(s): GH-7834, GH-7890, PR-7915
+
+               On OTP 24 and OTP 25, incoming distributed messages
+               larger than 64 KiB sent using an alias leaked memory if
+               the alias had been removed prior to entering the node.
+               This issue was not present on OTP 26.
+
+               Incoming distributed messages larger than 64 KiB sent
+               using an alias which had been removed on the receiving
+               node could crash the node. This crash was quite
+               unlikely on OTP 24 and OTP 25, but very likely on OTP
+               26.
+
+               'DOWN' signals with exit reason larger than 64 KiB
+               directed towards a process on a node with a not
+               matching creation leaked memory on the receiving node.
+               Such signals should however be very rare.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18762    Application(s): erts, kernel
+
+               Add Windows support for DGRAM socket connect.
+
+
+  OTP-18765    Application(s): erts
+               Related Id(s): PR-7707
+
+               process_info/2 now supports lookup of values for
+               specific keys in the process dictionary. For example,
+               {{dictionary, Key}, Value} = process_info(Pid,
+               {dictionary, Key}).
+
+
+  OTP-18830    Application(s): erts
+               Related Id(s): PR-7823
+
+               Removed unnecessary regexp library used when generating
+               yielding BIFs.
+
+
+  OTP-18872    Application(s): erts
+               Related Id(s): GH-7832
+
+               Fix tty restore when +Bc is used.
+
+
+  OTP-18877    Application(s): erl_interface, erts
+
+               Replaced old md5 implementation with an implementation
+               from OpenSSL.
+
+
+  OTP-18899    Application(s): erts
+
+               Removed unused makewhatis script.
+
+
+ Full runtime dependencies of erts-14.2: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- eunit-2.9 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The eunit-2.9 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18771    Application(s): eunit
+               Related Id(s): PR-7635
+
+               With this change, EUnit timetraps can be scaled with
+               the use of scale_timeouts option.
+
+
+ Full runtime dependencies of eunit-2.9: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.2.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+ Full runtime dependencies of ftp-1.2.1: erts-7.0, kernel-6.0,
+ runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- inets-9.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18855    Application(s): inets
+
+               Correct IP protocol handling so that redirects always
+               uses correct IP-family options and not fails.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18735    Application(s): inets
+               Related Id(s): GH-7580, PR-7596
+
+               inets app starts ssl by default
+
+
+  OTP-18882    Application(s): inets
+
+               Avoid httpd returning 500 internal server error when
+               unable to open a file. 404 or 503 will be returned
+               instead.
+
+
+  OTP-18891    Application(s): inets
+               Related Id(s): GH-7827, PR-7843
+
+               Properly handle documented option mime_type, for
+               backwards compatibility fallback to undocumented option
+               default_type if mime_type is not set.
+
+
+ Full runtime dependencies of inets-9.1: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18749    Application(s): kernel
+               Related Id(s): GH-7608
+
+               For inet_backend = socket, an unexpected receive error
+               such as etimedout caused the receiving state machine
+               server to crash. This bug has now been fixed.
+
+
+  OTP-18800    Application(s): kernel
+               Related Id(s): GH-7591, PR-7714
+
+               Fix bug where reading using file from a unicode enabled
+               standard_io, standard_error or any other group backed
+               device would result in incorrect values being returned
+               or a crash.
+
+               Now instead a no_translation error is returned to the
+               caller when unicode data is read using file. See Using
+               Unicode in the STDLIB User's Guide for more details on
+               how to correctly read from standard_io.
+
+
+  OTP-18812    Application(s): kernel
+               Related Id(s): ERIERL-997
+
+               The native resolver interface module has gotten a
+               rewrite of its ETS table handling to minimize term
+               copying, and also to move the handling of client
+               time-outs to the clients, which helps the native
+               resolver name server from digging itself into a tar pit
+               when heavily loaded.
+
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18833    Application(s): kernel
+               Related Id(s): GH-7625, PR-7659
+
+               Fix bug in pg if a client process both monitored a
+               group/scope and joined a group. The termination of such
+               process resulted in crash of the pg server process.
+
+
+  OTP-18873    Application(s): kernel
+               Related Id(s): PR-7831
+
+               Fix crash when using file:consult and the underlying
+               file read returns an error while reading.
+
+
+  OTP-18883    Application(s): kernel
+               Related Id(s): #7764
+
+               Corrected gen_tcp_socket listen option handling.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18762    Application(s): erts, kernel
+
+               Add Windows support for DGRAM socket connect.
+
+
+  OTP-18818    Application(s): kernel
+               Related Id(s): #7337
+
+               Document the, previously opaque, types select_tag() and
+               completion_tag().
+
+
+ Full runtime dependencies of kernel-9.2: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.23 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.23 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18798    Application(s): mnesia
+
+               Document mnesia:foldl/4 and mnesia:foldr/4.
+
+
+  OTP-18850    Application(s): mnesia
+
+               mnesia:add_table_copy/3 no longer fails with reason
+               system_limit when the node is starting.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18843    Application(s): mnesia
+               Related Id(s): GH-7766
+
+               Restore recreate of disc_only tables could crash if
+               they had an index.
+
+
+ Full runtime dependencies of mnesia-4.23: erts-9.0, kernel-5.3,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- os_mon-2.9.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The os_mon-2.9.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18895    Application(s): crypto, erl_interface, os_mon,
+               runtime_tools
+
+               Fixed some benign compile warnings on Windows.
+
+
+ Full runtime dependencies of os_mon-2.9.1: erts-14.0, kernel-9.0,
+ sasl-4.2.1, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.15 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.15 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18739    Application(s): public_key, ssl
+
+               ssl application will validate id-kp-serverAuth and
+               id-kp-clientAuth extended key usage only in end entity
+               certificates. public_key application will disallow
+               "anyExtendedKeyUsage" for CA certificates that includes
+               the extended key usage extension and marks it critical.
+
+
+  OTP-18854    Application(s): public_key
+
+               Modernize ECC handling so that crypto FIPS support
+               works as expected.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17844    Application(s): public_key
+               Related Id(s): ERIERL-738
+
+               Support certificate policies in path_validation - as
+               described by RFC 5280.
+
+
+  OTP-18814    Application(s): public_key
+               Related Id(s): PR-7435
+
+               Add more search paths for cacerts on Illumos.
+
+
+  OTP-18867    Application(s): public_key
+               Related Id(s): GH-7515
+
+               Make it possible to handle invalid date formats in the
+               verify_fun for pkix_path_validation/3
+
+
+ Full runtime dependencies of public_key-1.15: asn1-3.0, crypto-4.6,
+ erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- runtime_tools-2.0.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The runtime_tools-2.0.1 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18868    Application(s): runtime_tools
+               Related Id(s): GH-7735
+
+               Fixed issue with fetching port information for observer
+               could crash if port had died.
+
+
+  OTP-18895    Application(s): crypto, erl_interface, os_mon,
+               runtime_tools
+
+               Fixed some benign compile warnings on Windows.
+
+
+ Full runtime dependencies of runtime_tools-2.0.1: erts-11.0,
+ kernel-8.1, mnesia-4.12, stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1 ---------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18861    Application(s): ssh
+               Related Id(s): PR-7627
+
+               Avoid outputting ansi escape sequences to dumb ssh
+               clients.
+
+
+  OTP-18869    Application(s): ssh
+               Related Id(s): GH-7571, PR-7849
+
+               With this change, connection handler does not execute
+               socket operations until it becomes socket owner.
+               Previously errors could occur if connection handler
+               tried to work with socket whose owner exited.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18730    Application(s): ssh
+               Related Id(s): PR-7499
+
+               With this change, reverse search works with ssh shell
+               and non dumb terminals.
+
+
+ Full runtime dependencies of ssh-5.1: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1 --------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18739    Application(s): public_key, ssl
+
+               ssl application will validate id-kp-serverAuth and
+               id-kp-clientAuth extended key usage only in end entity
+               certificates. public_key application will disallow
+               "anyExtendedKeyUsage" for CA certificates that includes
+               the extended key usage extension and marks it critical.
+
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18817    Application(s): ssl
+
+               Correct handling of TLS-1.3 legacy scheme names, could
+               cause interop failures for TLS-1.2 clients.
+
+
+  OTP-18886    Application(s): ssl
+
+               Add missing export for connection_info() API type.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18836    Application(s): ssl
+               Related Id(s): GH-7795
+
+               Fixed server name indication which was not handled
+               properly.
+
+
+  OTP-18853    Application(s): ssl
+               Related Id(s): PR-7841
+
+               Align documentation and implementation
+
+
+  OTP-18893    Application(s): ssl
+               Related Id(s): PR-7920, PR-7921
+
+               Improve connection setup by optimizing certificate
+               lookup.
+
+
+ Full runtime dependencies of ssl-11.1: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18777    Application(s): stdlib
+               Related Id(s): PR-7663
+
+               Make shell_docs correctly trim the newline at the end
+               of code blocks.
+
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+  OTP-18822    Application(s): stdlib
+               Related Id(s): PR-7796
+
+               Fixed a bug where autocompletion could crash the shell
+               when trying to expand a nested tuple.
+
+
+  OTP-18823    Application(s): stdlib
+
+               Removed auto closing feature, in autocompletion, for
+               function arguments, tuples, records and maps, since
+               this could interfere with autocompletion of atoms.
+
+
+  OTP-18824    Application(s): stdlib
+
+               Fixed a bug where autocompletion string formatting
+               would remove suggestions that had the same name but
+               different case.
+
+
+  OTP-18826    Application(s): stdlib
+               Related Id(s): PR-7797
+
+               Fix so that ctrl+h, ctrl+backspace in the shell only
+               removes one character instead of a whole word.
+
+
+  OTP-18827    Application(s): stdlib
+               Related Id(s): PR-7797
+
+               Fix so that its possible to override the default
+               keyboard shortcuts for the shell.
+
+
+  OTP-18828    Application(s): stdlib
+               Related Id(s): PR-7799
+
+               Allow shell local func v(), in a restricted shell
+
+
+  OTP-18829    Application(s): stdlib
+               Related Id(s): PR-7799
+
+               Report syntax error when writing an invalid attribute
+               like '1> -hej.'
+
+
+  OTP-18866    Application(s): stdlib
+               Related Id(s): GH-7875, PR-7878
+
+               When attempting to match part of a record in the key of
+               a map generator, the entire record would be matched.
+
+
+ --- Improvements and New Features ---
+
+  OTP-18821    Application(s): stdlib
+               Related Id(s): OTP-18746
+
+               The warning for accidental use of a future
+               triple-quoted string delimiter has been upgraded to
+               instead warn for adjacent strings without intervening
+               white space, which effectively is the same at a string
+               start, but also covers the same situation at a string
+               end.
+
+
+  OTP-18840    Application(s): otp, stdlib
+               Related Id(s): PR-7629
+
+               The removal of the deprecated slave module, originally
+               planned for OTP 27, has been postponed to OTP 29.
+
+
+  OTP-18857    Application(s): stdlib, wx
+               Related Id(s): GH-7685
+
+               Guards have been added to gen_*:start* API functions to
+               catch bad arguments earlier. Before this change, in
+               some cases, a bad argument could tag along and cause
+               the server to fail later, right after start.
+
+
+ Full runtime dependencies of stdlib-5.2: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tftp-1.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tftp-1.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18815    Application(s): diameter, erts, ftp, inets, kernel,
+               otp, ssh, ssl, stdlib, tftp
+               Related Id(s): PR-7780
+
+               Replaced unintentional Erlang Public License 1.1
+               headers in some files with the intended Apache License
+               2.0 header.
+
+
+ Full runtime dependencies of tftp-1.1.1: erts-6.0, kernel-6.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.4 ----------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-18857    Application(s): stdlib, wx
+               Related Id(s): GH-7685
+
+               Guards have been added to gen_*:start* API functions to
+               catch bad arguments earlier. Before this change, in
+               some cases, a bad argument could tag along and cause
+               the server to fail later, right after start.
+
+
+ Full runtime dependencies of wx-2.4: erts-12.0, kernel-8.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.34 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.34 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18799    Application(s): common_test, erl_docgen, xmerl
+               Related Id(s): PR-7695
+
+               Update all <tt> html tags to be <code> instead.
+
+
+ Full runtime dependencies of xmerl-1.3.34: erts-6.0, kernel-3.0,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
