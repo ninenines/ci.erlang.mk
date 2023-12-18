@@ -141,7 +141,10 @@ endif
 endif
 
 ifdef AUTO_CI_MASTER_MINS
-ci:: $(KERL)
+ci::
+	$(verbose) $(MAKE) --no-print-directory ci-auto-master
+
+ci-auto-master: $(KERL)
 ifneq ($(wildcard $(KERL_INSTALL_DIR)/master),)
 	$(verbose) if find $(KERL_INSTALL_DIR)/master/activate \
 			-mmin +$(AUTO_CI_MASTER_MINS) | grep -q master; then \
