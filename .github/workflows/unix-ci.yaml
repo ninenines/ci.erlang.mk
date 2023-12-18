@@ -43,7 +43,7 @@ jobs:
 
     - name: Cleanup old master if necessary
       if: steps.cache.outputs.cache-hit == 'true' && inputs.erlang == 'master'
-      run: make ci-auto-master
+      run: make ci-auto-master CI_OTP=${{ inputs.erlang }}
 
     - name: Run ci-prepare
       if: steps.cache.outputs.cache-hit != 'true' || inputs.erlang == 'master'
