@@ -41,12 +41,8 @@ jobs:
           ~/erlang/
         key: ${{ runner.os }}-${{ runner.arch }}-Erlang-${{ inputs.erlang }}
 
-    - name: Cleanup old master if necessary
-      if: steps.cache.outputs.cache-hit == 'true' && inputs.erlang == 'master'
-      run: ls -la ~/erlang/master ; make ci-auto-master V=3
-
     - name: Run ci-prepare
-      if: steps.cache.outputs.cache-hit != 'true' || inputs.erlang == 'master'
+      if: steps.cache.outputs.cache-hit != 'true'
       run: make -k ci-prepare CI_OTP=${{ inputs.erlang }}
 
   test:
