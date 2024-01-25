@@ -42,7 +42,7 @@ jobs:
       run: |
         {
           echo "latest<<EOF"
-          make ci-list AUTO_CI_MASTER=daily | grep -v rc | grep -v master | tail -n1
+          make ci-list | grep -v rc | grep -v master | tail -n1
           echo EOF
         } >> "$GITHUB_OUTPUT"
 
