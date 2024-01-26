@@ -31,11 +31,11 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4
 
     - name: Manage CI cache
       id: cache
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v4
       with:
         path: |
           ~/erlang/
@@ -52,10 +52,10 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4
 
     - name: Restore CI cache
-      uses: actions/cache/restore@v3.3.2
+      uses: actions/cache/restore@v4
       with:
         path: |
           ~/erlang/
@@ -69,7 +69,7 @@ jobs:
       run: make -k ci-${{ inputs.erlang }}
 
     - name: Upload logs
-      uses: actions/upload-artifact@v4.0.0
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: Common Test logs (${{ inputs.erlang }} ${{ runner.os }})
@@ -86,10 +86,10 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4
 
     - name: Restore CI cache
-      uses: actions/cache/restore@v3.3.2
+      uses: actions/cache/restore@v4
       with:
         path: |
           ~/erlang/
