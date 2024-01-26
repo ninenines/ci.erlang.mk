@@ -110,7 +110,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install Erlang/OTP
-      uses: erlef/setup-beam@v1
+      uses: erlef/setup-beam@f6a73a7bf1fb3d2faab5d807acfd2829b706fda9
       with:
         otp-version: '${{ matrix.erlang }}'
         version-type: loose
