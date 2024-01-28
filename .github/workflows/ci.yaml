@@ -110,7 +110,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install Erlang/OTP
-      uses: erlef/setup-beam@f6a73a7bf1fb3d2faab5d807acfd2829b706fda9
+      uses: erlef/setup-beam@fix/bin-env-vars
       with:
         otp-version: '${{ matrix.erlang }}'
         version-type: loose
@@ -124,9 +124,13 @@ jobs:
           git
           make
 
+    - name: SETUP-BEAM DEBUGGING MSYS2
+      shell: msys2 {0}
+      run: pwd ; `cygpath -m $INSTALL_DIR_FOR_OTP`/bin/erl +V ; PATH=`cygpath -m $INSTALL_DIR_FOR_OTP`/bin:$PATH erl +V
+
     - name: Run tests
       shell: msys2 {0}
-      run: PATH=$INSTALL_DIR_FOR_OTP/bin:$PATH make -k ci-windows-${{ matrix.erlang }}
+      run: PATH=`cygpath -m $INSTALL_DIR_FOR_OTP`/bin:$PATH make -k ci-windows-${{ matrix.erlang }}
 
     - name: Upload logs
       uses: actions/upload-artifact@v4
