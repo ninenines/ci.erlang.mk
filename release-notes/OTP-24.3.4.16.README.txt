@@ -1,0 +1,99 @@
+Patch Package:           OTP 24.3.4.16
+Git Tag:                 OTP-24.3.4.16
+Date:                    2024-02-12
+Trouble Report Id:       OTP-18911, OTP-18932, OTP-18964
+Seq num:                 ERIERL-1023
+System:                  OTP
+Release:                 24
+Application:             common_test-1.22.1.2, erts-12.3.2.16,
+                         ssh-4.13.2.5
+Predecessor:             OTP 24.3.4.15
+
+ Check out the git tag OTP-24.3.4.16, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.22.1.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.22.1.2 application can be applied independently of
+ other applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18932    Application(s): common_test
+
+               Fix how CT finds Erlang/OTP releases for compatability
+               testing. This functionality is only used to test
+               Erlang/OTP.
+
+
+ Full runtime dependencies of common_test-1.22.1.2: compiler-6.0,
+ crypto-3.6, debugger-4.1, erts-7.0, ftp-1.0.0, inets-6.0, kernel-4.0,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.4.2, snmp-5.1.2, ssh-4.0,
+ stdlib-3.5, syntax_tools-1.7, tools-2.8, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-12.3.2.16 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-12.3.2.16 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 24
+       installation.
+
+       On a full OTP 24 installation, also the following runtime
+       dependency has to be satisfied:
+       -- kernel-8.3 (first satisfied in OTP 24.3)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18911    Application(s): erts
+               Related Id(s): ERIERL-1023, PR-7983
+
+               32-bit runtime systems on most Unix like platforms
+               could crash if a BIF timer was set with a huge timeout
+               of more than 68 years into the future. In order for the
+               crash to occur, the huge timer (at a later time than
+               when it was set) had to become the nearest active timer
+               set on the specific scheduler on which it was set. This
+               could not happen on a system with only one scheduler
+               since there would always be shorter timers in the
+               system.
+
+               Setting a timer larger than 49 days on Windows could
+               under rare circumstances cause the timeout to be
+               delayed.
+
+
+ Full runtime dependencies of erts-12.3.2.16: kernel-8.3, sasl-3.3,
+ stdlib-3.13
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.13.2.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.13.2.5 application can be applied independently of other
+ applications on a full OTP 24 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18964    Application(s): ssh
+
+               With this change, Curve25519 and Curve448 KEX methods
+               become most preferred (related to RFC8731).
+
+
+ Full runtime dependencies of ssh-4.13.2.5: crypto-5.0, erts-9.0,
+ kernel-5.3, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
