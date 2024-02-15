@@ -1,0 +1,101 @@
+Patch Package:           OTP 26.2.1
+Git Tag:                 OTP-26.2.1
+Date:                    2023-12-18
+Trouble Report Id:       OTP-18897, OTP-18902, OTP-18903
+Seq num:                
+System:                  OTP
+Release:                 26
+Application:             erts-14.2.1, ssh-5.1.1
+Predecessor:             OTP 26.2
+
+ Check out the git tag OTP-26.2.1, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18897    Application(s): ssh
+
+               With this change (being response to CVE-2023-48795),
+               ssh can negotiate "strict KEX" OpenSSH extension with
+               peers supporting it; also
+               'chacha20-poly1305@openssh.com' algorithm becomes a
+               less preferred cipher.
+
+               If strict KEX availability cannot be ensured on both
+               connection sides, affected encryption modes(CHACHA and
+               CBC) can be disabled with standard ssh configuration.
+               This will provide protection against vulnerability, but
+               at a cost of affecting interoperability. See
+               Configuring algorithms in SSH.
+
+
+ ---------------------------------------------------------------------
+ --- OTP-26.2.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18903    Application(s): otp
+
+               Updated copyright and license information.
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18902    Application(s): erts
+
+               Removed unnecessary PCRE source tar-ball.
+
+
+ Full runtime dependencies of erts-14.2.1: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.1 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18897    Application(s): ssh
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               With this change (being response to CVE-2023-48795),
+               ssh can negotiate "strict KEX" OpenSSH extension with
+               peers supporting it; also
+               'chacha20-poly1305@openssh.com' algorithm becomes a
+               less preferred cipher.
+
+               If strict KEX availability cannot be ensured on both
+               connection sides, affected encryption modes(CHACHA and
+               CBC) can be disabled with standard ssh configuration.
+               This will provide protection against vulnerability, but
+               at a cost of affecting interoperability. See
+               Configuring algorithms in SSH.
+
+
+ Full runtime dependencies of ssh-5.1.1: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
