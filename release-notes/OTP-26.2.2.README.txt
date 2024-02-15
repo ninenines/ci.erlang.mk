@@ -1,0 +1,178 @@
+Patch Package:           OTP 26.2.2
+Git Tag:                 OTP-26.2.2
+Date:                    2024-02-08
+Trouble Report Id:       OTP-18901, OTP-18911, OTP-18917, OTP-18931,
+                         OTP-18932, OTP-18949, OTP-18957, OTP-18964
+Seq num:                 ERIERL-1023, GH-7978, GH-7987, GH-8051
+System:                  OTP
+Release:                 26
+Application:             common_test-1.26.1, erl_interface-5.5.1,
+                         erts-14.2.2, kernel-9.2.1, ssh-5.1.2,
+                         ssl-11.1.1
+Predecessor:             OTP 26.2.1
+
+ Check out the git tag OTP-26.2.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.26.1 ----------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.26.1 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18932    Application(s): common_test
+
+               Fix how CT finds Erlang/OTP releases for compatability
+               testing. This functionality is only used to test
+               Erlang/OTP.
+
+
+ Full runtime dependencies of common_test-1.26.1: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erl_interface-5.5.1 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erl_interface-5.5.1 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18931    Application(s): erl_interface, erts
+               Related Id(s): GH-7987, PR-7989
+
+               Fix bug where the system installed openssl/md5.h would
+               be confused with the vendored md5.h.
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18911    Application(s): erts
+               Related Id(s): ERIERL-1023, PR-7983
+
+               32-bit runtime systems on most Unix like platforms
+               could crash if a BIF timer was set with a huge timeout
+               of more than 68 years into the future. In order for the
+               crash to occur, the huge timer (at a later time than
+               when it was set) had to become the nearest active timer
+               set on the specific scheduler on which it was set. This
+               could not happen on a system with only one scheduler
+               since there would always be shorter timers in the
+               system.
+
+               Setting a timer larger than 49 days on Windows could
+               under rare circumstances cause the timeout to be
+               delayed.
+
+
+  OTP-18931    Application(s): erl_interface, erts
+               Related Id(s): GH-7987, PR-7989
+
+               Fix bug where the system installed openssl/md5.h would
+               be confused with the vendored md5.h.
+
+
+  OTP-18949    Application(s): erts
+
+               The JIT has now been disabled on x86 Macs to prevent
+               annoying the "verifying shm-xyz" popups introduced in
+               MacOS Sonoma.
+
+               ARM Macs are unaffected.
+
+
+  OTP-18957    Application(s): erts
+               Related Id(s): GH-8051, OTP-18841, PR-8088
+
+               Garbage collection of a process on a dirty scheduler
+               could collide with signal handling for that process
+               causing a crash of the runtime system. This bug was
+               introduced in OTP 25.3.2.8 and OTP 26.2.
+
+
+ Full runtime dependencies of erts-14.2.2: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18901    Application(s): kernel
+
+               Fix group (that is the shell) to properly handle when
+               an get_until callback function returned {done, eof, []}
+               when an eof was detected.
+
+
+ Full runtime dependencies of kernel-9.2.1: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.2 -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18964    Application(s): ssh
+
+               With this change, Curve25519 and Curve448 KEX methods
+               become most preferred (related to RFC8731).
+
+
+ Full runtime dependencies of ssh-5.1.2: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18917    Application(s): ssl
+               Related Id(s): GH-7978
+
+               Legacy name handling could cause interop problems
+               between TLS-1.3/1.2 client and TLS-1.2 server.
+
+
+ Full runtime dependencies of ssl-11.1.1: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
