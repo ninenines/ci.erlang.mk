@@ -1,0 +1,108 @@
+Patch Package:           OTP 25.3.2.9
+Git Tag:                 OTP-25.3.2.9
+Date:                    2024-02-08
+Trouble Report Id:       OTP-18911, OTP-18932, OTP-18957, OTP-18964
+Seq num:                 ERIERL-1023, GH-8051
+System:                  OTP
+Release:                 25
+Application:             common_test-1.24.0.2, erts-13.2.2.6,
+                         ssh-4.15.3.2
+Predecessor:             OTP 25.3.2.8
+
+ Check out the git tag OTP-25.3.2.9, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.24.0.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.24.0.2 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18932    Application(s): common_test
+
+               Fix how CT finds Erlang/OTP releases for compatability
+               testing. This functionality is only used to test
+               Erlang/OTP.
+
+
+ Full runtime dependencies of common_test-1.24.0.2: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.2.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.2.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18911    Application(s): erts
+               Related Id(s): ERIERL-1023, PR-7983
+
+               32-bit runtime systems on most Unix like platforms
+               could crash if a BIF timer was set with a huge timeout
+               of more than 68 years into the future. In order for the
+               crash to occur, the huge timer (at a later time than
+               when it was set) had to become the nearest active timer
+               set on the specific scheduler on which it was set. This
+               could not happen on a system with only one scheduler
+               since there would always be shorter timers in the
+               system.
+
+               Setting a timer larger than 49 days on Windows could
+               under rare circumstances cause the timeout to be
+               delayed.
+
+
+  OTP-18957    Application(s): erts
+               Related Id(s): GH-8051, OTP-18841, PR-8088
+
+               Garbage collection of a process on a dirty scheduler
+               could collide with signal handling for that process
+               causing a crash of the runtime system. This bug was
+               introduced in OTP 25.3.2.8 and OTP 26.2.
+
+
+ Full runtime dependencies of erts-13.2.2.6: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.3.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.3.2 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18964    Application(s): ssh
+
+               With this change, Curve25519 and Curve448 KEX methods
+               become most preferred (related to RFC8731).
+
+
+ Full runtime dependencies of ssh-4.15.3.2: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
