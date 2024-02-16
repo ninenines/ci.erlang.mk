@@ -61,11 +61,14 @@ jobs:
           ~/erlang/
         key: ${{ runner.os }}-${{ runner.arch }}-Erlang-${{ inputs.erlang }}
 
-    - name: Install required software
+    - name: Run tests (macOS)
       if: runner.os == 'macOS'
-      run: brew install coreutils
+      run: >
+        brew install coreutils make &&
+        gmake -k ci-${{ inputs.erlang }}
 
-    - name: Run tests
+    - name: Run tests (Unix)
+      if: runner.os != 'macOS'
       run: make -k ci-${{ inputs.erlang }}
 
     - name: Upload logs
