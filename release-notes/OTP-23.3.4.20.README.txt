@@ -1,0 +1,78 @@
+Patch Package:           OTP 23.3.4.20
+Git Tag:                 OTP-23.3.4.20
+Date:                    2024-03-18
+Trouble Report Id:       OTP-18897, OTP-19002
+Seq num:                 ERIERL-1041
+System:                  OTP
+Release:                 23
+Application:             ssh-4.11.1.7
+Predecessor:             OTP 23.3.4.19
+
+ Check out the git tag OTP-23.3.4.20, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-18897    Application(s): ssh
+
+               With this change (being response to CVE-2023-48795),
+               ssh can negotiate "strict KEX" OpenSSH extension with
+               peers supporting it; also
+               'chacha20-poly1305@openssh.com' algorithm becomes a
+               less preferred cipher.
+
+               If strict KEX availability cannot be ensured on both
+               connection sides, affected encryption modes(CHACHA and
+               CBC) can be disabled with standard ssh configuration.
+               This will provide protection against vulnerability, but
+               at a cost of affecting interoperability. See
+               Configuring algorithms in SSH User's Guide.
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.11.1.7 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.11.1.7 application can be applied independently of other
+ applications on a full OTP 23 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-18897    Application(s): ssh
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               With this change (being response to CVE-2023-48795),
+               ssh can negotiate "strict KEX" OpenSSH extension with
+               peers supporting it; also
+               'chacha20-poly1305@openssh.com' algorithm becomes a
+               less preferred cipher.
+
+               If strict KEX availability cannot be ensured on both
+               connection sides, affected encryption modes(CHACHA and
+               CBC) can be disabled with standard ssh configuration.
+               This will provide protection against vulnerability, but
+               at a cost of affecting interoperability. See
+               Configuring algorithms in SSH User's Guide.
+
+
+  OTP-19002    Application(s): ssh
+               Related Id(s): ERIERL-1041
+
+               With this change, KEX strict terminal message is
+               emitted with debug verbosity.
+
+
+ Full runtime dependencies of ssh-4.11.1.7: crypto-4.6.4, erts-9.0,
+ kernel-5.3, public_key-1.6.1, stdlib-3.4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
