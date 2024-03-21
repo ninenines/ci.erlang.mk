@@ -8,6 +8,8 @@ on:
 env:
   CI_ERLANG_MK: 1
   AUTO_CI_MASTER: weekly
+  COWBOY_QUICER: ${{ vars.COWBOY_QUICER || 0 }}
+  GUN_QUICER: ${{ vars.GUN_QUICER || 0 }}
 
 jobs:
 
