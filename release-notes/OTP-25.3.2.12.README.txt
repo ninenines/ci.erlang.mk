@@ -1,0 +1,104 @@
+Patch Package:           OTP 25.3.2.12
+Git Tag:                 OTP-25.3.2.12
+Date:                    2024-05-02
+Trouble Report Id:       OTP-19065, OTP-19070, OTP-19071, OTP-19076
+Seq num:                 ERIERL-1073, GH-8356, GH-8385, OTP-18999,
+                         PR-8367, PR-8380
+System:                  OTP
+Release:                 25
+Application:             erts-13.2.2.9, mnesia-4.21.4.3, ssl-10.9.1.4
+Predecessor:             OTP 25.3.2.11
+
+ Check out the git tag OTP-25.3.2.12, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.2.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.2.9 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19070    Application(s): erts
+               Related Id(s): GH-8385
+
+               ETS functions did not properly handle keys containing
+               maps, sometimes matching too many or too few objects.
+
+
+  OTP-19071    Application(s): erts
+               Related Id(s): PR-8380, OTP-18999
+
+               Fix CPU quota determination for cgroups.
+
+               The bug was introduced through OTP-18999.
+
+
+ Full runtime dependencies of erts-13.2.2.9: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.21.4.3 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.21.4.3 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19076    Application(s): mnesia
+               Related Id(s): ERIERL-1073
+
+               Mnesia could crash during startup if del_table_copy/2
+               and add_table_copy/3 was invoked when the table was
+               loading.
+
+
+ Full runtime dependencies of mnesia-4.21.4.3: erts-9.0, kernel-5.3,
+ stdlib-3.4
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.9.1.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.9.1.4 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19065    Application(s): ssl
+               Related Id(s): GH-8356, PR-8367
+
+               Fix certificate authorities check so that CA closest to
+               peer is not lost. It could manifest itself in a failed
+               connection as the client failed to realize it had a
+               valid certificate chain to send to the server.
+
+
+ Full runtime dependencies of ssl-10.9.1.4: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
