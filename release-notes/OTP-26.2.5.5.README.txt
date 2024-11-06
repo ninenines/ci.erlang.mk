@@ -1,0 +1,143 @@
+Patch Package:           OTP 26.2.5.5
+Git Tag:                 OTP-26.2.5.5
+Date:                    2024-11-01
+Trouble Report Id:       OTP-19293, OTP-19311, OTP-19316, OTP-19325,
+                         OTP-19326, OTP-19329
+Seq num:                 ERIERL-1139, ERIERL-1147, GH-8929, GH-8971,
+                         GH-8997, PR-8924, PR-8931, PR-8979, PR-8980,
+                         PR-8995, PR-9001, PR-9002
+System:                  OTP
+Release:                 26
+Application:             common_test-1.26.2.2, crypto-5.4.2.3,
+                         ssh-5.1.4.4, ssl-11.1.4.5
+Predecessor:             OTP 26.2.5.4
+
+ Check out the git tag OTP-26.2.5.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.26.2.2 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.26.2.2 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-19293    Application(s): common_test
+               Related Id(s): ERIERL-1139, PR-8924, PR-8931
+
+               With this change, prefix option can be specified in
+               cth_conn_log option list. Option allows to specify how
+               much of additional information is added in raw log
+               output.
+
+
+ Full runtime dependencies of common_test-1.26.2.2: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.4.2.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.4.2.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19316    Application(s): crypto
+               Related Id(s): GH-8971, PR-8979
+
+               Fixed bug that could cause blocking scheduler threads
+               in crypto:supports(curves) if called the first time by
+               more than one Erlang process. Bug exists only in
+               OTP-26.2.5.4.
+
+
+  OTP-19329    Application(s): crypto
+               Related Id(s): GH-8997, PR-9002
+
+               Fixed crypto:hash_final/1 for digest types shake128 and
+               shake256 when using OpenSSL 3.4 or newer.
+
+
+ Full runtime dependencies of crypto-5.4.2.3: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.4 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19326    Application(s): ssh
+               Related Id(s): GH-8929, PR-8995
+
+               With this change, ssh connection does not crash upon
+               receiving exit-signal message for an already terminated
+               channel.
+
+
+ Full runtime dependencies of ssh-5.1.4.4: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.5 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.5 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19311    Application(s): ssl
+               Related Id(s): PR-8980
+
+               Avoid generating an internal alert for case that should
+               have been an orderly shutdown by the supervisor.
+
+
+ --- Improvements and New Features ---
+
+  OTP-19325    Application(s): ssl
+               Related Id(s): ERIERL-1147, PR-9001
+
+               Back port certificate_authorities option for TLS-1.3
+               servers to pre TLS-1.3 servers to enable them to
+               disable the sending of certificate authorities in their
+               certificate request. This will have same affect as the
+               the TLS-1.3 server option although it is handled by a
+               different mechanism in these versions, where the
+               functionality is described to be more of a guidance,
+               although some pre TLS clients have proven to make it
+               mandatory as in TLS-1.3 extension handling.
+
+
+ Full runtime dependencies of ssl-11.1.4.5: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ zmstone
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
