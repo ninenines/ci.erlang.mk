@@ -1,0 +1,251 @@
+Patch Package:           OTP 26.2.5.3
+Git Tag:                 OTP-26.2.5.3
+Date:                    2024-09-05
+Trouble Report Id:       OTP-17848, OTP-19119, OTP-19168, OTP-19170,
+                         OTP-19173, OTP-19175, OTP-19178, OTP-19179,
+                         OTP-19187, OTP-19205, OTP-19206, OTP-19213
+Seq num:                 ERIERL-1102, ERIERL-1108, GH-7746, GH-8454,
+                         GH-8561, GH-8630, PR-8310, PR-8543, PR-8686,
+                         PR-8690, PR-8763
+System:                  OTP
+Release:                 26
+Application:             compiler-8.4.3.1, diameter-2.3.2.2,
+                         erts-14.2.5.3, ftp-1.2.1.1, kernel-9.2.4.2,
+                         public_key-1.15.1.2, ssh-5.1.4.2,
+                         ssl-11.1.4.3
+Predecessor:             OTP 26.2.5.2
+
+ Check out the git tag OTP-26.2.5.3, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.4.3.1 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.4.3.1 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19168    Application(s): compiler
+               Related Id(s): GH-8630
+
+               Fixed a crash in an optimization pass relating to
+               appending binaries.
+
+
+  OTP-19178    Application(s): compiler
+               Related Id(s): PR-8686
+
+               Fixed a bug in the compiler's alias analysis pass that
+               could make it emit unsafe code.
+
+
+ Full runtime dependencies of compiler-8.4.3.1: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- diameter-2.3.2.2 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The diameter-2.3.2.2 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19206    Application(s): diameter
+               Related Id(s): ERIERL-1102
+
+               Stop service has been made more synchronous.
+
+
+ Full runtime dependencies of diameter-2.3.2.2: erts-10.0, kernel-3.2,
+ ssl-9.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19175    Application(s): erts, kernel, ssl
+               Related Id(s): GH-8561, PR-8690
+
+               A race in the kTLS flavour of SSL distribution has been
+               fixed so inet_drv.c doesn't read ahead too much data
+               which could cause the kTLS encryption to be activated
+               too late when some encrypted data had already been read
+               into the inet_drv.c buffer as unencrypted.
+
+
+ Full runtime dependencies of erts-14.2.5.3: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- ftp-1.2.1.1 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ftp-1.2.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19119    Application(s): ftp
+               Related Id(s): GH-8454, PR-8543
+
+               Fix race condition that sometimes resulted in
+               ftp:recv_bin/2 returning ok instead of {ok, Data}.
+
+
+ Full runtime dependencies of ftp-1.2.1.1: erts-7.0, kernel-6.0,
+ runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.2 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19175    Application(s): erts, kernel, ssl
+               Related Id(s): GH-8561, PR-8690
+
+               A race in the kTLS flavour of SSL distribution has been
+               fixed so inet_drv.c doesn't read ahead too much data
+               which could cause the kTLS encryption to be activated
+               too late when some encrypted data had already been read
+               into the inet_drv.c buffer as unencrypted.
+
+
+  OTP-19205    Application(s): kernel
+
+               Fix a deadlock when an application crashes during
+               startup and log messages were sent to standard out.
+               Logger would fail to print the messages to standard out
+               and instead print them to standard error.
+
+
+  OTP-19213    Application(s): kernel
+               Related Id(s): ERIERL-1108, PR-8763
+
+               Add the stdlib application parameters
+               shell_redraw_prompt_on_output which when set to false
+               disables redrawing of the shell prompt if any other
+               output is done.
+
+
+ Full runtime dependencies of kernel-9.2.4.2: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.15.1.2 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.15.1.2 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19179    Application(s): public_key
+
+               For completeness handle rsa_pss implicit default value,
+               although this will probably not be commonly used as it
+               provides very weak security.
+
+
+ Full runtime dependencies of public_key-1.15.1.2: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.2 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19170    Application(s): ssh
+               Related Id(s): GH-7746
+
+               With this change, ssh daemon started with TCP port
+               number argument will re-try to obtain listen socket
+               before returning error to user.
+
+
+  OTP-19173    Application(s): ssh
+               Related Id(s): PR-8310
+
+               With this change, robustness is improved by monitoring
+               connection handler process before casting socket
+               control notification.
+
+
+ Full runtime dependencies of ssh-5.1.4.2: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19175    Application(s): erts, kernel, ssl
+               Related Id(s): GH-8561, PR-8690
+
+               A race in the kTLS flavour of SSL distribution has been
+               fixed so inet_drv.c doesn't read ahead too much data
+               which could cause the kTLS encryption to be activated
+               too late when some encrypted data had already been read
+               into the inet_drv.c buffer as unencrypted.
+
+
+ --- Improvements and New Features ---
+
+  OTP-17848    Application(s): ssl
+
+               Make sure all TLS-1.3 terminations are graceful
+               (previous TLS version terminations already are).
+
+
+  OTP-19187    Application(s): ssl
+
+               Include more information in logging of SNI (Server Name
+               Indication) mismatch error.
+
+
+ Full runtime dependencies of ssl-11.1.4.3: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Frej Drejhammar, jakob svenningsson
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
