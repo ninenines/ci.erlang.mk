@@ -1,0 +1,238 @@
+Patch Package:           OTP 27.1.2
+Git Tag:                 OTP-27.1.2
+Date:                    2024-10-17
+Trouble Report Id:       OTP-19124, OTP-19235, OTP-19246, OTP-19247,
+                         OTP-19249, OTP-19258, OTP-19265, OTP-19266,
+                         OTP-19267, OTP-19268, OTP-19269, OTP-19274,
+                         OTP-19286, OTP-19288
+Seq num:                 ERIERL-1127, ERIERL-1133, ERIERL-1134,
+                         ERIERL-1137, ERIERL-1138, GH-6455, GH-7550,
+                         GH-8223, GH-8835, GH-8875, GH-8880, GH-8908,
+                         OTP-18520, OTP-19061, PR-8226, PR-8766,
+                         PR-8837, PR-8854, PR-8866, PR-8876, PR-8890,
+                         PR-8892, PR-8895, PR-8897, PR-8901, PR-8914,
+                         PR-8916
+System:                  OTP
+Release:                 27
+Application:             common_test-1.27.3, erts-15.1.2,
+                         kernel-10.1.1, ssh-5.2.3, ssl-11.2.4,
+                         stdlib-6.1.2
+Predecessor:             OTP 27.1.1
+
+Check out the git tag OTP-27.1.2, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# common_test-1.27.3
+
+The common_test-1.27.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, jquery and tablesorter licenses are added to COPYRIGHT file.
+  Also tablesorter is updated to version 2.32.
+
+  Own Id: OTP-19265
+  Related Id(s): PR-8876
+
+> #### Full runtime dependencies of common_test-1.27.3
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# erts-15.1.2
+
+The erts-15.1.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A bug has been fixed where receiving an SCTP message with `gen_sctp` could
+  waste the first fragments of a message and only deliver the last fragment.
+
+  This happened with low probability when the OS signaled that the socket was
+  ready for reading in combination with an internal time-out retry.
+
+  A bug has been fixed with a lingering time-out from after an SCTP connect that
+  could stop the flow of incoming messages on an active `gen_tcp` socket.
+
+  Own Id: OTP-19235
+  Related Id(s): ERIERL-1133, PR-8837
+
+- An boolean option `non_block_send` for SCTP, has ben added to be able to
+  achieve the old behaviour to avoid blocking send operations by passing the OS
+  network stack error message (`{error,eagain}` through.
+
+  Own Id: OTP-19258
+  Related Id(s): ERIERL-1134, OTP-19061
+
+- The call gen_tcp:send/2 could hang indefinitely despite having set the
+  `send_timeout` option for the following unfortunate combination of
+  circumstances:
+
+  - The socket has to be in passive mode.
+  - All output buffers had to be filled util the `high_watermark` was hit,
+    causing the gen_tcp:send/2 operation to block.
+  - While the send operation was blocked, a `gen_tcp:recv/2,3` call had to be
+    done from a different process. It had to block, waiting for data for a while
+    before completing the operation, and the received packet had to fill at
+    least 75% of the receive buffer.
+
+  Under these circumstances he information that a send operation was waiting got
+  lost, so the send operation that blocked in the first placed would never
+  return. The data it had would be sent, though, and send operations from other
+  processes, still work.
+
+  This bug has been fixed.
+
+  Own Id: OTP-19267
+  Related Id(s): ERIERL-1138, GH-6455, PR-8892, OTP-18520
+
+- In rare circumstances, in code that matches multiple tuples, the JIT could
+  generate code that would raise a `badmatch` exception even if the given tuples
+  were correct.
+
+  Own Id: OTP-19268
+  Related Id(s): GH-8875, PR-8895
+
+- Fixed beam crash that could happen if resetting `call_time` or `call_memory`
+  trace counters of a function while it is called. Bug exists since OTP R16.
+
+  Own Id: OTP-19269
+  Related Id(s): GH-8835, PR-8897
+
+> #### Full runtime dependencies of erts-15.1.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.1.1
+
+Note! The kernel-10.1.1 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.1 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- A bug has been fixed where receiving an SCTP message with `gen_sctp` could
+  waste the first fragments of a message and only deliver the last fragment.
+
+  This happened with low probability when the OS signaled that the socket was
+  ready for reading in combination with an internal time-out retry.
+
+  A bug has been fixed with a lingering time-out from after an SCTP connect that
+  could stop the flow of incoming messages on an active `gen_tcp` socket.
+
+  Own Id: OTP-19235
+  Related Id(s): ERIERL-1133, PR-8837
+
+- An boolean option `non_block_send` for SCTP, has ben added to be able to
+  achieve the old behaviour to avoid blocking send operations by passing the OS
+  network stack error message (`{error,eagain}` through.
+
+  Own Id: OTP-19258
+  Related Id(s): ERIERL-1134, OTP-19061
+
+> #### Full runtime dependencies of kernel-10.1.1
+>
+> crypto-5.0, erts-15.1, sasl-3.0, stdlib-6.0
+
+# ssh-5.2.3
+
+The ssh-5.2.3 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, a race condition is removed from ssh client connection setup
+  procedure.
+
+  Own Id: OTP-19124
+  Related Id(s): GH-7550, PR-8766
+
+- With this change, ssh:connect is not affected by presence of EXIT message in
+  queue.
+
+  Own Id: OTP-19246
+  Related Id(s): GH-8223, PR-8854
+
+- With this change, ssh appends {active, false} option after socket options
+  received from user - so that false value is always used.
+
+  Own Id: OTP-19247
+  Related Id(s): PR-8226
+
+> #### Full runtime dependencies of ssh-5.2.3
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.4
+
+Note! The ssl-11.2.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.2 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- Refactor trying to also make some optimizations introduced a bug in signature
+  algorithms checks in OTP-26.2.1. This could manifest itself in not being able
+  to negotiate connections using certificates needing to use some TLS-1.2
+  compatibility legacy signature schemes.
+
+  Own Id: OTP-19249
+  Related Id(s): ERIERL-1137, PR-8866
+
+- Correct timeout handling for termination code run for own alerts, so that
+  intended timeout is used instead of falling back to OS TCP-stack timeout that
+  is unreasonably long on some platforms.
+
+  Own Id: OTP-19274
+  Related Id(s): PR-8901
+
+- Fix assertion so that works as intended. This could result in that some
+  TLS-1.2 clients would fail to connect to the the erlang server. Bug introduced
+  in OTP-27.1.1
+
+  Own Id: OTP-19288
+  Related Id(s): GH-8908, PR-8916
+
+> #### Full runtime dependencies of ssl-11.2.4
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.2,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.1.2
+
+The stdlib-6.1.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, uri_string:normalize assumes empty path (do not crash) when
+  no path is provided in the URI map.
+
+  Own Id: OTP-19266
+  Related Id(s): ERIERL-1127, PR-8890
+
+- Fixed spec for json:format/3.
+
+  Own Id: OTP-19286
+  Related Id(s): GH-8880, PR-8914
+
+> #### Full runtime dependencies of stdlib-6.1.2
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# Thanks to
+
+Jakub Witczak
+
