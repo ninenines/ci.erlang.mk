@@ -1,0 +1,259 @@
+Patch Package:           OTP 27.0.1
+Git Tag:                 OTP-27.0.1
+Date:                    2024-07-10
+Trouble Report Id:       OTP-19091, OTP-19092, OTP-19094, OTP-19095,
+                         OTP-19099, OTP-19100, OTP-19106, OTP-19107,
+                         OTP-19108, OTP-19109, OTP-19116, OTP-19118,
+                         OTP-19121, OTP-19123, OTP-19131, OTP-19137,
+                         OTP-19140, OTP-19142, OTP-19147, OTP-19151,
+                         OTP-19152
+Seq num:                 ERIERL-1043, ERIERL-1106, GH-8376, GH-8482,
+                         GH-8484, GH-8489, GH-8574, GH-8579, GH-8580,
+                         GH-8588, GH-8614, PR-8345, PR-8507, PR-8508,
+                         PR-8519, PR-8534, PR-8539, PR-8542, PR-8546,
+                         PR-8567, PR-8581, PR-8585, PR-8616, PR-8619
+System:                  OTP
+Release:                 27
+Application:             compiler-8.5.1, edoc-1.3.1, erts-15.0.1,
+                         kernel-10.0.1, public_key-1.16.1, ssh-5.2.1,
+                         ssl-11.2.1, stdlib-6.0.1
+Predecessor:             OTP 27.0
+
+Check out the git tag OTP-27.0.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-27.0.1
+
+## Improvements and New Features
+
+- Bump ex_doc version to v0.34.1 and fix copyright in published docs to have
+  correct year.
+
+  Own Id: OTP-19095
+  Related Id(s): PR-8507
+
+# compiler-8.5.1
+
+The compiler-8.5.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- One of the compiler's optimization passes would get very slow when compiling
+  certain modules. The compiler will now automatically disable that pass for
+  input that would trigger the slowdown.
+
+  Own Id: OTP-19131
+  Related Id(s): PR-8567
+
+- Fix `+deterministic` to work properly with documentation attributes.
+
+  Own Id: OTP-19142
+  Related Id(s): GH-8579, PR-8585
+
+> #### Full runtime dependencies of compiler-8.5.1
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# edoc-1.3.1
+
+The edoc-1.3.1 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix broken makefile dependency when building HTML documentation.
+
+  Own Id: OTP-19116
+  Related Id(s): PR-8534
+
+> #### Full runtime dependencies of edoc-1.3.1
+>
+> erts-11.0, inets-5.10, kernel-7.0, stdlib-4.0, syntax_tools-2.0, xmerl-1.3.7
+
+# erts-15.0.1
+
+The erts-15.0.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In rare circumstances the JIT could do an unsafe in-place update of a tuple.
+
+  Own Id: OTP-19108
+  Related Id(s): PR-8539
+
+- When a port command crashed in the inet driver during gen_tcp:send/2, a
+  monitor `'DOWN'` message could be left lingering in the caller's mailbox. This
+  has now been fixed.
+
+  Own Id: OTP-19121
+  Related Id(s): GH-8484
+
+- `'DOWN'` messages originating from a monitored port, contained the atom
+  `process` instead of the atom `port` as the third element when the exit reason
+  was not an immediate term.
+
+  Own Id: OTP-19123
+  Related Id(s): GH-8484, PR-8546
+
+- Fix so that the options to enable Transparent Huge Page alignment of the
+  Erlang VM executable are only applied to the Erlang VM and not other native
+  programs such as `erlc` and `dialyzer`. This bug was introduced in Erlang/OTP
+  27.0.
+
+  Own Id: OTP-19137
+  Related Id(s): GH-8574
+
+- When *no time warp mode* was enabled, a smaller Erlang monotonic time could
+  be read than a previously read time, i.e., breaking the monotonic property.
+  The runtime system will abort when detecting an issue like this since OTP
+  24.3.4.17 and OTP 25.0.
+
+  Up until OTP 25 _no time warp mode_ is the default. As of OTP 26 [*multi time
+  warp mode*] is the default.
+
+  Own Id: OTP-19147
+  Related Id(s): ERIERL-1043, ERIERL-1106, PR-8619
+
+- When calling `trace:function(Session, _, true, meta)` the meta tracer was
+  incorrectly set to be the calling process. Now it's set to the session tracer
+  as expected.
+
+  Own Id: OTP-19151
+  Related Id(s): GH-8614, PR-8616
+
+> #### Full runtime dependencies of erts-15.0.1
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.0.1
+
+The kernel-10.0.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Improvements and New Features
+
+- Polish the `logger` documentation.
+
+  Own Id: OTP-19118
+  Related Id(s): PR-8534
+
+> #### Full runtime dependencies of kernel-10.0.1
+>
+> crypto-5.0, erts-15.0, sasl-3.0, stdlib-6.0
+
+# public_key-1.16.1
+
+The public_key-1.16.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix bug in dnsName constraint check, could cause valid cert to be considered
+  bad during path validation.
+
+  Own Id: OTP-19100
+  Related Id(s): GH-8482, PR-8508
+
+> #### Full runtime dependencies of public_key-1.16.1
+>
+> asn1-3.0, crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+# ssh-5.2.1
+
+The ssh-5.2.1 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, race condition between connection closing and automatic
+  window adjustment is fixed.
+
+  Own Id: OTP-19109
+  Related Id(s): PR-8345
+
+> #### Full runtime dependencies of ssh-5.2.1
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.1
+
+The ssl-11.2.1 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Check for TLS-1.3 support should check minimum requirements.
+
+  Own Id: OTP-19094
+  Related Id(s): GH-8489
+
+- If both TLS-1.3 and TLS-1.2 is supported and TLS-1.2 negotiated convert
+  TLS-1.3 ECDSA schemes to TLS-1.2 hash and signature pairs for increased
+  interoperability.
+
+  Own Id: OTP-19107
+  Related Id(s): GH-8376
+
+- TLS-1.3 negotiation now uses SNI based options correctly instead of ignoring
+  them.
+
+  Own Id: OTP-19140
+
+## Improvements and New Features
+
+- Make it easier to distinguish between a invalid signature and unsupported
+  signature.
+
+  Own Id: OTP-19091
+
+- Enhance ALERT logs to help understand what causes the alert.
+
+  Own Id: OTP-19092
+  Related Id(s): GH-8482
+
+- When the default value for signature_algs is used, default the
+  signature_algs_cert to the default value + rsa_pkcs1_sha1 to allow this
+  algorithms for certificates but not for the TLS protocol. This is for better
+  interoperability. If signature_algs is set explicitly signature_algs_cert must
+  also be set explicitly if they should be different.
+
+  Own Id: OTP-19152
+  Related Id(s): GH-8588
+
+> #### Full runtime dependencies of ssl-11.2.1
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.15,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.0.1
+
+The stdlib-6.0.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix so that missing `-doc({file, File})` files only result in a warning and
+  not an error.
+
+  Own Id: OTP-19099
+  Related Id(s): PR-8542
+
+- Fixed `json` bugs, json:encode_key_value_list/2 did not generate arrays
+  and json:decode/3 did not invoke the user callback for `0`.
+
+  Own Id: OTP-19106
+  Related Id(s): GH-8580, PR-8519, PR-8581
+
+> #### Full runtime dependencies of stdlib-6.0.1
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# Thanks to
+
+Frej Drejhammar, Igor Goryachev, Michał Muskała
+
