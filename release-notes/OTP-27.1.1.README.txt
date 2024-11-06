@@ -1,0 +1,154 @@
+Patch Package:           OTP 27.1.1
+Git Tag:                 OTP-27.1.1
+Date:                    2024-09-30
+Trouble Report Id:       OTP-19227, OTP-19236, OTP-19238, OTP-19241,
+                         OTP-19245, OTP-19251, OTP-19252, OTP-19254,
+                         OTP-19256, OTP-19257
+Seq num:                 #8848, #8853, ERIERL-1130, GH-8832, PR-8261,
+                         PR-8780, PR-8809, PR-8836, PR-8858
+System:                  OTP
+Release:                 27
+Application:             common_test-1.27.2, erts-15.1.1,
+                         public_key-1.16.3, ssl-11.2.3, stdlib-6.1.1
+Predecessor:             OTP 27.1
+
+Check out the git tag OTP-27.1.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# common_test-1.27.2
+
+The common_test-1.27.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, HTML reports include jQuery version 3.7.1.
+
+  Own Id: OTP-19252
+  Related Id(s): PR-8858
+
+> #### Full runtime dependencies of common_test-1.27.2
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# erts-15.1.1
+
+The erts-15.1.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- On Windows, successive failed socket calls caused socket to become
+  "uninitialized".
+
+  Own Id: OTP-19251
+  Related Id(s): #8853
+
+- The socket framework fails to start on a IPv6-only Windows machine.
+
+  Own Id: OTP-19254
+  Related Id(s): #8848
+
+> #### Full runtime dependencies of erts-15.1.1
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# public_key-1.16.3
+
+The public_key-1.16.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Introduction of verify_fun/4 unfortunately introduced an argument switch for
+  some specific path validation errors so that verify_fun/3 could under these
+  circumstances be called with a DER cert instead of a decod cert, also in this
+  situation the verify_fun/4 would have the certificates in reverse order.
+
+  Own Id: OTP-19245
+  Related Id(s): GH-8832
+
+## Improvements and New Features
+
+- Do not hide crypto badarg reason, this error handling enhancement facilitates
+  debugging. These kind of runtime errors are not documented and should never be
+  relied on for matching, they are intended for catching input errors early.
+
+  Own Id: OTP-19238
+
+> #### Full runtime dependencies of public_key-1.16.3
+>
+> asn1-3.0, crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+# ssl-11.2.3
+
+Note! The ssl-11.2.3 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.2 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- Starting from TLS-1.3 some server handshake alerts might arrive after
+  ssl:connection/2,3,4 has returned. If the socket is in active mode the
+  controlling process will get the alert message, but passive sockets would only
+  get {error, closed} on next call to ssl:recv/2,3 or ssl/setopts/2. Passive
+  sockets calls will now return {error, error_alert()} instead.
+
+  Own Id: OTP-19236
+  Related Id(s): PR-8261
+
+- Servers configured to support only version (pre TLS-1.2) should ignore hello
+  version extension, as it is an unknown extension to them, this will result in
+  that new clients that do not support the old server version will get an
+  insufficient security alert from the server and not a protocol version alert,
+  this is consistent with how old servers not able to support higher protocol
+  versions work.
+
+  Own Id: OTP-19257
+
+> #### Full runtime dependencies of ssl-11.2.3
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.2,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.1.1
+
+The stdlib-6.1.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Remove whitespace stripping of returned binaries in json:decode/3.
+
+  Own Id: OTP-19227
+  Related Id(s): ERIERL-1130, PR-8809
+
+- Fix zip:unzip/2 to not crash when extracting zip files with garbage in the
+  Zip64 extra header. This bug was introduced in Erlang 27.1 and has so far only
+  been seen on some archives creates by MS Excel.
+
+  Own Id: OTP-19241
+  Related Id(s): PR-8836
+
+- With this change, shutdown procedure handles a race condition between
+  supervisor executing a shutdown and child process termination from other
+  reason.
+
+  Own Id: OTP-19256
+  Related Id(s): PR-8780
+
+> #### Full runtime dependencies of stdlib-6.1.1
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# Thanks to
+
+Jakub Witczak
+
