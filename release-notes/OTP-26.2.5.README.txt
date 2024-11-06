@@ -1,0 +1,209 @@
+Patch Package:           OTP 26.2.5
+Git Tag:                 OTP-26.2.5
+Date:                    2024-05-02
+Trouble Report Id:       OTP-19061, OTP-19062, OTP-19065, OTP-19067,
+                         OTP-19068, OTP-19069, OTP-19070, OTP-19071,
+                         OTP-19072, OTP-19076, OTP-19078
+Seq num:                 ERIERL-1073, GH-8356, GH-8383, GH-8385,
+                         OTP-18999, PR-8367, PR-8379, PR-8380,
+                         PR-8391, PR-8422
+System:                  OTP
+Release:                 26
+Application:             dialyzer-5.1.3, erts-14.2.5, kernel-9.2.4,
+                         mnesia-4.23.1, ssl-11.1.4, stdlib-5.2.3
+Predecessor:             OTP 26.2.4
+
+ Check out the git tag OTP-26.2.5, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- HIGHLIGHTS ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-19069    Application(s): erts
+
+               Added a warning to open_port/2 regarding the BadBatBut
+               attack affecting Windows.
+
+
+ ---------------------------------------------------------------------
+ --- dialyzer-5.1.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The dialyzer-5.1.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19068    Application(s): dialyzer
+               Related Id(s): GH-8383
+
+               Fixed an issue with bitstring type inference on
+               segments following UTF-8/16/32 segments.
+
+
+ Full runtime dependencies of dialyzer-5.1.3: compiler-8.0, erts-12.0,
+ kernel-8.0, stdlib-5.0, syntax_tools-2.0, wx-2.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19061    Application(s): erts
+
+               gen_sctp:send/3,4 now waits for the send to complete
+               instead of returning an OS result such as
+               {error, ewouldblock}.
+
+
+  OTP-19070    Application(s): erts
+               Related Id(s): GH-8385
+
+               ETS functions did not properly handle keys containing
+               maps, sometimes matching too many or too few objects.
+
+
+  OTP-19071    Application(s): erts
+               Related Id(s): PR-8380, OTP-18999
+
+               Fix CPU quota determination for cgroups.
+
+               The bug was introduced through OTP-18999.
+
+
+ --- Improvements and New Features ---
+
+  OTP-19069    Application(s): erts
+
+               *** HIGHLIGHT ***
+
+               Added a warning to open_port/2 regarding the BadBatBut
+               attack affecting Windows.
+
+
+ Full runtime dependencies of erts-14.2.5: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19072    Application(s): kernel, stdlib
+               Related Id(s): PR-8391
+
+               Fix the shell Job Control Mode to not crash when typing
+               TAB or CTRL+R.
+
+
+  OTP-19078    Application(s): kernel
+               Related Id(s): PR-8422
+
+               Fix calls to blocking application APIs to throw an
+               exception with reason terminating if called when the
+               system is terminating.
+
+               This is done in order to avoid deadlocks during
+               shutdown or restart.
+
+
+ Full runtime dependencies of kernel-9.2.4: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.23.1 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.23.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19076    Application(s): mnesia
+               Related Id(s): ERIERL-1073
+
+               Mnesia could crash during startup if del_table_copy/2
+               and add_table_copy/3 was invoked when the table was
+               loading.
+
+
+ Full runtime dependencies of mnesia-4.23.1: erts-9.0, kernel-5.3,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19065    Application(s): ssl
+               Related Id(s): GH-8356, PR-8367
+
+               Fix certificate authorities check so that CA closest to
+               peer is not lost. It could manifest itself in a failed
+               connection as the client failed to realize it had a
+               valid certificate chain to send to the server.
+
+
+  OTP-19067    Application(s): ssl
+               Related Id(s): PR-8379
+
+               ssl:signature_algs/2 did not list some legacy algorithm
+               schemes correctly when listing all algorithms
+               available.
+
+
+ Full runtime dependencies of ssl-11.1.4: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2.3 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19062    Application(s): stdlib
+
+               Fix shell expansion of -type a() :: $a. in the erlang
+               shell.
+
+
+  OTP-19072    Application(s): kernel, stdlib
+               Related Id(s): PR-8391
+
+               Fix the shell Job Control Mode to not crash when typing
+               TAB or CTRL+R.
+
+
+ Full runtime dependencies of stdlib-5.2.3: compiler-5.0, crypto-4.5,
+ erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
