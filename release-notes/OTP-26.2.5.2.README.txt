@@ -1,0 +1,125 @@
+Patch Package:           OTP 26.2.5.2
+Git Tag:                 OTP-26.2.5.2
+Date:                    2024-07-10
+Trouble Report Id:       OTP-19143, OTP-19147, OTP-19152, OTP-19154,
+                         OTP-19157
+Seq num:                 ERIERL-1043, ERIERL-1106, GH-8588, GH-8613,
+                         PR-8619, PR-8627, PR-8638
+System:                  OTP
+Release:                 26
+Application:             crypto-5.4.2.1, erts-14.2.5.2, ssl-11.1.4.2,
+                         stdlib-5.2.3.1
+Predecessor:             OTP 26.2.5.1
+
+ Check out the git tag OTP-26.2.5.2, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- crypto-5.4.2.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.4.2.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-19143    Application(s): crypto
+
+               Add warning in documentation to avoid crypto:start/0 as
+               it does not work for FIPS mode. Use
+               application:start(crypto) instead.
+
+
+ Full runtime dependencies of crypto-5.4.2.1: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19147    Application(s): erts
+               Related Id(s): ERIERL-1043, ERIERL-1106, PR-8619
+
+               When no time warp mode was enabled, a smaller Erlang
+               monotonic time could be read than a previously read
+               time, i.e., breaking the monotonic property. The
+               runtime system will abort when detecting an issue like
+               this since OTP 24.3.4.17 and OTP 25.0.
+
+               Up until OTP 25 no time warp mode is the default. As of
+               OTP 26 multi time warp mode is the default.
+
+
+  OTP-19154    Application(s): erts
+               Related Id(s): GH-8613, PR-8627
+
+               A scheduler thread could get stuck when deleting a
+               memory allocator carrier when adjacent carriers were
+               deleted and/or inserted simultaneously by other
+               schedulers. This in turn could cause the other
+               schedulers to get stuck as well.
+
+
+ Full runtime dependencies of erts-14.2.5.2: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.2 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-19152    Application(s): ssl
+               Related Id(s): GH-8588
+
+               When the default value for signature_algs is used,
+               default the signature_algs_cert to the default value +
+               rsa_pkcs1_sha1 to allow this algorithms for
+               certificates but not for the TLS protocol. This is for
+               better interoperability. If signature_algs is set
+               explicitly signature_algs_cert must also be set
+               explicitly if they should be different.
+
+
+ Full runtime dependencies of ssl-11.1.4.2: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2.3.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2.3.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19157    Application(s): stdlib
+               Related Id(s): PR-8638
+
+               Fixed a bug that caused the shell completion to crash
+               when keyword and tuple appeared on the same line.
+
+
+ Full runtime dependencies of stdlib-5.2.3.1: compiler-5.0,
+ crypto-4.5, erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
