@@ -1,0 +1,3092 @@
+Inital Release:          OTP 27.0
+Git Tag:                 OTP-27.0
+Date:                    2024-05-20
+Trouble Report Id:       OTP-16607, OTP-18568, OTP-18577, OTP-18589,
+                         OTP-18590, OTP-18594, OTP-18606, OTP-18608,
+                         OTP-18609, OTP-18622, OTP-18639, OTP-18641,
+                         OTP-18642, OTP-18648, OTP-18658, OTP-18665,
+                         OTP-18667, OTP-18668, OTP-18671, OTP-18673,
+                         OTP-18680, OTP-18682, OTP-18684, OTP-18699,
+                         OTP-18703, OTP-18709, OTP-18713, OTP-18714,
+                         OTP-18715, OTP-18716, OTP-18717, OTP-18727,
+                         OTP-18741, OTP-18742, OTP-18743, OTP-18744,
+                         OTP-18750, OTP-18756, OTP-18761, OTP-18766,
+                         OTP-18774, OTP-18778, OTP-18779, OTP-18781,
+                         OTP-18783, OTP-18784, OTP-18785, OTP-18786,
+                         OTP-18787, OTP-18788, OTP-18789, OTP-18793,
+                         OTP-18794, OTP-18795, OTP-18796, OTP-18801,
+                         OTP-18804, OTP-18805, OTP-18806, OTP-18807,
+                         OTP-18808, OTP-18809, OTP-18813, OTP-18816,
+                         OTP-18819, OTP-18820, OTP-18825, OTP-18831,
+                         OTP-18834, OTP-18835, OTP-18845, OTP-18846,
+                         OTP-18847, OTP-18848, OTP-18849, OTP-18852,
+                         OTP-18856, OTP-18859, OTP-18860, OTP-18865,
+                         OTP-18870, OTP-18874, OTP-18875, OTP-18876,
+                         OTP-18878, OTP-18879, OTP-18881, OTP-18884,
+                         OTP-18887, OTP-18892, OTP-18894, OTP-18898,
+                         OTP-18904, OTP-18908, OTP-18912, OTP-18913,
+                         OTP-18914, OTP-18916, OTP-18918, OTP-18920,
+                         OTP-18922, OTP-18923, OTP-18927, OTP-18928,
+                         OTP-18929, OTP-18930, OTP-18934, OTP-18938,
+                         OTP-18941, OTP-18942, OTP-18943, OTP-18944,
+                         OTP-18945, OTP-18946, OTP-18947, OTP-18950,
+                         OTP-18951, OTP-18954, OTP-18955, OTP-18959,
+                         OTP-18961, OTP-18963, OTP-18965, OTP-18966,
+                         OTP-18967, OTP-18968, OTP-18969, OTP-18972,
+                         OTP-18973, OTP-18975, OTP-18976, OTP-18977,
+                         OTP-18978, OTP-18980, OTP-18981, OTP-18984,
+                         OTP-18987, OTP-18989, OTP-18992, OTP-18993,
+                         OTP-18994, OTP-18995, OTP-18998, OTP-19001,
+                         OTP-19004, OTP-19005, OTP-19010, OTP-19016,
+                         OTP-19017, OTP-19018, OTP-19020, OTP-19022,
+                         OTP-19025, OTP-19026, OTP-19027, OTP-19029,
+                         OTP-19030, OTP-19033, OTP-19042, OTP-19052,
+                         OTP-19053, OTP-19054, OTP-19057, OTP-19063,
+                         OTP-19073, OTP-19074, OTP-19075, OTP-19077,
+                         OTP-19079, OTP-19080, OTP-19081, OTP-19082,
+                         OTP-19086, OTP-19087, OTP-19088, OTP-19089,
+                         OTP-19090
+Seq num:                 #6724, BL-312, BL-322, ERIERL-43, ERIERL-964,
+                         ERIERL-967, ERIERL-985, GH-4992, GH-6152,
+                         GH-6692, GH-6979, GH-6985, GH-7266, GH-7295,
+                         GH-7397, GH-7432, GH-7438, GH-7483, GH-7493,
+                         GH-7494, GH-7539, GH-7617, GH-7706, GH-7718,
+                         GH-7972, GH-8058, GH-8061, GH-8066, GH-8159,
+                         GH-8166, GH-8244, GH-8360, GH-8364, GH-8365,
+                         GH-8366, GH-8452, OTP-16448, OTP-16608,
+                         OTP-16875, OTP-17734, OTP-18746, OTP-18750,
+                         OTP-18835, PR-6510, PR-6639, PR-6658,
+                         PR-6791, PR-6985, PR-7110, PR-7125, PR-7174,
+                         PR-7183, PR-7220, PR-7232, PR-7236, PR-7243,
+                         PR-7267, PR-7274, PR-7299, PR-7302, PR-7313,
+                         PR-7316, PR-7348, PR-7380, PR-7383, PR-7388,
+                         PR-7398, PR-7419, PR-7428, PR-7441, PR-7443,
+                         PR-7447, PR-7451, PR-7465, PR-7470, PR-7474,
+                         PR-7475, PR-7481, PR-7491, PR-7496, PR-7528,
+                         PR-7534, PR-7535, PR-7538, PR-7556, PR-7585,
+                         PR-7590, PR-7592, PR-7607, PR-7628, PR-7639,
+                         PR-7649, PR-7651, PR-7675, PR-7678, PR-7684,
+                         PR-7697, PR-7699, PR-7700, PR-7701, PR-7702,
+                         PR-7703, PR-7711, PR-7720, PR-7726, PR-7728,
+                         PR-7732, PR-7738, PR-7739, PR-7740, PR-7745,
+                         PR-7779, PR-7781, PR-7782, PR-7790, PR-7809,
+                         PR-7816, PR-7824, PR-7844, PR-7845, PR-7846,
+                         PR-7847, PR-7856, PR-7857, PR-7869, PR-7879,
+                         PR-7891, PR-7898, PR-7917, PR-7918, PR-7936,
+                         PR-7942, PR-7952, PR-7957, PR-7960, PR-7963,
+                         PR-7973, PR-7977, PR-7981, PR-7993, PR-8003,
+                         PR-8004, PR-8006, PR-8026, PR-8029, PR-8035,
+                         PR-8042, PR-8048, PR-8056, PR-8063, PR-8067,
+                         PR-8069, PR-8076, PR-8086, PR-8090, PR-8091,
+                         PR-8092, PR-8093, PR-8095, PR-8103, PR-8111,
+                         PR-8112, PR-8155, PR-8156, PR-8164, PR-8168,
+                         PR-8177, PR-8182, PR-8205, PR-8230, PR-8233,
+                         PR-8241, PR-8249, PR-8250, PR-8255, PR-8256,
+                         PR-8258, PR-8288, PR-8308, PR-8324, PR-8345,
+                         PR-8363, PR-8375, PR-8382, PR-8389, PR-8396,
+                         PR-8399
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3, common_test-1.27, compiler-8.5,
+                         crypto-5.5, debugger-5.4, dialyzer-5.2,
+                         diameter-2.4, edoc-1.3, eldap-1.2.13,
+                         erl_interface-5.5.2, erts-15.0, et-1.7.1,
+                         eunit-2.9.1, ftp-1.2.2, inets-9.2,
+                         jinterface-1.14.1, kernel-10.0, megaco-4.6,
+                         mnesia-4.23.2, observer-2.16, odbc-2.14.3,
+                         os_mon-2.10, parsetools-2.6, public_key-1.16,
+                         reltool-1.0.1, runtime_tools-2.1, sasl-4.2.2,
+                         snmp-5.16, ssh-5.2, ssl-11.2, stdlib-6.0,
+                         syntax_tools-3.2, tftp-1.2, tools-4.0,
+                         wx-2.4.2, xmerl-2.0
+Predecessor:             OTP
+
+Check out the git tag OTP-27.0, and build a full OTP system including
+documentation.
+
+# HIGHLIGHTS
+
+- The `ssl` client can negotiate and handle certificate status request (OCSP
+  stapling support on the client side).
+
+  Thanks to voltone for interop testing and related discussions.
+
+  Own Id: OTP-18606
+  Application(s): public_key, ssl
+  Related Id(s): OTP-16448, OTP-16875
+
+- The functions `is_equal/2`, `map/2`, and `filtermap/2` have been added to the
+  modules `sets`, `ordsets`, and `gb_sets`.
+
+  Own Id: OTP-18622
+  Application(s): stdlib
+  Related Id(s): PR-7183, PR-7232
+
+- The compiler now emits nicer error message for function head mismatches. For
+  example, given:
+
+      a() -> ok;
+      a(_) -> error.
+
+  Erlang/OTP 26 and earlier would emit a diagnostic similar to:
+
+      t.erl:6:1: head mismatch
+      %    6| a(_) -> error.
+      %     | ^
+
+  while in Erlang/OTP 27 the diagnostic is similar to:
+
+      t.erl:6:1: head mismatch: function a with arities 0 and 1 is regarded as two distinct functions. Is the number of arguments incorrect or is the semicolon in a/0 unwanted?
+      %    6| a(_) -> error.
+      %     | ^
+
+  Own Id: OTP-18648
+  Application(s): compiler, stdlib
+  Related Id(s): PR-7383
+
+- The compiler will now merge consecutive updates of the same record.
+
+  As an example, the body of the following function will be combined into a
+  single tuple creation instruction:
+
+      -record(r, {a,b,c,d}).
+
+      update(Value) ->
+          R0 = #r{},
+          R1 = R0#r{a=Value},
+          R2 = R1#r{b=2},
+          R2#r{c=3}.
+
+  Own Id: OTP-18680
+  Application(s): compiler
+  Related Id(s): ERIERL-967, PR-7491, PR-8086
+
+- As announced in OTP 26.1, `0.0` is no longer considered equivalent to `-0.0`
+  when using the term equivalence operators (`=:=` and `=/=`).
+
+  The arithmetic equality operators (`==` and `/=`) and all relative comparison
+  operations still consider `0.0` equal to `-0.0`.
+
+  Own Id: OTP-18717
+  Application(s): otp
+  Related Id(s): PR-7728
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The `erl` command now supports the `-S` flag, which is similar to the `-run`
+  flag, except that it will pass all arguments up to end of the command line to
+  the called function. (The `-run` flag will not pass arguments beginning with a
+  hyphen.) Another difference is that `-S` will always call a function with one
+  argument, passing an empty list if no arguments were given.
+
+  Own Id: OTP-18744
+  Application(s): erts
+  Related Id(s): PR-7470
+
+- Triple-Quoted Strings has been implemented as per EEP 64. See String in the
+  Reference Manual.
+
+  Example:
+
+      1> """
+         a
+         b
+         c
+         """.
+      "a\nb\nc"
+
+  Adjacent string literals without intervening white space is now a syntax
+  error, to avoid possible confusion with triple-quoted strings. For example:
+
+      1> "abc""xyz".
+      "xyz".
+      * 1:6: adjacent string literals without intervening white space
+
+  Own Id: OTP-18750
+  Application(s): stdlib, tools
+  Related Id(s): PR-7313, PR-7451, OTP-18746
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- There is a new tool `tprof`, which combines the functionality of `eprof`
+  and `cprof` under one interface and adds heap profiling. It also has
+  functionality to help with profiling process hierarchies.
+
+  _Example_:
+
+      1> tprof:profile(lists, seq, [1, 16], #{type => call_memory}).
+
+      ****** Process <0.92.0>  --  100.00% of total ***
+      FUNCTION          CALLS  WORDS  PER CALL  [     %]
+      lists:seq_loop/3      5     32      6.40  [100.00]
+                                  32            [ 100.0]
+      ok
+
+  Own Id: OTP-18756
+  Application(s): tools
+  Related Id(s): PR-6639
+
+- Several new functions that accept funs have been added to module `timer`.
+
+  Functions `apply_after/2`, `apply_interval/2`, and `apply_repeatedly/2` accept
+  a nullary fun as the second argument, while functions `apply_after/3`,
+  `apply_interval/3`, and `apply_repeatedly/3` accept an n-ary fun as the second
+  and a list of n arguments for the fun as the third argument.
+
+  Own Id: OTP-18808
+  Application(s): stdlib
+  Related Id(s): PR-7649
+
+- Sigils on string literals have been implemented as per EEP 66, that is:
+  binary and string sigils in verbatim and escape characters variants, as well
+  as a default (vanilla) Sigil. All for ordinary strings and for triple-quoted
+  strings (EEP 64). See Sigils in the Reference Manual.
+
+  Examples:
+
+      1> ~"Björn".
+      <<"Björn"/utf8>>
+      2> ~b"Björn".
+      <<"Björn"/utf8>>
+      3> ~S"\s*(\w+)".
+      "\\s*(\\w+)"
+      4> ~B"\s*(\w+)".
+      <<"\\s*(\\w+)">>
+
+  Own Id: OTP-18825
+  Application(s): stdlib
+  Related Id(s): PR-7684, OTP-18750
+
+- Native coverage support has been implemented in the JIT. It will automatically
+  be used by the `cover` tool to reduce the execution overhead when running
+  cover-compiled code.
+
+  There are also new APIs to support native coverage without using the `cover`
+  tool.
+
+  To instrument code for native coverage it must be compiled with the
+  `line_coverage` option.
+
+  To enable native coverage in the runtime system, start it like so:
+
+      $ erl +JPcover true
+
+  There are also the following new functions for supporting native coverage:
+
+  - code:coverage_support/0
+  - code:get_coverage/2
+  - code:reset_coverage/1
+  - code:get_coverage_mode/0
+  - code:get_coverage_mode/1
+  - code:set_coverage_mode/1
+
+  Own Id: OTP-18856
+  Application(s): compiler, erts, kernel, tools
+  Related Id(s): PR-7856
+
+- EEP-59 - Documentation Attributes has been implemented.
+
+  Documentation attributes can be used to document functions, types, callbacks,
+  and modules. The keyword `-moduledoc "Documentation here".` is used to
+  document modules, while `-doc "Documentation here".` can be used on top of
+  functions, types, and callbacks to document them, respectively.
+
+  - Types, callbacks, and function documentation can be set to `hidden` either
+    via `-doc false` or `-doc hidden`. When documentation attributes mark a type
+    as hidden, they will not be part of the documentation.
+  - The documentation from `moduledoc` and `doc` gets added by default to the
+    binary beam file, following the format of EEP-48.
+  - Using the compiler flag `warn_missing_doc` will raise a warning when `-doc`
+    attributes are missing in exported functions, types, and callbacks.
+  - Using the compiler flag `warn_missing_spec_documented` will raise a warning
+    when spec attributes are missing in documented functions, types, and
+    callbacks.
+  - `moduledoc`s and `doc`s may refer to external files to be embedded, such as
+    `-doc {file, "README.md"}.`, which refers to the file `README.md` found in
+    the current working directory.
+  - The compiler warns about exported functions whose specs refer to hidden
+    types. Thus, there will be warnings when a hidden type (meaning, the type is
+    not part of the documentation) gets used in an exported function.
+
+  Own Id: OTP-18916
+  Application(s): compiler, stdlib
+  Related Id(s): PR-7936
+
+- New `ets` functions ets:first_lookup/1, ets:next_lookup/2,
+  ets:prev_lookup/2 and ets:last_lookup/1. Example: ets:next_lookup/1 is
+  equivalent to ets:next/2 followed by ets:lookup/2 with the next key. The
+  new combined functions are more efficient and with guaranteed atomicity.
+
+  Own Id: OTP-18923
+  Application(s): stdlib
+  Related Id(s): PR-6791
+
+- The `maybe` expression is now enabled by default.
+
+  To use `maybe` as an atom, it needs to be single-quoted. Alternatively, the
+  `maybe` expression can be disabled by disabling the `maybe_expr` feature. That
+  can be done by placing the following the line at the beginning of an Erlang
+  source file:
+
+      -feature(maybe_expr, disable).
+
+  Another way to disable the `maybe_expr` feature is by passing the
+  `-disable-feature` option to `erlc`:
+
+      erlc -disable-feature maybe_expr some_file.erl
+
+  Own Id: OTP-18944
+  Application(s): otp, stdlib
+  Related Id(s): PR-8067
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Application(s): asn1, common_test, compiler, crypto, debugger, dialyzer,
+  diameter, edoc, eldap, erl_interface, erts, et, eunit, ftp, inets, jinterface,
+  kernel, megaco, mnesia, observer, odbc, os_mon, parsetools, public_key,
+  reltool, runtime_tools, sasl, snmp, ssh, ssl, stdlib, syntax_tools, tftp,
+  tools, wx, xmerl
+  Related Id(s): PR-8026
+
+- Safe destructive update of tuples has been implemented in the compiler and
+  runtime system. This allows the VM to update tuples in-place when it is safe
+  to do so, thus improving performance by doing less copying but also by
+  producing less garbage.
+
+  Example:
+
+      -record(rec, {a,b,c}).
+
+      update(#rec{a=needs_update,b=N}=R0) ->
+          R = R0#rec{a=up_to_date},
+          if
+              N < 0 ->
+                  R#rec{c=negative};
+              N == 0 ->
+                  R#rec{c=zero};
+              N > 0 ->
+                  R#rec{c=positive}
+          end.
+
+  The record updates in each of the three clauses of the `if` can safely be done
+  in-place, because variable `R` is not used again.
+
+  Own Id: OTP-18972
+  Application(s): compiler, erts
+  Related Id(s): PR-8090
+
+- There is a new module `trace` in Kernel providing the same trace
+  functionality as erlang:trace/3 and erlang:trace_pattern/3, but with the
+  addition of **dynamic isolated trace sessions**.
+
+  Own Id: OTP-18980
+  Application(s): erts, kernel
+
+- The `jer` (JSON Encoding Rules) for ASN.1 now use the new `json` module for
+  encoding and decoding JSON. Thus, there is no longer any need for an external
+  JSON library.
+
+  Own Id: OTP-19018
+  Application(s): asn1
+  Related Id(s): PR-8241
+
+- There is a new module `json` for encoding and decoding JSON.
+
+  Both encoding and decoding can be customized. Decoding can be done in a
+  SAX-like fashion and handle multiple documents and streams of data.
+
+  Own Id: OTP-19020
+  Application(s): stdlib
+  Related Id(s): PR-8111
+
+- For security reasons, the CBC ciphers are now longer included in the list of
+  default ciphers for TLS-1.2.
+
+  Own Id: OTP-19025
+  Application(s): ssl
+  Related Id(s): PR-8250
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+# POTENTIAL INCOMPATIBILITIES
+
+- The `pid` field returned from `erlang:fun_info/1,2` is now always the pid for
+  the `init` process of the local node, not the pid for the actual process that
+  created the fun.
+
+  Own Id: OTP-18594
+  Application(s): erts
+  Related Id(s): PR-7274
+
+- By default, escripts will now be compiled instead of interpreted. That means
+  that the `compiler` application must be installed.
+
+  Own Id: OTP-18639
+  Application(s): erts
+  Related Id(s): PR-7348
+
+- Introduced a default value for httpd_server name configuration to improve ease
+  of use.
+
+  Own Id: OTP-18641
+  Application(s): inets
+  Related Id(s): PR-7316
+
+- As announced in OTP 26.1, `0.0` is no longer considered equivalent to `-0.0`
+  when using the term equivalence operators (`=:=` and `=/=`).
+
+  The arithmetic equality operators (`==` and `/=`) and all relative comparison
+  operations still consider `0.0` equal to `-0.0`.
+
+  Own Id: OTP-18717
+  Application(s): otp
+  Related Id(s): PR-7728
+
+  *** HIGHLIGHT ***
+
+- Triple-Quoted Strings has been implemented as per EEP 64. See String in the
+  Reference Manual.
+
+  Example:
+
+      1> """
+         a
+         b
+         c
+         """.
+      "a\nb\nc"
+
+  Adjacent string literals without intervening white space is now a syntax
+  error, to avoid possible confusion with triple-quoted strings. For example:
+
+      1> "abc""xyz".
+      "xyz".
+      * 1:6: adjacent string literals without intervening white space
+
+  Own Id: OTP-18750
+  Application(s): stdlib, tools
+  Related Id(s): PR-7313, PR-7451, OTP-18746
+
+  *** HIGHLIGHT ***
+
+- The documentation for the preprocessor now mentions that `defined(Name)` can
+  be called in the condition for an `-if` or `-elif` directive to test whether
+  `Name` is the name of a defined macro. (This feature was implemented in OTP
+  21.)
+
+  If a function call in an `-if` or `-elif` with a name that is not the name of
+  a guard BIF, there would not be a compilation error, but would instead cause
+  the lines following the directive to be skipped. This has now been changed to
+  be a compilation error.
+
+  Own Id: OTP-18784
+  Application(s): compiler, otp, stdlib
+  Related Id(s): GH-7706, PR-7726
+
+- The existing experimental support for archive files will be changed in a
+  future release. The support for having an archive in an escript will remain,
+  but the support for using archives in a release will either become more
+  limited or completely removed.
+
+  As of Erlang/OTP 27, the function code:lib_dir/2, the `-code_path_choice`
+  flag, and using `erl_prim_loader` for reading members of an archive are
+  deprecated.
+
+  To remain compatible with future version of Erlang/OTP `escript` scripts that
+  need to retrieve data files from its archive should use escript:extract/2
+  instead of `erl_prim_loader` and code:lib_dir/2.
+
+  Own Id: OTP-18966
+  Application(s): kernel, otp
+  Related Id(s): PR-8091
+
+- The order in which the compiler looks up options has changed.
+
+  When there is a conflict in the compiler options given in the `-compile()`
+  attribute and options given to the compiler, the options given in the
+  `-compile()` attribute overrides the option given to the compiler, which in
+  turn overrides options given in the `ERL_COMPILER_OPTIONS` environment
+  variable.
+
+  Example:
+
+  If `some_module.erl` has the following attribute:
+
+      -compile([nowarn_missing_spec]).
+
+  and the compiler is invoked like so:
+
+      % erlc +warn_missing_spec some_module.erl
+
+  no warnings will be issued for functions that do not have any specs.
+
+  Own Id: OTP-18968
+  Application(s): compiler
+  Related Id(s): GH-6979, PR-8093
+
+- The existing function ssl:key_exporter_materials/4 is now documented and
+  supported.
+
+  Own Id: OTP-19016
+  Application(s): crypto, public_key
+  Related Id(s): PR-8233
+
+- The implementations of http_uri:encode/1 and http_uri:decode/1 are now
+  replaced with their equivalent, but bug free versions from module
+  `uri_string`, namely uri_string:quote/1 and uri_string:unquote/1.
+
+  Own Id: OTP-19022
+  Application(s): inets
+
+- For security reasons, the CBC ciphers are now longer included in the list of
+  default ciphers for TLS-1.2.
+
+  Own Id: OTP-19025
+  Application(s): ssl
+  Related Id(s): PR-8250
+
+  *** HIGHLIGHT ***
+
+- The error handling the `simple_one_for_one` supervisor has been enhanced. A
+  transient child returning `ignore` will no longer cause a crash.
+
+  Also, automatic shutdown has been disabled because it does not make sense for
+  this supervisor type. That is was allowed is considered a bug. Therefore, we
+  don't consider this an incompatible change.
+
+  Own Id: OTP-19029
+  Application(s): stdlib
+  Related Id(s): PR-8230
+
+- Due to another attack on PKCS #1 v1.5 padding, known as the Marvin attack,
+  about which we were alerted by Hubert Kario from Red Hat. You can find more
+  details about the attack at https://people.redhat.com/~hkario/marvin/
+  Functions that may be vulnerable are now deprecated.
+
+  Note that you might mitigate the problem by using appropriate versions of
+  OpenSSL together with our software, but we recommend not using them at all.
+
+  Also avoid using TLS versions prior to TLS-1.2 (not supported by default) and
+  do not enable RSA-key exchange cipher suites (not supported by default).
+
+  Own Id: OTP-19075
+  Application(s): crypto, public_key
+
+- Some default values in Xmerl has been changed to avoid XML External Entity
+  (XXE) vulnerabilities if you're parsing untrusted XML.
+
+  xmerl_scan: the default value for allow_entities has changed to false.
+  xmerl_sax_parser: the default value for external_entities has changed to none.
+
+  Own Id: OTP-19079
+  Application(s): xmerl
+  Related Id(s): GH-7539
+
+# OTP-27.0
+
+## Fixed Bugs and Malfunctions
+
+- As announced in OTP 26.1, `0.0` is no longer considered equivalent to `-0.0`
+  when using the term equivalence operators (`=:=` and `=/=`).
+
+  The arithmetic equality operators (`==` and `/=`) and all relative comparison
+  operations still consider `0.0` equal to `-0.0`.
+
+  Own Id: OTP-18717
+  Related Id(s): PR-7728
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The documentation for the preprocessor now mentions that `defined(Name)` can
+  be called in the condition for an `-if` or `-elif` directive to test whether
+  `Name` is the name of a defined macro. (This feature was implemented in OTP
+  21.)
+
+  If a function call in an `-if` or `-elif` with a name that is not the name of
+  a guard BIF, there would not be a compilation error, but would instead cause
+  the lines following the directive to be skipped. This has now been changed to
+  be a compilation error.
+
+  Own Id: OTP-18784
+  Related Id(s): GH-7706, PR-7726
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+## Improvements and New Features
+
+- `configure` scripts of the OTP build system are now generated using Autoconf
+  2.72.
+
+  Own Id: OTP-18943
+
+- The `maybe` expression is now enabled by default.
+
+  To use `maybe` as an atom, it needs to be single-quoted. Alternatively, the
+  `maybe` expression can be disabled by disabling the `maybe_expr` feature. That
+  can be done by placing the following the line at the beginning of an Erlang
+  source file:
+
+      -feature(maybe_expr, disable).
+
+  Another way to disable the `maybe_expr` feature is by passing the
+  `-disable-feature` option to `erlc`:
+
+      erlc -disable-feature maybe_expr some_file.erl
+
+  Own Id: OTP-18944
+  Related Id(s): PR-8067
+
+  *** HIGHLIGHT ***
+
+- By default `configure` scripts used when building OTP will now try to enable
+  support for timestamps that will work after mid-January 2038. This has
+  typically only been an issue on 32-bit platforms.
+
+  If `configure` cannot figure out how to enable such timestamps, it will abort
+  with an error message. If you want to build the system anyway, knowing that
+  the system will not function properly after mid-January 2038, you can pass the
+  `--disable-year2038` option to `configure`, which will enable `configure` to
+  continue without support for timestamps after mid-January 2038.
+
+  Own Id: OTP-18965
+  Related Id(s): PR-8095
+
+- The existing experimental support for archive files will be changed in a
+  future release. The support for having an archive in an escript will remain,
+  but the support for using archives in a release will either become more
+  limited or completely removed.
+
+  As of Erlang/OTP 27, the function code:lib_dir/2, the `-code_path_choice`
+  flag, and using `erl_prim_loader` for reading members of an archive are
+  deprecated.
+
+  To remain compatible with future version of Erlang/OTP `escript` scripts that
+  need to retrieve data files from its archive should use escript:extract/2
+  instead of `erl_prim_loader` and code:lib_dir/2.
+
+  Own Id: OTP-18966
+  Related Id(s): PR-8091
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The restriction for the expression that gives a default value for a record
+  field is now documented.
+
+  Own Id: OTP-18995
+  Related Id(s): GH-8166, PR-8177
+
+# asn1-5.3
+
+## Fixed Bugs and Malfunctions
+
+- Multiple bugs has been eliminated in the specialized decode feature.
+
+  Own Id: OTP-18813
+  Related Id(s): PR-7790
+
+## Improvements and New Features
+
+- Specs have been added to all `asn1ct` API functions.
+
+  Own Id: OTP-18804
+  Related Id(s): PR-7738
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The `jer` (JSON Encoding Rules) for ASN.1 now use the new `json` module for
+  encoding and decoding JSON. Thus, there is no longer any need for an external
+  JSON library.
+
+  Own Id: OTP-19018
+  Related Id(s): PR-8241
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of asn1-5.3
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# common_test-1.27
+
+## Improvements and New Features
+
+- Calls to ct:capture_start/0 and ct:capture_stop/0 are now synchronous to
+  ensure that all output is captured.
+
+  Own Id: OTP-18658
+  Related Id(s): PR-7380
+
+- The order in which multiple hooks are executed can now be reversed after each
+  config function. See CTH Execution Order.
+
+  Own Id: OTP-18682
+  Related Id(s): ERIERL-43, GH-7397, PR-7496
+
+- The default CSS will now include a basic dark mode handling if it is preferred
+  by the browser.
+
+  Own Id: OTP-18761
+  Related Id(s): PR-7428
+
+- `-callback` attributes have been added to `ct_suite` and `ct_hooks`.
+
+  Own Id: OTP-18781
+  Related Id(s): PR-7701
+
+- The built-in cth_log_redirect hook can now be configured to replace default
+  logger reports in terminal with HTML logs.
+
+  Own Id: OTP-18875
+  Related Id(s): PR-7891
+
+- Error handling for the `ct_property_test` framework has been enhanced.
+
+  Own Id: OTP-18881
+  Related Id(s): PR-7824
+
+- Enhance test case documentation, making it clear how a test case can be
+  failed.
+
+  Own Id: OTP-18892
+  Related Id(s): PR-7869
+
+- The failing line in the test source code is now colored to make it easier to
+  find on the screen.
+
+  Own Id: OTP-18898
+  Related Id(s): PR-7917
+
+- Function specifications and types have been added to all public API functions.
+
+  Own Id: OTP-18913
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The suite execution elapsed time is now included in the index page.
+
+  Own Id: OTP-18981
+  Related Id(s): GH-7972, PR-8112
+
+> #### Full runtime dependencies of common_test-1.27
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-8.5
+
+## Fixed Bugs and Malfunctions
+
+- Generators for binary comprehensions could be evaluated before it was known
+  that they would be needed. That could result in a binary comprehensions
+  failing if a generator that should not be evaluated until later failed.
+
+  As an example, consider this module:
+
+      -module(t).
+      -export([f/0]).
+
+      f() ->
+          <<0 || _ <- [], _ <- ok, false>>.
+
+  In Erlang/OTP 26 it would fail like so:
+
+      1> t:f().
+      ** exception error: bad generator ok
+           in function  t:f/0 (t.erl, line 6)
+
+  In Erlang/OTP 27 it returns an empty binary:
+
+      1> t:f().
+      <<>>
+
+  Own Id: OTP-18703
+  Related Id(s): GH-7494, PR-7538
+
+- The documentation for the preprocessor now mentions that `defined(Name)` can
+  be called in the condition for an `-if` or `-elif` directive to test whether
+  `Name` is the name of a defined macro. (This feature was implemented in OTP
+  21.)
+
+  If a function call in an `-if` or `-elif` with a name that is not the name of
+  a guard BIF, there would not be a compilation error, but would instead cause
+  the lines following the directive to be skipped. This has now been changed to
+  be a compilation error.
+
+  Own Id: OTP-18784
+  Related Id(s): GH-7706, PR-7726
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+## Improvements and New Features
+
+- The compiler now emits nicer error message for function head mismatches. For
+  example, given:
+
+      a() -> ok;
+      a(_) -> error.
+
+  Erlang/OTP 26 and earlier would emit a diagnostic similar to:
+
+      t.erl:6:1: head mismatch
+      %    6| a(_) -> error.
+      %     | ^
+
+  while in Erlang/OTP 27 the diagnostic is similar to:
+
+      t.erl:6:1: head mismatch: function a with arities 0 and 1 is regarded as two distinct functions. Is the number of arguments incorrect or is the semicolon in a/0 unwanted?
+      %    6| a(_) -> error.
+      %     | ^
+
+  Own Id: OTP-18648
+  Related Id(s): PR-7383
+
+  *** HIGHLIGHT ***
+
+- The compiler now optimizes creation of binaries that are known to be constant.
+
+  Consider this example:
+
+      bin() ->
+          C = char(),
+          <<C>>.
+
+      char() -> $*.
+
+  Essentially, the compiler rewrites the example to the slightly more efficient:
+
+      bin() ->
+          _ = char(),
+          <<$*>>.
+
+      char() -> $*.
+
+  Own Id: OTP-18673
+  Related Id(s): ERIERL-964, PR-7474
+
+- The compiler will now merge consecutive updates of the same record.
+
+  As an example, the body of the following function will be combined into a
+  single tuple creation instruction:
+
+      -record(r, {a,b,c,d}).
+
+      update(Value) ->
+          R0 = #r{},
+          R1 = R0#r{a=Value},
+          R2 = R1#r{b=2},
+          R2#r{c=3}.
+
+  Own Id: OTP-18680
+  Related Id(s): ERIERL-967, PR-7491, PR-8086
+
+  *** HIGHLIGHT ***
+
+- Improved the performance of the alias analysis pass.
+
+  Own Id: OTP-18714
+  Related Id(s): GH-7432, PR-7528
+
+- `-spec` attributes are now used for documentation.
+
+  Own Id: OTP-18801
+  Related Id(s): PR-7739
+
+- Native coverage support has been implemented in the JIT. It will automatically
+  be used by the `cover` tool to reduce the execution overhead when running
+  cover-compiled code.
+
+  There are also new APIs to support native coverage without using the `cover`
+  tool.
+
+  To instrument code for native coverage it must be compiled with the
+  `line_coverage` option.
+
+  To enable native coverage in the runtime system, start it like so:
+
+      $ erl +JPcover true
+
+  There are also the following new functions for supporting native coverage:
+
+  - code:coverage_support/0
+  - code:get_coverage/2
+  - code:reset_coverage/1
+  - code:get_coverage_mode/0
+  - code:get_coverage_mode/1
+  - code:set_coverage_mode/1
+
+  Own Id: OTP-18856
+  Related Id(s): PR-7856
+
+  *** HIGHLIGHT ***
+
+- EEP-59 - Documentation Attributes has been implemented.
+
+  Documentation attributes can be used to document functions, types, callbacks,
+  and modules. The keyword `-moduledoc "Documentation here".` is used to
+  document modules, while `-doc "Documentation here".` can be used on top of
+  functions, types, and callbacks to document them, respectively.
+
+  - Types, callbacks, and function documentation can be set to `hidden` either
+    via `-doc false` or `-doc hidden`. When documentation attributes mark a type
+    as hidden, they will not be part of the documentation.
+  - The documentation from `moduledoc` and `doc` gets added by default to the
+    binary beam file, following the format of EEP-48.
+  - Using the compiler flag `warn_missing_doc` will raise a warning when `-doc`
+    attributes are missing in exported functions, types, and callbacks.
+  - Using the compiler flag `warn_missing_spec_documented` will raise a warning
+    when spec attributes are missing in documented functions, types, and
+    callbacks.
+  - `moduledoc`s and `doc`s may refer to external files to be embedded, such as
+    `-doc {file, "README.md"}.`, which refers to the file `README.md` found in
+    the current working directory.
+  - The compiler warns about exported functions whose specs refer to hidden
+    types. Thus, there will be warnings when a hidden type (meaning, the type is
+    not part of the documentation) gets used in an exported function.
+
+  Own Id: OTP-18916
+  Related Id(s): PR-7936
+
+  *** HIGHLIGHT ***
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The order in which the compiler looks up options has changed.
+
+  When there is a conflict in the compiler options given in the `-compile()`
+  attribute and options given to the compiler, the options given in the
+  `-compile()` attribute overrides the option given to the compiler, which in
+  turn overrides options given in the `ERL_COMPILER_OPTIONS` environment
+  variable.
+
+  Example:
+
+  If `some_module.erl` has the following attribute:
+
+      -compile([nowarn_missing_spec]).
+
+  and the compiler is invoked like so:
+
+      % erlc +warn_missing_spec some_module.erl
+
+  no warnings will be issued for functions that do not have any specs.
+
+  Own Id: OTP-18968
+  Related Id(s): GH-6979, PR-8093
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Safe destructive update of tuples has been implemented in the compiler and
+  runtime system. This allows the VM to update tuples in-place when it is safe
+  to do so, thus improving performance by doing less copying but also by
+  producing less garbage.
+
+  Example:
+
+      -record(rec, {a,b,c}).
+
+      update(#rec{a=needs_update,b=N}=R0) ->
+          R = R0#rec{a=up_to_date},
+          if
+              N < 0 ->
+                  R#rec{c=negative};
+              N == 0 ->
+                  R#rec{c=zero};
+              N > 0 ->
+                  R#rec{c=positive}
+          end.
+
+  The record updates in each of the three clauses of the `if` can safely be done
+  in-place, because variable `R` is not used again.
+
+  Own Id: OTP-18972
+  Related Id(s): PR-8090
+
+  *** HIGHLIGHT ***
+
+- Improved the match context reuse optimization slightly, allowing match
+  contexts to be passed as-is to `bit_size/1` and `byte_size/1`.
+
+  Own Id: OTP-18987
+
+- `m:erl_lint` (and by extension the `compiler`) will now warn for code using
+  deprecated callbacks.
+
+  The only callback currenly deprecated is `format_status/2` in `gen_server`,
+  `gen_event` and `gen_statem`.
+
+  You can use `nowarn_deprecated_callback` to silence the warning.
+
+  Own Id: OTP-19010
+  Related Id(s): PR-8205
+
+> #### Full runtime dependencies of compiler-8.5
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.5
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Removed functions `crypto_dyn_iv_init/3` and `crypto_dyn_iv_update/3` which
+  were marked as deprecated since OTP 25.
+
+  Own Id: OTP-18973
+
+- Add support for sm3 hash and hmac.
+
+  Own Id: OTP-18975
+  Related Id(s): PR-6658
+
+- `OPENSSL_thread_stop` is called when `crypto` is purged to not leak thread
+  specific data.
+
+  Own Id: OTP-18978
+  Related Id(s): PR-7809
+
+- Add SM4 block cipher implemented according to GB/T 32907-2016.
+
+  Own Id: OTP-19005
+  Related Id(s): PR-8168
+
+- The existing function ssl:key_exporter_materials/4 is now documented and
+  supported.
+
+  Own Id: OTP-19016
+  Related Id(s): PR-8233
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Due to another attack on PKCS #1 v1.5 padding, known as the Marvin attack,
+  about which we were alerted by Hubert Kario from Red Hat. You can find more
+  details about the attack at https://people.redhat.com/~hkario/marvin/
+  Functions that may be vulnerable are now deprecated.
+
+  Note that you might mitigate the problem by using appropriate versions of
+  OpenSSL together with our software, but we recommend not using them at all.
+
+  Also avoid using TLS versions prior to TLS-1.2 (not supported by default) and
+  do not enable RSA-key exchange cipher suites (not supported by default).
+
+  Own Id: OTP-19075
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of crypto-5.5
+>
+> erts-9.0, kernel-5.3, stdlib-3.9
+
+# debugger-5.4
+
+## Fixed Bugs and Malfunctions
+
+- The dependencies for this application are now listed in the app file.
+
+  Own Id: OTP-18831
+  Related Id(s): PR-7441
+
+## Improvements and New Features
+
+- Type specs have been added to all API functions.
+
+  Own Id: OTP-18819
+  Related Id(s): PR-7781
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The Debugger now use a trace session for its internal use of tracing to avoid
+  interfering with the user's use of tracing.
+
+  Own Id: OTP-19074
+  Related Id(s): PR-8389
+
+> #### Full runtime dependencies of debugger-5.4
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-3.15, wx-2.0
+
+# dialyzer-5.2
+
+## Improvements and New Features
+
+- The `--gui` option for Dialyzer has been removed.
+
+  Own Id: OTP-18667
+  Related Id(s): PR-7443
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of dialyzer-5.2
+>
+> compiler-8.0, erts-12.0, kernel-8.0, stdlib-5.0, syntax_tools-2.0
+
+# diameter-2.4
+
+## Improvements and New Features
+
+- `-callback` attributes have been added to `diameter_app` and
+  `diameter_transport`.
+
+  Own Id: OTP-18783
+  Related Id(s): PR-7699
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Pick peer can now also handle request of type `#diameter_packet{}`.
+
+  Own Id: OTP-19090
+  Related Id(s): PR-8399
+
+> #### Full runtime dependencies of diameter-2.4
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# edoc-1.3
+
+## Fixed Bugs and Malfunctions
+
+- EEP 48 doc chunks now properly include links within `{@type }` macros.
+
+  Own Id: OTP-18945
+  Related Id(s): PR-8063
+
+- `@hidden` now means `hidden` in EEP 48 doc chunks instead of `none`.
+
+  Own Id: OTP-18946
+  Related Id(s): PR-8063
+
+## Improvements and New Features
+
+- There is a new `edoc_html_to_markdown` module that can be used to convert
+  EEP-48 `application/html+erlang` to Markdown.
+
+  Own Id: OTP-18947
+  Related Id(s): PR-8063
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Added module `edoc_doclet_markdown` that can be used to convert EDoc style
+  documentation to Markdown documentation attributes.
+
+  Own Id: OTP-19052
+  Related Id(s): PR-8308
+
+> #### Full runtime dependencies of edoc-1.3
+>
+> erts-11.0, inets-5.10, kernel-7.0, stdlib-4.0, syntax_tools-2.0, xmerl-1.3.7
+
+# eldap-1.2.13
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of eldap-1.2.13
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# erl_interface-5.5.2
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+## Known Bugs and Problems
+
+- The `ei` API for decoding/encoding terms is not fully 64-bit compatible since
+  terms that have a representation on the external term format larger than 2 GB
+  cannot be handled.
+
+  Own Id: OTP-16607
+  Related Id(s): OTP-16608
+
+# erts-15.0
+
+## Fixed Bugs and Malfunctions
+
+- Bugs in how `erl -extra` interacts with passing flags via ERL\_\*FLAGS or
+  `-args_file` have been fixed.
+
+  Own Id: OTP-18766
+  Related Id(s): PR-7639
+
+- Fixed a bug that prevented the emulator from building on recent versions of
+  Yocto Linux.
+
+  Own Id: OTP-18918
+  Related Id(s): PR-7952
+
+- Fixed spectre mitigation configure test to work with GCC patches to always add
+  `-fcf-protection=full`.
+
+  Own Id: OTP-18928
+  Related Id(s): PR-8006
+
+- A call to `socket:recv|recvfrom|recvmsg/*` with Timeout = 0 on Windows could
+  cause a (case clause) crash if data is immediately available.
+
+  Own Id: OTP-19063
+  Related Id(s): OTP-18835
+
+- Fix bug on Windows where `exit_status` would not be sent when a port exits
+  after the stdin/stdout handles have been closed.
+
+  Own Id: OTP-19077
+  Related Id(s): PR-8324
+
+## Improvements and New Features
+
+- Refactored how the JIT handles POSIX signals and how they affect thread
+  stacks, allowing us to use the native stack register for Erlang stacks on more
+  platforms.
+
+  Notably, containers built on 64-bit x86 Alpine Linux images will now perform
+  much better in sequential code. As an example, running `dialyzer` over the OTP
+  code base finishes about 15% quicker.
+
+  Own Id: OTP-18568
+  Related Id(s): PR-7174
+
+- The `instrument` module can now track allocations on a per-process or
+  per-port basis.
+
+  Own Id: OTP-18577
+  Related Id(s): PR-7236
+
+- The `pid` field returned from `erlang:fun_info/1,2` is now always the pid for
+  the `init` process of the local node, not the pid for the actual process that
+  created the fun.
+
+  Own Id: OTP-18594
+  Related Id(s): PR-7274
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- By default, escripts will now be compiled instead of interpreted. That means
+  that the `compiler` application must be installed.
+
+  Own Id: OTP-18639
+  Related Id(s): PR-7348
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- A binary returned from the `socket` receive functions is no longer created
+  as a sub binary of an often large receive buffer binary (socket option
+  `{otp,rcvbuf}`). This avoids space waste, trusting the allocators to implement
+  reallocation efficiently.
+
+  Own Id: OTP-18642
+  Related Id(s): GH-6152, PR-7465
+
+- The default process limit has been raised to `1048576` processes.
+
+  Own Id: OTP-18699
+  Related Id(s): PR-7388
+
+- The erlang:system_monitor/2 functionality is now able to monitor long
+  message queues in the system.
+
+  Own Id: OTP-18709
+  Related Id(s): PR-7651
+
+- The `erl` command now supports the `-S` flag, which is similar to the `-run`
+  flag, except that it will pass all arguments up to end of the command line to
+  the called function. (The `-run` flag will not pass arguments beginning with a
+  hyphen.) Another difference is that `-S` will always call a function with one
+  argument, passing an empty list if no arguments were given.
+
+  Own Id: OTP-18744
+  Related Id(s): PR-7470
+
+  *** HIGHLIGHT ***
+
+- When implementing an alternative carrier for the Erlang distribution, a
+  separate input handler process may now be registered, using
+  erlang:dist_ctrl_input_handler/2, also in the case when the distribution
+  controller is a port.
+
+  Own Id: OTP-18774
+  Related Id(s): PR-7110
+
+- The call stack trace has now been added to the error reported by
+  erlang:process_flag/2 when `max_heap_size` limit has been exceeded.
+
+  Own Id: OTP-18779
+  Related Id(s): PR-7592
+
+- `-callback` attributes have been added to `erl_tracer`.
+
+  Own Id: OTP-18794
+  Related Id(s): PR-7703
+
+- For `inet_backend = socket`, setting the `active` socket option alone, to
+  `once`, `true` or `N` has been optimized, as well as the corresponding data
+  delivery.
+
+  Own Id: OTP-18835
+
+- New functions `socket:sendv/*` for sending I/O vectors have been added.
+
+  Own Id: OTP-18845
+
+- Socket options that take string now also accept binaries.
+
+  Own Id: OTP-18849
+  Related Id(s): PR-6510
+
+- Native coverage support has been implemented in the JIT. It will automatically
+  be used by the `cover` tool to reduce the execution overhead when running
+  cover-compiled code.
+
+  There are also new APIs to support native coverage without using the `cover`
+  tool.
+
+  To instrument code for native coverage it must be compiled with the
+  `line_coverage` option.
+
+  To enable native coverage in the runtime system, start it like so:
+
+      $ erl +JPcover true
+
+  There are also the following new functions for supporting native coverage:
+
+  - code:coverage_support/0
+  - code:get_coverage/2
+  - code:reset_coverage/1
+  - code:get_coverage_mode/0
+  - code:get_coverage_mode/1
+  - code:set_coverage_mode/1
+
+  Own Id: OTP-18856
+  Related Id(s): PR-7856
+
+  *** HIGHLIGHT ***
+
+- Changed the default value of the command line flag `-code_path_choice` to
+  `strict`.
+
+  Note that for application systems using archives, it is necessary to add the
+  `code_path_choice relaxed` to the command line that invokes `erl`.
+
+  Own Id: OTP-18894
+  Related Id(s): PR-7243
+
+- Added module loading to `erl -init_debug` printouts.
+
+  Own Id: OTP-18929
+  Related Id(s): PR-8004
+
+- When the runtime system halts, it performs various flush operations before
+  terminating. By default there is no limit on how much time the flush
+  operations are allowed to take. A new _halt flush timeout_ functionality has
+  been introduced which can be used for limiting the amount of time that the
+  flushing operations are allowed to take. For more information see the
+  documentation of the `flush_timeout` option of the erlang:halt/2 BIF and
+  the documentation of the `erl` `+zhft <Timeout>` command line flag.
+
+  Own Id: OTP-18938
+  Related Id(s): GH-7438, PR-8035
+
+- Optimized code loading by moving certain operations from the code server to
+  the caller.
+
+  Own Id: OTP-18941
+  Related Id(s): PR-7981
+
+- Updated asmjit to version a465fe71ab3d0e224b2b4bd0fac69ae68ab9239d
+
+  Own Id: OTP-18942
+
+- The deprecated functions in `zlib` have been removed. That includes
+  `inflateChunk/{1,2}`, `getBufSize/1`, `setBufSize/2`, the CRC32 functions, and
+  the Adler checksum functions.
+
+  Own Id: OTP-18950
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Safe destructive update of tuples has been implemented in the compiler and
+  runtime system. This allows the VM to update tuples in-place when it is safe
+  to do so, thus improving performance by doing less copying but also by
+  producing less garbage.
+
+  Example:
+
+      -record(rec, {a,b,c}).
+
+      update(#rec{a=needs_update,b=N}=R0) ->
+          R = R0#rec{a=up_to_date},
+          if
+              N < 0 ->
+                  R#rec{c=negative};
+              N == 0 ->
+                  R#rec{c=zero};
+              N > 0 ->
+                  R#rec{c=positive}
+          end.
+
+  The record updates in each of the three clauses of the `if` can safely be done
+  in-place, because variable `R` is not used again.
+
+  Own Id: OTP-18972
+  Related Id(s): PR-8090
+
+  *** HIGHLIGHT ***
+
+- The obsolete and undocumented support for opening a port to an external
+  resource by passing an atom (or a string) as first argument to `open_port()`,
+  implemented by the vanilla driver, has been removed. This feature has been
+  scheduled for removal in OTP 27 since the release of OTP 26.
+
+  Own Id: OTP-18976
+  Related Id(s): PR-7125
+
+- An optional NIF callback `ERL_NIF_OPT_ON_UNLOAD_THREAD` to be called by all
+  scheduler threads when a NIF library is unloaded. Used for releasing thread
+  specific data. Can be set with function `enif_set_option`.
+
+  Own Id: OTP-18977
+  Related Id(s): PR-7809
+
+- There is a new module `trace` in Kernel providing the same trace
+  functionality as erlang:trace/3 and erlang:trace_pattern/3, but with the
+  addition of **dynamic isolated trace sessions**.
+
+  Own Id: OTP-18980
+  *** HIGHLIGHT ***
+
+- Added the `+MMlp on|off` emulator option to let the `mseg` allocator use
+  "large pages" (sometimes known as "huge pages" or "super pages"). This
+  currently only affects super-carrier allocations, but may be extended in the
+  future.
+
+  Own Id: OTP-18984
+  Related Id(s): PR-7977
+
+- `inet_backend = socket` has been optimized and reworked to be more compatible
+  with the original `inet_backend = inet`.
+
+  Own Id: OTP-19004
+  Related Id(s): OTP-18835
+
+- The `socket` documentation has been reworked, and due to that a few details
+  were fixed:
+
+  - socket:is_supported/1 now returns `true` for example for `protocols` that
+    is a "category", not an item.
+  - socket:cancel_monitor/1 no longer badargs for a monitor that was set by
+    another process, instead it returns `false` as for other unknown
+    `reference()`s.
+
+  Own Id: OTP-19054
+
+> #### Full runtime dependencies of erts-15.0
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# et-1.7.1
+
+## Fixed Bugs and Malfunctions
+
+- The dependencies for this application are now listed in the app file.
+
+  Own Id: OTP-18831
+  Related Id(s): PR-7441
+
+- Dialyzer warnings due to type specs added in `dbg` have been eliminated.
+
+  Own Id: OTP-18860
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of et-1.7.1
+>
+> erts-9.0, kernel-5.3, runtime_tools-1.10, stdlib-3.4, wx-1.2
+
+# eunit-2.9.1
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of eunit-2.9.1
+>
+> erts-9.0, kernel-5.3, stdlib-3.4
+
+# ftp-1.2.2
+
+## Fixed Bugs and Malfunctions
+
+- Dialyzer warnings due to type specs added in `dbg` have been eliminated.
+
+  Own Id: OTP-18860
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of ftp-1.2.2
+>
+> erts-7.0, kernel-6.0, runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+# inets-9.2
+
+## Improvements and New Features
+
+- Introduced a default value for httpd_server name configuration to improve ease
+  of use.
+
+  Own Id: OTP-18641
+  Related Id(s): PR-7316
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The `httpd` module has been extended with an API for simple serving directory
+  content over HTTP. With this change, the current working directory can be
+  served like this:
+
+      erl -S httpd
+
+  An arbitrary directory can be served like this:
+
+      erl -S httpd serve path/to/dir
+
+  Own Id: OTP-18727
+  Related Id(s): PR-7299
+
+- Added `-callback` attributes to `httpd`, `mod_esi`, and `mod_security`.
+
+  Own Id: OTP-18786
+  Related Id(s): PR-7700
+
+- Inets now uses a relative redirect with an absolute path to prevent whoever is
+  running Inets from having to configure the `ServerName` to match the
+  network-reachable host name of the server.
+
+  Own Id: OTP-18809
+  Related Id(s): GH-7617, PR-7678
+
+- `inets` processes now use proc_lib:set_label/1 to improve observeability.
+
+  Own Id: OTP-18927
+  Related Id(s): PR-8029
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The implementations of http_uri:encode/1 and http_uri:decode/1 are now
+  replaced with their equivalent, but bug free versions from module
+  `uri_string`, namely uri_string:quote/1 and uri_string:unquote/1.
+
+  Own Id: OTP-19022
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- With this change, the API specs are updated.
+
+  Own Id: OTP-19033
+
+> #### Full runtime dependencies of inets-9.2
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# jinterface-1.14.1
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+# kernel-10.0
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a crash when calling file:delete/2 with an empty option list.
+
+  Own Id: OTP-18590
+  Related Id(s): PR-7220
+
+- New functions have been added to the undocumented module `inet_dns` that
+  take a flag to specify if encode/decode is for mDNS. This affects how CLASS
+  values in the private range, with the top bit set, are handled.
+
+  Own Id: OTP-18878
+  Related Id(s): GH-7718, OTP-17734
+
+- The error information for erlang:phash/2 has been corrected.
+
+  Own Id: OTP-18904
+  Related Id(s): PR-7960
+
+- `get_until` requests using the I/O protocol now correctly return a binary or
+  list when `eof` is the last item returned by the callback.
+
+  Own Id: OTP-18930
+  Related Id(s): GH-4992, PR-7993
+
+- Calling logger:add_handlers/1 with config option now works.
+
+  Own Id: OTP-18954
+  Related Id(s): GH-8061, PR-8076
+
+- The code:del_path/1 function now also works on paths added through `-pa`,
+  `-pz` , `-path` and the boot script.
+
+  Own Id: OTP-18959
+  Related Id(s): GH-6692, PR-7697
+
+- A call to `socket:recv|recvfrom|recvmsg/*` with Timeout = 0 on Windows could
+  cause a (case clause) crash if data is immediately available.
+
+  Own Id: OTP-19063
+  Related Id(s): OTP-18835
+
+- Improve heuristic for when a characters is wide in the shell for systems with
+  old libc versions.
+
+  Own Id: OTP-19087
+  Related Id(s): PR-8382
+
+- Fix reading a line when reading from io:user/0 to not consider `\r` without
+  `\n` to be a new line when `erl` is started with `-noshell`.
+
+  Own Id: OTP-19088
+  Related Id(s): GH-8360, PR-8396
+
+## Improvements and New Features
+
+- Added file:read_file/2 with a `raw` option for reading files without going
+  through the file server.
+
+  Own Id: OTP-18589
+  Related Id(s): PR-7220
+
+- The undocumented Erlang DNS resolver library (`inet_dns` and `inet_res`) has
+  been augmented to handle IXFR, NOTIFY, UPDATE and TSIG records. With this some
+  bug fixes and code cleanup has been done, and the resolver used in the test
+  suite has been changed to Knot DNS. See the source code.
+
+  Kudos to Alexander Clouter that did almost all the work!
+
+  Own Id: OTP-18713
+  Related Id(s): GH-6985, PR-6985
+
+- The `ebin` directories for escripts are now cached.
+
+  Own Id: OTP-18778
+  Related Id(s): PR-7556
+
+- `-callback` attributes haven been added to `application`,
+  `logger_handler`, and `logger_formatter`.
+
+  Own Id: OTP-18795
+  Related Id(s): PR-7703
+
+- Progress reports from before logger is started are now logged when log level
+  is set to debug.
+
+  Own Id: OTP-18807
+  Related Id(s): ERIERL-985, PR-7732
+
+- The code:where_is_file/2 and code:which/1 functions now check for
+  existence of the file directly instead of listing the content of each
+  directory in the code path.
+
+  Own Id: OTP-18816
+  Related Id(s): PR-7711
+
+- Type specs has been added to the `logger:Level/1,2,3` functions.
+
+  Own Id: OTP-18820
+  Related Id(s): PR-7779
+
+- For `inet_backend = socket`, setting the `active` socket option alone, to
+  `once`, `true` or `N` has been optimized, as well as the corresponding data
+  delivery.
+
+  Own Id: OTP-18835
+
+- New functions `socket:sendv/*` for sending I/O vectors have been added.
+
+  Own Id: OTP-18845
+
+- The shell now pages long output from the documentation help command
+  (`h(Module)`), auto completions and the search command.
+
+  Own Id: OTP-18846
+  Related Id(s): PR-7845
+
+- Native coverage support has been implemented in the JIT. It will automatically
+  be used by the `cover` tool to reduce the execution overhead when running
+  cover-compiled code.
+
+  There are also new APIs to support native coverage without using the `cover`
+  tool.
+
+  To instrument code for native coverage it must be compiled with the
+  `line_coverage` option.
+
+  To enable native coverage in the runtime system, start it like so:
+
+      $ erl +JPcover true
+
+  There are also the following new functions for supporting native coverage:
+
+  - code:coverage_support/0
+  - code:get_coverage/2
+  - code:reset_coverage/1
+  - code:get_coverage_mode/0
+  - code:get_coverage_mode/1
+  - code:set_coverage_mode/1
+
+  Own Id: OTP-18856
+  Related Id(s): PR-7856
+
+  *** HIGHLIGHT ***
+
+- Optimized code loading by moving certain operations from the code server to
+  the caller.
+
+  Own Id: OTP-18941
+  Related Id(s): PR-7981
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Application startup has been optimized by removing an intermediary process.
+
+  Own Id: OTP-18963
+  Related Id(s): PR-8042
+
+- The existing experimental support for archive files will be changed in a
+  future release. The support for having an archive in an escript will remain,
+  but the support for using archives in a release will either become more
+  limited or completely removed.
+
+  As of Erlang/OTP 27, the function code:lib_dir/2, the `-code_path_choice`
+  flag, and using `erl_prim_loader` for reading members of an archive are
+  deprecated.
+
+  To remain compatible with future version of Erlang/OTP `escript` scripts that
+  need to retrieve data files from its archive should use escript:extract/2
+  instead of `erl_prim_loader` and code:lib_dir/2.
+
+  Own Id: OTP-18966
+  Related Id(s): PR-8091
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The undocumented and deprecated `file:pid2name` function has been removed.
+
+  Own Id: OTP-18967
+  Related Id(s): PR-8092
+
+- There is a new module `trace` in Kernel providing the same trace
+  functionality as erlang:trace/3 and erlang:trace_pattern/3, but with the
+  addition of **dynamic isolated trace sessions**.
+
+  Own Id: OTP-18980
+  *** HIGHLIGHT ***
+
+- Error logging has been improved when the io:standard_io/0 reader and/or
+  writer terminates with an error.
+
+  Own Id: OTP-18989
+  Related Id(s): PR-8103
+
+- `inet_backend = socket` has been optimized and reworked to be more compatible
+  with the original `inet_backend = inet`.
+
+  Own Id: OTP-19004
+  Related Id(s): OTP-18835
+
+- Add an simple example (echo server) )to the socket users guide.
+
+  Own Id: OTP-19042
+
+- `inet:i/0,1,2` has been improved to allow port numbers to be shown explicitly.
+
+  Own Id: OTP-19053
+  Related Id(s): #6724
+
+- The `socket` documentation has been reworked, and due to that a few details
+  were fixed:
+
+  - socket:is_supported/1 now returns `true` for example for `protocols` that
+    is a "category", not an item.
+  - socket:cancel_monitor/1 no longer badargs for a monitor that was set by
+    another process, instead it returns `false` as for other unknown
+    `reference()`s.
+
+  Own Id: OTP-19054
+
+- Add `stdin`, `stdout` and `stderr` keys to io:getopts/1 on
+  io:standard_io/0 to indicate if the respective I/O device is backed by a
+  terminal.
+
+  Own Id: OTP-19089
+  Related Id(s): PR-8396
+
+> #### Full runtime dependencies of kernel-10.0
+>
+> crypto-5.0, erts-15.0, sasl-3.0, stdlib-6.0
+
+# megaco-4.6
+
+## Improvements and New Features
+
+- `-callback` attributes have been added to `megaco_transport`.
+
+  Own Id: OTP-18806
+  Related Id(s): PR-7740
+
+- Updated types and specs for all API modules.
+
+  Own Id: OTP-18920
+  Related Id(s): BL-322
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of megaco-4.6
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.23.2
+
+## Fixed Bugs and Malfunctions
+
+- The `mnesia_registry` module have been deprecated.
+
+  Own Id: OTP-18994
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of mnesia-4.23.2
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# observer-2.16
+
+## Fixed Bugs and Malfunctions
+
+- The dependencies for this application are now listed in the app file.
+
+  Own Id: OTP-18831
+  Related Id(s): PR-7441
+
+## Improvements and New Features
+
+- The new function proc_lib:set_label/1 can be used to add a descriptive term
+  to any process that does not have a registered name. The name will be shown by
+  tools such as `\c:i/0`, `observer`, and it will be included in crash reports
+  produced by processes using `gen_server`, `gen_statem`, `gen_event`, and
+  `gen_fsm`.
+
+  The label for a process can be retrieved by calling proc_lib:get_label/1.
+
+  Note that those functions work on any process, not only processes that use
+  `proc_lib`.
+
+  Example:
+
+      1> self().
+      <0.90.0>
+      2> proc_lib:set_label(my_label).
+      ok
+      3> i().
+          .
+          .
+          .
+      <0.90.0>              erlang:apply/2                        2586    75011    0
+      my_label              c:pinfo/2                               51
+      4> proc_lib:get_label(self()).
+      my_label
+
+  Own Id: OTP-18789
+  Related Id(s): PR-7720, PR-8003
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- `m:etop` has been updated to use dbg:session/2 in order to not interfere
+  with any other tracing.
+
+  Own Id: OTP-19082
+  Related Id(s): PR-8363
+
+> #### Full runtime dependencies of observer-2.16
+>
+> erts-15.0, et-1.5, kernel-10.0, runtime_tools-2.1, stdlib-5.0, wx-2.3
+
+# odbc-2.14.3
+
+## Fixed Bugs and Malfunctions
+
+- The order of libs in the Makefile has been changed to avoid finding the
+  system's `libei` instead of Erlang's `libei`.
+
+  Own Id: OTP-19030
+  Related Id(s): GH-8244, PR-8258
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of odbc-2.14.3
+>
+> erts-6.0, kernel-3.0, stdlib-2.0
+
+# os_mon-2.10
+
+## Improvements and New Features
+
+- Function specifications and types have been added to all public API functions.
+
+  Own Id: OTP-18913
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of os_mon-2.10
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# parsetools-2.6
+
+## Improvements and New Features
+
+- The `leex` documentation has been updated to use specs for documenting the
+  generated interface.
+
+  Own Id: OTP-18796
+  Related Id(s): PR-7703
+
+- yecc now wraps the `-module` attribute with `-file` to indicate the `.yrl`
+  source file.
+
+  Own Id: OTP-18912
+  Related Id(s): PR-7963
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of parsetools-2.6
+>
+> erts-6.0, kernel-3.0, stdlib-3.4
+
+# public_key-1.16
+
+## Improvements and New Features
+
+- The `ssl` client can negotiate and handle certificate status request (OCSP
+  stapling support on the client side).
+
+  Thanks to voltone for interop testing and related discussions.
+
+  Own Id: OTP-18606
+  Related Id(s): OTP-16448, OTP-16875
+
+  *** HIGHLIGHT ***
+
+- The exception reason when public_key:cacerts_get/0 failed has been improved.
+
+  Own Id: OTP-18609
+  Related Id(s): GH-7295, PR-7302
+
+- Key customization support has been extended to allow flexibility for
+  implementers of for instance hardware security modules (HSM) or trusted
+  platform modules (TPM).
+
+  Own Id: OTP-18876
+  Related Id(s): PR-7475, PR-7898
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- The existing function ssl:key_exporter_materials/4 is now documented and
+  supported.
+
+  Own Id: OTP-19016
+  Related Id(s): PR-8233
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Due to another attack on PKCS #1 v1.5 padding, known as the Marvin attack,
+  about which we were alerted by Hubert Kario from Red Hat. You can find more
+  details about the attack at https://people.redhat.com/~hkario/marvin/
+  Functions that may be vulnerable are now deprecated.
+
+  Note that you might mitigate the problem by using appropriate versions of
+  OpenSSL together with our software, but we recommend not using them at all.
+
+  Also avoid using TLS versions prior to TLS-1.2 (not supported by default) and
+  do not enable RSA-key exchange cipher suites (not supported by default).
+
+  Own Id: OTP-19075
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of public_key-1.16
+>
+> asn1-3.0, crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+# reltool-1.0.1
+
+## Fixed Bugs and Malfunctions
+
+- The dependencies for this application are now listed in the app file.
+
+  Own Id: OTP-18831
+  Related Id(s): PR-7441
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of reltool-1.0.1
+>
+> erts-15.0, kernel-9.0, sasl-4.2.1, stdlib-5.0, tools-2.6.14, wx-2.3
+
+# runtime_tools-2.1
+
+## Improvements and New Features
+
+- The `instrument` module can now track allocations on a per-process or
+  per-port basis.
+
+  Own Id: OTP-18577
+  Related Id(s): PR-7236
+
+- The new function proc_lib:set_label/1 can be used to add a descriptive term
+  to any process that does not have a registered name. The name will be shown by
+  tools such as `\c:i/0`, `observer`, and it will be included in crash reports
+  produced by processes using `gen_server`, `gen_statem`, `gen_event`, and
+  `gen_fsm`.
+
+  The label for a process can be retrieved by calling proc_lib:get_label/1.
+
+  Note that those functions work on any process, not only processes that use
+  `proc_lib`.
+
+  Example:
+
+      1> self().
+      <0.90.0>
+      2> proc_lib:set_label(my_label).
+      ok
+      3> i().
+          .
+          .
+          .
+      <0.90.0>              erlang:apply/2                        2586    75011    0
+      my_label              c:pinfo/2                               51
+      4> proc_lib:get_label(self()).
+      my_label
+
+  Own Id: OTP-18789
+  Related Id(s): PR-7720, PR-8003
+
+- Type specs had been added to all `dbg` functions.
+
+  Own Id: OTP-18859
+  Related Id(s): PR-7782
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- `m:dbg` have been updated to use trace sessions.
+
+  dbg:session_create/1, dbg:session/2, and dbg:session_destroy/1 have been
+  added to work sessions. See the documentation for details.
+
+  Own Id: OTP-19081
+  Related Id(s): PR-8363
+
+> #### Full runtime dependencies of runtime_tools-2.1
+>
+> erts-15.0, kernel-10.0, mnesia-4.12, stdlib-6.0
+
+# sasl-4.2.2
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of sasl-4.2.2
+>
+> erts-15.0, kernel-6.0, stdlib-4.0, tools-2.6.14
+
+# snmp-5.16
+
+## Improvements and New Features
+
+- `-callback` attributes have been added to modules
+  `snmpa_network_interface_filter`, `snmpa_notification_filter`,
+  `snmpm_network_interface_filter`, `snmpm_user`, and
+  `snmpa_notification_delivery_info_receiver`.
+
+  New `-type` attributes have also been added to modules `snmp`, `snmpa`,
+  `snmpm`, and `snmpa_conf` to support the previously mentioned callbacks.
+
+  Own Id: OTP-18785
+  Related Id(s): PR-7702
+
+- Updated types and specs for all API modules.
+
+  Own Id: OTP-18934
+  Related Id(s): BL-312
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of snmp-5.16
+>
+> crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12, runtime_tools-1.8.14,
+> stdlib-5.0
+
+# ssh-5.2
+
+## Fixed Bugs and Malfunctions
+
+- SSH processes are now assigned labels for troubleshooting purposes.
+
+  Own Id: OTP-19017
+  Related Id(s): PR-8249
+
+- With this change, ssh client will automatically adjust transfer window size
+  for commands executed remotely over SSH.
+
+  Own Id: OTP-19057
+  Related Id(s): GH-7483, PR-8345
+
+## Improvements and New Features
+
+- The shell now pages long output from the documentation help command
+  (`h(Module)`), auto completions and the search command.
+
+  Own Id: OTP-18846
+  Related Id(s): PR-7845
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Updated types and specs for all API modules.
+
+  Own Id: OTP-18961
+
+> #### Full runtime dependencies of ssh-5.2
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2
+
+## Fixed Bugs and Malfunctions
+
+- Starting a TLS server without sufficient credentials (certificate or anonymous
+  cipher) would work, but it was impossible to connect to it.
+
+  This has been corrected to return an error instead of starting the server.
+
+  Own Id: OTP-18887
+  Related Id(s): GH-7493, PR-7918
+
+- ASN.1 decoding errors are handled in more places to ensure that errors are
+  returned instead of cause a crash.
+
+  Own Id: OTP-18969
+  Related Id(s): GH-8058, PR-8256
+
+- Improved error checking on the API functions.
+
+  Own Id: OTP-18992
+  Related Id(s): GH-8066, PR-8156
+
+## Improvements and New Features
+
+- The `ssl` client can negotiate and handle certificate status request (OCSP
+  stapling support on the client side).
+
+  Thanks to voltone for interop testing and related discussions.
+
+  Own Id: OTP-18606
+  Related Id(s): OTP-16448, OTP-16875
+
+  *** HIGHLIGHT ***
+
+- Memory consumption has been reduced and performance increased by refactoring
+  internal data structures and their usage.
+
+  Own Id: OTP-18665
+  Related Id(s): PR-7447
+
+- Added ssl_crl_cache_api:lookup/2 as an optional `-callback` attribute.
+
+  Own Id: OTP-18788
+  Related Id(s): PR-7700
+
+- Key customization support has been extended to allow flexibility for
+  implementers of for instance hardware security modules (HSM) or trusted
+  platform modules (TPM).
+
+  Own Id: OTP-18876
+  Related Id(s): PR-7475, PR-7898
+
+- The proc_lib:set_label/1 function is now used to increase observability of
+  `ssl` processes.
+
+  Own Id: OTP-18879
+
+- Brainpool elliptic curves are now supported in TLS-1.3.
+
+  Own Id: OTP-18884
+  Related Id(s): PR-8056
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- For security reasons, the CBC ciphers are now longer included in the list of
+  default ciphers for TLS-1.2.
+
+  Own Id: OTP-19025
+  Related Id(s): PR-8250
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- There is a new `cert_policy_opts` option to configure certificate policy
+  options for the certificate path validation.
+
+  Own Id: OTP-19027
+  Related Id(s): PR-8255
+
+> #### Full runtime dependencies of ssl-11.2
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.15,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.0
+
+## Fixed Bugs and Malfunctions
+
+- The specs in module `binary` has been updated to reflect what is allowed by
+  the documentation.
+
+  Own Id: OTP-18684
+  Related Id(s): PR-7481
+
+- Several functions in the `binary` module would accept arguments of the wrong
+  type under certain circumstances. In this release, they now raise an exception
+  when incorrect types are given.
+
+  The following functions would accept an invalid pattern if the subject binary
+  was empty or if the `{scope,{0,0}}` option was given: `binary:match/2,3`,
+  `binary:matches/2,3`, `binary:replace/3,4`, and `binary:split/2,3`
+
+  The call `binary:copy(<<1:1>>, 0)` would return an empty binary instead of
+  raising an exception. Similarly, calls to `binary:part/2,3` attempting to
+  extract 0 bytes at position 0 of a bitstring would return an empty binary
+  instead of raising an exception.
+
+  Own Id: OTP-18743
+  Related Id(s): PR-7607, PR-7628
+
+- The documentation for the preprocessor now mentions that `defined(Name)` can
+  be called in the condition for an `-if` or `-elif` directive to test whether
+  `Name` is the name of a defined macro. (This feature was implemented in OTP
+  21.)
+
+  If a function call in an `-if` or `-elif` with a name that is not the name of
+  a guard BIF, there would not be a compilation error, but would instead cause
+  the lines following the directive to be skipped. This has now been changed to
+  be a compilation error.
+
+  Own Id: OTP-18784
+  Related Id(s): GH-7706, PR-7726
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- `get_until` requests using the I/O protocol now correctly return a binary or
+  list when `eof` is the last item returned by the callback.
+
+  Own Id: OTP-18930
+  Related Id(s): GH-4992, PR-7993
+
+- The error handling the `simple_one_for_one` supervisor has been enhanced. A
+  transient child returning `ignore` will no longer cause a crash.
+
+  Also, automatic shutdown has been disabled because it does not make sense for
+  this supervisor type. That is was allowed is considered a bug. Therefore, we
+  don't consider this an incompatible change.
+
+  Own Id: OTP-19029
+  Related Id(s): PR-8230
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Fix shell expansion to not crash when expanding a map with non-atom keys and
+  to not list zero arity functions when an argument has been given.
+
+  Own Id: OTP-19073
+  Related Id(s): GH-8364, GH-8365, GH-8366, PR-8375
+
+## Improvements and New Features
+
+- The functions `is_equal/2`, `map/2`, and `filtermap/2` have been added to the
+  modules `sets`, `ordsets`, and `gb_sets`.
+
+  Own Id: OTP-18622
+  Related Id(s): PR-7183, PR-7232
+
+  *** HIGHLIGHT ***
+
+- The compiler now emits nicer error message for function head mismatches. For
+  example, given:
+
+      a() -> ok;
+      a(_) -> error.
+
+  Erlang/OTP 26 and earlier would emit a diagnostic similar to:
+
+      t.erl:6:1: head mismatch
+      %    6| a(_) -> error.
+      %     | ^
+
+  while in Erlang/OTP 27 the diagnostic is similar to:
+
+      t.erl:6:1: head mismatch: function a with arities 0 and 1 is regarded as two distinct functions. Is the number of arguments incorrect or is the semicolon in a/0 unwanted?
+      %    6| a(_) -> error.
+      %     | ^
+
+  Own Id: OTP-18648
+  Related Id(s): PR-7383
+
+  *** HIGHLIGHT ***
+
+- `zip:create/2,3` will now tolerate POSIX timestamps in the provided
+  `file_info` records.
+
+  Own Id: OTP-18668
+
+- The callback function gen_statem:handle_event/4 has been cached in the
+  `gen_statem` engine to optimize callback call speed.
+
+  Own Id: OTP-18671
+  Related Id(s): PR-7419
+
+- The type beam_lib:beam/0 is now exported.
+
+  Own Id: OTP-18716
+  Related Id(s): PR-7534
+
+- The documentation for the `binary` module has been improved.
+
+  Own Id: OTP-18741
+  Related Id(s): PR-7585
+
+- `binary:replace/3,4` now supports using a fun for supplying the replacement
+  binary.
+
+  Own Id: OTP-18742
+  Related Id(s): PR-7590
+
+- Triple-Quoted Strings has been implemented as per EEP 64. See String in the
+  Reference Manual.
+
+  Example:
+
+      1> """
+         a
+         b
+         c
+         """.
+      "a\nb\nc"
+
+  Adjacent string literals without intervening white space is now a syntax
+  error, to avoid possible confusion with triple-quoted strings. For example:
+
+      1> "abc""xyz".
+      "xyz".
+      * 1:6: adjacent string literals without intervening white space
+
+  Own Id: OTP-18750
+  Related Id(s): PR-7313, PR-7451, OTP-18746
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The new function proc_lib:set_label/1 can be used to add a descriptive term
+  to any process that does not have a registered name. The name will be shown by
+  tools such as `\c:i/0`, `observer`, and it will be included in crash reports
+  produced by processes using `gen_server`, `gen_statem`, `gen_event`, and
+  `gen_fsm`.
+
+  The label for a process can be retrieved by calling proc_lib:get_label/1.
+
+  Note that those functions work on any process, not only processes that use
+  `proc_lib`.
+
+  Example:
+
+      1> self().
+      <0.90.0>
+      2> proc_lib:set_label(my_label).
+      ok
+      3> i().
+          .
+          .
+          .
+      <0.90.0>              erlang:apply/2                        2586    75011    0
+      my_label              c:pinfo/2                               51
+      4> proc_lib:get_label(self()).
+      my_label
+
+  Own Id: OTP-18789
+  Related Id(s): PR-7720, PR-8003
+
+- `-callback` attributes has been added to modules `sys` and `erl_error`.
+
+  Own Id: OTP-18793
+  Related Id(s): PR-7703
+
+- Several new functions that accept funs have been added to module `timer`.
+
+  Functions `apply_after/2`, `apply_interval/2`, and `apply_repeatedly/2` accept
+  a nullary fun as the second argument, while functions `apply_after/3`,
+  `apply_interval/3`, and `apply_repeatedly/3` accept an n-ary fun as the second
+  and a list of n arguments for the fun as the third argument.
+
+  Own Id: OTP-18808
+  Related Id(s): PR-7649
+
+  *** HIGHLIGHT ***
+
+- Sigils on string literals have been implemented as per EEP 66, that is:
+  binary and string sigils in verbatim and escape characters variants, as well
+  as a default (vanilla) Sigil. All for ordinary strings and for triple-quoted
+  strings (EEP 64). See Sigils in the Reference Manual.
+
+  Examples:
+
+      1> ~"Björn".
+      <<"Björn"/utf8>>
+      2> ~b"Björn".
+      <<"Björn"/utf8>>
+      3> ~S"\s*(\w+)".
+      "\\s*(\\w+)"
+      4> ~B"\s*(\w+)".
+      <<"\\s*(\\w+)">>
+
+  Own Id: OTP-18825
+  Related Id(s): PR-7684, OTP-18750
+
+  *** HIGHLIGHT ***
+
+- Functions shell:default_multiline_prompt/1, shell:inverted_space_prompt/1,
+  and shell:prompt_width/1 have been exported to help with custom prompt
+  implementations.
+
+  Own Id: OTP-18834
+  Related Id(s): PR-7675, PR-7816
+
+- The shell now pages long output from the documentation help command
+  (`h(Module)`), auto completions and the search command.
+
+  Own Id: OTP-18846
+  Related Id(s): PR-7845
+
+- The `M-h` hotkey (Alt/Option-h) now outputs help for the module or function
+  directly before the cursor.
+
+  Own Id: OTP-18847
+  Related Id(s): PR-7846
+
+- Added support for adding a custom code formatter that formats your multi-line
+  shell commands in your preferred formatting on submission. See
+  `shell:format_shell_func/` and shell:erl_pp_format_func/1.
+
+  Own Id: OTP-18848
+  Related Id(s): PR-7847
+
+- Added shell functions for viewing, forgetting and saving locally defined
+  functions, types and records.
+
+  Own Id: OTP-18852
+  Related Id(s): PR-7844
+
+- Added string:jaro_similarity/2, which can be used to calculate the
+  similarity between two strings.
+
+  Own Id: OTP-18865
+  Related Id(s): PR-7879
+
+- The new function ets:update_element/4 is similar to ets:update_element/3,
+  but takes a default tuple as the fourth argument, which will be inserted if no
+  previous record with that key exists.
+
+  Own Id: OTP-18870
+  Related Id(s): PR-7857
+
+- Added functions to retrieve the next higher or lower key/element from
+  `gb_trees` and `gb_sets`, as well as returning iterators that start at
+  given keys/elements.
+
+  Own Id: OTP-18874
+  Related Id(s): PR-7745
+
+- When the shell built-in function `c/1,2` is used to re-compile a
+  module, the current working directory of the original compilation is now added
+  to the include path.
+
+  
+  Own Id: OTP-18908
+  Related Id(s): PR-7957
+
+- The `timer` module now uses a private table for its internal state, slightly
+  improving its performance.
+
+  Own Id: OTP-18914
+  Related Id(s): PR-7973
+
+- EEP-59 - Documentation Attributes has been implemented.
+
+  Documentation attributes can be used to document functions, types, callbacks,
+  and modules. The keyword `-moduledoc "Documentation here".` is used to
+  document modules, while `-doc "Documentation here".` can be used on top of
+  functions, types, and callbacks to document them, respectively.
+
+  - Types, callbacks, and function documentation can be set to `hidden` either
+    via `-doc false` or `-doc hidden`. When documentation attributes mark a type
+    as hidden, they will not be part of the documentation.
+  - The documentation from `moduledoc` and `doc` gets added by default to the
+    binary beam file, following the format of EEP-48.
+  - Using the compiler flag `warn_missing_doc` will raise a warning when `-doc`
+    attributes are missing in exported functions, types, and callbacks.
+  - Using the compiler flag `warn_missing_spec_documented` will raise a warning
+    when spec attributes are missing in documented functions, types, and
+    callbacks.
+  - `moduledoc`s and `doc`s may refer to external files to be embedded, such as
+    `-doc {file, "README.md"}.`, which refers to the file `README.md` found in
+    the current working directory.
+  - The compiler warns about exported functions whose specs refer to hidden
+    types. Thus, there will be warnings when a hidden type (meaning, the type is
+    not part of the documentation) gets used in an exported function.
+
+  Own Id: OTP-18916
+  Related Id(s): PR-7936
+
+  *** HIGHLIGHT ***
+
+- New `ets` functions ets:first_lookup/1, ets:next_lookup/2,
+  ets:prev_lookup/2 and ets:last_lookup/1. Example: ets:next_lookup/1 is
+  equivalent to ets:next/2 followed by ets:lookup/2 with the next key. The
+  new combined functions are more efficient and with guaranteed atomicity.
+
+  Own Id: OTP-18923
+  Related Id(s): PR-6791
+
+  *** HIGHLIGHT ***
+
+- The `maybe` expression is now enabled by default.
+
+  To use `maybe` as an atom, it needs to be single-quoted. Alternatively, the
+  `maybe` expression can be disabled by disabling the `maybe_expr` feature. That
+  can be done by placing the following the line at the beginning of an Erlang
+  source file:
+
+      -feature(maybe_expr, disable).
+
+  Another way to disable the `maybe_expr` feature is by passing the
+  `-disable-feature` option to `erlc`:
+
+      erlc -disable-feature maybe_expr some_file.erl
+
+  Own Id: OTP-18944
+  Related Id(s): PR-8067
+
+  *** HIGHLIGHT ***
+
+- The compiler will now raise a warning when updating record/map literals. As an
+  example, consider this module:
+
+      -module(t).
+      -export([f/0]).
+      -record(r, {a,b,c}).
+
+      f() ->
+          #r{a=1}#r{b=2}.
+
+  The compiler raises the following warning:
+
+      1> c(t).
+      t.erl:6:12: Warning: expression updates a literal
+      %    6|     #r{a=1}#r{b=2}.
+      %     |            ^
+
+  Own Id: OTP-18951
+  Related Id(s): PR-8069
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Optimized `ets:foldl` and `ets:foldr` to use new `ets:next_lookup`. Also made
+  them immune against table renaming.
+
+  Own Id: OTP-18993
+  Related Id(s): PR-8048
+
+- Windows now supports all functions in `math`.
+
+  Own Id: OTP-19001
+  Related Id(s): PR-8164
+
+- `m:erl_lint` (and by extension the `compiler`) will now warn for code using
+  deprecated callbacks.
+
+  The only callback currenly deprecated is `format_status/2` in `gen_server`,
+  `gen_event` and `gen_statem`.
+
+  You can use `nowarn_deprecated_callback` to silence the warning.
+
+  Own Id: OTP-19010
+  Related Id(s): PR-8205
+
+- There is a new module `json` for encoding and decoding JSON.
+
+  Both encoding and decoding can be customized. Decoding can be done in a
+  SAX-like fashion and handle multiple documents and streams of data.
+
+  Own Id: OTP-19020
+  Related Id(s): PR-8111
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of stdlib-6.0
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# syntax_tools-3.2
+
+## Fixed Bugs and Malfunctions
+
+- The `epp_dodger` module can now handle the `maybe` and `else` keywords.
+
+  Own Id: OTP-18608
+  Related Id(s): GH-7266, PR-7267
+
+- Reverting a `#wrapper` will no longer throw away changes made to
+  positions/annotations.
+
+  Own Id: OTP-18805
+  Related Id(s): PR-7398
+
+## Improvements and New Features
+
+- The type erl_syntax:annotation_or_location/0 is now exported.
+
+  Own Id: OTP-18715
+  Related Id(s): PR-7535
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of syntax_tools-3.2
+>
+> compiler-7.0, erts-9.0, kernel-5.0, stdlib-4.0
+
+# tftp-1.2
+
+## Improvements and New Features
+
+- There is a new `tftp_logger` callback behavior module.
+
+  Own Id: OTP-18787
+  Related Id(s): PR-7700
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of tftp-1.2
+>
+> erts-6.0, kernel-6.0, stdlib-5.0
+
+# tools-4.0
+
+## Fixed Bugs and Malfunctions
+
+- Dialyzer warnings due to type specs added in `dbg` have been eliminated.
+
+  Own Id: OTP-18860
+
+- In Erlang/OTP 26, doing a `cover` analysis on the `line` level would return
+  multiple entries for lines on which multiple functions were defined.
+
+  For example, consider this module:
+
+      -module(foo).
+      -export(bar/0, baz/0).
+
+      bar() -> ok. baz() -> not_ok.
+
+
+{% raw %}
+
+
+  In Erlang/OTP 26, analysing on the `line` level would return two entries for
+  line 4:
+
+      1> cover:compile_module(foo).
+      {ok,foo}
+      2> foo:bar().
+      ok
+      3> cover:analyse(foo, coverage, line).
+      {ok,{{foo,4},{1,0}},{{foo,4},{0,1}}}
+      4> cover:analyse(foo, calls, line).
+      {ok,{{foo,4},1},{{foo,4},0}}
+
+  In Erlang/OTP 27, there will only be a single entry for line 4:
+
+      1> cover:compile_module(foo).
+      {ok,foo}
+      2> foo:bar().
+      ok
+      3> cover:analyse(foo, coverage, line).
+      {ok,{{foo,4},{1,0}}}
+      4> cover:analyse(foo, calls, line).
+      {ok,{{foo,4},1}}
+
+{% endraw %}
+
+  Own Id: OTP-18998
+  Related Id(s): GH-8159, PR-8182
+
+- Fixed align command in emacs mode.
+
+  Own Id: OTP-19026
+  Related Id(s): PR-8155
+
+## Improvements and New Features
+
+- Triple-Quoted Strings has been implemented as per EEP 64. See String in the
+  Reference Manual.
+
+  Example:
+
+      1> """
+         a
+         b
+         c
+         """.
+      "a\nb\nc"
+
+  Adjacent string literals without intervening white space is now a syntax
+  error, to avoid possible confusion with triple-quoted strings. For example:
+
+      1> "abc""xyz".
+      "xyz".
+      * 1:6: adjacent string literals without intervening white space
+
+  Own Id: OTP-18750
+  Related Id(s): PR-7313, PR-7451, OTP-18746
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- There is a new tool `tprof`, which combines the functionality of `eprof`
+  and `cprof` under one interface and adds heap profiling. It also has
+  functionality to help with profiling process hierarchies.
+
+  _Example_:
+
+      1> tprof:profile(lists, seq, [1, 16], #{type => call_memory}).
+
+      ****** Process <0.92.0>  --  100.00% of total ***
+      FUNCTION          CALLS  WORDS  PER CALL  [     %]
+      lists:seq_loop/3      5     32      6.40  [100.00]
+                                  32            [ 100.0]
+      ok
+
+  Own Id: OTP-18756
+  Related Id(s): PR-6639
+
+  *** HIGHLIGHT ***
+
+- Native coverage support has been implemented in the JIT. It will automatically
+  be used by the `cover` tool to reduce the execution overhead when running
+  cover-compiled code.
+
+  There are also new APIs to support native coverage without using the `cover`
+  tool.
+
+  To instrument code for native coverage it must be compiled with the
+  `line_coverage` option.
+
+  To enable native coverage in the runtime system, start it like so:
+
+      $ erl +JPcover true
+
+  There are also the following new functions for supporting native coverage:
+
+  - code:coverage_support/0
+  - code:get_coverage/2
+  - code:reset_coverage/1
+  - code:get_coverage_mode/0
+  - code:get_coverage_mode/1
+  - code:set_coverage_mode/1
+
+  Own Id: OTP-18856
+  Related Id(s): PR-7856
+
+  *** HIGHLIGHT ***
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+- Improved the align command in emacs mode.
+
+  Own Id: OTP-19080
+  Related Id(s): PR-8288
+
+> #### Full runtime dependencies of tools-4.0
+>
+> compiler-8.5, erts-15.0, erts-15.0, kernel-10.0, runtime_tools-2.1, stdlib-6.0
+
+# wx-2.4.2
+
+## Improvements and New Features
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of wx-2.4.2
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# xmerl-2.0
+
+## Fixed Bugs and Malfunctions
+
+- Some default values in Xmerl has been changed to avoid XML External Entity
+  (XXE) vulnerabilities if you're parsing untrusted XML.
+
+  xmerl_scan: the default value for allow_entities has changed to false.
+  xmerl_sax_parser: the default value for external_entities has changed to none.
+
+  Own Id: OTP-19079
+  Related Id(s): GH-7539
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- An event state in xmerl_sax_parser which was updated in the event callback for
+  a startEntity was not saved.
+
+  Own Id: OTP-19086
+  Related Id(s): GH-8452
+
+## Improvements and New Features
+
+- Function specifications and types have been added to all public API functions.
+
+  Own Id: OTP-18913
+
+- As an alternative to `xmerl_xml`, a new export module `xmerl_xml_indent` that
+  provides out-of-the box indented output has been added.
+
+  Own Id: OTP-18922
+  Related Id(s): PR-7942
+
+- The documentation has been migrated to use Markdown and ExDoc.
+
+  Own Id: OTP-18955
+  Related Id(s): PR-8026
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of xmerl-2.0
+>
+> erts-6.0, kernel-3.0, stdlib-2.5
+
+# Thanks to
+
+Alexander Clouter, Andrea Leopardi, Angelo Lakra, Anshul Mittal (WhatsApp),
+Anupama Singh, Artem Solomatin, Benjamin Philip, chiroptical, Christian Flicker,
+Fabian N.C. van 't Hooft, Frej Drejhammar, Gilbert, Guilherme Andrade, Gustaw
+Lippa, Ildar Khizbulin, Ilya Klyuchnikov, Ivan Sokolov, Jakub Witczak, Jan
+Uhlig, jdamanalo, jianhui, João Henrique Ferreira de Freitas, Johannes Christ,
+Jonatan Männchen, Jonathan Arnett, José Valim, Jurek Michal-AMJ018,
+lexprfuncall, LJZN, Luca Succi, Łukasz Niemier, Marcelino Alberdi Pereira, Maria
+Scott, Marko Mindek, Matthew Pope, Maxim Fedorov, Max Nordlund kivra, M-I,
+Michael Davis, Michal Jurek, Michal Kuratczyk, Michał Muskała, Nelson Vides,
+neo, Nikolay Amiantov, Paul Guyot, Paulo F. Oliveira, Richard Carlsson, Roberto
+Aloi, Robin Morisset, Ryota Kinukawa, Sacha, Sergey Yelin, Takeru Ohta, Tomas
+Abrahamsson, William Fank Thomé, WLSF, yastanotheruser, zeyun chen, Zeyu Zhang
+
