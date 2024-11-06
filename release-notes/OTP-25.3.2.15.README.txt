@@ -1,0 +1,291 @@
+Patch Package:           OTP 25.3.2.15
+Git Tag:                 OTP-25.3.2.15
+Date:                    2024-10-14
+Trouble Report Id:       OTP-19124, OTP-19158, OTP-19221, OTP-19236,
+                         OTP-19238, OTP-19246, OTP-19247, OTP-19252,
+                         OTP-19256, OTP-19257, OTP-19265, OTP-19266,
+                         OTP-19269, OTP-19274, OTP-19284
+Seq num:                 ERIERL-1091, ERIERL-1093, ERIERL-1127,
+                         ERIERL-1131, GH-7550, GH-8223, GH-8835,
+                         PR-8226, PR-8261, PR-8766, PR-8780, PR-8788,
+                         PR-8801, PR-8831, PR-8854, PR-8858, PR-8876,
+                         PR-8890, PR-8897, PR-8901, PR-8909
+System:                  OTP
+Release:                 25
+Application:             common_test-1.24.0.4, erts-13.2.2.11,
+                         inets-8.3.1.4, public_key-1.13.3.4,
+                         ssh-4.15.3.7, ssl-10.9.1.6, stdlib-4.3.1.5
+Predecessor:             OTP 25.3.2.14
+
+ Check out the git tag OTP-25.3.2.15, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-19158    Application(s): inets
+
+               With this change, HTTP client, when returning an
+               asynchronous request, now correctly takes into account
+               `OptionRequest - full_result`
+
+
+ ---------------------------------------------------------------------
+ --- common_test-1.24.0.4 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.24.0.4 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19252    Application(s): common_test
+               Related Id(s): PR-8858
+
+               With this change, HTML reports include jQuery version
+               3.7.1.
+
+
+  OTP-19265    Application(s): common_test
+               Related Id(s): PR-8876
+
+               With this change, jquery and tablesorter licenses are
+               added to COPYRIGHT file. Also tablesorter is updated to
+               version 2.32.
+
+
+  OTP-19284    Application(s): common_test
+               Related Id(s): ERIERL-1093, PR-8909
+
+               Fixed a bug where the sum of testcases' execution time
+               in HTML logs was sometimes miscalculated, and the table
+               was not fully printed.
+
+
+ Full runtime dependencies of common_test-1.24.0.4: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.2.11 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.2.11 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 25
+       installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19269    Application(s): erts
+               Related Id(s): GH-8835, PR-8897
+
+               Fixed beam crash that could happen if resetting
+               call_time or call_memory trace counters of a function
+               while it is called. Bug exists since OTP R16.
+
+
+ Full runtime dependencies of erts-13.2.2.11: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- inets-8.3.1.4 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-8.3.1.4 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19158    Application(s): inets
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               With this change, HTTP client, when returning an
+               asynchronous request, now correctly takes into account
+               `OptionRequest - full_result`
+
+
+  OTP-19221    Application(s): inets
+               Related Id(s): ERIERL-1091, PR-8788, PR-8801
+
+               With this change, synchronous httpc:request now
+               timeouts after `Timeout` specified in `HttpOption
+               {timeout, Timeout}`
+
+
+ Full runtime dependencies of inets-8.3.1.4: erts-13.0, kernel-6.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-4.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.13.3.4 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.13.3.4 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-19238    Application(s): public_key
+               Related Id(s): PR-8831
+
+               Do not hide crypto badarg reason, this error handling
+               enhancement facilitates debugging. These kind of
+               runtime errors are not documented and should never be
+               relied on for matching, they are intended for catching
+               input errors early.
+
+
+ Full runtime dependencies of public_key-1.13.3.4: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.3.7 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.3.7 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19124    Application(s): ssh
+               Related Id(s): GH-7550, PR-8766
+
+               With this change, a race condition is removed from ssh
+               client connection setup procedure.
+
+
+  OTP-19246    Application(s): ssh
+               Related Id(s): GH-8223, PR-8854
+
+               With this change, ssh:connect is not affected by
+               presence of EXIT message in queue.
+
+
+  OTP-19247    Application(s): ssh
+               Related Id(s): PR-8226
+
+               With this change, ssh appends {active, false} option
+               after socket options received from user - so that false
+               value is always used.
+
+
+ Full runtime dependencies of ssh-4.15.3.7: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- ssl-10.9.1.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-10.9.1.6 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 25 installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependency has to be satisfied:
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19236    Application(s): ssl
+               Related Id(s): PR-8261
+
+               Starting from TLS-1.3 some server handshake alerts
+               might arrive after ssl:connection/2,3,4 has returned.
+               If the socket is in active mode the controlling process
+               will get the alert message, but passive sockets would
+               only get {error, closed} on next call to ssl:recv/2,3
+               or ssl/setopts/2. Passive sockets calls will now return
+               {error, error_alert()} instead.
+
+
+  OTP-19257    Application(s): ssl
+               Related Id(s): ERIERL-1131
+
+               Servers configured to support only version (pre
+               TLS-1.2) should ignore hello version extension, as it
+               is an unknown extension to them, this will result in
+               that new clients that do not support the old server
+               version will get an insufficient security alert from
+               the server and not a protocol version alert, this is
+               consistent with how old servers not able to support
+               higher protocol versions work.
+
+
+  OTP-19274    Application(s): ssl
+               Related Id(s): PR-8901
+
+               Correct timeout handling for termination code run for
+               own alerts, so that intended timeout is used instead of
+               falling back to OS TCP-stack timeout that is
+               unreasonably long on some platforms.
+
+
+ Full runtime dependencies of ssl-10.9.1.6: crypto-5.0, erts-10.0,
+ inets-5.10.7, kernel-8.4, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-4.3.1.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The stdlib-4.3.1.5 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 25
+       installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- erts-13.1 (first satisfied in OTP 25.1)
+       -- kernel-8.5.1 (first satisfied in OTP 25.1.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19256    Application(s): stdlib
+               Related Id(s): PR-8780
+
+               With this change, shutdown procedure handles a race
+               condition between supervisor executing a shutdown and
+               child process termination from other reason.
+
+
+  OTP-19266    Application(s): stdlib
+               Related Id(s): ERIERL-1127, PR-8890
+
+               With this change, uri_string:normalize assumes empty
+               path (do not crash) when no path is provided in the URI
+               map.
+
+
+ Full runtime dependencies of stdlib-4.3.1.5: compiler-5.0,
+ crypto-4.5, erts-13.1, kernel-8.5.1, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Jakub Witczak
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
