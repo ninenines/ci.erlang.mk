@@ -80,7 +80,7 @@ jobs:
         name: Common Test logs (${{ inputs.erlang }} ${{ runner.os }})
         path: |
           logs/
-          !logs/**/log_private
+#          !logs/**/log_private
 
   dialyze:
     name: Run Dialyzer using ${{ inputs.erlang }}

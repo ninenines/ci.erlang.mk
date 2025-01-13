@@ -138,4 +138,4 @@ jobs:
         name: Common Test logs (${{ matrix.erlang }} ${{ runner.os }})
         path: |
           logs/
-          !logs/**/log_private
+#          !logs/**/log_private
