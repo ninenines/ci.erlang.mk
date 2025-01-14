@@ -1,0 +1,766 @@
+Patch Package:           OTP 27.2
+Git Tag:                 OTP-27.2
+Date:                    2024-12-11
+Trouble Report Id:       OTP-19158, OTP-19221, OTP-19223, OTP-19225,
+                         OTP-19232, OTP-19234, OTP-19243, OTP-19248,
+                         OTP-19253, OTP-19260, OTP-19261, OTP-19264,
+                         OTP-19270, OTP-19273, OTP-19280, OTP-19281,
+                         OTP-19282, OTP-19283, OTP-19284, OTP-19289,
+                         OTP-19292, OTP-19299, OTP-19300, OTP-19301,
+                         OTP-19302, OTP-19304, OTP-19305, OTP-19307,
+                         OTP-19309, OTP-19310, OTP-19320, OTP-19321,
+                         OTP-19322, OTP-19329, OTP-19330, OTP-19331,
+                         OTP-19333, OTP-19335, OTP-19338, OTP-19341,
+                         OTP-19342, OTP-19344, OTP-19351, OTP-19353,
+                         OTP-19360, OTP-19361, OTP-19362, OTP-19368,
+                         OTP-19370, OTP-19372, OTP-19373, OTP-19375,
+                         OTP-19377, OTP-19379, OTP-19380, OTP-19387
+Seq num:                 ERIERL-1091, ERIERL-1093, ERIERL-1149,
+                         ERIERL-1152, ERIERL-1154, GH-7466, GH-8487,
+                         GH-8510, GH-8544, GH-8706, GH-8755, GH-8759,
+                         GH-8769, GH-8783, GH-8810, GH-8815, GH-8818,
+                         GH-8821, GH-8829, GH-8867, GH-8899, GH-8903,
+                         GH-8942, GH-8948, GH-8963, GH-8983, GH-8997,
+                         GH-9027, GH-9087, PR-8532, PR-8671, PR-8744,
+                         PR-8776, PR-8788, PR-8789, PR-8794, PR-8800,
+                         PR-8801, PR-8816, PR-8833, PR-8838, PR-8844,
+                         PR-8856, PR-8878, PR-8879, PR-8884, PR-8889,
+                         PR-8898, PR-8902, PR-8906, PR-8907, PR-8909,
+                         PR-8912, PR-8919, PR-8920, PR-8921, PR-8947,
+                         PR-8949, PR-8954, PR-8955, PR-8956, PR-8959,
+                         PR-8970, PR-8972, PR-8978, PR-8986, PR-8987,
+                         PR-9002, PR-9003, PR-9008, PR-9016, PR-9021,
+                         PR-9023, PR-9034, PR-9043, PR-9062, PR-9067,
+                         PR-9078, PR-9093, PR-9097, PR-9108, PR-9127
+System:                  OTP
+Release:                 27
+Application:             common_test-1.27.5, compiler-8.5.4,
+                         crypto-5.5.2, debugger-5.5, dialyzer-5.3,
+                         eldap-1.2.14, erts-15.2, inets-9.3.1,
+                         kernel-10.2, megaco-4.7, mnesia-4.23.3,
+                         observer-2.17, os_mon-2.10.1,
+                         public_key-1.17, snmp-5.18, ssh-5.2.5,
+                         ssl-11.2.6, stdlib-6.2, tools-4.1.1
+Predecessor:             OTP 27.1.3
+
+Check out the git tag OTP-27.2, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- The HTTP client now correctly takes into account the `full_result` option when
+  returning an asynchronous request.
+
+  Own Id: OTP-19158
+  Application(s): inets
+
+# OTP-27.2
+
+## Improvements and New Features
+
+- The `SECURITY.md` file with guidelines for reporting vulnerabilities and
+  security issues has been added to the git repository.
+
+  Own Id: OTP-19338
+  Related Id(s): PR-9023
+
+# common_test-1.27.5
+
+The common_test-1.27.5 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where the sum of testcases' execution time in HTML logs was
+  sometimes miscalculated, and the table was not fully printed.
+
+  Own Id: OTP-19284
+  Related Id(s): ERIERL-1093, PR-8909
+
+> #### Full runtime dependencies of common_test-1.27.5
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-8.5.4
+
+The compiler-8.5.4 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a crash in the common sub-expression elimination pass.
+
+  Own Id: OTP-19243
+  Related Id(s): GH-8818, PR-8838
+
+- Fixed a bug where bogus code was generated for consecutive calls to
+  erlang:setelement/2, potentially crashing the runtime system.
+
+  Own Id: OTP-19270
+  Related Id(s): GH-8783, PR-8898
+
+- When the `line_coverage` option was used, exceptions could show the wrong line
+  for where the exception was raised.
+
+  Own Id: OTP-19282
+  Related Id(s): PR-8907
+
+- The `line_coverage` option would be ignored if given in a `compile()`
+  attribute within a module.
+
+  Own Id: OTP-19309
+  Related Id(s): GH-8942, PR-8970
+
+- A segment matching a float in a binary generator will now skip any invalid
+  float (such as a NaN) and continue matching the rest of the binary. Before
+  this correction, the comprehension would stop as soon as an invalid float was
+  encountered.
+
+  Example:
+
+      1> BadFloat = <<-1:64>>.
+      <<"ÿÿÿÿÿÿÿÿ">>
+      2> [X || <<X:64/float>> <= <<0.0/float,BadFloat/binary,42.0/float>>].
+      [0.0,42.0]
+
+  Own Id: OTP-19331
+  Related Id(s): PR-8978
+
+> #### Full runtime dependencies of compiler-8.5.4
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.5.2
+
+The crypto-5.5.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- crypto:strong_rand_bytes/2 fixed to work on Ubuntu pro with installed FIPS
+  support.
+
+  Own Id: OTP-19223
+  Related Id(s): GH-8769, PR-8800
+
+- Fixed crypto:hash_final/1 for digest types `shake128` and `shake256` when
+  using OpenSSL 3.4 or newer.
+
+  Own Id: OTP-19329
+  Related Id(s): GH-8997, PR-9002
+
+> #### Full runtime dependencies of crypto-5.5.2
+>
+> erts-9.0, kernel-5.3, stdlib-3.9
+
+# debugger-5.5
+
+The debugger-5.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Defining a fun in the shell using the syntax `fun Name/Arity` would fail. This
+  has been corrected so that the following now works:
+
+      1> F = fun is_atom/1.
+      #Fun.erl.42.18682967>
+      > F(a).
+      true
+      3> Id = fun id/1.
+      #Fun.erl.42.18682967>
+      4> Id(42).
+      ** exception error: undefined shell command id/1
+      5> id(I) -> I.
+      ok
+      6> Id(42).
+      42
+
+  The Debugger has also been corrected to correctly handle this syntax for a
+  BIF.
+
+  Own Id: OTP-19322
+  Related Id(s): GH-8963, PR-8987
+
+## Improvements and New Features
+
+- Erlang/OTP type specifications has been updated to eliminate overlapping
+  domains.
+
+  Own Id: OTP-19310
+  Related Id(s): GH-8810, GH-8821, PR-8986
+
+> #### Full runtime dependencies of debugger-5.5
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-3.15, wx-2.0
+
+# dialyzer-5.3
+
+The dialyzer-5.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed type inference for `erlang:system_info(logical_processors)`.
+
+  Own Id: OTP-19307
+  Related Id(s): GH-8948, PR-8954
+
+- Dialyzer would crash when attempting to analyze a module compiled with the
+  `line_coverage` option.
+
+  Own Id: OTP-19344
+  Related Id(s): GH-9027, PR-9034
+
+## Improvements and New Features
+
+- Erlang/OTP type specifications has been updated to eliminate overlapping
+  domains.
+
+  Own Id: OTP-19310
+  Related Id(s): GH-8810, GH-8821, PR-8986
+
+> #### Full runtime dependencies of dialyzer-5.3
+>
+> compiler-8.0, erts-12.0, kernel-8.0, stdlib-5.0, syntax_tools-2.0
+
+# eldap-1.2.14
+
+The eldap-1.2.14 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Corrected dialyzer spec for usage of TLS options. The incorrect usage for the
+  options in `eldap` could cause dialyzer warnings in user code referring to
+  `eldap` specs.
+
+  Own Id: OTP-19281
+  Related Id(s): PR-8906
+
+> #### Full runtime dependencies of eldap-1.2.14
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# erts-15.2
+
+The erts-15.2 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- gen_sctp:peeloff/2 has been fixed to inherit socket options to the peeled
+  off socket more like gen_tcp:accept/1, for example the options `tos` or
+  `tclass`.
+
+  When setting SCTP options that are unsupported on the platform, some should be
+  silently ignored, but a bug caused the option parsing to derail so the options
+  after could bail out and cause an error instead. This has been fixed.
+
+  Own Id: OTP-19225
+  Related Id(s): PR-8789
+
+- Fixed a bug where Erlang would corrupt the terminal settings if stdin was a
+  TTY but stdout was not.
+
+  Own Id: OTP-19232
+  Related Id(s): GH-8487, PR-8794
+
+- Fixed a bug in the non-JIT VM when loading a NIF over a function that is
+  already traced by more than one session. This caused a VM crash. This bug has
+  existed since OTP-27.0, where multiple trace sessions were introduced.
+
+  Own Id: OTP-19248
+  Related Id(s): PR-8856
+
+- Fixed a bug where the loading of modules with extremely large binary
+  construction instructions crashed the emulator on AArch64.
+
+  Own Id: OTP-19261
+  Related Id(s): GH-8815, PR-8816
+
+- `inet:getifaddrs/0,1` is improved when using inet_backend = socket.
+
+  Own Id: OTP-19264
+
+- win32reg:value/2 will no longer crash the emulator when the value is an
+  unterminated REG_SZ of size 0.
+
+  Own Id: OTP-19283
+  Related Id(s): GH-8903, PR-8912
+
+- `Makefile` dependency generation on Windows in WSL 2 has been corrected.
+
+  Own Id: OTP-19300
+  Related Id(s): PR-8955
+
+- Fix lock order violation if a NIF monitor `down` callback calls
+  `enif_whereis_pid`. Would cause debug emulator to crash but could potentially
+  lead to deadlocks in optimized emulator.
+
+  Own Id: OTP-19330
+  Related Id(s): GH-8983, PR-9008
+
+- Fixed compilation faults when compiling using `--enable-vm-probes`.
+
+  Own Id: OTP-19333
+
+- Fixed `erl_nif.h` on Windows to compile when gcc or clang is used.
+
+  Own Id: OTP-19341
+  Related Id(s): PR-9016
+
+- Fixed a minor issue in the JIT debug information that confused tools like GDB
+  and perf.
+
+  Own Id: OTP-19362
+  Related Id(s): PR-9003
+
+## Improvements and New Features
+
+- Improved documentation of timers.
+
+  Own Id: OTP-19360
+  Related Id(s): ERIERL-1149, PR-9062
+
+- The label for a process can now be retrieved also using
+  `process_info(Pid, label)` in addition to proc_lib:get_label/1.
+
+  This new option is useful when one wants to retrieve more than one process
+  info item. For example:
+
+      process_info(Pid, [label,registered_name])
+
+  Own Id: OTP-19373
+  Related Id(s): PR-9108
+
+> #### Full runtime dependencies of erts-15.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.3.1
+
+The inets-9.3.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The HTTP client now correctly takes into account the `full_result` option when
+  returning an asynchronous request.
+
+  Own Id: OTP-19158
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- A synchronous httpc:request now timeouts after the `Timeout` specified in
+  `HttpOption {timeout, Timeout}`.
+
+  Own Id: OTP-19221
+  Related Id(s): ERIERL-1091, PR-8788, PR-8801
+
+- Fixed a bug where calling httpc:set_options/2 when one of keys: _ipfamily_ or
+  _unix_socket_, was not present, would cause the other value to get overriden
+  by the default value. The validation of these options was also improved.
+
+  Own Id: OTP-19379
+  Related Id(s): GH-8829, PR-8878
+
+## Improvements and New Features
+
+- The variable `Env` in the `mod_esi` callback will now have an additional
+  property `{connect_addr, Addr}` indicating on which address the server
+  received a connection.
+
+  Own Id: OTP-19377
+  Related Id(s): ERIERL-1152, PR-9127
+
+> #### Full runtime dependencies of inets-9.3.1
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# kernel-10.2
+
+Note! The kernel-10.2 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.1 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- gen_sctp:peeloff/2 has been fixed to inherit socket options to the peeled
+  off socket more like gen_tcp:accept/1, for example the options `tos` or
+  `tclass`.
+
+  When setting SCTP options that are unsupported on the platform, some should be
+  silently ignored, but a bug caused the option parsing to derail so the options
+  after could bail out and cause an error instead. This has been fixed.
+
+  Own Id: OTP-19225
+  Related Id(s): PR-8789
+
+- Made it possible to expand help text displayed by pressing ^[h by pressing ^[h
+  again.
+
+  Own Id: OTP-19260
+  Related Id(s): PR-8884
+
+- `inet:getifaddrs/0,1` is improved when using inet_backend = socket.
+
+  Own Id: OTP-19264
+
+- Fixed logger:report/0 to mandate at least one element in the report. This
+  fixes an issue with overlapping `spec` domains in all `logger` functions
+  that use logger:report/0.
+
+  Own Id: OTP-19302
+  Related Id(s): PR-8959
+
+- Fixed deadlock on `code_server`. Multiple calls loading the same module with
+  an `on_load` function loading call would create a deadlock.
+
+  Own Id: OTP-19305
+  Related Id(s): GH-7466, GH-8510, PR-8744
+
+## Improvements and New Features
+
+- The Kernel application now recognizes the `epmd_module` and
+  `erl_epmd_listen_port` parameters, similar to `-kernel:connect_all`.
+
+  Own Id: OTP-19253
+  Related Id(s): PR-8671
+
+- The `inetrc` kernel argument will now tolerate atoms again to improve
+  compatibility with old configurations that relied on atoms working by
+  accident.
+
+  The expected type always was, and still remains, a string.
+
+  Own Id: OTP-19280
+  Related Id(s): GH-8899, PR-8902
+
+- The file:io_device/0 type has been updated to clearly show the difference
+  between a `raw` and `cooked` IoDevice.
+
+  Own Id: OTP-19301
+  Related Id(s): PR-8956
+
+- Erlang/OTP type specifications has been updated to eliminate overlapping
+  domains.
+
+  Own Id: OTP-19310
+  Related Id(s): GH-8810, GH-8821, PR-8986
+
+- Added the kernel parameter `os_cmd_shell` that controls which shell should
+  be used by os:cmd/1.
+
+  Own Id: OTP-19342
+  Related Id(s): PR-8972
+
+- Added logging support to io:user/0, io:standard_io/0 and
+  io:standard_error/0. See io:setopts/2 for more details.
+
+  Own Id: OTP-19372
+  Related Id(s): PR-8947
+
+> #### Full runtime dependencies of kernel-10.2
+>
+> crypto-5.0, erts-15.1, sasl-3.0, stdlib-6.0
+
+# megaco-4.7
+
+The megaco-4.7 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Improvements and New Features
+
+- Erlang/OTP type specifications has been updated to eliminate overlapping
+  domains.
+
+  Own Id: OTP-19310
+  Related Id(s): GH-8810, GH-8821, PR-8986
+
+> #### Full runtime dependencies of megaco-4.7
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.23.3
+
+The mnesia-4.23.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Mnesia table converted from `ext_copies` to `disc_copies` will now be properly
+  saved to disk.
+
+  Own Id: OTP-19292
+  Related Id(s): GH-8706, PR-8921
+
+- Mnesia could crash if table was deleted during checkpoint initialization.
+
+  Own Id: OTP-19368
+  Related Id(s): ERIERL-1154, PR-9093
+
+> #### Full runtime dependencies of mnesia-4.23.3
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# observer-2.17
+
+The observer-2.17 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In the Memory tab of `crashdump_viewer`, the blocks sizes in
+  `Allocator Summary` would all be `N/A`.
+
+  Own Id: OTP-19353
+  Related Id(s): PR-8532
+
+## Improvements and New Features
+
+- The Kernel application now recognizes the `epmd_module` and
+  `erl_epmd_listen_port` parameters, similar to `-kernel:connect_all`.
+
+  Own Id: OTP-19253
+  Related Id(s): PR-8671
+
+> #### Full runtime dependencies of observer-2.17
+>
+> erts-15.0, et-1.5, kernel-10.0, runtime_tools-2.1, stdlib-5.0, wx-2.3
+
+# os_mon-2.10.1
+
+The os_mon-2.10.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed the `memsup` memory alarm to use `available_memory` when available,
+  instead of always using `free_memory`.
+
+  Own Id: OTP-19304
+  Related Id(s): GH-8759, PR-8776
+
+> #### Full runtime dependencies of os_mon-2.10.1
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# public_key-1.17
+
+The public_key-1.17 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Improvements and New Features
+
+- public_key:cacerts_load/1 can now be configured via the application
+  environment.
+
+  Own Id: OTP-19321
+  Related Id(s): PR-8920
+
+- On MacOS, CA certificates are now also loaded from the system keychain.
+
+  Own Id: OTP-19375
+  Related Id(s): PR-8844
+
+> #### Full runtime dependencies of public_key-1.17
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# snmp-5.18
+
+The snmp-5.18 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Improvements and New Features
+
+- Erlang/OTP type specifications has been updated to eliminate overlapping
+  domains.
+
+  Own Id: OTP-19310
+  Related Id(s): GH-8810, GH-8821, PR-8986
+
+> #### Full runtime dependencies of snmp-5.18
+>
+> crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12, runtime_tools-1.8.14,
+> stdlib-5.0
+
+# ssh-5.2.5
+
+The ssh-5.2.5 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Documentation is polished after OTP-27 migration to markdown.
+
+  Own Id: OTP-19335
+  Related Id(s): PR-9021
+
+> #### Full runtime dependencies of ssh-5.2.5
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.6
+
+Note! The ssl-11.2.6 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Improvements and New Features
+
+- Enhanced return value spec for active messages from the TLS connection socket.
+
+  Own Id: OTP-19387
+  Related Id(s): PR-9067
+
+> #### Full runtime dependencies of ssl-11.2.6
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.2
+
+The stdlib-6.2 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Made it possible to expand help text displayed by pressing ^[h by pressing ^[h
+  again.
+
+  Own Id: OTP-19260
+  Related Id(s): PR-8884
+
+- Defining a fun in the shell using the syntax `fun Name/Arity` would fail. This
+  has been corrected so that the following now works:
+
+      1> F = fun is_atom/1.
+      #Fun.erl.42.18682967>
+      > F(a).
+      true
+      3> Id = fun id/1.
+      #Fun.erl.42.18682967>
+      4> Id(42).
+      ** exception error: undefined shell command id/1
+      5> id(I) -> I.
+      ok
+      6> Id(42).
+      42
+
+  The Debugger has also been corrected to correctly handle this syntax for a
+  BIF.
+
+  Own Id: OTP-19322
+  Related Id(s): GH-8963, PR-8987
+
+- Fixed a bug where completion of 'fun(' would cause the shell to crash.
+
+  Own Id: OTP-19351
+  Related Id(s): PR-9043
+
+- Fixed a bug causing the shell to crash while trying to complete an expression
+  starting with a '/' or a variable followed by '(' or '/'. E.g. Foo/ and Foo(.
+
+  Own Id: OTP-19361
+  Related Id(s): PR-9078
+
+- zip:extract/2 with `keep_old_files` now respects the `cwd` option.
+
+  Own Id: OTP-19370
+  Related Id(s): GH-9087, PR-9097
+
+- Fixed an error in uri_string:percent_decode spec
+
+  Own Id: OTP-19380
+  Related Id(s): GH-8755
+
+## Improvements and New Features
+
+- Updated shell docs to display the type spec, that is, `h(erlang, min, 2)` now
+  prints the type spec and documentation in the shell.
+
+      > h(erlang,min,2).
+
+        -spec min(Term1, Term2) -> Minimum
+                     when Term1 :: term(), Term2 :: term(), Minimum :: term().
+
+        Returns the smallest of Term1 and Term2. If the terms compare equal with the == operator, Term1 is returned.
+
+  Own Id: OTP-19234
+  Related Id(s): GH-8544, PR-8833
+
+- The file:io_device/0 type has been updated to clearly show the difference
+  between a `raw` and `cooked` IoDevice.
+
+  Own Id: OTP-19301
+  Related Id(s): PR-8956
+
+- Added json:format_key_value_list/3 and
+  json:format_key_value_list_checked/3.
+
+  Own Id: OTP-19320
+  Related Id(s): PR-8889
+
+- Improved documentation of timers.
+
+  Own Id: OTP-19360
+  Related Id(s): ERIERL-1149, PR-9062
+
+- Added logging support to io:user/0, io:standard_io/0 and
+  io:standard_error/0. See io:setopts/2 for more details.
+
+  Own Id: OTP-19372
+  Related Id(s): PR-8947
+
+> #### Full runtime dependencies of stdlib-6.2
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# tools-4.1.1
+
+The tools-4.1.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed some deprecated errors on emacs-29.
+
+  Own Id: OTP-19273
+  Related Id(s): PR-8879
+
+- The `cover` tool could sometimes wrongly report lines as uncovered.
+
+  Own Id: OTP-19289
+  Related Id(s): GH-8867, PR-8919
+
+- Fixed `tprof:format(IoDevice, ...)` to not demand unicode encoding supported
+  by `IoDevice`.
+
+  Own Id: OTP-19299
+  Related Id(s): PR-8949
+
+> #### Full runtime dependencies of tools-4.1.1
+>
+> compiler-8.5, erts-15.0, erts-15.0, kernel-10.0, runtime_tools-2.1, stdlib-6.0
+
+# Thanks to
+
+Bryan Paxton, Daniel Finke, Dániel Szoboszlay, dependabotbot, Ildar Khizbulin,
+Jakub Witczak, Jonatan Kłosko, José Valim, Loïc Hoguin, Maas-Maarten Zeeman,
+Maria Scott, Marko Mindek, Péter Gömöri, Radek Szymczyszyn, Svilen Ivanov,
+Yaroslav Maslennikov, zmstone
+
