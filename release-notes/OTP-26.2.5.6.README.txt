@@ -1,0 +1,261 @@
+Patch Package:           OTP 26.2.5.6
+Git Tag:                 OTP-26.2.5.6
+Date:                    2024-12-05
+Trouble Report Id:       OTP-19240, OTP-19330, OTP-19332, OTP-19350,
+                         OTP-19352, OTP-19357, OTP-19365, OTP-19366,
+                         OTP-19368, OTP-19379, OTP-19380
+Seq num:                 #8989, CVE-2024-53846, ERIERL-1134,
+                         ERIERL-1154, ERIERL-1157, GH-8755, GH-8829,
+                         GH-8983, GH-9009, OTP-19061, OTP-19240,
+                         OTP-19532, PR-8840, PR-8878, PR-9008,
+                         PR-9053, PR-9080, PR-9093, PR-9130
+System:                  OTP
+Release:                 26
+Application:             common_test-1.26.2.3, erts-14.2.5.5,
+                         inets-9.1.0.2, kernel-9.2.4.4,
+                         mnesia-4.23.1.1, public_key-1.15.1.4,
+                         ssl-11.1.4.6, stdlib-5.2.3.3
+Predecessor:             OTP 26.2.5.5
+
+ Check out the git tag OTP-26.2.5.6, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- common_test-1.26.2.3 --------------------------------------------
+ ---------------------------------------------------------------------
+
+ The common_test-1.26.2.3 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19365    Application(s): common_test
+               Related Id(s): ERIERL-1157, PR-9080
+
+               With this change, cth_surefire hook module handles
+               group path reduction for a skipped group. This fixes a
+               bug manifesting with improper group path for a group
+               executed after a group which was skipped.
+
+
+ Full runtime dependencies of common_test-1.26.2.3: compiler-6.0,
+ crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0, kernel-8.4,
+ observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+ stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.5 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.5 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19330    Application(s): erts
+               Related Id(s): GH-8983, PR-9008
+
+               Fix lock order violation if a NIF monitor down callback
+               calls enif_whereis_pid. Would cause debug emulator to
+               crash but could potentially lead to deadlocks in
+               optimized emulator.
+
+
+  OTP-19332    Application(s): erts, kernel
+               Related Id(s): #8989
+
+               gen_udp:send on domain local can leak inet_reply
+               messages.
+
+
+  OTP-19366    Application(s): erts, kernel
+               Related Id(s): ERIERL-1134, OTP-19061
+
+               net:getifaddrs does not properly report the running
+               flag on windows.
+
+
+ Full runtime dependencies of erts-14.2.5.5: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- inets-9.1.0.2 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1.0.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19379    Application(s): inets
+               Related Id(s): GH-8829, PR-8878
+
+               Fixed a bug where calling httpc:set_options/2 when one
+               of keys: ipfamily or unix_socket, was not present,
+               would cause the other value to get overriden by the
+               default value. The validation of these options was also
+               improved.
+
+
+ Full runtime dependencies of inets-9.1.0.2: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19332    Application(s): erts, kernel
+               Related Id(s): #8989
+
+               gen_udp:send on domain local can leak inet_reply
+               messages.
+
+
+  OTP-19357    Application(s): kernel
+
+               Failure to create an UDP IPv6 socket when inet_backend
+               = socket with certain IPv6 socket options.
+
+
+  OTP-19366    Application(s): erts, kernel
+               Related Id(s): ERIERL-1134, OTP-19061
+
+               net:getifaddrs does not properly report the running
+               flag on windows.
+
+
+ Full runtime dependencies of kernel-9.2.4.4: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.23.1.1 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.23.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19368    Application(s): mnesia
+               Related Id(s): ERIERL-1154, PR-9093
+
+               Mnesia could crash if table was deleted during
+               checkpoint initialization.
+
+
+ Full runtime dependencies of mnesia-4.23.1.1: erts-9.0, kernel-5.3,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.15.1.4 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.15.1.4 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19240    Application(s): public_key
+               Related Id(s): PR-8840, OTP-19532
+
+               If both ext-key-usage and key-usage are defined for a
+               certificate it should be checked that these usages are
+               consistent with each other. This will have the affect
+               that such certificates where the ext-key-usages is
+               marked as critical and the usages is consistent with
+               the key-use it can be considered valid without
+               mandatory application specific checks for the
+               ext-key-useage extension.
+
+
+  OTP-19350    Application(s): public_key
+               Related Id(s): GH-9009, PR-9053
+
+               Handle decoding of EDDSA key properly, when decoding a
+               PEM file that contains only the public EDDSA key.
+
+
+ Full runtime dependencies of public_key-1.15.1.4: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.6 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.6 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19352    Application(s): ssl
+               Related Id(s): PR-9130, CVE-2024-53846, OTP-19240
+
+               If present, extended key-usage TLS (SSL) role check
+               (pk-clientAuth, pk-serverAuth) should always be
+               performed for peer-cert. An intermediate CA cert may
+               relax the requirement if AnyExtendedKeyUsage purpose is
+               present.
+
+               In OTP-25.3.2.8, OTP-26.2 and OTP-27.0 these
+               requirements became too relaxed. There where two
+               problems, firstly the peer cert extension was only
+               checked if it was marked critical, and secondly the CA
+               cert check did not assert the relaxed
+               AnyExtendedKeyUsage purpose.
+
+               This could result in that certificates might be misused
+               for purposes not intended by the certificate authority.
+
+               Thanks to Bryan Paxton for reporting the issue.
+
+
+ Full runtime dependencies of ssl-11.1.4.6: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2.3.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2.3.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19380    Application(s): stdlib
+               Related Id(s): GH-8755
+
+               Fixed an error in uri_string:percent_decode spec
+
+
+ Full runtime dependencies of stdlib-5.2.3.3: compiler-5.0,
+ crypto-4.5, erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Marko Mindek
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
