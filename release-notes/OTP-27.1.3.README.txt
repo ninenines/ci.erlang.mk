@@ -1,0 +1,234 @@
+Patch Package:           OTP 27.1.3
+Git Tag:                 OTP-27.1.3
+Date:                    2024-12-05
+Trouble Report Id:       OTP-19240, OTP-19293, OTP-19311, OTP-19325,
+                         OTP-19326, OTP-19328, OTP-19332, OTP-19340,
+                         OTP-19350, OTP-19352, OTP-19357, OTP-19365,
+                         OTP-19366, OTP-19374
+Seq num:                 #8989, CVE-2024-53846, ERIERL-1134,
+                         ERIERL-1139, ERIERL-1147, ERIERL-1157,
+                         GH-8929, GH-9009, GH-9014, GH-9100,
+                         OTP-19061, OTP-19240, OTP-19532, PR-8840,
+                         PR-8924, PR-8931, PR-8980, PR-8995, PR-9001,
+                         PR-9024, PR-9053, PR-9080, PR-9111, PR-9130
+System:                  OTP
+Release:                 27
+Application:             common_test-1.27.4, compiler-8.5.3,
+                         erts-15.1.3, kernel-10.1.2,
+                         public_key-1.16.4, ssh-5.2.4, ssl-11.2.5
+Predecessor:             OTP 27.1.2
+
+Check out the git tag OTP-27.1.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# common_test-1.27.4
+
+The common_test-1.27.4 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, cth_surefire hook module handles group path reduction for a
+  skipped group. This fixes a bug manifesting with improper group path for a
+  group executed after a group which was skipped.
+
+  Own Id: OTP-19365
+  Related Id(s): ERIERL-1157, PR-9080
+
+## Improvements and New Features
+
+- With this change, prefix option can be specified in cth_conn_log option list.
+  Option allows to specify how much of additional information is added in raw
+  log output.
+
+  Own Id: OTP-19293
+  Related Id(s): ERIERL-1139, PR-8924, PR-8931
+
+> #### Full runtime dependencies of common_test-1.27.4
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-8.5.3
+
+The compiler-8.5.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In rare circumstances, the destructive tuple update optimization could be
+  applied when it was unsafe.
+
+  Own Id: OTP-19340
+  Related Id(s): GH-9014, PR-9024
+
+- In rare circumstances involving appending to multiple binaries, the compile
+  could emit unsafe code that would crash the runtime system.
+
+  Own Id: OTP-19374
+  Related Id(s): GH-9100, PR-9111
+
+> #### Full runtime dependencies of compiler-8.5.3
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# erts-15.1.3
+
+The erts-15.1.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- gen_udp:send on domain local can leak inet_reply messages.
+
+  Own Id: OTP-19332
+  Related Id(s): #8989
+
+- net:getifaddrs does not properly report the running flag on windows.
+
+  Own Id: OTP-19366
+  Related Id(s): ERIERL-1134, OTP-19061
+
+> #### Full runtime dependencies of erts-15.1.3
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.1.2
+
+Note! The kernel-10.1.2 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.1 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- On windows the socket:recv could return with success ({ok, Data}) even though
+  not all data had been read.
+
+  Own Id: OTP-19328
+
+- gen_udp:send on domain local can leak inet_reply messages.
+
+  Own Id: OTP-19332
+  Related Id(s): #8989
+
+- Failure to create an UDP IPv6 socket when inet_backend = socket with certain
+  IPv6 socket options.
+
+  Own Id: OTP-19357
+
+- net:getifaddrs does not properly report the running flag on windows.
+
+  Own Id: OTP-19366
+  Related Id(s): ERIERL-1134, OTP-19061
+
+> #### Full runtime dependencies of kernel-10.1.2
+>
+> crypto-5.0, erts-15.1, sasl-3.0, stdlib-6.0
+
+# public_key-1.16.4
+
+The public_key-1.16.4 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- If both `ext-key-usage` and `key-usage` are defined for a certificate it
+  should be checked that these usages are consistent with each other. This will
+  have the affect that such certificates where the `ext-key-usages` is marked as
+  critical and the usages is consistent with the `key-use` it can be considered
+  valid without mandatory application specific checks for the `ext-key-useage`
+  extension.
+
+  Own Id: OTP-19240
+  Related Id(s): PR-8840, OTP-19532
+
+- Handle decoding of EDDSA key properly, when decoding a PEM file that contains
+  only the public EDDSA key.
+
+  Own Id: OTP-19350
+  Related Id(s): GH-9009, PR-9053
+
+> #### Full runtime dependencies of public_key-1.16.4
+>
+> asn1-3.0, crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+# ssh-5.2.4
+
+The ssh-5.2.4 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change, ssh connection does not crash upon receiving exit-signal
+  message for an already terminated channel.
+
+  Own Id: OTP-19326
+  Related Id(s): GH-8929, PR-8995
+
+> #### Full runtime dependencies of ssh-5.2.4
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.5
+
+Note! The ssl-11.2.5 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Avoid generating an internal alert for case that should have been an orderly
+  shutdown by the supervisor.
+
+  Own Id: OTP-19311
+  Related Id(s): PR-8980
+
+- If present, extended key-usage TLS (SSL) role check (`pk-clientAuth`,
+  `pk-serverAuth`) should always be performed for peer-cert. An intermediate CA
+  cert may relax the requirement if `AnyExtendedKeyUsage` purpose is present.
+
+  In OTP-25.3.2.8, OTP-26.2 and OTP-27.0 these requirements became too relaxed.
+  There where two problems, firstly the peer cert extension was only checked if
+  it was marked critical, and secondly the CA cert check did not assert the
+  relaxed `AnyExtendedKeyUsage` purpose.
+
+  This could result in that certificates might be misused for purposes not
+  intended by the certificate authority.
+
+  Thanks to Bryan Paxton for reporting the issue.
+
+  Own Id: OTP-19352
+  Related Id(s): PR-9130, CVE-2024-53846, OTP-19240
+
+## Improvements and New Features
+
+- Back port certificate_authorities option for TLS-1.3 servers to pre TLS-1.3
+  servers to enable them to disable the sending of certificate authorities in
+  their certificate request. This will have same affect as the the TLS-1.3
+  server option although it is handled by a different mechanism in these
+  versions, where the functionality is described to be more of a guidance,
+  although some pre TLS clients have proven to make it mandatory as in TLS-1.3
+  extension handling.
+
+  Own Id: OTP-19325
+  Related Id(s): ERIERL-1147, PR-9001
+
+> #### Full runtime dependencies of ssl-11.2.5
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+Frej Drejhammar, zmstone
+
