@@ -22,43 +22,49 @@ OTP-24 := OTP-24.0.6 OTP-24.1.7 OTP-24.2.2 OTP-24.3.4.17
 OTP-25 := OTP-25.0.4 OTP-25.1.2.1 OTP-25.2.3 OTP-25.3.2.17
 OTP-26 := OTP-26.0.2 OTP-26.1.2 OTP-26.2.5.8
 OTP-27 := OTP-27.0.1 OTP-27.1.3 OTP-27.2.2
+OTP-28 := OTP-28.0-rc1
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-23+ := $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-24+ := $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-25+ := $(OTP-25) $(OTP-26) $(OTP-27)
-OTP-26+ := $(OTP-26) $(OTP-27)
-OTP-27+ := $(OTP-27)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-23+ := $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-24+ := $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-25+ := $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-26+ := $(OTP-26) $(OTP-27) $(OTP-28)
+OTP-27+ := $(OTP-27) $(OTP-28)
+OTP-28+ := $(OTP-28)
 
 OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
 	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
 	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
 OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
 	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
 	$(lastword $(OTP-24)) $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28))
 OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) \
 	$(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24)) \
-	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27))
+	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
+	$(lastword $(OTP-28))
 OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
 	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
 OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
 	$(lastword $(OTP-24)) $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28))
 OTP-LATEST-23+ := $(lastword $(OTP-23)) $(lastword $(OTP-24)) \
-	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27))
+	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
+	$(lastword $(OTP-28))
 OTP-LATEST-24+ := $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
 OTP-LATEST-25+ := $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27))
-OTP-LATEST-26+ := $(lastword $(OTP-26)) $(lastword $(OTP-27))
-OTP-LATEST-27+ := $(lastword $(OTP-27))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28))
+OTP-LATEST-26+ := $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
+	$(lastword $(OTP-28))
+OTP-LATEST-27+ := $(lastword $(OTP-27)) $(lastword $(OTP-28))
+OTP-LATEST-28+ := $(lastword $(OTP-28))
 
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
@@ -122,9 +128,11 @@ OTP-26-DROPPED := OTP-26.0-rc3 \
 	OTP-26.0 OTP-26.0.1 OTP-26.1 OTP-26.1.1 OTP-26.2 OTP-26.2.1 OTP-26.2.2 OTP-26.2.3 OTP-26.2.4 OTP-26.2.5 OTP-26.2.5.1 OTP-26.2.5.2 OTP-26.2.5.3 OTP-26.2.5.4 OTP-26.2.5.5 OTP-26.2.5.6 OTP-26.2.5.7
 OTP-27-DROPPED := OTP-27.0-rc1 OTP-27.0-rc2 \
 	OTP-27.1.2 OTP-27.2 OTP-27.2.1
+OTP-28-DROPPED :=
 
 OTP-DROPPED := $(OTP-18-DROPPED) $(OTP-19-DROPPED) $(OTP-20-DROPPED) \
-	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED) $(OTP-24-DROPPED)
+	$(OTP-21-DROPPED) $(OTP-22-DROPPED) $(OTP-23-DROPPED) $(OTP-24-DROPPED) \
+	$(OTP-25-DROPPED) $(OTP-26-DROPPED) $(OTP-27-DROPPED) $(OTP-28-DROPPED)
 
 # Configure Erlang.mk's CI plugin.
 
@@ -203,50 +211,58 @@ WINDOWS-OTP-24 := 24.0 24.1 24.2 24.3
 WINDOWS-OTP-25 := 25.0 25.1 25.2 25.3
 WINDOWS-OTP-26 := 26.0 26.1 26.2
 WINDOWS-OTP-27 := 27.0 27.1 27.2
+WINDOWS-OTP-28 :=
 
 WINDOWS-OTP-18+ := $(WINDOWS-OTP-18) $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) \
 	$(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) \
-	$(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
 WINDOWS-OTP-19+ := $(WINDOWS-OTP-19) $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) \
-	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) \
+	$(WINDOWS-OTP-28)
 WINDOWS-OTP-20+ := $(WINDOWS-OTP-20) $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) \
-	$(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
 WINDOWS-OTP-21+ := $(WINDOWS-OTP-21) $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) \
-	$(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
 WINDOWS-OTP-22+ := $(WINDOWS-OTP-22) $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) \
-	$(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-26) $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
 WINDOWS-OTP-23+ := $(WINDOWS-OTP-23) $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) \
-	$(WINDOWS-OTP-27)
-WINDOWS-OTP-24+ := $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
-WINDOWS-OTP-25+ := $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
-WINDOWS-OTP-26+ := $(WINDOWS-OTP-26) $(WINDOWS-OTP-27)
-WINDOWS-OTP-27+ := $(WINDOWS-OTP-27)
+	$(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
+WINDOWS-OTP-24+ := $(WINDOWS-OTP-24) $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) \
+	$(WINDOWS-OTP-28)
+WINDOWS-OTP-25+ := $(WINDOWS-OTP-25) $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
+WINDOWS-OTP-26+ := $(WINDOWS-OTP-26) $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
+WINDOWS-OTP-27+ := $(WINDOWS-OTP-27) $(WINDOWS-OTP-28)
+WINDOWS-OTP-28+ := $(WINDOWS-OTP-28)
 
 WINDOWS-OTP-LATEST-18+ := $(lastword $(WINDOWS-OTP-18)) $(lastword $(WINDOWS-OTP-19)) \
 	$(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
 	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
-	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-19+ := $(lastword $(WINDOWS-OTP-19)) $(lastword $(WINDOWS-OTP-20)) \
 	$(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
 	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) \
-	$(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-20+ := $(lastword $(WINDOWS-OTP-20)) $(lastword $(WINDOWS-OTP-21)) \
 	$(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
-	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) \
+	$(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-21+ := $(lastword $(WINDOWS-OTP-21)) $(lastword $(WINDOWS-OTP-22)) \
 	$(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
-	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-22+ := $(lastword $(WINDOWS-OTP-22)) $(lastword $(WINDOWS-OTP-23)) \
 	$(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) \
-	$(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-23+ := $(lastword $(WINDOWS-OTP-23)) $(lastword $(WINDOWS-OTP-24)) \
-	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) \
+	$(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-24+ := $(lastword $(WINDOWS-OTP-24)) $(lastword $(WINDOWS-OTP-25)) \
-	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
 WINDOWS-OTP-LATEST-25+ := $(lastword $(WINDOWS-OTP-25)) $(lastword $(WINDOWS-OTP-26)) \
-	$(lastword $(WINDOWS-OTP-27))
-WINDOWS-OTP-LATEST-26+ := $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27))
-WINDOWS-OTP-LATEST-27+ := $(lastword $(WINDOWS-OTP-27))
+	$(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
+WINDOWS-OTP-LATEST-26+ := $(lastword $(WINDOWS-OTP-26)) $(lastword $(WINDOWS-OTP-27)) \
+	$(lastword $(WINDOWS-OTP-28))
+WINDOWS-OTP-LATEST-27+ := $(lastword $(WINDOWS-OTP-27)) $(lastword $(WINDOWS-OTP-28))
+WINDOWS-OTP-LATEST-28+ := $(lastword $(WINDOWS-OTP-28))
 
 # @todo Add support for release candidates (we don't want them as the "latest").
 WINDOWS-OTP-LATEST := $(lastword $(WINDOWS-OTP-18+))
