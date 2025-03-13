@@ -1,0 +1,98 @@
+Patch Package:           OTP 25.3.2.18
+Git Tag:                 OTP-25.3.2.18
+Date:                    2025-02-20
+Trouble Report Id:       OTP-19240, OTP-19466, OTP-19495
+Seq num:                 CVE-2025-26618, ERIERL-1173, GH-8208,
+                         GH-9208, PR-8209, PR-9286
+System:                  OTP
+Release:                 25
+Application:             erts-13.2.2.14, public_key-1.13.3.6,
+                         ssh-4.15.3.10
+Predecessor:             OTP 25.3.2.17
+
+ Check out the git tag OTP-25.3.2.18, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-13.2.2.14 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The erts-13.2.2.14 application *cannot* be applied
+       independently of other applications on an arbitrary OTP 25
+       installation.
+
+       On a full OTP 25 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- kernel-8.5 (first satisfied in OTP 25.1)
+       -- stdlib-4.1 (first satisfied in OTP 25.1)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19495    Application(s): erts
+               Related Id(s): GH-8208, PR-8209
+
+               Fixed BEAM crash when a custom thread sends a large map
+               (>128 keys) externally encoded with for example
+               erl_drv_send_term().
+
+
+ Full runtime dependencies of erts-13.2.2.14: kernel-8.5, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.13.3.6 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.13.3.6 application can be applied independently of
+ other applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19240    Application(s): public_key
+               Related Id(s): GH-9208, PR-9286
+
+               Consider keyCertSign to compatible with extended key
+               usage for TLS client/server auth in CAs, adhere to wide
+               spread implementations
+
+
+ Full runtime dependencies of public_key-1.13.3.6: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.3.10 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.3.10 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19466    Application(s): ssh
+               Related Id(s): ERIERL-1173, CVE-2025-26618
+
+               SFTP packets exceeding max packet size are not
+               processed and dropped.
+
+
+ Full runtime dependencies of ssh-4.15.3.10: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Simon Cornish
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
