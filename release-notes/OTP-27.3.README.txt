@@ -1,0 +1,346 @@
+Patch Package:           OTP 27.3
+Git Tag:                 OTP-27.3
+Date:                    2025-03-05
+Trouble Report Id:       OTP-19397, OTP-19399, OTP-19400, OTP-19405,
+                         OTP-19410, OTP-19416, OTP-19418, OTP-19423,
+                         OTP-19428, OTP-19429, OTP-19433, OTP-19442,
+                         OTP-19443, OTP-19447, OTP-19449, OTP-19458,
+                         OTP-19459, OTP-19468, OTP-19471, OTP-19475,
+                         OTP-19489, OTP-19490, OTP-19491, OTP-19495,
+                         OTP-19496, OTP-19501, OTP-19504
+Seq num:                 ERIERL-1195, GH-8208, GH-8634, GH-9000,
+                         GH-9096, GH-9150, GH-9163, GH-9190, GH-9222,
+                         GH-9306, GH-9332, GH-9348, GH-9359, PR-8209,
+                         PR-8640, PR-8811, PR-9136, PR-9151, PR-9160,
+                         PR-9185, PR-9188, PR-9248, PR-9274, PR-9288,
+                         PR-9295, PR-9303, PR-9307, PR-9308, PR-9331,
+                         PR-9335, PR-9338, PR-9349, PR-9358, PR-9368,
+                         PR-9371, PR-9379, PR-9419, PR-9424, PR-9463,
+                         PR-9469, PR-9499
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3.2, common_test-1.27.7, compiler-8.6,
+                         crypto-5.5.3, erts-15.2.3, kernel-10.2.3,
+                         mnesia-4.23.4, ssh-5.2.8, ssl-11.2.9,
+                         stdlib-6.2.1, syntax_tools-3.2.2, xmerl-2.1.1
+Predecessor:             OTP 27.2.4
+
+Check out the git tag OTP-27.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# asn1-5.3.2
+
+The asn1-5.3.2 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Multiple bugs in decoding of the `REAL` type has been eliminated. Also, the
+  documentation for `REAL` has been updated to mention the special values `0`,
+  `PLUS-INFINITY`, and `MINUS-INFINITY`.
+
+  Own Id: OTP-19504
+  Related Id(s): GH-9096, PR-9469
+
+> #### Full runtime dependencies of asn1-5.3.2
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# common_test-1.27.7
+
+The common_test-1.27.7 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Reduced the memory usage when testcases prints a lot to the log.
+
+  Own Id: OTP-19489
+  Related Id(s): PR-9424
+
+- Fixed the built-in hook `cth_surefire` to not crash when a group within a
+  skipped group is skipped.
+
+  Own Id: OTP-19491
+  Related Id(s): PR-9419
+
+> #### Full runtime dependencies of common_test-1.27.7
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-8.6
+
+The compiler-8.6 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Improvements and New Features
+
+- The `beam_validator` pass in the compiler that validates generated BEAM now
+  does stronger checks for binary syntax matching.
+
+  Own Id: OTP-19449
+  Related Id(s): PR-9338
+
+> #### Full runtime dependencies of compiler-8.6
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.5.3
+
+The crypto-5.5.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- `crypto` will now work when ED25519 and X25519 are available while ED448 and
+  X448 are not, which is the case in LibreSSL. This is necessary for supporting
+  TLS1.3 using LibreSSL.
+
+  Own Id: OTP-19399
+  Related Id(s): GH-9000, PR-9136
+
+> #### Full runtime dependencies of crypto-5.5.3
+>
+> erts-9.0, kernel-5.3, stdlib-3.9
+
+# erts-15.2.3
+
+The erts-15.2.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed failed runtime assert in debug VM when built with statically linked
+  NIFs.
+
+  Own Id: OTP-19443
+  Related Id(s): GH-9306, PR-9307
+
+- Fixed a bug where reading a binary from `persistent_term` could cause a
+  segmentation fault on Windows. This bug was introduced in Erlang/OTP 27.0.
+
+  Own Id: OTP-19458
+  Related Id(s): GH-9222, PR-9349
+
+- Fixed a crash in `erlexec` (an executable used by `erl` during startup) when a
+  `PATH` longer than 10240 was set.
+
+  Own Id: OTP-19471
+  Related Id(s): PR-9331
+
+- Fixed bug in `erlang:halt`. Two processes calling `erlang:halt` at the same
+  time could lead to one of them crashing with `badarg` as if it called
+  `erlang:halt(undefined,undefined)`.
+
+  Own Id: OTP-19490
+  Related Id(s): GH-8634, PR-8640
+
+- Fixed BEAM crash when a custom thread sends a large map (>128 keys) externally
+  encoded with, for example, `erl_drv_send_term()`.
+
+  Own Id: OTP-19495
+  Related Id(s): GH-8208, PR-8209
+
+> #### Full runtime dependencies of erts-15.2.3
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.2.3
+
+Note! The kernel-10.2.3 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.1 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- Clarify inet:setopts documentation
+
+  Own Id: OTP-19416
+  Related Id(s): PR-9248
+
+- Fix bug where log printouts would go missing when `application_controller` is
+  stopping while log messages are being sent.
+
+  This bug was introduced by OTP-19078 in Erlang/OTP 26.2.5.
+
+  Own Id: OTP-19418
+  Related Id(s): GH-9163, PR-9274
+
+- Fixes a bug in the socket type spec, which caused Dialyzer to reject some
+  valid programs.
+
+  Own Id: OTP-19429
+  Related Id(s): PR-9295, PR-9379
+
+> #### Full runtime dependencies of kernel-10.2.3
+>
+> crypto-5.0, erts-15.1, sasl-3.0, stdlib-6.0
+
+# mnesia-4.23.4
+
+The mnesia-4.23.4 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Mnesia could fail to load a table, if one of the copy holders was moved during
+  startup.
+
+  Own Id: OTP-19501
+  Related Id(s): ERIERL-1195, PR-9499
+
+> #### Full runtime dependencies of mnesia-4.23.4
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# ssh-5.2.8
+
+The ssh-5.2.8 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Minor documentation improvements.
+
+  Own Id: OTP-19410
+  Related Id(s): PR-9188
+
+- Function specification for ssh_sftp:start_channel/2 is fixed.
+
+  Own Id: OTP-19475
+  Related Id(s): GH-9359, PR-9368
+
+> #### Full runtime dependencies of ssh-5.2.8
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.9
+
+Note! The ssl-11.2.9 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- The function for selecting the best server certificate and key pair has been
+  enhanced when several options are available to ensure that the fallback will
+  not always be chosen.
+
+  Own Id: OTP-19423
+  Related Id(s): PR-9185
+
+- Avoided duplicating a few algorithms in default values caused by an
+  interoperability workaround not needed in this case.
+
+  Own Id: OTP-19428
+  Related Id(s): PR-9288
+
+- Fixed two alert bugs, which could result in a crash instead of an alert.
+
+  Own Id: OTP-19433
+  Related Id(s): PR-9308
+
+> #### Full runtime dependencies of ssl-11.2.9
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.2.1
+
+The stdlib-6.2.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed argparse:help/2 to accept the program name as part of the command
+  path.
+
+  Own Id: OTP-19397
+  Related Id(s): PR-9160
+
+- Fixed argparse:format_help/2 crash on 'hidden' command.
+
+  Own Id: OTP-19400
+  Related Id(s): GH-9150, PR-9151
+
+- Fixed the type specification for timer:sleep/1 by adding the value
+  `infinity` to its input type.
+
+  Own Id: OTP-19442
+  Related Id(s): PR-9303
+
+- Eliminated a crash in zip:unzip/1 while unzipping an archive where a
+  directory within was read-only. This bug was introduced in Erlang/OTP 27.1.
+
+  Own Id: OTP-19447
+  Related Id(s): GH-9332, PR-9335
+
+- Fixed map comprehension result when a key value is replaced.
+
+  Own Id: OTP-19459
+  Related Id(s): GH-9348, PR-9358
+
+- Fixed string:jaro_similarity/1 for matching strings of length 1.
+
+  Own Id: OTP-19468
+  Related Id(s): PR-9371
+
+> #### Full runtime dependencies of stdlib-6.2.1
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# syntax_tools-3.2.2
+
+The syntax_tools-3.2.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Annotation of `maybe` expressions has been corrected.
+
+  Own Id: OTP-19405
+  Related Id(s): PR-8811
+
+> #### Full runtime dependencies of syntax_tools-3.2.2
+>
+> compiler-7.0, erts-9.0, kernel-5.0, stdlib-4.0
+
+# xmerl-2.1.1
+
+The xmerl-2.1.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Some old-style `catch` expressions in the xmerl_sax_parser when the
+  continuation fun was called caused the stack to grow until all free memory was
+  exhausted. These parts have been rewritten so that the parser now runs
+  correctly without growing the stack. At the same time all old-style `catch`
+  expressions in xmerl were replaced with `try`/`catch`.
+
+  Own Id: OTP-19496
+  Related Id(s): GH-9190, PR-9463
+
+> #### Full runtime dependencies of xmerl-2.1.1
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Adam Bray, Alexandre Rodrigues, Brandon Duff, Daniel Gorin, dependabotbot,
+Eric Meadows-Jönsson, Jan Uhlig, Jean-Sébastien Pédron, Jesse Stimpson,
+lexprfuncall, Maria Scott, Marko Mindek, Nikita Vorobey, Olivier Boudeville, Rin
+Kuryloski, Roberto Aloi, Simon Cornish, Stefan Grundmann, victor23k, Volker
+Schlecht
+
