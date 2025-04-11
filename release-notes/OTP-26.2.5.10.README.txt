@@ -1,0 +1,183 @@
+Patch Package:           OTP 26.2.5.10
+Git Tag:                 OTP-26.2.5.10
+Date:                    2025-03-28
+Trouble Report Id:       OTP-19437, OTP-19469, OTP-19493, OTP-19501,
+                         OTP-19527, OTP-19529, OTP-19543, OTP-19545,
+                         OTP-19548, OTP-19559
+Seq num:                 #9172, CVE-2025-30211, ERIERL-1195, GH-9483,
+                         GH-9554, OTP-19472, OTP-19544, PR-9443,
+                         PR-9486, PR-9499, PR-9534, PR-9545, PR-9577,
+                         PR-9587
+System:                  OTP
+Release:                 26
+Application:             erts-14.2.5.9, kernel-9.2.4.7,
+                         mnesia-4.23.1.2, ssh-5.1.4.7, ssl-11.1.4.8
+Predecessor:             OTP 26.2.5.9
+
+ Check out the git tag OTP-26.2.5.10, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.9 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.9 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19469    Application(s): erts, kernel
+               Related Id(s): #9172
+
+               Behavior for socket:recv/3 has been improved. The
+               behavior has also been clarified in the documentation.
+
+
+  OTP-19493    Application(s): erts
+               Related Id(s): PR-9443
+
+               Fix prim_inet:send/3 (and in extension
+               gen_tcp:send/2,3) to use the selective recive
+               optimization when waiting for a send acknowledgement.
+
+
+  OTP-19527    Application(s): erts
+               Related Id(s): PR-9577
+
+               Trace messages due to receive tracing could potentially
+               be delayed a very long time if the traced process
+               waited in a receive expression without clauses matching
+               on messages (timed wait), or just did not enter a
+               receive expression for a very long time.
+
+
+  OTP-19548    Application(s): erts
+               Related Id(s): OTP-19472
+
+               Improve the naming of the (internal) esock mutex(es).
+               It is now possible to configure (as in autoconf) the
+               use of simple names for the esock mutex(es).
+
+
+ Full runtime dependencies of erts-14.2.5.9: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.7 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.7 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19469    Application(s): erts, kernel
+               Related Id(s): #9172
+
+               Behavior for socket:recv/3 has been improved. The
+               behavior has also been clarified in the documentation.
+
+
+  OTP-19545    Application(s): kernel
+               Related Id(s): PR-9587, OTP-19544
+
+               An infinite loop in CNAME loop detection that can cause
+               Out Of Memory has been fixed. This affected CNAME
+               lookup with the internal DNS resolver.
+
+
+ Full runtime dependencies of kernel-9.2.4.7: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- mnesia-4.23.1.2 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The mnesia-4.23.1.2 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19437    Application(s): mnesia
+               Related Id(s): PR-9534
+
+               With this change mnesia will merge schema of tables
+               using external backends.
+
+
+  OTP-19501    Application(s): mnesia
+               Related Id(s): ERIERL-1195, PR-9499
+
+               Mnesia could fail to load a table, if one of the copy
+               holders was moved during startup.
+
+
+ Full runtime dependencies of mnesia-4.23.1.2: erts-9.0, kernel-5.3,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.7 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.7 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19543    Application(s): ssh
+               Related Id(s): CVE-2025-30211
+
+               Reception of malicious KEX init message does not result
+               with ssh daemon excessive memory usage.
+
+
+  OTP-19559    Application(s): ssh
+               Related Id(s): GH-9554, PR-9545
+
+               Call to ssh:daemon_replace_options does not crash when
+               argument is not a valid daemon ref.
+
+
+ Full runtime dependencies of ssh-5.1.4.7: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.8 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.8 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19529    Application(s): ssl
+               Related Id(s): GH-9483, PR-9486
+
+               Correct handling of unassigned signature algorithms to
+               properly ignore them instead of failing the handshake.
+
+
+ Full runtime dependencies of ssl-11.1.4.8: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Alexandre Rodrigues, Marc Worrell, Sergei Shuvatov, zmsone
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
