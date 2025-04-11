@@ -1,0 +1,196 @@
+Patch Package:           OTP 27.3.2
+Git Tag:                 OTP-27.3.2
+Date:                    2025-04-04
+Trouble Report Id:       OTP-19482, OTP-19560, OTP-19561, OTP-19562,
+                         OTP-19563, OTP-19564, OTP-19565, OTP-19567,
+                         OTP-19568, OTP-19569, OTP-19571
+Seq num:                 ERIERL-1207, ERIERL-1208, ERIERL-1210,
+                         ERIERL-1211, ERIERL-1212, ERIERL-1214,
+                         ERIERL-1216, GH-9541, PR-9650, PR-9658,
+                         PR-9661, PR-9676
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3.4, compiler-8.6.1, erts-15.2.5,
+                         kernel-10.2.5, megaco-4.7.1, snmp-5.18.2,
+                         ssl-11.2.11, xmerl-2.1.2
+Predecessor:             OTP 27.3.1
+
+Check out the git tag OTP-27.3.2, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# asn1-5.3.4
+
+The asn1-5.3.4 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Negative REAL numbers greater than -1 would be incorrectly encoded (the minus
+  sign would be lost).
+
+  Own Id: OTP-19567
+  Related Id(s): ERIERL-1214, PR-9658
+
+> #### Full runtime dependencies of asn1-5.3.4
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# compiler-8.6.1
+
+The compiler-8.6.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix the compiler crash when the inner-most tuple in a nested tuple with 3
+  layers is updated.
+
+  Own Id: OTP-19561
+  Related Id(s): ERIERL-1208, ERIERL-1210, PR-9650
+
+> #### Full runtime dependencies of compiler-8.6.1
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# erts-15.2.5
+
+The erts-15.2.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- On Windows, using socket:sendv, a large IOV (size > MAX), the tail was not
+  sent.
+
+  Own Id: OTP-19482
+
+- Uplift pcre 8.44 to pcre 8.45
+
+  Own Id: OTP-19565
+
+> #### Full runtime dependencies of erts-15.2.5
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.2.5
+
+Note! The kernel-10.2.5 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.2.5 (first satisfied in OTP 27.3.2)
+
+## Fixed Bugs and Malfunctions
+
+- On Windows, using socket:sendv, a large IOV (size > MAX), the tail was not
+  sent.
+
+  Own Id: OTP-19482
+
+- gen_tcp connect with a sockaddr with loopback address failed.
+
+  Own Id: OTP-19560
+  Related Id(s): GH-9541
+
+- Remove debug printouts from gen_tcp_socket
+
+  Own Id: OTP-19564
+
+> #### Full runtime dependencies of kernel-10.2.5
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# megaco-4.7.1
+
+The megaco-4.7.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Correct type spec for ActionReply
+
+  Own Id: OTP-19563
+  Related Id(s): ERIERL-1216
+
+> #### Full runtime dependencies of megaco-4.7.1
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# snmp-5.18.2
+
+The snmp-5.18.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- When manager receives an v3 inform (request) it used engine-id and full
+  address (including port number) to check if engine was known. This did not
+  work if agent used ephemeral ports for notifications. Has now been changed to
+  only use (context) engine-id and address (without port).
+
+  Own Id: OTP-19562
+  Related Id(s): ERIERL-1207
+
+- Fixed snmp_generic (dialyzer) spec for function table_func.
+
+  Own Id: OTP-19568
+  Related Id(s): ERIERL-1211
+
+> #### Full runtime dependencies of snmp-5.18.2
+>
+> crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12, runtime_tools-1.8.14,
+> stdlib-5.0
+
+# ssl-11.2.11
+
+Note! The ssl-11.2.11 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Correct the debug functionality for NSS keylogging for TLS-1.3 introduced in
+  OTP-27.3.1 so that TLS-1.3 key updates items always get correct counter value
+  and each item is logged as one single line.
+
+  Own Id: OTP-19569
+  Related Id(s): PR-9661
+
+> #### Full runtime dependencies of ssl-11.2.11
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# xmerl-2.1.2
+
+The xmerl-2.1.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Corrected faulty type specification
+
+  Corrected type specification for the input parameter of xmerl_xs:value_of/1.
+
+  Also replaced underscore in the return type specifications of
+  xmerl_xs:select/2, xmerl_xpath:string/2 and xmerl_xpath:string/3 with
+  specified return values to improve documentation.
+
+  Own Id: OTP-19571
+  Related Id(s): ERIERL-1212, PR-9676
+
+> #### Full runtime dependencies of xmerl-2.1.2
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Björn Gustavsson
+
