@@ -1,0 +1,218 @@
+Patch Package:           OTP 27.3.1
+Git Tag:                 OTP-27.3.1
+Date:                    2025-03-28
+Trouble Report Id:       OTP-19391, OTP-19437, OTP-19469, OTP-19525,
+                         OTP-19527, OTP-19529, OTP-19542, OTP-19543,
+                         OTP-19545, OTP-19546, OTP-19547, OTP-19548,
+                         OTP-19549, OTP-19559
+Seq num:                 #9172, CVE-2025-30211, ERIERL-1204,
+                         ERIERL-1205, ERIERL-1206, GH-8891, GH-9483,
+                         GH-9554, OTP-19472, OTP-19544, PR-9221,
+                         PR-9486, PR-9534, PR-9545, PR-9553, PR-9577,
+                         PR-9587, PR-9588, PR-9596, PR-9611, PR-9612
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3.3, erts-15.2.4, kernel-10.2.4,
+                         mnesia-4.23.5, ssh-5.2.9, ssl-11.2.10,
+                         stdlib-6.2.2
+Predecessor:             OTP 27.3
+
+Check out the git tag OTP-27.3.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-27.3.1
+
+## Fixed Bugs and Malfunctions
+
+- Update used ExDoc version to v0.37.3
+
+  Own Id: OTP-19525
+  Related Id(s): PR-9553
+
+# asn1-5.3.3
+
+The asn1-5.3.3 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The JER backend will now include the SIZE constraint in the type info for
+  OCTET STRINGs, and a SIZE constraint with a range will now be included for BIT
+  STRINGs. This does not change the actual encoding or decoding of JER, but can
+  be useful for tools.
+
+  Own Id: OTP-19542
+  Related Id(s): ERIERL-1204, PR-9588
+
+## Improvements and New Features
+
+- When using the JSON encoding rules, it is now possible to call the decode/2
+  function in the following way with data that has already been decoded by
+  json:decode/1:
+
+      SomeModule:decode(Type, {json_decoded, Decoded}).
+
+  Own Id: OTP-19547
+  Related Id(s): ERIERL-1206, PR-9611
+
+> #### Full runtime dependencies of asn1-5.3.3
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# erts-15.2.4
+
+The erts-15.2.4 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Behavior for socket:recv/3 has been improved. The behavior has also been
+  clarified in the documentation.
+
+  Own Id: OTP-19469
+  Related Id(s): #9172
+
+- Trace messages due to `receive` tracing could potentially be delayed a very
+  long time if the traced process waited in a `receive` expression without
+  clauses matching on messages (timed wait), or just did not enter a `receive`
+  expression for a very long time.
+
+  Own Id: OTP-19527
+  Related Id(s): PR-9577
+
+- Improve the naming of the (internal) esock mutex(es). It is now possible to
+  configure (as in autoconf) the use of simple names for the esock mutex(es).
+
+  Own Id: OTP-19548
+  Related Id(s): OTP-19472
+
+> #### Full runtime dependencies of erts-15.2.4
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.2.4
+
+Note! The kernel-10.2.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.1 (first satisfied in OTP 27.1)
+
+## Fixed Bugs and Malfunctions
+
+- Behavior for socket:recv/3 has been improved. The behavior has also been
+  clarified in the documentation.
+
+  Own Id: OTP-19469
+  Related Id(s): #9172
+
+- An infinite loop in CNAME loop detection that can cause Out Of Memory has been
+  fixed. This affected CNAME lookup with the internal DNS resolver.
+
+  Own Id: OTP-19545
+  Related Id(s): PR-9587, OTP-19544
+
+> #### Full runtime dependencies of kernel-10.2.4
+>
+> crypto-5.0, erts-15.1, sasl-3.0, stdlib-6.0
+
+# mnesia-4.23.5
+
+The mnesia-4.23.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change mnesia will merge schema of tables using external backends.
+
+  Own Id: OTP-19437
+  Related Id(s): PR-9534
+
+> #### Full runtime dependencies of mnesia-4.23.5
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# ssh-5.2.9
+
+The ssh-5.2.9 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Reception of malicious KEX init message does not result with ssh daemon
+  excessive memory usage.
+
+  Own Id: OTP-19543
+  Related Id(s): CVE-2025-30211
+
+- Call to ssh:daemon_replace_options does not crash when argument is not a valid
+  daemon ref.
+
+  Own Id: OTP-19559
+  Related Id(s): GH-9554, PR-9545
+
+> #### Full runtime dependencies of ssh-5.2.9
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.10
+
+Note! The ssl-11.2.10 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Correct handling of unassigned signature algorithms to properly ignore them
+  instead of failing the handshake.
+
+  Own Id: OTP-19529
+  Related Id(s): GH-9483, PR-9486
+
+- Update key mechanism in CRL cache so that CRL DP with same URI path component
+  becomes distinguishable from each other.
+
+  Own Id: OTP-19549
+  Related Id(s): GH-8891, PR-9612
+
+## Improvements and New Features
+
+- Add callback for NSS keylogging so that it can work as expected for all
+  scenarios.
+
+  Own Id: OTP-19391
+  Related Id(s): PR-9221
+
+> #### Full runtime dependencies of ssl-11.2.10
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.2.2
+
+The stdlib-6.2.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed crash when fetching `initial_call` when user code have modified the
+  `process_dictionary`.
+
+  Own Id: OTP-19546
+  Related Id(s): ERIERL-1205, PR-9596
+
+> #### Full runtime dependencies of stdlib-6.2.2
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# Thanks to
+
+Alexandre Rodrigues, Marc Worrell, Sergei Shuvatov, zmstone
+
