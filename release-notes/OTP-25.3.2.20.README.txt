@@ -1,0 +1,51 @@
+Patch Package:           OTP 25.3.2.20
+Git Tag:                 OTP-25.3.2.20
+Date:                    2025-04-16
+Trouble Report Id:       OTP-19582, OTP-19595
+Seq num:                 CVE-2025-32433, PR-9679
+System:                  OTP
+Release:                 25
+Application:             ssh-4.15.3.12
+Predecessor:             OTP 25.3.2.19
+
+ Check out the git tag OTP-25.3.2.20, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- ssh-4.15.3.12 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-4.15.3.12 application can be applied independently of other
+ applications on a full OTP 25 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19582    Application(s): ssh
+               Related Id(s): PR-9679
+
+               Reception of wrong Unicode does not cause unnecessary
+               processing. US-ASCII fields are not decoded as Unicode.
+
+
+  OTP-19595    Application(s): ssh
+               Related Id(s): CVE-2025-32433
+
+               SSH daemon disconnects upon receiving connection
+               protocol message for unauthenticated used.
+
+               Thanks to Fabian Bäumer, Marcel Maehren, Marcus
+               Brinkmann, Nurullah Erinola, Jörg Schwenk (Ruhr
+               University Bochum).
+
+
+ Full runtime dependencies of ssh-4.15.3.12: crypto-5.0, erts-11.0,
+ kernel-6.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-3.15
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
