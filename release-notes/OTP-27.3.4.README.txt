@@ -1,0 +1,112 @@
+Patch Package:           OTP 27.3.4
+Git Tag:                 OTP-27.3.4
+Date:                    2025-05-08
+Trouble Report Id:       OTP-19577, OTP-19599, OTP-19602, OTP-19605,
+                         OTP-19608, OTP-19625
+Seq num:                 CVE-2025-46712, ERIERL-1220, GH-9707,
+                         GH-9720, PR-9696, PR-9724, PR-9753, PR-9765,
+                         PR-9767
+System:                  OTP
+Release:                 27
+Application:             erts-15.2.7, kernel-10.2.7, ssh-5.2.11,
+                         xmerl-2.1.3
+Predecessor:             OTP 27.3.3
+
+Check out the git tag OTP-27.3.4, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# erts-15.2.7
+
+The erts-15.2.7 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed an emulator crash when setting an error_handler module that was not yet
+  loaded.
+
+  Own Id: OTP-19577
+  Related Id(s): ERIERL-1220, PR-9696
+
+- Fixed a rare bug that could cause an emulator crash after unloading a module
+  or erasing a persistent_term.
+
+  Own Id: OTP-19599
+  Related Id(s): PR-9724
+
+> #### Full runtime dependencies of erts-15.2.7
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.2.7
+
+Note! The kernel-10.2.7 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.2.5 (first satisfied in OTP 27.3.2)
+
+## Fixed Bugs and Malfunctions
+
+- With this change, disk_log will not crash when using chunk_step/3 after log
+  size was decreased.
+
+  Own Id: OTP-19605
+  Related Id(s): GH-9720, PR-9765
+
+- With this change, disk_log will not run into infinite loop when using
+  chunk/2,3 after log size was decreased.
+
+  Own Id: OTP-19608
+  Related Id(s): GH-9707, PR-9767
+
+> #### Full runtime dependencies of kernel-10.2.7
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# ssh-5.2.11
+
+The ssh-5.2.11 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix KEX strict implementation according to draft-miller-sshm-strict-kex-01
+  document.
+
+  Own Id: OTP-19625
+  Related Id(s): CVE-2025-46712
+
+> #### Full runtime dependencies of ssh-5.2.11
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# xmerl-2.1.3
+
+The xmerl-2.1.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Improvements and New Features
+
+- A new option to discard whitespace before the `xml` tag when reading from a
+  stream has been added to the Xmerl SAX parser.
+
+  - **`{discard_ws_before_xml_document, Boolean}`** - Discard whitespace before
+    `xml` tag instead of returning a fatal error if set to `true` (`false` is
+    default)
+
+  Own Id: OTP-19602
+  Related Id(s): PR-9753
+
+> #### Full runtime dependencies of xmerl-2.1.3
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Lý Nhật Tâm
+
