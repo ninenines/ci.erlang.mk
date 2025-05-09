@@ -1,0 +1,150 @@
+Patch Package:           OTP 26.2.5.12
+Git Tag:                 OTP-26.2.5.12
+Date:                    2025-05-08
+Trouble Report Id:       OTP-19577, OTP-19599, OTP-19600, OTP-19602,
+                         OTP-19605, OTP-19608, OTP-19625
+Seq num:                 CVE-2025-46712, ERIERL-1220, GH-9707,
+                         GH-9715, GH-9720, PR-9696, PR-9724, PR-9737,
+                         PR-9753, PR-9765, PR-9767
+System:                  OTP
+Release:                 26
+Application:             compiler-8.4.3.3, erts-14.2.5.10,
+                         kernel-9.2.4.8, ssh-5.1.4.9, xmerl-1.3.34.3
+Predecessor:             OTP 26.2.5.11
+
+ Check out the git tag OTP-26.2.5.12, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.4.3.3 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.4.3.3 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19600    Application(s): compiler
+               Related Id(s): GH-9715, PR-9737
+
+               Fix a bug where unloaded nifs can crash the compiler.
+
+
+ Full runtime dependencies of compiler-8.4.3.3: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.10 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.10 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19577    Application(s): erts
+               Related Id(s): ERIERL-1220, PR-9696
+
+               Fixed an emulator crash when setting an error_handler
+               module that was not yet loaded.
+
+
+  OTP-19599    Application(s): erts
+               Related Id(s): PR-9724
+
+               Fixed a rare bug that could cause an emulator crash
+               after unloading a module or erasing a persistent_term.
+
+
+ Full runtime dependencies of erts-14.2.5.10: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.8 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.8 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19605    Application(s): kernel
+               Related Id(s): GH-9720, PR-9765
+
+               With this change, disk_log will not crash when using
+               chunk_step/3 after log size was decreased.
+
+
+  OTP-19608    Application(s): kernel
+               Related Id(s): GH-9707, PR-9767
+
+               With this change, disk_log will not run into infinite
+               loop when using chunk/2,3 after log size was decreased.
+
+
+ Full runtime dependencies of kernel-9.2.4.8: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.9 -----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.9 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19625    Application(s): ssh
+               Related Id(s): CVE-2025-46712
+
+               Fix KEX strict implementation according to
+               draft-miller-sshm-strict-kex-01 document.
+
+
+ Full runtime dependencies of ssh-5.1.4.9: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- xmerl-1.3.34.3 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The xmerl-1.3.34.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Improvements and New Features ---
+
+  OTP-19602    Application(s): xmerl
+               Related Id(s): PR-9753
+
+               A new option to discard whitespace before the xml tag
+               when reading from a stream has been added to the Xmerl
+               SAX parser.
+
+               -- {discard_ws_before_xml_document, Boolean} -- Discard
+               whitespace before xml tag instead of returning a fatal
+               error if set to true (false is default)
+
+
+ Full runtime dependencies of xmerl-1.3.34.3: erts-6.0, kernel-8.4,
+ stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ João Henrique Ferreira de Freitas, Lý Nhật Tâm
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
