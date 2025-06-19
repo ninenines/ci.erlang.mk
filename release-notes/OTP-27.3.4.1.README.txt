@@ -1,0 +1,219 @@
+Patch Package:           OTP 27.3.4.1
+Git Tag:                 OTP-27.3.4.1
+Date:                    2025-06-16
+Trouble Report Id:       OTP-19634, OTP-19635, OTP-19637, OTP-19638,
+                         OTP-19640, OTP-19646, OTP-19647, OTP-19649,
+                         OTP-19653, OTP-19658, OTP-19659, OTP-19662,
+                         OTP-19667, OTP-19676
+Seq num:                 CVE-2025-4748, ERIERL-1225, ERIERL-1235,
+                         GH-6463, GH-9102, GH-9722, GH-9771, GH-9816,
+                         GH-9841, GH-9875, PR-9103, PR-9691, PR-9838,
+                         PR-9846, PR-9849, PR-9859, PR-9876, PR-9896,
+                         PR-9897, PR-9898, PR-9905, PR-9912, PR-9941
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3.4.1, eldap-1.2.14.1,
+                         kernel-10.2.7.1, ssh-5.2.11.1, ssl-11.2.12.1,
+                         stdlib-6.2.2.1, xmerl-2.1.3.1
+Predecessor:             OTP 27.3.4
+
+Check out the git tag OTP-27.3.4.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-27.3.4.1
+
+## Fixed Bugs and Malfunctions
+
+- Disable warnings as error for `ex_doc` when any Erlang/OTP application has
+  been disabled by configure.
+
+  Own Id: OTP-19646
+  Related Id(s): GH-9875, PR-9876
+
+# asn1-5.3.4.1
+
+The asn1-5.3.4.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The ASN.1 compiler could generate code that would cause Dialyzer with the
+  `unmatched_returns` option to emit warnings.
+
+  Own Id: OTP-19638
+  Related Id(s): GH-9841, PR-9846
+
+> #### Full runtime dependencies of asn1-5.3.4.1
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# eldap-1.2.14.1
+
+The eldap-1.2.14.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change eldap's 'not' function will have specs fixed.
+
+  Own Id: OTP-19658
+  Related Id(s): PR-9859
+
+> #### Full runtime dependencies of eldap-1.2.14.1
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# kernel-10.2.7.1
+
+Note! The kernel-10.2.7.1 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.2.5 (first satisfied in OTP 27.3.2)
+
+## Fixed Bugs and Malfunctions
+
+- A remote shell can now exit by closing the input stream, without terminating
+  the remote node.
+
+  Own Id: OTP-19667
+  Related Id(s): PR-9912
+
+## Improvements and New Features
+
+- Document default buffer sizes
+
+  Own Id: OTP-19640
+  Related Id(s): GH-9722
+
+> #### Full runtime dependencies of kernel-10.2.7.1
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# ssh-5.2.11.1
+
+The ssh-5.2.11.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Various channel closing robustness improvements. Avoid crashes when channel
+  handling process closes channel and immediately exits. Avoid breaking the
+  protocol by sending duplicated channel-close messages. Cleanup channels which
+  timeout during closing procedure.
+
+  Own Id: OTP-19634
+  Related Id(s): GH-9102, PR-9103
+
+- Improved interoperability with clients acting as Paramiko.
+
+  Own Id: OTP-19637
+  Related Id(s): GH-6463, PR-9838
+
+> #### Full runtime dependencies of ssh-5.2.11.1
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.12.1
+
+Note! The ssl-11.2.12.1 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- hs_keylog callback properly handle alert in initial states, where encryption
+  is not yet used. Also add keylog callback invocation for corner-case where
+  server alert is encrypted with application secrets as client is already in
+  connection state.
+
+  Own Id: OTP-19635
+  Related Id(s): ERIERL-1235, PR-9849
+
+## Improvements and New Features
+
+- The documentation for SSL option `verify_fun` has been improved.
+
+  Own Id: OTP-19676
+  Related Id(s): PR-9691
+
+> #### Full runtime dependencies of ssl-11.2.12.1
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# stdlib-6.2.2.1
+
+The stdlib-6.2.2.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The `save_module/1` command in the shell now saves both the locally defined
+  records and the imported records using the `rr/1` command.
+
+  Own Id: OTP-19647
+  Related Id(s): GH-9816, PR-9897
+
+- It's now possible to write `lists:map(fun is_atom/1, [])` or
+  `lists:map(fun my_func/1, [])`, in the shell, instead of
+  `lists:map(fun erlang:is_atom/1, [])` or
+  `lists:map(fun shell_default:my_func/1, [])`.
+
+  Own Id: OTP-19649
+  Related Id(s): GH-9771, PR-9898
+
+- Properly strip the leading `/` and drive letter from filepaths when zipping
+  and unzipping archives.
+
+  Thanks to Wander Nauta for finding and responsibly disclosing this
+  vulnerability to the Erlang/OTP project.
+
+  Own Id: OTP-19653
+  Related Id(s): PR-9941, CVE-2025-4748
+
+- Shell no longer crashes when requesting to autocomplete map keys containing
+  non-atoms.
+
+  Own Id: OTP-19659
+  Related Id(s): PR-9896
+
+- A remote shell can now exit by closing the input stream, without terminating
+  the remote node.
+
+  Own Id: OTP-19667
+  Related Id(s): PR-9912
+
+> #### Full runtime dependencies of stdlib-6.2.2.1
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# xmerl-2.1.3.1
+
+The xmerl-2.1.3.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The type specs of xmerl_scan:file/2 and xmerl_scan:string/2 has been
+  updated to return `dynamic/0`. Due to hook functions they can return any user
+  defined term.
+
+  Own Id: OTP-19662
+  Related Id(s): ERIERL-1225, PR-9905
+
+> #### Full runtime dependencies of xmerl-2.1.3.1
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Dan Janowski, Ilya Averyanov, Yaroslav Maslennikov
+
