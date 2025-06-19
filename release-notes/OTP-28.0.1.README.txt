@@ -1,0 +1,231 @@
+Patch Package:           OTP 28.0.1
+Git Tag:                 OTP-28.0.1
+Date:                    2025-06-16
+Trouble Report Id:       OTP-19634, OTP-19635, OTP-19637, OTP-19638,
+                         OTP-19641, OTP-19644, OTP-19645, OTP-19650,
+                         OTP-19653, OTP-19658, OTP-19662, OTP-19665,
+                         OTP-19675, OTP-19676
+Seq num:                 CVE-2025-4748, ERIERL-1225, ERIERL-1235,
+                         GH-6463, GH-9102, GH-9841, GH-9858, GH-9863,
+                         GH-9872, PR-9103, PR-9691, PR-9838, PR-9846,
+                         PR-9849, PR-9859, PR-9861, PR-9870, PR-9878,
+                         PR-9880, PR-9892, PR-9905, PR-9926, PR-9941
+System:                  OTP
+Release:                 28
+Application:             asn1-5.4.1, debugger-6.0.1, eldap-1.2.16,
+                         erts-16.0.1, kernel-10.3.1,
+                         public_key-1.18.1, ssh-5.3.1, ssl-11.3.1,
+                         stdlib-7.0.1, xmerl-2.1.5
+Predecessor:             OTP 28.0
+
+Check out the git tag OTP-28.0.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# asn1-5.4.1
+
+The asn1-5.4.1 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The ASN.1 compiler could generate code that would cause Dialyzer with the
+  `unmatched_returns` option to emit warnings.
+
+  Own Id: OTP-19638
+  Related Id(s): GH-9841, PR-9846
+
+> #### Full runtime dependencies of asn1-5.4.1
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# debugger-6.0.1
+
+The debugger-6.0.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Restore deleted icon so that debugger does not crash on startup.
+
+  Own Id: OTP-19641
+  Related Id(s): GH-9858, PR-9861
+
+> #### Full runtime dependencies of debugger-6.0.1
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-7.0, wx-2.0
+
+# eldap-1.2.16
+
+The eldap-1.2.16 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change eldap's 'not' function will have specs fixed.
+
+  Own Id: OTP-19658
+  Related Id(s): PR-9859
+
+> #### Full runtime dependencies of eldap-1.2.16
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# erts-16.0.1
+
+The erts-16.0.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix Erlang to not crash when io:standard_error/0 is a terminal but
+  io:standard_io/0 is not. This bug has existed since Erlang/OTP 28.0 and only
+  effects Windows.
+
+  Own Id: OTP-19650
+  Related Id(s): GH-9872, PR-9878
+
+- In a debug build, the BIFs for the native debugger could cause a lock order
+  violation diagnostic from the lock checker.
+
+  Own Id: OTP-19665
+  Related Id(s): PR-9926
+
+- When building ERTS make sure correct `pcre2.h` file is included even if CFLAGS
+  contains extra include paths.
+
+  Own Id: OTP-19675
+  Related Id(s): PR-9892
+
+> #### Full runtime dependencies of erts-16.0.1
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.3.1
+
+The kernel-10.3.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix bug where calling io:setopts/1 in a shell without the `line_history`
+  option would always disable `line_history`. This bug was introduced in
+  Erlang/OTP 28.0.
+
+  Own Id: OTP-19645
+  Related Id(s): GH-9863, PR-9870
+
+> #### Full runtime dependencies of kernel-10.3.1
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# public_key-1.18.1
+
+The public_key-1.18.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Add back some ASN-1 macros and definitions that should be included in API.
+
+  Own Id: OTP-19644
+  Related Id(s): PR-9880
+
+> #### Full runtime dependencies of public_key-1.18.1
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# ssh-5.3.1
+
+The ssh-5.3.1 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Various channel closing robustness improvements. Avoid crashes when channel
+  handling process closes channel and immediately exits. Avoid breaking the
+  protocol by sending duplicated channel-close messages. Cleanup channels which
+  timeout during closing procedure.
+
+  Own Id: OTP-19634
+  Related Id(s): GH-9102, PR-9103
+
+- Improved interoperability with clients acting as Paramiko.
+
+  Own Id: OTP-19637
+  Related Id(s): GH-6463, PR-9838
+
+> #### Full runtime dependencies of ssh-5.3.1
+>
+> crypto-5.0, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.3.1
+
+The ssl-11.3.1 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- hs_keylog callback properly handle alert in initial states, where encryption
+  is not yet used. Also add keylog callback invocation for corner-case where
+  server alert is encrypted with application secrets as client is already in
+  connection state.
+
+  Own Id: OTP-19635
+  Related Id(s): ERIERL-1235, PR-9849
+
+## Improvements and New Features
+
+- The documentation for SSL option `verify_fun` has been improved.
+
+  Own Id: OTP-19676
+  Related Id(s): PR-9691
+
+> #### Full runtime dependencies of ssl-11.3.1
+>
+> crypto-5.6, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-7.0.1
+
+The stdlib-7.0.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Properly strip the leading `/` and drive letter from filepaths when zipping
+  and unzipping archives.
+
+  Thanks to Wander Nauta for finding and responsibly disclosing this
+  vulnerability to the Erlang/OTP project.
+
+  Own Id: OTP-19653
+  Related Id(s): PR-9941, CVE-2025-4748
+
+> #### Full runtime dependencies of stdlib-7.0.1
+>
+> compiler-5.0, crypto-4.5, erts-16.0, kernel-10.0, sasl-3.0, syntax_tools-3.2.1
+
+# xmerl-2.1.5
+
+The xmerl-2.1.5 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The type specs of xmerl_scan:file/2 and xmerl_scan:string/2 has been
+  updated to return `dynamic/0`. Due to hook functions they can return any user
+  defined term.
+
+  Own Id: OTP-19662
+  Related Id(s): ERIERL-1225, PR-9905
+
+> #### Full runtime dependencies of xmerl-2.1.5
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Dan Janowski, Ilya Averyanov, Mikael Pettersson, Yaroslav Maslennikov
