@@ -1,0 +1,183 @@
+Patch Package:           OTP 26.2.5.14
+Git Tag:                 OTP-26.2.5.14
+Date:                    2025-07-17
+Trouble Report Id:       OTP-19673, OTP-19683, OTP-19691, OTP-19697,
+                         OTP-19699, OTP-19702, OTP-19707, OTP-19710
+Seq num:                 ERIERL-1240, ERIERL-1241, GH-10007, GH-9632,
+                         GH-9655, GH-9884, GH-9992, PR-10003,
+                         PR-10016, PR-10023, PR-10029, PR-10035,
+                         PR-10036, PR-10039, PR-9887
+System:                  OTP
+Release:                 26
+Application:             erts-14.2.5.11, kernel-9.2.4.10,
+                         public_key-1.15.1.6, ssh-5.1.4.11,
+                         ssl-11.1.4.9, stdlib-5.2.3.5
+Predecessor:             OTP 26.2.5.13
+
+ Check out the git tag OTP-26.2.5.14, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.11 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.11 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19683    Application(s): erts
+               Related Id(s): GH-9884, GH-9992, PR-9887
+
+               Fix windows uninstall command.
+
+
+ --- Improvements and New Features ---
+
+  OTP-19710    Application(s): erts
+               Related Id(s): PR-10039
+
+               The maximum amount of connections for epmd on Windows
+               platforms has been increased from 64 to 1024.
+
+
+ Full runtime dependencies of erts-14.2.5.11: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.10 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.10 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19702    Application(s): kernel
+               Related Id(s): ERIERL-1241, PR-10029
+
+               net_kernel could be blocked for a very long time when
+               selecting distribution module for a connection if the
+               DNS service was slow. This prevented any new
+               connections to be set up during that time.
+
+
+ Full runtime dependencies of kernel-9.2.4.10: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.15.1.6 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.15.1.6 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19699    Application(s): public_key
+               Related Id(s): GH-9632, PR-10023
+
+               Handle certificates that are signed with RSASSA-PSS but
+               the PSS params are specified in the
+               'SignatureAlgorithm' of the signed cert and not in the
+               signer's 'SubjectPublicKeyInfo'.
+
+
+ Full runtime dependencies of public_key-1.15.1.6: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.11 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.11 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19691    Application(s): ssh
+               Related Id(s): PR-10003
+
+               Fix file handle id generation.
+
+
+  OTP-19707    Application(s): ssh
+               Related Id(s): GH-9655, PR-10035, PR-10036
+
+               Fixes a badmatch error, when SFTP operation cannot be
+               processed due to channel closed in parallel.
+
+
+ Full runtime dependencies of ssh-5.1.4.11: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.9 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.9 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19697    Application(s): ssl
+               Related Id(s): GH-10007, PR-10016
+
+               Improve error message for bad arguments to underlying
+               connect.
+
+
+ Full runtime dependencies of ssl-11.1.4.9: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2.3.5 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2.3.5 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19673    Application(s): stdlib
+               Related Id(s): ERIERL-1240
+
+               A set of small bugs in sort stability for
+               `lists:sort/1` and `lists:keysort/1` has been fixed.
+               The bug happened for only some, seemingly random,
+               element sequences. Most sorts were stable.
+
+               Sort stability for `lists:sort/1` is only possible to
+               observe when sorting lists with floating point and
+               integer numbers of the same value.
+
+               For `lists:keysort/1` the list had to start with two
+               tuples where the keys or the whole tuples compared
+               equal.
+
+
+ Full runtime dependencies of stdlib-5.2.3.5: compiler-5.0,
+ crypto-4.5, erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Dmytro Lytovchenko
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
