@@ -1,0 +1,295 @@
+Patch Package:           OTP 28.0.2
+Git Tag:                 OTP-28.0.2
+Date:                    2025-07-17
+Trouble Report Id:       OTP-19661, OTP-19670, OTP-19673, OTP-19674,
+                         OTP-19678, OTP-19680, OTP-19682, OTP-19683,
+                         OTP-19684, OTP-19687, OTP-19690, OTP-19691,
+                         OTP-19697, OTP-19699, OTP-19700, OTP-19702,
+                         OTP-19703, OTP-19707, OTP-19710, OTP-19711
+Seq num:                 ERIERL-1240, ERIERL-1241, ERIERL-1242,
+                         GH-10001, GH-10007, GH-10028, GH-10047,
+                         GH-9632, GH-9655, GH-9858, GH-9884, GH-9992,
+                         PR-10003, PR-10008, PR-10016, PR-10023,
+                         PR-10024, PR-10029, PR-10031, PR-10035,
+                         PR-10036, PR-10039, PR-10048, PR-9887,
+                         PR-9930, PR-9952, PR-9953, PR-9955, PR-9994,
+                         PR-9996
+System:                  OTP
+Release:                 28
+Application:             compiler-9.0.1, debugger-6.0.2, erts-16.0.2,
+                         kernel-10.3.2, public_key-1.18.2, ssh-5.3.2,
+                         ssl-11.3.2, stdlib-7.0.2, wx-2.5.1
+Predecessor:             OTP 28.0.1
+
+Check out the git tag OTP-28.0.2, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-28.0.2
+
+## Fixed Bugs and Malfunctions
+
+- Fix `otp_patch_apply` to work with Erlang/OTP 28 and later.
+
+  Own Id: OTP-19682
+  Related Id(s): PR-9953
+
+# compiler-9.0.1
+
+The compiler-9.0.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug that could cause empty bitstring matches to always succeed, even
+  when they should not.
+
+  Own Id: OTP-19711
+  Related Id(s): GH-10047, PR-10048
+
+> #### Full runtime dependencies of compiler-9.0.1
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# debugger-6.0.2
+
+The debugger-6.0.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed debugger priv dir, which was removed and caused crashes when the icons
+  could not be found.
+
+  Own Id: OTP-19687
+  Related Id(s): GH-9858, PR-9994
+
+> #### Full runtime dependencies of debugger-6.0.2
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-7.0, wx-2.0
+
+# erts-16.0.2
+
+The erts-16.0.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- prim_net nif used incorrect encoding for family resulting in non-functional
+  address selection.
+
+  Own Id: OTP-19674
+
+- Fix windows uninstall command.
+
+  Own Id: OTP-19683
+  Related Id(s): GH-9884, GH-9992, PR-9887
+
+- With this change erlang will start if it receives short (ms-dos compatible)
+  path to executable.
+
+  Own Id: OTP-19690
+  Related Id(s): PR-9996
+
+## Improvements and New Features
+
+- The maximum amount of connections for `epmd` on Windows platforms has been
+  increased from 64 to 1024.
+
+  Own Id: OTP-19710
+  Related Id(s): PR-10039
+
+> #### Full runtime dependencies of erts-16.0.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.3.2
+
+The kernel-10.3.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- socket:sendv/3 with 'nowait' sometimes return 'completion' without
+  'CompletionInfo' (Windows only).
+
+  Own Id: OTP-19661
+
+- prim_net nif used incorrect encoding for family resulting in non-functional
+  address selection.
+
+  Own Id: OTP-19674
+
+- socket:accept can return unexpected 'select_sent'.
+
+  Own Id: OTP-19684
+  Related Id(s): ERIERL-1242
+
+- `net_kernel` could be blocked for a very long time when selecting distribution
+  module for a connection if the DNS service was slow. This prevented any new
+  connections to be set up during that time.
+
+  Own Id: OTP-19702
+  Related Id(s): ERIERL-1241, PR-10029
+
+## Improvements and New Features
+
+- Improved documentation of CompletionStatus for asynchronous (nowait) socket
+  operations.
+
+  Own Id: OTP-19670
+  Related Id(s): PR-9930
+
+> #### Full runtime dependencies of kernel-10.3.2
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# public_key-1.18.2
+
+The public_key-1.18.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Adjustments in include file to retain compatibility with supported ASN-1
+  standards, although not all record and macros are explicitly documented.
+
+  Own Id: OTP-19678
+  Related Id(s): GH-10001, PR-10008, PR-9955
+
+- Handle certificates that are signed with RSASSA-PSS but the PSS params are
+  specified in the 'SignatureAlgorithm' of the signed cert and not in the
+  signer's 'SubjectPublicKeyInfo'.
+
+  Own Id: OTP-19699
+  Related Id(s): GH-9632, PR-10023
+
+- Add modern ASN-1 specs to be able to retain support for ExtensionRequest from
+  legacy PKCS-9 spec.
+
+  Own Id: OTP-19703
+  Related Id(s): GH-10028, PR-10031
+
+> #### Full runtime dependencies of public_key-1.18.2
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# ssh-5.3.2
+
+The ssh-5.3.2 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix file handle id generation.
+
+  Own Id: OTP-19691
+  Related Id(s): PR-10003
+
+- Fixes a badmatch error, when SFTP operation cannot be processed due to channel
+  closed in parallel.
+
+  Own Id: OTP-19707
+  Related Id(s): GH-9655, PR-10035, PR-10036
+
+> #### Full runtime dependencies of ssh-5.3.2
+>
+> crypto-5.0, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.3.2
+
+The ssl-11.3.2 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Improve error message for bad arguments to underlying connect.
+
+  Own Id: OTP-19697
+  Related Id(s): GH-10007, PR-10016
+
+> #### Full runtime dependencies of ssl-11.3.2
+>
+> crypto-5.6, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-7.0.2
+
+The stdlib-7.0.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A set of small bugs in sort stability for \`lists:sort/1\` and
+  \`lists:keysort/1\` has been fixed. The bug happened for only some, seemingly
+  random, element sequences. Most sorts were stable.
+
+  Sort stability for \`lists:sort/1\` is only possible to observe when sorting
+  lists with floating point and integer numbers of the same value.
+
+  For \`lists:keysort/1\` the list had to start with two tuples where the keys
+  or the whole tuples compared equal.
+
+  Own Id: OTP-19673
+  Related Id(s): ERIERL-1240
+
+- Fixed bug in io_lib:bformat/2 which crashed if format string contained
+  unicode characters.
+
+  Own Id: OTP-19680
+  Related Id(s): PR-9952
+
+> #### Full runtime dependencies of stdlib-7.0.2
+>
+> compiler-5.0, crypto-4.5, erts-16.0, kernel-10.0, sasl-3.0, syntax_tools-3.2.1
+
+# wx-2.5.1
+
+The wx-2.5.1 application can be applied independently of other applications on a
+full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Don't include `gl.beam` in pre-built source tar file, since it depends on
+  local configure results.
+
+  Own Id: OTP-19700
+  Related Id(s): PR-10024
+
+> #### Full runtime dependencies of wx-2.5.1
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# Thanks to
+
+Dmytro Lytovchenko
+
+GH-10001: https://github.com/erlang/otp/issues/10001 GH-10007:
+https://github.com/erlang/otp/issues/10007 GH-10028:
+https://github.com/erlang/otp/issues/10028 GH-10047:
+https://github.com/erlang/otp/issues/10047 GH-9632:
+https://github.com/erlang/otp/issues/9632 GH-9655:
+https://github.com/erlang/otp/issues/9655 GH-9858:
+https://github.com/erlang/otp/issues/9858 GH-9884:
+https://github.com/erlang/otp/issues/9884 GH-9992:
+https://github.com/erlang/otp/issues/9992 PR-10003:
+https://github.com/erlang/otp/pull/10003 PR-10008:
+https://github.com/erlang/otp/pull/10008 PR-10016:
+https://github.com/erlang/otp/pull/10016 PR-10023:
+https://github.com/erlang/otp/pull/10023 PR-10024:
+https://github.com/erlang/otp/pull/10024 PR-10029:
+https://github.com/erlang/otp/pull/10029 PR-10031:
+https://github.com/erlang/otp/pull/10031 PR-10035:
+https://github.com/erlang/otp/pull/10035 PR-10036:
+https://github.com/erlang/otp/pull/10036 PR-10039:
+https://github.com/erlang/otp/pull/10039 PR-10048:
+https://github.com/erlang/otp/pull/10048 PR-9887:
+https://github.com/erlang/otp/pull/9887 PR-9930:
+https://github.com/erlang/otp/pull/9930 PR-9952:
+https://github.com/erlang/otp/pull/9952 PR-9953:
+https://github.com/erlang/otp/pull/9953 PR-9955:
+https://github.com/erlang/otp/pull/9955 PR-9994:
+https://github.com/erlang/otp/pull/9994 PR-9996:
+https://github.com/erlang/otp/pull/9996
