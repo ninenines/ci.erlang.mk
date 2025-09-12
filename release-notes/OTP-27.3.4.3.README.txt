@@ -1,0 +1,202 @@
+Patch Package:           OTP 27.3.4.3
+Git Tag:                 OTP-27.3.4.3
+Date:                    2025-09-10
+Trouble Report Id:       OTP-19701, OTP-19719, OTP-19722, OTP-19728,
+                         OTP-19729, OTP-19740, OTP-19741, OTP-19742,
+                         OTP-19748, OTP-19760
+Seq num:                 CVE-2025-48038, CVE-2025-48039,
+                         CVE-2025-48040, CVE-2025-48041, GH-10057,
+                         GH-10065, GH-10072, GH-10077, GH-10103,
+                         GH-3392, PR-10066, PR-10090, PR-10093,
+                         PR-10118, PR-10120, PR-10155, PR-10156,
+                         PR-10157, PR-10162, PR-6223
+System:                  OTP
+Release:                 27
+Application:             compiler-8.6.1.2, debugger-5.5.0.1,
+                         erts-15.2.7.2, inets-9.3.2.1, ssh-5.2.11.3,
+                         syntax_tools-3.2.2.1
+Predecessor:             OTP 27.3.4.2
+
+Check out the git tag OTP-27.3.4.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- Option max_handles can be configured for sshd running SFTP. The positive
+  integer value limits amount of file handles opened for a connection (by
+  default 4096 is used).
+
+  Own Id: OTP-19701
+  Application(s): ssh
+  Related Id(s): PR-10157, CVE-2025-48041
+
+- Avoid decoding KEX messages providing too many algorithms. This change does
+  not introduce new limitation but assures it is enforced earlier in processing
+  chain. Adjustments in error logging during handshake.
+
+  Own Id: OTP-19741
+  Application(s): ssh
+  Related Id(s): PR-10162, CVE-2025-48040
+
+- A new 'max_path' option is now available in the sshd configuration, allowing
+  administrators to set the maximum allowable path length. By default, this
+  value is set to 4096 characters.
+
+  Own Id: OTP-19742
+  Application(s): ssh
+  Related Id(s): PR-10155, CVE-2025-48039
+
+- Reject file handles exceeding size specified in RFCs (256 bytes).
+
+  Own Id: OTP-19748
+  Application(s): ssh
+  Related Id(s): PR-10156, CVE-2025-48038
+
+# compiler-8.6.1.2
+
+The compiler-8.6.1.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In rare circumstances, the compiler could crash when compiling code using bit
+  syntax construction.
+
+  Own Id: OTP-19722
+  Related Id(s): GH-10077, PR-10090
+
+> #### Full runtime dependencies of compiler-8.6.1.2
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# debugger-5.5.0.1
+
+The debugger-5.5.0.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix unbound error in interpreted modules
+
+  Own Id: OTP-19719
+  Related Id(s): GH-10057, PR-10066
+
+> #### Full runtime dependencies of debugger-5.5.0.1
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-3.15, wx-2.0
+
+# erts-15.2.7.2
+
+The erts-15.2.7.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- As an optimization, when the unicode:characters_to_binary/3 was used to
+  convert from `latin1` to `utf8` or vice versa, it would return the original
+  binary unchanged if it only contained 7-bit ASCII characters. That
+  otpimization was broken in Erlang/OTP 27, and has now been mended.
+
+  Own Id: OTP-19728
+  Related Id(s): GH-10072, PR-10093
+
+> #### Full runtime dependencies of erts-15.2.7.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.3.2.1
+
+The inets-9.3.2.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where a request sent to httpd server which is using CGI script to
+  generate a response, would pollute server's environment variable -
+  `HTTP_PROXY` for that request. This bug is also known as httpoxy. More
+  information: CVE-2016-1000107
+
+  Own Id: OTP-19729
+  Related Id(s): GH-3392, PR-6223
+
+- Fixed a RFC 2616 violation, where a http request, made by httpc, without
+  providing any options, would be sent with an empty TE header, without also
+  having a TE value in the connection header. Now the default request doesn't
+  send a TE header at all.
+
+  Own Id: OTP-19760
+  Related Id(s): GH-10065, PR-10120
+
+> #### Full runtime dependencies of inets-9.3.2.1
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# ssh-5.2.11.3
+
+The ssh-5.2.11.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Option max_handles can be configured for sshd running SFTP. The positive
+  integer value limits amount of file handles opened for a connection (by
+  default 4096 is used).
+
+  Own Id: OTP-19701
+  Related Id(s): PR-10157, CVE-2025-48041
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Avoid decoding KEX messages providing too many algorithms. This change does
+  not introduce new limitation but assures it is enforced earlier in processing
+  chain. Adjustments in error logging during handshake.
+
+  Own Id: OTP-19741
+  Related Id(s): PR-10162, CVE-2025-48040
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- A new 'max_path' option is now available in the sshd configuration, allowing
+  administrators to set the maximum allowable path length. By default, this
+  value is set to 4096 characters.
+
+  Own Id: OTP-19742
+  Related Id(s): PR-10155, CVE-2025-48039
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Reject file handles exceeding size specified in RFCs (256 bytes).
+
+  Own Id: OTP-19748
+  Related Id(s): PR-10156, CVE-2025-48038
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of ssh-5.2.11.3
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# syntax_tools-3.2.2.1
+
+The syntax_tools-3.2.2.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Backport fix for annotating maybe to OTP-27
+
+  Own Id: OTP-19740
+  Related Id(s): GH-10103, PR-10118
+
+> #### Full runtime dependencies of syntax_tools-3.2.2.1
+>
+> compiler-7.0, erts-9.0, kernel-5.0, stdlib-4.0
+
+# Thanks to
+
+Marcel Lanz, Savvas Nicholas
+
