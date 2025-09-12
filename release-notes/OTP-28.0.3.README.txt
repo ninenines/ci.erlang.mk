@@ -1,0 +1,165 @@
+Patch Package:           OTP 28.0.3
+Git Tag:                 OTP-28.0.3
+Date:                    2025-09-10
+Trouble Report Id:       OTP-19701, OTP-19741, OTP-19742, OTP-19748,
+                         OTP-19753, OTP-19755, OTP-19761
+Seq num:                 CVE-2025-48038, CVE-2025-48039,
+                         CVE-2025-48040, CVE-2025-48041,
+                         CVE-2025-58050, PR-10155, PR-10156, PR-10157,
+                         PR-10162, PR-19755, PR-9815
+System:                  OTP
+Release:                 28
+Application:             diameter-2.5.1, erts-16.0.3, ssh-5.3.3,
+                         stdlib-7.0.3
+Predecessor:             OTP 28.0.2
+
+Check out the git tag OTP-28.0.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- Option max_handles can be configured for sshd running SFTP. The positive
+  integer value limits amount of file handles opened for a connection (by
+  default 4096 is used).
+
+  Own Id: OTP-19701
+  Application(s): ssh
+  Related Id(s): PR-10157, CVE-2025-48041
+
+- Avoid decoding KEX messages providing too many algorithms. This change does
+  not introduce new limitation but assures it is enforced earlier in processing
+  chain. Adjustments in error logging during handshake.
+
+  Own Id: OTP-19741
+  Application(s): ssh
+  Related Id(s): PR-10162, CVE-2025-48040
+
+- A new 'max_path' option is now available in the sshd configuration, allowing
+  administrators to set the maximum allowable path length. By default, this
+  value is set to 4096 characters.
+
+  Own Id: OTP-19742
+  Application(s): ssh
+  Related Id(s): PR-10155, CVE-2025-48039
+
+- Reject file handles exceeding size specified in RFCs (256 bytes).
+
+  Own Id: OTP-19748
+  Application(s): ssh
+  Related Id(s): PR-10156, CVE-2025-48038
+
+# diameter-2.5.1
+
+The diameter-2.5.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change message_cb callback will be called with updated state for
+  processing 'ack' after 'send'.
+
+  Own Id: OTP-19753
+  Related Id(s): PR-9815
+
+> #### Full runtime dependencies of diameter-2.5.1
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# erts-16.0.3
+
+The erts-16.0.3 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Update PCRE2 from 10.45 to 10.46. Fixes potential buffer read overflow on
+  regular expressions with `(*scs:)` and `(*ACCEPT)` syntax combined.
+
+  Own Id: OTP-19755
+  Related Id(s): CVE-2025-58050
+
+- Fixed bug that could cause crash in beam started with
+  `erl -emu_type debug +JPperf true` with any type of tracing return from
+  function.
+
+  Own Id: OTP-19761
+  Related Id(s): PR-19755
+
+> #### Full runtime dependencies of erts-16.0.3
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# ssh-5.3.3
+
+The ssh-5.3.3 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Option max_handles can be configured for sshd running SFTP. The positive
+  integer value limits amount of file handles opened for a connection (by
+  default 4096 is used).
+
+  Own Id: OTP-19701
+  Related Id(s): PR-10157, CVE-2025-48041
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Avoid decoding KEX messages providing too many algorithms. This change does
+  not introduce new limitation but assures it is enforced earlier in processing
+  chain. Adjustments in error logging during handshake.
+
+  Own Id: OTP-19741
+  Related Id(s): PR-10162, CVE-2025-48040
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- A new 'max_path' option is now available in the sshd configuration, allowing
+  administrators to set the maximum allowable path length. By default, this
+  value is set to 4096 characters.
+
+  Own Id: OTP-19742
+  Related Id(s): PR-10155, CVE-2025-48039
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Reject file handles exceeding size specified in RFCs (256 bytes).
+
+  Own Id: OTP-19748
+  Related Id(s): PR-10156, CVE-2025-48038
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of ssh-5.3.3
+>
+> crypto-5.0, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# stdlib-7.0.3
+
+Note! The stdlib-7.0.3 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-16.0.3 (first satisfied in OTP 28.0.3)
+
+## Fixed Bugs and Malfunctions
+
+- Update PCRE2 from 10.45 to 10.46. Fixes potential buffer read overflow on
+  regular expressions with `(*scs:)` and `(*ACCEPT)` syntax combined.
+
+  Own Id: OTP-19755
+  Related Id(s): CVE-2025-58050
+
+> #### Full runtime dependencies of stdlib-7.0.3
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-10.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# Thanks to
+
+Alberto Sartori
+
