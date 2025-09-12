@@ -1,0 +1,161 @@
+Patch Package:           OTP 26.2.5.15
+Git Tag:                 OTP-26.2.5.15
+Date:                    2025-09-10
+Trouble Report Id:       OTP-19701, OTP-19729, OTP-19741, OTP-19742,
+                         OTP-19748, OTP-19760
+Seq num:                 CVE-2025-48038, CVE-2025-48039,
+                         CVE-2025-48040, CVE-2025-48041, GH-10065,
+                         GH-3392, PR-10120, PR-10155, PR-10156,
+                         PR-10157, PR-10162, PR-6223
+System:                  OTP
+Release:                 26
+Application:             inets-9.1.0.3, ssh-5.1.4.12
+Predecessor:             OTP 26.2.5.14
+
+ Check out the git tag OTP-26.2.5.15, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-19701    Application(s): ssh
+               Related Id(s): PR-10157, CVE-2025-48041
+
+               Option max_handles can be configured for sshd running
+               SFTP. The positive integer value limits amount of file
+               handles opened for a connection (by default 4096 is
+               used).
+
+
+  OTP-19741    Application(s): ssh
+               Related Id(s): PR-10162, CVE-2025-48040
+
+               Avoid decoding KEX messages providing too many
+               algorithms. This change does not introduce new
+               limitation but assures it is enforced earlier in
+               processing chain. Adjustments in error logging during
+               handshake.
+
+
+  OTP-19742    Application(s): ssh
+               Related Id(s): PR-10155, CVE-2025-48039
+
+               A new 'max_path' option is now available in the sshd
+               configuration, allowing administrators to set the
+               maximum allowable path length. By default, this value
+               is set to 4096 characters.
+
+
+  OTP-19748    Application(s): ssh
+               Related Id(s): PR-10156, CVE-2025-48038
+
+               Reject file handles exceeding size specified in RFCs
+               (256 bytes).
+
+
+ ---------------------------------------------------------------------
+ --- inets-9.1.0.3 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1.0.3 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19729    Application(s): inets
+               Related Id(s): GH-3392, PR-6223
+
+               Fixed a bug where a request sent to httpd server which
+               is using CGI script to generate a response, would
+               pollute server's environment variable - HTTP_PROXY for
+               that request. This bug is also known as httpoxy. More
+               information: CVE-2016-1000107
+
+
+  OTP-19760    Application(s): inets
+               Related Id(s): GH-10065, PR-10120
+
+               Fixed a RFC 2616 violation, where a http request, made
+               by httpc, without providing any options, would be sent
+               with an empty TE header, without also having a TE value
+               in the connection header. Now the default request
+               doesn't send a TE header at all.
+
+
+ Full runtime dependencies of inets-9.1.0.3: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.12 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.12 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19701    Application(s): ssh
+               Related Id(s): PR-10157, CVE-2025-48041
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Option max_handles can be configured for sshd running
+               SFTP. The positive integer value limits amount of file
+               handles opened for a connection (by default 4096 is
+               used).
+
+
+  OTP-19741    Application(s): ssh
+               Related Id(s): PR-10162, CVE-2025-48040
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Avoid decoding KEX messages providing too many
+               algorithms. This change does not introduce new
+               limitation but assures it is enforced earlier in
+               processing chain. Adjustments in error logging during
+               handshake.
+
+
+  OTP-19742    Application(s): ssh
+               Related Id(s): PR-10155, CVE-2025-48039
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               A new 'max_path' option is now available in the sshd
+               configuration, allowing administrators to set the
+               maximum allowable path length. By default, this value
+               is set to 4096 characters.
+
+
+  OTP-19748    Application(s): ssh
+               Related Id(s): PR-10156, CVE-2025-48038
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               Reject file handles exceeding size specified in RFCs
+               (256 bytes).
+
+
+ Full runtime dependencies of ssh-5.1.4.12: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Marcel Lanz, Savvas Nicholas
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
