@@ -1,0 +1,39 @@
+Patch Package:           OTP 28.0.4
+Git Tag:                 OTP-28.0.4
+Date:                    2025-09-11
+Trouble Report Id:       OTP-19729
+Seq num:                 CVE-2016-1000107, GH-3392, PR-6223
+System:                  OTP
+Release:                 28
+Application:             inets-9.4.1
+Predecessor:             OTP 28.0.3
+
+Check out the git tag OTP-28.0.4, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# inets-9.4.1
+
+The inets-9.4.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where a request sent to httpd server which is using CGI script to
+  generate a response, would pollute server's environment variable -
+  `HTTP_PROXY` for that request. This bug is also known as httpoxy. More
+  information: CVE-2016-1000107
+
+  Own Id: OTP-19729
+  Related Id(s): GH-3392, PR-6223, CVE-2016-1000107
+
+> #### Full runtime dependencies of inets-9.4.1
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# Thanks to
+
+Marcel Lanz
+
