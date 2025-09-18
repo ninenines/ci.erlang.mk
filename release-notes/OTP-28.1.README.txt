@@ -1,0 +1,821 @@
+Patch Package:           OTP 28.1
+Git Tag:                 OTP-28.1
+Date:                    2025-09-17
+Trouble Report Id:       OTP-16607, OTP-19552, OTP-19619, OTP-19642,
+                         OTP-19646, OTP-19647, OTP-19648, OTP-19649,
+                         OTP-19651, OTP-19655, OTP-19657, OTP-19659,
+                         OTP-19660, OTP-19666, OTP-19667, OTP-19669,
+                         OTP-19671, OTP-19677, OTP-19681, OTP-19685,
+                         OTP-19686, OTP-19688, OTP-19689, OTP-19693,
+                         OTP-19694, OTP-19696, OTP-19698, OTP-19704,
+                         OTP-19706, OTP-19714, OTP-19719, OTP-19721,
+                         OTP-19722, OTP-19723, OTP-19724, OTP-19725,
+                         OTP-19726, OTP-19727, OTP-19728, OTP-19730,
+                         OTP-19731, OTP-19733, OTP-19735, OTP-19736,
+                         OTP-19737, OTP-19739, OTP-19745, OTP-19749,
+                         OTP-19752, OTP-19754, OTP-19756, OTP-19757,
+                         OTP-19758, OTP-19759, OTP-19760
+Seq num:                 ERIERL-1209, ERIERL-1231, GH-10002, GH-10020,
+                         GH-10057, GH-10061, GH-10065, GH-10072,
+                         GH-10077, GH-10079, GH-10097, GH-10102,
+                         GH-5697, GH-5756, GH-9631, GH-9638, GH-9771,
+                         GH-9816, GH-9875, GH-9901, GH-9903, GH-9972,
+                         GH-9987, OTP-16608, PR-10004, PR-10009,
+                         PR-10011, PR-10014, PR-10019, PR-10034,
+                         PR-10046, PR-10051, PR-10066, PR-10076,
+                         PR-10084, PR-10085, PR-10087, PR-10090,
+                         PR-10091, PR-10093, PR-10094, PR-10104,
+                         PR-10106, PR-10108, PR-10112, PR-10113,
+                         PR-10120, PR-10121, PR-10140, PR-10142,
+                         PR-10146, PR-10147, PR-10153, PR-9589,
+                         PR-9721, PR-9796, PR-9815, PR-9832, PR-9843,
+                         PR-9853, PR-9862, PR-9869, PR-9876, PR-9879,
+                         PR-9896, PR-9897, PR-9898, PR-9900, PR-9906,
+                         PR-9909, PR-9912, PR-9927, PR-9949, PR-9954,
+                         PR-9969, PR-9976, PR-9982, PR-9990
+System:                  OTP
+Release:                 28
+Application:             asn1-5.4.2, common_test-1.29, compiler-9.0.2,
+                         crypto-5.7, debugger-6.0.3, edoc-1.4.1,
+                         erl_interface-5.6.1, erts-16.1, inets-9.4.2,
+                         kernel-10.4, megaco-4.8.1, mnesia-4.24.1,
+                         observer-2.18.1, os_mon-2.11.1,
+                         public_key-1.18.3, runtime_tools-2.3,
+                         snmp-5.19.1, ssl-11.4, stdlib-7.1,
+                         syntax_tools-4.0.1, tools-4.1.3, wx-2.5.2,
+                         xmerl-2.1.6
+Predecessor:             OTP 28.0.4
+
+Check out the git tag OTP-28.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# HIGHLIGHTS
+
+- Added support for quantum crypto signature algorithm ML-DSA (ssl and
+  public_key) and key exchange algorithm ML-KEM (ssl).
+
+  Own Id: OTP-19552
+  Application(s): public_key, ssl
+  Related Id(s): PR-10004
+
+- A User's Guide to `dbg` is now available in the documentation.
+
+  Own Id: OTP-19655
+  Application(s): runtime_tools
+  Related Id(s): PR-9853
+
+- Support for ML-DSA and ML-KEM provided by OpenSSL 3.5.
+
+  Algorithms `mldsa44`, `mldsa65` and `mldsa87` can be passed to crypto:sign/4
+  and crypto:verify/5.
+
+  New functions crypto:encapsulate_key/2 and crypto:decapsulate_key/3 can be
+  used with `mlkem512`, `mlkem768` and `mlkem1024` to safely generate and
+  communicate an encapsulated shared secret.
+
+  Own Id: OTP-19657
+  Application(s): crypto
+  Related Id(s): PR-9900
+
+- TLS server now fails early for supplied PEM file issues, such as the file not
+  being found.
+
+  Own Id: OTP-19706
+  Application(s): ssl
+  Related Id(s): GH-9631, PR-10046
+
+# POTENTIAL INCOMPATIBILITIES
+
+- The internal `inet_dns_tsig` and `inet_res` modules have been fixed to TSIG
+  verify the correct timestamp.
+
+  In the process two undocumented error code atoms have been corrected to
+  `notauth` and `notzone` to adhere to the DNS RFCs. Code that relied on the
+  previous incorrect values may have to be corrected.
+
+  Own Id: OTP-19756
+  Application(s): kernel
+  Related Id(s): PR-10146
+
+# OTP-28.1
+
+## Fixed Bugs and Malfunctions
+
+- When any Erlang/OTP application has been disabled by `configure`, warnings
+  from `ex_doc` when building the documentation are now disabled.
+
+  Own Id: OTP-19646
+  Related Id(s): GH-9875, PR-9876
+
+- `./otp_build` now respects `TYPE` and `FLAVOR` to when set.
+
+  Own Id: OTP-19677
+  Related Id(s): PR-9954
+
+- Rendering of some tables in the documentation has been improved.
+
+  Own Id: OTP-19752
+  Related Id(s): PR-10142
+
+## Improvements and New Features
+
+- In Efficiency Guide, the section about `setelement/3` in Common Caveats has
+  been updated.
+
+  Own Id: OTP-19749
+  Related Id(s): PR-10140
+
+# asn1-5.4.2
+
+The asn1-5.4.2 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Decoding a constrained BIT STRING using JER was broken.
+
+  Own Id: OTP-19681
+  Related Id(s): PR-9949
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+> #### Full runtime dependencies of asn1-5.4.2
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# common_test-1.29
+
+The common_test-1.29 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Improved printing of maps. Map keys are now printed in the same order as
+  `maps:iterator(Map, ordered)` would sort them.
+
+  Own Id: OTP-19642
+  Related Id(s): ERIERL-1231, PR-9862
+
+- `ct:print` will now suppress printing of timestamp and heading when the
+  heading option is set to the empty string.
+
+  Own Id: OTP-19714
+  Related Id(s): PR-10051
+
+> #### Full runtime dependencies of common_test-1.29
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-9.0.2
+
+The compiler-9.0.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a compiler crash caused by patch order in destructive update.
+
+  Own Id: OTP-19660
+  Related Id(s): GH-9903, PR-9909
+
+- Fixed a compiler crash in `beam_ssa_pre_codegen` caused by wrong handling of
+  multiple phi patches in the destructive update pass.
+
+  Own Id: OTP-19689
+  Related Id(s): GH-9987, PR-9990
+
+- Fixed a crash when a zip generator contains a map pattern.
+
+  Own Id: OTP-19693
+  Related Id(s): GH-10002, PR-10009
+
+- In rare circumstances, the compiler could crash when compiling code using bit
+  syntax construction.
+
+  Own Id: OTP-19722
+  Related Id(s): GH-10077, PR-10090
+
+- A few minor bugs that could affect the `beam_debug_info` option were fixed.
+
+  Own Id: OTP-19758
+  Related Id(s): PR-10153
+
+> #### Full runtime dependencies of compiler-9.0.2
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.7
+
+The crypto-5.7 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+- Fixed bug seen to cause beam crash when doing `init:restart()` with `crypto`
+  statically linked to OpenSSL (`--disable-dynamic-ssl-lib`). Bug exists since
+  OTP 28.0.
+
+  Own Id: OTP-19721
+  Related Id(s): GH-10061, PR-10076
+
+- Fixed `crypto:strong_rand_bytes` failing after `init:restart` on MacOS with
+  statically linked OpenSSL.
+
+  Own Id: OTP-19725
+  Related Id(s): GH-10079, PR-10085
+
+- Fixed `crypto:hash(shake128 | shake256)` for OpenSSL 3.4 and newer.
+
+  Own Id: OTP-19733
+  Related Id(s): GH-9901, PR-9982
+
+- Rendering of some tables in the documentation has been improved.
+
+  Own Id: OTP-19752
+  Related Id(s): PR-10142
+
+## Improvements and New Features
+
+- Support for ML-DSA and ML-KEM provided by OpenSSL 3.5.
+
+  Algorithms `mldsa44`, `mldsa65` and `mldsa87` can be passed to crypto:sign/4
+  and crypto:verify/5.
+
+  New functions crypto:encapsulate_key/2 and crypto:decapsulate_key/3 can be
+  used with `mlkem512`, `mlkem768` and `mlkem1024` to safely generate and
+  communicate an encapsulated shared secret.
+
+  Own Id: OTP-19657
+  Related Id(s): PR-9900
+
+  *** HIGHLIGHT ***
+
+- Added support for SHA2 512/224 and SHA2 512/256 truncated hashes.
+
+  Own Id: OTP-19666
+  Related Id(s): PR-9721
+
+> #### Full runtime dependencies of crypto-5.7
+>
+> erts-9.0, kernel-6.0, stdlib-3.9
+
+# debugger-6.0.3
+
+The debugger-6.0.3 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed unbound error in interpreted modules
+
+  Own Id: OTP-19719
+  Related Id(s): GH-10057, PR-10066
+
+> #### Full runtime dependencies of debugger-6.0.3
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-7.0, wx-2.0
+
+# edoc-1.4.1
+
+The edoc-1.4.1 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Rendering of some tables in the documentation has been improved.
+
+  Own Id: OTP-19752
+  Related Id(s): PR-10142
+
+> #### Full runtime dependencies of edoc-1.4.1
+>
+> erts-11.0, inets-5.10, kernel-7.0, stdlib-4.0, syntax_tools-2.0, xmerl-1.3.7
+
+# erl_interface-5.6.1
+
+The erl_interface-5.6.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Fixed C compiler warnings generated by codechecker.
+
+  Own Id: OTP-19671
+  Related Id(s): PR-9832
+
+## Known Bugs and Problems
+
+- The `ei` API for decoding/encoding terms is not fully 64-bit compatible since
+  terms that have a representation on the external term format larger than 2 GB
+  cannot be handled.
+
+  Own Id: OTP-16607
+  Related Id(s): OTP-16608
+
+# erts-16.1
+
+The erts-16.1 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Made sure to not set any terminal settings when they have not been changed.
+  Doing so can trigger a SIGTTOU signal which would terminate Erlang when it
+  should not.
+
+  Own Id: OTP-19685
+  Related Id(s): PR-9906
+
+- As an optimization, when the unicode:characters_to_binary/3 was used to
+  convert from `latin1` to `utf8` or vice versa, it would return the original
+  binary unchanged if it only contained 7-bit ASCII characters. That
+  otpimization was broken in Erlang/OTP 27, and has now been mended.
+
+  Own Id: OTP-19728
+  Related Id(s): GH-10072, PR-10093
+
+## Improvements and New Features
+
+- Fixed C compiler warnings generated by codechecker.
+
+  Own Id: OTP-19671
+  Related Id(s): PR-9832
+
+- Added support in module `re` for export and import of compiled regular
+  expression in order to safely move them between Erlang node instances.
+
+  Own Id: OTP-19730
+  Related Id(s): PR-9976
+
+- Added new `erl` command line flag `+Mumadtn <bool>` causing `MADV_DONTNEED` to
+  be passed to `madvise()` instead of `MADV_FREE`.
+
+  Own Id: OTP-19739
+  Related Id(s): PR-10113
+
+> #### Full runtime dependencies of erts-16.1
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.4.2
+
+The inets-9.4.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a RFC 2616 violation, where a http request, made by httpc, without
+  providing any options, would be sent with an empty TE header, without also
+  having a TE value in the connection header. Now the default request doesn't
+  send a TE header at all.
+
+  Own Id: OTP-19760
+  Related Id(s): GH-10065, PR-10120
+
+> #### Full runtime dependencies of inets-9.4.2
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# kernel-10.4
+
+The kernel-10.4 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A remote shell can now exit by closing the input stream, without terminating
+  the remote node.
+
+  Own Id: OTP-19667
+  Related Id(s): PR-9912
+
+- The internal `inet_dns_tsig` and `inet_res` modules have been fixed to TSIG
+  verify the correct timestamp.
+
+  In the process two undocumented error code atoms have been corrected to
+  `notauth` and `notzone` to adhere to the DNS RFCs. Code that relied on the
+  previous incorrect values may have to be corrected.
+
+  Own Id: OTP-19756
+  Related Id(s): PR-10146
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+## Improvements and New Features
+
+- The rudimentary DNS resolver `inet_res` has aqcuired 3 new functions
+  inet_res:gethostbyname/4, `inet_res;getbyname/4` and
+  inet_res:gethostbyaddr/3, that all take an option list argument.
+
+  This option list can be used to override the Kernel application's resolver
+  options when calling the `inet_res` function directly.
+
+  Own Id: OTP-19737
+  Related Id(s): ERIERL-1209, PR-10112
+
+> #### Full runtime dependencies of kernel-10.4
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# megaco-4.8.1
+
+The megaco-4.8.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Documentation improvements.
+
+  Own Id: OTP-19669
+  Related Id(s): PR-9927
+
+- Rendering of some tables in the documentation has been improved.
+
+  Own Id: OTP-19752
+  Related Id(s): PR-10142
+
+> #### Full runtime dependencies of megaco-4.8.1
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.24.1
+
+The mnesia-4.24.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Mnesia no longer crashes when the node name is used as a table name.
+
+  Own Id: OTP-19745
+  Related Id(s): PR-10147
+
+> #### Full runtime dependencies of mnesia-4.24.1
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# observer-2.18.1
+
+The observer-2.18.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- `etop` will now fully stop before returning from etop:stop/0.
+
+  Own Id: OTP-19754
+  Related Id(s): PR-9815
+
+> #### Full runtime dependencies of observer-2.18.1
+>
+> erts-15.0, et-1.5, kernel-10.0, runtime_tools-2.1, stdlib-5.0, wx-2.3
+
+# os_mon-2.11.1
+
+The os_mon-2.11.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+> #### Full runtime dependencies of os_mon-2.11.1
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# public_key-1.18.3
+
+Note! The public_key-1.18.3 application _cannot_ be applied independently of
+other applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+- Added missing reference to `SignedAttributes` so that it now works with the
+  `der_encode` and `der_decode` functions.
+
+  Own Id: OTP-19727
+  Related Id(s): PR-10091
+
+## Improvements and New Features
+
+- Added support for quantum crypto signature algorithm ML-DSA (ssl and
+  public_key) and key exchange algorithm ML-KEM (ssl).
+
+  Own Id: OTP-19552
+  Related Id(s): PR-10004
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of public_key-1.18.3
+>
+> asn1-5.0, crypto-5.7, erts-13.0, kernel-8.0, stdlib-4.0
+
+# runtime_tools-2.3
+
+The runtime_tools-2.3 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+## Improvements and New Features
+
+- The default tracer is now aware that it is started by a remote shell
+  (`-remsh`), in which case the traces will be sent to the remote group_leader
+  to make the traces visible in the remote shell.
+
+  Own Id: OTP-19648
+  Related Id(s): PR-9589
+
+- A User's Guide to `dbg` is now available in the documentation.
+
+  Own Id: OTP-19655
+  Related Id(s): PR-9853
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of runtime_tools-2.3
+>
+> erts-16.0, kernel-10.0, mnesia-4.12, stdlib-6.0
+
+# snmp-5.19.1
+
+The snmp-5.19.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Using ASN.1 generated code for decode/encode of basic types, starting with
+  Counter64.
+
+  Own Id: OTP-19619
+  Related Id(s): GH-5756, PR-9869
+
+## Improvements and New Features
+
+- Reworked the timer handling of the (SNMP) manager start notification feature.
+
+  Own Id: OTP-19696
+  Related Id(s): PR-10014
+
+- Added missing specs to already documented functions.
+
+  Own Id: OTP-19723
+  Related Id(s): PR-10087
+
+> #### Full runtime dependencies of snmp-5.19.1
+>
+> asn1-5.4, crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12,
+> runtime_tools-1.8.14, stdlib-5.0
+
+# ssl-11.4
+
+Note! The ssl-11.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+       -- public_key-1.18.3 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- The sender side is now closed if an error occurs on the socket.
+
+  Own Id: OTP-19694
+  Related Id(s): PR-10011
+
+- The PEM cache process no longer crashes when a configured file has been
+  deleted before it could be read.
+
+  Own Id: OTP-19698
+  Related Id(s): GH-9638, PR-10019
+
+- Corrected handling of ssl:sockname/1 for DTLS, so that it now will return
+  the correct result in all situations.
+
+  Own Id: OTP-19736
+  Related Id(s): GH-10097, PR-10108
+
+- Rendering of some tables in the documentation has been improved.
+
+  Own Id: OTP-19752
+  Related Id(s): PR-10142
+
+## Improvements and New Features
+
+- Added support for quantum crypto signature algorithm ML-DSA (ssl and
+  public_key) and key exchange algorithm ML-KEM (ssl).
+
+  Own Id: OTP-19552
+  Related Id(s): PR-10004
+
+  *** HIGHLIGHT ***
+
+- Now allowing`send/2 `to buffer data when using sockets backend. Use
+  'high_watermark' and 'low_watermark' to steer buffering as gen_tcp does.
+
+  Own Id: OTP-19651
+  Related Id(s): PR-9879
+
+- Now allowing the PSK identity to be the empty string in TLS-1.2 for
+  compatibility reasons. It is allowed according to the spec, although providing
+  a proper value makes more sense.
+
+  Own Id: OTP-19688
+  Related Id(s): PR-9843
+
+- TLS server now fails early for supplied PEM file issues, such as the file not
+  being found.
+
+  Own Id: OTP-19706
+  Related Id(s): GH-9631, PR-10046
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of ssl-11.4
+>
+> crypto-5.7, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.18.3,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-7.1
+
+Note! The stdlib-7.1 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-16.0.3 (first satisfied in OTP 28.0.3)
+
+## Fixed Bugs and Malfunctions
+
+- The `save_module/1` command in the shell now saves both the locally defined
+  records and the imported records using the `rr/1` command.
+
+  Own Id: OTP-19647
+  Related Id(s): GH-9816, PR-9897
+
+- It's now possible to write `lists:map(fun is_atom/1, [])` or
+  `lists:map(fun my_func/1, [])` in the shell, instead of
+  `lists:map(fun erlang:is_atom/1, [])` or
+  `lists:map(fun shell_default:my_func/1, [])`.
+
+  Own Id: OTP-19649
+  Related Id(s): GH-9771, PR-9898
+
+- The shell no longer crashes when requesting to auto-complete map keys
+  containing non-atoms.
+
+  Own Id: OTP-19659
+  Related Id(s): PR-9896
+
+- A remote shell can now exit by closing the input stream, without terminating
+  the remote node.
+
+  Own Id: OTP-19667
+  Related Id(s): PR-9912
+
+- Fixed guard check for `is_record/2` in the linter.
+
+  Own Id: OTP-19704
+  Related Id(s): GH-10020, PR-10034
+
+## Improvements and New Features
+
+- Added a flag option `shell_hints` and function shell:hints/1. You can now
+  disable the warning in the shell when a command is taking longer than 5
+  seconds.
+
+  Own Id: OTP-19759
+  Related Id(s): PR-10121
+
+> #### Full runtime dependencies of stdlib-7.1
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-10.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# syntax_tools-4.0.1
+
+The syntax_tools-4.0.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed zip generator crash in `annotate_bindings/1`
+
+  Own Id: OTP-19731
+  Related Id(s): GH-10102, PR-10104
+
+> #### Full runtime dependencies of syntax_tools-4.0.1
+>
+> compiler-9.0, erts-16.0, kernel-10.3, stdlib-7.0
+
+# tools-4.1.3
+
+The tools-4.1.3 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Fixed some deprecations for newer emacs versions.
+
+  Own Id: OTP-19726
+  Related Id(s): PR-10106
+
+> #### Full runtime dependencies of tools-4.1.3
+>
+> compiler-8.5, erts-15.0, erts-15.0, kernel-10.0, runtime_tools-2.1, stdlib-6.0
+
+# wx-2.5.2
+
+The wx-2.5.2 application can be applied independently of other applications on a
+full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- NIFs and linked-in drivers are now loadable when running in an Erlang source
+  tree on Windows.
+
+  Own Id: OTP-19686
+  Related Id(s): PR-9969
+
+- Now avoiding that wx crashes the VM when running on OTP28+ due to one of the
+  new compiler hardening options.
+
+  Own Id: OTP-19724
+  Related Id(s): GH-9972, PR-10084
+
+## Improvements and New Features
+
+- `wx` was missing licenses that come from OpenGL documentation and wxWidgets
+  documentation.
+
+  Own Id: OTP-19735
+  Related Id(s): PR-10094
+
+> #### Full runtime dependencies of wx-2.5.2
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# xmerl-2.1.6
+
+The xmerl-2.1.6 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Corrected the bug that comments couldn't be exported.
+
+  `#xmlComment` elements is now exported when calling `export/3` or
+  `export_simple/3` and similar functions. Top level comments will only be
+  exported if one creates and export elements as a document.
+
+  Own Id: OTP-19757
+  Related Id(s): GH-5697, PR-9796
+
+> #### Full runtime dependencies of xmerl-2.1.6
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Alberto Sartori, Alexander Clouter, ausimian, Danil Zagoskin, dependabotbot,
+Dmytro Lytovchenko, Dunya Kokoschka, Håkan Stenholm, Hans Svensson, Jan Uhlig,
+Magnus Henoch, Mend Renovate, Paulo Tomé, Rodolfo Carvalho, Savvas Nicholas,
+Simon Oulevay, Tomas Abrahamsson, Tom Schuster, Yaroslav Maslennikov
+
