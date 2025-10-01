@@ -70,11 +70,11 @@ jobs:
       if: runner.os == 'macOS'
       run: >
         brew install coreutils make &&
-        gmake -k tests
+        gmake -k ci-setup tests
 
     - name: Run tests (Unix)
       if: runner.os != 'macOS'
-      run: make -k tests
+      run: make -k ci-setup tests
 
     - name: Upload logs
       uses: actions/upload-artifact@v4
@@ -86,7 +86,7 @@ jobs:
 #          !logs/**/log_private
 
   dialyze:
-    name: Run Dialyzer using ${{ needs.prepare-unix.outputs.latest }}
+    name: Dialyzer (${{ needs.prepare-unix.outputs.latest }})
     needs: prepare-unix
     runs-on: ubuntu-latest
     steps:
@@ -140,13 +140,14 @@ jobs:
         } >> "$GITHUB_OUTPUT"
 
   test-windows:
-    name: Windows
+    name: Tests
     needs: prepare-windows
     strategy:
       fail-fast: false
       matrix:
         erlang: ${{ fromJson(needs.prepare-windows.outputs.erlang) }}
-    runs-on: windows-latest
+        os: [windows-latest]
+    runs-on: ${{ matrix.os }}
     env:
       COWBOY_QUICER: 0
       GUN_QUICER: 0
@@ -172,7 +173,7 @@ jobs:
 
     - name: Run tests
       shell: msys2 {0}
-      run: PATH=$INSTALL_DIR_FOR_OTP/bin:$PATH make -k ci-windows-${{ matrix.erlang }}
+      run: PATH=$INSTALL_DIR_FOR_OTP/bin:$PATH make -k ci-setup tests
 
     - name: Upload logs
       uses: actions/upload-artifact@v4
