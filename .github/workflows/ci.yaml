@@ -72,6 +72,10 @@ jobs:
       matrix:
         erlang: ${{ fromJson(needs.prepare-unix.outputs.erlang) }}
         os: [ubuntu-latest, macos-14]
+        exclude:
+          # MacOS support in setup-beam starts at OTP-25.
+          - erlang: OTP-24.3.4.17
+            os: macos-14
     runs-on: ${{ matrix.os }}
     steps:
 
