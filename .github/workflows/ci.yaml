@@ -46,6 +46,24 @@ jobs:
           echo EOF
         } >> "$GITHUB_OUTPUT"
 
+  dialyze:
+    name: Dialyzer (${{ needs.prepare-unix.outputs.latest }})
+    needs: prepare-unix
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Erlang/OTP
+      uses: erlef/setup-beam@v1
+      with:
+        otp-version: '${{ needs.prepare-unix.outputs.latest }}'
+        version-type: strict
+
+    - name: Run Dialyzer
+      run: make dialyze
+
   test-unix:
     name: Tests
     needs: prepare-unix
@@ -84,24 +102,6 @@ jobs:
         path: |
           logs/
 #          !logs/**/log_private
-
-  dialyze:
-    name: Dialyzer (${{ needs.prepare-unix.outputs.latest }})
-    needs: prepare-unix
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Install Erlang/OTP
-      uses: erlef/setup-beam@v1
-      with:
-        otp-version: '${{ needs.prepare-unix.outputs.latest }}'
-        version-type: strict
-
-    - name: Run Dialyzer
-      run: make dialyze
 
   prepare-windows:
     name: Prepare Windows
