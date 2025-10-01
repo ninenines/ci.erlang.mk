@@ -46,19 +46,62 @@ jobs:
           echo EOF
         } >> "$GITHUB_OUTPUT"
 
-  check:
-    name: Unix
+  test-unix:
+    name: Run tests using ${{ matrix.erlang }} on ${{ matrix.os }}
     needs: prepare-unix
     strategy:
       fail-fast: false
       matrix:
         erlang: ${{ fromJson(needs.prepare-unix.outputs.erlang) }}
         os: [ubuntu-latest, macos-14]
-    uses: ./.github/workflows/unix-ci.yaml
-    with:
-      latest: ${{ needs.prepare-unix.outputs.latest }}
-      erlang: ${{ matrix.erlang }}
-      os: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Erlang/OTP
+      uses: erlef/setup-beam@v1
+      with:
+        otp-version: '${{ matrix.erlang }}'
+        version-type: strict
+
+    - name: Run tests (macOS)
+      if: runner.os == 'macOS'
+      run: >
+        brew install coreutils make &&
+        gmake -k check
+
+    - name: Run tests (Unix)
+      if: runner.os != 'macOS'
+      run: make -k check
+
+    - name: Upload logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: Common Test logs (${{ matrix.erlang }} ${{ runner.os }})
+        path: |
+          logs/
+#          !logs/**/log_private
+
+  dialyze:
+    name: Run Dialyzer using ${{ needs.prepare-unix.outputs.latest }}
+    needs: prepare-unix
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Erlang/OTP
+      uses: erlef/setup-beam@v1
+      with:
+        otp-version: '${{ needs.prepare-unix.outputs.latest }}'
+        version-type: strict
+
+    - name: Run Dialyzer
+      run: make dialyze
 
   prepare-windows:
     name: Prepare Windows
