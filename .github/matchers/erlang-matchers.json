@@ -1,0 +1,43 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "erlc-warning-matcher",
+      "pattern": [
+        {
+          "regexp": "^(.+):(\\d+):(\\d+): ([wW]arning): (.+)$$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      ]
+    },
+    {
+      "owner": "erlc-error-matcher",
+      "pattern": [
+        {
+          "regexp": "^(.+):(\\d+):(\\d+): (.+)$$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        }
+      ]
+    },
+    {
+      "owner": "ct-problem-matcher",
+      "pattern": [
+        {
+          "regexp": "^(.+) failed on line (\\d+)$$",
+          "file": 1,
+          "line": 2
+        },
+        {
+          "regexp": "^Reason: (.+)$$",
+          "message": 1,"loop": true
+        }
+      ]
+    }
+  ]
+}

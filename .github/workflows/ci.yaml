@@ -61,6 +61,16 @@ jobs:
         otp-version: '${{ needs.prepare-unix.outputs.latest }}'
         version-type: strict
 
+    - name: Checkout ci.erlang.mk
+      uses: actions/checkout@v4
+      with:
+        repository: ninenines/ci.erlang.mk
+        ref: master
+        path: ci.erlang.mk
+
+    - name: Install Erlang problem matchers
+      run: echo "::add-matcher::ci.erlang.mk/.github/matchers/erlang-matchers.json"
+
     - name: Run Dialyzer
       run: make dialyze
 
@@ -87,6 +97,16 @@ jobs:
       with:
         otp-version: '${{ matrix.erlang }}'
         version-type: strict
+
+    - name: Checkout ci.erlang.mk
+      uses: actions/checkout@v4
+      with:
+        repository: ninenines/ci.erlang.mk
+        ref: master
+        path: ci.erlang.mk
+
+    - name: Install Erlang problem matchers
+      run: echo "::add-matcher::ci.erlang.mk/.github/matchers/erlang-matchers.json"
 
     - name: Run tests (macOS)
       if: runner.os == 'macOS'
@@ -165,6 +185,16 @@ jobs:
       with:
         otp-version: '${{ matrix.erlang }}'
         version-type: loose
+
+    - name: Checkout ci.erlang.mk
+      uses: actions/checkout@v4
+      with:
+        repository: ninenines/ci.erlang.mk
+        ref: master
+        path: ci.erlang.mk
+
+    - name: Install Erlang problem matchers
+      run: echo "::add-matcher::ci.erlang.mk/.github/matchers/erlang-matchers.json"
 
     - name: Setup MSYS2
       uses: msys2/setup-msys2@v2
