@@ -35,7 +35,27 @@
         },
         {
           "regexp": "^Reason: (.+)$$",
-          "message": 1,"loop": true
+          "message": 1
+        }
+      ]
+    },
+    {
+      "owner": "eunit-problem-matcher",
+      "pattern": [
+        {
+          "regexp": "^.+: .+...\\*failed\\*$$"
+        },
+        {
+          "regexp": "^in function .+ \\((.+), line (\\d+)\\)$$",
+          "file": 1,
+          "line": 2
+        },
+        {
+          "regexp": "^in call from .+$$"
+        },
+        {
+          "regexp": "^\\*\\*error:(.+)$$",
+          "message": 1
         }
       ]
     }
