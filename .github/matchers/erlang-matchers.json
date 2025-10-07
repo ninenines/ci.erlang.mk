@@ -4,7 +4,7 @@
       "owner": "erlc-warning-matcher",
       "pattern": [
         {
-          "regexp": "^(.+):(\\d+):(\\d+): ([wW]arning): (.+)$$",
+          "regexp": "^(\\S+):(\\d+):(\\d+): ([wW]arning): (.+)$$",
           "file": 1,
           "line": 2,
           "column": 3,
@@ -17,7 +17,7 @@
       "owner": "erlc-error-matcher",
       "pattern": [
         {
-          "regexp": "^(.+):(\\d+):(\\d+): (.+)$$",
+          "regexp": "^(\\S+):(\\d+):(\\d+): (.+)$$",
           "file": 1,
           "line": 2,
           "column": 3,
@@ -29,7 +29,7 @@
       "owner": "ct-problem-matcher",
       "pattern": [
         {
-          "regexp": "^(.+) failed on line (\\d+)$$",
+          "regexp": "^(\\S+) failed on line (\\d+)$$",
           "file": 1,
           "line": 2
         },
@@ -43,7 +43,7 @@
       "owner": "eunit-problem-matcher",
       "pattern": [
         {
-          "regexp": "^.+: .+...\\*failed\\*$$"
+          "regexp": "^\\S+: .+...\\*failed\\*$$"
         },
         {
           "regexp": "^in function .+ \\((.+), line (\\d+)\\)$$",
