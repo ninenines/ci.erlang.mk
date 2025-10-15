@@ -133,6 +133,10 @@ jobs:
       matrix:
         erlang: ${{ fromJson(needs.prepare.outputs.erlang) }}
         os: [windows-latest]
+        exclude:
+          # Windows doesn't have master builds.
+          - erlang: master
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     env:
       COWBOY_QUICER: 0
