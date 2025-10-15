@@ -11,8 +11,8 @@ env:
 
 jobs:
 
-  prepare-unix:
-    name: Prepare Unix
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     outputs:
       erlang: ${{ steps.versions.outputs.erlang }}
@@ -47,8 +47,8 @@ jobs:
         } >> "$GITHUB_OUTPUT"
 
   dialyze:
-    name: Dialyzer (${{ needs.prepare-unix.outputs.latest }})
-    needs: prepare-unix
+    name: Dialyzer (${{ needs.prepare.outputs.latest }})
+    needs: prepare
     runs-on: ubuntu-latest
     steps:
 
@@ -58,7 +58,7 @@ jobs:
     - name: Install Erlang/OTP
       uses: erlef/setup-beam@v1
       with:
-        otp-version: '${{ needs.prepare-unix.outputs.latest }}'
+        otp-version: '${{ needs.prepare.outputs.latest }}'
         version-type: strict
 
     - name: Checkout ci.erlang.mk repository
@@ -75,11 +75,11 @@ jobs:
 
   test-unix:
     name: Tests
-    needs: prepare-unix
+    needs: prepare
     strategy:
       fail-fast: false
       matrix:
-        erlang: ${{ fromJson(needs.prepare-unix.outputs.erlang) }}
+        erlang: ${{ fromJson(needs.prepare.outputs.erlang) }}
         os: [ubuntu-latest, macos-14]
         exclude:
           # MacOS support in setup-beam starts at OTP-25.
@@ -125,49 +125,13 @@ jobs:
           logs/
 #          !logs/**/log_private
 
-  prepare-windows:
-    name: Prepare Windows
-    runs-on: windows-latest
-    outputs:
-      erlang: ${{ steps.versions.outputs.erlang }}
-    steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Checkout ci.erlang.mk repository
-      uses: actions/checkout@v4
-      with:
-        repository: ninenines/ci.erlang.mk
-        path: deps/ci.erlang.mk
-
-    - name: Setup MSYS2
-      uses: msys2/setup-msys2@v2
-      with:
-        msystem: mingw64
-        update: true
-        install: >-
-          git
-          make
-          mingw-w64-x86_64-jq
-
-    - name: Output Erlang/OTP versions
-      id: versions
-      shell: msys2 {0}
-      run: |
-        {
-          echo "erlang<<EOF"
-          make ci-windows-list | jq -Rn '[inputs]'
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
-
   test-windows:
     name: Tests
-    needs: prepare-windows
+    needs: prepare
     strategy:
       fail-fast: false
       matrix:
-        erlang: ${{ fromJson(needs.prepare-windows.outputs.erlang) }}
+        erlang: ${{ fromJson(needs.prepare.outputs.erlang) }}
         os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
