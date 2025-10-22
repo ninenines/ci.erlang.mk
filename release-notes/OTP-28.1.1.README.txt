@@ -1,0 +1,150 @@
+Patch Package:           OTP 28.1.1
+Git Tag:                 OTP-28.1.1
+Date:                    2025-10-20
+Trouble Report Id:       OTP-19768, OTP-19771, OTP-19774, OTP-19780,
+                         OTP-19790, OTP-19791, OTP-19792, OTP-19796,
+                         OTP-19799, OTP-19806
+Seq num:                 ERERL-1261, ERIERL-1251, ERIERL-1264,
+                         GH-10150, GH-10191, GH-10212, GH-10217,
+                         PR-10182, PR-10194, PR-10201, PR-10221,
+                         PR-10241, PR-10245, PR-10248, PR-10249,
+                         PR-10274, PR-9970
+System:                  OTP
+Release:                 28
+Application:             diameter-2.5.2, erts-16.1.1, kernel-10.4.1,
+                         ssl-11.4.1, xmerl-2.1.7
+Predecessor:             OTP 28.1
+
+Check out the git tag OTP-28.1.1, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-28.1.1
+
+## Improvements and New Features
+
+- When building OTP, some applications may be skipped due to lacking
+  dependencies, or due to user choice. Such skipped applications are excluded
+  from the docs build step and a placeholder page is displayed in their stead.
+
+  Own Id: OTP-19771
+  Related Id(s): ERIERL-1251, PR-10194
+
+# diameter-2.5.2
+
+The diameter-2.5.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Added documentation about 'proxy' and 'resend' options in
+  diameter:handle_request/3
+
+  Own Id: OTP-19768
+  Related Id(s): GH-10150, PR-10182
+
+> #### Full runtime dependencies of diameter-2.5.2
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# erts-16.1.1
+
+The erts-16.1.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed the `erl` documentation of the default timewarp mode used.
+
+  Own Id: OTP-19790
+  Related Id(s): PR-9970
+
+- The `erlang:suspend_process()` BIFs failed to suspend processes currently
+  executing on dirty schedulers.
+
+  Own Id: OTP-19799
+  Related Id(s): PR-10241
+
+> #### Full runtime dependencies of erts-16.1.1
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.4.1
+
+The kernel-10.4.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change group.erl will not crash when receiving unknown message.
+
+  Own Id: OTP-19796
+  Related Id(s): ERIERL-1264, PR-10248
+
+> #### Full runtime dependencies of kernel-10.4.1
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# ssl-11.4.1
+
+Note! The ssl-11.4.1 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+       -- public_key-1.18.3 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- Fixed so that sending of application data will adhere to max_fragment_length.
+  This was broken in OTP-27 release by an optimization.
+
+  Own Id: OTP-19774
+  Related Id(s): GH-10191, PR-10201
+
+- PR-10046 put to hard requirements on key file content. Make sure same file can
+  be used as keyfile and certfile
+
+  Own Id: OTP-19780
+  Related Id(s): GH-10212, GH-10217, PR-10221
+
+- Assert that hello extensions are unique and send an illegal parameter alert if
+  they are not.
+
+  Own Id: OTP-19791
+  Related Id(s): PR-10245
+
+- Avoid sending an internal message to the user process in conjunction with
+  handling a key update.
+
+  Own Id: OTP-19806
+  Related Id(s): PR-10274
+
+> #### Full runtime dependencies of ssl-11.4.1
+>
+> crypto-5.7, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.18.3,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# xmerl-2.1.7
+
+The xmerl-2.1.7 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The XSD validation failed due to not handling the optional text blocks
+  correctly in an XSD complex type with attribute `mixed=true`.
+
+  Own Id: OTP-19792
+  Related Id(s): PR-10249, ERERL-1261
+
+> #### Full runtime dependencies of xmerl-2.1.7
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Daniel Gorin, Dmytro Lytovchenko, Jean-Philippe Jodoin
+
