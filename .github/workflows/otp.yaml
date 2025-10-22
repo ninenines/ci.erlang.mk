@@ -1,0 +1,25 @@
+name: Update Erlang/OTP versions
+
+on:
+  workflow_dispatch:
+  schedule:
+      ## Every day at 4am.
+      - cron: 0 4 * * *
+
+jobs:
+
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configure Git identity
+      run: |
+        git config --global user.name "LeBot Hoguin"
+        git config --global user.email "essen+bot@ninenines.eu"
+
+    - name: Run update_all.sh
+      run: ./update_all.sh

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 rm -rf ./otp
 git clone https://github.com/erlang/otp
@@ -35,7 +35,14 @@ done
 
 rm VERSIONS
 
+# Immediately stop successfully when nothing was done.
+git diff --quiet && exit 0
+
 git add early-plugins.mk release-notes/
 # Only commit when there are changes to be pushed.
 git diff --cached --quiet || git commit -m "Automatically updated OTP versions"
-git push upstream master
+git push origin master
+
+# We exit with an error so an email is sent for verification
+# that everything the script did worked as intended.
+exit 17
