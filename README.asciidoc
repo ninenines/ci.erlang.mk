@@ -4,8 +4,7 @@ An https://erlang.mk/[Erlang.mk] plugin that maintains a list
 of Erlang/OTP versions in their most recent patch version. It
 allows configuring a project as supporting `OTP-19+`, for example,
 and automatically fills in the `CI_OTP` or other relevant variables
-with the most up to date list of versions. It also provides a target
-for automatically deleting older patch releases.
+with the most up to date list of versions.
 
 [source,make]
 ----
@@ -21,5 +20,12 @@ include erlang.mk
 ----
 
 Please consult 'early-plugins.mk' for a detailed list of
-the allowed values. You may also define your own values
+allowed values. You may also define your own values
 by creating the corresponding variable.
+
+This project also contains GitHub Actions workflows that can
+be used to automatically test Erlang.mk applications. Note
+that in this scenario the OTP versions used are not built
+by the plugin; instead the erlef/setup-beam action is used.
+But this plugin does provide the list of OTP releases to
+test against.
