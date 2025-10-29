@@ -1,0 +1,158 @@
+Patch Package:           OTP 27.3.4.4
+Git Tag:                 OTP-27.3.4.4
+Date:                    2025-10-28
+Trouble Report Id:       OTP-19768, OTP-19774, OTP-19790, OTP-19791,
+                         OTP-19792, OTP-19799, OTP-19803, OTP-19806,
+                         OTP-19813, OTP-19817, OTP-19818, OTP-19825
+Seq num:                 ERERL-1261, GH-10119, GH-10150, GH-10191,
+                         PR-10182, PR-10201, PR-10241, PR-10245,
+                         PR-10249, PR-10257, PR-10274, PR-10284,
+                         PR-10296, PR-9970
+System:                  OTP
+Release:                 27
+Application:             diameter-2.4.1.1, erts-15.2.7.3,
+                         ssl-11.2.12.3, syntax_tools-3.2.2.2,
+                         xmerl-2.1.3.2
+Predecessor:             OTP 27.3.4.3
+
+Check out the git tag OTP-27.3.4.4, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# diameter-2.4.1.1
+
+The diameter-2.4.1.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Added documentation about 'proxy' and 'resend' options in
+  diameter:handle_request/3
+
+  Own Id: OTP-19768
+  Related Id(s): GH-10150, PR-10182
+
+> #### Full runtime dependencies of diameter-2.4.1.1
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# erts-15.2.7.3
+
+The erts-15.2.7.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed the `erl` documentation of the default timewarp mode used.
+
+  Own Id: OTP-19790
+  Related Id(s): PR-9970
+
+- The `erlang:suspend_process()` BIFs failed to suspend processes currently
+  executing on dirty schedulers.
+
+  Own Id: OTP-19799
+  Related Id(s): PR-10241
+
+- When multiple processes called the same fun whose defining module was not
+  loaded, a `badfun` exception could sometimes occur in one of the calling
+  processes. This would only happen with the JIT runtime system.
+
+  Own Id: OTP-19803
+  Related Id(s): PR-10257
+
+> #### Full runtime dependencies of erts-15.2.7.3
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# ssl-11.2.12.3
+
+Note! The ssl-11.2.12.3 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Fixed so that sending of application data will adhere to max_fragment_length.
+  This was broken in OTP-27 release by an optimization.
+
+  Own Id: OTP-19774
+  Related Id(s): GH-10191, PR-10201
+
+- Assert that hello extensions are unique and send an illegal parameter alert if
+  they are not.
+
+  Own Id: OTP-19791
+  Related Id(s): PR-10245
+
+- Avoid sending an internal message to the user process in conjunction with
+  handling a key update.
+
+  Own Id: OTP-19806
+  Related Id(s): PR-10274
+
+- Graceful error handling added in negative test scenario.
+
+  Own Id: OTP-19813
+  Related Id(s): PR-10284
+
+- Handle duplicate change_cipher_spec message with an unexpected message alert
+  instead of failing later in corrupted state.
+
+  Own Id: OTP-19818
+  Related Id(s): PR-10296
+
+- Make sure TLS-1.3 protocol spec is followed, that is psk-hello extension is
+  guaranteed to be included as the last extension in the list of client hello
+  extensions and internal hello message truncation in handshake history is
+  handled correctly, the previous handling could cause interoperability issues.
+
+  Own Id: OTP-19825
+  Related Id(s): PR-10296
+
+> #### Full runtime dependencies of ssl-11.2.12.3
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# syntax_tools-3.2.2.2
+
+The syntax_tools-3.2.2.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Annotate map comprehensions and generators
+
+  Own Id: OTP-19817
+  Related Id(s): GH-10119
+
+> #### Full runtime dependencies of syntax_tools-3.2.2.2
+>
+> compiler-7.0, erts-9.0, kernel-5.0, stdlib-4.0
+
+# xmerl-2.1.3.2
+
+The xmerl-2.1.3.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The XSD validation failed due to not handling the optional text blocks
+  correctly in an XSD complex type with attribute `mixed=true`.
+
+  Own Id: OTP-19792
+  Related Id(s): PR-10249, ERERL-1261
+
+> #### Full runtime dependencies of xmerl-2.1.3.2
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Daniel Gorin, Jean-Philippe Jodoin
+
