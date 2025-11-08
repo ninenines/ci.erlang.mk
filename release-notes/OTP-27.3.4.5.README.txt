@@ -1,0 +1,75 @@
+Patch Package:           OTP 27.3.4.5
+Git Tag:                 OTP-27.3.4.5
+Date:                    2025-11-07
+Trouble Report Id:       OTP-19828, OTP-19835, OTP-19839
+Seq num:                 ERIERL-1273, PR-10242, PR-10333, PR-10350
+System:                  OTP
+Release:                 27
+Application:             inets-9.3.2.2, ssh-5.2.11.4, ssl-11.2.12.4
+Predecessor:             OTP 27.3.4.4
+
+Check out the git tag OTP-27.3.4.5, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# inets-9.3.2.2
+
+The inets-9.3.2.2 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed uri_string:uri_string() to string() type specs inside httpc.erl module.
+
+  Own Id: OTP-19835
+  Related Id(s): PR-10242
+
+> #### Full runtime dependencies of inets-9.3.2.2
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# ssh-5.2.11.4
+
+The ssh-5.2.11.4 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change user space buffers are used to limit ssh hello message size
+  instead of kernel buffers
+
+  Own Id: OTP-19839
+  Related Id(s): ERIERL-1273, PR-10350
+
+> #### Full runtime dependencies of ssh-5.2.11.4
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.12.4
+
+Note! The ssl-11.2.12.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Correct documentation for fail_if_no_peer_cert option.
+
+  Own Id: OTP-19828
+  Related Id(s): PR-10333
+
+> #### Full runtime dependencies of ssl-11.2.12.4
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+Marcelino Alberdi Pereira
+
