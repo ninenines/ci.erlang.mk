@@ -1,0 +1,73 @@
+Patch Package:           OTP 27.3.4.6
+Git Tag:                 OTP-27.3.4.6
+Date:                    2025-11-14
+Trouble Report Id:       OTP-19814, OTP-19843
+Seq num:                 PR-10353
+System:                  OTP
+Release:                 27
+Application:             erts-15.2.7.4, kernel-10.2.7.3, wx-2.4.3.1
+Predecessor:             OTP 27.3.4.5
+
+Check out the git tag OTP-27.3.4.6, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# erts-15.2.7.4
+
+The erts-15.2.7.4 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Improvements and New Features
+
+- Option(s) to create `gen_tcp` and `socket` sockets with protocol IPPROTO_MPTCP
+  has been implemented.
+
+  See functions gen_tcp:listen/2, gen_tcp:connect/4 and the type
+  socket:protocol/0.
+
+  Own Id: OTP-19814
+
+> #### Full runtime dependencies of erts-15.2.7.4
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.2.7.3
+
+Note! The kernel-10.2.7.3 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.2.5 (first satisfied in OTP 27.3.2)
+
+## Improvements and New Features
+
+- Option(s) to create `gen_tcp` and `socket` sockets with protocol IPPROTO_MPTCP
+  has been implemented.
+
+  See functions gen_tcp:listen/2, gen_tcp:connect/4 and the type
+  socket:protocol/0.
+
+  Own Id: OTP-19814
+
+> #### Full runtime dependencies of kernel-10.2.7.3
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# wx-2.4.3.1
+
+The wx-2.4.3.1 application can be applied independently of other applications on
+a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed reading out of array bounds and potential memory leaks.
+
+  Own Id: OTP-19843
+  Related Id(s): PR-10353
+
+> #### Full runtime dependencies of wx-2.4.3.1
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
