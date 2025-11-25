@@ -1,0 +1,177 @@
+Patch Package:           OTP 28.2
+Git Tag:                 OTP-28.2
+Date:                    2025-11-24
+Trouble Report Id:       OTP-19813, OTP-19817, OTP-19818, OTP-19825,
+                         OTP-19830, OTP-19832, OTP-19839, OTP-19845,
+                         OTP-19846, OTP-19861, OTP-19865
+Seq num:                 ERIERL-1251, ERIERL-1273, GH-10119, GH-10354,
+                         PR-10284, PR-10290, PR-10296, PR-10339,
+                         PR-10350, PR-10358, PR-10359, PR-10386,
+                         PR-10396
+System:                  OTP
+Release:                 28
+Application:             compiler-9.0.3, erts-16.1.2, kernel-10.4.2,
+                         public_key-1.19, ssh-5.3.4, ssl-11.4.2,
+                         syntax_tools-4.0.2
+Predecessor:             OTP 28.1.1
+
+Check out the git tag OTP-28.2, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# compiler-9.0.3
+
+The compiler-9.0.3 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed broken type inference for lists:mapfoldl/r.
+
+  Own Id: OTP-19845
+  Related Id(s): GH-10354, PR-10358
+
+> #### Full runtime dependencies of compiler-9.0.3
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# erts-16.1.2
+
+The erts-16.1.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a JIT bug that could miscompile equality tests on empty bitstrings.
+
+  Own Id: OTP-19846
+  Related Id(s): PR-10359
+
+- The documentation building code produced warnings during the build, if none of
+  the applications were skipped. The warnings were resolved.
+
+  Own Id: OTP-19865
+  Related Id(s): ERIERL-1251, PR-10396
+
+> #### Full runtime dependencies of erts-16.1.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# kernel-10.4.2
+
+The kernel-10.4.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a race condition when registering the standard error process.
+
+  Own Id: OTP-19832
+  Related Id(s): PR-10290
+
+> #### Full runtime dependencies of kernel-10.4.2
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# public_key-1.19
+
+Note! The public_key-1.19 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+
+## Improvements and New Features
+
+- Added support for the Public-Key Infrastructure Certificate Management
+  Protocol (PKICMP) ASN.1 specification.
+
+  Own Id: OTP-19861
+  Related Id(s): PR-10386
+
+> #### Full runtime dependencies of public_key-1.19
+>
+> asn1-5.0, crypto-5.7, erts-13.0, kernel-8.0, stdlib-4.0
+
+# ssh-5.3.4
+
+The ssh-5.3.4 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- With this change user space buffers are used to limit ssh hello message size
+  instead of kernel buffers
+
+  Own Id: OTP-19839
+  Related Id(s): ERIERL-1273, PR-10350
+
+> #### Full runtime dependencies of ssh-5.3.4
+>
+> crypto-5.0, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.4.2
+
+Note! The ssl-11.4.2 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+       -- public_key-1.18.3 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- Graceful error handling added in negative test scenario.
+
+  Own Id: OTP-19813
+  Related Id(s): PR-10284
+
+- Handle duplicate change_cipher_spec message with an unexpected message alert
+  instead of failing later in corrupted state.
+
+  Own Id: OTP-19818
+  Related Id(s): PR-10296
+
+- Make sure TLS-1.3 protocol spec is followed, that is psk-hello extension is
+  guaranteed to be included as the last extension in the list of client hello
+  extensions and internal hello message truncation in handshake history is
+  handled correctly, the previous handling could cause interoperability issues.
+
+  Own Id: OTP-19825
+  Related Id(s): PR-10296
+
+- If two certificate massages are sent to the server generate an unexpected
+  message alert for the second one.
+
+  Own Id: OTP-19830
+  Related Id(s): PR-10339
+
+> #### Full runtime dependencies of ssl-11.4.2
+>
+> crypto-5.7, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.18.3,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# syntax_tools-4.0.2
+
+The syntax_tools-4.0.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Annotate map comprehensions and generators
+
+  Own Id: OTP-19817
+  Related Id(s): GH-10119
+
+> #### Full runtime dependencies of syntax_tools-4.0.2
+>
+> compiler-9.0, erts-16.0, kernel-10.3, stdlib-7.0
+
+# Thanks to
+
+Dmytro Lytovchenko, Nelson Vides
+
