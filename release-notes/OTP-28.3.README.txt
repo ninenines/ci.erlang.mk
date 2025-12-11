@@ -1,0 +1,844 @@
+Patch Package:           OTP 28.3
+Git Tag:                 OTP-28.3
+Date:                    2025-12-10
+Trouble Report Id:       OTP-16607, OTP-19066, OTP-19626, OTP-19717,
+                         OTP-19738, OTP-19743, OTP-19767, OTP-19769,
+                         OTP-19777, OTP-19787, OTP-19789, OTP-19794,
+                         OTP-19797, OTP-19798, OTP-19802, OTP-19803,
+                         OTP-19805, OTP-19808, OTP-19812, OTP-19814,
+                         OTP-19819, OTP-19821, OTP-19823, OTP-19828,
+                         OTP-19829, OTP-19833, OTP-19835, OTP-19836,
+                         OTP-19837, OTP-19840, OTP-19841, OTP-19843,
+                         OTP-19847, OTP-19848, OTP-19850, OTP-19852,
+                         OTP-19854, OTP-19855, OTP-19856, OTP-19857,
+                         OTP-19859, OTP-19862, OTP-19863, OTP-19867,
+                         OTP-19869, OTP-19870, OTP-19872, OTP-19873,
+                         OTP-19875, OTP-19876, OTP-19877, OTP-19878,
+                         OTP-19879, OTP-19880, OTP-19883, OTP-19884,
+                         OTP-19885, OTP-19888
+Seq num:                 ERIERL-1251, GH-10254, GH-10255, GH-10280,
+                         GH-10282, GH-10294, GH-10299, GH-10322,
+                         GH-10330, GH-10347, GH-10367, GH-10368,
+                         GH-10404, GH-10432, GH-8235, GH-8329,
+                         GH-9997, OTP-16608, OTP-19814, PR-10064,
+                         PR-10128, PR-10149, PR-10177, PR-10186,
+                         PR-10216, PR-10231, PR-10232, PR-10236,
+                         PR-10237, PR-10242, PR-10252, PR-10256,
+                         PR-10257, PR-10262, PR-10268, PR-10275,
+                         PR-10283, PR-10288, PR-10307, PR-10308,
+                         PR-10309, PR-10314, PR-10315, PR-10317,
+                         PR-10321, PR-10323, PR-10326, PR-10333,
+                         PR-10335, PR-10344, PR-10349, PR-10353,
+                         PR-10362, PR-10364, PR-10369, PR-10374,
+                         PR-10379, PR-10383, PR-10388, PR-10390,
+                         PR-10391, PR-10394, PR-10398, PR-10405,
+                         PR-10406, PR-10410, PR-10428, PR-10435,
+                         PR-10439, PR-10452, PR-8309, PR-9983
+System:                  OTP
+Release:                 28
+Application:             common_test-1.29.1, compiler-9.0.4,
+                         crypto-5.8, diameter-2.6,
+                         erl_interface-5.6.2, erts-16.2, eunit-2.10.1,
+                         inets-9.5, kernel-10.5, mnesia-4.25,
+                         os_mon-2.11.2, public_key-1.20, snmp-5.20,
+                         ssh-5.4, ssl-11.5, stdlib-7.2, wx-2.5.3
+Predecessor:             OTP 28.2
+
+Check out the git tag OTP-28.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# HIGHLIGHTS
+
+- Add support for MLKEM hybrid algorithms x25519mlkem768, secp384r1mlkem1024,
+  secp256r1mlkem768 in TLS-1.3
+
+  Own Id: OTP-19767
+  Application(s): ssl
+  Related Id(s): PR-10262
+
+- Support for the socket options TCP_KEEPCNT, TCP_KEEPIDLE, and TCP_KEEPINTVL
+  have been implemented for `gen_tcp`, as well as TCP_USER_TIMEOUT for both
+  `gen_tcp` and `socket`.
+
+  Own Id: OTP-19857
+  Application(s): erts, kernel
+  Related Id(s): PR-10390, OTP-19814
+
+- Add support in public_key and ssl for post quantum algorithm SLH-DSA.
+
+  Own Id: OTP-19867
+  Application(s): public_key, ssl
+  Related Id(s): PR-10398
+
+- Publish OpenVEX statements in https://erlang.org/download/vex/
+
+  OpenVEX statements contain the same information as the OTP advisories, with
+  the addition of vendor CVEs for which Erlang/OTP is not affected. This is
+  important to silence vulnerability scanners that may claim Erlang/OTP to be
+  vulnerable to vendor dependency projects, e.g., `openssl`.
+
+  OpenVEX statements will be published in https://erlang.org/download/vex/ where
+  there will be an OTP file per release, e.g.,
+  https://erlang.org/download/vex/otp-28.openvex.json.
+
+  Erlang/OTP publishes OpenVEX statements for all supported releases, that is,
+  as of today, OTP-26, OTP-27, and OTP-28.
+
+  The source SBOM tooling (oss-review-toolkit) has been updated to produce
+  source SBOM in SPDX v2.3 format, and the source SBOM now links OpenVEX
+  statements to a security external reference. This means that by simply
+  analyzing the source SBOM, everyone can further read the location of the
+  OpenVEX statements and further process them.
+
+  Own Id: OTP-19878
+  Application(s): otp
+  Related Id(s): PR-10428, PR-10452
+
+# POTENTIAL INCOMPATIBILITIES
+
+- Adjustment in ssh_file module allowing inclusion of Erlang/OTP license in test
+  files containing keys.
+
+  Own Id: OTP-19743
+  Application(s): ssh
+  Related Id(s): PR-10177
+
+# OTP-28.3
+
+## Fixed Bugs and Malfunctions
+
+- Broken sidebar application index, for all OTP applications, are restored.
+
+  Own Id: OTP-19877
+  Related Id(s): ERIERL-1251, PR-10410
+
+## Improvements and New Features
+
+- Updated the vendor dependencies SHA to improve the accuracy of the source SBOM
+  with `purl` pointing to the exact vendor commit that Erlang/OTP builds upon.
+
+  Own Id: OTP-19777
+  Related Id(s): PR-10216
+
+- OpenVEX statements has been added to rule out false positives on vendor
+  dependencies: CVE-2025-9230, CVE-2025-9231, CVE-2025-9232
+
+  Own Id: OTP-19802
+  Related Id(s): GH-10254, GH-10255, PR-10256
+
+- The `mnesia_registry` module will be removed in Erlang/OTP 29.
+
+  Own Id: OTP-19808
+  Related Id(s): PR-10275
+
+- Publish OpenVEX statements in https://erlang.org/download/vex/
+
+  OpenVEX statements contain the same information as the OTP advisories, with
+  the addition of vendor CVEs for which Erlang/OTP is not affected. This is
+  important to silence vulnerability scanners that may claim Erlang/OTP to be
+  vulnerable to vendor dependency projects, e.g., `openssl`.
+
+  OpenVEX statements will be published in https://erlang.org/download/vex/ where
+  there will be an OTP file per release, e.g.,
+  https://erlang.org/download/vex/otp-28.openvex.json.
+
+  Erlang/OTP publishes OpenVEX statements for all supported releases, that is,
+  as of today, OTP-26, OTP-27, and OTP-28.
+
+  The source SBOM tooling (oss-review-toolkit) has been updated to produce
+  source SBOM in SPDX v2.3 format, and the source SBOM now links OpenVEX
+  statements to a security external reference. This means that by simply
+  analyzing the source SBOM, everyone can further read the location of the
+  OpenVEX statements and further process them.
+
+  Own Id: OTP-19878
+  Related Id(s): PR-10428, PR-10452
+
+  *** HIGHLIGHT ***
+
+# common_test-1.29.1
+
+The common_test-1.29.1 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Updated the vendor dependencies SHA to improve the accuracy of the source SBOM
+  with `purl` pointing to the exact vendor commit that Erlang/OTP builds upon.
+
+  Own Id: OTP-19777
+  Related Id(s): PR-10216
+
+> #### Full runtime dependencies of common_test-1.29.1
+>
+> compiler-6.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-8.4, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2, ssh-4.0,
+> stdlib-4.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-9.0.4
+
+The compiler-9.0.4 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- For some function heads or `case` expressions with a huge number of clauses,
+  the compiler could spend an inordinate amount of time compiling the code.
+
+  Own Id: OTP-19797
+  Related Id(s): PR-10252
+
+- Passing a type for a fun as a macro argument would result in a "badly formed
+  argument" error message from the compiler. Example:
+
+      -module(test).
+      -define(FOO(X), X).
+      -type foo() :: ?FOO(fun(() -> ok)).
+
+  Compiling this module would result in the following error message:
+
+      test.erl:3:17: badly formed argument for macro 'FOO'
+      %    5| -type foo() :: ?FOO(fun(() -> ok)).
+      %
+
+  Own Id: OTP-19821
+  Related Id(s): GH-10280, PR-10309
+
+- In certain edge cases, the compiler could emit code that would do an unsafe
+  destructive update of a tuple. This has been corrected.
+
+  Own Id: OTP-19879
+  Related Id(s): GH-10367, PR-10435
+
+## Improvements and New Features
+
+- The compiler option `beam_debug_stack` combined with `beam_debug_info` will
+  attempt to make as many variables as possible visible in the debugger. The
+  option has no effect if given without `beam_debug_info`.
+
+  Own Id: OTP-19854
+  Related Id(s): PR-10374
+
+> #### Full runtime dependencies of compiler-9.0.4
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.8
+
+The crypto-5.8 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The deprecated function crypto:rand_uniform/2 has gotten a new replacement
+  function crypto:strong_rand_range/1. When implementing this the
+  documentation of `crypto` and `rand` has been rewritten a bit and improved.
+
+  Own Id: OTP-19841
+  Related Id(s): PR-10344
+
+## Improvements and New Features
+
+- You can now build OTP with OpenSSL 3.5 or later on windows.
+
+  Own Id: OTP-19848
+
+- Added SLH-DSA algorithms for sign/verify. Twelve variants supported in total;
+  all combinations of SHAKE or SHA2 hashing, with 128, 192 or 256 bits, and
+  fast(`f`) or small(`s`).
+
+  Own Id: OTP-19856
+  Related Id(s): PR-10268
+
+- Made `crypto:generate_key(dh, P, G, MaxPrivateKeyBitLength)` accept values
+  of `MaxPrivateKeyBitLength` to be equal or larger than the bit length of `P`.
+  If so, the maximum bit length is adjusted down to `P`'s bit length minus one.
+
+  Own Id: OTP-19872
+  Related Id(s): PR-10394
+
+> #### Full runtime dependencies of crypto-5.8
+>
+> erts-9.0, kernel-6.0, stdlib-3.9
+
+# diameter-2.6
+
+The diameter-2.6 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Add new option 'indirect_inherits' to diameter_make:codec/2
+
+  Own Id: OTP-19626
+  Related Id(s): GH-8235, PR-10149
+
+> #### Full runtime dependencies of diameter-2.6
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# erl_interface-5.6.2
+
+The erl_interface-5.6.2 application can be applied independently of other
+applications on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- Updated the vendor dependencies SHA to improve the accuracy of the source SBOM
+  with `purl` pointing to the exact vendor commit that Erlang/OTP builds upon.
+
+  Own Id: OTP-19777
+  Related Id(s): PR-10216
+
+- Updated MD5 implementation from OpenSSL 3.5.0 to 3.6.0
+
+  Own Id: OTP-19870
+  Related Id(s): PR-10405
+
+## Known Bugs and Problems
+
+- The `ei` API for decoding/encoding terms is not fully 64-bit compatible since
+  terms that have a representation on the external term format larger than 2 GB
+  cannot be handled.
+
+  Own Id: OTP-16607
+  Related Id(s): OTP-16608
+
+# erts-16.2
+
+The erts-16.2 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a build issue on modern compilers.
+
+  Own Id: OTP-19789
+  Related Id(s): PR-9983
+
+- When multiple processes called the same fun whose defining module was not
+  loaded, a `badfun` exception could sometimes occur in one of the calling
+  processes. This would only happen with the JIT runtime system.
+
+  Own Id: OTP-19803
+  Related Id(s): PR-10257
+
+- Fix a bug where Erlang/OTP tools could load a different boot script from CWD.
+
+  Own Id: OTP-19819
+  Related Id(s): PR-10317
+
+- Fixed a bug when more than one session traced the same BIF. Disabling tracing
+  for a BIF in one session could incorrectly disable tracing of the BIF in other
+  trace sessions as well.
+
+  Own Id: OTP-19840
+  Related Id(s): PR-10349
+
+- Fixed a slight performance regression in `erlang:binary_to_term/1,2`.
+
+  Own Id: OTP-19859
+  Related Id(s): GH-8329, PR-10383
+
+- Two socket related code warts found by PVS Studio has been fixed. One caused
+  `gen_tcp` to no convert the send error `econnaborted` to `econnreset` on
+  Windows. The other caused `socket:sendfile/*` to indicate the wrong error for
+  a bad `Offset`.
+
+  Own Id: OTP-19862
+  Related Id(s): PR-10362, PR-10388
+
+- Fixed bug causing VM crash if an Erlang process gets killed while executing
+  `re:run` with a (presumably) large subject string.
+
+  Own Id: OTP-19888
+  Related Id(s): GH-10432, PR-10439
+
+## Improvements and New Features
+
+- Updated the vendor dependencies SHA to improve the accuracy of the source SBOM
+  with `purl` pointing to the exact vendor commit that Erlang/OTP builds upon.
+
+  Own Id: OTP-19777
+  Related Id(s): PR-10216
+
+- Receive buffer allocation has been optimized for `socket` socket in that an
+  underutilized buffers' content is copied to a freshly allocated binary of the
+  right size instead of being reallocated.
+
+  This optimization was already implemented for the socket:recv/1 functions,
+  but now the same buffer stragegy is shared between all `socket` receive
+  operations.
+
+  Own Id: OTP-19794
+  Related Id(s): PR-10231
+
+- Option(s) to create `gen_tcp` and `socket` sockets with protocol IPPROTO_MPTCP
+  has been implemented.
+
+  See functions gen_tcp:listen/2, gen_tcp:connect/4 and the type
+  socket:protocol/0.
+
+  Own Id: OTP-19814
+
+- `erlc` will now limit the number of ports and processes when starting `erl` in
+  order to use less memory.
+
+  Own Id: OTP-19852
+  Related Id(s): PR-10364
+
+- Support for the socket options TCP_KEEPCNT, TCP_KEEPIDLE, and TCP_KEEPINTVL
+  have been implemented for `gen_tcp`, as well as TCP_USER_TIMEOUT for both
+  `gen_tcp` and `socket`.
+
+  Own Id: OTP-19857
+  Related Id(s): PR-10390, OTP-19814
+
+  *** HIGHLIGHT ***
+
+- Limit size of sctp_event_subscribe on Linux
+
+  Own Id: OTP-19863
+  Related Id(s): PR-10321
+
+- Updated MD5 implementation from OpenSSL 3.5.0 to 3.6.0
+
+  Own Id: OTP-19870
+  Related Id(s): PR-10405
+
+- Improved performance when doing `socket:accept` on the same socket from many
+  processes on large multi core systems under high rate of connections.
+  Mitigating performance regression seen since OTP 28.0.
+
+  Own Id: OTP-19873
+  Related Id(s): GH-10322, PR-10323
+
+- Updated STL version used.
+
+  Own Id: OTP-19876
+
+- Updated PCRE2 to 10.47. Also picked newer fix, from upstream PCRE2, to bug
+  that could cause benign random uninitialized data in exported regular
+  expressions.
+
+  Own Id: OTP-19880
+  Related Id(s): PR-10391
+
+> #### Full runtime dependencies of erts-16.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# eunit-2.10.1
+
+The eunit-2.10.1 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Improvements and New Features
+
+- The usages of deprecated slave module have been removed from the application.
+  The fixture clause for spawning a test node now accepts Args either as a
+  string or a list of strings (previously only a string was accepted).
+
+  Own Id: OTP-19738
+  Related Id(s): PR-10128
+
+> #### Full runtime dependencies of eunit-2.10.1
+>
+> erts-9.0, kernel-5.3, stdlib-6.0
+
+# inets-9.5
+
+The inets-9.5 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed uri_string:uri_string() to string() type specs inside httpc.erl module.
+
+  Own Id: OTP-19835
+  Related Id(s): PR-10242
+
+- Fixed a bug where request options were not applied to a https proxy
+  connection.
+
+  Own Id: OTP-19875
+  Related Id(s): GH-10368, PR-10369
+
+## Improvements and New Features
+
+- The usages of slave module in inets were removed. The httpd_bench_suite has
+  been updated for SSL testing and is not skipped anymore. The httpd_load_test
+  example has been removed completely as outdated.
+
+  Own Id: OTP-19717
+  Related Id(s): PR-10064
+
+- Replace a call to application:which_applications() in httpc:set_options/2 with
+  try...catch to reduce bottleneck.
+
+  Own Id: OTP-19884
+  Related Id(s): GH-10282, PR-10307
+
+> #### Full runtime dependencies of inets-9.5
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# kernel-10.5
+
+The kernel-10.5 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a shell crash when calling io:getopts() when user_drv process is not
+  responding/terminating
+
+  Own Id: OTP-19812
+  Related Id(s): PR-10283
+
+- logger:get_handler_config/0 will no longer crash if a logger handler is
+  removed concurrently with that call.
+
+  Own Id: OTP-19837
+  Related Id(s): GH-9997, PR-10308
+
+- Fixed a bug in the shell that made it incorrectly output a newline after the
+  output already containing a newline but followed by an asci escape sequence.
+
+  Own Id: OTP-19847
+  Related Id(s): GH-10299
+
+## Improvements and New Features
+
+- Receive buffer allocation has been optimized for `socket` socket in that an
+  underutilized buffers' content is copied to a freshly allocated binary of the
+  right size instead of being reallocated.
+
+  This optimization was already implemented for the socket:recv/1 functions,
+  but now the same buffer stragegy is shared between all `socket` receive
+  operations.
+
+  Own Id: OTP-19794
+  Related Id(s): PR-10231
+
+- Option(s) to create `gen_tcp` and `socket` sockets with protocol IPPROTO_MPTCP
+  has been implemented.
+
+  See functions gen_tcp:listen/2, gen_tcp:connect/4 and the type
+  socket:protocol/0.
+
+  Own Id: OTP-19814
+
+- Support for the socket options TCP_KEEPCNT, TCP_KEEPIDLE, and TCP_KEEPINTVL
+  have been implemented for `gen_tcp`, as well as TCP_USER_TIMEOUT for both
+  `gen_tcp` and `socket`.
+
+  Own Id: OTP-19857
+  Related Id(s): PR-10390, OTP-19814
+
+  *** HIGHLIGHT ***
+
+- Limit size of sctp_event_subscribe on Linux
+
+  Own Id: OTP-19863
+  Related Id(s): PR-10321
+
+> #### Full runtime dependencies of kernel-10.5
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# mnesia-4.25
+
+The mnesia-4.25 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Add missing documentation about mnesia:activity/4
+
+  Own Id: OTP-19769
+  Related Id(s): PR-10186
+
+- With this change mnesia will try to not leak internal messages to user
+  processes.
+
+  Own Id: OTP-19855
+  Related Id(s): GH-10347, PR-10379
+
+## Improvements and New Features
+
+- The `mnesia_registry` module will be removed in Erlang/OTP 29.
+
+  Own Id: OTP-19808
+  Related Id(s): PR-10275
+
+> #### Full runtime dependencies of mnesia-4.25
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# os_mon-2.11.2
+
+The os_mon-2.11.2 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a small documentation mistake in memsup
+
+  Own Id: OTP-19836
+  Related Id(s): GH-10330, PR-10308
+
+> #### Full runtime dependencies of os_mon-2.11.2
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# public_key-1.20
+
+Note! The public_key-1.20 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-5.8 (first satisfied in OTP 28.3)
+
+## Fixed Bugs and Malfunctions
+
+- ASN.1 Encoding and decoding of some extensions did not work, e.g.
+  `CRLEntryExtension`.
+
+  Own Id: OTP-19869
+  Related Id(s): GH-10404, PR-10406
+
+## Improvements and New Features
+
+- Add support in public_key and ssl for post quantum algorithm SLH-DSA.
+
+  Own Id: OTP-19867
+  Related Id(s): PR-10398
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of public_key-1.20
+>
+> asn1-5.0, crypto-5.8, erts-13.0, kernel-8.0, stdlib-4.0
+
+# snmp-5.20
+
+The snmp-5.20 application can be applied independently of other applications on
+a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where running snmp:config() from Elixir would crash due to
+  io:get_line/1 returning unexpected datatype.
+
+  Own Id: OTP-19883
+  Related Id(s): PR-10326
+
+## Improvements and New Features
+
+- Inherit ERL_DETERMINISTIC variable for compiling snmp_pdus_basic.beam.
+
+  Own Id: OTP-19885
+  Related Id(s): PR-10288
+
+> #### Full runtime dependencies of snmp-5.20
+>
+> asn1-5.4, crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12,
+> runtime_tools-1.8.14, stdlib-5.0
+
+# ssh-5.4
+
+The ssh-5.4 application can be applied independently of other applications on a
+full OTP 28 installation.
+
+## Improvements and New Features
+
+- Adjustment in ssh_file module allowing inclusion of Erlang/OTP license in test
+  files containing keys.
+
+  Own Id: OTP-19743
+  Related Id(s): PR-10177
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of ssh-5.4
+>
+> crypto-5.0, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.5
+
+Note! The ssl-11.5 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependencies have to be satisfied:
+       -- crypto-5.8 (first satisfied in OTP 28.3)
+       -- public_key-1.18.3 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- Setting the internal process links between TLS distribution processes has been
+  reviewed. In the TLS distribution test framework there were issues fixed, but
+  probably not in the TLS distribution module.
+
+  Own Id: OTP-19805
+  Related Id(s): PR-10232
+
+- Correct documentation for fail_if_no_peer_cert option.
+
+  Own Id: OTP-19828
+  Related Id(s): PR-10333
+
+## Improvements and New Features
+
+- Add support for MLKEM hybrid algorithms x25519mlkem768, secp384r1mlkem1024,
+  secp256r1mlkem768 in TLS-1.3
+
+  Own Id: OTP-19767
+  Related Id(s): PR-10262
+
+  *** HIGHLIGHT ***
+
+- Property based test needed to compare raw handshakes, that is some utility
+  decoding needs to be converted back.
+
+  Own Id: OTP-19829
+  Related Id(s): PR-10335
+
+- Add support in public_key and ssl for post quantum algorithm SLH-DSA.
+
+  Own Id: OTP-19867
+  Related Id(s): PR-10398
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of ssl-11.5
+>
+> crypto-5.8, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.18.3,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-7.2
+
+Note! The stdlib-7.2 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-16.0.3 (first satisfied in OTP 28.0.3)
+
+## Fixed Bugs and Malfunctions
+
+- When creating a tar archive using `erl_tar`, leading slashes would be kept
+  for filenames with up to 100 characters. The slash would be dropped for longer
+  filenames. This has been corrected to always keep the leading slash.
+
+  Own Id: OTP-19066
+  Related Id(s): PR-8309
+
+- For some function heads or `case` expressions with a huge number of clauses,
+  the compiler could spend an inordinate amount of time compiling the code.
+
+  Own Id: OTP-19797
+  Related Id(s): PR-10252
+
+- Passing a type for a fun as a macro argument would result in a "badly formed
+  argument" error message from the compiler. Example:
+
+      -module(test).
+      -define(FOO(X), X).
+      -type foo() :: ?FOO(fun(() -> ok)).
+
+  Compiling this module would result in the following error message:
+
+      test.erl:3:17: badly formed argument for macro 'FOO'
+      %    5| -type foo() :: ?FOO(fun(() -> ok)).
+      %
+
+  Own Id: OTP-19821
+  Related Id(s): GH-10280, PR-10309
+
+- Fixed an issue that prohibited the use of user defined functions within a
+  restricted shell.
+
+  Own Id: OTP-19833
+  Related Id(s): PR-10315
+
+- The deprecated function crypto:rand_uniform/2 has gotten a new replacement
+  function crypto:strong_rand_range/1. When implementing this the
+  documentation of `crypto` and `rand` has been rewritten a bit and improved.
+
+  Own Id: OTP-19841
+  Related Id(s): PR-10344
+
+- Fixed a bug in the shell where a reference to a locally defined function would
+  cause a crash.
+
+  Own Id: OTP-19850
+  Related Id(s): GH-10294
+
+## Improvements and New Features
+
+- You are now able to read the reference manual with man.
+
+  Own Id: OTP-19787
+  Related Id(s): PR-10237
+
+- Improved spec for ets:lookup_element/4.
+
+  Own Id: OTP-19798
+  Related Id(s): PR-10236
+
+- The `mnesia_registry` module will be removed in Erlang/OTP 29.
+
+  Own Id: OTP-19808
+  Related Id(s): PR-10275
+
+> #### Full runtime dependencies of stdlib-7.2
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-10.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# wx-2.5.3
+
+The wx-2.5.3 application can be applied independently of other applications on a
+full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix getting `wxImage` pixel values. For example, `wxImage:getRed(Image)`
+  returned the wrong value.
+
+  Creating OpenGL windows should now work again.
+
+  Own Id: OTP-19823
+  Related Id(s): PR-10314
+
+- Fixed reading out of array bounds and potential memory leaks.
+
+  Own Id: OTP-19843
+  Related Id(s): PR-10353
+
+## Improvements and New Features
+
+- Updated the vendor dependencies SHA to improve the accuracy of the source SBOM
+  with `purl` pointing to the exact vendor commit that Erlang/OTP builds upon.
+
+  Own Id: OTP-19777
+  Related Id(s): PR-10216
+
+> #### Full runtime dependencies of wx-2.5.3
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# Thanks to
+
+Alexandre Rodrigues, Andrew Bennett, Anton Thomasson, Dmytro Lytovchenko, jakob
+svenningsson, João Henrique Ferreira de Freitas, Marcelino Alberdi Pereira,
+Maria Scott, Marko Mindek, Michael Neumann, Stavros Aronis, Sundeep Katepalli,
+Svilen Ivanov, Tom, Vladislav Grishenko, wallacegibbon
+
