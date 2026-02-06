@@ -1,0 +1,162 @@
+Patch Package:           OTP 27.3.4.7
+Git Tag:                 OTP-27.3.4.7
+Date:                    2026-02-05
+Trouble Report Id:       OTP-19762, OTP-19795, OTP-19830, OTP-19845,
+                         OTP-19846, OTP-19890, OTP-19893, OTP-19896,
+                         OTP-19926, OTP-19948, OTP-19951
+Seq num:                 ERIERL-1260, ERIERL-1268, GH-10354, PR-10339,
+                         PR-10358, PR-10359, PR-10437, PR-10465,
+                         PR-10480, PR-10482, PR-10547, PR-10588,
+                         PR-10599
+System:                  OTP
+Release:                 27
+Application:             compiler-8.6.1.3, erts-15.2.7.5,
+                         megaco-4.7.2.1, mnesia-4.23.5.1,
+                         ssl-11.2.12.5, xmerl-2.1.3.3
+Predecessor:             OTP 27.3.4.6
+
+Check out the git tag OTP-27.3.4.7, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# compiler-8.6.1.3
+
+The compiler-8.6.1.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed broken type inference for lists:mapfoldl/r.
+
+  Own Id: OTP-19845
+  Related Id(s): GH-10354, PR-10358
+
+- Fix a compiler alias analysis bug that can generate unsafe code for repeated
+  binary segments.
+
+  Own Id: OTP-19951
+  Related Id(s): PR-10588
+
+> #### Full runtime dependencies of compiler-8.6.1.3
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# erts-15.2.7.5
+
+The erts-15.2.7.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a JIT bug that could miscompile equality tests on empty bitstrings.
+
+  Own Id: OTP-19846
+  Related Id(s): PR-10359
+
+- Fail the windows build properly when nsis is not recognised.
+
+  Own Id: OTP-19926
+  Related Id(s): PR-10547
+
+> #### Full runtime dependencies of erts-15.2.7.5
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# megaco-4.7.2.1
+
+The megaco-4.7.2.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The megaco_tcp module had debug unintentionally enabled.
+
+  Own Id: OTP-19896
+
+> #### Full runtime dependencies of megaco-4.7.2.1
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.23.5.1
+
+The mnesia-4.23.5.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug where mnesia:del_table_copy/3 could fail when deleting a node that
+  had tables which was not active anywhere.
+
+  Own Id: OTP-19890
+  Related Id(s): ERIERL-1268, PR-10482
+
+> #### Full runtime dependencies of mnesia-4.23.5.1
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# ssl-11.2.12.5
+
+Note! The ssl-11.2.12.5 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- Correct TLS-1.3 alert handling so server will always send the alert with the
+  encryption keys that the client is expecting, that is if for instance if
+  client certification fails the alert will be sent using application traffic
+  encryption keys.
+
+  Own Id: OTP-19795
+  Related Id(s): PR-10465
+
+- If two certificate massages are sent to the server generate an unexpected
+  message alert for the second one.
+
+  Own Id: OTP-19830
+  Related Id(s): PR-10339
+
+- Corrected app environment handling for session callback that was broken In
+  OTP-23.
+
+  Own Id: OTP-19893
+  Related Id(s): PR-10480
+
+- When preforming renegotiation, in TLS-1.2 or previous TLS versions,
+  max_frag_length should not be renegotiated the connection should adhere to
+  originally negotiated value, and if a value was not negotiated it shall not be
+  negotiated now either.
+
+  Own Id: OTP-19948
+  Related Id(s): PR-10599
+
+> #### Full runtime dependencies of ssl-11.2.12.5
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# xmerl-2.1.3.3
+
+The xmerl-2.1.3.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- XML regular expressions in XSD validation now handle `\s` and `\S` correctly.
+
+  Own Id: OTP-19762
+  Related Id(s): ERIERL-1260, PR-10437
+
+> #### Full runtime dependencies of xmerl-2.1.3.3
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Nelson Vides
+
