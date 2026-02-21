@@ -1,0 +1,157 @@
+Patch Package:           OTP 27.3.4.8
+Git Tag:                 OTP-27.3.4.8
+Date:                    2026-02-20
+Trouble Report Id:       OTP-19864, OTP-19962, OTP-19978, OTP-19981,
+                         OTP-19983, OTP-19988, OTP-19993
+Seq num:                 CVE-2026-21620, GH-10651, GH-10705, GH-8676,
+                         PR-10575, PR-10616, PR-10664, PR-10696,
+                         PR-10706, PR-10708, PR-10732
+System:                  OTP
+Release:                 27
+Application:             crypto-5.5.3.1, erts-15.2.7.6, ssh-5.2.11.5,
+                         stdlib-6.2.2.3, tftp-1.2.2.1
+Predecessor:             OTP 27.3.4.7
+
+Check out the git tag OTP-27.3.4.8, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# crypto-5.5.3.1
+
+The crypto-5.5.3.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed static linking of OpenSSL 3.5+ on Windows.
+
+  Own Id: OTP-19993
+  Related Id(s): PR-10732
+
+> #### Full runtime dependencies of crypto-5.5.3.1
+>
+> erts-9.0, kernel-5.3, stdlib-3.9
+
+# erts-15.2.7.6
+
+The erts-15.2.7.6 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug in ets:update_counter/4 and ets:update_element/4 accepting and
+  inserting a default tuple smaller than the `keypos` of the table. Such a tuple
+  without a key element would make the table internally inconsistent and might
+  lead to bad behavior at table access, like ERTS runtime crash.
+
+  Now a call to ets:update_counter/4 or ets:update_element/4 will fail with
+  `badarg` if the key does not exist in the table and the default tuple is too
+  small.
+
+  Own Id: OTP-19962
+  Related Id(s): PR-10616
+
+- A missing memory barrier when unlocking process locks could cause unexpected
+  behavior on architectures with weak memory ordering such as for example ARM.
+
+  Own Id: OTP-19978
+  Related Id(s): PR-10664
+
+- A process could fail to wake from hibernation when a non‑message signal
+  followed by a message signal arrived concurrently as the receiving process
+  hibernated. If the process had a large heap, triggering a dirty GC, the wakeup
+  could be lost.
+
+  This bug existed since OTP 27.0.
+
+  Own Id: OTP-19983
+  Related Id(s): GH-10651, PR-10696
+
+> #### Full runtime dependencies of erts-15.2.7.6
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# ssh-5.2.11.5
+
+The ssh-5.2.11.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix handling of the SSH "each side may guess" key-exchange mechanism as
+  defined in RFC 4253, Section 7.
+
+  Own Id: OTP-19864
+  Related Id(s): GH-8676, PR-10575
+
+> #### Full runtime dependencies of ssh-5.2.11.5
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# stdlib-6.2.2.3
+
+The stdlib-6.2.2.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug in ets:update_counter/4 and ets:update_element/4 accepting and
+  inserting a default tuple smaller than the `keypos` of the table. Such a tuple
+  without a key element would make the table internally inconsistent and might
+  lead to bad behavior at table access, like ERTS runtime crash.
+
+  Now a call to ets:update_counter/4 or ets:update_element/4 will fail with
+  `badarg` if the key does not exist in the table and the default tuple is too
+  small.
+
+  Own Id: OTP-19962
+  Related Id(s): PR-10616
+
+- For a function that started with a bracket-only pattern (such as `[]`), the
+  `?FUNCTION_ARITY` macro would evaluate to one less than the actual arity.
+
+  Own Id: OTP-19988
+  Related Id(s): GH-10705, PR-10708
+
+> #### Full runtime dependencies of stdlib-6.2.2.3
+>
+> compiler-5.0, crypto-4.5, erts-15.0, kernel-10.0, sasl-3.0
+
+# tftp-1.2.2.1
+
+The tftp-1.2.2.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- An issue in the undocumented initial state option \\{root_dir,Dir\} to the
+  tftp_file module has been fixed. The request file name was just concatenated
+  to Dir so it was possible to traverse above Dir by using "../" file path
+  components. Now the option actually restricts local file operations to the Dir
+  directory and subdirectories.
+
+  The initial state option and how to use it was previously undocumented, so it
+  is unlikely that anyone would have used it without understanding its
+  peculiarities.
+
+  The documentation of the TFTP application has also been clarified to make it
+  obvious that the default server configuration allows read and write access to
+  all files that are readable or writable by the user running the Erlang VM, and
+  that the default configuration therefore should be avoided.
+
+  Thanks to Luigino Camastra at Aisle Research, for finding and reporting this
+  issue.
+
+  Own Id: OTP-19981
+  Related Id(s): PR-10706, CVE-2026-21620
+
+> #### Full runtime dependencies of tftp-1.2.2.1
+>
+> erts-6.0, kernel-6.0, stdlib-5.0
+
+# Thanks to
+
+Daniel Hryzbil, Jan Uhlig
+

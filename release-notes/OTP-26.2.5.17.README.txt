@@ -1,0 +1,254 @@
+Patch Package:           OTP 26.2.5.17
+Git Tag:                 OTP-26.2.5.17
+Date:                    2026-02-20
+Trouble Report Id:       OTP-19830, OTP-19843, OTP-19845, OTP-19896,
+                         OTP-19926, OTP-19962, OTP-19978, OTP-19981,
+                         OTP-19988, OTP-19993
+Seq num:                 CVE-2026-21620, GH-10354, GH-10705, PR-10339,
+                         PR-10353, PR-10358, PR-10547, PR-10616,
+                         PR-10664, PR-10706, PR-10708, PR-10732
+System:                  OTP
+Release:                 26
+Application:             compiler-8.4.3.4, crypto-5.4.2.4,
+                         erts-14.2.5.13, megaco-4.5.0.1,
+                         ssl-11.1.4.11, stdlib-5.2.3.6, tftp-1.1.1.1,
+                         wx-2.4.1.1
+Predecessor:             OTP 26.2.5.16
+
+ Check out the git tag OTP-26.2.5.17, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- compiler-8.4.3.4 ------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The compiler-8.4.3.4 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19845    Application(s): compiler
+               Related Id(s): GH-10354, PR-10358
+
+               Fixed broken type inference for lists:mapfoldl/r.
+
+
+ Full runtime dependencies of compiler-8.4.3.4: crypto-5.1, erts-13.0,
+ kernel-8.4, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- crypto-5.4.2.4 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The crypto-5.4.2.4 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19993    Application(s): crypto
+               Related Id(s): PR-10732
+
+               Fixed static linking of OpenSSL 3.5+ on Windows.
+
+
+ Full runtime dependencies of crypto-5.4.2.4: erts-9.0, kernel-5.3,
+ stdlib-3.9
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.13 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.13 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19926    Application(s): erts
+               Related Id(s): PR-10547
+
+               Fail the windows build properly when nsis is not
+               recognised.
+
+
+  OTP-19962    Application(s): erts, stdlib
+               Related Id(s): PR-10616
+
+               Fixed bug in ets:update_counter/4 and
+               ets:update_element/4 accepting and inserting a default
+               tuple smaller than the keypos of the table. Such a
+               tuple without a key element would make the table
+               internally inconsistent and might lead to bad behavior
+               at table access, like ERTS runtime crash.
+
+               Now a call to ets:update_counter/4 or
+               ets:update_element/4 will fail with badarg if the key
+               does not exist in the table and the default tuple is
+               too small.
+
+
+  OTP-19978    Application(s): erts
+               Related Id(s): PR-10664
+
+               A missing memory barrier when unlocking process locks
+               could cause unexpected behavior on architectures with
+               weak memory ordering such as for example ARM.
+
+
+ Full runtime dependencies of erts-14.2.5.13: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- megaco-4.5.0.1 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The megaco-4.5.0.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19896    Application(s): megaco
+
+               The megaco_tcp module had debug unintentionally
+               enabled.
+
+
+ Full runtime dependencies of megaco-4.5.0.1: asn1-3.0, debugger-4.0,
+ erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14, stdlib-2.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.11 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.11 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19830    Application(s): ssl
+               Related Id(s): PR-10339
+
+               If two certificate massages are sent to the server
+               generate an unexpected message alert for the second
+               one.
+
+
+ Full runtime dependencies of ssl-11.1.4.11: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- stdlib-5.2.3.6 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The stdlib-5.2.3.6 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19962    Application(s): erts, stdlib
+               Related Id(s): PR-10616
+
+               Fixed bug in ets:update_counter/4 and
+               ets:update_element/4 accepting and inserting a default
+               tuple smaller than the keypos of the table. Such a
+               tuple without a key element would make the table
+               internally inconsistent and might lead to bad behavior
+               at table access, like ERTS runtime crash.
+
+               Now a call to ets:update_counter/4 or
+               ets:update_element/4 will fail with badarg if the key
+               does not exist in the table and the default tuple is
+               too small.
+
+
+  OTP-19988    Application(s): stdlib
+               Related Id(s): GH-10705, PR-10708
+
+               For a function that started with a bracket-only pattern
+               (such as []), the ?FUNCTION_ARITY macro would evaluate
+               to one less than the actual arity.
+
+
+ Full runtime dependencies of stdlib-5.2.3.6: compiler-5.0,
+ crypto-4.5, erts-13.1, kernel-9.0, sasl-3.0
+
+
+ ---------------------------------------------------------------------
+ --- tftp-1.1.1.1 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The tftp-1.1.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19981    Application(s): tftp
+               Related Id(s): PR-10706, CVE-2026-21620
+
+               An issue in the undocumented initial state option
+               [{root_dir,Dir}] to the tftp_file module has been
+               fixed. The request file name was just concatenated to
+               Dir so it was possible to traverse above Dir by using
+               "../" file path components. Now the option actually
+               restricts local file operations to the Dir directory
+               and subdirectories.
+
+               The initial state option and how to use it was
+               previously undocumented, so it is unlikely that anyone
+               would have used it without understanding its
+               peculiarities.
+
+               The documentation of the TFTP application has also been
+               clarified to make it obvious that the default server
+               configuration allows read and write access to all files
+               that are readable or writable by the user running the
+               Erlang VM, and that the default configuration therefore
+               should be avoided.
+
+               Thanks to Luigino Camastra at Aisle Research, for
+               finding and reporting this issue.
+
+
+ Full runtime dependencies of tftp-1.1.1.1: erts-6.0, kernel-6.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- wx-2.4.1.1 ------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The wx-2.4.1.1 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19843    Application(s): wx
+               Related Id(s): PR-10353
+
+               Fixed reading out of array bounds and potential memory
+               leaks.
+
+
+ Full runtime dependencies of wx-2.4.1.1: erts-12.0, kernel-8.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Daniel Hryzbil, Jan Uhlig
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
