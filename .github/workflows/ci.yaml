@@ -141,6 +141,7 @@ jobs:
     env:
       COWBOY_QUICER: 0
       GUN_QUICER: 0
+      CORRAL_DEPS: quic
     steps:
 
     - name: Checkout repository
