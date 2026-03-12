@@ -17,9 +17,10 @@ function match_latest_minors {
     local dot1="$(match_latest $1.1)"
     local dot2="$(match_latest $1.2)"
     local dot3="$(match_latest $1.3)"
+    local dot4="$(match_latest $1.4)"
 
     # Awk is used to trim whitespaces.
-    echo "$dot0 $dot1 $dot2 $dot3" | awk '{$1=$1};1'
+    echo "$dot0 $dot1 $dot2 $dot3 $dot4" | awk '{$1=$1};1'
 }
 
 for v in $versions; do
