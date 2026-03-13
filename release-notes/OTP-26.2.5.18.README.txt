@@ -1,0 +1,132 @@
+Patch Package:           OTP 26.2.5.18
+Git Tag:                 OTP-26.2.5.18
+Date:                    2026-03-12
+Trouble Report Id:       OTP-19795, OTP-20007, OTP-20009, OTP-20011,
+                         OTP-20022
+Seq num:                 CVE-2026-23941, CVE-2026-23942,
+                         CVE-2026-23943, ERIERL-1305, GH-10694,
+                         PR-10465, PR-10707, PR-10811, PR-10813,
+                         PR-10833
+System:                  OTP
+Release:                 26
+Application:             inets-9.1.0.5, ssh-5.1.4.14, ssl-11.1.4.12
+Predecessor:             OTP 26.2.5.17
+
+ Check out the git tag OTP-26.2.5.18, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-9.1.0.5 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1.0.5 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20007    Application(s): inets
+               Related Id(s): PR-10833, CVE-2026-23941
+
+               The httpd server now rejects HTTP requests containing
+               multiple Content-Length headers with different values,
+               returning a 400 Bad Request response. This prevents
+               potential HTTP request smuggling attacks. Thanks
+               Luigino Camastra at Aisle Research for responsibly
+               disclosing this vulnerability
+
+
+ Full runtime dependencies of inets-9.1.0.5: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssh-5.1.4.14 ----------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssh-5.1.4.14 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20009    Application(s): ssh
+               Related Id(s): PR-10811, CVE-2026-23942
+
+               Fixed path traversal vulnerability in SFTP server's
+               root option allowing authenticated users to access
+               sibling directories with matching name prefixes. The
+               root option used string prefix matching instead of path
+               component validation. With {root, "/home/user1"},
+               attackers could access /home/user10/ or /home/user123/.
+               Thanks to Luigino Camastra, Aisle Research.
+
+
+  OTP-20011    Application(s): ssh
+               Related Id(s): PR-10813, CVE-2026-23943
+
+               Fixed excessive memory usage vulnerability in SSH
+               compression allowing attackers to consume system
+               resources through decompression bombs. The 'zlib' and
+               'zlib@openssh.com' algorithms lacked decompression size
+               limits, allowing 256 KB packets to expand to 255 MB
+               (1029:1 ratio). This could lead to crashes on systems
+               with limited memory.
+
+               The fix removes zlib from default compression
+               algorithms and implements decompression size limits for
+               both algorithms. Thanks to Igor Morgenstern at Aisle
+               Research
+
+
+ Full runtime dependencies of ssh-5.1.4.14: crypto-5.0, erts-14.0,
+ kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1, stdlib-5.0,
+ stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.12 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The ssl-11.1.4.12 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-19795    Application(s): ssl
+               Related Id(s): PR-10465
+
+               Correct TLS-1.3 alert handling so server will always
+               send the alert with the encryption keys that the client
+               is expecting, that is if for instance if client
+               certification fails the alert will be sent using
+               application traffic encryption keys.
+
+
+  OTP-20022    Application(s): ssl
+               Related Id(s): ERIERL-1305, GH-10694, PR-10707
+
+               TLS-1.3 certificate request now preserves the order of
+               signature algorithms in certificate request extension
+               to be in the servers preferred order, which might
+               affect the choice made by some TLS clients.
+
+
+ Full runtime dependencies of ssl-11.1.4.12: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.11.3, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Hewwho
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

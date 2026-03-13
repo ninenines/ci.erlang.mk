@@ -1,0 +1,107 @@
+Patch Package:           OTP 27.3.4.9
+Git Tag:                 OTP-27.3.4.9
+Date:                    2026-03-12
+Trouble Report Id:       OTP-19990, OTP-20007, OTP-20009, OTP-20011,
+                         OTP-20022
+Seq num:                 CVE-2026-23941, CVE-2026-23942,
+                         CVE-2026-23943, ERIERL-1305, GH-10694,
+                         GH-10698, PR-10707, PR-10723, PR-10811,
+                         PR-10813, PR-10833
+System:                  OTP
+Release:                 27
+Application:             inets-9.3.2.3, ssh-5.2.11.6, ssl-11.2.12.6
+Predecessor:             OTP 27.3.4.8
+
+Check out the git tag OTP-27.3.4.9, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# inets-9.3.2.3
+
+The inets-9.3.2.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The httpd server now rejects HTTP requests containing multiple Content-Length
+  headers with different values, returning a 400 Bad Request response. This
+  prevents potential HTTP request smuggling attacks. Thanks Luigino Camastra at
+  Aisle Research for responsibly disclosing this vulnerability
+
+  Own Id: OTP-20007
+  Related Id(s): PR-10833, CVE-2026-23941
+
+> #### Full runtime dependencies of inets-9.3.2.3
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# ssh-5.2.11.6
+
+The ssh-5.2.11.6 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed path traversal vulnerability in SFTP server's root option allowing
+  authenticated users to access sibling directories with matching name prefixes.
+  The root option used string prefix matching instead of path component
+  validation. With \{root, "/home/user1"\}, attackers could access /home/user10/
+  or /home/user123/. Thanks to Luigino Camastra, Aisle Research.
+
+  Own Id: OTP-20009
+  Related Id(s): PR-10811, CVE-2026-23942
+
+- Fixed excessive memory usage vulnerability in SSH compression allowing
+  attackers to consume system resources through decompression bombs. The 'zlib'
+  and 'zlib@openssh.com' algorithms lacked decompression size limits, allowing
+  256 KB packets to expand to 255 MB (1029:1 ratio). This could lead to crashes
+  on systems with limited memory.
+
+  The fix removes zlib from default compression algorithms and implements
+  decompression size limits for both algorithms. Thanks to Igor Morgenstern at
+  Aisle Research
+
+  Own Id: OTP-20011
+  Related Id(s): PR-10813, CVE-2026-23943
+
+> #### Full runtime dependencies of ssh-5.2.11.6
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.12.6
+
+Note! The ssl-11.2.12.6 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.16.4 (first satisfied in OTP 27.1.3)
+
+## Fixed Bugs and Malfunctions
+
+- The NSS Keylogging refactoring mixed up of Read and Write connection states,
+  could cause wrong NSS keylog labels, or `{error, closed}` returned without
+  keylog.
+
+  Own Id: OTP-19990
+  Related Id(s): GH-10698, PR-10723
+
+- TLS-1.3 certificate request now preserves the order of signature algorithms in
+  certificate request extension to be in the servers preferred order, which
+  might affect the choice made by some TLS clients.
+
+  Own Id: OTP-20022
+  Related Id(s): ERIERL-1305, GH-10694, PR-10707
+
+> #### Full runtime dependencies of ssl-11.2.12.6
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.16.4,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+Hewwho
+
