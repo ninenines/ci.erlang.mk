@@ -8,6 +8,7 @@ env:
   AUTO_CI_MASTER: weekly
   COWBOY_QUICER: ${{ vars.COWBOY_QUICER || 0 }}
   GUN_QUICER: ${{ vars.GUN_QUICER || 0 }}
+  CORRAL_DEPS: ${{ vars.CORRAL_DEPS || ' ' }}
 
 jobs:
 
