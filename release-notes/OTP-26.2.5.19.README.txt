@@ -1,0 +1,102 @@
+Patch Package:           OTP 26.2.5.19
+Git Tag:                 OTP-26.2.5.19
+Date:                    2026-04-07
+Trouble Report Id:       OTP-20037, OTP-20068
+Seq num:                 CVE-2026-28810, PR-10864
+System:                  OTP
+Release:                 26
+Application:             inets-9.1.0.6, kernel-9.2.4.11
+Predecessor:             OTP 26.2.5.18
+
+ Check out the git tag OTP-26.2.5.19, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- inets-9.1.0.6 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1.0.6 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20068    Application(s): inets
+
+               Fixed authentication bypass in httpd when script_alias
+               maps a URL to a directory outside document_root with
+               mod_auth directory-based access controls. The
+               mod_alias:which_alias/1 function now includes
+               script_alias entries so authorization is evaluated
+               against the correct path before CGI execution.
+               CVE-2026-28808.
+
+
+ Full runtime dependencies of inets-9.1.0.6: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- kernel-9.2.4.11 -------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The kernel-9.2.4.11 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20037    Application(s): kernel
+               Related Id(s): PR-10864, CVE-2026-28810
+
+               Before this patch, the Erlang/OTP built-in DNS resolver
+               (inet_res) used a sequential, process-global 16-bit
+               transaction ID for UDP queries and did not implement
+               source port randomization. Response validation relied
+               almost entirely on this ID. Together, this made DNS
+               cache poisoning practical for an attacker who can
+               observe one query or predict the next ID. The design
+               conflicted with RFC 5452 recommendations for mitigating
+               forged DNS answers.
+
+               inet_res is intended for use in trusted network
+               environments and with trusted recursive resolvers.
+               Earlier documentation did not clearly state this
+               deployment assumption, which could lead users to deploy
+               the resolver in environments where faked DNS responses
+               are possible.
+
+               Therefore, the documentation is been updated to clarify
+               that inet_res should only be used in trusted networks
+               and with trusted recursive resolvers.
+
+               The implementation is also improved to use strong
+               random DNS transaction IDs and source ports for every
+               DNS transaction. This should give ample protection
+               against brute forcing fake DNS replies, known as DNS
+               cache poisoning, but it still does not protect against,
+               for example, an adversary in the path of the DNS
+               transaction that can observe the random values before
+               faking malicious replies, an attack known as DNS
+               spoofing.
+
+               For randomization to happen, the Crypto application has
+               to be loaded, which most probably already should be the
+               case for an Erlang node in an exposed network.
+
+               If performance should become an issue, for applications
+               within safe network environments, the previous light
+               weight behaviour can be configured by setting the
+               resolver option random to false.
+
+
+ Full runtime dependencies of kernel-9.2.4.11: crypto-5.0, erts-14.0,
+ sasl-3.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+

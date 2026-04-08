@@ -1,0 +1,249 @@
+Patch Package:           OTP 27.3.4.10
+Git Tag:                 OTP-27.3.4.10
+Date:                    2026-04-07
+Trouble Report Id:       OTP-19506, OTP-19889, OTP-19931, OTP-20027,
+                         OTP-20037, OTP-20041, OTP-20042, OTP-20053,
+                         OTP-20064, OTP-20065, OTP-20068
+Seq num:                 CVE-2026-28810, CVE-2026-32144, GH-10454,
+                         GH-10562, GH-10901, GH-9476, PR-10456,
+                         PR-10569, PR-10620, PR-10859, PR-10864,
+                         PR-10873, PR-10904, PR-10906, PR-10941,
+                         PR-9481
+System:                  OTP
+Release:                 27
+Application:             compiler-8.6.1.4, crypto-5.5.3.2,
+                         erts-15.2.7.7, inets-9.3.2.4,
+                         kernel-10.2.7.4, public_key-1.17.1.2,
+                         sasl-4.2.2.1, ssl-11.2.12.7
+Predecessor:             OTP 27.3.4.9
+
+Check out the git tag OTP-27.3.4.10, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- When OCSP stapling is enabled via the \{stapling, staple\} or \{stapling,
+  #\{...\}\} options, the handshake now fails if the server does not provide an
+  OCSP stapled response.
+
+  Previously, a missing OCSP staple was silently accepted (soft-fail). Since
+  Erlang/OTP only supports OCSP via stapling with no fallback to direct OCSP
+  queries or CRL checking, soft-fail meant no revocation check at all.
+
+  Applications that need the previous soft-fail behavior can use a custom
+  verify_fun that accepts \{bad_cert, missing_ocsp_staple\}.
+
+  Own Id: OTP-20064
+  Application(s): ssl
+  Related Id(s): PR-10941, CVE-2026-32144
+
+# compiler-8.6.1.4
+
+The compiler-8.6.1.4 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The type inference for maps:from_list/1 was incorrect: when the provided
+  list was statically known to be bogus when non-empty (e.g. a list of atoms),
+  the compiler assumed it would also fail when the list was empty.
+
+  Own Id: OTP-19506
+  Related Id(s): GH-9476, PR-9481
+
+- Fixed a bug in the type analysis pass that could erroneously eliminate code
+  blocks.
+
+  Own Id: OTP-19931
+  Related Id(s): GH-10562, PR-10569
+
+- A binary as the value of a `-moduledoc()` attribute would be silently ignored.
+
+  Own Id: OTP-20065
+  Related Id(s): GH-10901, PR-10904
+
+> #### Full runtime dependencies of compiler-8.6.1.4
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# crypto-5.5.3.2
+
+The crypto-5.5.3.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug that could cause runtime crash after ~2 billion calls to
+  `crypto:mac_init` due to a double EVP_MAC_free.
+
+  Own Id: OTP-20041
+  Related Id(s): PR-10859
+
+> #### Full runtime dependencies of crypto-5.5.3.2
+>
+> erts-9.0, kernel-5.3, stdlib-3.9
+
+# erts-15.2.7.7
+
+The erts-15.2.7.7 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a JIT bug that miscompiled expressions like `X * X + X * X`.
+
+  Own Id: OTP-19889
+  Related Id(s): GH-10454, PR-10456
+
+- Fixed bug on windows that made tools dialyzer, erlc and typer unusable in
+  powershell or cmd.exe, when there are spaces in the installation path.
+
+  Own Id: OTP-20027
+  Related Id(s): PR-10620
+
+> #### Full runtime dependencies of erts-15.2.7.7
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.3.2.4
+
+The inets-9.3.2.4 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed authentication bypass in `httpd` when `script_alias` maps a URL to a
+  directory outside `document_root` with `mod_auth` directory-based access
+  controls. The mod_alias:which_alias/1 function now includes `script_alias`
+  entries so authorization is evaluated against the correct path before CGI
+  execution. CVE-2026-28808.
+
+  Own Id: OTP-20068
+
+> #### Full runtime dependencies of inets-9.3.2.4
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# kernel-10.2.7.4
+
+Note! The kernel-10.2.7.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- erts-15.2.5 (first satisfied in OTP 27.3.2)
+
+## Fixed Bugs and Malfunctions
+
+- Before this patch, the Erlang/OTP built-in DNS resolver (`inet_res`) used a
+  sequential, process-global 16-bit transaction ID for UDP queries and did not
+  implement source port randomization. Response validation relied almost
+  entirely on this ID. Together, this made DNS cache poisoning practical for an
+  attacker who can observe one query or predict the next ID. The design
+  conflicted with RFC 5452 recommendations for mitigating forged DNS answers.
+
+  `inet_res` is intended for use in trusted network environments and with
+  trusted recursive resolvers. Earlier documentation did not clearly state this
+  deployment assumption, which could lead users to deploy the resolver in
+  environments where faked DNS responses are possible.
+
+  Therefore, the documentation is been updated to clarify that `inet_res` should
+  only be used in trusted networks and with trusted recursive resolvers.
+
+  The implementation is also improved to use strong random DNS transaction IDs
+  and source ports for every DNS transaction. This should give ample protection
+  against brute forcing fake DNS replies, known as DNS cache poisoning, but it
+  still does not protect against, for example, an adversary in the path of the
+  DNS transaction that can observe the random values before faking malicious
+  replies, an attack known as DNS spoofing.
+
+  For randomization to happen, the Crypto application has to be loaded, which
+  most probably already should be the case for an Erlang node in an exposed
+  network.
+
+  If performance should become an issue, for applications within safe network
+  environments, the previous light weight behaviour can be configured by setting
+  the resolver option `random` to `false`.
+
+  Own Id: OTP-20037
+  Related Id(s): PR-10864, CVE-2026-28810
+
+> #### Full runtime dependencies of kernel-10.2.7.4
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-6.0
+
+# public_key-1.17.1.2
+
+The public_key-1.17.1.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- OCSP designated responder certificate verification now checks the CA's
+  cryptographic signature on the responder certificate. Previously, only the
+  issuer DN match and id-kp-OCSPSigning EKU were verified, which meant a forged
+  self-signed certificate with the CA's subject DN would be accepted as a valid
+  designated responder (Case 2 in RFC 6960 §4.2.2.2).
+
+  Own Id: OTP-20042
+  Related Id(s): PR-10873, CVE-2026-32144
+
+> #### Full runtime dependencies of public_key-1.17.1.2
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# sasl-4.2.2.1
+
+The sasl-4.2.2.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed the typespec of release_handler:eval_appup_script/4.
+
+  Own Id: OTP-20053
+  Related Id(s): PR-10906
+
+> #### Full runtime dependencies of sasl-4.2.2.1
+>
+> erts-15.0, kernel-6.0, stdlib-4.0, tools-2.6.14
+
+# ssl-11.2.12.7
+
+Note! The ssl-11.2.12.7 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.17.1.2 (first satisfied in OTP 27.3.4.10)
+
+## Fixed Bugs and Malfunctions
+
+- When OCSP stapling is enabled via the \{stapling, staple\} or \{stapling,
+  #\{...\}\} options, the handshake now fails if the server does not provide an
+  OCSP stapled response.
+
+  Previously, a missing OCSP staple was silently accepted (soft-fail). Since
+  Erlang/OTP only supports OCSP via stapling with no fallback to direct OCSP
+  queries or CRL checking, soft-fail meant no revocation check at all.
+
+  Applications that need the previous soft-fail behavior can use a custom
+  verify_fun that accepts \{bad_cert, missing_ocsp_staple\}.
+
+  Own Id: OTP-20064
+  Related Id(s): PR-10941, CVE-2026-32144
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of ssl-11.2.12.7
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.17.1.2,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+William Yang
+
