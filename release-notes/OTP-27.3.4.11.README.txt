@@ -1,0 +1,97 @@
+Patch Package:           OTP 27.3.4.11
+Git Tag:                 OTP-27.3.4.11
+Date:                    2026-04-21
+Trouble Report Id:       OTP-20081, OTP-20086, OTP-20094, OTP-20098,
+                         OTP-20101
+Seq num:                 CVE-2026-32147, GH-10667, GH-10967, PR-10976,
+                         PR-10985, PR-11002, PR-11027
+System:                  OTP
+Release:                 27
+Application:             erts-15.2.7.8, mnesia-4.23.5.2, ssh-5.2.11.7
+Predecessor:             OTP 27.3.4.10
+
+Check out the git tag OTP-27.3.4.11, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-27.3.4.11
+
+## Fixed Bugs and Malfunctions
+
+- Fix the `otp_patch_apply` script to properly handle installation of
+  documentation for OTP versions with more than one digit in version parts less
+  significant than the major version.
+
+  Own Id: OTP-20086
+  Related Id(s): PR-10985
+
+# erts-15.2.7.8
+
+The erts-15.2.7.8 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug in `enif_make_map_from_arrays` for arrays with at least 33 keys. If
+  duplicate keys existed, instead of failing, it would skip the duplicates. If
+  less than 33 unique keys existed, an internally inconsistent and broken map
+  was returned.
+
+  Own Id: OTP-20098
+  Related Id(s): PR-10976
+
+- Fixed an issue when supplying the args_file option to erl.exe on windows that
+  did not handle unicode characters correctly.
+
+  Own Id: OTP-20101
+  Related Id(s): GH-10667
+
+> #### Full runtime dependencies of erts-15.2.7.8
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# mnesia-4.23.5.2
+
+The mnesia-4.23.5.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where stacktrace was not returned from mnesia:transaction/1 when
+  transaction aborts with an error exception.
+
+  Own Id: OTP-20094
+  Related Id(s): GH-10967, PR-11002
+
+> #### Full runtime dependencies of mnesia-4.23.5.2
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# ssh-5.2.11.7
+
+The ssh-5.2.11.7 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a vulnerability in the SFTP server where file attributes could be
+  modified outside the configured root directory. When using FSETSTAT on an open
+  file handle, the operation used the path stored in the handle without
+  verifying it was within the root directory, allowing attribute changes to
+  files outside the chroot boundary.
+
+  Thanks to John Downey.
+
+  Own Id: OTP-20081
+  Related Id(s): PR-11027, CVE-2026-32147
+
+> #### Full runtime dependencies of ssh-5.2.11.7
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# Thanks to
+
+Nick Vatamaniuc
+

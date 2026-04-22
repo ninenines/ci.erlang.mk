@@ -1,0 +1,75 @@
+Patch Package:           OTP 28.4.3
+Git Tag:                 OTP-28.4.3
+Date:                    2026-04-21
+Trouble Report Id:       OTP-20081, OTP-20086, OTP-20104
+Seq num:                 #10968, CVE-2026-32147, PR-10985, PR-11027
+System:                  OTP
+Release:                 28
+Application:             kernel-10.6.3, ssh-5.5.2
+Predecessor:             OTP 28.4.2
+
+Check out the git tag OTP-28.4.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# OTP-28.4.3
+
+## Fixed Bugs and Malfunctions
+
+- Fix the `otp_patch_apply` script to properly handle installation of
+  documentation for OTP versions with more than one digit in version parts less
+  significant than the major version.
+
+  Own Id: OTP-20086
+  Related Id(s): PR-10985
+
+# kernel-10.6.3
+
+The kernel-10.6.3 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- On Windows, sockets has to be bound when using 'socket'. Therefor when using
+  gen_tcp with inet_backend = socket, gen_tcp_socket bind even if the caller has
+  not provided an explicit bind address. In that case it attempts to locate a
+  "proper" address on its own. But if the connect address is the loopback
+  address, this could lead to an attempt to bind to an external interface. So,
+  this has now been changed so that if the connect address is the loopback
+  address, the loopback address will also be used when binding.
+
+  Own Id: OTP-20104
+  Related Id(s): #10968
+
+> #### Full runtime dependencies of kernel-10.6.3
+>
+> crypto-5.0, erts-15.2.5, sasl-3.0, stdlib-7.0
+
+# ssh-5.5.2
+
+Note! The ssh-5.5.2 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a vulnerability in the SFTP server where file attributes could be
+  modified outside the configured root directory. When using FSETSTAT on an open
+  file handle, the operation used the path stored in the handle without
+  verifying it was within the root directory, allowing attribute changes to
+  files outside the chroot boundary.
+
+  Thanks to John Downey.
+
+  Own Id: OTP-20081
+  Related Id(s): PR-11027, CVE-2026-32147
+
+> #### Full runtime dependencies of ssh-5.5.2
+>
+> crypto-5.7, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
