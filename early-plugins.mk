@@ -23,48 +23,51 @@ OTP-25 := OTP-25.0.4 OTP-25.1.2.1 OTP-25.2.3 OTP-25.3.2.21
 OTP-26 := OTP-26.0.2 OTP-26.1.2 OTP-26.2.5.20
 OTP-27 := OTP-27.0.1 OTP-27.1.3 OTP-27.2.4 OTP-27.3.4.11
 OTP-28 := OTP-28.0.4 OTP-28.1.1 OTP-28.2 OTP-28.3.3 OTP-28.4.3
+OTP-29 := OTP-29.0-rc3
 
-OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-23+ := $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-24+ := $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-25+ := $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-26+ := $(OTP-26) $(OTP-27) $(OTP-28)
-OTP-27+ := $(OTP-27) $(OTP-28)
-OTP-28+ := $(OTP-28)
+OTP-18+ := $(OTP-18) $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-19+ := $(OTP-19) $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-20+ := $(OTP-20) $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-21+ := $(OTP-21) $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-22+ := $(OTP-22) $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-23+ := $(OTP-23) $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-24+ := $(OTP-24) $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-25+ := $(OTP-25) $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-26+ := $(OTP-26) $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-27+ := $(OTP-27) $(OTP-28) $(OTP-29)
+OTP-28+ := $(OTP-28) $(OTP-29)
+OTP-29+ := $(OTP-29)
 
 OTP-LATEST-18+ := $(lastword $(OTP-18)) $(lastword $(OTP-19)) \
 	$(lastword $(OTP-20)) $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
 	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-19+ := $(lastword $(OTP-19)) $(lastword $(OTP-20)) \
 	$(lastword $(OTP-21)) $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
 	$(lastword $(OTP-24)) $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-20+ := $(lastword $(OTP-20)) $(lastword $(OTP-21)) \
 	$(lastword $(OTP-22)) $(lastword $(OTP-23)) $(lastword $(OTP-24)) \
 	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
-	$(lastword $(OTP-28))
+	$(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-21+ := $(lastword $(OTP-21)) $(lastword $(OTP-22)) \
 	$(lastword $(OTP-23)) $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-22+ := $(lastword $(OTP-22)) $(lastword $(OTP-23)) \
 	$(lastword $(OTP-24)) $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-23+ := $(lastword $(OTP-23)) $(lastword $(OTP-24)) \
 	$(lastword $(OTP-25)) $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
-	$(lastword $(OTP-28))
+	$(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-24+ := $(lastword $(OTP-24)) $(lastword $(OTP-25)) \
-	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-26)) $(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-25+ := $(lastword $(OTP-25)) $(lastword $(OTP-26)) \
-	$(lastword $(OTP-27)) $(lastword $(OTP-28))
+	$(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
 OTP-LATEST-26+ := $(lastword $(OTP-26)) $(lastword $(OTP-27)) \
-	$(lastword $(OTP-28))
-OTP-LATEST-27+ := $(lastword $(OTP-27)) $(lastword $(OTP-28))
-OTP-LATEST-28+ := $(lastword $(OTP-28))
+	$(lastword $(OTP-28)) $(lastword $(OTP-29))
+OTP-LATEST-27+ := $(lastword $(OTP-27)) $(lastword $(OTP-28)) $(lastword $(OTP-29))
+OTP-LATEST-28+ := $(lastword $(OTP-28)) $(lastword $(OTP-29))
+OTP-LATEST-29+ := $(lastword $(OTP-29))
 
 # We exclude release candidates here because they are not
 # the latest release, they are the *next* one.
