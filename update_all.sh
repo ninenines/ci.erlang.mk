@@ -6,7 +6,7 @@ cd otp && git tag | grep OTP- | sort -V > ../VERSIONS
 cd -
 rm -rf ./otp
 
-declare -r versions="OTP-18 OTP-19 OTP-20 OTP-21 OTP-22 OTP-23 OTP-24 OTP-25 OTP-26 OTP-27 OTP-28"
+declare -r versions="OTP-18 OTP-19 OTP-20 OTP-21 OTP-22 OTP-23 OTP-24 OTP-25 OTP-26 OTP-27 OTP-28 OTP-29"
 
 function match_latest {
     cat VERSIONS | grep $1 | sort -V | tail -n1

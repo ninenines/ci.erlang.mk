@@ -1,0 +1,3254 @@
+Inital Release:          OTP 29.0
+Git Tag:                 OTP-29.0
+Date:                    2026-04-15
+Trouble Report Id:       OTP-16607, OTP-19587, OTP-19611, OTP-19643,
+                         OTP-19663, OTP-19672, OTP-19695, OTP-19708,
+                         OTP-19709, OTP-19713, OTP-19734, OTP-19744,
+                         OTP-19747, OTP-19750, OTP-19751, OTP-19763,
+                         OTP-19766, OTP-19783, OTP-19784, OTP-19785,
+                         OTP-19786, OTP-19793, OTP-19800, OTP-19801,
+                         OTP-19807, OTP-19809, OTP-19811, OTP-19815,
+                         OTP-19822, OTP-19826, OTP-19834, OTP-19838,
+                         OTP-19842, OTP-19853, OTP-19858, OTP-19866,
+                         OTP-19874, OTP-19882, OTP-19887, OTP-19898,
+                         OTP-19903, OTP-19906, OTP-19910, OTP-19912,
+                         OTP-19917, OTP-19918, OTP-19919, OTP-19921,
+                         OTP-19922, OTP-19925, OTP-19927, OTP-19932,
+                         OTP-19933, OTP-19934, OTP-19935, OTP-19936,
+                         OTP-19938, OTP-19942, OTP-19943, OTP-19949,
+                         OTP-19956, OTP-19960, OTP-19963, OTP-19964,
+                         OTP-19965, OTP-19966, OTP-19968, OTP-19969,
+                         OTP-19975, OTP-19980, OTP-19982, OTP-19991,
+                         OTP-19995, OTP-19996, OTP-19997, OTP-20001,
+                         OTP-20002, OTP-20003, OTP-20004, OTP-20010,
+                         OTP-20013, OTP-20015, OTP-20016, OTP-20017,
+                         OTP-20019, OTP-20020, OTP-20023, OTP-20025,
+                         OTP-20026, OTP-20028, OTP-20029, OTP-20030,
+                         OTP-20031, OTP-20032, OTP-20034, OTP-20035,
+                         OTP-20036, OTP-20045, OTP-20048, OTP-20054,
+                         OTP-20055, OTP-20059, OTP-20061, OTP-20066,
+                         OTP-20069, OTP-20070, OTP-20071, OTP-20072,
+                         OTP-20073, OTP-20076, OTP-20077, OTP-20078,
+                         OTP-20079, OTP-20080, OTP-20088, OTP-20090,
+                         OTP-20092, OTP-20095, OTP-20099
+Seq num:                 GH-10071, GH-10125, GH-10151, GH-10214,
+                         GH-10260, GH-10341, GH-10345, GH-10557,
+                         GH-10650, GH-10807, GH-8569, GH-8841,
+                         GH-8993, GH-9822, OTP-16608, OTP-19652,
+                         OTP-19775, OTP-19779, OTP-19827, PR-10013,
+                         PR-10033, PR-10078, PR-10114, PR-10115,
+                         PR-10126, PR-10134, PR-10144, PR-10145,
+                         PR-10161, PR-10166, PR-10168, PR-10187,
+                         PR-10189, PR-10193, PR-10195, PR-10197,
+                         PR-10202, PR-10207, PR-10230, PR-10234,
+                         PR-10243, PR-10253, PR-10259, PR-10269,
+                         PR-10276, PR-10277, PR-10281, PR-10304,
+                         PR-10338, PR-10348, PR-10372, PR-10382,
+                         PR-10387, PR-10417, PR-10421, PR-10422,
+                         PR-10426, PR-10433, PR-10449, PR-10453,
+                         PR-10478, PR-10510, PR-10511, PR-10514,
+                         PR-10519, PR-10524, PR-10532, PR-10549,
+                         PR-10554, PR-10556, PR-10564, PR-10568,
+                         PR-10571, PR-10573, PR-10578, PR-10579,
+                         PR-10580, PR-10585, PR-10592, PR-10598,
+                         PR-10601, PR-10614, PR-10615, PR-10617,
+                         PR-10619, PR-10626, PR-10642, PR-10646,
+                         PR-10647, PR-10653, PR-10656, PR-10674,
+                         PR-10710, PR-10718, PR-10730, PR-10735,
+                         PR-10739, PR-10753, PR-10754, PR-10755,
+                         PR-10770, PR-10782, PR-10783, PR-10801,
+                         PR-10804, PR-10805, PR-10814, PR-10817,
+                         PR-10818, PR-10819, PR-10820, PR-10821,
+                         PR-10824, PR-10830, PR-10836, PR-10838,
+                         PR-10839, PR-10870, PR-10892, PR-10894,
+                         PR-10910, PR-10938, PR-10948, PR-10949,
+                         PR-10950, PR-10951, PR-10958, PR-10962,
+                         PR-10965, PR-10969, PR-10970, PR-10979,
+                         PR-10986, PR-10998, PR-11004, PR-11010,
+                         PR-7118, PR-7315, PR-9115, PR-9125, PR-9134,
+                         PR-9153, PR-9209, PR-9223, PR-9315, PR-9374,
+                         PR-9475, PR-9712, PR-9814, PR-9864, PR-9866,
+                         PR-9894, PR-9899, PR-9934, PR-9940, PR-9984
+System:                  OTP
+Release:                 29
+Application:             asn1-5.5, common_test-1.31, compiler-10.0,
+                         crypto-5.9, debugger-7.0, dialyzer-6.0,
+                         diameter-2.7, edoc-1.5, eldap-1.3,
+                         erl_interface-5.7, erts-17.0, et-1.8,
+                         eunit-2.11, ftp-1.2.5, inets-9.7,
+                         jinterface-1.16, kernel-11.0, megaco-4.9,
+                         mnesia-4.26, observer-2.19, odbc-2.17,
+                         os_mon-2.12, parsetools-2.8, public_key-1.21,
+                         reltool-1.1, runtime_tools-2.4, sasl-4.4,
+                         snmp-5.20.3, ssh-6.0, ssl-11.6, stdlib-8.0,
+                         syntax_tools-4.1, tftp-1.3, tools-4.2,
+                         wx-2.6, xmerl-2.2
+Predecessor:             OTP
+
+Check out the git tag OTP-29.0, and build a full OTP system including
+documentation.
+
+# HIGHLIGHTS
+
+- The JIT now generates better code for matching or creating binaries with
+  multiple little-endian segments.
+
+  Own Id: OTP-19747
+  Application(s): erts
+  Related Id(s): PR-10126
+
+- In the documentation for the `compile` module, a section has been added with
+  recommendations for implementors of languages running on the BEAM.
+  Documentation has also been added for the `to_abstr`, `to_exp`, and
+  `from_abstr` options.
+
+  The documentation for erlc now lists `.abstr` as one of the supported
+  options.
+
+  When compiling with the `to_abstr` option, the resulting `.abstr` file now
+  retains any `-doc` attributes present in the source code.
+
+  Own Id: OTP-19784
+  Application(s): compiler, erts
+  Related Id(s): PR-10230, PR-10234
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Application(s): compiler, debugger, dialyzer, erts, stdlib
+  Related Id(s): PR-10617
+
+- The guard BIF `is_integer/3` has been added. It follows the design of the
+  original EEP-16, only changing the name from `is_between` to `is_integer`.
+  This BIF takes in 3 parameters, `Term`, `LowerBound`, and `UpperBound`.
+
+  It returns `true` if `Term`, `LowerBound`, and `UpperBound` are all integers,
+  and `LowerBound =< Term =< UpperBound`; otherwise, it returns false.
+
+  Example:
+
+      1> I = 42.
+      2> is_integer(I, 0, 100).
+      true
+
+  Own Id: OTP-19809
+  Application(s): compiler, dialyzer, erts
+  Related Id(s): PR-10276
+
+- There are new functions for random permutation of a list: rand:shuffle/1 and
+  rand:shuffle_s/2. They are inspired by a suggestion and discussion on
+  ErlangForums.
+
+  Own Id: OTP-19826
+  Application(s): stdlib
+  Related Id(s): PR-10281
+
+- In the default code path for the Erlang system, the current working directory
+  (`.`) is now in the last position instead of the first.
+
+  Own Id: OTP-19842
+  Application(s): erts, kernel
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Function application is now left associative. That means one can now write:
+
+      f(X)(Y)
+
+  instead of:
+
+      (f(X))(Y)
+
+  Own Id: OTP-19866
+  Application(s): compiler
+  Related Id(s): PR-9223
+
+- The old-style type tests in guards (`integer`, `atom`, and so on) have been
+  scheduled for removal in Erlang/OTP 30. They have been deprecated for a long
+  time.
+
+  Own Id: OTP-19887
+  Application(s): otp
+  Related Id(s): PR-10417
+
+- There will now be a warning when exporting variables out of a subexpression.
+  For example:
+
+      case file:open(File, AllOpts = [write,{encoding,utf8}]) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  To avoid the warning, this can be rewritten to:
+
+      AllOpts = [write,{encoding,utf8}],
+      case file:open(File, AllOpts) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  The warning can be suppressed by giving option `nowarn_export_var_subexpr` to
+  the compiler.
+
+  Own Id: OTP-19898
+  Application(s): compiler, stdlib
+  Related Id(s): PR-9134
+
+- By default, the compiler will now warn for uses of the `and` and `or`
+  operators.
+
+  This warning can be suppressed using the `nowarn_obsolete_bool_op` compiler
+  option.
+
+  Own Id: OTP-19918
+  Application(s): compiler
+  Related Id(s): PR-9115
+
+- `graph` is a new module that is a functional equivalent of the `digraph` and
+  `digraph_utils` modules.
+
+  Own Id: OTP-19922
+  Application(s): stdlib
+  Related Id(s): PR-10532
+
+- Before Erlang/OTP 29, attempting to bind variables in a comprehension would
+  compile successfully but fail at runtime. Example:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      * exception error: bad filter 2614250
+
+  In Erlang/OTP 29, attempting to bind a variable in a comprehension will fail
+  by default:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      * 5:14: matches using '=' are not allowed in comprehension qualifiers
+      unless the experimental 'compr_assign' language feature is enabled.
+      With 'compr_assign' enabled, a match 'P = E' will behave as a
+      strict generator 'P <-:- [E]'."
+
+  However, this example will work as expected if the `compr_assign` feature is
+  enabled when starting the runtime system:
+
+      $ erl -enable-feature compr_assign
+      . . .
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      [2614250]
+
+  Here is another example how `compr_assign` can be used:
+
+      -module(example).
+      -feature(compr_assign, enable).
+      -export([cat/1]).
+
+      cat(Files) ->
+          [Char || F <- Files,
+                   {ok, Bin} = file:read_file(F),
+                   Char <- unicode:characters_to_list(Bin)].
+
+  Own Id: OTP-19927
+  Application(s): compiler, stdlib
+  Related Id(s): PR-9153
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- There will now be a warning when using the `catch` operator, which has been
+  deprecated for a long time.
+
+  It is recommended to instead use `try`...`catch`...`end` but is also possible
+  to disable the warning by using the `nowarn_deprecated_catch` option.
+
+  Own Id: OTP-19938
+  Application(s): compiler, stdlib
+  Related Id(s): PR-10421
+
+- Multi-valued comprehensions according to EEP 78 has been implemented.
+
+  Example:
+
+      > [I, -I || I <- lists:seq(1, 5)].
+      [1,-1,2,-2,3,-3,4,-4,5,-5]
+
+  Own Id: OTP-19942
+  Application(s): compiler, debugger, stdlib, syntax_tools
+  Related Id(s): PR-9374
+
+- There will now be a warning for matches that unify constructors, such as the
+  following:
+
+      m({a,B} = {Y,Z}) -> . . .
+
+  Such a match can be rewritten to:
+
+      m({a=Y,B=B}) -> . . .
+
+  The compiler option `nowarn_match_alias_pats` can be used to disable the
+  warning.
+
+  Own Id: OTP-19943
+  Application(s): compiler, stdlib
+  Related Id(s): PR-10433
+
+- There is no longer a 32-bit Erlang/OTP build for Windows.
+
+  Own Id: OTP-19960
+  Application(s): otp
+
+- While the iteration order for maps is undefined, it is now guaranteed that all
+  ways of iterating over maps provides the elements in the same order. That is,
+  all of the following ways of iterating will produce the elements in the same
+  order:
+
+  - maps:keys/1
+  - maps:values/1
+  - maps:to_list/1
+  - `maps:to_list(maps:iterator(M))`
+  - Map comprehension: `{K,V} || K := V <- M`
+
+  Own Id: OTP-19963
+  Application(s): erts
+  Related Id(s): PR-10626
+
+- The default key exchange algorithm is now mlkem768x25519-sha256, a hybrid
+  quantum-resistant algorithm combining ML-KEM-768 with X25519. This provides
+  protection against both classical and quantum computer attacks while
+  maintaining backward compatibility through automatic fallback to other
+  algorithms when peers don't support it.
+
+  Own Id: OTP-19965
+  Application(s): ssh
+  Related Id(s): PR-10656
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The compiler now generates more efficient code for map comprehensions with
+  constant values that don't depend on the generator, such as the following:
+
+      #{K => 42} || K <- List}.
+      #{K => X || K <- List}.
+      #{K => {X, Y} || K <- List}.
+
+  Own Id: OTP-19968
+  Application(s): compiler
+  Related Id(s): PR-10646
+
+- The SSH daemon now defaults to disabled for shell and exec services,
+  implementing the "secure by default" principle. This prevents authenticated
+  users from executing arbitrary Erlang code unless explicitly configured.
+
+  Applications requiring shell or exec functionality must now explicitly enable:
+
+        %% Enable Erlang shell
+        ssh:daemon(Port, [{shell, {shell, start, []}} | Options])
+
+        %% Enable Erlang term evaluation via exec
+        ssh:daemon(Port, [{exec, erlang_eval} | Options])
+
+        %% Restore complete old behavior
+        ssh:daemon(Port, [{shell, {shell, start, []}},
+                          {exec, erlang_eval}
+                          | Options])
+
+  Own Id: OTP-19969
+  Application(s): ssh
+  Related Id(s): PR-10970
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The `odbc` application is now deprecated and is planned to be removed in
+  Erlang/OTP 30.
+
+  The `ftp` and `ct_ftp` modules are now deprecated and are planned to be
+  removed in Erlang/OTP 30.
+
+  Own Id: OTP-19980
+  Application(s): ftp, odbc
+  Related Id(s): PR-10804
+
+- The `array` module have been extended with several new functions. The internal
+  representation have been changed to allow the new functionality and
+  optimizations. Arrays serialized with `term_to_binary/1` in previous releases
+  are not compatible.
+
+  Own Id: OTP-20004
+  Application(s): stdlib
+  Related Id(s): PR-10578
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Added support for socket functions `recvmmsg()` and `sendmmsg()`.
+
+  Own Id: OTP-20015
+  Application(s): erts, kernel
+  Related Id(s): PR-10564
+
+- `m:erl_tar` will use less memory when extracting large tar entries to disk.
+  Instead of reading each tar entry into memory, `erl_tar` will now stream
+  data in chunks of 64KB. The chunk size is settable using the new
+  `{chunks,ChunkSize}` option.
+
+  The new `{max_size,Size}` option will set a limit on the total size of
+  extracted data to protect against filling up the disk.
+
+  Checking of symlinks has been improved. Some symlinks that were safe (such as
+  `dir/link -> ../file`) used to be rejected.
+
+  Own Id: OTP-20023
+  Application(s): stdlib
+  Related Id(s): PR-10814, PR-10818, PR-10821
+
+- Added a new module called `io_ansi` that allows the user to emit Virtual
+  Terminal Sequences (a.k.a. ANSI sequences) to the terminal in order to add
+  colors/styling to text or create fully-fledged terminal applications.
+
+  `io_ansi` uses the local terminfo database in order to be as cross-platform
+  compatible as possible.
+
+  It also works across nodes so that if functions on a remote node call
+  io_ansi:fwrite/1 it will use the destination terminal's terminfo database to
+  determine which sequences to emit. In practice, this means that you can call
+  functions in a remote shell session that use `io_ansi` and it will properly
+  detect the terminal sequences the target terminal can handle and will print
+  using them correctly.
+
+  Own Id: OTP-20028
+  Application(s): kernel, stdlib
+  Related Id(s): PR-9940
+
+- The `ignore_xref` attribute has been handled as a post-analysis filter by
+  build tools such as Rebar3. In this release, `xref` itself does the
+  filtering, ensuring that all tooling that calls `xref` for any purpose can
+  rely on these declarations to just work.
+
+  Own Id: OTP-20032
+  Application(s): tools
+  Related Id(s): PR-10592
+
+- New in this release is `ct_doctest`, a module that allows the user to test
+  documentation examples in Erlang module docs and documentation files.
+
+  ct_doctest allows you to:
+
+  - Test code examples using shell syntax and their returns
+  - Test code examples that should fail
+  - Write example modules that are compiled and available in shell examples
+  - Plugin other documentation parsing engines so that examples in, for example,
+    `edoc`, `asciidoc`, and others can also be tested.
+
+  See the documentation for more details.
+
+  Own Id: OTP-20034
+  Application(s): common_test
+  Related Id(s): PR-10824, PR-9315
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Application(s): asn1, common_test, compiler, crypto, debugger, dialyzer,
+  diameter, edoc, eunit, inets, kernel, megaco, mnesia, observer, odbc, os_mon,
+  otp, parsetools, public_key, reltool, runtime_tools, sasl, ssh, ssl, stdlib,
+  syntax_tools, tftp, tools, wx, xmerl
+  Related Id(s): PR-10839
+
+- Post quantum hybrid algorithm x25519mlkem768 is now the most preferred key
+  exchange group in the default configuration.
+
+  Post-quantum hybrid algorithms secp384r1mlkem1024 and secp256r1mlkem768 are
+  supported but have to be configured. The same goes for the plain post-quantum
+  algorithms mlkem1024, mlkem768, and mlkem512.
+
+  The most preferred signature algorithms are now post-quantum algorithms ML-DSA
+  and SLH-DSA if such certs are available in the configuration.
+
+  All these algorithms where available in OTP-28.4 but none of them preferred
+  and some of them changed default status.
+
+  Own Id: OTP-20070
+  Application(s): ssl
+  Related Id(s): PR-10949
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The `json` module now encodes and decodes quoted strings faster.
+  Improvements of up to 55 percent has been measured when decoding JSON data
+  with long strings.
+
+  The string:length/1, string:slice/2, and string:slice/3 functions have
+  been optimized. For some strings, they can be up to twice as fast.
+
+  Own Id: OTP-20072
+  Application(s): stdlib
+  Related Id(s): PR-10938, PR-10948
+
+- The SFTP subsystem is no longer enabled by default when starting an SSH
+  daemon. To enable it, add the subsystems option explicitly:
+
+      ssh:daemon(Port, [{subsystems, [ssh_sftpd:subsystem_spec([])]} | Options])
+
+  Own Id: OTP-20078
+  Application(s): ssh
+  Related Id(s): PR-10970
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+# POTENTIAL INCOMPATIBILITIES
+
+- Fixed (`inet`) module selection when calling (`gen_tcp`) listen and connect
+  and (`gen_udp`) open. Depending on the order of the options, the module option
+  (`tcp_module` or `udp_module`) was sometimes ignored.
+
+  Own Id: OTP-19695
+  Application(s): kernel
+  Related Id(s): GH-9822, PR-10013
+
+- `ssh:stop_deamon` now uses `supervisor:stop` for shutting down daemons. With
+  this change, the scenario when `ssh:stop_daemon` is called for a non-existing
+  process results in calling process exiting. Previously an error tuple was
+  returned (which was not documented).
+
+  Own Id: OTP-19801
+  Application(s): ssh
+  Related Id(s): PR-10253
+
+- The `mnesia_registry` module has been removed.
+
+  Own Id: OTP-19807
+  Application(s): mnesia
+  Related Id(s): PR-7315
+
+- In the default code path for the Erlang system, the current working directory
+  (`.`) is now in the last position instead of the first.
+
+  Own Id: OTP-19842
+  Application(s): erts, kernel
+
+  *** HIGHLIGHT ***
+
+- Before Erlang/OTP 29, attempting to bind variables in a comprehension would
+  compile successfully but fail at runtime. Example:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      * exception error: bad filter 2614250
+
+  In Erlang/OTP 29, attempting to bind a variable in a comprehension will fail
+  by default:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      * 5:14: matches using '=' are not allowed in comprehension qualifiers
+      unless the experimental 'compr_assign' language feature is enabled.
+      With 'compr_assign' enabled, a match 'P = E' will behave as a
+      strict generator 'P <-:- [E]'."
+
+  However, this example will work as expected if the `compr_assign` feature is
+  enabled when starting the runtime system:
+
+      $ erl -enable-feature compr_assign
+      . . .
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      [2614250]
+
+  Here is another example how `compr_assign` can be used:
+
+      -module(example).
+      -feature(compr_assign, enable).
+      -export([cat/1]).
+
+      cat(Files) ->
+          [Char || F <- Files,
+                   {ok, Bin} = file:read_file(F),
+                   Char <- unicode:characters_to_list(Bin)].
+
+  Own Id: OTP-19927
+  Application(s): compiler, stdlib
+  Related Id(s): PR-9153
+
+  *** HIGHLIGHT ***
+
+- The default key exchange algorithm is now mlkem768x25519-sha256, a hybrid
+  quantum-resistant algorithm combining ML-KEM-768 with X25519. This provides
+  protection against both classical and quantum computer attacks while
+  maintaining backward compatibility through automatic fallback to other
+  algorithms when peers don't support it.
+
+  Own Id: OTP-19965
+  Application(s): ssh
+  Related Id(s): PR-10656
+
+  *** HIGHLIGHT ***
+
+- The SSH daemon now defaults to disabled for shell and exec services,
+  implementing the "secure by default" principle. This prevents authenticated
+  users from executing arbitrary Erlang code unless explicitly configured.
+
+  Applications requiring shell or exec functionality must now explicitly enable:
+
+        %% Enable Erlang shell
+        ssh:daemon(Port, [{shell, {shell, start, []}} | Options])
+
+        %% Enable Erlang term evaluation via exec
+        ssh:daemon(Port, [{exec, erlang_eval} | Options])
+
+        %% Restore complete old behavior
+        ssh:daemon(Port, [{shell, {shell, start, []}},
+                          {exec, erlang_eval}
+                          | Options])
+
+  Own Id: OTP-19969
+  Application(s): ssh
+  Related Id(s): PR-10970
+
+  *** HIGHLIGHT ***
+
+- Changed ets:update_counter/4 and ets:update_element/4 to _always_ reject
+  default tuples smaller than the `keypos` of the table. Such keyless tuples are
+  now rejected even if the key exists in the table and the default tuple would
+  not be used. This is a subtle semantic change but is a nicer behavior for
+  development and testing as it will detect faulty default tuple arguments
+  earlier.
+
+  Own Id: OTP-19975
+  Application(s): erts
+  Related Id(s): PR-10674
+
+- Added explicit size validation guards for pre-authentication SSH messages to
+  improve defense-in-depth against DoS attacks. Messages now have per-field size
+  limits based on RFC specifications:
+
+  - Transport layer messages (DISCONNECT, IGNORE, DEBUG)
+  - Key exchange messages (DH, ECDH, DH-GEX)
+  - Service request messages (SERVICE_REQUEST, SERVICE_ACCEPT, EXT_INFO)
+
+  This change enhances the existing 256KB global packet size limit with granular
+  per-message validation. Compliant implementations are not affected.
+
+  Own Id: OTP-19995
+  Application(s): ssh
+  Related Id(s): PR-10739
+
+- The `array` module have been extended with several new functions. The internal
+  representation have been changed to allow the new functionality and
+  optimizations. Arrays serialized with `term_to_binary/1` in previous releases
+  are not compatible.
+
+  Own Id: OTP-20004
+  Application(s): stdlib
+  Related Id(s): PR-10578
+
+  *** HIGHLIGHT ***
+
+- The SFTP subsystem `root` option now properly rejects relative paths at daemon
+  startup. Previously, relative paths would cause unpredictable behavior as file
+  operations resolved relative to the Erlang VM's current working directory. The
+  option now requires an absolute path or empty string.
+
+  Own Id: OTP-20019
+  Application(s): ssh
+  Related Id(s): PR-10820
+
+- The gb_sets:from_ordset/1 and gb_trees:from_orddict/1 functions would
+  trust their inputs. If the input contained duplicates or was not properly
+  sorted, the resulting gb_set or gb_tree would be invalid, and any number of
+  interesting problems could occur.
+
+  In this release, these functions will raise an exception if their input is not
+  valid. That could mean that incorrect programs that **seemed** to work could
+  now stop working altogether.
+
+  There is also a new gb_trees:from_list/1 function for directly creating a
+  gb_tree from a list.
+
+  Own Id: OTP-20061
+  Application(s): stdlib
+  Related Id(s): PR-10910
+
+- Post quantum hybrid algorithm x25519mlkem768 is now the most preferred key
+  exchange group in the default configuration.
+
+  Post-quantum hybrid algorithms secp384r1mlkem1024 and secp256r1mlkem768 are
+  supported but have to be configured. The same goes for the plain post-quantum
+  algorithms mlkem1024, mlkem768, and mlkem512.
+
+  The most preferred signature algorithms are now post-quantum algorithms ML-DSA
+  and SLH-DSA if such certs are available in the configuration.
+
+  All these algorithms where available in OTP-28.4 but none of them preferred
+  and some of them changed default status.
+
+  Own Id: OTP-20070
+  Application(s): ssl
+  Related Id(s): PR-10949
+
+  *** HIGHLIGHT ***
+
+- The old Tcl-based implementation of `erl_errno_id()` has been replaced by our
+  own implementation now supporting more `errno` values on modern operating
+  systems. It now also returns the string `"errno_<ERRNO_INTEGER>"`
+  corresponding to the integer given as argument if the `errno` integer is
+  unknown instead of as previously just return the string `"unknown"`.
+
+  The result of `erl_errno_id()` is often converted into an atom and passed as
+  an error from a driver or a NIF.
+
+  Own Id: OTP-20076
+  Application(s): erts
+  Related Id(s): PR-10958, PR-10969
+
+- The SFTP subsystem is no longer enabled by default when starting an SSH
+  daemon. To enable it, add the subsystems option explicitly:
+
+      ssh:daemon(Port, [{subsystems, [ssh_sftpd:subsystem_spec([])]} | Options])
+
+  Own Id: OTP-20078
+  Application(s): ssh
+  Related Id(s): PR-10970
+
+  *** HIGHLIGHT ***
+
+- Always use secure renegotiation for TLS-1.2 specified in RFC 5746 from 2010.
+  Interoperability fallback option should no longer be needed.
+
+  Own Id: OTP-20080
+  Application(s): ssl
+  Related Id(s): PR-10979
+
+- The erlang:suspend_process/1 and erlang:suspend_process/2 BIFs now also
+  suspend BIF timers that will send messages to the process if the timer was
+  created using the PID of the process as destination. Timers created using
+  registered names are not affected.
+
+  Own Id: OTP-20095
+  Application(s): erts
+  Related Id(s): PR-10619, PR-11004
+
+# OTP-29.0
+
+## Improvements and New Features
+
+- Vendor dependencies and OpenVEX statements in the `otp` repository is now
+  scanned for vulnerabilities. It is verified that OTP security issues reported
+  at Github exist in the published OpenVEX statements, and issues are
+  automatically opened in the `otp` repository if vendor vulnerabilities are
+  detected.
+
+  Own Id: OTP-19763
+  Related Id(s): PR-10145, PR-10166, PR-10168, PR-10189, PR-10193,
+  PR-10195, PR-10197, PR-10202, OTP-19652, OTP-19775, OTP-19779
+
+- Documentation about how to validate the SBOM using sigstore has been added.
+
+  Own Id: OTP-19766
+  Related Id(s): GH-10151, PR-10187
+
+- The old-style type tests in guards (`integer`, `atom`, and so on) have been
+  scheduled for removal in Erlang/OTP 30. They have been deprecated for a long
+  time.
+
+  Own Id: OTP-19887
+  Related Id(s): PR-10417
+
+  *** HIGHLIGHT ***
+
+- Removed the undocumented `dyn_erl` utility.
+
+  Own Id: OTP-19933
+  Related Id(s): PR-10573
+
+- There is no longer a 32-bit Erlang/OTP build for Windows.
+
+  Own Id: OTP-19960
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- The Upcoming Potential Incompatibilities page has been updated to note that
+  in Erlang/OTP 30, `erlang:fun_info(Fun, pid)` will no longer retrieve a pid,
+  but will raise a `badarg` exception.
+
+  Own Id: OTP-20092
+  Related Id(s): PR-10998
+
+# asn1-5.5
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of asn1-5.5
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# common_test-1.31
+
+## Fixed Bugs and Malfunctions
+
+- Improved support for QuickCheck when writing property tests.
+
+  Own Id: OTP-20010
+  Related Id(s): PR-10783
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- `'EXIT'` messages are now formatted in the same way as `badmatch` errors.
+
+  Own Id: OTP-19910
+  Related Id(s): PR-10277
+
+- Error notifications now contain the name of the source file in which the error
+  occurred.
+
+  Own Id: OTP-19925
+  Related Id(s): GH-10260, PR-10269
+
+- New in this release is `ct_doctest`, a module that allows the user to test
+  documentation examples in Erlang module docs and documentation files.
+
+  ct_doctest allows you to:
+
+  - Test code examples using shell syntax and their returns
+  - Test code examples that should fail
+  - Write example modules that are compiled and available in shell examples
+  - Plugin other documentation parsing engines so that examples in, for example,
+    `edoc`, `asciidoc`, and others can also be tested.
+
+  See the documentation for more details.
+
+  Own Id: OTP-20034
+  Related Id(s): PR-10824, PR-9315
+
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of common_test-1.31
+>
+> compiler-10.0, crypto-4.5, debugger-4.1, erts-7.0, ftp-1.0, inets-6.0,
+> kernel-11.0, observer-2.1, runtime_tools-1.8.16, sasl-2.5, snmp-5.1.2,
+> ssh-4.0, stdlib-8.0, syntax_tools-1.7, tools-3.2, xmerl-1.3.8
+
+# compiler-10.0
+
+## Fixed Bugs and Malfunctions
+
+- For a function such as the following:
+
+      bar(S0) ->
+          S1 = setelement(8, S0, a),
+          S2 = setelement(7, S1, b),
+          setelement(5, S2, c).
+
+  the compiler would keep all of the calls to `setelement/3` and emit extra
+  unnecessary `set_tuple_element` instructions.
+
+  This has been corrected so that the compiler will never emit code that uses
+  the `set_tuple_element` instruction. In a future release, support for the
+  `set_tuple_element` will be removed from the runtime system.
+
+  Own Id: OTP-19751
+  Related Id(s): GH-10125, PR-10144
+
+- beam_lib:strip/1 will now retain the Beam debug information chunk produced
+  by the `beam_debug_info` option. The chunk will also be retained when combing
+  the `beam_debug_info` option with the undocumented `slim` option.
+
+  The runtime system will no longer crash when attempting to load modules that
+  have been compiled with `beam_debug_info` but lack the actual Beam debug info
+  chunk.
+
+  Own Id: OTP-19991
+  Related Id(s): GH-10557, PR-10735
+
+## Improvements and New Features
+
+- In comprehensions, a generator that builds a list with a single element will
+  now be optimized to avoid building and matching the list. Example:
+
+      [H || E <- List, H <- [erlang:phash2(E)], H rem 10 =:= 0]
+
+  Own Id: OTP-19672
+  Related Id(s): PR-9934
+
+- In the documentation for the `compile` module, a section has been added with
+  recommendations for implementors of languages running on the BEAM.
+  Documentation has also been added for the `to_abstr`, `to_exp`, and
+  `from_abstr` options.
+
+  The documentation for erlc now lists `.abstr` as one of the supported
+  options.
+
+  When compiling with the `to_abstr` option, the resulting `.abstr` file now
+  retains any `-doc` attributes present in the source code.
+
+  Own Id: OTP-19784
+  Related Id(s): PR-10230, PR-10234
+
+  *** HIGHLIGHT ***
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Related Id(s): PR-10617
+
+  *** HIGHLIGHT ***
+
+- The guard BIF `is_integer/3` has been added. It follows the design of the
+  original EEP-16, only changing the name from `is_between` to `is_integer`.
+  This BIF takes in 3 parameters, `Term`, `LowerBound`, and `UpperBound`.
+
+  It returns `true` if `Term`, `LowerBound`, and `UpperBound` are all integers,
+  and `LowerBound =< Term =< UpperBound`; otherwise, it returns false.
+
+  Example:
+
+      1> I = 42.
+      2> is_integer(I, 0, 100).
+      true
+
+  Own Id: OTP-19809
+  Related Id(s): PR-10276
+
+  *** HIGHLIGHT ***
+
+- Function application is now left associative. That means one can now write:
+
+      f(X)(Y)
+
+  instead of:
+
+      (f(X))(Y)
+
+  Own Id: OTP-19866
+  Related Id(s): PR-9223
+
+  *** HIGHLIGHT ***
+
+- There will now be a warning when exporting variables out of a subexpression.
+  For example:
+
+      case file:open(File, AllOpts = [write,{encoding,utf8}]) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  To avoid the warning, this can be rewritten to:
+
+      AllOpts = [write,{encoding,utf8}],
+      case file:open(File, AllOpts) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  The warning can be suppressed by giving option `nowarn_export_var_subexpr` to
+  the compiler.
+
+  Own Id: OTP-19898
+  Related Id(s): PR-9134
+
+  *** HIGHLIGHT ***
+
+- By default, the compiler will now warn for uses of the `and` and `or`
+  operators.
+
+  This warning can be suppressed using the `nowarn_obsolete_bool_op` compiler
+  option.
+
+  Own Id: OTP-19918
+  Related Id(s): PR-9115
+
+  *** HIGHLIGHT ***
+
+- Before Erlang/OTP 29, attempting to bind variables in a comprehension would
+  compile successfully but fail at runtime. Example:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      * exception error: bad filter 2614250
+
+  In Erlang/OTP 29, attempting to bind a variable in a comprehension will fail
+  by default:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      * 5:14: matches using '=' are not allowed in comprehension qualifiers
+      unless the experimental 'compr_assign' language feature is enabled.
+      With 'compr_assign' enabled, a match 'P = E' will behave as a
+      strict generator 'P <-:- [E]'."
+
+  However, this example will work as expected if the `compr_assign` feature is
+  enabled when starting the runtime system:
+
+      $ erl -enable-feature compr_assign
+      . . .
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      [2614250]
+
+  Here is another example how `compr_assign` can be used:
+
+      -module(example).
+      -feature(compr_assign, enable).
+      -export([cat/1]).
+
+      cat(Files) ->
+          [Char || F <- Files,
+                   {ok, Bin} = file:read_file(F),
+                   Char <- unicode:characters_to_list(Bin)].
+
+  Own Id: OTP-19927
+  Related Id(s): PR-9153
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- There will now be a warning when using the `catch` operator, which has been
+  deprecated for a long time.
+
+  It is recommended to instead use `try`...`catch`...`end` but is also possible
+  to disable the warning by using the `nowarn_deprecated_catch` option.
+
+  Own Id: OTP-19938
+  Related Id(s): PR-10421
+
+  *** HIGHLIGHT ***
+
+- Multi-valued comprehensions according to EEP 78 has been implemented.
+
+  Example:
+
+      > [I, -I || I <- lists:seq(1, 5)].
+      [1,-1,2,-2,3,-3,4,-4,5,-5]
+
+  Own Id: OTP-19942
+  Related Id(s): PR-9374
+
+  *** HIGHLIGHT ***
+
+- There will now be a warning for matches that unify constructors, such as the
+  following:
+
+      m({a,B} = {Y,Z}) -> . . .
+
+  Such a match can be rewritten to:
+
+      m({a=Y,B=B}) -> . . .
+
+  The compiler option `nowarn_match_alias_pats` can be used to disable the
+  warning.
+
+  Own Id: OTP-19943
+  Related Id(s): PR-10433
+
+  *** HIGHLIGHT ***
+
+- The compiler now generates more efficient code for map comprehensions with
+  constant values that don't depend on the generator, such as the following:
+
+      #{K => 42} || K <- List}.
+      #{K => X || K <- List}.
+      #{K => {X, Y} || K <- List}.
+
+  Own Id: OTP-19968
+  Related Id(s): PR-10646
+
+  *** HIGHLIGHT ***
+
+- Compilation times of modules with a huge number of calls to `element/2` has
+  been improved.
+
+  Own Id: OTP-20020
+  Related Id(s): GH-10807, PR-10819
+
+- The format of the debug information stored by the `beam_debug_info` option
+  (used by the edb debugger) has been updated to more easily extendible and to
+  contain more information about call targets. (See the linked PR for more
+  details.)
+
+  Own Id: OTP-20048
+  Related Id(s): PR-9814
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of compiler-10.0
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-8.0
+
+# crypto-5.9
+
+## Fixed Bugs and Malfunctions
+
+- Fixed crypto:hash_equals/2 and FIPS when crypto is statically linked to the
+  beam (with `--enable-static-nifs` and `--disable-dynamic-ssl-lib`).
+
+  Own Id: OTP-20025
+  Related Id(s): PR-10817
+
+## Improvements and New Features
+
+- The rand:bytes/1 and rand:bytes_s/2 functions have been optimized by
+  implementing a new internal callback function that crypto:rand_seed_alg/1
+  and crypto:alg_seed_alg_s/1 have been updated to use.
+
+  A new algorithm `crypto_prng1`, which also takes advantage of this new
+  internal callback, has been added to crypto:rand_seed_alg/2 and
+  crypto:rand_seed_alg_s/2. It is much faster then the existing `crypto_aes`,
+  in particular for generating bytes.
+
+  Own Id: OTP-19882
+  Related Id(s): PR-10453, OTP-19827
+
+- In interactive mode, application `crypto` is automatically loaded when the
+  `crypto` module is loaded. This will ensure that the correct value of
+  configuration parameter `fips_mode` is used to initialize OpenSSL if module
+  `crypto` is called/loaded before the application `crypto` has been loaded. In
+  embedded mode, module `crypto` will fail to load if the application has not
+  been loaded.
+
+  Own Id: OTP-20035
+  Related Id(s): PR-10830
+
+- OpenSSL engine support has been removed on Windows.
+
+  Own Id: OTP-20036
+  Related Id(s): PR-10836
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of crypto-5.9
+>
+> erts-9.0, kernel-6.0, stdlib-3.9
+
+# debugger-7.0
+
+## Improvements and New Features
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Related Id(s): PR-10617
+
+  *** HIGHLIGHT ***
+
+- Tools such as the debugger, `beam_lib`, and `xref` no longer support BEAM
+  files created before OTP 13B.
+
+  Own Id: OTP-19906
+  Related Id(s): PR-10519
+
+- Multi-valued comprehensions according to EEP 78 has been implemented.
+
+  Example:
+
+      > [I, -I || I <- lists:seq(1, 5)].
+      [1,-1,2,-2,3,-3,4,-4,5,-5]
+
+  Own Id: OTP-19942
+  Related Id(s): PR-9374
+
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of debugger-7.0
+>
+> compiler-8.0, erts-15.0, kernel-10.0, stdlib-7.0, wx-2.0
+
+# dialyzer-6.0
+
+## Improvements and New Features
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Related Id(s): PR-10617
+
+  *** HIGHLIGHT ***
+
+- The guard BIF `is_integer/3` has been added. It follows the design of the
+  original EEP-16, only changing the name from `is_between` to `is_integer`.
+  This BIF takes in 3 parameters, `Term`, `LowerBound`, and `UpperBound`.
+
+  It returns `true` if `Term`, `LowerBound`, and `UpperBound` are all integers,
+  and `LowerBound =< Term =< UpperBound`; otherwise, it returns false.
+
+  Example:
+
+      1> I = 42.
+      2> is_integer(I, 0, 100).
+      true
+
+  Own Id: OTP-19809
+  Related Id(s): PR-10276
+
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of dialyzer-6.0
+>
+> compiler-10.0, erts-12.0, kernel-8.0, stdlib-5.0, syntax_tools-2.0
+
+# diameter-2.7
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of diameter-2.7
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# edoc-1.5
+
+## Improvements and New Features
+
+- Changed behavior of EDoc so that when a module defines a private type and a
+  private function spec uses it, that type no longer gets included in the EDoc
+  chunk.
+
+  Own Id: OTP-20030
+  Related Id(s): PR-10770
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of edoc-1.5
+>
+> erts-11.0, inets-5.10, kernel-7.0, stdlib-4.0, syntax_tools-2.0, xmerl-1.3.7
+
+# eldap-1.3
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+> #### Full runtime dependencies of eldap-1.3
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# erl_interface-5.7
+
+## Improvements and New Features
+
+- Improved name consistency of EPMD protocol messages in documentation and code.
+  Renamed `PORT_PLEASE2_REQ` to `PORT2_REQ` and added prefix `EPMD_`.
+
+  Own Id: OTP-19734
+  Related Id(s): GH-10071, PR-10078
+
+- Replaced embedded OpenSSL MD5 implementation.
+
+  Own Id: OTP-20045
+  Related Id(s): PR-10870
+
+## Known Bugs and Problems
+
+- The `ei` API for decoding/encoding terms is not fully 64-bit compatible since
+  terms that have a representation on the external term format larger than 2 GB
+  cannot be handled.
+
+  Own Id: OTP-16607
+  Related Id(s): OTP-16608
+
+# erts-17.0
+
+## Fixed Bugs and Malfunctions
+
+- For a function such as the following:
+
+      bar(S0) ->
+          S1 = setelement(8, S0, a),
+          S2 = setelement(7, S1, b),
+          setelement(5, S2, c).
+
+  the compiler would keep all of the calls to `setelement/3` and emit extra
+  unnecessary `set_tuple_element` instructions.
+
+  This has been corrected so that the compiler will never emit code that uses
+  the `set_tuple_element` instruction. In a future release, support for the
+  `set_tuple_element` will be removed from the runtime system.
+
+  Own Id: OTP-19751
+  Related Id(s): GH-10125, PR-10144
+
+- Improved the handling of the logging directory for the start script on
+  Unix-like systems, so that it no longer crashes when `$ROOTDIR/log` is not
+  writable.
+
+  Own Id: OTP-19874
+  Related Id(s): GH-10341, PR-10348
+
+- The `-nocookie` option for `erl` is now documented.
+
+  Own Id: OTP-19935
+  Related Id(s): PR-10549
+
+- beam_lib:strip/1 will now retain the Beam debug information chunk produced
+  by the `beam_debug_info` option. The chunk will also be retained when combing
+  the `beam_debug_info` option with the undocumented `slim` option.
+
+  The runtime system will no longer crash when attempting to load modules that
+  have been compiled with `beam_debug_info` but lack the actual Beam debug info
+  chunk.
+
+  Own Id: OTP-19991
+  Related Id(s): GH-10557, PR-10735
+
+- Fixed potential symbol clashing on MacOS by passing `RTLD_LOCAL` to `dlopen`.
+  This will make symbols to not be resolvable between subsequently loaded
+  NIF/drivers, which is the default behavior on Linux and BSD.
+
+  Own Id: OTP-20026
+  Related Id(s): PR-10805
+
+- The `configure` script used to call `isfinite()` with argument `0`. That could
+  fail on some platforms. This has been changed to call `isfinite()` with `1.0`
+  instead.
+
+  Own Id: OTP-20088
+  Related Id(s): PR-10965
+
+## Improvements and New Features
+
+- The exported name space of the `beam` executable has been cleaned to only
+  expose symbols of documented interfaces like NIF and driver APIs. This will
+  avoid accidental name clashes with, for example, our statically linked
+  variants of PCRE2 and ZSTD. NIFs and drivers that abuse undocumented internal
+  interfaces will fail to load due to this change.
+
+  Own Id: OTP-19643
+  Related Id(s): PR-9864
+
+- Improved name consistency of EPMD protocol messages in documentation and code.
+  Renamed `PORT_PLEASE2_REQ` to `PORT2_REQ` and added prefix `EPMD_`.
+
+  Own Id: OTP-19734
+  Related Id(s): GH-10071, PR-10078
+
+- The JIT now generates better code for matching or creating binaries with
+  multiple little-endian segments.
+
+  Own Id: OTP-19747
+  Related Id(s): PR-10126
+
+  *** HIGHLIGHT ***
+
+- In the documentation for the `compile` module, a section has been added with
+  recommendations for implementors of languages running on the BEAM.
+  Documentation has also been added for the `to_abstr`, `to_exp`, and
+  `from_abstr` options.
+
+  The documentation for erlc now lists `.abstr` as one of the supported
+  options.
+
+  When compiling with the `to_abstr` option, the resulting `.abstr` file now
+  retains any `-doc` attributes present in the source code.
+
+  Own Id: OTP-19784
+  Related Id(s): PR-10230, PR-10234
+
+  *** HIGHLIGHT ***
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Related Id(s): PR-10617
+
+  *** HIGHLIGHT ***
+
+- Task stealing between schedulers has been further optimized.
+
+  Own Id: OTP-19793
+  Related Id(s): PR-9984
+
+- The guard BIF `is_integer/3` has been added. It follows the design of the
+  original EEP-16, only changing the name from `is_between` to `is_integer`.
+  This BIF takes in 3 parameters, `Term`, `LowerBound`, and `UpperBound`.
+
+  It returns `true` if `Term`, `LowerBound`, and `UpperBound` are all integers,
+  and `LowerBound =< Term =< UpperBound`; otherwise, it returns false.
+
+  Example:
+
+      1> I = 42.
+      2> is_integer(I, 0, 100).
+      true
+
+  Own Id: OTP-19809
+  Related Id(s): PR-10276
+
+  *** HIGHLIGHT ***
+
+- Calls to `trace:info(_, {M,F,A}, Item)`, with `Item` as `call_time`,
+  `call_memory`, or `all`, will no longer block all scheduler threads from
+  running.
+
+  Own Id: OTP-19811
+  Related Id(s): PR-10207
+
+- Full support for SCTP in `socket`. Not (yet) supported for FreeBSD.
+
+  Own Id: OTP-19834
+
+- In the default code path for the Erlang system, the current working directory
+  (`.`) is now in the last position instead of the first.
+
+  Own Id: OTP-19842
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Tools such as the debugger, `beam_lib`, and `xref` no longer support BEAM
+  files created before OTP 13B.
+
+  Own Id: OTP-19906
+  Related Id(s): PR-10519
+
+- Optimized ETS named table lookup scalability by replacing read locks with
+  lockless atomic operations.
+
+  Own Id: OTP-19919
+  Related Id(s): PR-7118
+
+- Removed the undocumented `dyn_erl` utility.
+
+  Own Id: OTP-19933
+  Related Id(s): PR-10573
+
+- Added zstd:flush/2 for flushing compressed data without closing the
+  compression context.
+
+  Own Id: OTP-19936
+  Related Id(s): GH-10345, PR-10511
+
+- While the iteration order for maps is undefined, it is now guaranteed that all
+  ways of iterating over maps provides the elements in the same order. That is,
+  all of the following ways of iterating will produce the elements in the same
+  order:
+
+  - maps:keys/1
+  - maps:values/1
+  - maps:to_list/1
+  - `maps:to_list(maps:iterator(M))`
+  - Map comprehension: `{K,V} || K := V <- M`
+
+  Own Id: OTP-19963
+  Related Id(s): PR-10626
+
+  *** HIGHLIGHT ***
+
+- Improved the performance of code loading.
+
+  Own Id: OTP-19966
+  Related Id(s): PR-10615
+
+- Changed ets:update_counter/4 and ets:update_element/4 to _always_ reject
+  default tuples smaller than the `keypos` of the table. Such keyless tuples are
+  now rejected even if the key exists in the table and the default tuple would
+  not be used. This is a subtle semantic change but is a nicer behavior for
+  development and testing as it will detect faulty default tuple arguments
+  earlier.
+
+  Own Id: OTP-19975
+  Related Id(s): PR-10674
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Improved compatibility with systems that lack certain shell utilities.
+
+  Own Id: OTP-20002
+  Related Id(s): PR-10647
+
+- It was previously not possible to check on the socket nif load result. A
+  successful load was self-evident, but a failure was only visible from the fact
+  that most `socket` functions failed with `notsup`. This has now been
+  improved such that the (socket nif) load result is visible in the info map
+  (from socket:info/0).
+
+  Own Id: OTP-20003
+
+- A new `configure` option `--enable-use-embedded-3pp-alternatives`/
+  `--disable-use-embedded-3pp-alternatives` has been added. When enabled
+  `configure` is forced to find alternatives to the embedded third-party
+  products (_3pps_) in the runtime system on the OS and when disabled
+  `configure` will use of all internal embedded 3pps. Currently these options
+  affect `zstd`, `zlib` and `ryu` (with `STL`). As of OTP 29 the default is to
+  try to find alternatives for `zstd` and `zlib` on the OS and otherwise use the
+  built-in versions. `zstd` needs to be of at least version 1.5.6 to be used and
+  `zlib` needs to be of at least 1.2.5 to be used.
+
+  The OS alternative to `ryu` needs a C++ compiler with C++17 support. Currently
+  the alternative to `ryu` may cause float to string conversions to produce
+  slightly different (but correct) results compared to `ryu`.
+
+  The argument `embedded_3pps` has been added to erlang:system_info/1. It
+  returns a map with information about the use of embedded 3pps in the runtime
+  system.
+
+  Own Id: OTP-20013
+  Related Id(s): PR-10894, PR-10986
+
+- Added support for socket functions `recvmmsg()` and `sendmmsg()`.
+
+  Own Id: OTP-20015
+  Related Id(s): PR-10564
+
+  *** HIGHLIGHT ***
+
+- There is a new NIF function `enif_term_size()`.
+
+  Own Id: OTP-20016
+  Related Id(s): PR-10782
+
+- Call trace match specs can use `Arg1, Arg2 | '_'` syntax to match functions
+  with at least N number of arguments.
+
+  Own Id: OTP-20017
+  Related Id(s): PR-10754
+
+- Replaced embedded OpenSSL MD5 implementation.
+
+  Own Id: OTP-20045
+  Related Id(s): PR-10870
+
+- The format of the debug information stored by the `beam_debug_info` option
+  (used by the edb debugger) has been updated to more easily extendible and to
+  contain more information about call targets. (See the linked PR for more
+  details.)
+
+  Own Id: OTP-20048
+  Related Id(s): PR-9814
+
+- There are new functions `erlang:exit_signal/2,3` replacing the old
+  `erlang:exit/2,3`. The primary purpose is better naming to distinguish between
+  exit _exceptions_ and exit _signals_. The new `exit_signal` functions will
+  also avoid a historical quirk when a process sends an exit signal to itself
+  with reason `normal`.
+
+  The old `erlang:exit/2,3` will work as before, but it is recommended to use
+  the new `exit:signal/2,3` functions for new or modified code. Deprecation of
+  `erlang:exit/2,3` with a compiler warning is planned for OTP 30.
+
+  Own Id: OTP-20069
+  Related Id(s): PR-10801
+
+- The old Tcl-based implementation of `erl_errno_id()` has been replaced by our
+  own implementation now supporting more `errno` values on modern operating
+  systems. It now also returns the string `"errno_<ERRNO_INTEGER>"`
+  corresponding to the integer given as argument if the `errno` integer is
+  unknown instead of as previously just return the string `"unknown"`.
+
+  The result of `erl_errno_id()` is often converted into an atom and passed as
+  an error from a driver or a NIF.
+
+  Own Id: OTP-20076
+  Related Id(s): PR-10958, PR-10969
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- When implementing an alternate distribution implementors can now use an
+  alternate *handshake complete* fun of arity 4 if needed.
+
+  Own Id: OTP-20090
+  Related Id(s): PR-10478
+
+- The erlang:suspend_process/1 and erlang:suspend_process/2 BIFs now also
+  suspend BIF timers that will send messages to the process if the timer was
+  created using the PID of the process as destination. Timers created using
+  registered names are not affected.
+
+  Own Id: OTP-20095
+  Related Id(s): PR-10619, PR-11004
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of erts-17.0
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# et-1.8
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+> #### Full runtime dependencies of et-1.8
+>
+> erts-9.0, kernel-5.3, runtime_tools-1.10, stdlib-3.4, wx-1.2
+
+# eunit-2.11
+
+## Improvements and New Features
+
+- Added `randomDelay` macro.
+
+  Own Id: OTP-19997
+  Related Id(s): PR-10614
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of eunit-2.11
+>
+> erts-9.0, kernel-11.0, stdlib-6.0
+
+# ftp-1.2.5
+
+## Fixed Bugs and Malfunctions
+
+- The `odbc` application is now deprecated and is planned to be removed in
+  Erlang/OTP 30.
+
+  The `ftp` and `ct_ftp` modules are now deprecated and are planned to be
+  removed in Erlang/OTP 30.
+
+  Own Id: OTP-19980
+  Related Id(s): PR-10804
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of ftp-1.2.5
+>
+> erts-7.0, kernel-6.0, runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+# inets-9.7
+
+## Improvements and New Features
+
+- A new option `max_connections_open` has been added to the `httpc` HTTP
+  client profile configuration. It limits the maximum number of concurrent HTTP
+  handler processes that can be open simultaneously.
+
+  When the limit is reached, new requests are queued internally and started
+  automatically as existing handlers complete. This prevents bandwidth
+  exhaustion in high-load scenarios where too many parallel connections cause
+  remote servers to close sockets before transfers finish (the
+  socket_closed_remotely error).
+
+  The option can be set via
+  `httpc:set_options({max_connections_open, 10}, Profile).`
+
+  The default value is `infinity` (unlimited), preserving backward
+  compatibility. The value must be a positive integer or `infinity` and must be
+  greater than or equal to `max_sessions`.
+
+  Own Id: OTP-19587
+  Related Id(s): GH-8841, PR-9712
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- Deprecated `mod_cgi` and `mod_actions`. Scheduled to be removed in OTP 30
+
+  Own Id: OTP-20071
+  Related Id(s): PR-10950
+
+> #### Full runtime dependencies of inets-9.7
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# jinterface-1.16
+
+## Improvements and New Features
+
+- The `jinterface` build now honors `SOURCE_DATE_EPOCH` for deterministic build
+  of `OtpErlang.jar`.
+
+  Own Id: OTP-19956
+  Related Id(s): PR-10556
+
+- Removed prebuilt java files from source tar file to avoid issues with
+  different version of the java runtime.
+
+  Own Id: OTP-20073
+  Related Id(s): PR-10951
+
+# kernel-11.0
+
+## Fixed Bugs and Malfunctions
+
+- Fixed (`inet`) module selection when calling (`gen_tcp`) listen and connect
+  and (`gen_udp`) open. Depending on the order of the options, the module option
+  (`tcp_module` or `udp_module`) was sometimes ignored.
+
+  Own Id: OTP-19695
+  Related Id(s): GH-9822, PR-10013
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The TCP/UDP compatibility layer has been fixed so that `inet_backend = socket`
+  now supports socket options `reuseport` and `reuseport_lb` for `gen_tcp` and
+  `gen_udp`.
+
+  Own Id: OTP-19917
+  Related Id(s): PR-10514
+
+- Some errors in config files for the application controller would result in
+  very cryptic crashes. Error handling has been improved to ensure that the file
+  name and line number of the offending token are now printed.
+
+  Own Id: OTP-20054
+  Related Id(s): GH-10214, PR-10259
+
+## Improvements and New Features
+
+- Added an option to set the `erl_boot_server` listen port.
+
+  Own Id: OTP-19708
+  Related Id(s): PR-9894
+
+- The memory footprint of some supervisors has been reduced by purging obsoleted
+  data when the supervisor is transitioning to and from hibernation.
+
+  Own Id: OTP-19713
+  Related Id(s): PR-9866
+
+- Improved name consistency of EPMD protocol messages in documentation and code.
+  Renamed `PORT_PLEASE2_REQ` to `PORT2_REQ` and added prefix `EPMD_`.
+
+  Own Id: OTP-19734
+  Related Id(s): GH-10071, PR-10078
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Refactored a `kernel_load_completed` clause in the `init` module for
+  conciseness.
+
+  Own Id: OTP-19786
+  Related Id(s): PR-10134
+
+- Full support for SCTP in `socket`. Not (yet) supported for FreeBSD.
+
+  Own Id: OTP-19834
+
+- In the default code path for the Erlang system, the current working directory
+  (`.`) is now in the last position instead of the first.
+
+  Own Id: OTP-19842
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- It was previously not possible to check on the socket nif load result. A
+  successful load was self-evident, but a failure was only visible from the fact
+  that most `socket` functions failed with `notsup`. This has now been
+  improved such that the (socket nif) load result is visible in the info map
+  (from socket:info/0).
+
+  Own Id: OTP-20003
+
+- Added support for socket functions `recvmmsg()` and `sendmmsg()`.
+
+  Own Id: OTP-20015
+  Related Id(s): PR-10564
+
+  *** HIGHLIGHT ***
+
+- Added a new module called `io_ansi` that allows the user to emit Virtual
+  Terminal Sequences (a.k.a. ANSI sequences) to the terminal in order to add
+  colors/styling to text or create fully-fledged terminal applications.
+
+  `io_ansi` uses the local terminfo database in order to be as cross-platform
+  compatible as possible.
+
+  It also works across nodes so that if functions on a remote node call
+  io_ansi:fwrite/1 it will use the destination terminal's terminfo database to
+  determine which sequences to emit. In practice, this means that you can call
+  functions in a remote shell session that use `io_ansi` and it will properly
+  detect the terminal sequences the target terminal can handle and will print
+  using them correctly.
+
+  Own Id: OTP-20028
+  Related Id(s): PR-9940
+
+  *** HIGHLIGHT ***
+
+- Polished the documentation groups, essentially removed groups that did nothing
+  but obscure the documentation.
+
+  Own Id: OTP-20029
+  Related Id(s): PR-10755
+
+- Added a new behavior, `data_publisher`, for building eventually consistent,
+  replicated data stores across distributed nodes. This is a generalization of
+  the `pg` module.
+
+  Own Id: OTP-20055
+  Related Id(s): PR-10426
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- When implementing an alternate distribution implementors can now use an
+  alternate *handshake complete* fun of arity 4 if needed.
+
+  Own Id: OTP-20090
+  Related Id(s): PR-10478
+
+> #### Full runtime dependencies of kernel-11.0
+>
+> crypto-5.8, erts-17.0, sasl-3.0, stdlib-8.0
+
+# megaco-4.9
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of megaco-4.9
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.26
+
+## Improvements and New Features
+
+- `mnesia` now has new functions `select_reverse/1-6` supporting iteration over
+  tables in reverse order.
+
+  Own Id: OTP-19611
+  Related Id(s): GH-8993, PR-9475
+
+- The `mnesia_registry` module has been removed.
+
+  Own Id: OTP-19807
+  Related Id(s): PR-7315
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of mnesia-4.26
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# observer-2.19
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of observer-2.19
+>
+> erts-15.0, et-1.5, kernel-10.0, runtime_tools-2.1, stdlib-5.0, wx-2.3
+
+# odbc-2.17
+
+## Fixed Bugs and Malfunctions
+
+- The `odbc` application is now deprecated and is planned to be removed in
+  Erlang/OTP 30.
+
+  The `ftp` and `ct_ftp` modules are now deprecated and are planned to be
+  removed in Erlang/OTP 30.
+
+  Own Id: OTP-19980
+  Related Id(s): PR-10804
+
+  *** HIGHLIGHT ***
+
+## Improvements and New Features
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of odbc-2.17
+>
+> erts-6.0, kernel-3.0, stdlib-2.0
+
+# os_mon-2.12
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of os_mon-2.12
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# parsetools-2.8
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of parsetools-2.8
+>
+> erts-6.0, kernel-3.0, stdlib-3.4
+
+# public_key-1.21
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Added an option for relaxed encoding of certificates to allow some values to
+  be empty. This may be used by other applications for interoperability reasons.
+  This option is not used by the `ssl` application.
+
+  Own Id: OTP-19822
+  Related Id(s): PR-10033
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of public_key-1.21
+>
+> asn1-5.0, crypto-5.8, erts-13.0, kernel-8.0, stdlib-4.0
+
+# reltool-1.1
+
+## Improvements and New Features
+
+- Removed the undocumented `dyn_erl` utility.
+
+  Own Id: OTP-19933
+  Related Id(s): PR-10573
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of reltool-1.1
+>
+> erts-15.0, kernel-9.0, sasl-4.2.1, stdlib-5.0, tools-2.6.14, wx-2.3
+
+# runtime_tools-2.4
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of runtime_tools-2.4
+>
+> erts-16.0, kernel-10.0, mnesia-4.12, stdlib-6.0
+
+# sasl-4.4
+
+## Fixed Bugs and Malfunctions
+
+- UNC paths are now handled on Windows.
+
+  Own Id: OTP-19949
+  Related Id(s): PR-10601
+
+## Improvements and New Features
+
+- Removed the undocumented `dyn_erl` utility.
+
+  Own Id: OTP-19933
+  Related Id(s): PR-10573
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of sasl-4.4
+>
+> erts-15.0, kernel-6.0, stdlib-4.0, tools-2.6.14
+
+# snmp-5.20.3
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+> #### Full runtime dependencies of snmp-5.20.3
+>
+> asn1-5.4, crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12,
+> runtime_tools-1.8.14, stdlib-5.0
+
+# ssh-6.0
+
+## Fixed Bugs and Malfunctions
+
+- Password-based authentication has been updated to follow current security best
+  practices. Key-based authentication remains recommended for production
+  systems.
+
+  Own Id: OTP-19982
+  Related Id(s): PR-10571
+
+- Added explicit size validation guards for pre-authentication SSH messages to
+  improve defense-in-depth against DoS attacks. Messages now have per-field size
+  limits based on RFC specifications:
+
+  - Transport layer messages (DISCONNECT, IGNORE, DEBUG)
+  - Key exchange messages (DH, ECDH, DH-GEX)
+  - Service request messages (SERVICE_REQUEST, SERVICE_ACCEPT, EXT_INFO)
+
+  This change enhances the existing 256KB global packet size limit with granular
+  per-message validation. Compliant implementations are not affected.
+
+  Own Id: OTP-19995
+  Related Id(s): PR-10739
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The SFTP subsystem `root` option now properly rejects relative paths at daemon
+  startup. Previously, relative paths would cause unpredictable behavior as file
+  operations resolved relative to the Erlang VM's current working directory. The
+  option now requires an absolute path or empty string.
+
+  Own Id: OTP-20019
+  Related Id(s): PR-10820
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+## Improvements and New Features
+
+- Using KEX strict extension names as specified in
+  draft-ietf-sshm-strict-kex-00. Pre standard names are still supported.
+
+  Own Id: OTP-19709
+  Related Id(s): PR-10115
+
+- Added an `alive` option to detect and terminate dead SSH connections.
+  Functionally equivalent to OpenSSH's ClientAlive*/ServerAlive* settings.
+
+  Own Id: OTP-19750
+  Related Id(s): PR-10372, PR-9125
+
+- `ssh:stop_deamon` now uses `supervisor:stop` for shutting down daemons. With
+  this change, the scenario when `ssh:stop_daemon` is called for a non-existing
+  process results in calling process exiting. Previously an error tuple was
+  returned (which was not documented).
+
+  Own Id: OTP-19801
+  Related Id(s): PR-10253
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The default key exchange algorithm is now mlkem768x25519-sha256, a hybrid
+  quantum-resistant algorithm combining ML-KEM-768 with X25519. This provides
+  protection against both classical and quantum computer attacks while
+  maintaining backward compatibility through automatic fallback to other
+  algorithms when peers don't support it.
+
+  Own Id: OTP-19965
+  Related Id(s): PR-10656
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The SSH daemon now defaults to disabled for shell and exec services,
+  implementing the "secure by default" principle. This prevents authenticated
+  users from executing arbitrary Erlang code unless explicitly configured.
+
+  Applications requiring shell or exec functionality must now explicitly enable:
+
+        %% Enable Erlang shell
+        ssh:daemon(Port, [{shell, {shell, start, []}} | Options])
+
+        %% Enable Erlang term evaluation via exec
+        ssh:daemon(Port, [{exec, erlang_eval} | Options])
+
+        %% Restore complete old behavior
+        ssh:daemon(Port, [{shell, {shell, start, []}},
+                          {exec, erlang_eval}
+                          | Options])
+
+  Own Id: OTP-19969
+  Related Id(s): PR-10970
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Added SFTP resource limits section to hardening guide covering `max_handles`,
+  `max_path`, and `max_files` with deployment recommendations.
+
+  Own Id: OTP-20031
+  Related Id(s): PR-10838
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- The SFTP subsystem is no longer enabled by default when starting an SSH
+  daemon. To enable it, add the subsystems option explicitly:
+
+      ssh:daemon(Port, [{subsystems, [ssh_sftpd:subsystem_spec([])]} | Options])
+
+  Own Id: OTP-20078
+  Related Id(s): PR-10970
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The SSH hardening guide has been improved with a timeout overview table
+  replacing the previous image, corrected terminology ("authenticated" instead
+  of "authorized"), and new examples for loopback binding, public key user
+  checking, and password lockout using ETS.
+
+  Own Id: OTP-20079
+  Related Id(s): PR-10970
+
+- With this change usage of `zlib` compression algorithm in SSH is deprecated
+  and scheduled for removal in OTP 30.0
+
+  Own Id: OTP-20099
+  Related Id(s): PR-11010
+
+> #### Full runtime dependencies of ssh-6.0
+>
+> crypto-5.7, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-8.0
+
+# ssl-11.6
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- Post quantum hybrid algorithm x25519mlkem768 is now the most preferred key
+  exchange group in the default configuration.
+
+  Post-quantum hybrid algorithms secp384r1mlkem1024 and secp256r1mlkem768 are
+  supported but have to be configured. The same goes for the plain post-quantum
+  algorithms mlkem1024, mlkem768, and mlkem512.
+
+  The most preferred signature algorithms are now post-quantum algorithms ML-DSA
+  and SLH-DSA if such certs are available in the configuration.
+
+  All these algorithms where available in OTP-28.4 but none of them preferred
+  and some of them changed default status.
+
+  Own Id: OTP-20070
+  Related Id(s): PR-10949
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Always use secure renegotiation for TLS-1.2 specified in RFC 5746 from 2010.
+  Interoperability fallback option should no longer be needed.
+
+  Own Id: OTP-20080
+  Related Id(s): PR-10979
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of ssl-11.6
+>
+> crypto-5.8, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.20.3,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-8.0
+
+## Fixed Bugs and Malfunctions
+
+- Fixed an issue in digraph_utils:roots/1 where roots could be missed in some
+  cases.
+
+  Own Id: OTP-19932
+  Related Id(s): PR-10510
+
+- beam_lib:strip/1 will now retain the Beam debug information chunk produced
+  by the `beam_debug_info` option. The chunk will also be retained when combing
+  the `beam_debug_info` option with the undocumented `slim` option.
+
+  The runtime system will no longer crash when attempting to load modules that
+  have been compiled with `beam_debug_info` but lack the actual Beam debug info
+  chunk.
+
+  Own Id: OTP-19991
+  Related Id(s): GH-10557, PR-10735
+
+- Fixed a crash when zstd:compress/2 was asked to compress empty data.
+
+  Own Id: OTP-20001
+  Related Id(s): GH-10650, PR-10653
+
+## Improvements and New Features
+
+- Error return values from functions in `zip` now also specify which file in
+  the archive the error belongs to.
+
+  Own Id: OTP-19663
+  Related Id(s): PR-9899
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- The undocumented and unsupported function lists:zf/2 is now deprecated.
+
+  Own Id: OTP-19783
+  Related Id(s): PR-10161
+
+- Native records as described in EEP-79 has been implemented.
+
+  A native record is a data structure similar to the traditional tuple-based
+  records, except that is a true data type.
+
+  Native records are considered experimental in Erlang/OTP 29 and possibly also
+  in Erlang/OTP 30, meaning that their behavior may change, potentially
+  requiring updates to applications that use them.
+
+  Own Id: OTP-19785
+  Related Id(s): PR-10617
+
+  *** HIGHLIGHT ***
+
+- The new `supervior:stop/1,2` functions can be used to manage the dynamic parts
+  of a supervisor tree in an application from outside the tree but in the same
+  application.
+
+  Own Id: OTP-19800
+  Related Id(s): PR-9209
+
+- Added a new constructor array:from/2.
+
+  Own Id: OTP-19815
+  Related Id(s): PR-10304
+
+- There are new functions for random permutation of a list: rand:shuffle/1 and
+  rand:shuffle_s/2. They are inspired by a suggestion and discussion on
+  ErlangForums.
+
+  Own Id: OTP-19826
+  Related Id(s): PR-10281
+
+  *** HIGHLIGHT ***
+
+- The undocumented functions erl_eval:extended_parse_exprs/1 and
+  erl_eval:extended_parse_term/1 will now be faster when called with a long
+  list of tokens. (These functions are used by `qlc` and the shell.)
+
+  Own Id: OTP-19838
+  Related Id(s): PR-10338
+
+- The `unicode` module now supports the Unicode 17 standard.
+
+  Own Id: OTP-19853
+  Related Id(s): PR-10382
+
+- Added functions to `unicode` for recognizing whitespaces and identifiers.
+
+  Own Id: OTP-19858
+  Related Id(s): PR-10387
+
+- The rand:bytes/1 and rand:bytes_s/2 functions have been optimized by
+  implementing a new internal callback function that crypto:rand_seed_alg/1
+  and crypto:alg_seed_alg_s/1 have been updated to use.
+
+  A new algorithm `crypto_prng1`, which also takes advantage of this new
+  internal callback, has been added to crypto:rand_seed_alg/2 and
+  crypto:rand_seed_alg_s/2. It is much faster then the existing `crypto_aes`,
+  in particular for generating bytes.
+
+  Own Id: OTP-19882
+  Related Id(s): PR-10453, OTP-19827
+
+- There will now be a warning when exporting variables out of a subexpression.
+  For example:
+
+      case file:open(File, AllOpts = [write,{encoding,utf8}]) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  To avoid the warning, this can be rewritten to:
+
+      AllOpts = [write,{encoding,utf8}],
+      case file:open(File, AllOpts) of
+          {ok,Fd} ->
+              {Fd,AllOpts}
+      end
+
+  The warning can be suppressed by giving option `nowarn_export_var_subexpr` to
+  the compiler.
+
+  Own Id: OTP-19898
+  Related Id(s): PR-9134
+
+  *** HIGHLIGHT ***
+
+- There are new functions in the shell for returning process information.
+
+  The `pi/1` function is shortcut for erlang:process_info/1. The `pi/3`
+  function takes the three numbers from a pid, constructs a pid, and calls
+  `process_info/1`.
+
+  Examples:
+
+      1> pi(<0.90.0>).
+      [{current_function,{c,pinfo,1}},
+      {initial_call,{erlang,apply,2}},
+      {status,running},
+      ...
+      2> pi(0, 90, 0).
+      [{current_function,{c,pinfo,1}},
+      {initial_call,{erlang,apply,2}},
+      {status,running},
+      ...
+
+  Own Id: OTP-19903
+  Related Id(s): PR-10422
+
+- Tools such as the debugger, `beam_lib`, and `xref` no longer support BEAM
+  files created before OTP 13B.
+
+  Own Id: OTP-19906
+  Related Id(s): PR-10519
+
+- The `mcalendar` module has been updated to use the much faster than before
+  Neri-Schneider algorithm for Gregorian calendar calculations, and been
+  extended to handle negative years.
+
+  Own Id: OTP-19912
+  Related Id(s): PR-10449
+
+- `graph` is a new module that is a functional equivalent of the `digraph` and
+  `digraph_utils` modules.
+
+  Own Id: OTP-19922
+  Related Id(s): PR-10532
+
+  *** HIGHLIGHT ***
+
+- Before Erlang/OTP 29, attempting to bind variables in a comprehension would
+  compile successfully but fail at runtime. Example:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      * exception error: bad filter 2614250
+
+  In Erlang/OTP 29, attempting to bind a variable in a comprehension will fail
+  by default:
+
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      * 5:14: matches using '=' are not allowed in comprehension qualifiers
+      unless the experimental 'compr_assign' language feature is enabled.
+      With 'compr_assign' enabled, a match 'P = E' will behave as a
+      strict generator 'P <-:- [E]'."
+
+  However, this example will work as expected if the `compr_assign` feature is
+  enabled when starting the runtime system:
+
+      $ erl -enable-feature compr_assign
+      . . .
+      1> fh(List) -> [H || E <- List, H = erlang:phash2(E), H rem 10 =:= 0].
+      ok
+      2> fh(lists:seq(1, 10)).
+      [2614250]
+
+  Here is another example how `compr_assign` can be used:
+
+      -module(example).
+      -feature(compr_assign, enable).
+      -export([cat/1]).
+
+      cat(Files) ->
+          [Char || F <- Files,
+                   {ok, Bin} = file:read_file(F),
+                   Char <- unicode:characters_to_list(Bin)].
+
+  Own Id: OTP-19927
+  Related Id(s): PR-9153
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Removed the undocumented `dyn_erl` utility.
+
+  Own Id: OTP-19933
+  Related Id(s): PR-10573
+
+- The functions erl_tar:add/3 and erl_tar:add/4 now accepts the
+  `{mode,Mode}` option for setting the permission of the file.
+
+  Own Id: OTP-19934
+  Related Id(s): PR-10524
+
+- Added zstd:flush/2 for flushing compressed data without closing the
+  compression context.
+
+  Own Id: OTP-19936
+  Related Id(s): GH-10345, PR-10511
+
+- There will now be a warning when using the `catch` operator, which has been
+  deprecated for a long time.
+
+  It is recommended to instead use `try`...`catch`...`end` but is also possible
+  to disable the warning by using the `nowarn_deprecated_catch` option.
+
+  Own Id: OTP-19938
+  Related Id(s): PR-10421
+
+  *** HIGHLIGHT ***
+
+- Multi-valued comprehensions according to EEP 78 has been implemented.
+
+  Example:
+
+      > [I, -I || I <- lists:seq(1, 5)].
+      [1,-1,2,-2,3,-3,4,-4,5,-5]
+
+  Own Id: OTP-19942
+  Related Id(s): PR-9374
+
+  *** HIGHLIGHT ***
+
+- There will now be a warning for matches that unify constructors, such as the
+  following:
+
+      m({a,B} = {Y,Z}) -> . . .
+
+  Such a match can be rewritten to:
+
+      m({a=Y,B=B}) -> . . .
+
+  The compiler option `nowarn_match_alias_pats` can be used to disable the
+  warning.
+
+  Own Id: OTP-19943
+  Related Id(s): PR-10433
+
+  *** HIGHLIGHT ***
+
+- The `array` module have been extended with several new functions. The internal
+  representation have been changed to allow the new functionality and
+  optimizations. Arrays serialized with `term_to_binary/1` in previous releases
+  are not compatible.
+
+  Own Id: OTP-20004
+  Related Id(s): PR-10578
+
+  *** HIGHLIGHT ***
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- `m:erl_tar` will use less memory when extracting large tar entries to disk.
+  Instead of reading each tar entry into memory, `erl_tar` will now stream
+  data in chunks of 64KB. The chunk size is settable using the new
+  `{chunks,ChunkSize}` option.
+
+  The new `{max_size,Size}` option will set a limit on the total size of
+  extracted data to protect against filling up the disk.
+
+  Checking of symlinks has been improved. Some symlinks that were safe (such as
+  `dir/link -> ../file`) used to be rejected.
+
+  Own Id: OTP-20023
+  Related Id(s): PR-10814, PR-10818, PR-10821
+
+  *** HIGHLIGHT ***
+
+- Added a new module called `io_ansi` that allows the user to emit Virtual
+  Terminal Sequences (a.k.a. ANSI sequences) to the terminal in order to add
+  colors/styling to text or create fully-fledged terminal applications.
+
+  `io_ansi` uses the local terminfo database in order to be as cross-platform
+  compatible as possible.
+
+  It also works across nodes so that if functions on a remote node call
+  io_ansi:fwrite/1 it will use the destination terminal's terminfo database to
+  determine which sequences to emit. In practice, this means that you can call
+  functions in a remote shell session that use `io_ansi` and it will properly
+  detect the terminal sequences the target terminal can handle and will print
+  using them correctly.
+
+  Own Id: OTP-20028
+  Related Id(s): PR-9940
+
+  *** HIGHLIGHT ***
+
+- Polished the documentation groups, essentially removed groups that did nothing
+  but obscure the documentation.
+
+  Own Id: OTP-20029
+  Related Id(s): PR-10755
+
+- The gb_sets:from_ordset/1 and gb_trees:from_orddict/1 functions would
+  trust their inputs. If the input contained duplicates or was not properly
+  sorted, the resulting gb_set or gb_tree would be invalid, and any number of
+  interesting problems could occur.
+
+  In this release, these functions will raise an exception if their input is not
+  valid. That could mean that incorrect programs that **seemed** to work could
+  now stop working altogether.
+
+  There is also a new gb_trees:from_list/1 function for directly creating a
+  gb_tree from a list.
+
+  Own Id: OTP-20061
+  Related Id(s): PR-10910
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+- The `json` module now encodes and decodes quoted strings faster.
+  Improvements of up to 55 percent has been measured when decoding JSON data
+  with long strings.
+
+  The string:length/1, string:slice/2, and string:slice/3 functions have
+  been optimized. For some strings, they can be up to twice as fast.
+
+  Own Id: OTP-20072
+  Related Id(s): PR-10938, PR-10948
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of stdlib-8.0
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-11.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# syntax_tools-4.1
+
+## Fixed Bugs and Malfunctions
+
+- merl:compile_and_load/1 could crash when compiling code containing comments.
+
+  merl:quote/2 would fail to handle literal UTF-8 encoded binaries.
+
+  Own Id: OTP-20077
+  Related Id(s): PR-10243, PR-10962
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- Multi-valued comprehensions according to EEP 78 has been implemented.
+
+  Example:
+
+      > [I, -I || I <- lists:seq(1, 5)].
+      [1,-1,2,-2,3,-3,4,-4,5,-5]
+
+  Own Id: OTP-19942
+  Related Id(s): PR-9374
+
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of syntax_tools-4.1
+>
+> compiler-9.0, erts-16.0, kernel-10.3, stdlib-8.0
+
+# tftp-1.3
+
+## Improvements and New Features
+
+- The legacy `and` and `or` operators have been replaced with other language
+  constructs.
+
+  Own Id: OTP-19744
+  Related Id(s): PR-10114, PR-10554, PR-10568, PR-10579, PR-10580,
+  PR-10585, PR-10598, PR-10710, PR-10718, PR-10730
+
+- All use of legacy `catch` in the TFTP application has been rewritten.
+
+  In the process, deep return using `exit/1` or `throw/1` from callbacks has
+  been changed to only work with `throw/1`, as customary. This was considered a
+  misfeature.
+
+  Explicit loading of callback module or logger module has been removed, since
+  that was against what one would expect for embedded mode.
+
+  Own Id: OTP-19996
+  Related Id(s): PR-10753
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of tftp-1.3
+>
+> erts-6.0, kernel-6.0, stdlib-5.0
+
+# tools-4.2
+
+## Fixed Bugs and Malfunctions
+
+- Fixed "unbalanced parenthesis" issue when pressing TAB in emacs erlang shell.
+
+  Own Id: OTP-19921
+  Related Id(s): GH-8569, PR-10642
+
+- The minimum supported Emacs version for `erlang-mode` has been raised from
+  24.3 to 27.1. Compatibility shims for older Emacs versions have been removed.
+
+  The `erlang-mode` package version now tracks the Erlang/OTP release version
+  (29.0) for consistent version numbers across package managers.
+
+  Own Id: OTP-20059
+  Related Id(s): PR-10892
+
+## Improvements and New Features
+
+- Tools such as the debugger, `beam_lib`, and `xref` no longer support BEAM
+  files created before OTP 13B.
+
+  Own Id: OTP-19906
+  Related Id(s): PR-10519
+
+- The `ignore_xref` attribute has been handled as a post-analysis filter by
+  build tools such as Rebar3. In this release, `xref` itself does the
+  filtering, ensuring that all tooling that calls `xref` for any purpose can
+  rely on these declarations to just work.
+
+  Own Id: OTP-20032
+  Related Id(s): PR-10592
+
+  *** HIGHLIGHT ***
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of tools-4.2
+>
+> compiler-8.5, erts-15.0, erts-15.0, kernel-10.0, runtime_tools-2.1, stdlib-6.0
+
+# wx-2.6
+
+## Improvements and New Features
+
+- Documentation about how to validate the SBOM using sigstore has been added.
+
+  Own Id: OTP-19766
+  Related Id(s): GH-10151, PR-10187
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of wx-2.6
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# xmerl-2.2
+
+## Improvements and New Features
+
+- Only minor internal changes.
+
+  Own Id: OTP-19964
+
+- Added support for `-unsafe` attributes, which is used to mark functions as
+  unsafe to use.
+
+  This is similar to but separate from deprecation, and the compiler will by
+  default now generate warnings for calls to functions in Erlang/OTP that are
+  known to be always unsafe.
+
+  Furthermore, `xref` can now be used to find calls to functions in another
+  application that lack a `-doc` attribute (`undocumented_function_calls`),
+  calls to functions in another application marked `-doc false.`
+  (`private_function_calls`), as well as calls to unsafe functions
+  (`unsafe_function_calls`).
+
+  Own Id: OTP-20066
+  Related Id(s): PR-10839
+
+  *** HIGHLIGHT ***
+
+> #### Full runtime dependencies of xmerl-2.2
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Alexandre Rodrigues, Alex Mickelson, Andreas Hasselberg, Andrew Bennett,
+Bentheburrito, Bernhard M. Wiedemann, Bozhidar Batsov, Claes Nästén, Daniel
+Gorin, Daniel Kukula, dependabotbot, Eksperimental, Eric Meadows-Jönsson,
+erlang-bot-appbot, felipe stival, Fernando Areias, Holger Weiß, Ievgen
+Pyrogov, Ilya Averyanov, Ilya Klyuchnikov, Jan Uhlig, Jérôme de Bretagne, João
+Henrique Ferreira de Freitas, Johannes Christ, Jonatan Männchen, José Valim,
+krishnadas, Loïc Hoguin, loscher, Maria Scott, Marko Mindek, matt, Mend
+Renovate, Michael Daniels, Michał Muskała, Nelson Vides, Nick Vatamaniuc,
+Olexandr88, Paul Guyot, Paulo F. Oliveira, Paulo Tomé, Petr Sumbera, Preet,
+Radek Szymczyszyn, Rasmus Précenth, Richard Carlsson, Robert Ismo, Robin
+Morisset, Sam Weaver, Sébastien Saint-Sevin, Sergey Fedorov, siiky, Simon
+Cornish, spoo, Stefan Grundmann, Takeru Ohta, Vadim Yanitskiy, Vance Shipley,
+Wade Mealing, Wei Huang, williamthome, yagogarea, Zabrane, Zeyu Zhang, наб
+
