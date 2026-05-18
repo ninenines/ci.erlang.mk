@@ -2,7 +2,7 @@
 
 rm -rf ./otp
 git clone https://github.com/erlang/otp
-cd otp && git tag | grep OTP- | sort -V > ../VERSIONS
+cd otp && git tag | grep OTP- | grep -v rc | sort -V > ../VERSIONS
 cd -
 rm -rf ./otp
 
