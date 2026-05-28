@@ -1,0 +1,145 @@
+Patch Package:           OTP 27.3.4.12
+Git Tag:                 OTP-27.3.4.12
+Date:                    2026-05-27
+Trouble Report Id:       OTP-20112, OTP-20128, OTP-20129, OTP-20130,
+                         OTP-20140, OTP-20141
+Seq num:                 CVE-2026-42789, CVE-2026-42790, ERIERL-1314,
+                         GH-11088, PR-11079, PR-11089, PR-11123,
+                         PR-11124, PR-11125, PR-11136
+System:                  OTP
+Release:                 27
+Application:             compiler-8.6.1.5, inets-9.3.2.5,
+                         public_key-1.17.1.3, ssl-11.2.12.8
+Predecessor:             OTP 27.3.4.11
+
+Check out the git tag OTP-27.3.4.12, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- 'public_key', Adhere to RFC 9525, and remove support for legacy fallback to
+  check hostname against subject common name. Also improve error handling
+  creating two separate errors for name constraint check for subject names and
+  subject alternative names.
+
+  'ssl'. Error handling is slightly changed to better reflect public_key
+  behaviour.
+
+  Own Id: OTP-20130
+  Application(s): public_key, ssl
+  Related Id(s): PR-11124, CVE-2026-42790
+
+# compiler-8.6.1.5
+
+The compiler-8.6.1.5 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In rare circumstances, optimization of boolean expressions could invert the
+  boolean value.
+
+  Own Id: OTP-20140
+  Related Id(s): GH-11088, PR-11089
+
+> #### Full runtime dependencies of compiler-8.6.1.5
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# inets-9.3.2.5
+
+The inets-9.3.2.5 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A call to httpd:reload_config/2 now validates the new configuration before
+  removing the old one, leaving the server running in case of faulty config,
+  instead of putting it in an unrecoverable state.
+
+  Own Id: OTP-20128
+  Related Id(s): ERIERL-1314, PR-11079
+
+> #### Full runtime dependencies of inets-9.3.2.5
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# public_key-1.17.1.3
+
+The public_key-1.17.1.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- OCSP responder certificates are now checked for expiration before being
+  accepted as authorized responders. Previously, expired or not-yet-valid
+  responder certificates were incorrectly accepted when verifying OCSP
+  responses.
+
+  Own Id: OTP-20112
+  Related Id(s): PR-11136
+
+- Corrected basic constraint path validation check in accordance to RFC 5280.
+
+  Own Id: OTP-20129
+  Related Id(s): PR-11123, CVE-2026-42789
+
+- 'public_key', Adhere to RFC 9525, and remove support for legacy fallback to
+  check hostname against subject common name. Also improve error handling
+  creating two separate errors for name constraint check for subject names and
+  subject alternative names.
+
+  'ssl'. Error handling is slightly changed to better reflect public_key
+  behaviour.
+
+  Own Id: OTP-20130
+  Related Id(s): PR-11124, CVE-2026-42790
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of public_key-1.17.1.3
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# ssl-11.2.12.8
+
+Note! The ssl-11.2.12.8 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.17.1.3 (first satisfied in OTP 27.3.4.12)
+
+## Fixed Bugs and Malfunctions
+
+- 'public_key', Adhere to RFC 9525, and remove support for legacy fallback to
+  check hostname against subject common name. Also improve error handling
+  creating two separate errors for name constraint check for subject names and
+  subject alternative names.
+
+  'ssl'. Error handling is slightly changed to better reflect public_key
+  behaviour.
+
+  Own Id: OTP-20130
+  Related Id(s): PR-11124, CVE-2026-42790
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- Could cause server to terminate a connection without an alert towards a bad
+  client.
+
+  Own Id: OTP-20141
+  Related Id(s): PR-11125
+
+> #### Full runtime dependencies of ssl-11.2.12.8
+>
+> crypto-5.0, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.17.1.3,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+Paul Guyot
+

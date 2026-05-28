@@ -1,0 +1,161 @@
+Patch Package:           OTP 26.2.5.21
+Git Tag:                 OTP-26.2.5.21
+Date:                    2026-05-27
+Trouble Report Id:       OTP-20098, OTP-20128, OTP-20129, OTP-20130
+Seq num:                 CVE-2026-42789, CVE-2026-42790, ERIERL-1314,
+                         PR-10976, PR-11079, PR-11123, PR-11124
+System:                  OTP
+Release:                 26
+Application:             erts-14.2.5.15, inets-9.1.0.7,
+                         public_key-1.15.1.7, ssl-11.1.4.13
+Predecessor:             OTP 26.2.5.20
+
+ Check out the git tag OTP-26.2.5.21, and build a full OTP system
+ including documentation. Apply one or more applications from this
+ build as patches to your installation using the 'otp_patch_apply'
+ tool. For information on install requirements, see descriptions for
+ each application version below.
+
+ ---------------------------------------------------------------------
+ --- POTENTIAL INCOMPATIBILITIES -------------------------------------
+ ---------------------------------------------------------------------
+
+  OTP-20130    Application(s): public_key, ssl
+               Related Id(s): PR-11124, CVE-2026-42790
+
+               'public_key', Adhere to RFC 9525, and remove support
+               for legacy fallback to check hostname against subject
+               common name. Also improve error handling creating two
+               separate errors for name constraint check for subject
+               names and subject alternative names.
+
+               'ssl'. Error handling is slightly changed to better
+               reflect public_key behaviour.
+
+
+ ---------------------------------------------------------------------
+ --- erts-14.2.5.15 --------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The erts-14.2.5.15 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20098    Application(s): erts
+               Related Id(s): PR-10976
+
+               Fixed bug in enif_make_map_from_arrays for arrays with
+               at least 33 keys. If duplicate keys existed, instead of
+               failing, it would skip the duplicates. If less than 33
+               unique keys existed, an internally inconsistent and
+               broken map was returned.
+
+
+ Full runtime dependencies of erts-14.2.5.15: kernel-9.0, sasl-3.3,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- inets-9.1.0.7 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ The inets-9.1.0.7 application can be applied independently of other
+ applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20128    Application(s): inets
+               Related Id(s): ERIERL-1314, PR-11079
+
+               A call to httpd:reload_config/2 now validates the new
+               configuration before removing the old one, leaving the
+               server running in case of faulty config, instead of
+               putting it in an unrecoverable state.
+
+
+ Full runtime dependencies of inets-9.1.0.7: erts-14.0, kernel-9.0,
+ mnesia-4.12, public_key-1.13, runtime_tools-1.8.14, ssl-9.0,
+ stdlib-5.0, stdlib-5.0
+
+
+ ---------------------------------------------------------------------
+ --- public_key-1.15.1.7 ---------------------------------------------
+ ---------------------------------------------------------------------
+
+ The public_key-1.15.1.7 application can be applied independently of
+ other applications on a full OTP 26 installation.
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20129    Application(s): public_key
+               Related Id(s): PR-11123, CVE-2026-42789
+
+               Corrected basic constraint path validation check in
+               accordance to RFC 5280.
+
+
+  OTP-20130    Application(s): public_key, ssl
+               Related Id(s): PR-11124, CVE-2026-42790
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               'public_key', Adhere to RFC 9525, and remove support
+               for legacy fallback to check hostname against subject
+               common name. Also improve error handling creating two
+               separate errors for name constraint check for subject
+               names and subject alternative names.
+
+               'ssl'. Error handling is slightly changed to better
+               reflect public_key behaviour.
+
+
+ Full runtime dependencies of public_key-1.15.1.7: asn1-3.0,
+ crypto-4.6, erts-6.0, kernel-3.0, stdlib-3.5
+
+
+ ---------------------------------------------------------------------
+ --- ssl-11.1.4.13 ---------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Note! The ssl-11.1.4.13 application *cannot* be applied independently
+       of other applications on an arbitrary OTP 26 installation.
+
+       On a full OTP 26 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.15.1.7 (first satisfied in OTP 26.2.5.21)
+
+
+ --- Fixed Bugs and Malfunctions ---
+
+  OTP-20130    Application(s): public_key, ssl
+               Related Id(s): PR-11124, CVE-2026-42790
+
+               *** POTENTIAL INCOMPATIBILITY ***
+
+               'public_key', Adhere to RFC 9525, and remove support
+               for legacy fallback to check hostname against subject
+               common name. Also improve error handling creating two
+               separate errors for name constraint check for subject
+               names and subject alternative names.
+
+               'ssl'. Error handling is slightly changed to better
+               reflect public_key behaviour.
+
+
+ Full runtime dependencies of ssl-11.1.4.13: crypto-5.0, erts-14.0,
+ inets-5.10.7, kernel-9.0, public_key-1.15.1.7, runtime_tools-1.15.1,
+ stdlib-4.1
+
+
+ ---------------------------------------------------------------------
+ --- Thanks to -------------------------------------------------------
+ ---------------------------------------------------------------------
+
+ Nick Vatamaniuc
+
+
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+
