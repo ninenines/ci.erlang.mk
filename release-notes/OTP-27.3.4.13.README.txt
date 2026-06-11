@@ -1,0 +1,224 @@
+Patch Package:           OTP 27.3.4.13
+Git Tag:                 OTP-27.3.4.13
+Date:                    2026-06-10
+Trouble Report Id:       OTP-19631, OTP-20149, OTP-20150, OTP-20152,
+                         OTP-20154, OTP-20155, OTP-20156, OTP-20160,
+                         OTP-20161, OTP-20162, OTP-20165, OTP-20166,
+                         OTP-20174
+Seq num:                 CVE-2026-48855, CVE-2026-48856,
+                         CVE-2026-48858, CVE-2026-48860,
+                         CVE-2026-49759, CVE-2026-49760, GH-11093,
+                         GH-11104, GH-11105, GH-SA-24cv-hwgr-37fq,
+                         GH-SA-6f4f-chj5-5g97, GH-SA-gp7x-mfv6-52cv,
+                         GH-SA-m75x-4vwg-ggjh, GH-SA-pv7g-pjrq-x2fh,
+                         GH-SA-xcxj-5pg2-v72j, PR-11096, PR-11115,
+                         PR-11145, PR-11146, PR-11148, PR-11181,
+                         PR-11186, PR-11192, PR-11193, PR-11212,
+                         PR-1234, PR-27384
+System:                  OTP
+Release:                 27
+Application:             dialyzer-5.3.1.1, diameter-2.4.1.2,
+                         erl_interface-5.5.2.1, erts-15.2.7.9,
+                         ftp-1.2.3.1, inets-9.3.2.6, mnesia-4.23.5.3,
+                         ssh-5.2.11.8, ssl-11.2.12.9
+Predecessor:             OTP 27.3.4.12
+
+Check out the git tag OTP-27.3.4.13, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# dialyzer-5.3.1.1
+
+The dialyzer-5.3.1.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix Dialyzer crash with overriding built-in types
+
+  Own Id: OTP-19631
+  Related Id(s): GH-11093, PR-11096
+
+> #### Full runtime dependencies of dialyzer-5.3.1.1
+>
+> compiler-8.0, erts-12.0, kernel-8.0, stdlib-5.0, syntax_tools-2.0
+
+# diameter-2.4.1.2
+
+The diameter-2.4.1.2 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed return value documentation of
+  `diameter:service_info(SvcName, statistics)`
+
+  Own Id: OTP-20150
+  Related Id(s): GH-11105, PR-11146
+
+> #### Full runtime dependencies of diameter-2.4.1.2
+>
+> erts-10.0, kernel-3.2, ssl-9.0, stdlib-5.0
+
+# erl_interface-5.5.2.1
+
+The erl_interface-5.5.2.1 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed stack overflow in `ei_s_print_term` for very big integer terms (> 2000
+  hexadecimal digits long).
+
+  Own Id: OTP-20160
+  Related Id(s): GH-SA-xcxj-5pg2-v72j, PR-11193, CVE-2026-49760
+
+# erts-15.2.7.9
+
+The erts-15.2.7.9 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed bug in ets:member/2 for `set`, `bag` and `duplicate_bag`. The bug
+  could (maybe) lead to `ets:member` spuriously returning false for a value
+  which is actually a member for a table that faces high insert load.
+
+  Own Id: OTP-20152
+  Related Id(s): PR-11115
+
+- A buffer overflow error when parsing SCTP ERROR or ABORT chunks has been
+  fixed.
+
+  This could lead to stack corruption and VM crash, but ultimately with hard
+  work by an attacker be refined into maybe even remote code execution.
+
+  Own Id: OTP-20165
+  Related Id(s): GH-SA-6f4f-chj5-5g97, PR-1234, CVE-2026-49759
+
+> #### Full runtime dependencies of erts-15.2.7.9
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# ftp-1.2.3.1
+
+The ftp-1.2.3.1 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- FTP client default connections that use the so called passive mode of FTP
+  fails to properly validating the response IP of the server, hence a malicious
+  or compromised FTP server could redirect the data connection to an arbitrary
+  host, enabling s server-side request forgery (SSRF) and FTP bounce attacks.
+
+  Own Id: OTP-20166
+  Related Id(s): GH-SA-24cv-hwgr-37fq, PR-11186, CVE-2026-48858
+
+> #### Full runtime dependencies of ftp-1.2.3.1
+>
+> erts-7.0, kernel-6.0, runtime_tools-1.15.1, ssl-10.2, stdlib-3.5
+
+# inets-9.3.2.6
+
+The inets-9.3.2.6 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The HTTP client (httpc) now removes Authorization, Proxy-Authorization,
+  Cookie, Referer, and Origin headers when following a redirect to a different
+  host or port. Previously these headers were forwarded verbatim, potentially
+  leaking credentials to unintended targets.
+
+  This follows the requirements of RFC 9110 §15.4.
+
+  Own Id: OTP-20155
+  Related Id(s): GH-SA-m75x-4vwg-ggjh, PR-11212, CVE-2026-48856
+
+> #### Full runtime dependencies of inets-9.3.2.6
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# mnesia-4.23.5.3
+
+The mnesia-4.23.5.3 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed docs of mnesia:write/3 to clarify when a transaction can terminate.
+
+  Own Id: OTP-20149
+  Related Id(s): GH-11104, PR-11145
+
+> #### Full runtime dependencies of mnesia-4.23.5.3
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# ssh-5.2.11.8
+
+The ssh-5.2.11.8 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed SSH_FXP_READLINK handler in ssh_sftpd to strip the backend root prefix
+  from symlink targets before returning them to the client, preventing
+  disclosure of the server's absolute filesystem path when the root option is
+  configured.
+
+  Own Id: OTP-20162
+  Related Id(s): GH-SA-pv7g-pjrq-x2fh, PR-11192, CVE-2026-48855
+
+> #### Full runtime dependencies of ssh-5.2.11.8
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.12.9
+
+Note! The ssl-11.2.12.9 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.17.1.3 (first satisfied in OTP 27.3.4.12)
+
+## Fixed Bugs and Malfunctions
+
+- Fix miscellanies issues that could cause unnecessary memory consumption and in
+  some less common scenarios or configurations cause connection failures.
+
+  Own Id: OTP-20154
+  Related Id(s): PR-11148
+
+- Erlang distribution over TLS run with the kernel 'check_ip' flag now properly
+  enforce connecting nodes to be on the same LAN.
+
+  Own Id: OTP-20156
+  Related Id(s): GH-SA-gp7x-mfv6-52cv, PR-11181, CVE-2026-48860
+
+- Enhance error message, by fixing typo of atom in new error message related to
+  \`public_key\` CVE-2026-42790 solution.
+
+  Own Id: OTP-20161
+  Related Id(s): PR-11148
+
+- Corrected SNI handling for TLS-1.3 only server, could cause connection
+  failures if supported signature algorithms where changed by SNI option update.
+
+  Own Id: OTP-20174
+  Related Id(s): PR-27384
+
+> #### Full runtime dependencies of ssl-11.2.12.9
+>
+> crypto-5.1, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.17.1.3,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+John Downey, Jonatan Männchen, Maria Scott
+
