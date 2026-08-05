@@ -1,0 +1,57 @@
+Patch Package:           OTP 28.5.0.5
+Git Tag:                 OTP-28.5.0.5
+Date:                    2026-08-04
+Trouble Report Id:       OTP-20137, OTP-20275
+Seq num:                 GH-11402, PR-11110, PR-11409
+System:                  OTP
+Release:                 28
+Application:             erts-16.4.0.5, ssh-5.5.2.4
+Predecessor:             OTP 28.5.0.4
+
+Check out the git tag OTP-28.5.0.5, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# erts-16.4.0.5
+
+The erts-16.4.0.5 application can be applied independently of other applications
+on a full OTP 28 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a regression in the previous patch release that prevented epmd from
+  binding to localhost.
+
+  Own Id: OTP-20275
+  Related Id(s): GH-11402, PR-11409
+
+> #### Full runtime dependencies of erts-16.4.0.5
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# ssh-5.5.2.4
+
+Note! The ssh-5.5.2.4 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 28 installation.
+
+       On a full OTP 28 installation, also the following runtime
+       dependency has to be satisfied:
+       -- crypto-5.7 (first satisfied in OTP 28.1)
+
+## Fixed Bugs and Malfunctions
+
+- The SSH client and server now reject incoming packets not aligned to the
+  cipher block size as required by RFC 4253 §6. For CBC ciphers, a timing-safe
+  "packet discard" mechanism (CVE-2008-5161 mitigation) ensures structural
+  errors are indistinguishable from MAC failures before disconnecting. AEAD and
+  encrypt-then-MAC modes disconnect immediately.
+
+  Own Id: OTP-20137
+  Related Id(s): PR-11110
+
+> #### Full runtime dependencies of ssh-5.5.2.4
+>
+> crypto-5.7, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
