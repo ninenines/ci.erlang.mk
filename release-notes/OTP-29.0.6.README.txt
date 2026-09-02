@@ -1,0 +1,518 @@
+Patch Package:           OTP 29.0.6
+Git Tag:                 OTP-29.0.6
+Date:                    2026-09-01
+Trouble Report Id:       OTP-20135, OTP-20234, OTP-20264, OTP-20268,
+                         OTP-20269, OTP-20270, OTP-20271, OTP-20274,
+                         OTP-20278, OTP-20279, OTP-20281, OTP-20282,
+                         OTP-20284, OTP-20286, OTP-20289, OTP-20296,
+                         OTP-20300, OTP-20301, OTP-20302, OTP-20306,
+                         OTP-20307, OTP-20308, OTP-20312, OTP-20319,
+                         OTP-20321, OTP-20324, OTP-20330, OTP-20333,
+                         OTP-20334, OTP-20342, OTP-20343, OTP-20344,
+                         OTP-20345, OTP-20346, OTP-20347, OTP-20350,
+                         OTP-20351
+Seq num:                 CVE-2026-75538, ERIERL-1345, ERIERL-1354,
+                         GH-11052, GH-11240, GH-11278, GH-11380,
+                         GH-11404, GH-11416, GH-11419, GH-11494,
+                         GH-11511, PR-11298, PR-11325, PR-11358,
+                         PR-11417, PR-11425, PR-11428, PR-11429,
+                         PR-11437, PR-11463, PR-11464, PR-11470,
+                         PR-11478, PR-11481, PR-11485, PR-11492,
+                         PR-11503, PR-11509, PR-11513, PR-11517,
+                         PR-11521, PR-11533, PR-11538, PR-11539,
+                         PR-11540, PR-11541, PR-11542, PR-11543,
+                         PR-11544, PR-11545, PR-11546, PR-11547,
+                         PR-11548, PR-11553, PR-11554
+System:                  OTP
+Release:                 29
+Application:             compiler-10.0.4, crypto-5.9.3, eldap-1.3.1,
+                         erl_interface-5.8.2, erts-17.0.6,
+                         inets-9.7.2, megaco-4.9.2, mnesia-4.26.2,
+                         public_key-1.21.5, snmp-5.20.5, ssh-6.0.5,
+                         ssl-11.7.5, stdlib-8.0.4, tools-4.2.2
+Predecessor:             OTP 29.0.5
+
+Check out the git tag OTP-29.0.6, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# compiler-10.0.4
+
+The compiler-10.0.4 application can be applied independently of other
+applications on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- compiler: Fix bug in beam_types:subtract/2 for bitstrings
+
+  Own Id: OTP-20312
+  Related Id(s): GH-11494, PR-11503
+
+> #### Full runtime dependencies of compiler-10.0.4
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-8.0
+
+# crypto-5.9.3
+
+The crypto-5.9.3 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed type mismatch between `ErlNifUInt64` and `uint64_t` in crypto NIF that
+  caused incompatible-pointer warnings on macOS arm64 when passing DH parameters
+  to OpenSSL.
+
+  Own Id: OTP-20333
+  Related Id(s): GH-11511, PR-11513
+
+> #### Full runtime dependencies of crypto-5.9.3
+>
+> erts-9.0, kernel-6.0, stdlib-3.9
+
+# eldap-1.3.1
+
+The eldap-1.3.1 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- eldap referral URL parsing now rejects a port component longer than 5 digits
+  instead of attempting to convert an arbitrarily large digit string to an
+  integer.
+
+  Own Id: OTP-20345
+  Related Id(s): PR-11538
+
+> #### Full runtime dependencies of eldap-1.3.1
+>
+> asn1-3.0, erts-6.0, kernel-3.0, ssl-5.3.4, stdlib-3.4
+
+# erl_interface-5.8.2
+
+The erl_interface-5.8.2 application can be applied independently of other
+applications on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- erl_interface: Fix buffer leak and state corruption on `ei_x_buff` realloc
+  failure
+
+  Own Id: OTP-20324
+  Related Id(s): PR-11492
+
+# erts-17.0.6
+
+The erts-17.0.6 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- No-suspend port command signals (i.e. port command signals sent using the
+  erlang:port_command/3 BIF or the erlang:send/3 BIF with the `nosuspend`
+  option) were not aborted properly in all scenarios which could leave the port
+  queue in a busy state indefinitely. Also asynchronously sent no-suspend
+  command signals (i.e, port command signals sent using the erlang:send/3 BIF
+  with the `nosuspend` option) could sometimes be delivered even though the port
+  was busy.
+
+  Own Id: OTP-20135
+  Related Id(s): GH-11052, PR-11463
+
+- erts: Fix missing exit_status caused by SIGCHLD race
+
+  Own Id: OTP-20274
+  Related Id(s): GH-11278, PR-11298
+
+- erts: Fix bug in `is_in_range` instruction for x86 JIT
+
+  Own Id: OTP-20278
+  Related Id(s): GH-11419, PR-11429
+
+- Fixed bug in `binary_to_term` that could cause emulator crash for specific
+  terms in specific process states (reductions left).
+
+  Own Id: OTP-20281
+  Related Id(s): GH-11404, PR-11425
+
+- erts: Fix crash with `term_to_iovec/2` for large binary
+
+  Own Id: OTP-20282
+  Related Id(s): PR-11428
+
+- A distributed `priority` send larger than 32 KiB to a process alias caused the
+  receiving runtime system to crash.
+
+  Own Id: OTP-20286
+  Related Id(s): GH-11416, PR-11417
+
+- Priority message queue markers were sometimes installed in the message queue
+  even when no priority messages could be received. As a result, the two markers
+  had to be traversed unnecessarily when scanning the message queue, introducing
+  a small but avoidable overhead.
+
+  Own Id: OTP-20300
+  Related Id(s): PR-11485
+
+- A monitor of `time_offset` co-created with a process alias
+  (`monitor(time_offset, clock_service, {alias, UnaliasOpt})`) either crashed
+  the runtime system or did not work. This bug was introduced in OTP 25.0.
+
+  Own Id: OTP-20319
+  Related Id(s): PR-11509
+
+- A process alias was erroneously created when a remote `spawn_request()`
+  operation with a `{monitor, {alias, explicit_unalias}}` option failed with
+  `noconnection` reason.
+
+  Own Id: OTP-20330
+  Related Id(s): PR-11521
+
+- A `gen_tcp` socket using the inet driver and `{packet,4}` had a bug if
+  receiving a packet with size just below INT_MAX.
+
+  That packet size wrapped in size calculations and made the received data
+  overwrite its allocation and trash allocator metadata and subsequent block(s),
+  causing the VM to crash.
+
+  This made it possible for anyone to remotely crash an Erlang node that used
+  `{packet,4}` on a reachable socket.
+
+  This bug has been corrected.
+
+  Own Id: OTP-20334
+  Related Id(s): PR-11533, CVE-2026-75538
+
+> #### Full runtime dependencies of erts-17.0.6
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.7.2
+
+The inets-9.7.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The `dets` and `mnesia` `mod_auth` backends used a key that did not include
+  the directory path, so all `require_user`/`require_group` records collapsed
+  into one per-listener namespace. A user authorized for one protected directory
+  could authenticate against any other protected directory served by the same
+  listener. `{path, Directory}` is now included in the auth backend key, scoping
+  records per directory as documented.
+
+  Own Id: OTP-20264
+  Related Id(s): PR-11546
+
+- Requests specifying both `Transfer-Encoding` and `Content-Length` headers are
+  now rejected with `400 Bad Request`, per RFC 9112 Section 6.3. Previously such
+  requests could be used for CL.TE request-smuggling/desync attacks against
+  reverse proxies in front of `httpd`.
+
+  Own Id: OTP-20268
+  Related Id(s): PR-11547
+
+- `httpd` accepted the obsolete header line-folding syntax (RFC 9112 Section
+  5.2, a continuation line beginning with space/tab), silently treating the
+  folded continuation as a separate header. This allowed CL.TE-style request
+  smuggling when `httpd` was placed behind a folding-aware proxy. Such requests
+  are now rejected with `400 Bad Request`.
+
+  Own Id: OTP-20269
+  Related Id(s): PR-11544
+
+- A header such as `Content-Length : 6` (whitespace before the colon) was
+  previously silently dropped, causing the content length to default to 0 and
+  the body bytes to be misinterpreted as a pipelined request (CL.0 smuggling).
+  Per RFC 7230 Section 3.2.4, such headers are now rejected with
+  `400 Bad Request`.
+
+  Own Id: OTP-20270
+  Related Id(s): PR-11545
+
+- A new httpd option `request_timeout` (default 60 seconds, renamed from the
+  interim `max_body_read_timeout`) bounds the idle time between reads of a
+  request body/message. The server now also sends `408 Request Timeout` when the
+  `min_bytes_per_second` floor is hit, and `keep_alive_timeout` measurement was
+  corrected so the timer is cancelled as soon as new data arrives rather than
+  only after full header parsing; `keep_alive_timeout` and `request_timeout` now
+  also accept `infinity` to disable the timeout.
+
+  Own Id: OTP-20271
+  Related Id(s): PR-11543
+
+- `mod_auth`, `mod_security`, and `mod_get` compared resolved filesystem paths
+  against configured protected-directory patterns without normalizing repeated
+  slashes or filesystem case. On case-insensitive filesystems (macOS, Windows)
+  or with repeated slashes, a request could resolve to a protected resource
+  while evading the directory match. Paths are now canonicalized
+  (slash-collapsed, and case-normalized when the filesystem is case-insensitive)
+  before the authorization decision.
+
+  Own Id: OTP-20279
+  Related Id(s): PR-11542
+
+- A request with an invalid chunked transfer-encoding chunk size previously
+  caused the httpd connection handler to hang indefinitely without requiring
+  further input from the client. This leaked a process per request and could be
+  used to exhaust server resources (denial of service). Invalid chunk sizes are
+  now rejected immediately with an error response, and the connection is closed.
+
+  Own Id: OTP-20306
+  Related Id(s): PR-11539
+
+- `max_body_size` was previously enforced only after a complete chunk had been
+  received, allowing a single oversized chunk to be buffered in full before the
+  limit was checked — undermining the memory-exhaustion protection the option is
+  meant to provide. The limit is now enforced incrementally as chunk data
+  arrives, rejecting the request as soon as the configured size is exceeded.
+
+  Own Id: OTP-20307
+  Related Id(s): PR-11540
+
+- The documented default of 150 for the `max_clients` option was not applied by
+  the implementation, allowing an unbounded number of concurrent clients to
+  connect regardless of configuration. The default is now correctly enforced.
+
+  Own Id: OTP-20308
+  Related Id(s): PR-11541
+
+- Fixed a bug where httpd failed to start when configured with {socket_type,
+  {ip_comm, SockOpts}} and a fixed (non-zero) port.
+
+  Own Id: OTP-20342
+  Related Id(s): PR-11548
+
+- `httpc` now enforces a limit on the total size of response headers and
+  response body, preventing unbounded memory allocation when connecting to a
+  malicious or malfunctioning server. The new max_header_size and max_body_size
+  request options can be used to override the default limit (10240 bytes for
+  headers). Additionally, httpc now validates that the Content-Length header
+  contains only digits before use, avoiding a crash on malformed responses.
+
+  Own Id: OTP-20343
+  Related Id(s): PR-11538
+
+> #### Full runtime dependencies of inets-9.7.2
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# megaco-4.9.2
+
+The megaco-4.9.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Numeric fields in megaco text-encoded messages are now validated for
+  digit-string length before integer conversion, improving robustness of the
+  text decoder. Per-field digit limits based on the H.248.1 ASN.1 type
+  constraints are enforced (e.g., 10 digits for UINT32, 2 digits for timer
+  values), along with a 100 KB overall message size cap at the scanner entry
+  point. The binary (BER/PER) codec is not affected.
+
+  Own Id: OTP-20234
+  Related Id(s): PR-11325
+
+> #### Full runtime dependencies of megaco-4.9.2
+>
+> asn1-3.0, debugger-4.0, erts-12.0, et-1.5, kernel-8.0, runtime_tools-1.8.14,
+> stdlib-2.5
+
+# mnesia-4.26.2
+
+The mnesia-4.26.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A transaction iterating a table (first/1, last/1, next/2, prev/2, select,
+  select_reverse on non-ordered_set) leaked a safe_fixtable hold when the
+  coordinator was killed by an external signal. The table remained fixed for the
+  lifetime of the node, preventing space reclamation of deleted objects.
+
+  Own Id: OTP-20347
+  Related Id(s): PR-11517
+
+- Fixed a race condition where mnesia_controller could crash if a table was
+  deleted while mnesia:set_master_nodes/2 was being processed.
+
+  Own Id: OTP-20351
+  Related Id(s): PR-11554
+
+> #### Full runtime dependencies of mnesia-4.26.2
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# public_key-1.21.5
+
+The public_key-1.21.5 application can be applied independently of other
+applications on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Retain lost CommonName length relaxation.
+
+  Own Id: OTP-20321
+  Related Id(s): GH-11240, PR-11358
+
+> #### Full runtime dependencies of public_key-1.21.5
+>
+> asn1-5.0, crypto-5.8, erts-13.0, kernel-8.0, stdlib-4.0
+
+# snmp-5.20.5
+
+The snmp-5.20.5 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The SNMP PDU decoder now bounds the byte length accepted for INTEGER,
+  Counter32, Gauge32/Unsigned32, TimeTicks, and Counter64 values during decoding
+  (4, 5, 5, 5, and 9 bytes respectively, matching the SMIv2 value ranges),
+  instead of accepting an arbitrarily large byte string and converting it to an
+  integer.
+
+  Own Id: OTP-20346
+  Related Id(s): PR-11538
+
+> #### Full runtime dependencies of snmp-5.20.5
+>
+> asn1-5.4, crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12,
+> runtime_tools-1.8.14, stdlib-5.0
+
+# ssh-6.0.5
+
+The ssh-6.0.5 application can be applied independently of other applications on
+a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug where multiple subsystem requests could succeed on same ssh
+  channel which is forbidden by RFC 4254 §6.5
+
+  Own Id: OTP-20284
+  Related Id(s): PR-11437
+
+> #### Full runtime dependencies of ssh-6.0.5
+>
+> crypto-5.7, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-8.0
+
+# ssl-11.7.5
+
+Note! The ssl-11.7.5 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 29 installation.
+
+       On a full OTP 29 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.21.1 (first satisfied in OTP 29.0.1)
+
+## Fixed Bugs and Malfunctions
+
+- Debugging keylog_hs callback used for logging handshake secrets on failed
+  connections swapped the argument order in logging function confusing server
+  and client side. The bug was introduced in OTP 28.5
+
+  Own Id: OTP-20350
+  Related Id(s): ERIERL-1354, PR-11553
+
+## Improvements and New Features
+
+- Hardening improvements of the ssl application.
+
+  TLS distribution now defaults to TLS-1.3 instead of TLS-1.2 (TLS-1.2 is kept
+  as fallback for rolling upgrades).
+
+  TLS-1.2 server with {verify, verify_peer} now defaults reuse_sessions to false
+  to mitigate the Triple Handshake attack (RFC 7627). Set {reuse_sessions, true}
+  explicitly to restore previous behavior.
+
+  Various missing or faulty sanity checks added and TLS alerts adjusted to
+  comply with RFC MUST requirements, including: signature algorithm validation
+  for intermediate certificates, TLS-1.3 session_id echo, pre_shared_key
+  extension ordering, and renegotiation_info enforcement.
+
+  Hardened and improved CRL support. Introduces new option allowed_hosts for the
+  optional CRL HTTP fetching feature to restrict which hosts may be contacted.
+  Internal/loopback IPs are now blocked by default (SSRF protection).
+
+  TLS-1.3 client ticket handling is more robust (locked tickets are released on
+  client crash). Server TLS-1.3 ticket handling and anti-replay Bloom filter
+  performance are optimized.
+
+  DTLS duplicate ChangeCipherSpec handling simplified, fixing potential state
+  machine confusion (GH-11075).
+
+  Process state formatting no longer leaks secrets in crash logs.
+
+  Own Id: OTP-20289
+  Related Id(s): PR-11478
+
+> #### Full runtime dependencies of ssl-11.7.5
+>
+> crypto-5.8, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.21.1,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-8.0.4
+
+The stdlib-8.0.4 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a bug in unicode_util:gc/1 where the grapheme cluster segmentation of
+  `$\r` (not followed by `$\n`) would decompose binary continuations into mixed
+  chardata. This caused string:trim/3 (and string:chomp/1) to return
+  incorrect results or crash when trimming strings containing binaries followed
+  by another list element.
+
+  Own Id: OTP-20296
+  Related Id(s): GH-11380, PR-11464
+
+- `record_info/2` will now mark tuple records as used.
+
+  Own Id: OTP-20301
+  Related Id(s): ERIERL-1345, PR-11470
+
+- uri_string:parse/1 now rejects URIs with an unreasonably long port component
+  (more than 5 digits) instead of attempting to convert an arbitrarily large
+  digit string to an integer.
+
+  Own Id: OTP-20344
+  Related Id(s): PR-11538
+
+> #### Full runtime dependencies of stdlib-8.0.4
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-11.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# tools-4.2.2
+
+The tools-4.2.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- tools: fixes tprof not stopping tracing
+
+  A call to `tprof:enable_trace(new|existing)` starts tracing processes. To stop
+  it, one calls `tprof:disable_trace(new|existing)`. However, the guard to stop
+  tracing was matching on `new_processes | existing_processes`. The return
+  happens to say `0` processes are traced now, but the tracing did not stop.
+  This issue has been fixed.
+
+  Own Id: OTP-20302
+  Related Id(s): PR-11481
+
+> #### Full runtime dependencies of tools-4.2.2
+>
+> compiler-8.5, crypto-5.9, erts-15.0, kernel-10.0, public_key-1.21,
+> runtime_tools-2.1, stdlib-6.0
+
+# Thanks to
+
+Andrew Bennett, ausimian, Laurynas Četyrkinas, ruslandoga, Thomas Cioppettini
+
