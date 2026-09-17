@@ -46,6 +46,5 @@ git add early-plugins.mk release-notes/
 git diff --cached --quiet || git commit -m "Automatically updated OTP versions"
 git push origin master
 
-# We exit with an error so an email is sent for verification
-# that everything the script did worked as intended.
-exit 17
+# All good.
+exit 0
