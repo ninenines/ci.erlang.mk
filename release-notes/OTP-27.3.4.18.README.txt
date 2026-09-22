@@ -1,0 +1,234 @@
+Patch Package:           OTP 27.3.4.18
+Git Tag:                 OTP-27.3.4.18
+Date:                    2026-09-22
+Trouble Report Id:       OTP-20256, OTP-20272, OTP-20287, OTP-20327,
+                         OTP-20355, OTP-20358, OTP-20365, OTP-20367,
+                         OTP-20371, OTP-20384, OTP-20386, OTP-20388,
+                         OTP-20390
+Seq num:                 CVE-2026-65634, CVE-2026-68956,
+                         CVE-2026-89422, ERIERL-1355, ERIERL-1356,
+                         ERIERL-1363, GH-11338, GH-11344, GH-11534,
+                         GH-11586, GH-11619, GH-SA-qhcm-px9c-rvfh,
+                         PR-11356, PR-11426, PR-11523, PR-11559,
+                         PR-11566, PR-11570, PR-11574, PR-11616,
+                         PR-11632, PR-11638, PR-11641, PR-11651,
+                         PR-11655
+System:                  OTP
+Release:                 27
+Application:             asn1-5.3.4.3, compiler-8.6.1.7,
+                         mnesia-4.23.5.5, public_key-1.17.1.6,
+                         ssh-5.2.11.13, ssl-11.2.12.13
+Predecessor:             OTP 27.3.4.17
+
+Check out the git tag OTP-27.3.4.18, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- Fixed a vulnerability where the `max_channels` daemon option was not enforced
+  for session channels without an active subsystem, allowing a remote
+  authenticated user to open an infinite number of channels and exhaust server
+  resources despite the configured limit.
+
+  The default value of the max_channels daemon option has been changed from
+  infinity to 256. Deployments requiring more than 256 simultaneous channels per
+  connection can restore the previous behavior by setting
+  `{max_channels, infinity}`.
+
+  The default value of the max_sessions daemon option has been changed from
+  infinity to 1024. Deployments requiring more concurrent SSH connections can
+  restore the previous behavior by setting `{max_sessions, infinity}`.
+
+  Own Id: OTP-20287
+  Application(s): ssh
+  Related Id(s): GH-SA-qhcm-px9c-rvfh, PR-11523, CVE-2026-68956
+
+# asn1-5.3.4.3
+
+The asn1-5.3.4.3 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a denial-of-service attack in asn1, where abnormally large OID
+  components (arcs) could cause resource exhaustion.
+
+  Own Id: OTP-20272
+  Related Id(s): PR-11655, CVE-2026-65634
+
+- The JER backend will no longer break certain values (true, false, null) when
+  they are typed as ENUMERATED, they will now be encoded as strings as required
+  by the standard.
+
+  Own Id: OTP-20355
+  Related Id(s): ERIERL-1355, PR-11559
+
+> #### Full runtime dependencies of asn1-5.3.4.3
+>
+> erts-14.0, kernel-9.0, stdlib-5.0
+
+# compiler-8.6.1.7
+
+The compiler-8.6.1.7 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- In rare circumstances, the type analysis pass of the compiler could run for
+  many minutes.
+
+  Own Id: OTP-20365
+  Related Id(s): GH-11534, PR-11566
+
+- Certain uses of funs could crash the compiler. For example:
+
+      f() ->
+          F = fun Fn(0) -> 0; Fn(N) -> Fn(N - 1) end,
+          [F(X) || X <- [1, 2]].
+
+  This has been corrected.
+
+  Own Id: OTP-20386
+  Related Id(s): GH-11619, PR-11638
+
+> #### Full runtime dependencies of compiler-8.6.1.7
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-6.0
+
+# mnesia-4.23.5.5
+
+The mnesia-4.23.5.5 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed mnesia:force_load_table/1 getting stuck when the remote node becomes
+  unreachable during table loading. When a network loader is aborted due to
+  sender node going down and a user has forced a table load, we now retry
+  loading from disc instead. Additionally, for disc_only_copies tables, the
+  process actually loading the table is the dets server process, not the mnesia
+  loader, so it would not receive the abort notification and would hang
+  indefinitely. Now it correctly receives the notification and aborts table
+  loading.
+
+  Own Id: OTP-20256
+  Related Id(s): GH-11344, PR-11426
+
+> #### Full runtime dependencies of mnesia-4.23.5.5
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# public_key-1.17.1.6
+
+The public_key-1.17.1.6 application can be applied independently of other
+applications on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Align moduli and pubkey_moduli.hrl to state on OTP-28 and newer.
+
+  Own Id: OTP-20367
+  Related Id(s): PR-11574
+
+> #### Full runtime dependencies of public_key-1.17.1.6
+>
+> asn1-5.0, crypto-5.0, erts-13.0, kernel-8.0, stdlib-4.0
+
+# ssh-5.2.11.13
+
+The ssh-5.2.11.13 application can be applied independently of other applications
+on a full OTP 27 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a vulnerability where the `max_channels` daemon option was not enforced
+  for session channels without an active subsystem, allowing a remote
+  authenticated user to open an infinite number of channels and exhaust server
+  resources despite the configured limit.
+
+  The default value of the max_channels daemon option has been changed from
+  infinity to 256. Deployments requiring more than 256 simultaneous channels per
+  connection can restore the previous behavior by setting
+  `{max_channels, infinity}`.
+
+  The default value of the max_sessions daemon option has been changed from
+  infinity to 1024. Deployments requiring more concurrent SSH connections can
+  restore the previous behavior by setting `{max_sessions, infinity}`.
+
+  Own Id: OTP-20287
+  Related Id(s): GH-SA-qhcm-px9c-rvfh, PR-11523, CVE-2026-68956
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+- The SSH daemon no longer rejects a `subsystem` request that is preceded by
+  `env` or `pty-req` request on the same channel.
+
+  Own Id: OTP-20371
+  Related Id(s): ERIERL-1363, GH-11586, PR-11616
+
+> #### Full runtime dependencies of ssh-5.2.11.13
+>
+> crypto-5.0, erts-14.0, kernel-9.0, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-5.0, stdlib-6.0
+
+# ssl-11.2.12.13
+
+Note! The ssl-11.2.12.13 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 27 installation.
+
+       On a full OTP 27 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.17.1.3 (first satisfied in OTP 27.3.4.12)
+
+## Fixed Bugs and Malfunctions
+
+- Undecodable `certificate_authorities` names are now skipped, as they are just
+  a hint.
+
+  Own Id: OTP-20327
+  Related Id(s): GH-11338, PR-11356
+
+- Corrected generated keylog information generated from the `keylog_hs` option
+  in the corner case that it was invoked after the client had reached its
+  connection state, but the server closed the connection before it reached its
+  connection state.
+
+  Own Id: OTP-20358
+  Related Id(s): ERIERL-1356, PR-11570
+
+- Fix restart bug for TLS-1.3 session ticket server, introduced by backport
+  commit in OTP-27.3.4.14, would case a restart to fail due to wrong number of
+  arguments.
+
+  Own Id: OTP-20384
+  Related Id(s): PR-11632
+
+- Reject unsolicited TLS-1.3 pre_shared_key in client.
+
+  Own Id: OTP-20388
+  Related Id(s): PR-11641, CVE-2026-89422
+
+- Security and robustness hardening returning RFC mandated alert reasons,
+  narrowing/correcting length checks.
+
+  Correct signature algorithm handling that slightly mixed up signature
+  algorithms and signature algorithms cert in TLS-1.2.
+
+  Add missing TLS-1.3 Brainpool groups support. (Not relevant in 27 patch)
+
+  Enhanced/corrected documentation and spec errors/deviations.
+
+  Own Id: OTP-20390
+  Related Id(s): PR-11651
+
+> #### Full runtime dependencies of ssl-11.2.12.13
+>
+> crypto-5.1, erts-15.0, inets-5.10.7, kernel-9.0, public_key-1.17.1.3,
+> runtime_tools-1.15.1, stdlib-6.0
+
+# Thanks to
+
+Alex Nogueira, ausimian
+
