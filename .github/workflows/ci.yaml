@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       erlang: ${{ steps.versions.outputs.erlang }}
+      freebsd: ${{ steps.freebsd_versions.outputs.freebsd }}
       latest: ${{ steps.latest_version.outputs.latest }}
     steps:
 
@@ -35,6 +36,15 @@ jobs:
         {
           echo "erlang<<EOF"
           make ci-list | jq -Rn '[inputs]'
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Output FreeBSD Erlang/OTP versions
+      id: freebsd_versions
+      run: |
+        {
+          echo "freebsd<<EOF"
+          make ci-list | sed -n 's/^OTP-\([0-9][0-9]*\).*/\1/p' | awk '!seen[$0]++' | jq -Rn '[inputs]'
           echo EOF
         } >> "$GITHUB_OUTPUT"
 
@@ -173,8 +183,13 @@ jobs:
 #          !logs/**/log_private
 
   test-freebsd:
-    name: Tests (FreeBSD)
+    name: Tests
     needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        erlang: ${{ fromJson(needs.prepare.outputs.freebsd) }}
+        os: [freebsd-15.1]
     runs-on: ubuntu-latest
     steps:
 
@@ -190,26 +205,26 @@ jobs:
     - name: Install problem matchers
       run: echo "::add-matcher::deps/ci.erlang.mk/.github/matchers/erlang-matchers.json"
 
+    - name: Select FreeBSD release
+      id: freebsd
+      run: |
+        release='${{ matrix.os }}'
+        echo "os=${release%%-*}" >> "$GITHUB_OUTPUT"
+        echo "version=${release#*-}" >> "$GITHUB_OUTPUT"
+
     - name: Run tests (FreeBSD)
       uses: cross-platform-actions/action@v1
-      env:
-        LATEST_OTP: ${{ needs.prepare.outputs.latest }}
       with:
-        operating_system: freebsd
-        version: '15.1'
-        environment_variables: CI_ERLANG_MK AUTO_CI_MASTER COWBOY_QUICER GUN_QUICER CORRAL_DEPS LATEST_OTP
+        operating_system: ${{ steps.freebsd.outputs.os }}
+        version: ${{ steps.freebsd.outputs.version }}
+        environment_variables: CI_ERLANG_MK AUTO_CI_MASTER COWBOY_QUICER GUN_QUICER CORRAL_DEPS
         run: |
           sudo pkg update
           sudo pkg upgrade -y
-          major=$(printf '%s\n' "$LATEST_OTP" | sed -n 's/^OTP-\([0-9][0-9]*\).*/\1/p')
-          if [ -z "$major" ]; then
-            echo "No FreeBSD package for OTP version: ${LATEST_OTP}" >&2
-            exit 1
-          fi
-          sudo pkg install -y erlang-runtime${major} elixir bash ca_root_nss gmake git libsodium perl5 7-zip
+          sudo pkg install -y erlang-runtime${{ matrix.erlang }} ca_root_nss gmake git
 
           git config --global safe.directory '*'
-          export PATH=/usr/local/lib/erlang${major}/bin:$PATH
+          export PATH=/usr/local/lib/erlang${{ matrix.erlang }}/bin:$PATH
           erl -sname init_cookie -run erlang halt
 
           gmake -k ci-setup tests USE_NODETOOL=1
@@ -218,7 +233,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: Common Test logs (${{ needs.prepare.outputs.latest }} FreeBSD)
+        name: Common Test logs (${{ matrix.erlang }} ${{ matrix.os }})
         path: |
           logs/
 #          !logs/**/log_private
