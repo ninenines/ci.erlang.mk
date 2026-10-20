@@ -26,6 +26,6 @@ by creating the corresponding variable.
 This project also contains GitHub Actions workflows that can
 be used to automatically test Erlang.mk applications. Note
 that in this scenario the OTP versions used are not built
-by the plugin; instead the erlef/setup-beam action is used.
-But this plugin does provide the list of OTP releases to
-test against.
+by the plugin; instead the erlef/setup-beam action is used
+(or ports on FreeBSD). But this plugin does provide the
+list of OTP releases to test against.

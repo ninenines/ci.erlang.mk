@@ -171,3 +171,54 @@ jobs:
         path: |
           logs/
 #          !logs/**/log_private
+
+  test-freebsd:
+    name: Tests (FreeBSD)
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Checkout ci.erlang.mk repository
+      uses: actions/checkout@v4
+      with:
+        repository: ninenines/ci.erlang.mk
+        path: deps/ci.erlang.mk
+
+    - name: Install problem matchers
+      run: echo "::add-matcher::deps/ci.erlang.mk/.github/matchers/erlang-matchers.json"
+
+    - name: Run tests (FreeBSD)
+      uses: cross-platform-actions/action@v1
+      env:
+        LATEST_OTP: ${{ needs.prepare.outputs.latest }}
+      with:
+        operating_system: freebsd
+        version: '15.1'
+        environment_variables: CI_ERLANG_MK AUTO_CI_MASTER COWBOY_QUICER GUN_QUICER CORRAL_DEPS LATEST_OTP
+        run: |
+          sudo pkg update
+          sudo pkg upgrade -y
+          major=$(printf '%s\n' "$LATEST_OTP" | sed -n 's/^OTP-\([0-9][0-9]*\).*/\1/p')
+          if [ -z "$major" ]; then
+            echo "No FreeBSD package for OTP version: ${LATEST_OTP}" >&2
+            exit 1
+          fi
+          sudo pkg install -y erlang-runtime${major} elixir bash ca_root_nss gmake git libsodium perl5 7-zip
+
+          git config --global safe.directory '*'
+          export PATH=/usr/local/lib/erlang${major}/bin:$PATH
+          erl -sname init_cookie -run erlang halt
+
+          gmake -k ci-setup tests USE_NODETOOL=1
+
+    - name: Upload logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: Common Test logs (${{ needs.prepare.outputs.latest }} FreeBSD)
+        path: |
+          logs/
+#          !logs/**/log_private
