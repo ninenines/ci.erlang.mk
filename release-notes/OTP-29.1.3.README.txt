@@ -1,0 +1,613 @@
+Patch Package:           OTP 29.1.3
+Git Tag:                 OTP-29.1.3
+Date:                    2026-11-24
+Trouble Report Id:       OTP-20381, OTP-20424, OTP-20429, OTP-20449,
+                         OTP-20458, OTP-20460, OTP-20462, OTP-20466,
+                         OTP-20467, OTP-20468, OTP-20469, OTP-20472,
+                         OTP-20486, OTP-20499, OTP-20511, OTP-20514,
+                         OTP-20515, OTP-20517, OTP-20519, OTP-20523,
+                         OTP-20524, OTP-20525, OTP-20526, OTP-20527,
+                         OTP-20528, OTP-20530, OTP-20534, OTP-20537,
+                         OTP-20538, OTP-20545, OTP-20546, OTP-20551,
+                         OTP-20555, OTP-20556, OTP-20559, OTP-20561,
+                         OTP-20563, OTP-20567, OTP-20569, OTP-20571,
+                         OTP-20572, OTP-20580, OTP-20582, OTP-20584
+Seq num:                 CVE-2026-115747, CVE-2026-116225,
+                         CVE-2026-116293, CVE-2026-116295,
+                         CVE-2026-116382, CVE-2026-117642,
+                         CVE-2026-119443, CVE-2026-120961,
+                         CVE-2026-125658, ERIERL-1338, ERIERL-1362,
+                         ERIERL-1375, ERIERL-1382, ERIERL-1383,
+                         ERIERL-1384, ERIERL-1385, GH-11725, GH-11726,
+                         GH-11829, GH-11889, GH-11923, GH-11941,
+                         GH-8513, GH-SA-7fjc-wcvc-vp96,
+                         GH-SA-84cc-vh37-jqpf, GH-SA-9p2q-5p4x-rhpq,
+                         PR-11220, PR-11568, PR-11687, PR-11827,
+                         PR-11837, PR-11843, PR-11844, PR-11847,
+                         PR-11849, PR-11898, PR-11907, PR-11908,
+                         PR-11915, PR-11918, PR-11927, PR-11938,
+                         PR-11939, PR-11942, PR-11954, PR-11959,
+                         PR-11960, PR-11967, PR-11971, PR-12043,
+                         PR-12108, PR-12117, PR-12120, PR-12144,
+                         PR-12147, PR-12148, PR-12181, PR-12182,
+                         PR-12198, PR-12199, PR-12200, PR-12226,
+                         PR-12231, PR-12238, PR-12241, PR-12252,
+                         PR-12261, PR-12262, PR-12263, PR-12274
+System:                  OTP
+Release:                 29
+Application:             compiler-10.0.8, crypto-5.10.1, erts-17.1.2,
+                         inets-9.8.2, mnesia-4.27.2, odbc-2.17.3,
+                         os_mon-2.12.1, public_key-1.21.9,
+                         snmp-5.20.7, ssh-6.0.8, ssl-11.7.9,
+                         stdlib-8.1.2, wx-2.7.1, xmerl-2.2.1
+Predecessor:             OTP 29.1.2
+
+Check out the git tag OTP-29.1.3, and build a full OTP system including
+documentation. Apply one or more applications from this build as patches to your
+installation using the 'otp_patch_apply' tool. For information on install
+requirements, see descriptions for each application version below.
+
+# POTENTIAL INCOMPATIBILITIES
+
+- An external DTD was automatically fetched by `xmerl_scan` which resulted in a
+  scan of an untrusted DTD that may result in an out of memory crash.
+
+  `xmerl_xcan` has now got a new option `{fetch_external_DTD, Boolean}` which
+  default set to `false` to protect against this. This result in an
+  incompatibility if one took advantage of that `xmerl_scan` auto fetched the
+  external DTD.
+
+  The secure way to use a DTD is to let `fetch_external_DTD` be `false`
+  (default) and use doctype_DTD to provide the needed DTD in the call to
+  `xmerl_scan`.
+
+  Own Id: OTP-20556
+  Application(s): xmerl
+  Related Id(s): PR-12241, CVE-2026-119443
+
+# compiler-10.0.8
+
+The compiler-10.0.8 application can be applied independently of other
+applications on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- An unsafe optimization for native record access has been removed.
+
+  Own Id: OTP-20424
+  Related Id(s): GH-11726, PR-11837
+
+- A variable substitution bug has been fixed for native record operations.
+
+  Own Id: OTP-20449
+  Related Id(s): GH-11725, PR-11843
+
+> #### Full runtime dependencies of compiler-10.0.8
+>
+> crypto-5.1, erts-13.0, kernel-8.4, stdlib-8.0
+
+# crypto-5.10.1
+
+The crypto-5.10.1 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed two bugs in the AES-GCM decryption fallback used when crypto is built
+  against OpenSSL 1.0.1 through 1.0.1c: the ciphertext and AAD arguments were
+  swapped, and an empty authentication tag was not rejected. AES-GCM decryption
+  on these builds now behaves the same as on all other OpenSSL versions.
+
+  Own Id: OTP-20381
+  Related Id(s): PR-11927
+
+- Added bounds checks to crypto:pbkdf2_hmac/5. The password, salt, iteration
+  count and derived key length must now be at most INT_MAX, otherwise a `badarg`
+  exception is raised.
+
+  Own Id: OTP-20514
+  Related Id(s): PR-11938
+
+- When crypto was built against OpenSSL 3.x,
+  `crypto:generate_key(rsa, {ModulusSize, PublicExponent})` could generate a key
+  with a different public exponent than requested on little-endian machines.
+
+  Own Id: OTP-20515
+  Related Id(s): PR-11939
+
+- crypto:hash_final_xof/2 (SHAKE128/SHAKE256) now runs on a dirty CPU
+  scheduler when the requested output is large. Before this fix, asking for a
+  long XOF output could block a normal scheduler for a long time and hurt the
+  responsiveness of other processes.
+
+  Own Id: OTP-20551
+  Related Id(s): PR-12200
+
+> #### Full runtime dependencies of crypto-5.10.1
+>
+> erts-9.0, kernel-6.0, stdlib-3.9
+
+# erts-17.1.2
+
+The erts-17.1.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix race between ets:delete/1 and exiting process auto unfixing the table.
+  Could cause emulator crash.
+
+  Own Id: OTP-20462
+  Related Id(s): ERIERL-1338, PR-11908
+
+- Fixed an issue where comparisons of maps were not deterministic between
+  runtime instances; one node in a cluster could say `A < B` where another said
+  `A >= B`.
+
+  Own Id: OTP-20511
+  Related Id(s): PR-11568
+
+- A bug in the AArch64 (ARM64) JIT could crash the BEAM virtual machine when
+  processing certain input. The flaw caused the runtime system to misuse a CPU
+  register in some chained comparison operations, leading to a segmentation
+  fault.
+
+  One way this was triggered was by parsing XML containing an oversized numeric
+  character reference (for example, `&#576460752303423488;`) with
+  `xmerl_sax_parser`. Any application that passed attacker-controlled input
+  through an affected code path could be vulnerable to a denial-of-service
+  crash.
+
+  Only AArch64 (ARM64) systems running the JIT were affected. The x86-64 JIT,
+  interpreter (emu) builds, and 32-bit platforms were not affected.
+
+  Own Id: OTP-20523
+  Related Id(s): PR-11967, CVE-2026-115747
+
+- A bug in x86 JIT that caused `<<>>` to be compared equal to some non-empty
+  bitstrings has been fixed.
+
+  Own Id: OTP-20525
+  Related Id(s): PR-11954
+
+- A bug that reduced garbage collection efficiency has been fixed.
+
+  Own Id: OTP-20528
+  Related Id(s): GH-11923, PR-11971
+
+- Fixed `binary_to_term` to handle incorrectly encoded reference with `Len=0`.
+  Could cause beam emulator crash instead of badarg exception.
+
+  Own Id: OTP-20530
+  Related Id(s): PR-12043, CVE-2026-116293
+
+- Port commands with the `nosuspend` option could be executed by the port even
+  though it had set itself in a busy state.
+
+  Own Id: OTP-20534
+  Related Id(s): GH-11941, PR-11942
+
+- Fixed bug in `term_to_binary(Term,local)`. Caused emulator crash if `Term`
+  contained funs.
+
+  Own Id: OTP-20545
+  Related Id(s): PR-12148
+
+- The `ct_run` command no longer crashes with a segmentation fault when
+  `-sname`, `-name`, `-browser` or `-ctname` is given as the last argument
+  without a value. It now prints an error message and exits with status 1.
+
+  Own Id: OTP-20546
+  Related Id(s): PR-12147
+
+- Fixed `binary_to_term` for Erlang fun terms deliberately incorrectly encoded.
+  Could cause the Erlang VM to abort due to stack exhaustion.
+
+  Own Id: OTP-20555
+  Related Id(s): PR-12182, CVE-2026-117642
+
+- When erlang:open_port/2 with `{spawn_executable, FileName}` accepts the
+  executable name and the `args`, `arg0` and `cd` option values as binaries, the
+  previous implementation did not check for embedded NUL bytes. Everything after
+  NUL would be silently dropped. Now NUL bytes will be rejected with `badarg`.
+
+  Own Id: OTP-20559
+  Related Id(s): PR-12198
+
+- Fixed `binary_to_term` of old `FLOAT_EXT` with an invalid string without zero
+  termination. Avoid dangerous buffer overrun and instead fail safely with
+  badarg.
+
+  Own Id: OTP-20561
+  Related Id(s): PR-12181, CVE-2026-120961
+
+- On macOS, the runtime system could crash or hang when using a file operation
+  on a file name starting with certain Unicode symbols.
+
+  Own Id: OTP-20569
+  Related Id(s): PR-12231, CVE-2026-125658
+
+> #### Full runtime dependencies of erts-17.1.2
+>
+> kernel-9.0, sasl-3.3, stdlib-4.1
+
+# inets-9.8.2
+
+The inets-9.8.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed a vulnerability in the inets HTTP server (httpd) where a request header
+  name could create a new atom in the atom table. Since atoms are never
+  reclaimed, an unauthenticated client able to reach an Erlang Server Interface
+  (ESI) URL prefix could grow the atom table with ordinary HTTP requests until
+  the runtime system aborted when the atom limit was reached, taking down all
+  applications on the node. Only servers with at least one `erl_script_alias`
+  configured are affected. Servers without ESI, CGI scripts served by `mod_cgi`,
+  and the `httpc` client are unaffected. When building the environment passed to
+  an ESI callback, `httpd` now derives the `{http_<header-name>, string()}` keys
+  from a fixed set of standard request header names instead of constructing an
+  atom from the header name received. The documented `mod_esi` contract is
+  unchanged for those headers. A header outside that set is now reported under
+  `http_other`, which is already where a header whose name is not an existing
+  atom has always been placed.
+
+  Own Id: OTP-20458
+  Related Id(s): GH-SA-7fjc-wcvc-vp96, PR-12262, CVE-2026-116382
+
+- CR, LF and NUL characters in HTTP header field names and values are now
+  replaced with a space before the header is sent. This applies to request
+  headers sent by httpc, including when the headers_as_is option is used, to
+  response headers sent by httpd, and to chunked trailers.
+
+  Previously, an application that placed untrusted data in an httpc request
+  header could allow injection of additional header lines or of a second
+  request.
+
+  Own Id: OTP-20571
+  Related Id(s): GH-SA-84cc-vh37-jqpf, PR-12263, CVE-2026-116295
+
+- Fixed a memory leak in the process calling httpc:request/4,5. Every
+  asynchronous request, and every request given an explicit receiver option,
+  left an active process alias behind in the calling process, so a long-lived
+  process making many such requests would grow without bound. An alias is now
+  only created for synchronous requests, and it is always deactivated when the
+  request completes or fails.
+
+  Own Id: OTP-20580
+  Related Id(s): GH-11829, PR-11687
+
+> #### Full runtime dependencies of inets-9.8.2
+>
+> erts-14.0, kernel-9.0, mnesia-4.12, public_key-1.13, runtime_tools-1.8.14,
+> ssl-9.0, stdlib-5.0, stdlib-6.0
+
+# mnesia-4.27.2
+
+The mnesia-4.27.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- The mnesia checkpoint retainer process no longer crashes when
+  mnesia:change_table_copy_type/3 is called on a table that is part of an
+  active checkpoint.
+
+  Own Id: OTP-20466
+  Related Id(s): PR-11844
+
+- Fixed a bug where a dirty write to a `disc_copies` table racing with
+  mnesia:delete_table/1 could leave the table's log file open, so data written
+  after the table was recreated could be lost at the next transaction log dump.
+
+  Own Id: OTP-20467
+  Related Id(s): PR-11915
+
+- The `mnesia_subscr` process could crash if a table subscriber terminated after
+  the table had been deleted.
+
+  Own Id: OTP-20517
+  Related Id(s): PR-11960
+
+- `mnesia:sync_transaction/1,2,3` could return before all nodes had committed
+  when the transaction used the asymmetric commit protocol. This happens, for
+  example, when the transaction updates a table with the `majority` option, or
+  updates several tables whose replicas differ in storage type or nodes.
+  Synchronous transactions now always wait for all participants to commit.
+
+  Own Id: OTP-20526
+  Related Id(s): PR-12144
+
+> #### Full runtime dependencies of mnesia-4.27.2
+>
+> erts-9.0, kernel-5.3, stdlib-5.0
+
+# odbc-2.17.3
+
+The odbc-2.17.3 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Validate string parameter values before they are sent to the odbcserver port
+  program, and harden the port program against malformed or oversized input, so
+  bad input fails early with a clear error instead of corrupting the port
+  program heap.
+
+  Own Id: OTP-20537
+  Related Id(s): PR-12117
+
+> #### Full runtime dependencies of odbc-2.17.3
+>
+> erts-6.0, kernel-3.0, stdlib-2.0
+
+# os_mon-2.12.1
+
+The os_mon-2.12.1 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- `cpu_sup:util()` failed on systems with a huge amount of logical processors.
+
+  Own Id: OTP-20582
+  Related Id(s): ERIERL-1383, PR-12252
+
+> #### Full runtime dependencies of os_mon-2.12.1
+>
+> erts-14.0, kernel-9.0, sasl-4.2.1, stdlib-5.0
+
+# public_key-1.21.9
+
+The public_key-1.21.9 application can be applied independently of other
+applications on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Correct decoding of mldsa expanded key only
+
+  Own Id: OTP-20499
+  Related Id(s): PR-11849
+
+> #### Full runtime dependencies of public_key-1.21.9
+>
+> asn1-5.0, crypto-5.8, erts-13.0, kernel-8.0, stdlib-4.0
+
+# snmp-5.20.7
+
+The snmp-5.20.7 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- snmp_pdus now enforces the OBJECT IDENTIFIER limits given in RFC 2578, section
+  3.5, when decoding: at most 128 sub-identifiers per OID, and a maximum
+  sub-identifier value of 2^32-1, which requires at most five BER content
+  octets. A single sub-identifier spread over a large number of continuation
+  octets was previously accepted, and the decoding time grew quadratically with
+  its length — decoding one sub-identifier of 64 kB took roughly 230 ms of CPU,
+  and 500 kB took over 13 seconds. Since OIDs are also decoded for messages that
+  have not been authenticated, a peer could use this to make an agent or manager
+  unresponsive.
+
+  Own Id: OTP-20429
+  Related Id(s): GH-SA-9p2q-5p4x-rhpq, PR-12261, CVE-2026-116225
+
+- The SNMP agent can once again complete engine-ID discovery that it initiates
+  itself with `snmpa:discovery/2,3,4,5,6`. Since OTP 27.3.4.19, 28.5.0.8 and
+  29.1.2 (OTP-20427), the agent silently discarded the manager's Report
+  answering a stage-1 discovery request, because the Report carries the
+  manager's engine ID, which is not yet known to the agent. Discovery therefore
+  timed out, the engine ID of the target was never learned, and no INFORM was
+  sent to managers whose engine ID is not configured.
+
+  The agent now accepts such a Report, as allowed by RFC 3414, section 3.2, step
+  3a, provided it answers a discovery request still pending from the agent. The
+  behaviour introduced by OTP-20427 for incoming messages is unchanged.
+
+  Own Id: OTP-20584
+  Related Id(s): ERIERL-1362, ERIERL-1384, ERIERL-1385, PR-12274
+
+> #### Full runtime dependencies of snmp-5.20.7
+>
+> asn1-5.4, crypto-4.6, erts-12.0, kernel-8.0, mnesia-4.12,
+> runtime_tools-1.8.14, stdlib-5.0
+
+# ssh-6.0.8
+
+The ssh-6.0.8 application can be applied independently of other applications on
+a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- When strict key exchange was negotiated and the peer sent another message
+  before its first `SSH_MSG_KEXINIT`, the connection was closed with reason
+  `SSH_DISCONNECT_BY_APPLICATION` and the description "Internal error". Such a
+  connection is now closed with reason `SSH_DISCONNECT_KEY_EXCHANGE_FAILED`, as
+  for other key exchange failures.
+
+  Own Id: OTP-20460
+  Related Id(s): PR-11827
+
+- Starting an SSH daemon with the `user_passwords` option and no `pwdfun` is now
+  faster, as the password-hashing work done at daemon start has been reduced.
+
+  Own Id: OTP-20469
+  Related Id(s): ERIERL-1375, PR-11907
+
+> #### Full runtime dependencies of ssh-6.0.8
+>
+> crypto-5.7, erts-14.0, kernel-10.3, public_key-1.6.1, runtime_tools-1.15.1,
+> stdlib-8.0
+
+# ssl-11.7.9
+
+Note! The ssl-11.7.9 application _cannot_ be applied independently of other
+applications on an arbitrary OTP 29 installation.
+
+       On a full OTP 29 installation, also the following runtime
+       dependency has to be satisfied:
+       -- public_key-1.21.1 (first satisfied in OTP 29.0.1)
+
+## Fixed Bugs and Malfunctions
+
+- TLS client now enforces EdDSA curve binding in TLS-1.3 CertificateVerify
+  selection.
+
+  Own Id: OTP-20468
+  Related Id(s): PR-11847
+
+- Server now verifies that the cipher suite in the second `ClientHello` (after a
+  `HelloRetryRequest`) matches the one it selected in the HRR, aborting with
+  `illegal_parameter` on mismatch
+
+  Own Id: OTP-20519
+  Related Id(s): PR-11959
+
+- Resend DTLS `HelloRetryRequest` on retransmitted `ClientHello` to avoid
+  handshake hang or timeout.
+
+  Corner case coverage of TLS handshake parsing to improve error handling. DTLS
+  handshake fragment reassembling safeguard for preserving handshake message
+  boundaries.
+
+  Client Keyshare sanity check.
+
+  Added missing ocsp extension in paused handshake,
+
+  Stop claiming client supports unimplemented PSK only mode.
+
+  Own Id: OTP-20524
+  Related Id(s): PR-12108
+
+- Correct HelloRetryRequest handling, that is a TLS-1.3 client offers an ML-KEM
+  group in supported_groups but " "sends a key_share for a different group. The
+  server, which only " "accepts the ML-KEM group, must respond with a
+  HelloRetryRequest and " "the handshake must then complete with the ML-KEM
+  group selected.
+
+  Own Id: OTP-20538
+  Related Id(s): PR-12120
+
+- Make sure crypto:hash_equals/2 length error exception is caught generating
+  appropriate TLS ALERT . Will not happen during valid connection attempts.
+
+  Own Id: OTP-20563
+  Related Id(s): ERIERL-1382, PR-12199
+
+- Restating of `verify_peer` option in handshake could loose `verify_fun` option
+  set in listen falling back to default.
+
+  Own Id: OTP-20572
+  Related Id(s): PR-12238
+
+## Improvements and New Features
+
+- Add in-depth-defense for TLS-1.3 session tickets and TLS-1.3 client ALPN
+  choice. And also decline resumption for runtime tightened configuration
+  change.
+
+  Own Id: OTP-20486
+  Related Id(s): PR-11918
+
+> #### Full runtime dependencies of ssl-11.7.9
+>
+> crypto-5.8, erts-16.0, inets-5.10.7, kernel-10.3, public_key-1.21.1,
+> runtime_tools-1.15.1, stdlib-7.0
+
+# stdlib-8.1.2
+
+The stdlib-8.1.2 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fix race between ets:delete/1 and exiting process auto unfixing the table.
+  Could cause emulator crash.
+
+  Own Id: OTP-20462
+  Related Id(s): ERIERL-1338, PR-11908
+
+- Fixed Unicode NFC/NFKC normalization leaving a Hangul syllable decomposed when
+  preceded by an L jamo or a prepend character.
+
+  Own Id: OTP-20472
+  Related Id(s): GH-11889, PR-11898
+
+- A bug occurred in the auto-repair when opening dets has been fixed.
+
+  Own Id: OTP-20527
+  Related Id(s): GH-8513, PR-11220
+
+> #### Full runtime dependencies of stdlib-8.1.2
+>
+> compiler-5.0, crypto-4.5, erts-16.0.3, kernel-11.0, sasl-3.0,
+> syntax_tools-3.2.1
+
+# wx-2.7.1
+
+The wx-2.7.1 application can be applied independently of other applications on a
+full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- Fixed vendor information in SBOM.
+
+  Own Id: OTP-20567
+  Related Id(s): PR-12226
+
+> #### Full runtime dependencies of wx-2.7.1
+>
+> erts-12.0, kernel-8.0, stdlib-5.0
+
+# xmerl-2.2.1
+
+The xmerl-2.2.1 application can be applied independently of other applications
+on a full OTP 29 installation.
+
+## Fixed Bugs and Malfunctions
+
+- A bug in the AArch64 (ARM64) JIT could crash the BEAM virtual machine when
+  processing certain input. The flaw caused the runtime system to misuse a CPU
+  register in some chained comparison operations, leading to a segmentation
+  fault.
+
+  One way this was triggered was by parsing XML containing an oversized numeric
+  character reference (for example, `&#576460752303423488;`) with
+  `xmerl_sax_parser`. Any application that passed attacker-controlled input
+  through an affected code path could be vulnerable to a denial-of-service
+  crash.
+
+  Only AArch64 (ARM64) systems running the JIT were affected. The x86-64 JIT,
+  interpreter (emu) builds, and 32-bit platforms were not affected.
+
+  Own Id: OTP-20523
+  Related Id(s): PR-11967, CVE-2026-115747
+
+- An external DTD was automatically fetched by `xmerl_scan` which resulted in a
+  scan of an untrusted DTD that may result in an out of memory crash.
+
+  `xmerl_xcan` has now got a new option `{fetch_external_DTD, Boolean}` which
+  default set to `false` to protect against this. This result in an
+  incompatibility if one took advantage of that `xmerl_scan` auto fetched the
+  external DTD.
+
+  The secure way to use a DTD is to let `fetch_external_DTD` be `false`
+  (default) and use doctype_DTD to provide the needed DTD in the call to
+  `xmerl_scan`.
+
+  Own Id: OTP-20556
+  Related Id(s): PR-12241, CVE-2026-119443
+
+  *** POTENTIAL INCOMPATIBILITY ***
+
+> #### Full runtime dependencies of xmerl-2.2.1
+>
+> erts-6.0, kernel-8.4, stdlib-2.5
+
+# Thanks to
+
+Alexandre Rodrigues, Björn Gustavsson, Felix Jankowski, George Guimarães,
+haoxian, Miguel Rubinos Rodríguez
+
